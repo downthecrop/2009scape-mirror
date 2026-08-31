@@ -266,36 +266,39 @@ class ContainerisedItem(val container: core.game.container.Container?, val itemI
 }
 
 /**
- * Check if player has the specified item ID equipped, in inventory, or in their bank
+ * Check if player has the specified item ID equipped, in inventory, in their active bank, or in their POH storage.
  * @param id The item ID to check
+ * @param checkInactiveBank Whether to check the player's inactive bank (default false).
+ * @param checkPOH Whether to check a player's POH storage (default false).
  * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
  */
-fun hasAnItem(player: Player, id: Int): ContainerisedItem {
-    return hasAnItem(player, arrayOf(id), false)
+@JvmOverloads
+fun hasAnItem(player: Player, id: Int, checkInactiveBank: Boolean = false, checkPOH: Boolean = false): ContainerisedItem {
+    return hasAnItem(player, arrayOf(id), checkInactiveBank, checkPOH)
 }
 
 /**
- * Check if player has the specified item ID equipped, in inventory, or in their bank
- * @param id The item ID to check
- * @param checkSecondBank Whether to check the player's second bank.
- * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
- */
-fun hasAnItem(player: Player, id: Int, checkSecondBank: Boolean): ContainerisedItem {
-    return hasAnItem(player, arrayOf(id), checkSecondBank)
-}
-
-/**
- * Check if player has any of the specified item IDs equipped, in inventory, or in their bank
+ * Check if player has any of the specified item IDs equipped, in inventory, in their active bank, or in their POH storage.
  * @param ids An array of item IDs to check
- * @param checkSecondBank Whether to check the player's second bank.
+ * @param checkInactiveBank Whether to check the player's inactive bank (default false).
+ * @param checkPOH Whether to check a player's POH storage (default false).
  * @return A ContainerisedItem containing the container and the item ID if found, otherwise ContainerisedItem(null, -1) if not found
  */
-fun hasAnItem(player: Player, ids: Array<Int>, checkSecondBank: Boolean): ContainerisedItem {
-    // Search bank/equip/inv and return if item is found there.
-    val searchSpace = if (checkSecondBank) {
-        arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary)
+fun hasAnItem(player: Player, ids: Array<Int>, checkInactiveBank: Boolean = false, checkPOH: Boolean = false): ContainerisedItem {
+    // Gets which bank account is active.
+    val (active, inactive) = if (isUsingSecondaryBankAccount(player)) {
+        // Active               // Inactive
+        player.bankSecondary to player.bankPrimary
     } else {
-        arrayOf(player.inventory, player.equipment, player.bankPrimary)
+        // Active             // Inactive
+        player.bankPrimary to player.bankSecondary
+    }
+
+    // Search bank/equip/inv and return if item is found there.
+    val searchSpace = if (checkInactiveBank) {
+        arrayOf(player.inventory, player.equipment, active, inactive)
+    } else {
+        arrayOf(player.inventory, player.equipment, active)
     }
     for (container in searchSpace) {
         for (id in ids) {
@@ -305,15 +308,17 @@ fun hasAnItem(player: Player, ids: Array<Int>, checkSecondBank: Boolean): Contai
         }
     }
 
-    // Check all costume storage containers and return if item is found there.
-    for (id in ids) {
-        if (StorableFamily.values().any { family ->
-                player.getPOHStorageState()
-                    .getContainer(family)
-                    .contains(id)
-            }) {
-            // Note that this proxy container is a fake container just used to get the correct return type.
-            return ContainerisedItem(player.POHStorageProxyContainer, id)
+    // Check all costume storage and bookcase containers and return if item is found there.
+    if (checkPOH) {
+        for (id in ids) {
+            if (StorableFamily.values().any { family ->
+                    player.getPOHStorageState()
+                        .getContainer(family)
+                        .contains(id)
+                }) {
+                // Note that this proxy container is a fake container just used to get the correct return type.
+                return ContainerisedItem(player.POHStorageProxyContainer, id)
+            }
         }
     }
 
@@ -2809,7 +2814,7 @@ fun toggleBankAccount(player: Player) {
 }
 
 /**
- * Checks if a player is currentl using their secondary bank account.
+ * Checks if a player is currently using their secondary bank account.
  *
  * @author vddCore
  * @param player The player whose bank account toggle state to inspect.

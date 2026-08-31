@@ -73,9 +73,9 @@ object DrillDemonUtils {
 
     fun reward(player: Player) {
         queueScript(player, 2, QueueStrength.SOFT) {
-            val hasHat = hasAnItem(player, Items.CAMO_HELMET_6656).container != null
-            val hasShirt = hasAnItem(player, Items.CAMO_TOP_6654).container != null
-            val hasPants = hasAnItem(player, Items.CAMO_BOTTOMS_6655).container != null
+            val hasHat = hasAnItem(player, Items.CAMO_HELMET_6656, checkPOH = true).exists()
+            val hasShirt = hasAnItem(player, Items.CAMO_TOP_6654, checkPOH = true).exists()
+            val hasPants = hasAnItem(player, Items.CAMO_BOTTOMS_6655, checkPOH = true).exists()
             when {
                 !hasHat -> addItemOrDrop(player, Items.CAMO_HELMET_6656)
                 !hasShirt -> addItemOrDrop(player, Items.CAMO_TOP_6654)

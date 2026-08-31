@@ -35,9 +35,9 @@ object FreakUtils{
     }
 
     fun reward(player: Player){
-        val hasHat = hasAnItem(player, Items.LEDERHOSEN_HAT_6182).container != null
-        val hasTop = hasAnItem(player, Items.LEDERHOSEN_TOP_6180).container != null
-        val hasShort = hasAnItem(player, Items.LEDERHOSEN_SHORTS_6181).container != null
+        val hasHat = hasAnItem(player, Items.LEDERHOSEN_HAT_6182, checkPOH = true).exists()
+        val hasTop = hasAnItem(player, Items.LEDERHOSEN_TOP_6180, checkPOH = true).exists()
+        val hasShort = hasAnItem(player, Items.LEDERHOSEN_SHORTS_6181, checkPOH = true).exists()
         sendNPCDialogue(player, freakNpc, "You get a lederhosen item as a reward for your help, many thanks!")
         when{
             (!hasHat) -> addItemOrDrop(player, Items.LEDERHOSEN_HAT_6182, 1)
