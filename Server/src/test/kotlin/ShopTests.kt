@@ -2,6 +2,7 @@
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.game.shops.Shop
+import core.game.shops.ShopItemView
 import core.game.shops.Shops
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -276,6 +277,58 @@ class ShopTests {
         Assertions.assertDoesNotThrow {
             general.openFor(testPlayer)
         }
+    }
+
+    @Test fun shouldNotAllowBuyingItemHiddenByShopView() {
+        val shop = TestUtils.getMockShop("Conditional stock", false, false, Item(Items.MAGIC_CAPE_9762, 2))
+        val hiddenCape: ShopItemView = { _, item ->
+            if (item.id == Items.MAGIC_CAPE_9762) null else item
+        }
+
+        shop.openFor(testPlayer, hiddenCape)
+        testPlayer.inventory.add(Item(Items.COINS_995, 200_000))
+
+        Assertions.assertNull(shop.getVisibleStockItem(testPlayer, 0))
+        Assertions.assertTrue(shop.buy(testPlayer, 0, 1) is Shop.TransactionStatus.Failure)
+        Assertions.assertEquals(2, shop.getContainer(testPlayer).getAmount(Items.MAGIC_CAPE_9762))
+        Assertions.assertEquals(0, testPlayer.inventory.getAmount(Items.MAGIC_CAPE_9762))
+    }
+
+    @Test fun shouldGrantSubstitutedItemFromShopView() {
+        val shop = TestUtils.getMockShop("Conditional stock", false, false, Item(Items.MAGIC_CAPE_9762, 2))
+        val trimmedCape: ShopItemView = { _, item ->
+            if (item.id == Items.MAGIC_CAPE_9762) Item(Items.MAGIC_CAPET_9763, item.amount) else item
+        }
+
+        shop.openFor(testPlayer, trimmedCape)
+        testPlayer.inventory.add(Item(Items.COINS_995, 200_000))
+
+        Assertions.assertEquals(Items.MAGIC_CAPET_9763, shop.getVisibleStockItem(testPlayer, 0)?.id)
+        assertTransactionSuccess(shop.buy(testPlayer, 0, 1))
+        Assertions.assertEquals(1, testPlayer.inventory.getAmount(Items.MAGIC_CAPET_9763))
+        Assertions.assertEquals(1, shop.getContainer(testPlayer).getAmount(Items.MAGIC_CAPE_9762))
+    }
+
+    @Test fun playerSpecificViewsShouldShareCanonicalStock() {
+        val shop = TestUtils.getMockShop(
+            "Conditional stock",
+            false,
+            false,
+            Item(Items.MYSTIC_ROBE_BOTTOM_4093, 3),
+            Item(Items.MAGIC_CAPE_9762, 2)
+        )
+        val hiddenCape: ShopItemView = { _, item ->
+            if (item.id == Items.MAGIC_CAPE_9762) null else item
+        }
+
+        shop.openFor(testPlayer)
+        testPlayer.inventory.add(Item(Items.COINS_995, 200_000))
+        assertTransactionSuccess(shop.buy(testPlayer, 0, 1))
+
+        shop.openFor(testIronman, hiddenCape)
+
+        Assertions.assertSame(shop.getContainer(testPlayer), shop.getContainer(testIronman))
+        Assertions.assertEquals(2, shop.getContainer(testIronman).getAmount(Items.MYSTIC_ROBE_BOTTOM_4093))
     }
 
     @Test fun shouldNotThrowExceptionWhenRestockingStockWithNullSlot() {

@@ -4,7 +4,6 @@ import static core.api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.DialoguePlugin;
-import core.game.global.Skillcape;
 import core.game.global.action.ClimbActionHandler;
 import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -318,13 +317,8 @@ public final class WizardGuildPlugin extends OptionHandler {
 		@Override
 		public boolean open(Object... args) {
 			npc = (NPC) args[0];
-			if (Skillcape.isMaster(player, Skills.MAGIC)) {
-				options("Ask about Skillcape.", "Something else");
-				stage = 6;
-			} else {
-				npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?");
-				stage = 0;
-			}
+			npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?");
+			stage = 0;
 			return true;
 		}
 
@@ -352,47 +346,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 				break;
 			case 4:
 				end();
-				npc.openShop(player);
-				break;
-			case 6:
-				switch (buttonId) {
-				case 1:
-					player("Can I buy a Skillcape of Magic?");
-					stage = 7;
-					break;
-				case 2:
-					npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?");
-					stage = 0;
-					break;
-				}
-				break;
-			case 7:
-				npc("Certinaly! Right when you give me 99000 coins.");
-				stage = 8;
-				break;
-			case 8:
-				options("Okay, here you go.", "No, thanks.");
-				stage = 9;
-				break;
-			case 9:
-				switch (buttonId) {
-				case 1:
-					player("Okay, here you go.");
-					stage = 10;
-					break;
-				case 2:
-					end();
-					break;
-				}
-				break;
-			case 10:
-				if (Skillcape.purchase(player, Skills.MAGIC)) {
-					npc("There you go! Enjoy.");
-				}
-				stage = 11;
-				break;
-			case 11:
-				end();
+				MagicGuildRobeStore.openRobeStore(player);
 				break;
 			}
 			return true;

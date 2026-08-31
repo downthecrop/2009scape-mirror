@@ -189,10 +189,11 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             }
 
             val price = shop.getBuyPrice(player, slot)
+            val visibleItem = if (isMainStock) shop.getVisibleStockItem(player, slot) else shop.playerStock[slot]
 
             when(opcode)
             {
-                OP_VALUE -> sendMessage(player, "${getItemName(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id)}: This item currently costs ${price.amount} ${price.name.lowercase()}.")
+                OP_VALUE -> if (visibleItem != null && price.id != -1) sendMessage(player, "${getItemName(visibleItem.id)}: This item currently costs ${price.amount} ${price.name.lowercase()}.")
                 OP_BUY_1 -> shop.buy(player, slot, 1)
                 OP_BUY_5 -> shop.buy(player, slot, 5)
                 OP_BUY_10 -> shop.buy(player, slot, 10)
@@ -200,7 +201,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                     val amt = value as Int
                     shop.buy(player, slot, amt)
                 }
-                OP_EXAMINE -> sendMessage(player, itemDefinition(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id).examine)
+                OP_EXAMINE -> if (visibleItem != null) sendMessage(player, itemDefinition(visibleItem.id).examine)
             }
 
             return@on true

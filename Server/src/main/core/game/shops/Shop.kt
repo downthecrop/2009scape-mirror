@@ -24,15 +24,23 @@ import kotlin.math.roundToInt
 
 data class ShopItem(var itemId: Int, var amount: Int, val restockRate: Int = 100)
 
-class ShopListener(val player: Player) : ContainerListener
+typealias ShopItemView = (Player, Item) -> Item?
+
+private val defaultShopItemView: ShopItemView = { _, item -> item }
+
+class ShopListener(val player: Player, private val itemView: ShopItemView = defaultShopItemView) : ContainerListener
 {
+    fun view(item: Item): Item? = itemView(player, item)
+
+    private fun view(items: Array<out Item?>): Array<Item?> = items.map { it?.let(::view) }.toTypedArray()
+
     var enabled = false
     override fun update(c: Container?, event: ContainerEvent?) {
-        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, event!!.items, false, *event.slots))
+        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, view(event!!.items), false, *event.slots))
     }
 
     override fun refresh(c: Container?) {
-        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, c!!.toArray(), c.capacity(), false))
+        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1, 92, view(c!!.toArray()), c.capacity(), false))
     }
 }
 
@@ -48,9 +56,12 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             stockInstances[ServerConstants.SERVER_NAME.hashCode()] = generateStockContainer()
     }
 
-    fun openFor(player: Player)
+    @JvmOverloads
+    fun openFor(player: Player, itemView: ShopItemView = defaultShopItemView)
     {
         val cont = getContainer(player)
+        listenerInstances[player.details.uid]?.let(cont.listeners::remove)
+        listenerInstances[player.details.uid] = ShopListener(player, itemView)
         setInterfaceText(player, title, 620, 22)
         setAttribute(player, "shop", this)
         setAttribute(player, "shop-cont", cont)
@@ -117,6 +128,14 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         return container
     }
 
+    fun getVisibleStockItem(player: Player, slot: Int): Item?
+    {
+        val container = getAttribute<Container?>(player, "shop-cont", null) ?: return null
+        val item = container[slot] ?: return null
+        val listener = listenerInstances[player.details.uid] ?: return item
+        return listener.view(item)
+    }
+
     private fun generateStockContainer(): Container
     {
         val container = Container(40, ContainerType.SHOP)
@@ -162,15 +181,20 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             player.sendMessage("That item doesn't appear to be there anymore. Please try again.")
             return Item(-1, -1)
         }
+        val visibleItem = if (isMainStock) getVisibleStockItem(player, slot) else item
+        if (visibleItem == null) {
+            player.sendMessage("That item doesn't appear to be there anymore. Please try again.")
+            return Item(-1, -1)
+        }
 
         val price = when(currency)
         {
-            Items.TOKKUL_6529 -> item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1)
-            Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
-            Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
+            Items.TOKKUL_6529 -> visibleItem.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1)
+            Items.ARCHERY_TICKET_1464 -> visibleItem.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
+            Items.CASTLE_WARS_TICKET_4067 -> visibleItem.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1)
             else -> {
-                val fixedPrice = fixedPriceItems[item.id]
-                fixedPrice ?: getGPCost(Item(item.id, 1),
+                val fixedPrice = fixedPriceItems[visibleItem.id]
+                fixedPrice ?: getGPCost(Item(visibleItem.id, 1),
 					if (isMainStock) stock[item.slot].amount else playerStock[slot].amount,
 					if (isMainStock) item.amount else playerStock[slot].amount)
             }
@@ -281,7 +305,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         }
         val cont = if (isMainStock) (getAttribute<Container?>(player, "shop-cont", null) ?: return TransactionStatus.Failure("Invalid shop-cont attr")) else playerStock
         val inStock = cont[slot]
-        val item = Item(inStock.id, amount)
+        val visibleItem = if (isMainStock) getVisibleStockItem(player, slot) else inStock
+        if (visibleItem == null) return TransactionStatus.Failure("Shop item is not available to this player")
+        val item = Item(visibleItem.id, amount)
         if(inStock.amount < amount)
             item.amount = inStock.amount
         if (item.amount > player.inventory.getMaximumAdd(item))
@@ -473,7 +499,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
 		// Items with fixed prices that don't fluctuate based on stock (both buy & sell price)
 		val fixedPriceItems = mapOf(
 			Items.SPIRIT_SHARDS_12183 to 25,
-			Items.POUCH_12155 to 1
+			Items.POUCH_12155 to 1,
+			Items.MAGIC_CAPE_9762 to 99000,
+			Items.MAGIC_CAPET_9763 to 99000
 		)
 	}
 
