@@ -7,6 +7,7 @@ import core.api.inEquipment
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*
+import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.prayer.PrayerType
@@ -30,8 +31,11 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
 
         private val SEERS_VILLAGE_AREA = ZoneBorders(2687, 3455, 2742, 3507)
         private val SEERS_BANK_AREA = ZoneBorders(2721, 3490, 2730, 3493)
-        private val SEERS_COAL_TRUCKS_AREA = ZoneBorders(2690, 3502, 2699, 3508)
         private val SEERS_COURTHOUSE_AREA = ZoneBorders(2732, 3467, 2739, 3471)
+        private val SEERS_COAL_TRUCK_LOCATIONS = setOf(
+            Location.create(2696, 3504),
+            Location.create(2698, 3507)
+        )
 
         private val RANGING_GUILD_LOCATION = Location(2657, 3439)
 
@@ -246,19 +250,17 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         }
     }
 
-    override fun onInteracted(player: Player, event: InteractionEvent) {
-        when {
-            inBorders(player, SEERS_COAL_TRUCKS_AREA) -> {
-                whenTaskRequirementFulfilled(player, ATTRIBUTE_COAL_TRUCK_FULL) {
-                    if (event.option == "remove-coal") {
-                        finishTask(
-                            player,
-                            DiaryLevel.MEDIUM,
-                                MediumTasks.TRANSPORT_FULL_LOAD_OF_COAL
-                        )
-                    }
-                }
-            }
+    fun onCoalRemovedFromSeersTruck(player: Player, node: Node, coalTruckFull: Boolean) {
+        if (!coalTruckFull) return
+        if (node.id != Scenery.COAL_TRUCK_2114) return
+        if (node.location !in SEERS_COAL_TRUCK_LOCATIONS) return
+
+        whenTaskRequirementFulfilled(player, ATTRIBUTE_COAL_TRUCK_FULL) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.TRANSPORT_FULL_LOAD_OF_COAL
+            )
         }
     }
 

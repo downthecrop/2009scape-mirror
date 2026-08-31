@@ -1,5 +1,6 @@
 package content.global.handlers.item.withobject
 
+import content.region.kandarin.seers.diary.SeersVillageAchievementDiary
 import core.api.*
 import core.game.node.item.Item
 import org.rs09.consts.Items
@@ -26,6 +27,8 @@ class CoalTruckListener : InteractionListener {
                 return@on true
             }
 
+            val coalTruckFull = coalInTruck == 120
+
             var toRemove = freeSlots(player)
 
             if (toRemove > coalInTruck) {
@@ -35,6 +38,10 @@ class CoalTruckListener : InteractionListener {
             if (addItem(player, Items.COAL_453, toRemove)) {
                 coalInTruck -= toRemove
                 setAttribute(player, "/save:$ATTRIBUTE_COAL_TRUCK_INVENTORY", coalInTruck)
+
+                if (toRemove > 0) {
+                    SeersVillageAchievementDiary().onCoalRemovedFromSeersTruck(player, node, coalTruckFull)
+                }
             }
 
             return@on true

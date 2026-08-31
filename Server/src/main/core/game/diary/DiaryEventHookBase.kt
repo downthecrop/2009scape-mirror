@@ -75,7 +75,7 @@ abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, L
     }
 
     protected fun fulfillTaskRequirement(player: Player, level: DiaryLevel, task: Int, attribute: String) {
-        if (getAttribute(player, attribute, false)) return
+        if (isTaskCompleted(player, level, task) || getAttribute(player, attribute, false)) return
 
         player.achievementDiaryManager.updateTask(
             player,
