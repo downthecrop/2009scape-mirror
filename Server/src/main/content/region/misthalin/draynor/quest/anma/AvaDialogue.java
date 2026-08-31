@@ -1,10 +1,7 @@
 package content.region.misthalin.draynor.quest.anma;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import content.data.Quests;
-import core.game.container.Container;
+import core.api.Container;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
@@ -12,6 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
+import org.rs09.consts.Items;
 
 import static core.api.ContentAPIKt.*;
 
@@ -127,7 +125,7 @@ public final class AvaDialogue extends DialoguePlugin {
 			}
 			break;
 		case 100:
-			npc("I'm busy with my newest research, so can't gossip too", "much. Are you after an upgrade to your device, or a", "new device, or some information, of would you like to", "see my goods for sale?");
+			npc("Hello again; I'm busy with my newest research, so can't", "gossip too much. Are you after information, an upgrade,", "another device or would you like to see my goods for", "sale?");
 			break;
 		default:
 			npc("How's the quest going?");
@@ -561,65 +559,81 @@ public final class AvaDialogue extends DialoguePlugin {
 		case 100:
 			switch (stage) {
 			case 0:
-				options("Devices, please.", "I'd like information, please.", "I'd like to see your stuff for sale, please.", "I'll just head off, I think.");
+				options("I'd like information, please.", "I seem to need a new device.", "I'd like to upgrade my device, please.", "I'd like to see your stuff for sale, please.", "I'll just head off, I think.");
 				stage++;
 				break;
 			case 1:
 				switch (buttonId) {
 				case 1:
-					player("Devices, please.");
-					stage = 10;
-					break;
-				case 2:
 					player("I'd like information, please.");
 					stage = 20;
 					break;
+				case 2:
+					player("I need another arrow-attracting device, please.");
+					stage = 10;
+					break;
 				case 3:
+					player("I'd like to upgrade my device, please.");
+					stage = 50;
+					break;
+				case 4:
 					player("I'd like to see your stuff for sale, please.");
 					stage = 30;
 					break;
-				case 4:
+				case 5:
 					player("I'll just head off, I think.");
 					stage = 40;
 					break;
 				}
 				break;
 			case 10:
-				String first = "Basic: 999 coins";
-				String second = "Upgraded: 999 coins<br> + 75 steel arrows";
-				if (!canBuyUpgrade(player)) {
-					second = "<col=FF0000> Upgraded: Level 50 Ranged";
-				}
-				player.getPacketDispatch().sendItemZoomOnInterface(10498, 170, 140, 5);
-				player.getPacketDispatch().sendItemZoomOnInterface(10499, 170, 140, 6);
-				player.getPacketDispatch().sendString("Which device would you like?", 140, 4);
-				player.getPacketDispatch().sendString(first, 140, 2);
-				player.getPacketDispatch().sendString(second, 140, 3);
-				player.getInterfaceManager().openChatbox(140);
+				npc("Well, luckily for you, they have a habit of returning to", "me when people lose them, so I have some spares. They", "are homing chickens, it seems.");
 				stage++;
 				break;
 			case 11:
-				switch (buttonId) {
-				case 1:
-					end();
-					buy(buttonId == 2);
-					break;
-				case 2:
-					if (!canBuyUpgrade(player)) {
-						if (player.getSkills().getStaticLevel(Skills.RANGE) < 50) {
-							npc("I'm afraid you aren't yet skilled enough for the", "upgraded version. You need a Range level of 50 or", "greater.");
-						} else {
-							npc("You need to have an avas attractor in order", "to upgrade it.");
-						}
-						stage++;
-					} else {
-						buy(true);
-					}
-					break;
-				}
+				npc("I'll need 999 gp, however, for the expenses involved in", "restoring the poor creature to health, or unhealth, or", "whatever.");
+				stage++;
 				break;
 			case 12:
-				end();
+				player("Why 999?");
+				stage++;
+				break;
+			case 13:
+				npc("Well, it just sounds less expensive than 1000. Do you", "want that replacement or not?");
+				stage++;
+				break;
+			case 14:
+				options("Sounds good to me.", "I'd prefer not to, actually.");
+				stage++;
+				break;
+			case 15:
+				switch (buttonId) {
+					case 1:
+						player("Sounds good to me.");
+						stage++;
+						break;
+					case 2:
+						player("I'd prefer not to, actually.");
+						stage = 54;
+						break;
+				}
+				break;
+			case 16:
+				if (!inInventory(player, Items.COINS_995, 999)) {
+					npc("You seem not to have enough cash; you could always", "sell some of your gear, though.");
+					stage = 55;
+					break;
+				}
+				if (!hasSpaceFor(player, AnimalMagnetism.AVAS_ATTRACTOR)) {
+					player("Sorry, I don't have enough inventory space.");
+					stage = 55;
+					break;
+				}
+				if (removeItem(player, new Item(Items.COINS_995, 999), Container.INVENTORY)) {
+					addItem(player, AnimalMagnetism.AVAS_ATTRACTOR.getId(), 1, Container.INVENTORY);
+				}
+				npc("Here's your device; take good care of your chicken.");
+				stage = 55;
 				break;
 			case 20:
 				npc("Just a few bits of information before you run away to", "persecute rock crabs or cows.");
@@ -676,6 +690,61 @@ public final class AvaDialogue extends DialoguePlugin {
 			case 41:
 				end();
 				break;
+			case 50:
+				if (!inEquipmentOrInventory(player, Items.AVAS_ATTRACTOR_10498, 1)) {
+					npc("You don't have a device in your bags that I can", "upgrade, I'm afraid.");
+					stage = 55;
+					break;
+				}
+				if (!hasLevelStat(player, Skills.RANGE, 50)) {
+					sendDialogue("You need a Ranged level of 50 to do this.");
+					stage = 55;
+					break;
+				}
+				if (!inInventory(player, Items.STEEL_ARROW_886, 75)) {
+					npc("I need 75 steel arrows for the upgrade process,", "I'm afraid.");
+					stage = 55;
+					break;
+				}
+				npc("You are ready to upgrade. I'll take 75 steel arrows and", "the old device, if that's all fine with you?");
+				stage++;
+				break;
+			case 51:
+				options("Sounds good to me.", "I'd prefer not to, actually.");
+				stage++;
+				break;
+			case 52:
+				switch (buttonId) {
+					case 1:
+						player("Sounds good to me.");
+						stage++;
+						break;
+					case 2:
+						player("I'd prefer not to, actually.");
+						stage = 54;
+						break;
+				}
+				break;
+			case 53:
+				if (!removeItem(player, new Item(Items.STEEL_ARROW_886, 75), Container.INVENTORY)) {
+					npc("I need 75 steel arrows for the upgrade process,", "I'm afraid.");
+					stage = 55;
+					break;
+				}
+				if (removeItem(player, Items.AVAS_ATTRACTOR_10498, Container.INVENTORY) ||
+				removeItem(player, Items.AVAS_ATTRACTOR_10498, Container.EQUIPMENT)) {
+					addItem(player, Items.AVAS_ACCUMULATOR_10499, 1, Container.INVENTORY);
+				}
+				npc("Here's your upgraded device; take good care of it.");
+				stage = 55;
+				break;
+			case 54:
+				npc("I've better things to do than be irritated by you.");
+				stage++;
+				break;
+			case 55:
+				end();
+				break;
 			}
 			break;
 		default:
@@ -691,74 +760,6 @@ public final class AvaDialogue extends DialoguePlugin {
 			break;
 		}
 		return true;
-	}
-
-	/**
-	 * Checks if the player can buy an upgrade.
-	 * @param player the player.
-	 * @return {@code True} if so.
-	 */
-	public boolean canBuyUpgrade(Player player) {
-		if (player.hasItem(AnimalMagnetism.AVAS_ACCUMULATOR)){
-			return true;
-		}
-		return player.getSkills().getStaticLevel(Skills.RANGE) >= 50;
-	}
-
-	/**
-	 * Buys a device.
-	 * @param upgrade if upgraded.
-	 */
-	private void buy(boolean upgrade) {
-		Item item = upgrade ? AnimalMagnetism.AVAS_ACCUMULATOR : AnimalMagnetism.AVAS_ATTRACTOR;
-		if (!player.getInventory().hasSpaceFor(item)) {
-			player("Sorry, I don't have enough inventory space.");
-			stage++;
-			return;
-		}
-		Item coins = new Item(995, 999);
-		if (upgrade) {
-			if (!player.getInventory().contains(886, 75)) {
-				player("Sorry, I don't have enough arrows.");
-				stage++;
-				return;
-			}
-		}
-		if (!player.getInventory().containsItem(coins)) {
-			player("Sorry, I don't have enough coins.");
-			return;
-		}
-		if (upgrade) {
-			player.getInventory().remove(new Item(886, 75));
-		}
-		removeAll(player, item, upgrade ? AnimalMagnetism.AVAS_ATTRACTOR : AnimalMagnetism.AVAS_ACCUMULATOR);
-		player.getInventory().remove(coins);
-		npc("Here's your device; take good care of your chicken.");
-		stage++;
-	}
-
-	/**
-	 * Removes all the items.
-	 * @param player the player.
-	 * @param add the add item.
-	 * @param remove the remove item.
-	 */
-	private void removeAll(Player player, Item add, Item remove) {
-		List<Container> containers = new ArrayList<>(20);
-		containers.add(player.getInventory());
-		containers.add(player.getEquipment());
-		containers.add(player.getBank());
-		boolean replace = false;
-		for (Container c : containers) {
-			if (c.containsItem(remove)) {
-				c.replace(add, c.getSlot(remove));
-				replace = true;
-				break;
-			}
-		}
-		if (!replace) {
-			player.getInventory().add(add);
-		}
 	}
 
 	@Override
