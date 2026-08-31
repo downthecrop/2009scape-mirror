@@ -11,37 +11,35 @@ import java.util.Arrays;
  *
  */
 public enum HousingStyle {
-
-    // open door ids are doorId + 1
-	
+	// open door ids are doorId + 1
 	BASIC_WOOD          (1, 5000, 7503, 0, 13100, 13101, 13098, Decoration.BASIC_WOOD_WINDOW),
-	BASIC_STONE         (10, 5000, 7503, 1, 13094, 13096, 1902, Decoration.BASIC_STONE_WINDOW),
+	BASIC_STONE         (10, 5000, 7503, 1, 13094, 13096, 1902, 13090, Decoration.BASIC_STONE_WINDOW),
 	WHITEWASHED_STONE   (20, 7500, 7503, 2, 13006, 13007, 1415, Decoration.WHITEWASHED_STONE_WINDOW),
 	FREMENNIK_STYLE_WOOD(30, 10000, 7503, 3, 13109, 13107, 13111, Decoration.FREMENNIK_WINDOW),
 	TROPICAL_WOOD       (40, 15000, 7759, 0, 13016, 13015, 13011, Decoration.TROPICAL_WOOD_WINDOW),
 	FANCY_STONE         (50, 25000, 7759, 1, 13119, 13118, 13116, Decoration.FANCY_STONE_WINDOW);
 
-    /**
-     * Array of all Dungeon Wall IDs.
-     * From Region 7503, Location.create(1898, 5084, 0)
-     */
-    private static final int[] DUNGEON_WALL_IDS = {
-            13019, 13020, 13021, 13022, 13023, 13024, 13025, 13026, 13027, 13028,
-            13029, 13030, 13031, 13032, 13033, 13034, 13035, 13036, 13037, 13046,
-            13048, 13049, 13050, 13051, 13055, 13056, 13058, 13059, 13060, 13061,
-            13062, 13063, 13065, 13066, 13067, 13068, 13069, 13070, 13072, 13073,
-            13074, 13075, 13076, 13077, 13079, 13080, 13081, 13082, 13083, 13084,
-            13086, 13087, 13088, 13089
-    };
+	/**
+	 * Array of all Dungeon Wall IDs.
+	 * From Region 7503, Location.create(1898, 5084, 0)
+	 */
+	private static final int[] DUNGEON_WALL_IDS = {
+			13019, 13020, 13021, 13022, 13023, 13024, 13025, 13026, 13027, 13028,
+			13029, 13030, 13031, 13032, 13033, 13034, 13035, 13036, 13037, 13046,
+			13048, 13049, 13050, 13051, 13055, 13056, 13058, 13059, 13060, 13061,
+			13062, 13063, 13065, 13066, 13067, 13068, 13069, 13070, 13072, 13073,
+			13074, 13075, 13076, 13077, 13079, 13080, 13081, 13082, 13083, 13084,
+			13086, 13087, 13088, 13089
+	};
 
-    /**
-     * Checks if the provided ID is a dungeon wall.
-     * @param id The object ID.
-     * @return {@code true} if it's a dungeon wall.
-     */
-    public static boolean isDungeonWall(int id) {
-        return Arrays.binarySearch(DUNGEON_WALL_IDS, id) >= 0;
-    }
+	/**
+	 * Checks if the provided ID is a dungeon wall.
+	 * @param id The object ID.
+	 * @return {@code true} if it's a dungeon wall.
+	 */
+	public static boolean isDungeonWall(int id) {
+		return Arrays.binarySearch(DUNGEON_WALL_IDS, id) >= 0;
+	}
 	
 	/**
 	 * The level required.
@@ -77,21 +75,26 @@ public enum HousingStyle {
 	 * The wall id.
 	 */
 	private final int wallId;
+
+	/**
+	 * A second wall id, used for walls behind fireplaces in some house styles.
+	 * Only used for the basic stone house style, who knows why. Same as wallId for other house styles.
+	 */
+	private final int secondWallId;
 	
 	/**
 	 * The window style
 	 */
 	private final Decoration window;
 
-    /**
-     * Checks if the player has the level.
-     *
-     * @param player the player.
-     * @return {@code True} if so.
-     */
-    public boolean hasLevel(Player player) {
-        return player.getSkills().getStaticLevel(Skills.CONSTRUCTION) >= levelRequirement;
-    }
+	/**
+	 * Checks if the player has the level.
+	 * @param player the player.
+	 * @return {@code True} if so.
+	 */
+	public boolean hasLevel(Player player) {
+		return player.getSkills().getStaticLevel(Skills.CONSTRUCTION) >= levelRequirement;
+	}
 
 	/**
 	 * Constructs a new {@code HousingStyle} {@code Object}
@@ -100,8 +103,12 @@ public enum HousingStyle {
 	 * @param regionId The region id for this style.
 	 * @param plane The plane for this style.
 	 * @param doorId The door object id used in this style.
+	 * @param secondDoorId The second-door object id used in this style.
+	 * @param wallId The wall object id used in this style.
+	 * @param secondWallId The second-wall object id used in this style.
+	 * @param window The window decoration used in this style.
 	 */
-	private HousingStyle(int level, int cost, int regionId, int plane, int doorId, int secondDoorId, int wallId, Decoration window) {
+	HousingStyle(int level, int cost, int regionId, int plane, int doorId, int secondDoorId, int wallId, int secondWallId, Decoration window) {
 		this.levelRequirement = level;
 		this.cost = cost;
 		this.regionId = regionId;
@@ -109,6 +116,30 @@ public enum HousingStyle {
 		this.doorId = doorId;
 		this.secondDoorId = secondDoorId;
 		this.wallId = wallId;
+		this.secondWallId = secondWallId;
+		this.window = window;
+	}
+
+	/**
+	 * Constructs a new {@code HousingStyle} {@code Object} for housing styles that do not have a second wall id
+	 * @param level The level required.
+	 * @param cost The cost of the style.
+	 * @param regionId The region id for this style.
+	 * @param plane The plane for this style.
+	 * @param doorId The door object id used in this style.
+	 * @param secondDoorId The second-door object id used in this style.
+	 * @param wallId The wall object id used in this style.
+	 * @param window The window decoration used in this style.
+	 */
+	HousingStyle(int level, int cost, int regionId, int plane, int doorId, int secondDoorId, int wallId, Decoration window) {
+		this.levelRequirement = level;
+		this.cost = cost;
+		this.regionId = regionId;
+		this.plane = plane;
+		this.doorId = doorId;
+		this.secondDoorId = secondDoorId;
+		this.wallId = wallId;
+		this.secondWallId = wallId;
 		this.window = window;
 	}
 
@@ -159,7 +190,15 @@ public enum HousingStyle {
 	public int getWallId() {
 		return wallId;
 	}
-	
+
+	/**
+	 * Gets the second wall used in this style.
+	 * @return The wall object id.
+	 */
+	public int getSecondWallId() {
+		return secondWallId;
+	}
+
 	/**
 	 * Gets the window id for this style of house
 	 * @return The windows object id

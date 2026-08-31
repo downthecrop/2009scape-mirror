@@ -100,11 +100,17 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
     }
 
     /**
+     * Clears the current star object or sprite
+     */
+    fun clear() {
+        SceneryBuilder.remove(starObject)
+        clearSprite()
+    }
+
+    /**
      * Fires the shooting star (spawns a new one). Only used when spawning new shooting stars, not for downgrading existing ones.
      */
     fun fire() {
-        SceneryBuilder.remove(starObject)
-        clearSprite()
         SceneryBuilder.add(starObject)
         if(!isSpawned) {
             (0..2).forEach {

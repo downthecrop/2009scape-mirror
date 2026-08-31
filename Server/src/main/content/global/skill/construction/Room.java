@@ -1,14 +1,15 @@
 package content.global.skill.construction;
 
-
 import core.game.node.entity.player.Player;
-import core.game.node.scenery.Constructed;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.*;
 import core.tools.Log;
 
+import java.util.ArrayList;
+
 import static core.api.ContentAPIKt.log;
+import static core.game.world.map.RegionChunk.getRotatedPosition;
 
 /**
  * Represents a room.
@@ -16,7 +17,6 @@ import static core.api.ContentAPIKt.log;
  *
  */
 public final class Room {
-	
 	/**
 	 * The default room type.
 	 */
@@ -95,7 +95,7 @@ public final class Room {
 	public void decorate(HousingStyle style) {
 		Region region = RegionManager.forId(style.getRegionId());
 		Region.load(region, true);
-		chunk = region.getPlanes()[style.getPlane()].getRegionChunk(properties.getChunkX(), properties.getChunkY());
+		chunk = region.getChunks()[properties.getChunkX()][properties.getChunkY()][style.getPlane()];
 	}
 
 	/**
@@ -111,7 +111,7 @@ public final class Room {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Checks if the building hotspot has been built.
 	 * @param hotspot The building hotspot.
@@ -126,67 +126,64 @@ public final class Room {
 	 * Loads all the decorations.
 	 * @param housePlane The plane.
 	 * @param chunk The chunk used in the dynamic region.
-     */
-	public void loadDecorations(int housePlane, BuildRegionChunk chunk, HouseManager house) {
-		for (int i = 0; i < hotspots.length; i++) {
-			Hotspot spot = hotspots[i];
+	 */
+	public void loadDecorations(int housePlane, RegionChunk chunk, HouseManager house) {
+		for (Hotspot spot : hotspots) {
 			int x = spot.getChunkX();
 			int y = spot.getChunkY();
-			if (spot.getHotspot() == null) {
-				continue;
-			}
-			int index = chunk.getIndex(x, y, spot.getHotspot().getObjectId(house.getStyle()));
-			Scenery[][] objects = chunk.getObjects(index);
-			Scenery object = objects[x][y];
-			if (object != null && object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
-				if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
-					int id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
-					if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
-						id += house.getCrest().ordinal();
+			int id = spot.getHotspot().getObjectId(house.getStyle());
+			int index = chunk.getIndex(x, y, id, -1);
+			if (index != -1) {
+				Scenery object = chunk.getObjects()[x][y][index];
+				if (object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
+					if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
+						id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
+						if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
+							id += house.getCrest().ordinal();
+						}
+						SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+					} else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
+						SceneryBuilder.replace(object, object.transform(house.getStyle().getWindowStyle().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
 					}
-					SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+					int[] pos = getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation.toInteger());
+					spot.setCurrentX(pos[0]);
+					spot.setCurrentY(pos[1]);
 				}
-				else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
-					chunk.add(object.transform(house.getStyle().getWindowStyle().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
-				}
-				int[] pos = RegionChunk.getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation.toInteger());
-				spot.setCurrentX(pos[0]);
-				spot.setCurrentY(pos[1]);
 			}
 		}
-		if (rotation != Direction.NORTH && chunk.getRotation() == 0) {
+		if (rotation != Direction.NORTH) { //TODO: it is absolutely insane that this is using Direction.NORTH and such rather than RegionChunk.NORTH_ROTATION and such.
 			chunk.rotate(rotation);
 		}
 		if (!house.isBuildingMode()) {
 			placeDoors(housePlane, house, chunk);
-			removeHotspots(housePlane, house, chunk);
+			removeHotspots(house, chunk);
 		}
 	}
 	
 	/**
 	 * Removes the building hotspots from the room.
-	 * @param housePlane The room's plane in house.
 	 * @param house The house manager.
 	 * @param chunk The region chunk used.
 	 */
-	private void removeHotspots(int housePlane, HouseManager house, BuildRegionChunk chunk) {
+	private void removeHotspots(HouseManager house, RegionChunk chunk) {
 		if (properties.isRoof()) return;
+		ArrayList<Scenery> remove = new ArrayList<>();
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
-					Scenery object = chunk.get(x, y, i);
+				for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
+					Scenery object = chunk.getObjects()[x][y][i];
 					if (object != null) {
-                        int id = object.getId();
-						boolean isBuilt = object instanceof Constructed;
-                        boolean isWall  = HousingStyle.isDungeonWall(id) || id == house.getStyle().getWallId();
-                        boolean isDoor  = id == house.getStyle().getDoorId() || id == house.getStyle().getSecondDoorId();
-						if (!isBuilt && !isWall && !isDoor) {
-							SceneryBuilder.remove(object);
-							chunk.remove(object);
+						boolean isBuildHotspot = BuildHotspot.forId(object.getId(), house.getStyle()) != null;
+						boolean isDoorHotspot = BuildingUtils.isDoorHotspot(object);
+						if (isBuildHotspot || isDoorHotspot) {
+							remove.add(object);
 						}
 					}
 				}
 			}
+		}
+		for (Scenery object : remove) {
+			SceneryBuilder.remove(object);
 		}
 	}
 
@@ -197,14 +194,14 @@ public final class Room {
 	 * @param house The house manager.
 	 * @param chunk The region chunk used.
 	 */
-	private void placeDoors(int housePlane, HouseManager house, BuildRegionChunk chunk) {
+	private void placeDoors(int housePlane, HouseManager house, RegionChunk chunk) {
 		Room[][][] rooms = house.getRooms();
 		int rx = chunk.getCurrentBase().getChunkX();
 		int ry = chunk.getCurrentBase().getChunkY();
-		for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
+		for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
-					Scenery object = chunk.get(x, y, i);
+					Scenery object = chunk.getObjects()[x][y][i];
 					if (object != null && BuildingUtils.isDoorHotspot(object)) {
 						boolean edge = false;
 						Room otherRoom = null;
@@ -274,7 +271,7 @@ public final class Room {
 				return object.getId() % 2 != 0 ? house.getStyle().getDoorId() : house.getStyle().getSecondDoorId();
 			}
 		}
-		return room.getProperties().isDungeon() ? 13065 : house.getStyle().getWallId();
+		return room.getProperties().isDungeon() ? 13065 : house.getStyle().getWallId(); //otherWallId is only used behind fireplaces
 	}
 
 	/**
@@ -423,5 +420,4 @@ public final class Room {
 	public Direction getRotation() {
 		return rotation;
 	}
-	
 }

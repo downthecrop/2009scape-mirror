@@ -9,6 +9,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
@@ -123,7 +124,7 @@ public class NoraTHaggNPC extends AbstractNPC {
     @Override
     public void tick() {
         super.tick();
-        List<Player> players = getViewport().getCurrentPlane().getPlayers();
+        List<Player> players = RegionManager.getLocalPlayers(location);
         if(getLocation().getX() == 2930){
             walkdir = false;
         } else if(getLocation().getX() == 2904){

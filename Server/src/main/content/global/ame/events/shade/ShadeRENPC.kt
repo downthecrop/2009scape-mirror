@@ -4,6 +4,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import content.global.ame.RandomEventNPC
 import core.api.utils.WeightBasedTable
+import core.game.world.map.MapDistance
 
 class ShadeRENPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(425){
     val ids = (425..430).toList()
@@ -20,10 +21,12 @@ class ShadeRENPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(4
         super.finalizeDeath(killer)
     }
     override fun tick() {
-        if(!player.location.withinDistance(this.location,8)){
+        if (!player.location.withinDistance(this.location, 8)) {
             this.terminate()
         }
         super.tick()
-        if(!player.viewport.currentPlane.npcs.contains(this)) this.clear()
+        if (!player.location.withinDistance(this.location, MapDistance.RENDERING.distance)) {
+            this.clear()
+        }
     }
 }

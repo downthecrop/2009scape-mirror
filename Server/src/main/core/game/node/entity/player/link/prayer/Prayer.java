@@ -112,15 +112,16 @@ public final class Prayer {
 			killer.getImpactHandler().manualHit(player, 1 + RandomFunction.randomize(maximum), HitsplatType.NORMAL);
 		}
 		if (player.getProperties().isMultiZone()) {
-			@SuppressWarnings("rawtypes")
-			List targets = null;
+			List<? extends Entity> targets;
 			if (killer instanceof NPC) {
-				targets = RegionManager.getSurroundingNPCs(player, player, killer);
+				targets = RegionManager.getLocalNPCs(player.getLocation(), 1);
 			} else {
-				targets = RegionManager.getSurroundingPlayers(player, player, killer);
+				targets = RegionManager.getLocalPlayers(player.getLocation(), 1);
 			}
-			for (Object o : targets) {
-				Entity entity = (Entity) o;
+			for (Entity entity : targets) {
+				if (entity == player || entity == killer) {
+					continue;
+				}
 				if (entity.isAttackable(player, CombatStyle.MAGIC, false)) {
 					entity.getImpactHandler().manualHit(player, 1 + RandomFunction.randomize(maximum), HitsplatType.NORMAL);
 				}

@@ -20,6 +20,7 @@ import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.RegionChunk;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBuilder;
@@ -125,40 +126,48 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 		if (!session.isActive()) {
 			return;
 		}
-		for (final Player p : session.getRegion().getPlanes()[0].getPlayers()) {
-			p.getProperties().setTeleportLocation(getLeaveLocation());
-			if (!success) {
-				p.getDialogueInterpreter().open(3781, true, 0, true);
-				// default,
-				// type,
-				// default
-			} else if (success && p.getAttribute("pc_zeal", 0) >= 50) {
-				int amount = type.ordinal() + 2;
-				p.getSavedData().getActivityData().increasePestPoints(amount);
-				Item coins = new Item(995, p.getProperties().getCurrentCombatLevel() * 10);
-				if (!p.getInventory().add(coins)) {
-					GroundItemManager.create(coins, p);
+		RegionChunk[][][] chunks = session.getRegion().getChunks();
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				for (int z = 0; z < 4; z++) {
+					RegionChunk chunk = chunks[x][y][z];
+					for (Player p : chunk.getPlayers()) {
+						p.getProperties().setTeleportLocation(getLeaveLocation());
+						if (!success) {
+							p.getDialogueInterpreter().open(3781, true, 0, true);
+							// default,
+							// type,
+							// default
+						} else if (p.getAttribute("pc_zeal", 0) >= 50) {
+							int amount = type.ordinal() + 2;
+							p.getSavedData().getActivityData().increasePestPoints(amount);
+							Item coins = new Item(995, p.getProperties().getCurrentCombatLevel() * 10);
+							if (!p.getInventory().add(coins)) {
+								GroundItemManager.create(coins, p);
+							}
+							// default, type, name
+							p.getDialogueInterpreter().open(3781, true, 1, type.ordinal() == 0 ? "two" : type.ordinal() == 1 ? "three" : "four");
+						} else {
+							// default type, default
+							p.getDialogueInterpreter().open(3781, true, 2, true);
+						}
+						p.removeAttribute("pc_zeal");
+						p.removeExtension(PestControlSession.class);
+						p.fullRestore();
+						if (isPoisoned(p)) {
+							curePoison(p);
+						}
+						PulseManager.cancelDeathTask(p);
+						GameWorld.getPulser().submit(new Pulse(1, p) {
+							@Override
+							public boolean pulse() {
+								p.getSkills().restore();
+								return true;
+							}
+						});
+					}
 				}
-				// default, type, name
-				p.getDialogueInterpreter().open(3781, true, 1, type.ordinal() == 0 ? "two" : type.ordinal() == 1 ? "three" : "four");
-			} else {
-				// default type, default
-				p.getDialogueInterpreter().open(3781, true, 2, true);
 			}
-			p.removeAttribute("pc_zeal");
-			p.removeExtension(PestControlSession.class);
-			p.fullRestore();
-			if (isPoisoned(p)) {
-                            curePoison(p);
-			}
-			PulseManager.cancelDeathTask(p);
-			GameWorld.getPulser().submit(new Pulse(1, p) {
-				@Override
-				public boolean pulse() {
-					p.getSkills().restore();
-					return true;
-				}
-			});
 		}
 		session.getRegion().getRegionZones().clear();
 		session.setActive(false);
@@ -293,7 +302,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public boolean death(Entity e, Entity killer) {
-		if (e instanceof Player && e.getViewport().getRegion().getRegionId() == 10536) {
+		if (e instanceof Player && e.getLocation().getRegion().getRegionId() == 10536) {
 			PestControlSession session = e.getExtension(PestControlSession.class);
 			if (session != null) {
 				Location l = session.getRegion().getBaseLocation();

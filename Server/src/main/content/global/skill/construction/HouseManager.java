@@ -20,11 +20,11 @@ import core.game.world.GameWorld;
 import org.rs09.consts.Sounds;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import static core.api.ContentAPIKt.*;
 import static core.api.regionspec.RegionSpecificationKt.fillWith;
 import static core.api.regionspec.RegionSpecificationKt.using;
-
 
 /**
  * Manages the player's house.
@@ -32,7 +32,6 @@ import static core.api.regionspec.RegionSpecificationKt.using;
  *
  */
 public final class HouseManager {
-
 	/**
 	 * The current region.
 	 */
@@ -96,7 +95,6 @@ public final class HouseManager {
 		 * empty.
 		 */
 	}
-
 
 	public void parse(JSONObject data){
 		location = HouseLocation.values()[Integer.parseInt( data.get("location").toString())];
@@ -195,8 +193,8 @@ public final class HouseManager {
 	}
 
 	private void updateVarbits(Player player, boolean build) {
-                setVarp(player, 261, build ? 1 : 0);
-                setVarp(player, 262, getRoomAmount());
+		setVarp(player, 261, build ? 1 : 0);
+		setVarp(player, 262, getRoomAmount());
 	}
 
 	private void unlockMusicTrack(Player player) {
@@ -241,13 +239,13 @@ public final class HouseManager {
 	 * Reloads the house.
 	 * @param player The player.
 	 * @param buildingMode If building mode should be enabled.
-         * NOTE: I think we should avoid this method, it might be causing some issues. It's actually really suspicious...
+	 * NOTE: I think we should avoid this method, it might be causing some issues. It's actually really suspicious...
 	 */
 	public void reload(Player player, boolean buildingMode) {
 		int diffX = player.getLocation().getLocalX();
 		int diffY = player.getLocation().getLocalY();
 		int diffZ = player.getLocation().getZ();
-		boolean inDungeon = player.getViewport().getRegion() == dungeonRegion;
+		boolean inDungeon = player.getLocation().getRegion() == dungeonRegion;
 		this.buildingMode = buildingMode;
 		construct();
 		Location newLoc = (dungeonRegion == null ? houseRegion : (inDungeon ? dungeonRegion : houseRegion)).getBaseLocation().transform(diffX,diffY,diffZ);
@@ -260,19 +258,14 @@ public final class HouseManager {
 	 */
 	public void expelGuests(Player player) {
 		if (isLoaded()) {
-			for (RegionPlane plane : houseRegion.getPlanes()) {
-				for (Player p : plane.getPlayers()) {
+			for (int z = 0; z < Region.PLANES; z++) {
+				ArrayList<Player> players = new ArrayList<>(houseRegion.assemblePlayerList(z));
+				if (dungeonRegion != null) {
+					players.addAll(dungeonRegion.assemblePlayerList(z));
+				}
+				for (Player p : players) {
 					if (p != player) {
 						leave(p);
-					}
-				}
-			}
-			if (dungeonRegion != null) {
-				for (RegionPlane plane : dungeonRegion.getPlanes()) {
-					for (Player p : plane.getPlayers()) {
-						if (p != player) {
-							leave(p);
-						}
 					}
 				}
 			}
@@ -296,7 +289,7 @@ public final class HouseManager {
 						if (h.getDecorationIndex() > -1) {
 							Decoration d = h.getHotspot().getDecorations()[h.getDecorationIndex()];
 							if (d == Decoration.PORTAL) {
-								return houseRegion.getBaseLocation().transform(x * 8 + h.getChunkX(), y * 8 + h.getChunkY() + 2, 0);
+								return houseRegion.getBaseLocation().transform(x*RegionChunk.SIZE + h.getChunkX(), y*RegionChunk.SIZE + h.getChunkY() + 2, 0);
 							}
 						}
 					}
@@ -312,9 +305,9 @@ public final class HouseManager {
 	 */
 	public void redecorate(HousingStyle style) {
 		this.style = style;
-		for (int z = 0; z < 4; z++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
+		for (int z = 0; z < Region.PLANES; z++) {
+			for (int x = 0; x < RegionChunk.SIZE; x++) {
+				for (int y = 0; y < RegionChunk.SIZE; y++) {
 					Room room = rooms[z][x][y];
 					if (room != null) {
 						room.decorate(style);
@@ -329,9 +322,9 @@ public final class HouseManager {
 	 */
 	@Deprecated
 	public void clearRooms() {
-		for (int z = 0; z < 4; z++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
+		for (int z = 0; z < Region.PLANES; z++) {
+			for (int x = 0; x < RegionChunk.SIZE; x++) {
+				for (int y = 0; y < RegionChunk.SIZE; y++) {
 					rooms[z][x][y] = null;
 				}
 			}
@@ -372,10 +365,9 @@ public final class HouseManager {
 	}
 
 	private DynamicRegion getPreparedRegion() {
-		ZoneBorders borders = DynamicRegion.reserveArea(8,8);
+		ZoneBorders borders = DynamicRegion.reserveArea(Region.CHUNKS_SIZE, Region.CHUNKS_SIZE);
 		DynamicRegion region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
-		region.setUpdateAllPlanes(true);
 		region.setBuild(true);
 		RegionManager.addRegion(region.getId(), region);
 		return region;
@@ -393,12 +385,12 @@ public final class HouseManager {
 		}
 
 		@Override
-		public BuildRegionChunk getChunk(int x, int y, int plane, @NotNull DynamicRegion dyn) {
-			return rooms[plane][x][y].getChunk().copy(dyn.getPlanes()[plane]);
+		public @Nullable RegionChunk getChunk(int x, int y, int plane, @NotNull DynamicRegion dyn) {
+			return rooms[plane][x][y].getChunk().copy();
 		}
 
 		@Override
-		public void afterSetting(@Nullable BuildRegionChunk chunk, int x, int y, int plane, @NotNull DynamicRegion dyn) {
+		public void afterSetting(@Nullable RegionChunk chunk, int x, int y, int plane, @NotNull DynamicRegion dyn) {
 			rooms[plane][x][y].loadDecorations(dyn != manager.dungeonRegion ? plane : 3, chunk, manager);
 		}
 	}
@@ -406,8 +398,8 @@ public final class HouseManager {
 	private void prepareHouseChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, Room[][][] rooms) {
 		Region from = RegionManager.forId(style.getRegionId());
 		Region.load(from, true);
-		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
-		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
+		RegionChunk defaultChunk = from.getChunks()[1][0][style.getPlane()];
+		RegionChunk defaultSkyChunk = from.getChunks()[0][0][1];
 
 		RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, rooms);
 		RegionSpecification spec = new RegionSpecification(
@@ -430,7 +422,7 @@ public final class HouseManager {
 	private void prepareDungeonChunks(HousingStyle style, DynamicRegion target, DynamicRegion house, boolean buildingMode, Room[][] rooms) {
 		Region from = RegionManager.forId(style.getRegionId());
 		Region.load(from, true);
-		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
+		RegionChunk defaultChunk = from.getChunks()[3][0][style.getPlane()];
 
 		RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, new Room[][][]{rooms});
 		RegionSpecification spec = new RegionSpecification(
@@ -609,8 +601,8 @@ public final class HouseManager {
 		int startY = 99;
 		int endX = 0;
 		int endY = 0;
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
+		for (int x = 0; x < Region.CHUNKS_SIZE; x++) {
+			for (int y = 0; y < Region.CHUNKS_SIZE; y++) {
 				if (rooms[0][x][y] != null) {
 					if (x < startX) startX = x;
 					if (y < startY) startY = y;
@@ -688,7 +680,7 @@ public final class HouseManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean isInHouse(Player player) {
-		return isLoaded() && (player.getViewport().getRegion() == houseRegion || player.getViewport().getRegion() == dungeonRegion);
+		return isLoaded() && (player.getLocation().getRegion() == houseRegion || player.getLocation().getRegion() == dungeonRegion);
 	}
 
 	/**
@@ -697,16 +689,13 @@ public final class HouseManager {
 	 * @return {@code True} if so.
 	 */
 	public static boolean isInDungeon(Player player) {
-		return player.getViewport().getRegion() == player.getHouseManager().dungeonRegion;
+		return player.getLocation().getRegion() == player.getHouseManager().dungeonRegion;
 	}
 
 	/**
 	 * Checks if the house region was constructed and active.
 	 * @return {@code True} if an active region for the house exists.
 	 */
-	//public boolean isLoaded() {
-	//	return (houseRegion != null) || (dungeonRegion != null);
-	//}
 	public boolean isLoaded() {
 		return (houseRegion != null && houseRegion.isActive()) || (dungeonRegion != null && dungeonRegion.isActive());
 	}

@@ -201,7 +201,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                             GameWorld.getPulser().submit(new Pulse(2, player) {
                                 @Override
                                 public boolean pulse() {
-                                    player.getDialogueInterpreter().open(831, RegionManager.getNpc(player, 831));
+                                    player.getDialogueInterpreter().open(831, RegionManager.getNpc(player.getLocation(), 831, 16));
                                     return true;
                                 }
                             });
@@ -1254,7 +1254,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         @Override
         public boolean handle(NodeUsageEvent event) {
             final Player player = event.getPlayer();
-            player.getDialogueInterpreter().open(831, RegionManager.getNpc(player, 831));
+            player.getDialogueInterpreter().open(831, RegionManager.getNpc(player.getLocation(), 831, 16));
             return true;
         }
 

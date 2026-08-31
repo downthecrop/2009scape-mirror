@@ -120,7 +120,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     )
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             12341 -> if (event.itemId == Items.RAW_TROUT_335) {
                 finishTask(
                     player,
@@ -172,7 +172,7 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     }
 
     override fun onInteracted(player: Player, event: InteractionEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             12342 -> if (event.target.id == 26934) {
                 finishTask(
                     player,
@@ -217,8 +217,8 @@ class VarrockAchivementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
 
     override fun onButtonClicked(player: Player, event: ButtonClickEvent) {
         /* This gets fired even on the login screen, and we don't have a region there, so... */
-        player.viewport.region?.let {
-            when (it.id) {
+        player.location.regionId.let {
+            when (it) {
                 12342 -> {
                     if (event.iface == CanoeListener.CANOE_SHAPING_INTERFACE
                         && event.buttonId == CanoeListener.CANOE_SHAPING_BUTTONS[CanoeListener.Companion.Canoes.WAKA.ordinal]) {

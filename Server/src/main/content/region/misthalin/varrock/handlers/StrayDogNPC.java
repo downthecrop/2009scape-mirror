@@ -69,7 +69,7 @@ public class StrayDogNPC extends AbstractNPC {
 		if (delay < System.currentTimeMillis() && RandomFunction.random(1, 16) == 2) {
 			getPulseManager().clear();
 			target = null;
-			players = RegionManager.getLocalPlayers(this, 7);
+			players = RegionManager.getLocalPlayers(location, 7);
 			if (players.size() != 0) {
 				target = players.get(RandomFunction.random(players.size()));
 				getPulseManager().run(getFollowPulse(target), PulseType.STANDARD);

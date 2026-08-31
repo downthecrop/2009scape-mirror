@@ -58,7 +58,7 @@ class CannonballSmelter : Script() {
                 } else if(!coalMine.insideBorder(bot)){
                     scriptAPI.walkTo(coalMine.randomLoc)
                 } else {
-                    val rock = scriptAPI.getNearestObjectByPredicate({node -> node?.name?.equals("rocks", true)!! && MiningNode.forId(node?.id!!).reward == Items.COAL_453 })
+                    val rock = scriptAPI.getNearestObjectByPredicate { node -> node?.name?.equals("rocks", true)!! && MiningNode.forId(node.id)?.reward == Items.COAL_453 }
                     if(rock != null) {
                         scriptAPI.interact(bot, rock, "mine")
                     } else {
@@ -75,7 +75,7 @@ class CannonballSmelter : Script() {
                     var loc = ironMine.randomLoc
                     scriptAPI.walkTo(loc)
                 } else {
-                    val rock = scriptAPI.getNearestObjectByPredicate({node -> node?.name?.equals("rocks", true)!! && MiningNode.forId(node?.id!!).reward == Items.IRON_ORE_440 })
+                    val rock = scriptAPI.getNearestObjectByPredicate { node -> node?.name?.equals("rocks", true)!! && MiningNode.forId(node.id)?.reward == Items.IRON_ORE_440 }
                     //rock?.let { InteractionListeners.run(rock.id, IntType.SCENERY,"mine",bot,rock) }
                     if(rock != null) {
                         scriptAPI.interact(bot, rock, "mine")

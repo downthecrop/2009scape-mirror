@@ -93,7 +93,7 @@ public class ForceMovement extends Pulse {
 	 * @param unlockAfter Whether to unlock the entity after the ForceMovement completes
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public ForceMovement(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed, boolean unlockAfter) {
 		super(1, e);
 		this.entity = e;
@@ -116,15 +116,15 @@ public class ForceMovement extends Pulse {
 	 * @param speed The path speed.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public ForceMovement(Entity e, Location start, Location end, Animation animation, int speed) {
 		this(e, start, end, WALK_ANIMATION, animation, direction(start, end), WALKING_SPEED, speed, true);
 	}
 
-        /**
+		/**
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public ForceMovement(Entity e, Location destination, int startSpeed, int animSpeed){
 		this(e,e.getLocation(),destination,WALK_ANIMATION,WALK_ANIMATION,direction(e.getLocation(),destination),startSpeed,animSpeed, true);
 	}
@@ -137,7 +137,7 @@ public class ForceMovement extends Pulse {
 	 * @param animation the animation.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public ForceMovement(Entity e, Location start, Location destination, Animation animation) {
 		this(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -149,7 +149,7 @@ public class ForceMovement extends Pulse {
 	 * @param animation the animation.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public ForceMovement(Location start, Location destination, Animation animation) {
 		this(null, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -161,7 +161,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location destination) {
 		return run(e, e.getLocation(), destination, WALK_ANIMATION, WALK_ANIMATION, direction(e.getLocation(), destination), WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -174,7 +174,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination) {
 		return run(e, start, destination, WALK_ANIMATION, WALK_ANIMATION, direction(e.getLocation(), destination), WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -188,7 +188,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation animation) {
 		return run(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -203,7 +203,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation animation, int speed) {
 		return run(e, start, destination, WALK_ANIMATION, animation, direction(start, destination), WALKING_SPEED, speed, true);
 	}
@@ -217,7 +217,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation) {
 		return run(e, start, destination, startAnim, animation, direction(start, destination), WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -232,7 +232,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction) {
 		return run(e, start, destination, startAnim, animation, direction, WALKING_SPEED, WALKING_SPEED, true);
 	}
@@ -248,15 +248,15 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int pathSpeed) {
 		return run(e, start, destination, startAnim, animation, direction, WALKING_SPEED, pathSpeed, true);
 	}
 
-        /**
+		/**
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed) {
 		return run(e, start, destination, startAnim, animation, direction, commenceSpeed, pathSpeed, true);
 	}
@@ -271,7 +271,7 @@ public class ForceMovement extends Pulse {
 	 * @return The created ForceMovement object.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location start, Location destination, Animation startAnim, Animation animation, Direction direction, int commenceSpeed, int pathSpeed, boolean unlockAfter) {
 		if (startAnim != null) {
 			startAnim.setPriority(Animator.Priority.VERY_HIGH);
@@ -285,10 +285,10 @@ public class ForceMovement extends Pulse {
 		GameWorld.getPulser().submit(fm);
 		return fm;
 	}
-        /*
+		/*
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public static ForceMovement run(Entity e, Location destination, int commenceSpeed, int pathSpeed){
 		return run(e,e.getLocation(),destination,WALK_ANIMATION,WALK_ANIMATION,direction(e.getLocation(),destination),commenceSpeed,pathSpeed, true);
 	}
@@ -298,7 +298,7 @@ public class ForceMovement extends Pulse {
 	 * @param e the entity.
 	 * @deprecated this is no longer the preferred way to use force movement. Use the ContentAPI forceMove method instead, please. 
 	 */
-        @Deprecated
+	@Deprecated
 	public void run(final Entity e, final int speed) {
 		this.entity = e;
 		int commence = (int) start.getDistance(e.getLocation());
@@ -358,9 +358,9 @@ public class ForceMovement extends Pulse {
 		int ticks = 1 + commenceSpeed + pathSpeed;
 		entity.getImpactHandler().setDisabledTicks(ticks);
 		entity.getUpdateMasks().register(EntityFlag.ForceMove, new ForceMoveCtx(start, destination, commenceSpeed * 30, pathSpeed * 30, direction));
-        if(entity instanceof Player) {
-            entity.getWalkingQueue().updateRegion(destination, false);
-        }
+		if (entity instanceof Player) {
+			entity.getWalkingQueue().updateRegion(start, destination, false);
+		}
 		super.start();
 	}
 

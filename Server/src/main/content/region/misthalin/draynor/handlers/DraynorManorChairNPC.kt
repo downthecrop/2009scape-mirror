@@ -78,7 +78,7 @@ class DraynorManorChairNPC(id: Int = DRAYNOR_MANOR_CHAIR_NPC_ID, location: Locat
      * @return The Player object representing the closest player, or null if there are no players nearby.
      */
     fun findClosestPlayer(): Player? {
-        val players = RegionManager.getLocalPlayers(this, FOLLOWING_DISTANCE)
+        val players = RegionManager.getLocalPlayers(location, FOLLOWING_DISTANCE)
         if (players.isEmpty()) {
             return null
         }

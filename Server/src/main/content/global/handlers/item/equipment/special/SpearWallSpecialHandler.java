@@ -5,12 +5,9 @@ import java.util.List;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -19,6 +16,7 @@ import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playGlobalAudio;
+import static core.game.node.entity.combat.MultihitTargetsKt.findMultihitTargets;
 
 /**
  * Handles Vesta's Spear special attack - Spear Wall.
@@ -76,19 +74,14 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 		if (!multi) {
 			return super.swing(entity, victim, state);
 		}
-		@SuppressWarnings("rawtypes")
-		List list = victim instanceof NPC ? RegionManager.getSurroundingNPCs(entity, 9, entity) : RegionManager.getSurroundingPlayers(entity, 9, entity);
+		List<Entity> list = findMultihitTargets(victim, entity, CombatStyle.MELEE);
 		BattleState[] targets = new BattleState[list.size()];
 		int count = 0;
-		for (Object o : list) {
-			Entity e = (Entity) o;
-			if (CombatStyle.RANGE.getSwingHandler().canSwing(entity, e) != InteractionType.NO_INTERACT && e.isAttackable(entity, CombatStyle.RANGE, false)) {
-				BattleState s = targets[count++] = new BattleState(entity, e);
-				int hit = 0;
-				hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
-				s.setStyle(CombatStyle.MELEE);
-				s.setEstimatedHit(hit);
-			}
+		for (Entity e : list) {
+			BattleState s = targets[count++] = new BattleState(entity, e);
+			int hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
+			s.setStyle(CombatStyle.MELEE);
+			s.setEstimatedHit(hit);
 		}
 		state.setTargets(targets);
 		return 1;

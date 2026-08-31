@@ -117,7 +117,7 @@ public class RevenantNPC extends AbstractNPC {
 	public void tick() {
 		skills.pulse();
 		getWalkingQueue().update();
-		if (this.getViewport().getRegion().isActive()) {
+		if (this.getLocation().getRegion().isActive()) {
 			getUpdateMasks().prepare(this);
 		}
 		if (!DeathTask.isDead(this)) {
@@ -128,7 +128,7 @@ public class RevenantNPC extends AbstractNPC {
 				lock(3);
 				getProperties().getCombatPulse().delayNextAttack(3);
 				getSkills().heal(maxhp / 6);
-				for (Player p : RegionManager.getLocalPlayers(this)) {
+				for (Player p : RegionManager.getLocalPlayers(location)) {
 					playAudio(p, Sounds.EAT_2393);
 				}
 				setAttribute("eat-delay", GameWorld.getTicks() + 6);

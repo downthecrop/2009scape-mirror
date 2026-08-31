@@ -17,6 +17,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.item.GroundItemManager;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -71,7 +72,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 	public boolean move(Entity e, Location from, Location to) {
 		for (Location location : DOOR_SUPPORTS) {
 			if (location.equals(to)) {
-				List<NPC> npcs = RegionManager.getLocalNpcs(location, 0);
+				List<NPC> npcs = RegionManager.getLocalNPCs(location, 0);
 				NPC npc = null;
 				if (npcs.size() != 0) {
 					npc = npcs.get(0);
@@ -243,10 +244,10 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 		 * allows both players and pet rocks to activate the pad
 		 */
 		private boolean pressurePadActivated(Player player, Location location) {
-			if (RegionManager.getLocalPlayers(location,0).size() > 0) {
+			if (!RegionManager.getLocalPlayers(location, 0).isEmpty()) {
 				return true;
 			}
-			if (RegionManager.getRegionPlane(location).getItem(Items.PET_ROCK_3695,location,player) != null) {
+			if (GroundItemManager.get(Items.PET_ROCK_3695, location, player) != null) {
 				return true;
 			}
 			return false;
@@ -411,9 +412,9 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			if (entity.getLocation().getDistance(getLocation()) <= 3) {
 				if (entity instanceof Player) {
 					Player player = entity.asPlayer();
-                    if(message) {
-                        player.sendMessage("The door is propped securely shut from this side...");
-                    }
+					if(message) {
+						player.sendMessage("The door is propped securely shut from this side...");
+					}
 				}
 				return false;
 			}

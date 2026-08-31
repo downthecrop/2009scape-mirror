@@ -27,7 +27,7 @@ class ImpDefenderBehavior : NPCBehavior(6074) {
         var nextCaptureTick = getAttribute(self, "next-capture-tick", 0)
         if (getWorldTicks() < nextCaptureTick) return true
 
-        var players = RegionManager.getLocalPlayers(self, 2)
+        var players = RegionManager.getLocalPlayers(self.location, 2)
         for (player in players) {
             var lowestTierImpling = BNetTypes.getImpling(player)
             if (lowestTierImpling == null) continue

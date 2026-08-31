@@ -143,7 +143,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         )
 
     override fun onInteracted(player: Player, event: InteractionEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             12084 -> {
                 if (event.option == "burst" && event.target.id in PARTY_BALLOONS) {
                     finishTask(
@@ -179,7 +179,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
     }
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             11828 -> when (event.itemId) {
                 Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513 -> {
                     if (inBorders(player, PARK_TREE_PATCH_AREA)) {
@@ -195,7 +195,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
     }
 
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             11828 -> if (event.npc.id in PARK_DUCKS && inBorders(event.npc, PARK_POND_AREA)) {
                 finishTask(
                     player,

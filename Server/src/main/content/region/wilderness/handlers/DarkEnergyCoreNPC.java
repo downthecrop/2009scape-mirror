@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.plugin.Initializable;
@@ -82,7 +83,7 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 		}
 		if (ticks % 2 == 0) {
 			boolean jump = true;
-			for (Player p : getViewport().getCurrentPlane().getPlayers()) {
+			for (Player p : RegionManager.getLocalPlayers(location)) {
 				if (p.getLocation().withinDistance(getLocation(), 1)) {
 					jump = false;
 					int hit = 5 + RandomFunction.random(6);
@@ -93,7 +94,7 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 			}
 			if (jump) {
 				Entity victim = master.getProperties().getCombatPulse().getVictim();
-				if (++fails >= 3 && victim != null && victim.getViewport().getCurrentPlane() == getViewport().getCurrentPlane()) {
+				if (++fails >= 3 && victim != null && getLocation().withinDistance(victim.getLocation(), 8)) {
 					Path path = Pathfinder.find(getLocation(), victim.getLocation(), 1);
 					if (path.isSuccessful() || !path.isMoveNear()) {
 						jump(victim.getLocation());

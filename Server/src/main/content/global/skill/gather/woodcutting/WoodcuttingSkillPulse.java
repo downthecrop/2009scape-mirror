@@ -11,7 +11,6 @@ import core.game.dialogue.FacialExpression;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.Skills;
 import content.data.skill.SkillingTool;
@@ -24,9 +23,6 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static core.api.ContentAPIKt.playAudio;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
@@ -113,17 +109,13 @@ public class WoodcuttingSkillPulse extends Pulse {
     }
 
     public void animate() {
-        if(!player.getAnimator().isAnimating()) {
+        if (!player.getAnimator().isAnimating()) {
             player.animate(SkillingTool.getHatchet(player).getAnimation());
-
-            List<Player> playersAroundMe = RegionManager.getLocalPlayers(player, 2)
-                .stream()
-                .filter(p -> !p.getUsername().equals(player.getUsername()))
-                .collect(Collectors.toList());
-
             int soundIndex = RandomFunction.random(0, woodcuttingSounds.length);
-
-            for (Player p : playersAroundMe) {
+            for (Player p : RegionManager.getLocalPlayers(player.getLocation(), 2)) {
+                if (p == player) {
+                    continue;
+                }
                 playAudio(p, woodcuttingSounds[soundIndex]);
             }
         }
@@ -227,7 +219,7 @@ public class WoodcuttingSkillPulse extends Pulse {
         // Seers village medium reward - extra normal log while in seer's village
         if (reward == 1511
                 && player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(1)
-                && player.getViewport().getRegion().getId() == 10806) {
+                && player.getLocation().getRegionId() == 10806) {
             amount = 2;
         }
 

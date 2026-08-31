@@ -106,7 +106,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 			}
 			break;
 		case 767:
-			List<NPC> npcs = RegionManager.getLocalNpcs(player);
+			List<NPC> npcs = RegionManager.getLocalNPCs(player.getLocation());
 			NPC master = null;
 			for (NPC n : npcs) {
 				if (n.getId() == 643) {

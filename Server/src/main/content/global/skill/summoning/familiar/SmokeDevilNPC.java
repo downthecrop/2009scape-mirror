@@ -70,7 +70,7 @@ public class SmokeDevilNPC extends Familiar {
 		if (!isOwnerAttackable()) {
 			return false;
 		}
-		final List<Entity> entitys = RegionManager.getLocalEntitys(this, 1);
+		final List<Entity> entitys = RegionManager.getLocalEntities(location, 1);
 		entitys.remove(this);
 		entitys.remove(owner);
 		visualize(Animation.create(7820), Graphics.create(1375));

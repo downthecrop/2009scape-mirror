@@ -1,9 +1,12 @@
 package core.game.world.map;
 
 import core.cache.Cache;
+import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
+import core.game.node.scenery.Scenery;
+import core.game.node.scenery.SceneryBuilder;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
 import core.game.world.map.build.DynamicRegion;
@@ -29,11 +32,20 @@ import static core.api.ContentAPIKt.log;
  * @author Emperor
  */
 public class Region {
-
 	/**
-	 * The default size of a region.
+	 * The number of tiles per region.
 	 */
 	public static final int SIZE = 64;
+
+	/**
+	 * The number of chunks per region.
+	 */
+	public static final int CHUNKS_SIZE = 8;
+
+	/**
+	 * The number of z levels per x,y coordinate.
+	 */
+	public static final int PLANES = 4;
 
 	/**
 	 * The region x-coordinate.
@@ -46,9 +58,9 @@ public class Region {
 	private final int y;
 
 	/**
-	 * The region planes.
+	 * The chunks in this region.
 	 */
-	private final RegionPlane[] planes = new RegionPlane[4];
+	protected RegionChunk[][][] chunks = new RegionChunk[CHUNKS_SIZE][CHUNKS_SIZE][PLANES];
 
 	/**
 	 * The activity pulse.
@@ -73,7 +85,7 @@ public class Region {
 	/**
 	 * Keeps track of players and time in region for tolerance purposes
 	 */
-	private final HashMap<String,Long> tolerances = new HashMap<>();
+	private final HashMap<String, Long> tolerances = new HashMap<String, Long>();
 
 	/**
 	 * If the region is active.
@@ -106,9 +118,10 @@ public class Region {
 	private boolean build;
 
 	/**
-	 * If all planes should be updated when in this region (instead of just current one).
+	 * Any scenery overrides for this region
 	 */
-	private boolean updateAllPlanes;
+	private final ArrayList<Scenery> addSceneries = new ArrayList<>();
+	private final ArrayList<Scenery> removeSceneries = new ArrayList<>();
 
 	/**
 	 * Constructs a new {@code Region} {@code Object}.
@@ -118,8 +131,14 @@ public class Region {
 	public Region(int x, int y) {
 		this.x = x;
 		this.y = y;
-		for (int plane = 0; plane < 4; plane++) {
-			planes[plane] = new RegionPlane(this, plane);
+		Location swCorner = getBaseLocation();
+		for (x = 0; x < CHUNKS_SIZE; x++) {
+			for (y = 0; y < CHUNKS_SIZE; y++) {
+				for (int z = 0; z < PLANES; z++) {
+					Location loc = swCorner.transform(x * RegionChunk.SIZE, y * RegionChunk.SIZE, z);
+					chunks[x][y][z] = new RegionChunk(loc, 0);
+				}
+			}
 		}
 		this.activityPulse = new Pulse(50) {
 			@Override
@@ -140,78 +159,56 @@ public class Region {
 	}
 
 	/**
+	 * Gets the chunks.
+	 * @return The chunks.
+	 */
+	public RegionChunk[][][] getChunks() {
+		return chunks;
+	}
+
+	/**
 	 * Adds a region zone to this region.
 	 * @param zone The region zone.
 	 */
 	public void add(RegionZone zone) {
 		regionZones.add(zone);
-		for (RegionPlane plane : planes) {
-			for (NPC npc : plane.getNpcs()) {
-				npc.getZoneMonitor().updateLocation(npc.getLocation());
-			}
-			for (Player p : plane.getPlayers()) {
-				p.getZoneMonitor().updateLocation(p.getLocation());
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				for (int z = 0; z < PLANES; z++) {
+					for (NPC npc : chunks[x][y][z].getNpcs()) {
+						npc.getZoneMonitor().updateLocation(npc.getLocation());
+					}
+					for (Player player : chunks[x][y][z].getPlayers()) {
+						if (player != null) {
+							player.getZoneMonitor().updateLocation(player.getLocation());
+						}
+					}
+				}
 			}
 		}
 	}
 
 	public void remove(RegionZone zone) {
 		regionZones.remove(zone);
-		for (RegionPlane plane : planes) {
-			for (NPC npc : plane.getNpcs()) {
-				npc.getZoneMonitor().updateLocation(npc.getLocation());
-			}
-			for (Player p : plane.getPlayers()) {
-				p.getZoneMonitor().updateLocation(p.getLocation());
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				for (int z = 0; z < PLANES; z++) {
+					for (NPC npc : chunks[x][y][z].getNpcs()) {
+						npc.getZoneMonitor().updateLocation(npc.getLocation());
+					}
+					for (Player player : chunks[x][y][z].getPlayers()) {
+						player.getZoneMonitor().updateLocation(player.getLocation());
+					}
+				}
 			}
 		}
-	}
-
-	/**
-	 * Adds a player to this region.
-	 * @param player The player.
-	 */
-	public void add(Player player) {
-		planes[player.getLocation().getZ()].add(player);
-		tolerances.put(player.getUsername(), System.currentTimeMillis());
-		flagActive();
-	}
-
-	/**
-	 * Adds an npc to this region.
-	 * @param npc The npc.
-	 */
-	public void add(NPC npc) {
-		planes[npc.getLocation().getZ()].add(npc);
-	}
-
-	/**
-	 * Removes an NPC from this region.
-	 * @param npc The NPC.
-	 */
-	public void remove(NPC npc) {
-		RegionPlane plane = npc.getViewport().getCurrentPlane();
-		if (plane != null && plane != planes[npc.getLocation().getZ()]) {
-			plane.remove(npc);
-		}
-		planes[npc.getLocation().getZ()].remove(npc);
-	}
-
-	/**
-	 * Removes a player from this region.
-	 * @param player The player.
-	 */
-	public void remove(Player player) {
-		player.getViewport().getCurrentPlane().remove(player);
-		tolerances.remove(player.getUsername());
-		checkInactive();
 	}
 
 	/**
 	 * Checks if player is tolerated by enemies in this region
 	 */
-	public boolean isTolerated(Player player){
-		return System.currentTimeMillis() - tolerances.getOrDefault(player.getUsername(), System.currentTimeMillis()) > TimeUnit.MINUTES.toMillis(10);
+	public boolean isTolerated(Player player) {
+		return System.currentTimeMillis() - tolerances.getOrDefault(player.getName(), System.currentTimeMillis()) > TimeUnit.MINUTES.toMillis(10);
 	}
 
 	/**
@@ -231,9 +228,13 @@ public class Region {
 		if (isViewed()) {
 			return false;
 		}
-		for (RegionPlane p : planes) {
-			if (!p.getPlayers().isEmpty()) {
-				return false;
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				for (int z = 0; z < PLANES; z++) {
+					if (!chunks[x][y][z].getPlayers().isEmpty()) {
+						return false;
+					}
+				}
 			}
 		}
 		if (runPulse) {
@@ -247,14 +248,6 @@ public class Region {
 	}
 
 	/**
-	 * Checks if this region has the inactivity flagging pulse running.
-	 * @return {@code True} if so.
-	 */
-	public boolean isPendingRemoval() {
-		return activityPulse.isRunning();
-	}
-
-	/**
 	 * Flags the region as active.
 	 */
 	public void flagActive() {
@@ -262,10 +255,14 @@ public class Region {
 		if (!active) {
 			active = true;
 			load(this);
-			for (RegionPlane r : planes) {
-				for (NPC n : r.getNpcs()) {
-					if (n.isActive()) {
-						Repository.addRenderableNPC(n);
+			for (int x = 0; x < CHUNKS_SIZE; x++) {
+				for (int y = 0; y < CHUNKS_SIZE; y++) {
+					for (int z = 0; z < PLANES; z++) {
+						for (NPC npc : chunks[x][y][z].getNpcs()) {
+							if (npc.isActive()) {
+								Repository.addRenderableNPC(npc);
+							}
+						}
 					}
 				}
 			}
@@ -273,7 +270,7 @@ public class Region {
 	}
 
 	public boolean flagInactive(boolean force) {
-		if (unload(this, force)) {
+		if (unload(force)) {
 			active = false;
 			return true;
 		} else {
@@ -285,7 +282,7 @@ public class Region {
 	 * Flags the region as inactive.
 	 */
 	public boolean flagInactive() {
-            return flagInactive(false);
+		return flagInactive(false);
 	}
 
 	/**
@@ -299,7 +296,7 @@ public class Region {
 	/**
 	 * Loads the flags for a region.
 	 * @param r The region.
-	 * @param build if all objects in this region should be stored (rather than just the ones with options).
+	 * @param build If the region can be edited.
 	 */
 	public static void load(Region r, boolean build) {
 		try {
@@ -318,11 +315,13 @@ public class Region {
 				return;
 			}
 
-			byte[][][] mapscapeData = new byte[4][SIZE][SIZE];
-			for (RegionPlane plane : r.planes) {
-				plane.getFlags().setLandscape(new boolean[SIZE][SIZE]);
-				//plane.getFlags().setClippingFlags(new int[SIZE][SIZE]);
-				//plane.getProjectileFlags().setClippingFlags(new int[SIZE][SIZE]);
+			byte[][][] mapscapeData = new byte[PLANES][SIZE][SIZE];
+			for (int x = 0; x < CHUNKS_SIZE; x++) {
+				for (int y = 0; y < CHUNKS_SIZE; y++) {
+					for (int z = 0; z < PLANES; z++) {
+						r.chunks[x][y][z].getFlags().setLandscape(new boolean[RegionChunk.SIZE][RegionChunk.SIZE]);
+					}
+				}
 			}
 			if (mapscapeId > -1) {
 				ByteBuffer mapscape = ByteBuffer.wrap(Cache.getIndexes()[5].getCacheFile().getContainerUnpackedData(mapscapeId));
@@ -338,50 +337,64 @@ public class Region {
 				}
 				r.hasFlags = true;
 				try {
-					LandscapeParser.parse(r, mapscapeData, ByteBuffer.wrap(landscape), build);
+					LandscapeParser.parse(r, r.chunks, mapscapeData, ByteBuffer.wrap(landscape), build);
 				} catch (Throwable t) {
 					new Throwable("Failed parsing region " + regionId + "!", t).printStackTrace();
 				}
 			}
-			MapscapeParser.clipMapscape(r, mapscapeData);
+			MapscapeParser.clipMapscape(r, r.chunks, mapscapeData);
+			for (Scenery object : r.removeSceneries) {
+				// Get the actual object, not the instance that's kept in the removeScenery array
+				Location loc = object.getLocation();
+				Scenery realObject = RegionManager.getObject(loc.getX(), loc.getY(), loc.getZ(), object.getId(), object.getType());
+				if (realObject != null) {
+					SceneryBuilder.remove(realObject);
+				}
+			}
+			for (Scenery object : r.addSceneries) {
+				SceneryBuilder.add(object);
+			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static boolean unload(Region r) {
-            return unload(r, false);
-        }
-
 	/**
-	 * Unloads a region.
-	 * @param r The region.
+	 * Unloads the region.
 	 */
-	public static boolean unload(Region r, boolean force) {
-		if (!force && r.isViewed()) {
+	public boolean unload(boolean force) {
+		if (!force && isViewed()) {
 			log(CommunicationInfo.class, Log.ERR, "Players viewing region!");
-			r.flagActive();
+			flagActive();
 			return false;
 		}
-		for (RegionPlane p : r.planes) {
-			if (!force && !p.getPlayers().isEmpty()) {
-				log(CommunicationInfo.class, Log.ERR, "Players still in region!");
-				r.flagActive();
-				return false;
-			}
-		}
-		for (RegionPlane p : r.planes) {
-			p.clear();
-			if (!(r instanceof DynamicRegion)) {
-				for (NPC n : p.getNpcs()) {
-					n.onRegionInactivity();
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				for (int z = 0; z < PLANES; z++) {
+					if (!force && !chunks[x][y][z].getPlayers().isEmpty()) {
+						log(CommunicationInfo.class, Log.ERR, "Players still in region! (region id " + getId() + "; " + chunks[x][y][z].getPlayers().size() + " players on a chunk)");
+						flagActive();
+						return false;
+					}
 				}
 			}
 		}
-		if (r.isBuild())
-			r.setLoaded(false);
-		r.activityPulse.stop();
-	        return true;
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				for (int z = 0; z < PLANES; z++) {
+					if (!(this instanceof DynamicRegion)) {
+						ArrayList<NPC> npcs = new ArrayList<>(chunks[x][y][z].getNpcs());
+						for (NPC npc : npcs) {
+							npc.onRegionInactivity();
+						}
+					}
+					chunks[x][y][z].clear();
+				}
+			}
+		}
+		loaded = false;
+		activityPulse.stop();
+		return true;
 	}
 
 	/**
@@ -427,17 +440,6 @@ public class Region {
 	}
 
 	/**
-	 * Sets the active.
-	 * @param active The active to set.
-	 * @deprecated This should not be used, instead use the {@link #flagInactive()},
-	 * 				{@link #flagActive()} & {@link #checkInactive()} methods to safely change the activity state.
-	 */
-	@Deprecated
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	/**
 	 * Gets the region id.
 	 * @return The region id.
 	 */
@@ -467,14 +469,6 @@ public class Region {
 	 */
 	public int getY() {
 		return y;
-	}
-
-	/**
-	 * Gets the planes.
-	 * @return The planes.
-	 */
-	public RegionPlane[] getPlanes() {
-		return planes;
 	}
 
 	/**
@@ -533,14 +527,6 @@ public class Region {
 	}
 
 	/**
-	 * Sets the hasFlags.
-	 * @param hasFlags The hasFlags to set.
-	 */
-	public void setHasFlags(boolean hasFlags) {
-		this.hasFlags = hasFlags;
-	}
-
-	/**
 	 * Sets the region time out duration.
 	 * @param ticks The amount of ticks before the region is flagged as inactive.
 	 */
@@ -565,14 +551,6 @@ public class Region {
 	}
 
 	/**
-	 * Sets the viewAmount.
-	 * @param viewAmount The viewAmount to set.
-	 */
-	public void setViewAmount(int viewAmount) {
-		this.viewAmount = viewAmount;
-	}
-
-	/**
 	 * Gets the build.
 	 * @return the build
 	 */
@@ -588,19 +566,69 @@ public class Region {
 		this.build = build;
 	}
 
-	/**
-	 * Gets the updateAllPlanes value.
-	 * @return The updateAllPlanes.
-	 */
-	public boolean isUpdateAllPlanes() {
-		return updateAllPlanes;
+	public List<Scenery> assembleObjectList(int z) {
+		ArrayList<Scenery> list = new ArrayList<>();
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				RegionChunk chunk = chunks[x][y][z];
+				for (int offsetX = 0; offsetX < RegionChunk.SIZE; offsetX++) {
+					for (int offsetY = 0; offsetY < RegionChunk.SIZE; offsetY++) {
+						for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
+							Scenery object = chunk.getObjects()[offsetX][offsetY][i];
+							if (object != null) {
+								list.add(object);
+							}
+						}
+					}
+				}
+			}
+		}
+		return list;
+	}
+
+	public List<NPC> assembleNpcList(int z) {
+		ArrayList<NPC> list = new ArrayList<>();
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				RegionChunk chunk = chunks[x][y][z];
+				list.addAll(chunk.getNpcs());
+			}
+		}
+		return list;
+	}
+
+	public List<Player> assemblePlayerList(int z) {
+		ArrayList<Player> list = new ArrayList<>();
+		for (int x = 0; x < CHUNKS_SIZE; x++) {
+			for (int y = 0; y < CHUNKS_SIZE; y++) {
+				RegionChunk chunk = chunks[x][y][z];
+				list.addAll(chunk.getPlayers());
+			}
+		}
+		return list;
+	}
+
+	public List<Node> assembleNodeList(int z) {
+		ArrayList<Node> list = new ArrayList<>(assembleObjectList(z));
+		list.addAll(assemblePlayerList(z));
+		list.addAll(assembleNpcList(z));
+		return list;
 	}
 
 	/**
-	 * Sets the updateAllPlanes value.
-	 * @param updateAllPlanes The updateAllPlanes to set.
+	 * Getter for region aggro tolerances.
 	 */
-	public void setUpdateAllPlanes(boolean updateAllPlanes) {
-		this.updateAllPlanes = updateAllPlanes;
+	public HashMap<String, Long> getTolerances() {
+		return tolerances;
+	}
+
+	/**
+	 * Getters for addScenery and removeScenery.
+	 */
+	public ArrayList<Scenery> getAddSceneries() {
+		return addSceneries;
+	}
+	public ArrayList<Scenery> getRemoveSceneries() {
+		return removeSceneries;
 	}
 }

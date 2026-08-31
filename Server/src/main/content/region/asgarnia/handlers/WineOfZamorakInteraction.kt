@@ -15,7 +15,7 @@ class WineOfZamorakInteraction : InteractionListener {
                 PickupHandler.take(player, wine as GroundItem)
                 return@on true
             }
-            val npcs = RegionManager.getLocalNpcs(player)
+            val npcs = RegionManager.getLocalNPCs(player.location)
             for (n in npcs) {
                 if (n.id == 188) {
                     n.sendChat("Hands off zamorak's wine!")

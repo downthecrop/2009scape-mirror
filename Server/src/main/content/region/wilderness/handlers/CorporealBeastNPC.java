@@ -126,7 +126,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 		public int swing(Entity entity, Entity victim, BattleState state) {
 			// If we're below the right HP threshold, roll a chance to spawn the dark core
 			CorporealBeastNPC corp = (CorporealBeastNPC) ((NPC) entity).behavior;
-			double thresh = entity.getSkills().getMaximumLifepoints() * (0.3 + (entity.getViewport().getCurrentPlane().getPlayers().size() * 0.05));
+			double thresh = entity.getSkills().getMaximumLifepoints() * (0.3 + (RegionManager.getLocalPlayers(entity.getLocation()).size() * 0.05));
 			if (corp.forceCoreRoll || entity.getSkills().getLifepoints() < thresh) {
 				rollDarkCore(entity, corp, victim);
 				corp.forceCoreRoll = false;
@@ -189,7 +189,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 			int ticks = 1 + (int) Math.ceil(entity.getLocation().getDistance(location) * 0.5);
 			GameWorld.getPulser().submit(new Pulse(ticks) {
 				boolean secondStage = false;
-				List<Player> players = RegionManager.getLocalPlayers(entity);
+				List<Player> players = RegionManager.getLocalPlayers(entity.getLocation());
 				Location[] locations = null;
 
 				@Override
@@ -245,7 +245,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 		public boolean doStompAttack(Entity entity) {
 			Location l = entity.getLocation();
 			List<Player> stompTargets = null;
-			for (Player player : RegionManager.getLocalPlayers(entity, 5)) {
+			for (Player player : RegionManager.getLocalPlayers(entity.getLocation(), 5)) {
 				Location p = player.getLocation();
 				if (p.getX() >= l.getX() && p.getY() >= l.getY() && p.getX() < l.getX() + entity.size() && p.getY() < l.getY() + entity.size()) {
 					if (stompTargets == null) {

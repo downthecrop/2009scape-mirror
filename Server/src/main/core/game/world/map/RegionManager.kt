@@ -9,11 +9,9 @@ import core.game.node.scenery.Scenery
 import core.game.world.map.zone.ZoneBorders
 import core.tools.Log
 import core.tools.RandomFunction
-import core.tools.SystemLogger
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
-import kotlin.collections.HashMap
 
 /**
  * Manages the regions.
@@ -27,7 +25,7 @@ object RegionManager {
     @JvmStatic val CLIPPING_FLAGS = HashMap<Int, Array<Int>>()
     @JvmStatic val PROJECTILE_FLAGS = HashMap<Int, Array<Int>>()
 
-    public val LOCK = ReentrantLock()
+    private val LOCK = ReentrantLock()
 
     /**
      * Gets the region for the given region id.
@@ -36,7 +34,7 @@ object RegionManager {
      */
     @JvmStatic
     fun forId(regionId: Int): Region {
-        if(LOCK.tryLock() || LOCK.tryLock(10000, TimeUnit.MILLISECONDS)) {
+        if (LOCK.tryLock() || LOCK.tryLock(10000, TimeUnit.MILLISECONDS)) {
             var region = REGION_CACHE[regionId]
             if (region == null) {
                 region = Region((regionId shr 8) and 0xFF, regionId and 0xFF)
@@ -45,35 +43,23 @@ object RegionManager {
             LOCK.unlock()
             return REGION_CACHE[regionId]!!
         }
-        log(this::class.java, Log.ERR,  "UNABLE TO OBTAIN LOCK WHEN GETTING REGION BY ID. RETURNING BLANK REGION.")
-        return Region(0,0)
+        log(this::class.java, Log.ERR, "UNABLE TO OBTAIN LOCK WHEN GETTING REGION BY ID. RETURNING BLANK REGION.")
+        return Region(0, 0)
     }
 
     /**
-     * Pulses the active regions.
+     * Applies a function to all active regions
      */
     @JvmStatic
-    fun pulse() {
-        if(LOCK.tryLock() || LOCK.tryLock(10000,TimeUnit.MILLISECONDS)) {
+    fun apply(callback: (r: Region) -> Unit) {
+        if (LOCK.tryLock() || LOCK.tryLock(10000,TimeUnit.MILLISECONDS)) {
             for (r in REGION_CACHE.values) {
                 if (r.isActive) {
-                    for (p in r.planes) {
-                        p.pulse()
-                    }
+                    callback(r)
                 }
             }
             LOCK.unlock()
         }
-    }
-
-    /**
-     * Gets the clipping flag on the given location.
-     * @param l The location.
-     * @return The clipping flag.
-     */
-    @JvmStatic
-    fun getClippingFlag(l: Location): Int {
-        return getClippingFlag(l.z, l.x, l.y)
     }
 
     /**
@@ -85,56 +71,36 @@ object RegionManager {
      */
     @JvmStatic
     fun getClippingFlag(z: Int, x: Int, y: Int): Int {
-        val regionX = x shr 6
-        val regionY = y shr 6
-        val localX = x and 63
-        val localY = y and 63
-        return getClippingFlag(z, regionX, regionY, localX, localY)
+        return getClippingFlag(Location(x, y, z))
     }
 
     /**
-     * Gets the clipping flags using Jagex-style coords
-     * e.g 0_50_50_13_13 gets plane 0, region 50-50 (12850), (13, 13) which is in lumbridge.
+     * Gets the clipping flag.
+     * @param loc The location.
+     * @param projectile Clipping flags or projectile flags.
      */
     @JvmStatic
-    fun getClippingFlag(z: Int, regionX: Int, regionY: Int, localX: Int, localY: Int, projectile: Boolean = false) : Int {
-        val (region, index) = getFlagIndex(z, regionX, regionY, localX, localY)
-        var flag = getFlags(region, projectile)[index]
-
-        if (flag == -1) {
-            val r = forId((regionX shr 8) or regionY)
-            if (!r.isLoaded)
-                Region.load(r)
-            if (!r.isHasFlags)
-                return -1
-            flag = getFlags(region, projectile)[index]
+    fun getClippingFlag(loc: Location, projectile: Boolean = false) : Int {
+        val region = forId(loc.regionId)
+        Region.load(region)
+        if (!region.isHasFlags) {
+            return -1
         }
-
-        return flag
+        // Index by absChunkX and absChunkY coordinates; these give the position of the chunk on the world map. Together with chunkOffsetX and chunkOffsetY, they identify individual tiles.
+        val (key, index) = getFlagIndex(loc.absChunkX, loc.absChunkY, loc.z, loc.chunkOffsetX, loc.chunkOffsetY)
+        return getFlags(key, projectile)[index]
     }
 
-    private fun getFlagIndex(z: Int, regionX: Int, regionY: Int, localX: Int, localY: Int) : Pair<Int,Int> {
-        return Pair((regionX shl 8) or regionY, (z * 64 * 64) + (localX * 64) + localY)
-    }
-
-    @JvmStatic
-    fun getFlags(regionX: Int, regionY: Int, projectile: Boolean) : Array<Int> {
-        val region = (regionX shl 8) or regionY
-        return getFlags(region, projectile)
+    private fun getFlagIndex(absChunkX: Int, absChunkY: Int, z: Int, chunkOffsetX: Int, chunkOffsetY: Int) : Pair<Int, Int> {
+        return Pair((z shl 22) or (absChunkX shl 11) or absChunkY, (chunkOffsetX * 8) + chunkOffsetY)
     }
 
     @JvmStatic
-    fun getFlags(regionId: Int, projectile: Boolean) : Array<Int> {
+    fun getFlags(chunkId: Int, projectile: Boolean) : Array<Int> {
         return if (projectile)
-            PROJECTILE_FLAGS.getOrPut (regionId) {Array(16384){0}}
+            PROJECTILE_FLAGS.getOrPut(chunkId) { Array(64){0} }
         else
-            CLIPPING_FLAGS.getOrPut (regionId) {Array(16384){-1}}
-    }
-
-    @JvmStatic
-    fun resetFlags(regionId: Int) {
-        PROJECTILE_FLAGS.put (regionId, Array(16384){0})
-        CLIPPING_FLAGS.put (regionId, Array(16384){-1})
+            CLIPPING_FLAGS.getOrPut(chunkId) { Array(64){-1} }
     }
 
     /**
@@ -144,41 +110,37 @@ object RegionManager {
      */
     @JvmStatic
     fun getWaterClipFlag(z: Int, x: Int, y: Int): Int {
-        val flag = getClippingFlag(z, x, y)
-        return if (!isClipped(z, x, y)) {
+        return getWaterClipFlag(Location(x, y, z))
+    }
+
+    /**
+     * Gets the water variant of a tile's clipping flag
+     * Essentially strips the landscape flag off a tile and keeps other flags, and makes normally walkable tiles unwalkable.
+     */
+    @JvmStatic
+    fun getWaterClipFlag(loc: Location): Int {
+        val flag = getClippingFlag(loc)
+        return if (!isClipped(loc)) {
             flag or 0x100
         } else flag and 0x200000.inv()
     }
 
     /**
      * Checks if the tile is part of the landscape.
-     * @param l The location.
+     * @param loc The location.
      * @return `True` if so.
      */
     @JvmStatic
-    fun isLandscape(l: Location): Boolean {
-        return isLandscape(l.z, l.x, l.y)
-    }
-
-    /**
-     * Checks if the tile is part of the landscape.
-     * @param z The plane.
-     * @param x The absolute x-coordinate.
-     * @param y The absolute y-coordinate.
-     * @return `True` if so.
-     */
-    @JvmStatic
-    fun isLandscape(z: Int, x: Int, y: Int): Boolean {
-        var x = x
-        var y = y
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
+    fun isLandscape(loc: Location): Boolean {
+        val region = forId(loc.regionId)
         Region.load(region)
-        if (!region.isHasFlags || region.planes[z].flags.landscape == null) {
+        if (!region.isHasFlags) {
             return false
         }
-        x -= x shr 6 shl 6
-        y -= y shr 6 shl 6
-        return region.planes[z].flags.landscape[x][y]
+        if (loc.chunk.flags.landscape == null) {
+            return false
+        }
+        return loc.chunk.flags.landscape[loc.chunkOffsetX][loc.chunkOffsetY]
     }
 
     /**
@@ -191,24 +153,31 @@ object RegionManager {
      */
     @JvmStatic
     fun addClippingFlag(z: Int, x: Int, y: Int, projectile: Boolean, flag: Int) {
-        var x = x
-        var y = y
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
-        Region.load(region)
-        if (!region.isHasFlags) {
-            return
-        }
-        x -= (x shr 6) shl 6
-        y -= (y shr 6) shl 6
-        if (projectile) {
-            region.planes[z].projectileFlags.flag(x, y, flag)
-        } else {
-            region.planes[z].flags.flag(x, y, flag)
-        }
+        return addClippingFlag(Location(x, y, z), projectile, flag)
     }
 
     /**
      * Adds a clipping flag.
+     * @param loc The location.
+     * @param projectile If the flag is being set for projectile pathfinding.
+     * @param flag The clipping flag.
+     */
+    @JvmStatic
+    fun addClippingFlag(loc: Location, projectile: Boolean, flag: Int) {
+        val region = forId(loc.regionId)
+        Region.load(region)
+        if (!region.isHasFlags) {
+            return
+        }
+        if (projectile) {
+            loc.chunk.projectileFlags.flag(loc.chunkOffsetX, loc.chunkOffsetY, flag)
+        } else {
+            loc.chunk.flags.flag(loc.chunkOffsetX, loc.chunkOffsetY, flag)
+        }
+    }
+
+    /**
+     * Removes a clipping flag.
      * @param z The plane.
      * @param x The absolute x-coordinate.
      * @param y The absolute y-coordinate.
@@ -217,24 +186,31 @@ object RegionManager {
      */
     @JvmStatic
     fun removeClippingFlag(z: Int, x: Int, y: Int, projectile: Boolean, flag: Int) {
-        var x = x
-        var y = y
-        val region = forId(((x shr 6) shl 8) or (y shr 6))
+        return removeClippingFlag(Location(x, y, z), projectile, flag)
+    }
+
+    /**
+     * Removes a clipping flag.
+     * @param loc The location.
+     * @param projectile If the flag is being set for projectile pathfinding.
+     * @param flag The clipping flag.
+     */
+    @JvmStatic
+    fun removeClippingFlag(loc: Location, projectile: Boolean, flag: Int) {
+        val region = forId(loc.regionId)
         Region.load(region)
         if (!region.isHasFlags) {
             return
         }
-        x -= (x shr 6) shl 6
-        y -= (y shr 6) shl 6
         if (projectile) {
-            region.planes[z].projectileFlags.unflag(x, y, flag)
+            loc.chunk.projectileFlags.unflag(loc.chunkOffsetX, loc.chunkOffsetY, flag)
         } else {
-            region.planes[z].flags.unflag(x, y, flag)
+            loc.chunk.flags.unflag(loc.chunkOffsetX, loc.chunkOffsetY, flag)
         }
     }
 
     /**
-     * Gets the clipping flag.
+     * Gets the projectile flag.
      * @param z The plane.
      * @param x The absolute x-coordinate.
      * @param y The absolute y-coordinate.
@@ -242,62 +218,34 @@ object RegionManager {
      */
     @JvmStatic
     fun getProjectileFlag(z: Int, x: Int, y: Int): Int {
-        val regionX = x shr 6
-        val regionY = y shr 6
-        val localX = x and 63
-        val localY = y and 63
-        return getClippingFlag(z, regionX, regionY, localX, localY, true)
+        return getClippingFlag(Location(x, y, z), true)
     }
 
     /**
-     * Gets the clipping flag
-     * @param location the Location
-     * @return the clipping flag
+     * Checks if teleport is permitted.
+     * @param loc The Location.
+     * @return If teleport is permitted.
      */
     @JvmStatic
-    fun isTeleportPermitted(location: Location): Boolean {
-        return isTeleportPermitted(location.z, location.x, location.y)
-    }
-
-    /**
-     * Gets the clipping flag.
-     * @param z The plane.
-     * @param x The absolute x-coordinate.
-     * @param y The absolute y-coordinate.
-     * @return The clipping flags.
-     */
-    @JvmStatic
-    fun isTeleportPermitted(z: Int, x: Int, y: Int): Boolean {
-        if (!isLandscape(z, x, y)) {
+    fun isTeleportPermitted(loc: Location): Boolean {
+        if (!isLandscape(loc)) {
             return false
         }
-        val flag = getClippingFlag(z, x, y)
+        val flag = getClippingFlag(loc)
         return flag and 0x12c0102 == 0 || flag and 0x12c0108 == 0 || flag and 0x12c0120 == 0 || flag and 0x12c0180 == 0
     }
 
     /**
      * Checks if the location has any clipping flags.
-     * @param location The location.
+     * @param loc The location.
      * @return `True` if a clipping flag disables access for this location.
      */
     @JvmStatic
-    fun isClipped(location: Location): Boolean {
-        return isClipped(location.z, location.x, location.y)
-    }
-
-    /**
-     * Checks if the location has any clipping flags.
-     * @param z The plane.
-     * @param x The x-coordinate.
-     * @param y The y-coordinate.
-     * @return `True` if a clipping flag disables access for this location.
-     */
-    @JvmStatic
-    fun isClipped(z: Int, x: Int, y: Int): Boolean {
-        if (!isLandscape(z, x, y)) {
+    fun isClipped(loc: Location): Boolean {
+        if (!isLandscape(loc)) {
             return true
         }
-        val flag = getClippingFlag(z, x, y)
+        val flag = getClippingFlag(loc)
         return flag and 0x12c0102 != 0 || flag and 0x12c0108 != 0 || flag and 0x12c0120 != 0 || flag and 0x12c0180 != 0
     }
 
@@ -352,53 +300,45 @@ object RegionManager {
      */
     @JvmStatic
     fun getObject(l: Location): Scenery? {
-        return getObject(l.z, l.x, l.y)
+        return getObject(l.x, l.y, l.z)
     }
 
     /**
      * Gets the scenery on the current absolute coordinates.
-     * @param z The height.
      * @param x The x-coordinate.
      * @param y The y-coordinate.
+     * @param z The height.
      * @return The scenery, or `null` if no object was found.
      */
     @JvmStatic
-    fun getObject(z: Int, x: Int, y: Int): Scenery? {
-        return getObject(z, x, y, -1)
+    fun getObject(x: Int, y: Int, z: Int): Scenery? {
+        return getObject(x, y, z, -1, -1)
     }
 
     /**
      * Gets the object on the given absolute coordinates.
-     * @param z The height.
      * @param x The x-coordinate.
      * @param y The y-coordinate.
-     * @param objectId The object id.
+     * @param z The height.
+     * @param objectId The object id. May be -1, which means 'any'.
+     * @param type The scenery type. May be -1, which means 'any'.
      * @return The scenery, or `null` if no object was found.
      */
     @JvmStatic
-    fun getObject(z: Int, x: Int, y: Int, objectId: Int): Scenery? {
-        var x = x
-        var y = y
-        val regionId = ((x shr 6) shl 8) or (y shr 6)
-        x -= (x shr 6) shl 6
-        y -= (y shr 6) shl 6
-        val region = forId(regionId)
+    fun getObject(x: Int, y: Int, z: Int, objectId: Int = -1, type: Int = -1): Scenery? {
+        val loc = Location(x, y, z)
+        val region = forId(loc.regionId)
         Region.load(region)
-        val `object`: Scenery? = region.planes[z].getChunkObject(x, y, objectId)
-        return if (`object` != null && !`object`.isRenderable) {
-            null
-        } else `object`
-    }
-
-    /**
-     * Gets the region plane for this location.
-     * @param l The location.
-     * @return The region plane.
-     */
-    @JvmStatic
-    fun getRegionPlane(l: Location): RegionPlane {
-        val regionId = ((l.x shr 6) shl 8) or (l.y shr 6)
-        return forId(regionId).planes[l.z]
+        val chunk = region.chunks[loc.chunkX][loc.chunkY][loc.z]
+        val index = chunk.getIndex(loc.chunkOffsetX, loc.chunkOffsetY, objectId, type)
+        if (index == -1) {
+            return null
+        }
+        val obj = chunk.objects[loc.chunkOffsetX][loc.chunkOffsetY][index]
+        if (obj != null && !obj.isRenderable) {
+            return null
+        }
+        return obj
     }
 
     /**
@@ -408,247 +348,73 @@ object RegionManager {
      */
     @JvmStatic
     fun getRegionChunk(l: Location): RegionChunk {
-        val plane = getRegionPlane(l)
-        return plane.getRegionChunk(l.localX / RegionChunk.SIZE, l.localY / RegionChunk.SIZE)
+        val regionId = ((l.x shr 6) shl 8) or (l.y shr 6)
+        return forId(regionId).chunks[l.chunkX][l.chunkY][l.z]
     }
 
     /**
-     * Moves the entity from the current region to the new one.
+     * Moves the entity from the current chunk to the new one.
      * @param entity The entity.
      */
     @JvmStatic
-    fun move(entity: Entity) {
-        val player = entity is Player
-        val regionId = ((entity.location.regionX shr 3) shl 8) or (entity.location.regionY shr 3)
-        val viewport = entity.viewport
-        val current = forId(regionId)
-        val z = entity.location.z
-        val plane = current.planes[z]
-        viewport.updateViewport(entity)
-        if (plane == viewport.currentPlane) {
-            entity.zoneMonitor.updateLocation(entity.walkingQueue.footPrint)
-            return
-        }
-        viewport.remove(entity)
-        if (player) {
-            current.add(entity as Player)
-        } else {
-            current.add(entity as NPC)
-        }
-        viewport.region = current
-        viewport.currentPlane = plane
-        val view: MutableList<RegionPlane> = LinkedList()
-        for (regionX in ((entity.location.regionX shr 3) - 1)..((entity.location.regionX shr 3) + 1)) {
-            for (regionY in ((entity.location.regionY shr 3) - 1)..((entity.location.regionY shr 3) + 1)) {
-                if (regionX < 0 || regionY < 0) {
-                    continue
+    fun move(entity: Entity, src: Location?, dst: Location) {
+        if (src?.chunk != dst.chunk) {
+            when (entity) {
+                is Player -> {
+                    val player = entity.asPlayer()
+                    val sameRegion = src?.region == dst.region
+                    if (src != null && sameRegion) {
+                        src.chunk.removePlayer(player)
+                        dst.chunk.addPlayer(player)
+                    } else {
+                        if (src != null) {
+                            src.chunk.removePlayer(player)
+                            src.region.tolerances.remove(player.name)
+                            src.region.decrementViewAmount()
+                        }
+                        dst.chunk.addPlayer(entity)
+                        dst.region.tolerances[entity.asPlayer().name] = System.currentTimeMillis()
+                        dst.region.incrementViewAmount()
+                    }
                 }
-                val region = forId((regionX shl 8) or regionY)
-                val p = region.planes[z]
-                if (player) {
-                    region.incrementViewAmount()
-                    region.flagActive()
+                is NPC -> {
+                    src?.chunk?.remove(entity)
+                    dst.chunk.add(entity)
                 }
-                view.add(p)
+                else -> log(this::class.java, Log.ERR, "Tried to move an Entity that was neither Player nor NPC, but $entity of class ${entity.javaClass}! It tried to move from $src to $dst.")
             }
         }
-        viewport.viewingPlanes = view
         entity.zoneMonitor.updateLocation(entity.walkingQueue.footPrint)
     }
 
     /**
-     * Gets the list of local NPCs with a maximum distance of 16.
-     * @param n The entity.
-     * @return The list of local NPCs.
-     */
-    @JvmStatic
-    fun getLocalNpcs(n: Entity): List<NPC> {
-        return getLocalNpcs(n, MapDistance.RENDERING.distance)
-    }
-
-    /**
-     * Gets the location entitys.
+     * Gets local entities. You never call the below function directly (it's inlined); instead, you use one of the typed helpers defined directly below this function.
      * @param location the location.
      * @param distance the distance.
      * @return the list.
      */
-    @JvmStatic
-    fun getLocalEntitys(location: Location, distance: Int): List<Entity> {
-        val entitys: MutableList<Entity> = ArrayList(20)
-        entitys.addAll(getLocalNpcs(location, distance))
-        entitys.addAll(getLocalPlayers(location, distance))
-        return entitys
-    }
-
-    /**
-     * Gets the location entitys.
-     * @param entity the entity.
-     * @param distance the distance.
-     * @return the list.
-     */
-    @JvmStatic
-    fun getLocalEntitys(entity: Entity, distance: Int): List<Entity> {
-        return getLocalEntitys(entity.location, distance)
-    }
-
-    /**
-     * Gets the local entitys.
-     * @param entity the entity.
-     * @return the entitys.
-     */
-    @JvmStatic
-    fun getLocalEntitys(entity: Entity): List<Entity> {
-        return getLocalEntitys(entity.location, MapDistance.RENDERING.distance)
-    }
-
-    /**
-     * Gets the list of local NPCs.
-     * @param n The entity.
-     * @param distance The distance to the entity.
-     * @return The list of local NPCs.
-     */
-    @JvmStatic
-    fun getLocalNpcs(n: Entity, distance: Int): List<NPC> {
-        val npcs: MutableList<NPC> = LinkedList()
-        for (r in n.viewport.viewingPlanes) {
-            for (npc in r.npcs) {
-                if (npc.location.withinDistance(n.location, distance)) {
-                    npcs.add(npc)
+    private inline fun<reified T: Entity> getLocalEntitiesOfType(location: Location, distance: Int): List<T> {
+        val entities: ArrayList<T> = ArrayList(20)
+        val radius = (distance / 8) + 1
+        for (cx in (location.absChunkX - radius)..(location.absChunkX + radius)) {
+            for (cy in (location.absChunkY - radius)..(location.absChunkY + radius)) {
+                val chunk = Location(cx shl 3, cy shl 3, location.z).chunk
+                if (T::class.java.isAssignableFrom(Player::class.java)) {
+                    entities.addAll(chunk.players.filterIsInstance<T>())
+                }
+                if (T::class.java.isAssignableFrom(NPC::class.java)) {
+                    entities.addAll(chunk.npcs.filterIsInstance<T>())
                 }
             }
         }
-        return npcs
+        val b = ZoneBorders(location.x - distance, location.y - distance, location.x + distance, location.y + distance)
+        return entities.filter { b.insideBorder(it.location.x, it.location.y) }
     }
-
-    /**
-     * Gets the list of local players with a maximum distance of 15.
-     * @param n The entity.
-     * @return The list of local players.
-     */
-    @JvmStatic
-    fun getLocalPlayers(n: Entity): List<Player> {
-        return getLocalPlayers(n, MapDistance.RENDERING.distance)
-    }
-
-    /**
-     * Gets the list of local players.
-     * @param n The entity.
-     * @param distance The distance to the entity.
-     * @return The list of local players.
-     */
-    @JvmStatic
-    fun getLocalPlayers(n: Entity, distance: Int): List<Player> {
-        val players: MutableList<Player> = LinkedList()
-        for (r in n.viewport.viewingPlanes) {
-            for (p in r.players) {
-                if (p.location.withinDistance(n.location, distance)) {
-                    players.add(p)
-                }
-            }
-        }
-        return players
-    }
-
-    /**
-     * Gets the surrounding players.
-     * @param n The node the players should be surrounding.
-     * @param ignore The nodes not to add to the list.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getSurroundingPlayers(n: Node, vararg ignore: Node): List<Player> {
-        return getSurroundingPlayers(n, 9, *ignore)
-    }
-
-    /**
-     * Gets the surrounding players.
-     * @param n The node the players should be surrounding.
-     * @param ignore The nodes not to add to the list.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getSurroundingPlayers(n: Node, maximum: Int, vararg ignore: Node): List<Player> {
-        val players = getLocalPlayers(n.location, 2)
-        var count = 0
-        val it = players.iterator()
-        while (it.hasNext()) {
-            val p = it.next()
-            if(p.isInvisible()) {
-                it.remove()
-            }
-            if(!p.location.withinMaxnormDistance(n.location, 1)) {
-                it.remove()
-                continue
-            }
-            if (++count >= maximum) {
-                it.remove()
-                continue
-            }
-            for (node in ignore) {
-                if (p === node) {
-                    count--
-                    it.remove()
-                    break
-                }
-            }
-        }
-        return players
-    }
-
-    /**
-     * Gets the surrounding players.
-     * @param n The node the players should be surrounding.
-     * @param ignore The nodes not to add to the list.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getSurroundingNPCs(n: Node, vararg ignore: Node): List<NPC> {
-        return getSurroundingNPCs(n, 9, *ignore)
-    }
-
-    /**
-     * Gets the surrounding players.
-     * @param n The node the npcs should be surrounding.
-     * @param ignore The nodes not to add to the list.
-     * @return The list of npcs.
-     */
-    @JvmStatic
-    fun getSurroundingNPCs(n: Node, maximum: Int, vararg ignore: Node): List<NPC> {
-        val npcs = getLocalNpcs(n.location, 2)
-        var count = 0
-        val it = npcs.iterator()
-        while (it.hasNext()) {
-            val p = it.next()
-            if(p.properties.teleportLocation != null && !p.properties.teleportLocation.withinMaxnormDistance(n.location, 1)) {
-                it.remove()
-                continue
-            }
-            if(p.getAttribute("state:death", false)) {
-                it.remove()
-                continue
-            }
-            if(p.isInvisible()) {
-                it.remove()
-                continue
-            }
-            if(!p.location.withinMaxnormDistance(n.location, 1)) {
-                it.remove()
-                continue
-            }
-            if (++count > maximum) {
-                it.remove()
-                continue
-            }
-            for (node in ignore) {
-                if (p === node) {
-                    count--
-                    it.remove()
-                    break
-                }
-            }
-        }
-        return npcs
-    }
+    @JvmStatic fun getLocalEntities(location: Location, distance: Int) = getLocalEntitiesOfType<Entity>(location, distance)
+    @JvmStatic fun getLocalPlayers(location: Location, distance: Int) = getLocalEntitiesOfType<Player>(location, distance)
+    @JvmStatic fun getLocalNPCs(location: Location, distance: Int) = getLocalEntitiesOfType<NPC>(location, distance)
+    @JvmStatic fun getLocalPlayers(location: Location): List<Player> = getLocalPlayers(location, MapDistance.RENDERING.distance)
+    @JvmStatic fun getLocalNPCs(location: Location): List<NPC> = getLocalNPCs(location, MapDistance.RENDERING.distance)
 
     /**
      * Gets a random teleport location in the radius around the given location.
@@ -701,189 +467,20 @@ object RegionManager {
     }
 
     /**
-     * Gets the current viewport for the location.
-     * @param l The location.
-     * @return The viewport.
-     */
-    @JvmStatic
-    fun getViewportPlayers(l: Location): List<Player> {
-        var l = l
-        val players: MutableList<Player> = LinkedList()
-        l = l.chunkBase.transform(-8, -8, 0)
-        val b = ZoneBorders(l.x, l.y, l.x + 24, l.y + 24)
-        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
-            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
-                for (player in forId(regionX shl 8 or regionY).planes[l.z].players) {
-                    l = player.location
-                    if (b.insideBorder(l.x, l.y)) {
-                        players.add(player)
-                    }
-                }
-            }
-        }
-        return players
-    }
-
-    /**
-     * Gets a list of players in the given region.
-     * @param regionId The region id.
-     * @return The list of players in this region.
-     */
-    @JvmStatic
-    fun getRegionPlayers(regionId: Int): List<Player> {
-        val r = forId(regionId)
-        val players: MutableList<Player> = ArrayList(20)
-        for (plane in r.planes) {
-            players.addAll(plane.players)
-        }
-        return players
-    }
-
-    /**
-     * Gets a list of local players within rendering distance of the location.
-     * @param l The location.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getLocalPlayers(l: Location): List<Player> {
-        return getLocalPlayers(l, MapDistance.RENDERING.distance)
-    }
-
-    /**
-     * Gets a list of local players.
-     * @param l The location.
-     * @param distance The distance to that location.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getLocalPlayers(l: Location, distance: Int): MutableList<Player> {
-        val players: MutableList<Player> = LinkedList()
-        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
-            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
-                for (player in forId((regionX shl 8) or regionY).planes[l.z].players) {
-                    if (player.location.withinDistance(l, distance)) {
-                        players.add(player)
-                    }
-                }
-            }
-        }
-        return players
-    }
-
-    /**
-     * Gets a list of local players within a symmetric bounding box.
-     * @param l The location.
-     * @param xdist The distance from the location on the x plane that is considered within bounds.
-     * @param ydist The distance from the location on the y plane that is considered within bounds.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getLocalPlayersBoundingBox(l: Location, xdist: Int, ydist: Int): MutableList<Player> {
-        val players: MutableList<Player> = LinkedList()
-        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
-            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
-                for (player in forId((regionX shl 8) or regionY).planes[l.z].players) {
-                    if (player.location.x >= l.x - xdist &&
-                        player.location.x <= l.x + xdist &&
-                        player.location.y >= l.y - ydist &&
-                        player.location.y <= l.y + ydist) {
-                        players.add(player)
-                    }
-                }
-            }
-        }
-        return players
-    }
-
-    /**
-     * Gets a list of local players.
-     * @param l The location.
-     * @param distance The distance to that location.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getLocalPlayersMaxNorm(l: Location, distance: Int): MutableList<Player> {
-        val players: MutableList<Player> = LinkedList()
-        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
-            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
-                for (player in forId((regionX shl 8) or regionY).planes[l.z].players) {
-                    if (player.location.withinMaxnormDistance(l, distance)) {
-                        players.add(player)
-                    }
-                }
-            }
-        }
-        return players
-    }
-
-    /**
-     * Gets a list of local players within 16 tile distance of the location.
-     * @param l The location.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getLocalNpcs(l: Location): List<NPC> {
-        return getLocalNpcs(l, MapDistance.RENDERING.distance)
-    }
-
-    /**
-     * Gets the npc.
-     * @param entity the entity.
-     * @param id the id.
-     */
-    @JvmStatic
-    fun getNpc(entity: Entity, id: Int): NPC? {
-        return getNpc(entity, id, 16)
-    }
-
-    /**
-     * Gets the npc.
-     * @param entity the entity.
-     * @param id the id.
+     * Gets an npc near a location.
+     * @param id the id,
      * @param distance the distance.
      * @return the npc.
      */
     @JvmStatic
-    fun getNpc(entity: Entity, id: Int, distance: Int): NPC? {
-        return getNpc(entity.location, id, distance)
-    }
-
-    /**
-     * Gets an npc near the entity.
-     * @param id the id,
-     * @param distance the dinstance.
-     * @return the npc.
-     */
-    @JvmStatic
     fun getNpc(location: Location, id: Int, distance: Int): NPC? {
-        val npcs: List<NPC> = getLocalNpcs(location, distance)
+        val npcs: List<NPC> = getLocalNPCs(location, distance)
         for (n in npcs) {
             if (n.id == id) {
                 return n
             }
         }
         return null
-    }
-
-    /**
-     * Gets a list of local players.
-     * @param l The location.
-     * @param distance The distance to that location.
-     * @return The list of players.
-     */
-    @JvmStatic
-    fun getLocalNpcs(l: Location, distance: Int): MutableList<NPC> {
-        val npcs: MutableList<NPC> = LinkedList()
-        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
-            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
-                for (n in forId(regionX shl 8 or regionY).planes[l.z].npcs) {
-                    if (n.location.withinDistance(l, (n.size() shr 1) + distance)) {
-                        npcs.add(n)
-                    }
-                }
-            }
-        }
-        return npcs
     }
 
     @JvmStatic

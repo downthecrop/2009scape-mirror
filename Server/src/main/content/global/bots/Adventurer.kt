@@ -11,23 +11,19 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
-import core.game.world.update.flag.*
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import core.ServerConstants
-import core.api.log
 import core.game.bots.AIRepository
 import core.game.bots.CombatBotAssembler
 import core.game.bots.Script
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
-import core.tools.Log
 import java.io.File
 import java.io.FileReader
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
-
 
 /**
  * A bot script for Adventurers who explore the world!
@@ -114,7 +110,7 @@ class Adventurer(val style: CombatStyle): Script() {
     }
 
     private fun otherPlayersNearby(): Boolean {
-        val localPlayers = RegionManager.getLocalPlayers(bot)
+        val localPlayers = RegionManager.getLocalPlayers(bot.location)
         val otherPlayers = localPlayers.filter { it.name != bot.name }
         return otherPlayers.isNotEmpty()
     }
@@ -503,7 +499,7 @@ class Adventurer(val style: CombatStyle): Script() {
             dateCode == 404 -> lineAlt = dialogue.getLines("easter").rand()
         }
 
-        var localPlayers = RegionManager.getLocalPlayers(bot)
+        val localPlayers = RegionManager.getLocalPlayers(bot.location)
         if (localPlayers.isNotEmpty()) {
             val localPlayer = localPlayers
                 .filter { it.name != bot.name }

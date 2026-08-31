@@ -5,6 +5,7 @@ import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
+import core.game.world.update.MapChunkRenderer;
 import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
@@ -29,25 +30,23 @@ public final class BuildDynamicScene implements OutgoingPacket<DynamicSceneConte
 		buffer.putS(player.getLocation().getZ());
 		buffer.putLEShortA(player.getLocation().getSceneY());
 		buffer.setBitAccess();
-		Region r = player.getViewport().getRegion();
-		RegionChunk[][][] chunks = new RegionChunk[4][13][13];
+		RegionChunk[][][] chunks = new RegionChunk[MapChunkRenderer.BUILD_AREA_SIZE][MapChunkRenderer.BUILD_AREA_SIZE][Region.PLANES];
 		int baseX = player.getLocation().getRegionX() - 6;
 		int baseY = player.getLocation().getRegionY() - 6;
-		for (int z = 0; z < 4; z++) {
-			for (int x = baseX; x <= player.getLocation().getRegionX() + 6; x++) {
-				for (int y = baseY; y <= player.getLocation().getRegionY() + 6; y++) {
-					r = RegionManager.forId((x >> 3) << 8 | (y >> 3));
+		for (int x = baseX; x <= player.getLocation().getRegionX() + 6; x++) {
+			for (int y = baseY; y <= player.getLocation().getRegionY() + 6; y++) {
+				for (int z = 0; z < Region.PLANES; z++) {
+					Region r = RegionManager.forId((x >> 3) << 8 | (y >> 3));
 					if (r instanceof DynamicRegion) {
-						DynamicRegion dr = (DynamicRegion) r;
-						chunks[z][x - baseX][y - baseY] = dr.getChunks()[z][x - (dr.getX() << 3)][y - (dr.getY() << 3)];
+						chunks[x - baseX][y - baseY][z] = r.getChunks()[x - (r.getX() << 3)][y - (r.getY() << 3)][z];
 					}
 				}
 			}
 		}
-		for (int plane = 0; plane < 4; plane++) {
-			for (int offsetX = 0; offsetX < 13; offsetX++) {
-				for (int offsetY = 0; offsetY < 13; offsetY++) {
-					RegionChunk c = chunks[plane][offsetX][offsetY];
+		for (int plane = 0; plane < Region.PLANES; plane++) {
+			for (int offsetX = 0; offsetX < MapChunkRenderer.BUILD_AREA_SIZE; offsetX++) {
+				for (int offsetY = 0; offsetY < MapChunkRenderer.BUILD_AREA_SIZE; offsetY++) {
+					RegionChunk c = chunks[offsetX][offsetY][plane];
 					if (c == null || c.getBase().getX() < 0 || c.getBase().getY() < 0) {
 						buffer.putBits(1, 0);
 						continue;
@@ -74,5 +73,4 @@ public final class BuildDynamicScene implements OutgoingPacket<DynamicSceneConte
 		buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());context.getPlayer().getSession().write(buffer);
 		player.getPlayerFlags().setLastSceneGraph(player.getLocation());
 	}
-
 }

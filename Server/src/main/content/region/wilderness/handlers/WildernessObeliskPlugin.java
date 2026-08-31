@@ -47,12 +47,12 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 		if (stationObelisk == null) {
 			return false;
 		}
-                if (player.getSkullManager().isDeepWilderness()) {
-                    if (player.getProperties().getCombatPulse().isInCombat()) {
-                        player.sendMessage("You can't use this while in combat.");
-                        return false;
-                    }
-                }
+				if (player.getSkullManager().isDeepWilderness()) {
+					if (player.getProperties().getCombatPulse().isInCombat()) {
+						player.sendMessage("You can't use this while in combat.");
+						return false;
+					}
+				}
 		for (int i = 0; i < 4; i++) {
 			int x = stationObelisk.getLocation().getX();
 			int y = stationObelisk.getLocation().getY();
@@ -106,7 +106,7 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 				int index = RandomFunction.random(0, newObelisks.length - 1); //cutting out the last one that is now duplicated
 				Obelisk newObelisk = newObelisks[index];
 				// Teleport players standing within a 3-by-3 bounding box
-				for (Player player : RegionManager.getLocalPlayersBoundingBox(center, 1, 1)) {
+				for (Player player : RegionManager.getLocalPlayers(center, 1)) {
 					if (player.timers.getTimer("teleblock") == null) {
 						player.getPacketDispatch().sendMessage("Ancient magic teleports you somewhere in the wilderness.");
 						int xOffset = player.getLocation().getX() - center.getX();

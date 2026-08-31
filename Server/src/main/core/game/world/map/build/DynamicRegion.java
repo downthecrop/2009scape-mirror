@@ -5,7 +5,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.game.node.scenery.Scenery;
 import core.game.world.map.*;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -13,10 +12,8 @@ import core.game.world.map.zone.impl.MultiwayCombatZone;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-
 
 /**
  * Represents a dynamically constructed region.
@@ -24,7 +21,6 @@ import java.util.List;
  * @author Emperor
  */
 public final class DynamicRegion extends Region {
-
 	/**
 	 * The reserved areas.
 	 */
@@ -34,11 +30,6 @@ public final class DynamicRegion extends Region {
 	 * The region id of the copied region.
 	 */
 	private final int regionId;
-
-	/**
-	 * The region chunks.
-	 */
-	private final RegionChunk[][][] chunks;
 
 	/**
 	 * The zone borders.
@@ -76,14 +67,25 @@ public final class DynamicRegion extends Region {
 	public DynamicRegion(int regionId, int x, int y) {
 		super(x, y);
 		this.regionId = regionId;
-		this.chunks = new RegionChunk[4][SIZE >> 3][SIZE >> 3];
-        RegionManager.resetFlags(getId());
+		// Reset any stale flags at this region's chunk coordinates
+		for (int chunkX = 0; chunkX < CHUNKS_SIZE; chunkX++) {
+			for (int chunkY = 0; chunkY < CHUNKS_SIZE; chunkY++) {
+				for (int cz = 0; cz < Region.PLANES; cz++) {
+					RegionChunk chunk = chunks[chunkX][chunkY][cz];
+					for (int chunkOffsetX = 0; chunkOffsetX < 8; chunkOffsetX++) {
+						for (int chunkOffsetY = 0; chunkOffsetY < 8; chunkOffsetY++) {
+							chunk.getFlags().invalidateFlag(chunkOffsetX, chunkOffsetY); // the 'invalid' value of -1 triggers reloading
+							chunk.getProjectileFlags().clearFlag(chunkOffsetX, chunkOffsetY); // the 'clear' value of 0 is the default state
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public DynamicRegion(@NotNull ZoneBorders borders) {
 		this(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		setBorders(borders);
-		setUpdateAllPlanes(true);
 		RegionManager.addRegion(getId(), this);
 	}
 
@@ -120,7 +122,6 @@ public final class DynamicRegion extends Region {
 	public static DynamicRegion[] create(ZoneBorders copy) {
 		int baseX = copy.getSouthWestX() >> 6;
 		int baseY = copy.getSouthWestY() >> 6;
-
 		ZoneBorders border = findZoneBorders((copy.getNorthEastX() - copy.getSouthWestX()) >> 3, (copy.getNorthEastY() - copy.getSouthWestY()) >> 3);
 		RESERVED_AREAS.add(border);
 		Location l = Location.create(border.getSouthWestX(), border.getSouthWestY(), 0);
@@ -129,23 +130,18 @@ public final class DynamicRegion extends Region {
 			for (int y = copy.getSouthWestY() >> 6; y < copy.getNorthEastY() >> 6; y++) {
 				int regionId = x << 8 | y;
 				Location loc = l.transform((x - baseX) << 6, (y - baseY) << 6, 0);
-				DynamicRegion region = copy(regionId, loc);
-				region.setBorders(border);
-				Region r = RegionManager.forId(region.getId());
-				if (r != null) {
-					for (int z = 0; z < 4; z++) {
-						region.getPlanes()[z].getPlayers().addAll(r.getPlanes()[z].getPlayers());
-						region.getPlanes()[z].getNpcs().addAll(r.getPlanes()[z].getNpcs());
-					}
-				}
-				RegionManager.addRegion(region.getId(), region);
-				regions.add(region);
+				DynamicRegion dest = copy(regionId, loc);
+				dest.setBorders(border);
+				RegionManager.addRegion(dest.getId(), dest);
+				regions.add(dest);
 			}
 		}
 		for (Region r : regions) {
-			for (int z = 0; z < 4; z++) {
-				for (Player p : r.getPlanes()[z].getPlayers()) {
-					p.updateSceneGraph(false);
+			for (int z = 0; z < PLANES; z++) {
+				for (Player player : r.assemblePlayerList(z)) {
+					if (player != null) {
+						player.updateSceneGraph(false);
+					}
 				}
 			}
 		}
@@ -176,11 +172,11 @@ public final class DynamicRegion extends Region {
 		int count = 0;
 		int width = (sizeX >> 3) << 6;
 		int height = (sizeY >> 3) << 6;
-		if (width < 64) {
-			width = 64;
+		if (width < SIZE) {
+			width = SIZE;
 		}
-		if (height < 64) {
-			height = 64;
+		if (height < SIZE) {
+			height = SIZE;
 		}
 		while (true) {
 			int endX = x + width;
@@ -197,10 +193,10 @@ public final class DynamicRegion extends Region {
 				return new ZoneBorders(x, y, endX, endY);
 			}
 			if (++count % 15 == 0) {
-				y += 64;
+				y += SIZE;
 				x = 0;
 			} else {
-				x += 64;
+				x += SIZE;
 			}
 		}
 	}
@@ -221,12 +217,14 @@ public final class DynamicRegion extends Region {
 			for (int offsetY = 0; offsetY < 8; offsetY++) {
 				int x = regionX + (offsetX << 3);
 				int y = regionY + (offsetY << 3);
-				for (int plane = 0; plane < 4; plane++) {
-					RegionChunk c = base.getPlanes()[plane].getRegionChunk(offsetX, offsetY);
+				for (int plane = 0; plane < PLANES; plane++) {
+					RegionChunk c = base.getChunks()[offsetX][offsetY][plane];
 					if (c == null) {
-						region.chunks[plane][offsetX][offsetY] = c = new RegionChunk(Location.create(0, 0, 0), 0, region.getPlanes()[plane]);
+						c = new RegionChunk(Location.create(0, 0, 0), 0);
+						region.chunks[offsetX][offsetY][plane] = c;
 					} else {
-						region.replaceChunk(plane, offsetX, offsetY, (c = c.copy(region.getPlanes()[plane])), base);
+						c = c.copy();
+						region.replaceChunk(plane, offsetX, offsetY, c, base);
 					}
 					c.setRotation(0);
 					c.setBase(Location.create(x, y, plane));
@@ -275,70 +273,30 @@ public final class DynamicRegion extends Region {
 	}
 
 	/**
-	 * Rotates the region 90% clockwise.
-	 * TODO: Finish this
-	 */
-	public void rotate() {
-		for (int z = 0; z < 4; z++) {
-			RegionChunk[][] c = Arrays.copyOf(chunks[z], 8);
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					RegionChunk r = chunks[z][x][y] = c[8 - y - 1][x];
-					if (r != null) {
-						r.setRotation(r.getRotation() + 1);
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Sets a region chunk (without setting objects/clipping flags).
-	 * @param z The plane.
-	 * @param x The chunk x (0-8).
-	 * @param y The chunk y (0-8).
-	 * @param chunk The chunk to set.
-	 */
-	public void setChunk(int z, int x, int y, RegionChunk chunk) {
-		chunks[z][x][y] = chunk;
-		getPlanes()[z].getChunks()[x][y] = chunk;
-		if (chunk != null) {
-			chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, 0));
-		}
-	}
-
-	/**
 	 * Replaces a region chunk.
 	 * @param z The plane.
 	 * @param x The x-coordinate of the chunk. (0-7)
 	 * @param y The y-coordinate of the chunk. (0-7)
-	 * @param chunk The chunk to replace with.
+	 * @param replacement The chunk to replace with.
 	 * @param fromRegion The region the chunk is copied from.
 	 */
-	public void replaceChunk(int z, int x, int y, RegionChunk chunk, Region fromRegion) {
+	public void replaceChunk(int z, int x, int y, RegionChunk replacement, Region fromRegion) {
 		Region.load(DynamicRegion.this);
-		RegionPlane p = getPlanes()[z];
-		chunks[z][x][y] = chunk;
-		p.getChunks()[x][y] = chunk;
-		if (chunk == null) {
-			for (int i = x << 3; i < (x + 1) << 3; i++) {
-				for (int j = y << 3; j < (y + 1) << 3; j++) {
-					p.getFlags().invalidateFlag(i, j);
-					p.getProjectileFlags().invalidateFlag(i, j);
-					Scenery object = p.getObjects()[i][j];
-					if (object != null) {
-						LandscapeParser.removeScenery(object);
-					} else {
-						p.add(null, i, j, true);
-					}
-				}
-			}
-		} else {
-			Region.load(fromRegion);
-			Location l = chunk.getBase();
-			RegionPlane rp = fromRegion.getPlanes()[l.getZ()];
-			chunk.setCurrentBase(getBaseLocation().transform(x << 3, y << 3, z));
-			chunk.rebuildFlags(rp);
+		chunks[x][y][z] = replacement;
+		Region.load(fromRegion);
+		RegionChunk orig = fromRegion.getChunks()[x][y][z];
+		Location currentBase = getBaseLocation().transform(x << 3, y << 3, z);
+		replacement.setCurrentBase(currentBase);
+		replacement.rebaseObjects();
+		replacement.resetClippingFlags();
+		replacement.rebuildClippingFlags(orig);
+		for (NPC npc : orig.getNpcs()) {
+			Location newLoc = currentBase.transform(npc.getLocation().getChunkOffsetX(), npc.getLocation().getChunkOffsetY(), 0);
+			NPC copy = NPC.create(npc.getId(), newLoc, npc.getDirection());
+			copy.setAggressive(npc.isAggressive());
+			copy.setRespawn(npc.isRespawn());
+			copy.setWalks(npc.isWalks());
+			copy.init();
 		}
 	}
 
@@ -356,20 +314,18 @@ public final class DynamicRegion extends Region {
 					}
 				}
 			}
-			if(!super.flagInactive(force)) {
-                return false;
-            }
-			for (RegionPlane plane : getPlanes()) {
-				for (int i = 0; i < plane.getNpcs().size(); i++) {
-					NPC npc = plane.getNpcs().get(0);
-					npc.clear();
-				}
-				for (RegionChunk[] chunks : getChunks()[plane.getPlane()]) {
-					for (RegionChunk chunk : chunks) {
-						if (chunk != null) {
-							for (Iterator<GroundItem> it = chunk.getItems().iterator(); it.hasNext();) {
-								GroundItemManager.getItems().remove(it.next());
-							}
+			if (!super.flagInactive(force)) {
+				return false;
+			}
+			for (int x = 0; x < CHUNKS_SIZE; x++) {
+				for (int y = 0; y < CHUNKS_SIZE; y++) {
+					for (int z = 0; z < PLANES; z++) {
+						RegionChunk chunk = chunks[x][y][z];
+						for (NPC npc : new ArrayList<>(chunk.getNpcs())) {
+							npc.clear();
+						}
+						for (GroundItem item : new ArrayList<>(chunk.getItems())) {
+							GroundItemManager.destroy(item);
 						}
 					}
 				}
@@ -378,29 +334,21 @@ public final class DynamicRegion extends Region {
 			if (multicombat) {
 				toggleMulticombat();
 			}
-            boolean allLinkedInactive = true;
+			boolean allLinkedInactive = true;
 			if (linked != null) {
 				for (DynamicRegion r : linked) {
 					allLinkedInactive &= r.flagInactive(force);
 				}
 			}
-            return allLinkedInactive;
+			return allLinkedInactive;
 		} else {
-            return true;
-        }
+			return true;
+		}
 	}
 
 	@Override
 	public int getRegionId() {
 		return regionId;
-	}
-
-	/**
-	 * Gets the chunks.
-	 * @return The chunks.
-	 */
-	public RegionChunk[][][] getChunks() {
-		return chunks;
 	}
 
 	/**

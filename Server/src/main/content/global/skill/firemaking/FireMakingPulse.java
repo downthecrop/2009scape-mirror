@@ -138,7 +138,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		player.faceLocation(object.getFaceLocation(player.getLocation()));
 		player.getSkills().addExperience(Skills.FIREMAKING,fire.getXp());
 
-		int playerRegion = player.getViewport().getRegion().getId();
+		int playerRegion = player.getLocation().getRegionId();
 
 		setLastFire();
 		player.dispatch(new LitFireEvent(fire.getLogId()));

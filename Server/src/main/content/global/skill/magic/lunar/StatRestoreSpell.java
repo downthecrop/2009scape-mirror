@@ -16,6 +16,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class StatRestoreSpell extends MagicSpell {
 
 	private static final Animation ANIMATION = new Animation(4413);
 	private static final Graphics GRAPHICS = new Graphics(733, 130);
-        private static final Consumables[] acceptedPotions = new Consumables[] { Consumables.RESTORE, Consumables.SUPER_RESTO, Consumables.PRAYER, Consumables.ENERGY, Consumables.SUPER_ENERGY }; 
+	private static final Consumables[] acceptedPotions = new Consumables[] { Consumables.RESTORE, Consumables.SUPER_RESTO, Consumables.PRAYER, Consumables.ENERGY, Consumables.SUPER_ENERGY }; 
 
 	public StatRestoreSpell() {
 		super(SpellBook.LUNAR, 81, 84, null, null, null, new Item[] { new Item(Runes.ASTRAL_RUNE.getId(), 2), new Item(Runes.EARTH_RUNE.getId(), 10), new Item(Runes.WATER_RUNE.getId(), 10) });
@@ -44,42 +45,38 @@ public class StatRestoreSpell extends MagicSpell {
 		final Player player = ((Player) entity);
 		Item item = ((Item) target);
 		player.getInterfaceManager().setViewedTab(6);
-
-                if (Consumables.getConsumableById(item.getId()) == null) {
-		    player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
-                    return false;
-                }
-
+		if (Consumables.getConsumableById(item.getId()) == null) {
+			player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
+			return false;
+		}
 		final Potion potion = (Potion) Consumables.getConsumableById(item.getId()).getConsumable();
-
 		if (potion == null) {
-		        player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
+			player.getPacketDispatch().sendMessage("You can only cast this spell on a potion.");
 			return false;
 		}
 		if (!item.getDefinition().isTradeable() || !isRestore(potion)) {
 			player.getPacketDispatch().sendMessage("You can't cast this spell on that item.");
 			return false;
 		}
-		List<Player> pl = RegionManager.getLocalPlayers(player, 2);
-		int plSize = pl.size() - 1;
+		List<Player> pl = RegionManager.getLocalPlayers(player.getLocation(), 1);
 		int doses = potion.getDose(item);
-		if (pl.size() == 0) {
-			return false;
-		}
 		if (!super.meetsRequirements(player, true, false)) {
 			return false;
 		}
 		int size = 0;
-    		for (Player players : pl) {
-                        if (size >= doses) break;
-			Player o = (Player) players;
-			if (!o.isActive() || o.getLocks().isInteractionLocked() || o == player) {
+		for (Player o : pl) {
+			if (size >= doses) break;
+			if (o == player) {
 				continue;
 			}
-			if (!o.getSettings().isAcceptAid() && !(o instanceof AIPlayer)) {
+			if (!o.isActive() || o.getLocks().isInteractionLocked()) {
+				continue;
+			}
+			if (!o.getSettings().isAcceptAid()) {
 				continue;
 			}
 			o.graphics(GRAPHICS);
+			playGlobalAudio(o.getLocation(), Sounds.LUNAR_STAT_SHARE_INDIVIDUAL_2897);
 			potion.getEffect().activate(o);
 			size++;
 		}
@@ -92,21 +89,22 @@ public class StatRestoreSpell extends MagicSpell {
 		playGlobalAudio(player.getLocation(), Sounds.LUNAR_STAT_SHARE_2899);
 		player.animate(ANIMATION);
 		player.graphics(GRAPHICS);
-		player.getInventory().remove(item);
-                int newIndex = (potion.getIds().length - doses) + size;
-                if (newIndex > potion.getIds().length - 1) {
-                    player.getInventory().add(new Item(229));
-                    return true;
-                }
-		player.getInventory().add(new Item(potion.getIds()[newIndex]));
+		if (player.getInventory().remove(item)) {
+			int newIndex = (potion.getIds().length - doses) + size;
+			if (newIndex > potion.getIds().length - 1) {
+				player.getInventory().add(new Item(Items.VIAL_229));
+				return true;
+			}
+			player.getInventory().add(new Item(potion.getIds()[newIndex]));
+		}
 		return true;
 	}
 
 	private boolean isRestore(Potion p) {
-                for (int i = 0; i < acceptedPotions.length; i++) {
-                    if (p == acceptedPotions[i].getConsumable())
-                        return true;
-                }
+		for (int i = 0; i < acceptedPotions.length; i++) {
+			if (p == acceptedPotions[i].getConsumable())
+				return true;
+		}
 		return false;
 	}
 

@@ -173,6 +173,6 @@ enum class ImplingSpawnLocations (val type: ImplingSpawnTypes, vararg val locati
 object ImplingClipper : ClipMaskSupplier {
     override fun getClippingFlag (z: Int, x: Int, y: Int) : Int {
         var flag = RegionManager.getClippingFlag(z, x, y)
-        return flag and (RegionFlags.SOLID_TILE.inv()) and (RegionFlags.TILE_OBJECT.inv()) //Allow walking on water and flying over small objects, but keep all other tile flags the same.
+        return flag and (ChunkFlags.SOLID_TILE.inv()) and (ChunkFlags.TILE_OBJECT.inv()) // Allow walking on water and flying over small objects, but keep all other tile flags the same.
     }
 }

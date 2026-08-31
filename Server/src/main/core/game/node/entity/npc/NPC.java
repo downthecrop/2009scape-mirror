@@ -142,7 +142,7 @@ public class NPC extends Entity {
 
 	public NPCBehavior behavior;
 
-        public boolean isRespawning = false;
+		public boolean isRespawning = false;
 
 	/**
 	 * Constructs a new {@code NPC} {@code Object}.
@@ -213,8 +213,8 @@ public class NPC extends Entity {
 		getProperties().setSpawnLocation(getLocation());
 		initConfig();
 		Repository.getNpcs().add(this);
-		RegionManager.move(this);
-		if (getViewport().getRegion().isActive()) {
+		RegionManager.move(this, null, location);
+		if (getLocation().getRegion().isActive()) {
 			Repository.addRenderableNPC(this);
 		}
 		interactPlugin.setDefault();
@@ -230,9 +230,9 @@ public class NPC extends Entity {
 			}
 		}
 		behavior.onCreation(this);
-        // FIXME: hack around MovementPulse's constructor getting run while behavior is null when behavior is set between NPC constructor and init.
+		// FIXME: hack around MovementPulse's constructor getting run while behavior is null when behavior is set between NPC constructor and init.
 		// FIXME: Commented out as a fix. most npcs were not being able to attack with range/magic due to setting the combat pulse.
-        // getProperties().setCombatPulse(new CombatPulse(this));
+		// getProperties().setCombatPulse(new CombatPulse(this));
 	}
 
 	@Override
@@ -240,9 +240,7 @@ public class NPC extends Entity {
 		super.clear();
 		Repository.removeRenderableNPC(this);
 		Repository.getNpcs().remove(this);
-		getViewport().setCurrentPlane(null);
 		behavior.onRemoval(this);
-		// getViewport().setRegion(null);
 	}
 
 	/**
@@ -329,7 +327,7 @@ public class NPC extends Entity {
 	 */
 	public boolean openShop(Player player) {
 		if (getName().contains("assistant")) {
-			NPC n = RegionManager.getNpc(this, getId() - 1);
+			NPC n = RegionManager.getNpc(location, getId() - 1, 16);
 			if (n != null) {
 				return n.openShop(player);
 			}
@@ -425,7 +423,7 @@ public class NPC extends Entity {
 			return false;
 		}
 		return true;
-    }
+	}
 
 	@Override
 	public int getDragonfireProtection(boolean fire) {
@@ -434,7 +432,7 @@ public class NPC extends Entity {
 
 	@Override
 	public void tick() {
-		if (!getViewport().getRegion().isActive()) {
+		if (!getLocation().getRegion().isActive()) {
 			onRegionInactivity();
 			return;
 		}
@@ -444,10 +442,10 @@ public class NPC extends Entity {
 			return;
 		}
 		if (isRespawning && respawnTick <= GameWorld.getTicks()) {
-                        behavior.onRespawn(this);
+						behavior.onRespawn(this);
 			onRespawn();
-                        fullRestore();
-                        isRespawning = false;
+						fullRestore();
+						isRespawning = false;
 		}
 		handleTickActions();
 		super.tick();
@@ -549,10 +547,10 @@ public class NPC extends Entity {
 		nextWalk = GameWorld.getTicks() + 5 + RandomFunction.randomize(10);
 	}
 
-    public void resetWalk() {
-        nextWalk = GameWorld.getTicks() - 1;
-        getWalkingQueue().reset();
-    }
+	public void resetWalk() {
+		nextWalk = GameWorld.getTicks() - 1;
+		getWalkingQueue().reset();
+	}
 
 	/**
 	 * Called when the region goes inactive.
@@ -562,7 +560,9 @@ public class NPC extends Entity {
 		getPulseManager().clear();
 		getUpdateMasks().reset();
 		if (getAttribute("return-to-spawn", false)) {
-			this.location = getProperties().getSpawnLocation();
+			location.getChunk().remove(this);
+			location = getProperties().getSpawnLocation();
+			location.getChunk().add(this);
 			MovementPulse returnPulse = getAttribute("return-to-spawn-pulse");
 			if (returnPulse != null) {
 				returnPulse.pulse();
@@ -570,7 +570,7 @@ public class NPC extends Entity {
 			}
 		}
 		Repository.removeRenderableNPC(this);
-		if (getViewport().getRegion() instanceof DynamicRegion) {
+		if (getLocation().getRegion() instanceof DynamicRegion) {
 			clear();
 		}
 	}
@@ -597,7 +597,7 @@ public class NPC extends Entity {
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
 			p.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ENEMIES_KILLED);
-            PlayerStatsCounter.incrementKills(p, originalId);
+			PlayerStatsCounter.incrementKills(p, originalId);
 		}
 		handleDrops(p, killer);
 		if (!isRespawn())
@@ -608,9 +608,9 @@ public class NPC extends Entity {
 		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 	}
 
-        public void setRespawnTicks (int ticks) {
-            definition.getHandlers().put(NPCConfigParser.RESPAWN_DELAY, ticks);
-        }
+		public void setRespawnTicks (int ticks) {
+			definition.getHandlers().put(NPCConfigParser.RESPAWN_DELAY, ticks);
+		}
 
 	@Override
 	public void commenceDeath(Entity killer) {
@@ -687,9 +687,9 @@ public class NPC extends Entity {
 		}
 		getProperties().setAttackStyle(new WeaponInterface.AttackStyle(WeaponInterface.STYLE_CONTROLLED, index));
 		CombatStyle style = getDefinition().getConfiguration(NPCConfigParser.COMBAT_STYLE);
-        if (style != null) {
-            getProperties().getCombatPulse().setStyle(style);
-        }
+		if (style != null) {
+			getProperties().getCombatPulse().setStyle(style);
+		}
 		if (style == CombatStyle.MAGIC) {
 			getProperties().setAutocastSpell(new DefaultCombatSpell(this));
 			int spell = definition.getConfiguration("spell_id", -1);
@@ -744,10 +744,10 @@ public class NPC extends Entity {
 		configure();
 		interactPlugin.setDefault();
 		if (id == originalId) {
-                    int ordinal = EntityFlags.getOrdinal (EFlagType.NPC, EntityFlag.TypeSwap);
-                    getUpdateMasks().unregisterSynced(ordinal);
+					int ordinal = EntityFlags.getOrdinal (EFlagType.NPC, EntityFlag.TypeSwap);
+					getUpdateMasks().unregisterSynced(ordinal);
 		}
-                getUpdateMasks().register(EntityFlag.TypeSwap, id, id != originalId);
+				getUpdateMasks().register(EntityFlag.TypeSwap, id, id != originalId);
 		return this;
 	}
 
@@ -783,10 +783,10 @@ public class NPC extends Entity {
 			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(RandomFunction.random(-radius, radius+1), RandomFunction.random(-radius, radius+1), 0);
 			int dist = (int) Location.getDistance(location, returnToSpawnLocation);
 			int pathLimit = 14;
-                        if (dist > pathLimit) {
-                            Vector normalizedDir = Vector.betweenLocs(this.location, returnToSpawnLocation).normalized();
-                            returnToSpawnLocation = this.location.transform (normalizedDir.times(pathLimit));
-                        }
+						if (dist > pathLimit) {
+							Vector normalizedDir = Vector.betweenLocs(this.location, returnToSpawnLocation).normalized();
+							returnToSpawnLocation = this.location.transform (normalizedDir.times(pathLimit));
+						}
 			return returnToSpawnLocation;
 		}
 		Location l = movementPath[movementIndex++];
@@ -1059,5 +1059,4 @@ public class NPC extends Entity {
 	public void setNeverWalks(boolean neverWalks) {
 		this.neverWalks = neverWalks;
 	}
-
 }

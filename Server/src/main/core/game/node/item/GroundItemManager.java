@@ -3,6 +3,7 @@ package core.game.node.item;
 import core.game.node.entity.player.Player;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.ItemUpdateFlag;
 import core.net.packet.PacketRepository;
@@ -81,7 +82,7 @@ public final class GroundItemManager {
 			item.getPlugin().remove(item.getDropper(), item, ItemPlugin.DROP);
 		}
 		item.setRemoved(false);
-		RegionManager.getRegionPlane(item.getLocation()).add(item);
+		RegionManager.getRegionChunk(item.getLocation()).add(item);
 		if (GROUND_ITEMS.add(item)) {
 			return item;
 		}
@@ -97,7 +98,7 @@ public final class GroundItemManager {
 			return null;
 		}
 		GROUND_ITEMS.remove(item);
-		RegionManager.getRegionPlane(item.getLocation()).remove(item);
+		RegionManager.getRegionChunk(item.getLocation()).remove(item);
 		if (item.isAutoSpawn()) {
 			item.respawn();
 		}
@@ -112,7 +113,18 @@ public final class GroundItemManager {
 	 * @return The ground item, or {@code null} if the ground item wasn't found.
 	 */
 	public static GroundItem get(int itemId, Location location, Player player) {
-		return RegionManager.getRegionPlane(location).getItem(itemId, location, player);
+		RegionChunk chunk = RegionManager.getRegionChunk(location);
+		for (GroundItem item : chunk.getItems()) {
+			if (item.getId() == itemId && location.equals(item.getLocation()) && !item.isRemoved()) {
+				if (!item.isPrivate()) {
+					return item;
+				}
+				if (player != null && item.droppedBy(player)) {
+					return item;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -155,7 +167,7 @@ public final class GroundItemManager {
 					}
 				}
 				if (!item.isRemoved()) {
-					RegionManager.getRegionPlane(item.getLocation()).remove(item);
+					RegionManager.getRegionChunk(item.getLocation()).remove(item);
 				}
 			} else if (!item.isRemainPrivate() && item.getDecayTime() - GameWorld.getTicks() == 100) {
 				RegionManager.getRegionChunk(item.getLocation()).flag(new ItemUpdateFlag(item, ItemUpdateFlag.CONSTRUCT_TYPE));

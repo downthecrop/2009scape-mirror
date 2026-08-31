@@ -49,7 +49,7 @@ class AlKharidWarriorNPC : AbstractNPC {
         if (entity is Player) {
             if (target == null) {
                 target = entity
-                RegionManager.getLocalNpcs(entity, supportRange).forEach {
+                RegionManager.getLocalNPCs(entity.location, supportRange).forEach {
                     if (it.id == NPCs.AL_KHARID_WARRIOR_18 && !it.properties.combatPulse.isAttacking && it != this) {
                         it.sendChat("Brother, I shall help thee with this infidel!")
                         it.attack(entity)

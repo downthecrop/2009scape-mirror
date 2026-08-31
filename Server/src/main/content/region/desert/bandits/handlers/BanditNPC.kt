@@ -23,8 +23,7 @@ class BanditNPC(id: Int = NPCs.BANDIT_1926, location: Location? = null) : Abstra
 
     override fun tick() {
         if (!inCombat()) {
-            val players = RegionManager.getLocalPlayers(this, 5)
-            for (player in players) {
+            for (player in RegionManager.getLocalPlayers(location, 5)) {
                 if (player.inCombat()) continue
                 if (hasGodItem(player, God.SARADOMIN)) {
                     sendChat("Time to die, Saradominist filth!")
@@ -47,7 +46,7 @@ class BanditNPC(id: Int = NPCs.BANDIT_1926, location: Location? = null) : Abstra
 
     override fun onImpact(entity: Entity?, state: BattleState?) {
         if (entity is Player) {
-                RegionManager.getLocalNpcs(entity, supportRange).forEach {
+                RegionManager.getLocalNPCs(entity.location, supportRange).forEach {
                     if (it.id == NPCs.BANDIT_1926 && !it.properties.combatPulse.isAttacking && it != this) {
                         it.sendChat("You picked the wrong place to start trouble!")
                         it.attack(entity)

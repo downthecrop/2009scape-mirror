@@ -19,6 +19,7 @@ import content.global.skill.summoning.familiar.Familiar;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
+import core.game.world.map.Region;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.update.flag.context.Graphics;
@@ -84,37 +85,41 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 		@Override
 		public boolean pulse() {
 			boolean end = true;
-			for (Player p : RegionManager.getRegionPlayers(14231)) {
-				end = false;
-				int index = p.getAttribute("barrow:drain-index", -1);
-				if (index > -1) {
-					p.removeAttribute("barrow:drain-index");
-					p.getPacketDispatch().sendItemOnInterface(-1, 1, 24, index);
-					continue;
-				}
-				if (p.getLocation().getZ() == 0 && p.getAttribute("barrow:looted", false) && getWorldTicks() % 3 == 0) {
-					if (RandomFunction.random(15) == 0) {
-						p.getImpactHandler().manualHit(p, RandomFunction.random(5), HitsplatType.NORMAL);
-						Graphics.send(Graphics.create(405), p.getLocation());
+			Region region = RegionManager.forId(14231);
+			Region.load(region);
+			for (int z = 0; z < 4; z++) {
+				for (Player p : region.assemblePlayerList(z)) {
+					end = false;
+					int index = p.getAttribute("barrow:drain-index", -1);
+					if (index > -1) {
+						p.removeAttribute("barrow:drain-index");
+						p.getPacketDispatch().sendItemOnInterface(-1, 1, 24, index);
+						continue;
 					}
-				}
-				int drain = 8;
+					if (p.getLocation().getZ() == 0 && p.getAttribute("barrow:looted", false) && getWorldTicks() % 3 == 0) {
+						if (RandomFunction.random(15) == 0) {
+							p.getImpactHandler().manualHit(p, RandomFunction.random(5), HitsplatType.NORMAL);
+							Graphics.send(Graphics.create(405), p.getLocation());
+						}
+					}
+					int drain = 8;
 
-				//if (p.getLocks().isLocked("barrow:drain") || RandomFunction.random(100) % 2 == 0) {
-				//	continue;
-				//}
-				for (boolean killed : p.getSavedData().getActivityData().getBarrowBrothers()) {
-					if (killed) {
-						drain += 1;
+					//if (p.getLocks().isLocked("barrow:drain") || RandomFunction.random(100) % 2 == 0) {
+					//	continue;
+					//}
+					for (boolean killed : p.getSavedData().getActivityData().getBarrowBrothers()) {
+						if (killed) {
+							drain += 1;
+						}
 					}
-				}
-				if(getWorldTicks() % 30 == 0){
-					p.getSkills().decrementPrayerPoints(drain);
-					p.getLocks().lock("barrow:drain", (3 + RandomFunction.random(15)) * 3);
-					index = 1 + RandomFunction.random(6);
-					p.setAttribute("barrow:drain-index", index);
-					p.getPacketDispatch().sendItemZoomOnInterface(4761 + RandomFunction.random(12), 100, 24, index);
-					p.getPacketDispatch().sendAnimationInterface(9810, 24, index);
+					if (getWorldTicks() % 30 == 0) {
+						p.getSkills().decrementPrayerPoints(drain);
+						p.getLocks().lock("barrow:drain", (3 + RandomFunction.random(15)) * 3);
+						index = 1 + RandomFunction.random(6);
+						p.setAttribute("barrow:drain-index", index);
+						p.getPacketDispatch().sendItemZoomOnInterface(4761 + RandomFunction.random(12), 100, 24, index);
+						p.getPacketDispatch().sendAnimationInterface(9810, 24, index);
+					}
 				}
 			}
 			return end;
@@ -130,7 +135,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public void locationUpdate(Entity e, Location last) {
-		if (e instanceof Player && e.getViewport().getRegion().getId() == 14231) {
+		if (e instanceof Player && e.getLocation().getRegionId() == 14231) {
 			boolean tunnel = false;
 			for (ZoneBorders border : MINI_TUNNELS) {
 				if (border.insideBorder(e)) {
@@ -140,7 +145,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			}
 			Player player = (Player) e;
 			if ((getVarp(player, 1270) == 1) != tunnel) {
-                                setVarp(player, 1270, tunnel ? 3 : 0, true);
+								setVarp(player, 1270, tunnel ? 3 : 0, true);
 			}
 		}
 	}
@@ -213,7 +218,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 	public static void shuffleCatacombs(Player player) {
 		int value = TUNNEL_CONFIGS[RandomFunction.random(TUNNEL_CONFIGS.length)];
 		value |= 1 << (6 + RandomFunction.random(4));
-                setVarp(player, 452, value);
+				setVarp(player, 452, value);
 	}
 
 	@Override
@@ -293,10 +298,10 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				return true;
 			case 6774:
 				player.lock(1);
-                int brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
-                if (!player.getSavedData().getActivityData().getBarrowBrothers()[brother] && !player.getAttribute("brother:" + brother, false)) {
-                    BarrowsCrypt.getCrypt(brother).spawnBrother(player, RegionManager.getTeleportLocation(target.getCenterLocation(), 4));
-                }
+				int brother = player.getSavedData().getActivityData().getBarrowTunnelIndex();
+				if (!player.getSavedData().getActivityData().getBarrowBrothers()[brother] && !player.getAttribute("brother:" + brother, false)) {
+					BarrowsCrypt.getCrypt(brother).spawnBrother(player, RegionManager.getTeleportLocation(target.getCenterLocation(), 4));
+				}
 				player.setAttribute("barrow:opened_chest", true);
 				sendConfiguration(player);
 				return true;
@@ -335,7 +340,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 		if (player.getAttribute("barrow:opened_chest", false)) {
 			config |= 1 << 16;
 		}
-                setVarp(player, 453, config);
+				setVarp(player, 453, config);
 	}
 
 	@Override

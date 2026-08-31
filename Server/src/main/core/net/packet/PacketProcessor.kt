@@ -1,6 +1,5 @@
 package core.net.packet
 
-import content.global.ame.events.maze.MazeInterface
 import content.global.handlers.iface.ge.StockMarket
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellListeners
@@ -407,7 +406,7 @@ object PacketProcessor {
             player = pkt.player
             child = pkt.child
             iface = pkt.iface
-            target = RegionManager.getObject(player.location.z, pkt.x, pkt.y) ?: return sendClearMinimap(player)
+            target = RegionManager.getObject(pkt.x, pkt.y, player.location.z) ?: return sendClearMinimap(player)
             targetId = pkt.sceneryId
             type = SpellListener.OBJECT
         }
@@ -580,7 +579,7 @@ object PacketProcessor {
         }
         else if (pkt is Packet.UseWithScenery) {
             item = pkt.player.inventory[pkt.slot] ?: return sendClearMinimap(pkt.player)
-            node = RegionManager.getObject(pkt.player.location.z, pkt.x, pkt.y) ?: return sendClearMinimap(pkt.player)
+            node = RegionManager.getObject(pkt.x, pkt.y, pkt.player.location.z, pkt.sceneryId, -1) ?: return sendClearMinimap(pkt.player)
             childNode = node.asScenery().getChild(pkt.player)
             itemId = pkt.itemId
             nodeId = node.id
@@ -681,7 +680,7 @@ object PacketProcessor {
 
     private fun processSceneryAction(pkt: Packet.SceneryAction) {
         val player = pkt.player
-        var scenery = RegionManager.getObject(player.location.z, pkt.x, pkt.y, pkt.id)
+        var scenery = RegionManager.getObject(pkt.x, pkt.y, player.location.z, pkt.id, -1)
         var objId = pkt.id
 
         //what follows is a series of hardcoded crimes against humanity
@@ -689,11 +688,6 @@ object PacketProcessor {
             scenery = Scenery(6898, Location(3219, 9618))
         if (pkt.id == 6899)
             scenery = Scenery(6899, Location(3221, 9618))
-
-        // Random Event Maze chests are overridden by the walls, which needs to be hacked in.
-        if ((scenery?.id == 3626 || scenery?.id == 3635) && (objId in 3635..3636)) {
-            scenery = MazeInterface.overrideScenery(scenery, objId)
-        }
 
         // Family crest levers don't have varps associated with them, so their state is validated with attributes
         // instead, and they always appear as their down/odd variant in the server's map

@@ -1,8 +1,6 @@
 package content.minigame.vinesweeper
 
-import BlinkinDialogue
-import FarmerDialogue.Companion.FARMER_FLAG_LINES
-import WinkinDialogue
+import content.minigame.vinesweeper.FarmerDialogue.Companion.FARMER_FLAG_LINES
 import content.minigame.vinesweeper.Vinesweeper.Companion.FARMERS
 import content.minigame.vinesweeper.Vinesweeper.Companion.FARMER_CLEAR_RADIUS
 import content.minigame.vinesweeper.Vinesweeper.Companion.HOLES
@@ -34,6 +32,8 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.GameWorld.ticks
 import core.game.world.map.Location
+import core.game.world.map.Region
+import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
@@ -52,27 +52,26 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
     }
 
     override fun areaEnter(entity: Entity) {
-        if(entity is Player)
-        {
+        if (entity is Player) {
             openOverlay(entity, Components.RABBIT_OVERLAY_689)
             sendUpdatedPoints(entity)
         }
     }
 
     override fun areaLeave(entity: Entity, logout: Boolean) {
-        if(entity is Player) {
+        if (entity is Player) {
             entity.interfaceManager.closeOverlay()
-            if(!logout) {
+            if (!logout) {
                 sendMessage(entity, "Winkin's Farm thanks you for your visit.")
                 sendMessage(entity, "Leftover ogleroots and flags have been returned to the establishment.")
                 sendMessage(entity, "You have been reimbursed at a rate of 10gp per ogleroot and the flags have been collected.")
                 val flags = entity.inventory.getAmount(Item(Items.FLAG_12625))
-                if(flags > 0) {
+                if (flags > 0) {
                     entity.setAttribute("/save:vinesweeper:stored-flags", flags)
                     entity.inventory.remove(Item(Items.FLAG_12625, flags))
                 }
                 val roots = entity.inventory.getAmount(Item(Items.OGLEROOT_12624))
-                if(roots > 0) {
+                if (roots > 0) {
                     entity.inventory.remove(Item(Items.OGLEROOT_12624, roots))
                     entity.inventory.add(Item(Items.COINS_995, roots * 10))
                 }
@@ -98,7 +97,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             return@on true
         }
         on(HOLES, IntType.SCENERY, "dig") { player, node ->
-            if(!player.inventory.contains(Items.SPADE_952, 1)) {
+            if (!player.inventory.contains(Items.SPADE_952, 1)) {
                 // TODO (crash): authenticity
                 player.sendMessage("You need a spade to dig here.")
             } else {
@@ -115,7 +114,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         on(HOLES, IntType.SCENERY, "flag") { player, node ->
             val hole = node as Scenery
             var count = 0
-            if(player.location != node.location) {
+            if (player.location != node.location) {
                 plantFlag(player,hole)
                 return@on true
             }
@@ -151,7 +150,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                         1 -> "You get some mud in your eye and it stings! You have no idea what is in the hole."
                         2 -> "The mud seems to be too thick to see what is there."
                         3 -> "A slimy worm wriggles out of the mud, making you jump and lose concentration. You're not sure if there is a seed here or not."
-                        else -> if(isSeed(node.location)) {
+                        else -> if (isSeed(node.location)) {
                             "You notice a seed hidden in the dirt."
                         } else {
                             "You are certain there is no seed planted here."
@@ -262,7 +261,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
     data class SeedDestination(val player: Player, val loc: Location, val alive: Boolean) {
         override fun equals(other: Any?): Boolean {
-            return if(other is SeedDestination) {
+            return if (other is SeedDestination) {
                 loc == other.loc
             } else {
                 false
@@ -274,8 +273,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         }
     }
 
-    companion object
-    {
+    companion object {
         val AVACH_NIMPORTO_LOC = Location.create(1637, 4709)
         val SIGNS = intArrayOf(Sceneries.INSTRUCTION_SIGN_29461, Sceneries.INSTRUCTION_SIGN_29462, Sceneries.INSTRUCTION_SIGN_29463, Sceneries.INSTRUCTION_SIGN_29464)
         val HOLES = intArrayOf(Sceneries.HOLE_29476, Sceneries.HOLE_29477, Sceneries.HOLE_29478)
@@ -334,9 +332,9 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             val reward = REWARDS[buttonID] ?: return
             val cost = amount * reward.points
             val points = player.getAttribute("vinesweeper:points", 0)
-            if(cost in 1 until points) {
+            if (cost in 1 until points) {
                 val item = Item(reward.itemID, amount)
-                if(!player.inventory.add(item)) {
+                if (!player.inventory.add(item)) {
                     GroundItemManager.create(item, player)
                 }
                 player.incrementAttribute("/save:vinesweeper:points", -cost)
@@ -346,7 +344,6 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 player.sendMessage("You don't have enough points for that.")
             }
         }
-
 
         val TUTORIAL = 685
 
@@ -362,52 +359,87 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
         val MAX_SEEDS = 300
         val FARMER_CLEAR_RADIUS = 3
-        val VINESWEEPER_BORDERS = ZoneBorders(1600,4672,1663,4735)
+        val VINESWEEPER_REGION = RegionManager.forId(6473)
+        var SEED_LOCS: HashSet<Location> = HashSet()
 
         fun sendUpdatedPoints(player: Player) {
             val points = player.getAttribute("vinesweeper:points", 0)
             setVarbit(player, 4449, points)
         }
 
-        var SEED_LOCS: HashSet<Location> = HashSet()
-
         fun isSeed(loc: Location): Boolean {
             val scenery = getScenery(loc)
             return scenery != null && SEED_LOCS.contains(scenery.location)
         }
 
-        fun populateSeeds() {
-            val holes = countHoles()
-            val seeds = min(1.0 * MAX_SEEDS, holes * 0.13).toInt()
-            var tries = 0 // Prevent the while loop from crashing the server
-            while(SEED_LOCS.size < seeds && tries++ < 1000) {
-                val loc = VINESWEEPER_BORDERS.getRandomLoc()
-                val scenery = getScenery(loc)
-                if(scenery != null && HOLES.contains(scenery.id)) {
-                    SEED_LOCS.add(loc)
-                }
-            }
-        }
-
-        private fun countHoles(): Int {
-            val northEastX = VINESWEEPER_BORDERS.northEastX
-            val northEastY = VINESWEEPER_BORDERS.northEastY
-            val southWestX = VINESWEEPER_BORDERS.southWestX
-            val southWestY = VINESWEEPER_BORDERS.southWestY
-            var holeCount = 0
-            for (x in southWestX .. northEastX){
-                for (y in southWestY .. northEastY){
-                    val scenery = getScenery(x, y, 0)
-                    if(scenery != null && HOLES.contains(scenery.id)) {
-                        holeCount++
+        private fun resetChunkIfBarren(chunk: RegionChunk) {
+            val wipedHoles = ArrayList<Scenery>()
+            for (x in 0 until 8) {
+                for (y in 0 until 8) {
+                    for (i in 0 until 4) {
+                        val obj = chunk.objects[x][y][i] ?: continue
+                        if (obj.id in HOLES) {
+                            return // this chunk is not barren and hence should not be reset
+                        }
+                        if (obj.id == NUMBERS[0]) {
+                            wipedHoles.add(obj)
+                        }
                     }
                 }
             }
-            return holeCount
+            for (scenery in wipedHoles) {
+                restoreOriginalHole(scenery)
+            }
+        }
+
+        private fun countFieldState(chunk: RegionChunk, emptyHoleList: ArrayList<Scenery>, seedHoleList: ArrayList<Scenery>) {
+            for (x in 0 until RegionChunk.SIZE) {
+                for (y in 0 until RegionChunk.SIZE) {
+                    for (i in 0 until RegionChunk.ARRAY_SIZE) {
+                        val obj = chunk.objects[x][y][i] ?: continue
+                        if (obj.id in HOLES) {
+                            if (obj.location in SEED_LOCS) {
+                                seedHoleList.add(obj)
+                            } else {
+                                emptyHoleList.add(obj)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        fun populateSeeds() {
+            // First, see if there are any chunks that have been completely wiped out. These need to be restored first (GL #2400).
+            Region.load(VINESWEEPER_REGION)
+            for (cx in 0 until RegionChunk.SIZE) {
+                for (cy in 0 until RegionChunk.SIZE) {
+                    val chunk = VINESWEEPER_REGION.chunks[cx][cy][0]
+                    resetChunkIfBarren(chunk)
+                }
+            }
+            // Next, get the state of the field
+            val emptyHoleList = ArrayList<Scenery>()
+            val seedHoleList = ArrayList<Scenery>()
+            for (cx in 0 until 8) {
+                for (cy in 0 until 8) {
+                    val chunk = VINESWEEPER_REGION.chunks[cx][cy][0]
+                    countFieldState(chunk, emptyHoleList, seedHoleList)
+                }
+            }
+            val target = min(1.0 * MAX_SEEDS, (seedHoleList.size + emptyHoleList.size) * 0.13).toInt()
+            val seedsToAdd = target - seedHoleList.size
+            if (seedsToAdd < 1) {
+                return
+            }
+            emptyHoleList.shuffle()
+            for (i in 0 until seedsToAdd) {
+                SEED_LOCS.add(emptyHoleList[i].location)
+            }
         }
 
         fun plantFlag(player: Player, hole: Scenery) {
-            if(player.inventory.remove(Item(Items.FLAG_12625, 1))) {
+            if (player.inventory.remove(Item(Items.FLAG_12625, 1))) {
                 player.lock()
                 player.visualize(Animation(Animations.HUMAN_PLANT_FLAG_8711),Graphics(Gfx.VINESWEEPER_PLANT_FLAG_1541))
                 player.sendMessage("You add a flag to the patch.")
@@ -427,9 +459,9 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
         fun feedRabbit(player: Player, rabbit: NPC) {
             val respawnDelay = 50
-            if(rabbit.isInvisible || DeathTask.isDead(rabbit)) { return }
-            if(rabbit.getAttribute("dead", 0) > ticks) { return }
-            if(player.inventory.remove(Item(Items.OGLEROOT_12624, 1))) {
+            if (rabbit.isInvisible || DeathTask.isDead(rabbit)) { return }
+            if (rabbit.getAttribute("dead", 0) > ticks) { return }
+            if (player.inventory.remove(Item(Items.OGLEROOT_12624, 1))) {
                 rabbit.setAttribute("dead",ticks + respawnDelay)
                 player.skills.addExperience(Skills.HUNTER, 30.0)
                 rabbit.sendChat("Squeak!")
@@ -449,36 +481,36 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         }
 
         fun dig(player: Player, loc: Location) {
-            if(isSeed(loc)) {
+            if (isSeed(loc)) {
                 val oldPoints = player.getAttribute("vinesweeper:points", 0)
                 player.setAttribute("/save:vinesweeper:points", Math.max(oldPoints-10, 0))
                 sendUpdatedPoints(player)
                 player.sendMessage("Oh dear! It looks like you dug up a potato seed by mistake.")
                 scheduleNPCs(player, loc, false, false)
                 val scenery = getScenery(loc)
-                if(scenery != null) {
+                if (scenery != null) {
                     SceneryBuilder.replace(scenery, scenery.transform(Sceneries.DEAD_PLANT_29456))
                 }
             } else {
                 player.incrementAttribute("/save:vinesweeper:points", 1)
                 sendUpdatedPoints(player)
                 var count = 0
-                for(dx in -1..1) {
-                    for(dy in -1..1) {
-                        if(isSeed(loc.transform(dx, dy, 0))) {
+                for (dx in -1..1) {
+                    for (dy in -1..1) {
+                        if (isSeed(loc.transform(dx, dy, 0))) {
                             count += 1
                         }
                     }
                 }
                 val scenery = getScenery(loc)
-                if(scenery != null) {
+                if (scenery != null) {
                     SceneryBuilder.replace(scenery, scenery.transform(NUMBERS[count]))
                 }
-                if(count == 0) {
-                    for(dx in -1..1) {
-                        for(dy in -1..1) {
+                if (count == 0) {
+                    for (dx in -1..1) {
+                        for (dy in -1..1) {
                             val newLoc = loc.transform(dx, dy, 0)
-                            if(isHole(newLoc))
+                            if (isHole(newLoc))
                                 dig(player, newLoc)
                         }
                     }
@@ -492,10 +524,10 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             dest.player.incrementAttribute("/save:vinesweeper:points", points)
             dest.player.inventory.add(Item(Items.FLAG_12625, 1))
             sendUpdatedPoints(dest.player)
-            for (neighbor in RegionManager.getLocalPlayers(npc)) {
-                if (neighbor != dest.player) {
-                    neighbor.incrementAttribute("/save:vinesweeper:points", points / 2)
-                    sendUpdatedPoints(neighbor)
+            for (player in RegionManager.getLocalPlayers(npc.location)) {
+                if (player.name != dest.player.name) {
+                    player.incrementAttribute("/save:vinesweeper:points", points / 2)
+                    sendUpdatedPoints(player)
                 }
             }
         }
@@ -507,9 +539,9 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
         fun scheduleNPCs(player: Player, loc: Location, alive: Boolean, rabbit: Boolean) {
             val dest = SeedDestination(player, loc, alive)
-            val ids = if(rabbit) { RABBITS + FARMERS } else { FARMERS }
-            for(npc in findLocalNPCs(player, ids, 30)) {
-                if(npc is VinesweeperNPC) {
+            val ids = if (rabbit) { RABBITS + FARMERS } else { FARMERS }
+            for (npc in findLocalNPCs(player, ids, 30)) {
+                if (npc is VinesweeperNPC) {
                     npc.seedDestinations.add(dest)
                     npc.resetWalk()
                 }
@@ -572,21 +604,23 @@ class VinesweeperNPC : AbstractNPC {
     }
     override fun handleTickActions() {
         val dest = seedDestinations.find { sd -> sd.loc == location }
-        if (locks.isMovementLocked() || locks.isInteractionLocked())
+        if (locks.isMovementLocked || locks.isInteractionLocked)
             return
-        if(dest != null) {
-            for(npc in RegionManager.getRegionPlane(location).npcs) {
-                if(npc is VinesweeperNPC) {
-                    npc.seedDestinations.remove(dest)
-                    npc.resetWalk()
+        if (dest != null) {
+            val npcs = location.region.assembleNpcList(0)
+            for (npc in npcs) {
+                if (npc !is VinesweeperNPC || npc.seedDestinations.isEmpty() /*npc is not currently walking towards a seed*/) {
+                    continue
                 }
+                npc.seedDestinations.remove(dest)
+                npc.resetWalk()
             }
             val scenery = getScenery(dest.loc)
-            if(scenery != null) {
-                if(id in RABBITS) {
+            if (scenery != null) {
+                if (id in RABBITS) {
                     handleRabbitSeed(scenery, dest)
                 } else {
-                    if(dest.alive) {
+                    if (dest.alive) {
                         handleFarmerFlag(scenery, dest)
                     } else {
                         handleFarmerSeed(scenery, dest)
@@ -599,7 +633,7 @@ class VinesweeperNPC : AbstractNPC {
     }
 
     override fun getMovementDestination(): Location? {
-        if(seedDestinations.size > 0) {
+        if (seedDestinations.size > 0) {
             seedDestinations.sortBy { a -> a.loc.getDistance(location).toInt() }
             return seedDestinations.first().loc
         } else {
@@ -608,7 +642,7 @@ class VinesweeperNPC : AbstractNPC {
     }
 
     fun handleRabbitSeed(scenery: Scenery, dest: Vinesweeper.SeedDestination) {
-        if(SEED_LOCS.contains(dest.loc)) {
+        if (SEED_LOCS.contains(dest.loc)) {
             val replacement = Sceneries.DEAD_PLANT_29456
             lock(4)
             animate(Animation(Animations.RABBIT_EAT_SEED_8718))
@@ -618,6 +652,7 @@ class VinesweeperNPC : AbstractNPC {
             scheduleNPCs(dest.player, dest.loc, alive = true, rabbit = false)
         }
     }
+
     fun handleFarmerSeed(scenery: Scenery, dest: Vinesweeper.SeedDestination) {
         lock()
         var i = 0
@@ -631,7 +666,7 @@ class VinesweeperNPC : AbstractNPC {
                     1 -> {
                         animate(Animation(Animations.GNOME_FARMER_SPADE_SMACK_8732))
                         sendChat(FARMER_FLAG_LINES.DEAD_PLANT.line)
-                        SceneryBuilder.replace(scenery, scenery.transform(HOLES[0]))
+                        restoreOriginalHole(scenery)
                     }
                     2 -> {
                         animate(Animation(Animations.GNOME_FARMER_CLEAR_HOLES_8724))
@@ -653,13 +688,13 @@ class VinesweeperNPC : AbstractNPC {
         animate(Animation(Animations.GNOME_FARMER_DIG_FLAG_8725))
         GameWorld.Pulser.submit(object: Pulse(3) {
             override fun pulse(): Boolean {
-                when(i++) {
+                when (i++) {
                     0 -> {
                         sendChat(FARMER_FLAG_LINES.FIND_FLAG.line)
                     }
                     1 -> {
-                        SceneryBuilder.replace(scenery, scenery.transform(HOLES[0]))
-                        if(SEED_LOCS.contains(dest.loc)) {
+                        restoreOriginalHole(scenery)
+                        if (SEED_LOCS.contains(dest.loc)) {
                             sendChat(FARMER_FLAG_LINES.FIND_SEED.line)
                             animate(Animation(Animations.GNOME_FARMER_HOORAY_8731))
                             sendPoints(npc,dest)
@@ -688,11 +723,11 @@ class VinesweeperNPC : AbstractNPC {
     }
 
     fun farmerClear(dest: Vinesweeper.SeedDestination) {
-        for(dx in -FARMER_CLEAR_RADIUS..FARMER_CLEAR_RADIUS) {
-            for(dy in -FARMER_CLEAR_RADIUS..FARMER_CLEAR_RADIUS) {
+        for (dx in -FARMER_CLEAR_RADIUS..FARMER_CLEAR_RADIUS) {
+            for (dy in -FARMER_CLEAR_RADIUS..FARMER_CLEAR_RADIUS) {
                 val toClear = getScenery(dest.loc.transform(dx, dy, 0))
-                if(toClear != null && intArrayOf(Sceneries.DEAD_PLANT_29456, *NUMBERS).contains(toClear.id)) {
-                    SceneryBuilder.replace(toClear, toClear.transform(HOLES[0]))
+                if (toClear != null && intArrayOf(Sceneries.DEAD_PLANT_29456, *NUMBERS).contains(toClear.id)) {
+                    restoreOriginalHole(toClear)
                 }
             }
         }
@@ -701,6 +736,16 @@ class VinesweeperNPC : AbstractNPC {
     }
 }
 
+fun restoreOriginalHole(scenery: Scenery) {
+    var originalHoleId = HOLES[0]
+    for (obj in scenery.location.chunk.getStatObjects(scenery.location.chunkOffsetX, scenery.location.chunkOffsetY)) {
+        if (obj?.id != null) {
+            originalHoleId = obj.id
+            break
+        }
+    }
+    SceneryBuilder.replace(scenery, scenery.transform(originalHoleId))
+}
 
 
 /*

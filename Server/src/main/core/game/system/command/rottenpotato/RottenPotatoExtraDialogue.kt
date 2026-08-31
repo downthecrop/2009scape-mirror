@@ -62,7 +62,7 @@ class RottenPotatoExtraDialogue(player: Player? = null) : core.game.dialogue.Dia
                    end()
                    sendInputDialogue(player, InputType.STRING_LONG,"Enter the chat message:"){ value ->
                        val msg = value as String
-                       RegionManager.getLocalNpcs(player).forEach {
+                       RegionManager.getLocalNPCs(player.location).forEach {
                            it.sendChat(msg)
                        }
                    }
@@ -71,7 +71,7 @@ class RottenPotatoExtraDialogue(player: Player? = null) : core.game.dialogue.Dia
                //Kill all nearby NPCs
                5 -> {
                    end()
-                   RegionManager.getLocalNpcs(player).forEach {
+                   RegionManager.getLocalNPCs(player.location).forEach {
                        it.finalizeDeath(player)
                    }
                }

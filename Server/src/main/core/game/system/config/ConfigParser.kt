@@ -16,6 +16,7 @@ class ConfigParser : Commands {
         ItemConfigParser().load()
         ObjectConfigParser().load()
         XteaParser().load()
+        ObjectOverrideParser().load()
         InterfaceConfigParser().load()
     }
     fun postPlugin() {
@@ -31,7 +32,12 @@ class ConfigParser : Commands {
     }
 
     fun reloadConfigs(callback: () -> Unit) {
-        GlobalScope.launch { 
+        GlobalScope.launch {
+            RegionManager.apply { r ->
+                r.addSceneries.clear()
+                r.removeSceneries.clear()
+            }
+
             Repository.npcs.toTypedArray().forEach { npc ->
                 npc.isRespawn = false
                 npc.clear()
@@ -41,7 +47,7 @@ class ConfigParser : Commands {
             
             GroundItemManager.getItems().toTypedArray().forEach {gi -> 
                 GroundItemManager.getItems().remove(gi)
-                RegionManager.getRegionPlane(gi.location).remove(gi) 
+                RegionManager.getRegionChunk(gi.location).remove(gi)
             }
 
             prePlugin()

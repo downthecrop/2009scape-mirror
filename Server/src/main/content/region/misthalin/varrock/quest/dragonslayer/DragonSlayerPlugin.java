@@ -36,10 +36,10 @@ import content.data.Quests;
  */
 public final class DragonSlayerPlugin extends OptionHandler {
 
-    /**
-     * Represents the hammer animation.
-     */
-    private static final Animation HAMMER_ANIM = new Animation(3676);
+	/**
+	 * Represents the hammer animation.
+	 */
+	private static final Animation HAMMER_ANIM = new Animation(3676);
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -150,7 +150,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				ForceMovement movement = new ForceMovement(player, player.getLocation(), player.getLocation().transform(player.getLocation().getX() == 2845 ? 2 : -2, 0, 0), new Animation(839));
 				movement.run(player, 10);
 				if (player.getLocation().getX() <= 2845) {
-					List<NPC> npcs = RegionManager.getLocalNpcs(player);
+					List<NPC> npcs = RegionManager.getLocalNPCs(player.getLocation());
 					for (NPC n : npcs) {
 						if (n.getId() == 742) {
 							n.getProperties().getCombatPulse().attack(player);
@@ -165,18 +165,18 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 2);
 			break;
 		case 2606:
-                if (player.getLocation().getY() < 9600 && !player.getSavedData().getQuestData().getDragonSlayerAttribute("memorized") && player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).getStage(player) != 100) {
-                    player.getPacketDispatch().sendMessage("The door is securely locked.");
-                } else {
-                    if (!player.getSavedData().getQuestData().getDragonSlayerAttribute("memorized")) {
-                        player.getPacketDispatch().sendMessage("You found a secret door.");
-                        player.getPacketDispatch().sendMessage("You remember where the secret door is for future reference.");
-                    }
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 1);
-                    player.getSavedData().getQuestData().setDragonSlayerAttribute("memorized", true);
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
-                }
-                break;
+				if (player.getLocation().getY() < 9600 && !player.getSavedData().getQuestData().getDragonSlayerAttribute("memorized") && player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER).getStage(player) != 100) {
+					player.getPacketDispatch().sendMessage("The door is securely locked.");
+				} else {
+					if (!player.getSavedData().getQuestData().getDragonSlayerAttribute("memorized")) {
+						player.getPacketDispatch().sendMessage("You found a secret door.");
+						player.getPacketDispatch().sendMessage("You remember where the secret door is for future reference.");
+					}
+					player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 1);
+					player.getSavedData().getQuestData().setDragonSlayerAttribute("memorized", true);
+					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				}
+				break;
 		case 25154:
 			ClimbActionHandler.climb(player, new Animation(828), new Location(2833, 9658, 0));
 			break;
@@ -206,7 +206,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogue("You nail a plank over the hole, but you still need more planks to", "close the hole completely.");
 				} else {
 					player.getSavedData().getQuestData().setDragonSlayerAttribute("repaired", true);
-                                        setVarp(player, 177, 1967876);
+										setVarp(player, 177, 1967876);
 					player.getDialogueInterpreter().sendDialogue("You nail a final plank over the hole. You have successfully patched", "the hole in the ship.");
 				}
 			}

@@ -95,11 +95,6 @@ public final class GlobalData {
 	private boolean wydinEmployee;
 
 	/**
-	 * Represents if the draynor recording has been seen.
-	 */
-	private boolean draynorRecording;
-
-	/**
 	 * Represents if the ge tutorial has been done.
 	 */
 	private boolean geTutorial;
@@ -313,7 +308,6 @@ public final class GlobalData {
 		zafTime =  Long.parseLong(data.get("zafTime").toString());
 		fritzGlass = (boolean) data.get("fritzGlass");
 		wydinEmployee = (boolean) data.get("wydinEmployee");
-		draynorRecording = (boolean) data.get("draynorRecording");
 		geTutorial = (boolean) data.get("geTutorial");
 		essenceTeleporter = Integer.parseInt( data.get("essenceTeleporter").toString());
 		recoilDamage = Integer.parseInt( data.get("recoilDamage").toString());
@@ -659,22 +653,6 @@ public final class GlobalData {
 	 */
 	public long getZafTime() {
 		return zafTime;
-	}
-
-	/**
-	 * Gets the draynorRecording.
-	 * @return The draynorRecording.
-	 */
-	public boolean isDraynorRecording() {
-		return draynorRecording;
-	}
-
-	/**
-	 * Sets the draynorRecording.
-	 * @param draynorRecording The draynorRecording to set.
-	 */
-	public void setDraynorRecording(boolean draynorRecording) {
-		this.draynorRecording = draynorRecording;
 	}
 
 	/**

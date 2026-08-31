@@ -61,7 +61,7 @@ public final class GodWarsNPC extends AbstractNPC {
 		@Override
 		public List<Entity> getPossibleTargets(Entity entity, int radius) {
 			List<Entity> targets = new ArrayList<>(20);
-			for (Player player : RegionManager.getLocalPlayers(entity, radius)) {
+			for (Player player : RegionManager.getLocalPlayers(entity.getLocation(), radius)) {
 				if (canSelectTarget(entity, player)) {
 					targets.add(player);
 				}
@@ -69,7 +69,7 @@ public final class GodWarsNPC extends AbstractNPC {
 			if (!targets.isEmpty()) {
 				return targets;
 			}
-			for (NPC npc : RegionManager.getLocalNpcs(entity, radius)) {
+			for (NPC npc : RegionManager.getLocalNPCs(entity.getLocation(), radius)) {
 				if (canSelectTarget(entity, npc)) {
 					targets.add(npc);
 				}
@@ -115,9 +115,9 @@ public final class GodWarsNPC extends AbstractNPC {
 	@Override
 	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (style == CombatStyle.MELEE && faction == GodWarsFaction.ARMADYL && entity instanceof Player) {
-            if(message) {
-                ((Player) entity).getPacketDispatch().sendMessage("The aviansie is flying too high for you to attack using melee.");
-            }
+			if(message) {
+				((Player) entity).getPacketDispatch().sendMessage("The aviansie is flying too high for you to attack using melee.");
+			}
 			return false;
 		}
 		return super.isAttackable(entity, style, message);

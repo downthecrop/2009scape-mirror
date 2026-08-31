@@ -59,7 +59,7 @@ class UpdateSequence
         playersList!!.forEach(Player::reset)
         npcList!!.forEach(NPC::reset)
         renderablePlayers.sync()
-        RegionManager.pulse()
+        ChunkUpdateTracker.resetAll()
         GroundItemManager.pulse()
     }
 

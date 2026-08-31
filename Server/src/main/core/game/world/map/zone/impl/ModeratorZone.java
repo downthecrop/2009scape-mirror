@@ -65,13 +65,6 @@ public class ModeratorZone extends MapZone {
 	}
 
 	@Override
-	public boolean interact(Entity entity, Node target, Option option) {
-		if (entity instanceof Player) {
-		}
-		return super.interact(entity, target, option);
-	}
-
-	@Override
 	public void configure() {
 		register(new ZoneBorders(2840, 5204, 2853, 5224));
 	}
@@ -82,11 +75,11 @@ public class ModeratorZone extends MapZone {
 	 * @param on the toggle switch.
 	 */
 	public static final void toggle(final Player player, final boolean on) {
-		open = on ? true : false;
+		open = on;
 		player.getPacketDispatch().sendMessage(getToggleMessage());
 		if (!open) {
 			for (Player p : RegionManager.getLocalPlayers(center)) {
-				if (p == null || p.getDetails().getRights() == Rights.ADMINISTRATOR) {
+				if (p.getDetails().getRights() == Rights.ADMINISTRATOR) {
 					continue;
 				}
 				home(p);
@@ -123,10 +116,7 @@ public class ModeratorZone extends MapZone {
 	 * @return return <code>True</code> if so.
 	 */
 	public static boolean isOpen() {
-		if (!open) {
-			return false;
-		}
-		return true;
+		return open;
 	}
 
 }

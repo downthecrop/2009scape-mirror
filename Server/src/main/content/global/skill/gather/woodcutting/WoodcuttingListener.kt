@@ -212,12 +212,11 @@ class WoodcuttingListener : InteractionListener {
     fun animateWoodcutting(player: Player) {
         if (!player.animator.isAnimating) {
             player.animate(SkillingTool.getHatchet(player).animation)
-            val playersAroundMe: List<Player> = RegionManager.getLocalPlayers(player, 2)
+            val playersAroundMe: List<Player> = RegionManager.getLocalPlayers(player.location, 2)
                     .stream()
-                    .filter { p: Player -> p.username != player.username }
+                    .filter { p -> p != player }
                     .toList()
             val soundIndex = RandomFunction.random(0, woodcuttingSounds.size)
-
             for (p in playersAroundMe) {
                 playAudio(p, woodcuttingSounds[soundIndex])
             }
@@ -260,7 +259,7 @@ class WoodcuttingListener : InteractionListener {
         }
 
         // Seers village medium reward - extra normal log while in seer's village
-        if (reward == 1511 && player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(1) && player.getViewport().getRegion().getId() == 10806) {
+        if (reward == 1511 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).isComplete(1) && player.getLocation().regionId == 10806) {
             amount = 2
         }
         return amount

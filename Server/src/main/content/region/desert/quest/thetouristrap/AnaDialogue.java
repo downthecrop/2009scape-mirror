@@ -108,7 +108,7 @@ public final class AnaDialogue extends DialoguePlugin {
 			case 3:
 				player.getInventory().add(TouristTrap.WROUGHT_IRON_KEY, player);
 				player.getPacketDispatch().sendMessage("Ana spots Irena and waves...");
-				NPC irena = RegionManager.getNpc(player, 4986);
+				NPC irena = RegionManager.getNpc(player.getLocation(), 4986, 16);
 				irena.sendChat("Hi Ana!");
 				quest.setStage(player, 98);
 				end();

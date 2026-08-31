@@ -1,6 +1,5 @@
 import core.api.regionspec.*
 import core.api.regionspec.contracts.FillChunkContract
-import core.game.world.map.BuildRegionChunk
 import core.game.world.map.Region
 import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager
@@ -33,7 +32,7 @@ class RegionSpecificationTests {
     fun shouldAllowFillingRegionWithGivenChunk() {
         val base = RegionManager.forId(12850)
         Region.load(base)
-        val chunk = base.planes[0].getRegionChunk(2, 2)
+        val chunk = base.getChunks()[2][2][0]
         val specification = RegionSpecification(fillWith(chunk).from(base).onPlanes(0))
         val region = specification.build()
         Assertions.assertEquals(36782, RegionManager.getObject(region.baseLocation.transform(23, 17, 0))?.id)
@@ -43,7 +42,7 @@ class RegionSpecificationTests {
     fun shouldAllowCustomRulesForFillingChunks() {
         val base = RegionManager.forId(12850)
         Region.load(base)
-        val chunk = base.planes[0].getRegionChunk(2, 2)
+        val chunk = base.getChunks()[2][2][0]
         val specification = RegionSpecification(
             fillWith(chunk)
                 .from(base)
@@ -59,7 +58,7 @@ class RegionSpecificationTests {
     fun shouldAllowMultipleRulesForFillingChunks() {
         val base = RegionManager.forId(12850)
         Region.load(base)
-        val chunk = base.planes[0].getRegionChunk(2, 2)
+        val chunk = base.getChunks()[2][2][0]
         val specification = RegionSpecification(
             fillWith(chunk)
                 .from(base)
@@ -81,7 +80,7 @@ class RegionSpecificationTests {
         Region.load(base)
         val specification = RegionSpecification(
             fillWith { destChunkX, destChunkY, destPlane, _ ->
-                base.planes[destPlane].getRegionChunk(destChunkX, destChunkY)
+                base.chunks[destchunkX][destChunkY][destPlane]
             }.from(base).onPlanes(0, 1, 2, 3)
         )
         val region = specification.build()
@@ -94,7 +93,7 @@ class RegionSpecificationTests {
     @Test fun shouldAllowUseExistingDynamicRegion() {
         val base = RegionManager.forId(12850)
         Region.load(base)
-        val chunk = base.planes[0].getRegionChunk(2, 2)
+        val chunk = base.getChunks()[2][2][0]
         val dyn = DynamicRegion.create(12850)
         val specification = RegionSpecification (
             using(dyn),
@@ -109,13 +108,13 @@ class RegionSpecificationTests {
     @Test fun fillChunkContractShouldAllowChunkSetCallback() {
         class TemporaryFillContract(chunk: RegionChunk) : FillChunkContract(chunk) {
             var callBackRan = false
-            override fun afterSetting(chunk: BuildRegionChunk?, x: Int, y: Int, plane: Int, dyn: DynamicRegion) {
+            override fun afterSetting(chunk: RegionChunk?, x: Int, y: Int, plane: Int, dyn: DynamicRegion) {
                 callBackRan = true
             }
         }
         val base = RegionManager.forId(12850)
         Region.load(base)
-        val chunk = base.planes[0].getRegionChunk(2, 2)
+        val chunk = base.getChunks()[2][2][0]
         val dyn = DynamicRegion.create(12850)
         val fillTemporary = TemporaryFillContract(chunk)
         val specification = RegionSpecification (

@@ -17,6 +17,7 @@ import core.game.world.GameWorld
 import core.tools.Log
 import core.tools.secondsToTicks
 import content.data.Quests
+import core.game.node.scenery.SceneryBuilder
 
 class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Commands, StartupListener {
     override fun login(player: Player) {
@@ -46,6 +47,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
 
         // Check if it's time to fire a new one
         if (star.ticks >= tickDelay && !star.spriteSpawned) {
+            star.clear()
             star.rebuildVars()
             star.fire()
         }
@@ -138,6 +140,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
         }
 
         define("submit", Privilege.ADMIN, description = "Rebuilds and fires the shooting star event immediately.") { _, _ ->
+            star.clear()
             star.rebuildVars()
             star.fire()
         }

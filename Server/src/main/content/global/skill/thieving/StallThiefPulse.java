@@ -117,7 +117,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 				SceneryBuilder.replace(node, node.transform(stall.getEmpty(node.getId())), stall.getDelay());
 			}
 			final Item item = stall.getRandomLoot();
-		    player.getInventory().add(item);
+			player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.THIEVING, stall.getExperience(), true);
 			if (item.getId() == 1987) {
 				player.getPacketDispatch().sendMessage("You steal grapes from the grape stall.");
@@ -137,9 +137,9 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 		if(stall == Stall.CANDLES) {
 			return;
 		}
-        if (type == 0) {
-            player.getPacketDispatch().sendMessage("You attempt to steal some " + stall.msgItem + " from the " + stall.name().toLowerCase().replace('_', ' '));
-        }
+		if (type == 0) {
+			player.getPacketDispatch().sendMessage("You attempt to steal some " + stall.msgItem + " from the " + stall.name().toLowerCase().replace('_', ' '));
+		}
 	}
 
 	/**
@@ -158,7 +158,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 				player.sendMessage("A higher power smites you");
 				return false;
 			}
-			for (NPC npc : RegionManager.getLocalNpcs(player.getLocation(), 8)) {
+			for (NPC npc : RegionManager.getLocalNPCs(player.getLocation(), 8)) {
 				if (!npc.getProperties().getCombatPulse().isAttacking() && (npc.getId() == 32 || npc.getId() == 2236)) {
 					npc.sendChat("Hey! Get your hands off there!");
 					npc.getProperties().getCombatPulse().attack(player);

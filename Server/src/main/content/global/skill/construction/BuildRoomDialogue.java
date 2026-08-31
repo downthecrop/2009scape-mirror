@@ -1,6 +1,5 @@
 package content.global.skill.construction;
 
-
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -18,6 +17,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.game.world.map.RegionChunk.getRotatedPosition;
+
 /**
  * Handles the building a room dialogue.
  * @author Emperor
@@ -25,7 +26,6 @@ import java.util.List;
  */
 @Initializable
 public final class BuildRoomDialogue extends DialoguePlugin {
-
 	/**
 	 * The door hotspot.
 	 */
@@ -49,7 +49,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 	/**
 	 * The boundaries of the room to build.
 	 */
-	private List<Scenery> boundaries = new ArrayList<>(20);
+	private final List<Scenery> boundaries = new ArrayList<>(20);
 
 	/**
 	 * The room we're building.
@@ -239,15 +239,18 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 		for (Scenery object : boundaries) {
 			SceneryBuilder.remove(object);
 		}
-		int rotation = directions[index].toInteger();
 		boundaries.clear();
-		Location base = player.getViewport().getRegion().getBaseLocation().transform(roomX << 3, roomY << 3, player.getLocation().getZ());
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 8; y++) {
-				Scenery[] objects = room.getChunk().getObjects(x, y);
-				for (Scenery object : objects) {
+		int rotation = directions[index].toInteger();
+		Location base = player.getLocation().getRegion().getBaseLocation().transform(roomX << 3, roomY << 3, player.getLocation().getZ());
+		for (int x = 0; x < RegionChunk.SIZE; x++) {
+			for (int y = 0; y < RegionChunk.SIZE; y++) {
+				for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
+					Scenery object = room.getChunk().getObjects(x, y)[i];
 					if (object != null && object.getDefinition().hasAction("build")) {
-						int[] pos = RegionChunk.getRotatedPosition(x, y, object.getDefinition().getSizeX(), object.getDefinition().getSizeY(), object.getRotation(), rotation);
+						if (object.getLayer() == Scenery.Layer.WALL && !BuildingUtils.isDoorHotspot(object)) {
+							continue;
+						}
+						int[] pos = getRotatedPosition(x, y, object.getDefinition().getSizeX(), object.getDefinition().getSizeY(), object.getRotation(), rotation);
 						Scenery obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, base.transform(pos[0], pos[1], 0));
 						boundaries.add(SceneryBuilder.add(obj));
 					}

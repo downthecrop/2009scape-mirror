@@ -108,7 +108,7 @@ class ServerConstants {
 
         //the location where new players are placed on login.
         @JvmField
-        var START_LOCATION: Location? = null
+        var START_LOCATION: Location = Location(2524, 5002, 0)
 
         //Location for all home teleports/respawn location
         @JvmField

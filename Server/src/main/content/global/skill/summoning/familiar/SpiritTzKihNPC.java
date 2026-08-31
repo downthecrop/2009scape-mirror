@@ -41,7 +41,7 @@ public class SpiritTzKihNPC extends Familiar {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		final List<Entity> entitys = RegionManager.getLocalEntitys(owner, 8);
+		final List<Entity> entitys = RegionManager.getLocalEntities(owner.getLocation(), 8);
 		if (entitys.size() == 0) {
 			return false;
 		}

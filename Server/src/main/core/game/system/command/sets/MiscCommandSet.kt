@@ -115,7 +115,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
          */
         define("loc", Privilege.STANDARD, "", "Prints quite a lot of information about your current location."){ player, _->
             val l = player.location
-            val r = player.viewport.region
+            val r = l.region
             var obj: Scenery? = null
             notify(player,"Absolute: " + l + ", regional: [" + l.localX + ", " + l.localY + "], chunk: [" + l.chunkOffsetX + ", " + l.chunkOffsetY + "], flag: [" + RegionManager.isTeleportPermitted(l) + ", " + RegionManager.getClippingFlag(l) + ", " + RegionManager.isLandscape(l) + "].")
             notify(player,"Region: [id=" + l.regionId + ", active=" + r.isActive + ", instanced=" + (r is DynamicRegion) + "], obj=" + RegionManager.getObject(l) + ".")

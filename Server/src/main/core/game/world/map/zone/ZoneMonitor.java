@@ -362,7 +362,7 @@ public final class ZoneMonitor {
 				it.remove();
 			}
 		}
-		for (RegionZone zone : entity.getViewport().getRegion().getRegionZones()) {
+		for (RegionZone zone : entity.getLocation().getRegion().getRegionZones()) {
 			if (!zone.getBorders().insideBorder(entity)) {
 				continue;
 			}
@@ -403,7 +403,7 @@ public final class ZoneMonitor {
 				}
 			}
 		}
-		Region r = player.getViewport().getRegion();
+		Region r = player.getLocation().getRegion();
 		for (MusicZone zone : r.getMusicZones()) {
 			if (zone.getBorders().insideBorder(l.getX(), l.getY())) {
 				zone.enter(player);

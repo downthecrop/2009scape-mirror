@@ -252,6 +252,7 @@
         <configuration>
           <useFile>false</useFile>
           <trimStackTrace>false</trimStackTrace>
+          <argLine>-Xmx4g -Xms2g</argLine>
         </configuration>
         <version>2.22.0</version>
       </plugin>

@@ -501,16 +501,16 @@ class LunarListeners : SpellListener("lunar"), Commands {
         removeRunes(player, true)
         visualizeSpell(player, Animations.LUNAR_SPELLBOOK_CURE_GROUP_4409, Graphics.LUNAR_SPELLBOOK_CURE_GROUP_744, 130, Sounds.LUNAR_CURE_GROUP_2882)
         curePoison(player)
-        for(acct in RegionManager.getLocalPlayers(player, 1)) {
-            if(!acct.isActive || acct.locks.isInteractionLocked) {
+        for (otherPlayer in RegionManager.getLocalPlayers(player.location, 1)) {
+            if (otherPlayer == player || !otherPlayer.isActive || otherPlayer.locks.isInteractionLocked) {
                 continue
             }
-            if(!acct.settings.isAcceptAid) {
+            if (!otherPlayer.settings.isAcceptAid) {
                 continue
             }
-            curePoison(acct)
-            sendMessage(acct, "You have been cured of poison.")
-            visualizeSpell(acct, -1, Graphics.LUNAR_SPELLBOOK_CURE_GROUP_744, 130, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
+            curePoison(otherPlayer)
+            sendMessage(otherPlayer, "You have been cured of poison.")
+            visualizeSpell(otherPlayer, -1, Graphics.LUNAR_SPELLBOOK_CURE_GROUP_744, 130, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
         }
         addXP(player, 74.0)
     }
@@ -836,12 +836,12 @@ class LunarListeners : SpellListener("lunar"), Commands {
     }
 
     private fun sendGroupTeleport(player: Player, xp: Double, destName: String, loc: Location){
-        RegionManager.getLocalPlayers(player, 1).forEach {
-            if(it == player) return@forEach
-            if(it.isTeleBlocked) return@forEach
-            if(!it.isActive) return@forEach
-            if(!it.settings.isAcceptAid) return@forEach
-            if(it.ironmanManager.isIronman) return@forEach
+        RegionManager.getLocalPlayers(player.location, 1).forEach {
+            if (it == player) return@forEach
+            if (it.isTeleBlocked) return@forEach
+            if (!it.isActive) return@forEach
+            if (!it.settings.isAcceptAid) return@forEach
+            if (it.ironmanManager.isIronman) return@forEach
             setAttribute(it, "t-o_location", loc)
             openInterface(it, Components.TELEPORT_OTHER_326)
             setInterfaceText(it, player.username, Components.TELEPORT_OTHER_326, 1)

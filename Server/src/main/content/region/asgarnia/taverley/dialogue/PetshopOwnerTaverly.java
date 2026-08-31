@@ -53,7 +53,7 @@ public final class PetshopOwnerTaverly extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		if (args.length > 1) {
-			List<NPC> npcs = RegionManager.getLocalNpcs(player);
+			List<NPC> npcs = RegionManager.getLocalNPCs(player.getLocation());
 			for (NPC n : npcs) {
 				if (n.getId() == 6893) {
 					npc = n;

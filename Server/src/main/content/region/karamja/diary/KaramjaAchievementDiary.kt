@@ -83,7 +83,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
     }
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10802 -> if (event.itemId == Items.GOLD_ORE_444) {
                 finishTask(
                     player,
@@ -148,7 +148,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
     }
 
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10899, 10900 -> if (event.npc.id in METAL_DRAGONS) {
                 finishTask(
                     player,

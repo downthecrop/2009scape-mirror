@@ -100,9 +100,9 @@ public final class PCSpinnerNPC extends AbstractNPC {
 	 */
 	public void explode() {
 		animate(getProperties().getDeathAnimation());
-		for (Player p : RegionManager.getLocalPlayers(this, 1)) {
+		for (Player p : RegionManager.getLocalPlayers(location, 1)) {
 			p.getImpactHandler().manualHit(this, 5, HitsplatType.POISON);
-                        applyPoison(p, this, 1);
+			applyPoison(p, this, 1);
 		}
 		GameWorld.getPulser().submit(new Pulse(1, this) {
 			@Override

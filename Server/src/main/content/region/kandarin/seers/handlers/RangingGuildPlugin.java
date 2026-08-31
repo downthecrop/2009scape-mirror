@@ -698,7 +698,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                 case 17:
                     ClimbActionHandler.climb(player, null, Location.create(2668, 3427, 2));
                     player.getInterfaceManager().close();
-                    List<NPC> npcs = RegionManager.getLocalNpcs(Location.create(2668, 3427, 2));
+                    List<NPC> npcs = RegionManager.getLocalNPCs(Location.create(2668, 3427, 2));
                     String dir = "";
                     for (NPC n : npcs) {
                         if (n.getId() >= 684 && n.getId() <= 687) {

@@ -43,7 +43,7 @@ class BloatedToadNPC : AbstractNPC {
     super.handleTickActions()
     
     if (ticksToLive-- <= 0) {
-      val toDamage = RegionManager.getLocalEntitys(this.location, 2)
+      val toDamage = RegionManager.getLocalEntities(this.location, 2)
 
       for (entity in toDamage) {
         if (entity == this) continue

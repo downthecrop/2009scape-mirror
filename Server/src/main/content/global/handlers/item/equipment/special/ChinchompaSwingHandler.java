@@ -6,15 +6,14 @@ import core.game.node.entity.combat.equipment.Ammunition;
 import core.game.node.entity.combat.equipment.RangeWeapon;
 import core.game.node.entity.combat.equipment.Weapon;
 import core.game.node.entity.combat.equipment.WeaponInterface;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
-import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static core.game.node.entity.combat.MultihitTargetsKt.findMultihitTargetsForChinchompa;
 
 /**
  * Handles a combat swing using red chinchompas.
@@ -56,22 +55,18 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 			return -1;
 		}
 
-		// ! Initial capacity of 14, but has dynamic size? i.e. we are not restricting to a max of 14 targets hit here now
-		List<Entity> targetCandidates = new ArrayList<>(14);
-		targetCandidates.addAll(RegionManager.getSurroundingNPCs(victim, 14, entity));
-		targetCandidates.addAll(RegionManager.getSurroundingPlayers(victim, 14, entity));
+		boolean accurate = isAccurateImpact(entity, victim, CombatStyle.RANGE);
+		List<Entity> targetCandidates = findMultihitTargetsForChinchompa(victim, entity);
 		BattleState[] targets = new BattleState[targetCandidates.size()];
 		int count = 0;
 		for (Entity e : targetCandidates) {
-			if (canSwing(entity, e) != InteractionType.NO_INTERACT && e.isAttackable(entity, CombatStyle.RANGE, false)) {
-				BattleState s = targets[count++] = new BattleState(entity, e);
-				s.setStyle(CombatStyle.RANGE);
-				int hit = 0;
-				if (isAccurateImpact(entity, e, CombatStyle.RANGE)) {
-					hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
-				}
-				s.setEstimatedHit(hit);
+			BattleState s = targets[count++] = new BattleState(entity, e);
+			s.setStyle(CombatStyle.RANGE);
+			int hit = 0;
+			if (accurate) {
+				hit = RandomFunction.random(calculateHit(entity, e, 1.0) + 1);
 			}
+			s.setEstimatedHit(hit);
 		}
 		state.setTargets(targets);
 		Companion.useAmmo(entity, state, null);

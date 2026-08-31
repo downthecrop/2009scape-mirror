@@ -128,13 +128,14 @@ public final class LoginConfiguration {
         Repository.getLobbyPlayers().remove(player);
         player.setPlaying(true);
         UpdateSequence.getRenderablePlayers().add(player);
-        RegionManager.move(player);
+        RegionManager.move(player, null, player.getLocation());
         player.getMusicPlayer().init();
         player.updateAppearance();
         player.getPlayerFlags().setUpdateSceneGraph(true);
         player.getPacketDispatch().sendInterfaceConfig(226, 1, true);
 
-        if(player.getGlobalData().getTestStage() == 3 && !player.getEmoteManager().isUnlocked(Emotes.SAFETY_FIRST)){
+        if (player.getGlobalData().getTestStage() == 3 && !player.getEmoteManager().isUnlocked(Emotes.SAFETY_FIRST)) {
+            // TODO: port this to save version later. when you do, please also do this for the Explore emote, which has a similar problem (e.g. player_name.json has this).
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);
         }
 

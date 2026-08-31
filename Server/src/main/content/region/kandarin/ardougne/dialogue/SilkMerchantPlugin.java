@@ -188,7 +188,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 		npc = (NPC) args[0];
 		if (player.getSavedData().getGlobalData().getSilkSteal() > System.currentTimeMillis()) {
 			end();
-			for (NPC npc : RegionManager.getLocalNpcs(player.getLocation(), 8)) {
+			for (NPC npc : RegionManager.getLocalNPCs(player.getLocation(), 8)) {
 				if (!npc.getProperties().getCombatPulse().isAttacking() && npc.getId() == 32) {
 					npc.sendChat("Hey! Get your hands off there!");
 					npc.getProperties().getCombatPulse().attack(player);

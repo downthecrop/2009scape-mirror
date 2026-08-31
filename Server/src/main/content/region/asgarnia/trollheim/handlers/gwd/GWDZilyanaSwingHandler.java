@@ -11,6 +11,7 @@ import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.equipment.ArmourSet;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.NPC;
+import core.game.node.entity.player.Player;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -59,7 +60,7 @@ public class GWDZilyanaSwingHandler extends CombatSwingHandler {
 		} else {
 			NPC npc = (NPC) entity;
 			List<BattleState> list = new ArrayList<>(20);
-			for (Entity t : RegionManager.getLocalPlayers(npc.getCenterLocation(), (npc.size() >> 1) + 2)) {
+			for (Player t : RegionManager.getLocalPlayers(npc.getCenterLocation(), (npc.size() >> 1) + 2)) {
 				if (t.getLocation().getX() < 2908 && t.isAttackable(npc, CombatStyle.MAGIC, false)) {
 					list.add(new BattleState(entity, t));
 				}

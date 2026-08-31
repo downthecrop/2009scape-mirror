@@ -2,7 +2,8 @@ package content.global.skill.magic.ancient;
 
 import java.util.List;
 
-import core.game.node.entity.player.Player;
+import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.MultihitTargetsKt;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.combat.spell.Runes;
 import core.game.node.Node;
@@ -115,7 +116,8 @@ public final class ShadowSpells extends CombatSpell {
 		if (animation.getId() == 1978 || !entity.getProperties().isMultiZone() || !target.getProperties().isMultiZone()) {
 			return super.getTargets(entity, target);
 		}
-		List<Entity> list = getMultihitTargets(entity, target, 9);
+
+		List<Entity> list = MultihitTargetsKt.findMultihitTargets(target, entity, CombatStyle.MAGIC);
 		BattleState[] targets = new BattleState[list.size()];
 		int index = 0;
 		for (Entity e : list) {

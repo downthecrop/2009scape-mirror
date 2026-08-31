@@ -80,7 +80,7 @@ public final class KhardianInteractionPlugin extends OptionHandler {
 			if (!failed) {
 				player.getSkills().addExperience(Skills.WOODCUTTING, 10, true);
 			}
-			SceneryBuilder.replace(((Scenery) node), new Scenery(DRY_CACTUS, node.getLocation()), SPAWN_DELAY + RandomFunction.random(RegionManager.getLocalPlayers(player).size() / 2));
+			SceneryBuilder.replace(((Scenery) node), new Scenery(DRY_CACTUS, node.getLocation()), SPAWN_DELAY + RandomFunction.random(RegionManager.getLocalPlayers(player.getLocation()).size() / 2));
 			break;
 		}
 		return true;

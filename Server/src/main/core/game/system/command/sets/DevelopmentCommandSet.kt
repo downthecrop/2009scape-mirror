@@ -33,7 +33,7 @@ import core.tools.Log
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
-import core.game.world.map.RegionManager.getLocalEntitys
+import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import org.json.simple.JSONArray
 import kotlin.collections.set
@@ -45,6 +45,7 @@ import content.global.activity.penguinhns.PenguinManager.Companion.spawner
 import content.global.activity.penguinhns.PenguinManager.Companion.tagMapping
 import content.global.activity.penguinhns.PenguinManager.Companion.updateStoreFile
 import core.ServerStore.Companion.toJSONArray
+import core.game.world.map.RegionManager.getLocalEntities
 import org.rs09.consts.NPCs
 
 @Initializable
@@ -144,7 +145,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             return@define
         }
 
-        define("cs2", Privilege.ADMIN, "::cs2 id args", "Allows you to call arbitrary cs2 scripts during runtime") {player, args -> 
+        define("cs2", Privilege.ADMIN, "::cs2 id args", "Allows you to call arbitrary cs2 scripts during runtime") {player, args ->
             var scriptArgs = ArrayList<Any>()
             if (args.size == 2) {
                 runcs2(player, args[1].toIntOrNull() ?: return@define)
@@ -177,10 +178,6 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             playerJobManager.jobOriginalAmount = -1
 
             sendMessage(player, "Job cleared successfully.")
-        }
-
-        define("region", Privilege.STANDARD, "", "Prints your current Region ID.") {player, args ->
-            sendMessage(player, "Region ID: ${player.viewport.region.regionId}")
         }
 
         define("spellbook", Privilege.ADMIN, "::spellbook <lt>book ID<gt> (0 = MODERN, 1 = ANCIENTS, 2 = LUNARS)", "Swaps your spellbook to the given book ID."){player, args ->
@@ -484,31 +481,6 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             target.skills.addExperience(skill, xp!!)
         }
 
-        define("renewpenguins", Privilege.ADMIN, "", "Generates a fresh set of weekly penguins") { player, _ ->
-            val spawnedOrdinals = (PenguinHNSEvent.getStoreFile()["spawned-penguins"] as JSONArray).map { it.toString().toInt() }
-            val penguinNPCs = arrayListOf(NPCs.BARREL_8104, NPCs.BUSH_8105,NPCs.CACTUS_8107,NPCs.CRATE_8108,NPCs.ROCK_8109,NPCs.TOADSTOOL_8110)
-
-            spawnedOrdinals.forEach {
-                val peng = Penguin.values()[it]
-                val nearNPCs = getLocalEntitys(peng.location,1)
-                nearNPCs.forEach { npc ->
-                    if (npc.id in penguinNPCs) {
-                        poofClear(npc as NPC)
-                    }
-                }
-            }
-            penguins = spawner.spawnPenguins(10)
-            PenguinHNSEvent.getStoreFile()["spawned-penguins"] = penguins.toJSONArray()
-            tagMapping.clear()
-            for (p in penguins) {
-                tagMapping.put(p, JSONArray())
-                val pengCoord = Penguin.values()[p].location
-                player.debug("Penguin spawned at:$pengCoord")
-            }
-            updateStoreFile()
-            player.debug("Penguin positions have been renewed")
-        }
-
         define("spawnpenguin",Privilege.ADMIN,"::spawnPenguin <lt>Ordinal<gt>","Adds a new Penguin spawn to this weeks list based on the ordinal provided 0-64"){player,args->
             if (args.size!=2) reject (player,"Usage: ::spawnpenguin Ordinal")
             val ordinal = args[1].toIntOrNull()
@@ -531,6 +503,5 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val pengCoords = peng.location
             player.debug("Penguin spawned at:$pengCoords")
         }
-
-        }
+    }
 }

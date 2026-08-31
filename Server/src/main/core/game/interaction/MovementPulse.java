@@ -208,7 +208,7 @@ public abstract class MovementPulse extends Pulse {
 
     @Override
     public boolean update() {
-        if (!mover.getViewport().getRegion().isActive())
+        if (!mover.getLocation().getRegion().isActive())
             return false;
 
         if (!isRunning()) return true;
@@ -240,7 +240,7 @@ public abstract class MovementPulse extends Pulse {
     private boolean tryInteract() {
         Location ml = mover.getLocation();
         // Allow being within 1 square of moving entities to interact with them.
-        int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
+        int radius = destination instanceof Entity && ((Entity) destination).getWalkingQueue().hasPath() ? 1 : 0;
         if (interactLocation == null)
             return false;
 	boolean atInteractLocation = Math.max(Math.abs(ml.getX() - interactLocation.getX()), Math.abs(ml.getY() - interactLocation.getY())) <= radius;
@@ -341,7 +341,7 @@ public abstract class MovementPulse extends Pulse {
     }
 
     private boolean validate() {
-        if (mover == null || destination == null || mover.getViewport().getRegion() == null || hasInactiveNode()) {
+        if (mover == null || destination == null || mover.getLocation().getRegion() == null || hasInactiveNode()) {
             return false;
         }
         return isRunning();

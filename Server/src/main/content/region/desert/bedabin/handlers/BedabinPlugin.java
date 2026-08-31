@@ -47,7 +47,7 @@ public final class BedabinPlugin extends OptionHandler {
 					player.getPacketDispatch().sendMessage("You walk back out the tent.");
 					break;
 				}
-				player.getDialogueInterpreter().open(834, RegionManager.getNpc(player, 834));
+				player.getDialogueInterpreter().open(834, RegionManager.getNpc(player.getLocation(), 834, 16));
 				break;
 			}
 			break;

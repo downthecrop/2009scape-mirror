@@ -28,7 +28,7 @@ public final class RenderInfo {
 	/**
 	 * The list of local NPCs.
 	 */
-	private List<NPC> localNpcs = new LinkedList<NPC>();
+	private List<NPC> localNPCs = new LinkedList<NPC>();
 
 	/**
 	 * The appearance time stamps (in millisecond).
@@ -89,16 +89,16 @@ public final class RenderInfo {
 	 * Gets the localNpcs.
 	 * @return The localNpcs.
 	 */
-	public List<NPC> getLocalNpcs() {
-		return localNpcs;
+	public List<NPC> getLocalNPCs() {
+		return localNPCs;
 	}
 
 	/**
 	 * Sets the localNpcs.
-	 * @param localNpcs The localNpcs to set.
+	 * @param localNPCs The localNpcs to set.
 	 */
-	public void setLocalNpcs(List<NPC> localNpcs) {
-		this.localNpcs = localNpcs;
+	public void setLocalNPCs(List<NPC> localNPCs) {
+		this.localNPCs = localNPCs;
 	}
 
 	/**

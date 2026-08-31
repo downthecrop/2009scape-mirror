@@ -116,7 +116,7 @@ public class AggressiveBehavior {
 	 */
 	public List<Entity> getPossibleTargets(Entity entity, int radius) {
 		List<Entity> targets = new ArrayList<>(20);
-		for (Player player : RegionManager.getLocalPlayers(entity, radius)) {
+		for (Player player : RegionManager.getLocalPlayers(entity.getLocation(), radius)) {
 			if (canSelectTarget(entity, player)) {
 				targets.add(player);
 			}

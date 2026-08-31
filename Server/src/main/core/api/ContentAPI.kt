@@ -546,7 +546,10 @@ fun poofClear(npc: NPC) {
         override fun pulse(): Boolean {
             when (counter++) {
                 2 -> {
-                    npc.isInvisible = true; Graphics.send(Graphics(86), npc.location)
+                    npc.isInvisible = true;
+                    if (npc.location.region.isActive) {
+                        Graphics.send(Graphics(86), npc.location)
+                    }
                 }
                 3 -> npc.clear().also { return true }
             }
@@ -657,7 +660,7 @@ fun addScenery (scenery: Scenery) {
  * Remove a scenery from the world
  * @param scenery the Scenery object to remove.
 */
-fun removeScenery (scenery: Scenery) {
+fun removeScenery(scenery: Scenery) {
     SceneryBuilder.remove(scenery)
 }
 
@@ -1022,8 +1025,7 @@ fun playAudio(player: Player, id: Int, delay: Int = 0, loops: Int = 1, location:
  */
 @JvmOverloads
 fun playGlobalAudio(location: Location, id: Int, delay: Int = 0, loops: Int = 1, radius: Int = Audio.defaultAudioRadius) {
-    val nearbyPlayers = RegionManager.getLocalPlayers(location, radius)
-    for (player in nearbyPlayers) {
+    for (player in RegionManager.getLocalPlayers(location, radius)) {
         PacketRepository.send(AudioPacket::class.java, DefaultContext(player, Audio(id, delay, loops, radius), location))
     }
 }
@@ -1083,7 +1085,7 @@ fun findNPC(id: Int): NPC? {
  * @param z the Z coordinate to use
  */
 fun getScenery(x: Int, y: Int, z: Int): Scenery? {
-    return RegionManager.getObject(z, x, y)
+    return RegionManager.getObject(x, y, z)
 }
 
 /**
@@ -1111,7 +1113,7 @@ fun findNPC(refLoc: Location, id: Int): NPC? {
  * @returns an NPC matching the given ID or null if none is found
  */
 fun findLocalNPC(entity: Entity, id: Int): NPC? {
-    return RegionManager.getLocalNpcs(entity).firstOrNull { it.id == id }
+    return RegionManager.getLocalNPCs(entity.location).firstOrNull { it.id == id }
 }
 
 /**
@@ -1120,8 +1122,8 @@ fun findLocalNPC(entity: Entity, id: Int): NPC? {
  * @param distance The maximum distance to the entity.
  * @returns an NPC matching the given ID or null if none is found
  */
-fun findLocalNPCs(location: Location, distance: Int): MutableList<NPC> {
-    return RegionManager.getLocalNpcs(location, distance)
+fun findLocalNPCs(location: Location, distance: Int): List<NPC> {
+    return RegionManager.getLocalNPCs(location, distance)
 }
 
 
@@ -1131,7 +1133,7 @@ fun findLocalNPCs(location: Location, distance: Int): MutableList<NPC> {
  * @param ids the IDs of the NPCs to look for
  */
 fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC> {
-    return RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
+    return RegionManager.getLocalNPCs(entity.location).filter { it.id in ids }.toList()
 }
 
 /**
@@ -1141,7 +1143,7 @@ fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC> {
  * @param distance The maximum distance to the entity.
  */
 fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC> {
-    return RegionManager.getLocalNpcs(entity, distance).filter { it.id in ids }.toList()
+    return RegionManager.getLocalNPCs(entity.location, distance).filter { it.id in ids }.toList()
 }
 
 /**

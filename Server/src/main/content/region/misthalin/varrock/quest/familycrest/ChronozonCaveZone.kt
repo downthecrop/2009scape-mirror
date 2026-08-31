@@ -40,7 +40,7 @@ class ChronozonCaveZone: MapZone("FC ChronozoneZone", true), Plugin<Unit> {
                     ){
                     // Chronozon is allowed to spawn (quest stage right and the player doesn't have the crest part)
                     // Now check there is not one already
-                    if(!RegionManager.getLocalNpcs(spawnLoc, 5).contains(chronozon)){
+                    if(!RegionManager.getLocalNPCs(spawnLoc, 5).contains(chronozon)){
                         chronozon.setPlayer(e)
                         chronozon.isRespawn = false
                         chronozon.location = spawnLoc

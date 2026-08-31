@@ -2,6 +2,8 @@ package content.global.skill.magic.ancient;
 
 import java.util.List;
 
+import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.MultihitTargetsKt;
 import core.game.node.entity.combat.spell.Runes;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -10,7 +12,6 @@ import core.game.node.entity.combat.spell.CombatSpell;
 import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
-import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -114,7 +115,7 @@ public final class SmokeSpells extends CombatSpell {
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
 		if (state.getEstimatedHit() > -1) {
-                    applyPoison(victim, entity, type.ordinal() >= SpellType.BLITZ.ordinal() ? 4 : 2);
+			applyPoison(victim, entity, type.ordinal() >= SpellType.BLITZ.ordinal() ? 4 : 2);
 		}
 	}
 
@@ -123,7 +124,8 @@ public final class SmokeSpells extends CombatSpell {
 		if (animation.getId() == 1978 || !entity.getProperties().isMultiZone() || !target.getProperties().isMultiZone()) {
 			return super.getTargets(entity, target);
 		}
-		List<Entity> list = getMultihitTargets(entity, target, 9);
+
+		List<Entity> list = MultihitTargetsKt.findMultihitTargets(target, entity, CombatStyle.MAGIC);
 		BattleState[] targets = new BattleState[list.size()];
 		int index = 0;
 		for (Entity e : list) {

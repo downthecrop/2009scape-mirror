@@ -8,7 +8,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
@@ -60,11 +59,11 @@ public class BoneOfferPlugin extends UseWithHandler {
 		Scenery left = null;
 		Scenery right = null;
 		if (event.getUsedWith().asScenery().getRotation() % 2 == 0) {
-			left = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX() + 3, event.getUsedWith().getLocation().getY());
-			right = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX() - 2, event.getUsedWith().getLocation().getY());
+			left = RegionManager.getObject(event.getUsedWith().getLocation().getX() + 3, event.getUsedWith().getLocation().getY(), event.getUsedWith().getLocation().getZ());
+			right = RegionManager.getObject(event.getUsedWith().getLocation().getX() - 2, event.getUsedWith().getLocation().getY(), event.getUsedWith().getLocation().getZ());
 		} else {
-			left = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX(), event.getUsedWith().getLocation().getY() + 3);
-			right = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX(), event.getUsedWith().getLocation().getY() - 2);
+			left = RegionManager.getObject(event.getUsedWith().getLocation().getX(), event.getUsedWith().getLocation().getY() + 3, event.getUsedWith().getLocation().getZ());
+			right = RegionManager.getObject(event.getUsedWith().getLocation().getX(), event.getUsedWith().getLocation().getY() - 2, event.getUsedWith().getLocation().getZ());
 		}
 		Bones b = Bones.forId(event.getUsedItem().getId());
 		if (b != null) {

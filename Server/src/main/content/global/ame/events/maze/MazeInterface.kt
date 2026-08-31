@@ -12,8 +12,6 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
@@ -109,73 +107,17 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
                 addItemOrDrop(player, REWARD_ITEM[randomNumber], itemQuantity.toInt())
             }
         }
-
-        /**
-         * Chest Location to rotation mapping.
-         * This is needed as it is impossible to obtain the underlying chest scenery for the rotation.
-         * 0: Facing North, 1: Facing East, 2: Facing South, 3: Facing West
-         */
-        val chestLocationRotationMap = mapOf(
-                Location(2930, 4595, 0).toString() to 2,
-                Location(2924, 4572, 0).toString() to 2,
-                Location(2925, 4573, 0).toString() to 0,
-                Location(2900, 4578, 0).toString() to 2,
-                Location(2901, 4560, 0).toString() to 1,
-                Location(2890, 4599, 0).toString() to 2,
-                Location(2896, 4591, 0).toString() to 2,
-                Location(2895, 4592, 0).toString() to 1,
-                Location(2901, 4560, 0).toString() to 3,
-                Location(2918, 4590, 0).toString() to 1,
-                Location(2917, 4590, 0).toString() to 3,
-        )
-
-        /**
-         * Chest Interaction workaround
-         *
-         * The issue here is that the walls(3626) of the Maze are overlapping some(not all) chest sceneries.
-         *
-         * The types for the wallScenery:
-         * Type 0 - flat panel |
-         * Type 2 - right angle panel with rotation 0:r 1:7 2:> 3:L
-         * Type 3 - corner post . for angle edges of walls
-         */
-        fun overrideScenery(wallScenery: core.game.node.scenery.Scenery, chestSceneryId: Int): core.game.node.scenery.Scenery {
-            if (wallScenery.id == chestSceneryId) {
-                replaceScenery(wallScenery, Scenery.CHEST_3636, 30)
-                wallScenery.isActive = true
-                return wallScenery // Return the chest scenery as the wallScenery isn't there.
-            }
-
-            addScenery(Scenery.CHEST_3636, wallScenery.location, chestLocationRotationMap[wallScenery.location.toString()] ?: 0, 10)
-            addScenery(wallScenery)
-            // replaceScenery(newChestScenery, Scenery.CHEST_3636, 3) // didn't work for an underlying scenery
-            // I did a world pulse since everyone will get to see the chest open.
-            Pulser.submit(object : Pulse(30) {
-                override fun pulse(): Boolean {
-                    addScenery(Scenery.CHEST_3635, wallScenery.location, chestLocationRotationMap[wallScenery.location.toString()] ?: 0, 10)
-                    addScenery(wallScenery)
-                    return true
-                }
-            })
-            // Return the chest scenery to replace PacketProcessor so that MISMATCH will not happen.
-            return core.game.node.scenery.Scenery(
-                    chestSceneryId,
-                    wallScenery.location,
-                    chestLocationRotationMap[wallScenery.location.toString()] ?: 0
-            )
-        }
     }
 
     override fun defineListeners() {
-
-        // This somehow doesn't trigger as the scenery.id != objId (3626 != 3635)
         on(Scenery.CHEST_3635, IntType.SCENERY, "open") { player, node ->
+            lock(player, 3)
+            animate(player, 536)
+            replaceScenery(node.asScenery(), Scenery.CHEST_3636, 3)
             if (getAttribute(player, MAZE_ATTRIBUTE_TICKS_LEFT, 0) > 0 && getAttribute(player, MAZE_ATTRIBUTE_CHESTS_OPEN, 0) < 10) {
-                animate(player, 536)
-    //          val actualScenery = RegionManager.getObject(node.location.z, node.location.x, node.location.y, 3626)
                 val tableRoll = CHEST_REWARDS.roll()
                 addItemOrBank(player, tableRoll[0].id, tableRoll[0].amount)
-                when (tableRoll[0].id){
+                when (tableRoll[0].id) {
                     Items.AIR_RUNE_556 -> sendItemDialogue(player, Items.AIR_RUNE_556, "You've found some air runes!")
                     Items.WATER_RUNE_555 -> sendItemDialogue(player, Items.WATER_RUNE_555, "You've found some water runes!")
                     Items.EARTH_RUNE_557 -> sendItemDialogue(player, Items.EARTH_RUNE_557, "You've found some earth runes!")
@@ -187,7 +129,7 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
                     Items.STRENGTH_POTION2_117 -> sendItemDialogue(player, Items.STRENGTH_POTION2_117, "You've found a strength potion!")
                     Items.DEFENCE_POTION2_135 -> sendItemDialogue(player, Items.DEFENCE_POTION2_135, "You've found a defence potion!")
                 }
-                setAttribute(player, MAZE_ATTRIBUTE_CHESTS_OPEN, getAttribute(player, MAZE_ATTRIBUTE_CHESTS_OPEN, 0))
+                setAttribute(player, MAZE_ATTRIBUTE_CHESTS_OPEN, getAttribute(player, MAZE_ATTRIBUTE_CHESTS_OPEN, 0) + 1)
             } else {
                 sendMessage(player,"You find nothing of interest.")
             }

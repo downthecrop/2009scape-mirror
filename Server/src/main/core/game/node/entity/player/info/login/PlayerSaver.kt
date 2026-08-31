@@ -350,7 +350,6 @@ class PlayerSaver (val player: Player){
         globalData.put("zafTime",player.savedData.globalData.zafTime.toString())
         globalData.put("fritzGlass",player.savedData.globalData.isFritzGlass)
         globalData.put("wydinEmployee",player.savedData.globalData.isWydinEmployee)
-        globalData.put("draynorRecording",player.savedData.globalData.isDraynorRecording)
         globalData.put("geTutorial",player.savedData.globalData.isGeTutorial)
         globalData.put("essenceTeleporter",player.savedData.globalData.essenceTeleporter.toString())
         globalData.put("recoilDamage",player.savedData.globalData.recoilDamage.toString())

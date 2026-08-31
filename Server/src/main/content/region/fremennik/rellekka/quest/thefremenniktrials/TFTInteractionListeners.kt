@@ -8,8 +8,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.Skills
-import content.global.skill.gather.woodcutting.WoodcuttingSkillPulse
-import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -23,6 +21,8 @@ import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld.Pulser
 import content.data.Quests
 import core.game.interaction.QueueStrength
+import core.game.node.Node
+import org.rs09.consts.Scenery
 
 class TFTInteractionListeners : InteractionListener {
 
@@ -74,7 +74,7 @@ class TFTInteractionListeners : InteractionListener {
                     removeItem(player,LOW_ALC_KEG)
                     setAttribute(player,"/save:fremtrials:keg-mixed", true)
                     sendMessage(player,"The cherry bomb in the pipe goes off.")
-                    RegionManager.getLocalEntitys(player).stream().forEach { e -> e.sendChat("What was THAT??") }
+                    RegionManager.getLocalNPCs(player.location).stream().forEach { e -> e.sendChat("What was THAT??") }
                     sendMessage(player,"You mix the kegs together.")
                 } else {
                     player.dialogueInterpreter?.sendDialogue("I can't do this right now. I should create","a distraction.")
@@ -204,7 +204,7 @@ class TFTInteractionListeners : InteractionListener {
                     setAttribute(player,"/save:fremtrials:maze-complete",true)
                     DestRoom(2662, 10034, 2668, 10039).getCenter()
                 }
-                else -> getRandomLocation(player)
+                else -> getRandomLocation(player, portal)
             }
             return@on true
         }
@@ -280,17 +280,15 @@ class TFTInteractionListeners : InteractionListener {
         return Location((swx + nex) / 2, (swy + ney) / 2).transform(1,0,0)
     }
 
-    fun getRandomLocation(player: Player?): Location{
-        var obj: Scenery? = null
-
-        while(obj?.id != 5138) {
-            val objects = player?.viewport?.chunks?.random()?.random()?.objects
-            obj = objects?.random()?.random()
-            if(obj == null || obj.location?.equals(Location(0,0,0))!!){
-                continue
+    fun getRandomLocation(player: Player, portal: Node): Location {
+        val objects = player.location.region.assembleObjectList(player.location.z)
+        objects.shuffle()
+        for (o in objects) {
+            if (o.id == Scenery.PORTAL_5138) {
+                return o.location
             }
         }
-        return obj.location
+        return portal.location
     }
 
     fun hasEquippableItems(player: Player?): Boolean {

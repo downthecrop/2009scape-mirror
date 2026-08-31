@@ -56,7 +56,7 @@ public class GiantChinchompaNPC extends Familiar {
 		if (!isOwnerAttackable()) {
 			return false;
 		}
-		final List<Entity> entitys = RegionManager.getLocalEntitys(owner, 6);
+		final List<Entity> entitys = RegionManager.getLocalEntities(owner.getLocation(), 6);
 		entitys.remove(owner);
 		entitys.remove(this);
 		sendChat("Squeak!");

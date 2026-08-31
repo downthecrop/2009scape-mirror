@@ -1,6 +1,7 @@
 package core.game.world.update
 
 import core.game.node.entity.player.Player
+import core.game.world.map.Location
 import core.game.world.map.RegionChunk
 import core.net.packet.PacketRepository
 import core.net.packet.context.ClearChunkContext
@@ -12,39 +13,51 @@ import java.util.*
  * @author Emperor
  */
 object MapChunkRenderer {
+    const val BUILD_AREA_DEPTH = 6
+    const val BUILD_AREA_SIZE = 2 * BUILD_AREA_DEPTH + 1
+
     /**
      * Sends the map chunk rendering packet.
      * @param player The player.
      */
     @JvmStatic
     fun render(player: Player) {
-        val v = player.viewport
         val last = player.playerFlags.lastViewport
-        val updated: MutableList<RegionChunk> = ArrayList()
-        val current = v.chunks
+        val updated: ArrayList<RegionChunk> = ArrayList()
+        val anchor = player.playerFlags.lastSceneGraph ?: player.location
+        val center = Location.create(anchor.x, anchor.y, player.location.z) // z is correct, the client does not tear down the build area on z scene transitions (and WalkingQueue.java similarly does not invalidate the scene graph on z transitions, only on x/y transitions)
+        val current = List(BUILD_AREA_SIZE) { x ->
+            val dcx = x - BUILD_AREA_DEPTH // so it becomes -6..+6 instead of 0..12
+            List(BUILD_AREA_SIZE) { y ->
+                val dcy = y - BUILD_AREA_DEPTH
+                center.transform(dcx * RegionChunk.SIZE, dcy * RegionChunk.SIZE, 0).chunk
+            }
+        }
+
         var sizeX = last.size
         for (x in 0 until sizeX) {
             val sizeY: Int = last[x].size
             for (y in 0 until sizeY) {
                 val previous = last[x][y] ?: continue
-                if (!containsChunk(current, previous)) {
-                    PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
-                } else {
+                if (containsChunk(current, previous)) {
                     updated.add(previous)
+                } else {
+                    PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
                 }
             }
         }
+
         sizeX = current.size
         for (x in 0 until sizeX) {
             val sizeY: Int = current[x].size
             for (y in 0 until sizeY) {
                 val chunk = current[x][y]
-                if (!updated.contains(chunk)) {
-                    chunk.synchronize(player)
-                } else {
+                if (updated.contains(chunk)) {
                     chunk.update(player)
+                } else {
+                    chunk.synchronize(player)
                 }
-                last[x][y] = current[x][y]
+                last[x][y] = chunk
             }
         }
     }
@@ -55,7 +68,7 @@ object MapChunkRenderer {
      * @param c The region chunk.
      * @return `True` if so.
      */
-    private fun containsChunk(list: Array<Array<RegionChunk>>, c: RegionChunk): Boolean {
+    private fun containsChunk(list: List<List<RegionChunk>>, c: RegionChunk): Boolean {
         val sizeList = list.size
         for (x in 0 until sizeList) {
             val chunkSize: Int = list[x].size

@@ -262,10 +262,12 @@ class DoublingMoney : Script() {
                 minDist = min(minDist, loc.getDistance(bot.location))
             }
             if (minDist > 1) return 2
-            RegionManager.forId(bot.location.regionId).planes[bot.location.z].players.forEach {
-                if (AIRepository.PulseRepository[it?.username?.lowercase()]?.botScript is DoublingMoney
-                    && it != bot
-                    && it.location.getDistance(bot.location) <= 1) {
+            val region = RegionManager.forId(bot.location.regionId)
+            val players = region.assemblePlayerList(bot.location.z)
+            for (player in players) {
+                if (AIRepository.PulseRepository[player.username.lowercase()]?.botScript is DoublingMoney
+                    && player != bot
+                    && player.location.getDistance(bot.location) <= 1) {
                     return 2
                 }
             }

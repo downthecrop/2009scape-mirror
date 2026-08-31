@@ -307,8 +307,8 @@ public final class DesertGuardDialogue extends DialoguePlugin {
 		 * Method used to warn players whom are breaking rules.
 		 */
 		private void warn() {
-			final List<Player> players = RegionManager.getLocalPlayers(this);
-			for (final Player player : players) {
+			final List<Player> players = RegionManager.getLocalPlayers(location);
+			for (Player player : players) {
 				if (player.getAttribute("guard-warning", 0) > GameWorld.getTicks() || !player.getZoneMonitor().isInZone("mining camp") || player.inCombat() || !player.getLocation().withinDistance(this.getLocation(), 8)) {
 					continue;
 				}

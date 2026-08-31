@@ -152,9 +152,9 @@ public class ForgeRegentNPC extends Familiar {
 						familiar.moveStep();
 						GroundItemManager.destroy(ground);
 						player.getSkills().addExperience(Skills.FIREMAKING, log.getXp() + 10);
-                                                familiar.faceLocation(object.getFaceLocation(familiar.getLocation()));
+						familiar.faceLocation(object.getFaceLocation(familiar.getLocation()));
 						SceneryBuilder.add(object, log.getLife(), FireMakingPulse.getAsh(player, log, object));
-						if (player.getViewport().getRegion().getId() == 10806) {
+						if (player.getLocation().getRegionId() == 10806) {
 							player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 1, 9);
 						}
 						return true;

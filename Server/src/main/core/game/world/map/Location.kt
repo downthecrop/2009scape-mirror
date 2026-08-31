@@ -101,6 +101,8 @@ class Location(var hash: LocationHash) : Node(null, null) {
     // Derived variables. Please note the following isn't a 1-1 representation of what is officially used.
 
     // Region - (Officially: Map Square) 64x64
+    /** The region. */
+    val region: Region get() = RegionManager.forId(regionId)
     /** Unique index "key" (Officially: region_uid) for a 64x64 area. Made of x and y joined bitwise together. Used in xteas.json. */
     val regionId: Int get() = x shr 6 shl 8 or (y shr 6) // Cuts off the end 6 bits of both x y and joins them together. E.g. 10392
     /** The chunk x index for this position (x/8). For sets of 8x8 area. THIS IS NAMED WRONG, THIS IS A CHUNK(8) NOT REGION(64). */
@@ -116,7 +118,14 @@ class Location(var hash: LocationHash) : Node(null, null) {
     fun isInRegion(region: Int): Boolean = regionId == region
 
     // Chunk - (Officially: Zones) 8x8
+    /** The chunk. */
+    val chunk: RegionChunk get() = region.chunks[chunkX][chunkY][z]
+    /** The chunk base on the world map. */
     val chunkBase: Location get() = create(regionX shl 3, regionY shl 3, z)
+    /** The ABSOLUTE chunk x index for this position. (Same as regionX, but named correctly.) */
+    val absChunkX: Int get() = x shr 3 // shr 3 is essentially divide by 8
+    /** The ABSOLUTE chunk y index for this position. (Same as regionY, but named correctly.) */
+    val absChunkY: Int get() = y shr 3 // shr 3 is essentially divide by 8
     /** The chunk x index for this position RELATIVE to a region[localX](x/8). THIS IS NOT GLOBAL CHUNK X. */
     val chunkX: Int get() = localX shr 3 // shr 3 is essentially divide by 8 (note this is localX)
     /** The chunk y index for this position RELATIVE to a region[localY](y/8). THIS IS NOT GLOBAL CHUNK Y. */
@@ -136,8 +145,6 @@ class Location(var hash: LocationHash) : Node(null, null) {
     /** @return The local scene y-coordinate relative to another location's regionY. */
     fun getSceneY(loc: Location): Int = y - (loc.regionY - 6 shl 3)
 
-
-
     /** @return The location incremented by another location's coordinates. (POTENTIAL Z PROBLEMS HERE) */
     // TODO: THE FOLLOWING TRANSFORM HAS SHIT Z HANDLING.
     fun transform(l: Location): Location = Location(x + l.x, y + l.y, (z + l.z) % 4)
@@ -147,7 +154,6 @@ class Location(var hash: LocationHash) : Node(null, null) {
     @JvmOverloads fun transform(dir: Direction, steps: Int = 1): Location = Location(x + dir.stepX * steps, y + dir.stepY * steps, z)
     /** Location transformed by a Vector. Limit usage to more complicated functionality. */
     fun transform(vector: Vector): Location = create(x + floor(vector.x).toInt(), y + floor(vector.y).toInt())
-
 
     /** @return True if this location is 1 tile N, W, S, or E of the node. THIS CAN BE REFACTORED OUT. */
     fun isNextTo(node: Node): Boolean {
@@ -167,7 +173,7 @@ class Location(var hash: LocationHash) : Node(null, null) {
     /** @return The straight-line(Euclidean) distance between this and another location. */
     fun getDistance(other: Location): Double = getDistance(this, other)
 
-    /** @returns ArrayList of the 8 cardinal and diagonal tiles. Order is important and follows [Direction] indexing **/
+    /** @returns ArrayList of the 8 cardinal and diagonal tiles. Order is important and follows [Direction] indexing */
     val surroundingTiles: ArrayList<Location> get() {
         val locations = ArrayList<Location>()
         locations.add(transform(-1, -1, 0))
@@ -181,7 +187,7 @@ class Location(var hash: LocationHash) : Node(null, null) {
         return locations
     }
 
-    /** @returns ArrayList of the 4 cardinal direction tiles. Order is important and follows [Direction] indexing **/
+    /** @returns ArrayList of the 4 cardinal direction tiles. Order is important and follows [Direction] indexing */
     val cardinalTiles: ArrayList<Location> get() {
         val locations = ArrayList<Location>()
         locations.add(transform(-1, 0, 0))
@@ -190,7 +196,6 @@ class Location(var hash: LocationHash) : Node(null, null) {
         locations.add(transform(0, 1, 0))
         return locations
     }
-
 
     /**
      * Gets the directional components of a movement step.

@@ -3,13 +3,16 @@ package core.game.system.command.sets
 import core.api.log
 import core.api.sendMessage
 import core.cache.Cache
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
+import core.game.node.scenery.Constructed
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.system.command.CommandPlugin
-import core.plugin.Initializable
 import core.game.system.command.Privilege
+import core.game.world.map.RegionManager.getObject
+import core.game.world.map.RegionManager.getRegionChunk
+import core.plugin.Initializable
 import core.tools.Log
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
@@ -141,6 +144,54 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
                     SceneryBuilder.add(Scenery(29447 + (j / 10) % 10, player.location.transform(-1, j/10, 0)))
                 }
             }
+        }
+
+        define("removeobject", Privilege.ADMIN, "::removeobject", "Removes the first scenery at your current coordinates (the meaning of 'the first' is currently arbitrary, do not use this in production)") { player, args ->
+            if (args.size != 1) reject(player, "::removeobject doesn't support arguments")
+            val obj = getObject(player.location)
+            if (obj == null) {
+                sendMessage(player, "All four objects on the tile were null.")
+                return@define
+            }
+            sendMessage(player, "The first object found on the tile was ${obj.id}; it will now be removed.")
+            SceneryBuilder.remove(obj)
+        }
+
+        define("objects", Privilege.STANDARD, "::objects", "Prints a list of all ten sceneries at your current coordinates") { player, args ->
+            if (args.size != 1) reject(player, "::objects doesn't support arguments")
+            val chunk = getRegionChunk(player.location)
+            fun dump(label: String, objects: List<Scenery?>) {
+                sendMessage(player, "--- $label ---")
+                val nulls = ArrayList<Int>(10)
+                for ((i, o) in objects.withIndex()) {
+                    if (o == null) {
+                        nulls.add(i)
+                    } else {
+                        val c = if (o is Constructed) "C" else ""
+                        val r = if (o.isRenderable) "R" else ""
+                        val a = if (o.isActive) "A" else ""
+                        var props = c + r + a
+                        if (props.isNotEmpty()) {
+                            props = " *$props"
+                        }
+                        sendMessage(player, "    $i: $o$props")
+                    }
+                }
+                if (nulls.isNotEmpty()) {
+                    sendMessage(player, "    ${nulls.joinToString()}: null")
+                }
+            }
+            val stat = ArrayList<Scenery>(10)
+            for (i in 0 until 4) {
+                val obj = chunk.statObjects[player.location.chunkOffsetX][player.location.chunkOffsetY][i]
+                if (obj != null) {
+                    stat.add(obj)
+                }
+            }
+            dump("Chunk static objects", stat)
+            dump("Chunk dynamic objects", chunk.getObjects(player.location.chunkOffsetX, player.location.chunkOffsetY).asList())
+            dump("RegionManager", listOf(getObject(player.location))) // getObject can only get one
+            sendMessage(player, "--- That's all, folks! ---")
         }
     }
 }

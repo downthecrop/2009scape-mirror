@@ -83,7 +83,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 			GameWorld.getPulser().submit(new Pulse(12, player) {
 				@Override
 				public boolean pulse() {
-					player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(0, 2898, 3716), Animation.create(6981));
+					player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(2898, 3716, 0), Animation.create(6981));
 					return true;
 				}
 			});

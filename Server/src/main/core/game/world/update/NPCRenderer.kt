@@ -6,6 +6,7 @@ import core.game.world.map.RegionManager
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
 import core.game.world.GameWorld
+import core.game.world.map.MapDistance
 import java.nio.ByteBuffer
 import java.util.*
 
@@ -22,7 +23,7 @@ object NPCRenderer {
     fun render(player: Player) {
         val buffer = IoBuffer(32, PacketHeader.SHORT)
         val info = player.renderInfo
-        val localNPCs = info.localNpcs
+        val localNPCs = info.localNPCs
         val maskBuffer = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.allocate(1 shl 16))
         buffer.setBitAccess()
         buffer.putBits(8, localNPCs.size)
@@ -30,7 +31,7 @@ object NPCRenderer {
         val it: Iterator<NPC> = localNPCs.iterator()
         while (it.hasNext()) {
             val npc = it.next()
-            val withinDistance = player.location.withinDistance(npc.location)
+            val withinDistance = player.location.withinDistance(npc.location, MapDistance.RENDERING.distance)
             if (npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
                 buffer.putBits(1, 1).putBits(2, 3)
                 toRemove.add(npc)
@@ -51,7 +52,7 @@ object NPCRenderer {
             }
         }
         localNPCs.removeAll(toRemove)
-        for (npc in RegionManager.getLocalNpcs(player)) {
+        for (npc in RegionManager.getLocalNPCs(player.location, MapDistance.RENDERING.distance)) {
             if (localNPCs.size >= 255) {
                 break
             }

@@ -75,10 +75,10 @@ public final class PCSplatterNPC extends AbstractNPC {
 		}
 	}
 
-    @Override
-    public boolean shouldPreventStacking(Entity mover) {
-        return mover instanceof NPC;
-    }
+	@Override
+	public boolean shouldPreventStacking(Entity mover) {
+		return mover instanceof NPC;
+	}
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
@@ -132,10 +132,10 @@ public final class PCSplatterNPC extends AbstractNPC {
 				}
 			}
 		}
-		for (Player p : RegionManager.getLocalPlayers(this, 1)) {
+		for (Player p : RegionManager.getLocalPlayers(location, 1)) {
 			p.getImpactHandler().manualHit(this, RandomFunction.random(minimum, maximum), null);
 		}
-		for (NPC npc : RegionManager.getLocalNpcs(this, 1)) {
+		for (NPC npc : RegionManager.getLocalNPCs(location, 1)) {
 			if (npc != this) {
 				npc.getImpactHandler().manualHit(this, RandomFunction.random(minimum, maximum), null);
 			}

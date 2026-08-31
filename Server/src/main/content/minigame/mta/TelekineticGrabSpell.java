@@ -100,8 +100,9 @@ public final class TelekineticGrabSpell extends MagicSpell {
 
 	@Override
 	public boolean cast(final Entity entity, final Node target) {
-                if (!(target instanceof GroundItem))
-                    return false;
+		if (!(target instanceof GroundItem)) {
+			return false;
+		}
 		final GroundItem ground = (GroundItem) target;
 		if (!canCast(entity, ground)) {
 			return false;
@@ -131,32 +132,34 @@ public final class TelekineticGrabSpell extends MagicSpell {
 				Player player = entity instanceof Player ? (Player) entity : null;
 				GroundItem g = GroundItemManager.get(ground.getId(), ground.getLocation(), player);
 				if (g == null) {
-					player.getPacketDispatch().sendMessage("Too late!");
+					if (player != null) {
+						player.getPacketDispatch().sendMessage("Too late!");
+					}
 					return true;
 				}
-				if (g == SpecialGroundItems.AHAB_BEER.asGroundItem()){
-					player.getDialogueInterpreter().open(2692, new NPC(2692), true);
+				if (g == SpecialGroundItems.AHAB_BEER.asGroundItem()) {
+					if (player != null) {
+						player.getDialogueInterpreter().open(2692, new NPC(2692), true);
+					}
 					return true;
 				}
 				if (player == null) {
 					return true;
 				}
 				boolean teleZone = player.getZoneMonitor().isInZone("Telekinetic Theatre") && g.getId() == 6888;
-				if (player != null) {
-					if (g == null || !g.isActive()) {
-						player.getPacketDispatch().sendMessage("Too late!");
-						return true;
-					}
-					playAudio(player, Sounds.VULNERABILITY_IMPACT_3008);
-					if (!teleZone) {
-						player.getInventory().add(new Item(g.getId(), g.getAmount(), g.getCharge()));
-					} else {
-						TelekineticZone zone = TelekineticZone.getZone(player);
-						zone.moveStatue();
-						player.lock(getDelay());
-					}
-					player.getPacketDispatch().sendPositionedGraphics(END_GRAPHIC, ground.getLocation());
+				if (!g.isActive()) {
+					player.getPacketDispatch().sendMessage("Too late!");
+					return true;
 				}
+				playAudio(player, Sounds.VULNERABILITY_IMPACT_3008);
+				if (!teleZone) {
+					player.getInventory().add(new Item(g.getId(), g.getAmount(), g.getCharge()));
+				} else {
+					TelekineticZone zone = TelekineticZone.getZone(player);
+					zone.moveStatue();
+					player.lock(getDelay());
+				}
+				player.getPacketDispatch().sendPositionedGraphics(END_GRAPHIC, ground.getLocation());
 				if (!teleZone) {
 					GroundItemManager.destroy(g);
 				}

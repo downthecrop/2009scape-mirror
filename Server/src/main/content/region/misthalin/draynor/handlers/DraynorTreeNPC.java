@@ -63,8 +63,8 @@ public final class DraynorTreeNPC extends AbstractNPC {
 
 	@Override
 	public void tick() {
-		final List<Player> players = RegionManager.getLocalPlayers(this, 1);
-		if (players.size() != 0) {
+		final List<Player> players = RegionManager.getLocalPlayers(location, 1);
+		if (!players.isEmpty()) {
 			if (attackDelay < GameWorld.getTicks()) {
 				for (Player p : players) {
 					faceTemporary(p, 2);

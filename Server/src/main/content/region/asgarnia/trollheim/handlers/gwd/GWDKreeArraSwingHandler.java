@@ -12,6 +12,7 @@ import core.game.node.entity.combat.equipment.ArmourSet;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.NPC;
+import core.game.node.entity.player.Player;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -83,7 +84,7 @@ public final class GWDKreeArraSwingHandler extends CombatSwingHandler {
 			ticks += (int) Math.ceil(entity != null ? entity.getLocation().getDistance(victim.getLocation()) : 0.0 * 0.3);
 			NPC npc = (NPC) entity;
 			List<BattleState> list = new ArrayList<>(20);
-			for (Entity t : RegionManager.getLocalPlayers(npc, 28)) {
+			for (Player t : RegionManager.getLocalPlayers(npc.getLocation(), 28)) {
 				if (!CHAMBER.insideBorder(t.getLocation())) {
 					continue;
 				}

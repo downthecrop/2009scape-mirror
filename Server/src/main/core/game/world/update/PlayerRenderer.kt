@@ -39,7 +39,7 @@ object PlayerRenderer {
             renderLocalPlayer(player, other, buffer, flags)
         }
         var count = 0
-        for (other in RegionManager.getLocalPlayers(player, 15)) {
+        for (other in RegionManager.getLocalPlayers(player.location, 15)) {
             if (other === player || !other.isActive || info.localPlayers.contains(other) || other.isInvisible) {
                 continue
             }

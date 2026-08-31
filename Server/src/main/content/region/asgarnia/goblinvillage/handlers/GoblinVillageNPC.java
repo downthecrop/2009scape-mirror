@@ -103,8 +103,8 @@ public final class GoblinVillageNPC extends AbstractNPC {
 		if (delay < System.currentTimeMillis() && !getProperties().getCombatPulse().isAttacking()) {
 			final int rand = RandomFunction.random(1, 4);
 			if (rand == 2) {
-				final List<NPC> surronding = RegionManager.getLocalNpcs(this, 10);
-				for (NPC n : surronding) {
+				final List<NPC> surrounding = RegionManager.getLocalNPCs(location, 10);
+				for (NPC n : surrounding) {
 					if (n.getId() == getId()) {
 						continue;
 					}

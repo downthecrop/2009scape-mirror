@@ -167,7 +167,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     }
 
     override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10553 -> if (event.source.id in FISHING_SPOTS) {
                 finishTask(
                         player,
@@ -204,7 +204,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     }
 
     override fun onNpcKilled(player: Player, event: NPCKillEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10042, 10554 -> if (event.npc.id in ROCK_CRABS) {
                 progressIncrementalTask(
                     player,
@@ -260,7 +260,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     }
 
     override fun onPickedUp(player: Player, event: PickUpEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10810 -> if (event.itemId == Items.SEAWEED_401) {
                 progressIncrementalTask(
                     player,
@@ -284,7 +284,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     }
 
     override fun onSummoningPointsRecharged(player: Player, event: SummoningPointsRechargeEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10552 -> if (event.obelisk.id == Scenery.SMALL_OBELISK_29944) {
                 finishTask(
                     player,
@@ -296,7 +296,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     }
 
     override fun onInteracted(player: Player, event: InteractionEvent) {
-        when (player.viewport.region.id) {
+        when (player.location.regionId) {
             10811 -> if (event.target.id == Scenery.COLLAPSED_TRAP_19233 && inBorders(player, RELLEKKA_HUNTING_AREA) && event.option == "dismantle") {
                 finishTask(
                     player,

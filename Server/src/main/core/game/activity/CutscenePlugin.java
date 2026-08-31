@@ -129,12 +129,9 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 	 */
 	public void end() {
 		if (region != null) {
-			for (int i = 0; i < region.getPlanes().length; i++) {
-				for (NPC n : region.getPlanes()[i].getNpcs()) {
-					if (n == null) {
-						continue;
-					}
-					n.clear();
+			for (int z = 0; z < 4; z++) {
+				for (NPC npc : region.assembleNpcList(z)) {
+					npc.clear();
 				}
 			}
 		}

@@ -19,6 +19,7 @@ import core.tools.RandomFunction
 import core.api.*
 import core.game.interaction.DestinationFlag
 import core.game.system.timer.impl.*
+import core.game.world.map.RegionManager
 
 /**
  * The combat-handling pulse implementation.
@@ -116,7 +117,7 @@ class CombatPulse(
         if (victim == null || DeathTask.isDead(entity) || DeathTask.isDead(victim)) {
             return true
         }
-        if (!entity!!.viewport.region.isActive || !victim!!.viewport.region.isActive) {
+        if (!RegionManager.forId(entity!!.location.regionId).isActive || !RegionManager.forId(victim!!.location.regionId).isActive) {
             return true
         }
         if (!interactable()) {

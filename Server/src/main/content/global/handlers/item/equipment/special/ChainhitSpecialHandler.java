@@ -79,7 +79,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
-        state.setStyle(CombatStyle.RANGE);
+		state.setStyle(CombatStyle.RANGE);
 		if (victim instanceof NPC) {
 			NPC npc = victim.asNpc();
 			if (npc.getId() == 2440) {
@@ -186,9 +186,9 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 		if (list == null) {
 			int distance = 5;
 			if (victim instanceof NPC) {
-				e.setAttribute("chain-hit_v", list = RegionManager.getLocalNpcs(e, distance));
+				e.setAttribute("chain-hit_v", list = RegionManager.getLocalNPCs(e.getLocation(), distance));
 			} else {
-				e.setAttribute("chain-hit_v", list = RegionManager.getLocalPlayers(e, distance));
+				e.setAttribute("chain-hit_v", list = RegionManager.getLocalPlayers(e.getLocation(), distance));
 			}
 			list.remove(e);
 			list.remove(victim);

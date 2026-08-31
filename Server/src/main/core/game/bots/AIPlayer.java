@@ -34,7 +34,6 @@ import java.util.*;
  * @author Emperor
  */
 public class AIPlayer extends Player {
-
     /**
      * The current UID.
      */
@@ -318,25 +317,25 @@ public class AIPlayer extends Player {
         int meX = this.getLocation().getX();
         int meY = this.getLocation().getY();
         ArrayList<Node> nodes = new ArrayList<Node>();
-        for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
+        for (NPC npc : RegionManager.getLocalNPCs(location, range)) {
             if (npc.getId() == entry)
                 nodes.add(npc);
         }
         for (int x = 0; x < range; x++) {
             for (int y = 0; y < range - x; y++) {
-                Node node = RegionManager.getObject(0, meX + x, meY + y);
+                Node node = RegionManager.getObject(meX + x, meY + y, 0);
                 if (node != null)
                     if (node.getId() == entry)
                         nodes.add(node);
-                Node node2 = RegionManager.getObject(0, meX + x, meY - y);
+                Node node2 = RegionManager.getObject(meX + x, meY - y, 0);
                 if (node2 != null)
                     if (node2.getId() == entry)
                         nodes.add(node2);
-                Node node3 = RegionManager.getObject(0, meX - x, meY + y);
+                Node node3 = RegionManager.getObject(meX - x, meY + y, 0);
                 if (node3 != null)
                     if (node3.getId() == entry)
                         nodes.add(node3);
-                Node node4 = RegionManager.getObject(0, meX - x, meY - y);
+                Node node4 = RegionManager.getObject(meX - x, meY - y, 0);
                 if (node4 != null)
                     if (node4.getId() == entry)
                         nodes.add(node4);
@@ -351,25 +350,25 @@ public class AIPlayer extends Player {
         //int meX2 = this.getLocation().getX();
 
         ArrayList<Node> nodes = new ArrayList<Node>();
-        for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
+        for (NPC npc : RegionManager.getLocalNPCs(location, range)) {
             if (entrys.contains(npc.getId()))
                 nodes.add(npc);
         }
         for (int x = 0; x < range; x++) {
             for (int y = 0; y < range - x; y++) {
-                Node node = RegionManager.getObject(0, meX + x, meY + y);
+                Node node = RegionManager.getObject(meX + x, meY + y, 0);
                 if (node != null)
                     if (entrys.contains(node.getId()))
                         nodes.add(node);
-                Node node2 = RegionManager.getObject(0, meX + x, meY - y);
+                Node node2 = RegionManager.getObject(meX + x, meY - y, 0);
                 if (node2 != null)
                     if (entrys.contains(node2.getId()))
                         nodes.add(node2);
-                Node node3 = RegionManager.getObject(0, meX - x, meY + y);
+                Node node3 = RegionManager.getObject(meX - x, meY + y, 0);
                 if (node3 != null)
                     if (entrys.contains(node3.getId()))
                         nodes.add(node3);
-                Node node4 = RegionManager.getObject(0, meX - x, meY - y);
+                Node node4 = RegionManager.getObject(meX - x, meY - y, 0);
                 if (node4 != null)
                     if (entrys.contains(node4.getId()))
                         nodes.add(node4);
@@ -411,7 +410,7 @@ public class AIPlayer extends Player {
     public Node getClosesCreature(int radius) {
         int distance = radius + 1;
         Node npcReturn = null;
-        for (NPC npc : RegionManager.getLocalNpcs(this, radius)) {
+        for (NPC npc : RegionManager.getLocalNPCs(location, radius)) {
             double distanceToNpc = npc.getLocation().getDistance(this.getLocation());
             if ((distanceToNpc) < distance) {
                 distance = (int) distanceToNpc;
@@ -424,7 +423,7 @@ public class AIPlayer extends Player {
     public Node getClosesCreature(int radius, int entry) {
         int distance = radius + 1;
         Node npcReturn = null;
-        for (NPC npc : RegionManager.getLocalNpcs(this, radius)) {
+        for (NPC npc : RegionManager.getLocalNPCs(location, radius)) {
             double distanceToNpc = npc.getLocation().getDistance(this.getLocation());
             if (npc.getId() == entry) {
                 if ((distanceToNpc) < distance) {
@@ -439,7 +438,7 @@ public class AIPlayer extends Player {
     public Node getClosesCreature(int radius, ArrayList<Integer> entrys) {
         int distance = radius + 1;
         Node npcReturn = null;
-        for (NPC npc : RegionManager.getLocalNpcs(this, radius)) {
+        for (NPC npc : RegionManager.getLocalNPCs(location, radius)) {
             double distanceToNpc = npc.getLocation().getDistance(this.getLocation());
             if (entrys.contains(npc.getId())) {
                 if ((distanceToNpc) < distance) {

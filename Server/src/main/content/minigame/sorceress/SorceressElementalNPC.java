@@ -1,7 +1,5 @@
 package content.minigame.sorceress;
 
-import java.util.List;
-
 import core.game.component.Component;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatSwingHandler;
@@ -12,6 +10,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
@@ -194,20 +193,11 @@ public final class SorceressElementalNPC extends AbstractNPC {
 		return respawn;
 	}
 
-	/**
-	 * Gets the tilesIndex.
-	 * @return The tilesIndex.
-	 */
-	public int getTilesIndex() {
-		return tilesIndex;
-	}
-
 	@Override
 	public void tick() {
 		super.tick();
-		List<Player> players = getViewport().getCurrentPlane().getPlayers();
-		for (Player player : players) {
-			if (player == null || !player.isActive() || player.getLocks().isInteractionLocked() || DeathTask.isDead(player) || !canTeleport(player) || !CombatSwingHandler.isProjectileClipped(this, player, false)) {
+		for (Player player : RegionManager.getLocalPlayers(location)) {
+			if (!player.isActive() || player.getLocks().isInteractionLocked() || DeathTask.isDead(player) || !canTeleport(player) || !CombatSwingHandler.isProjectileClipped(this, player, false)) {
 				continue;
 			}
 			animate(new Animation(5803));

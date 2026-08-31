@@ -3,6 +3,8 @@
 import java.util.List;
 
 import core.game.container.impl.EquipmentContainer;
+import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.MultihitTargetsKt;
 import core.plugin.Initializable;
 import core.game.node.entity.combat.spell.Runes;
 import core.game.node.Node;
@@ -121,7 +123,7 @@ public final class MiasmicSpells extends CombatSpell {
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
 		if (!hasTimerActive(victim, "miasmic:immunity")) {
-                    registerTimer(victim, spawnTimer("miasmic", (getSpellId() - 15) * 20));
+			registerTimer(victim, spawnTimer("miasmic", (getSpellId() - 15) * 20));
 		}
 	}
 	
@@ -142,8 +144,8 @@ public final class MiasmicSpells extends CombatSpell {
 	@Override
 	public boolean cast(Entity entity, Node target) {
 		if (!validStaffEquipped(entity) && !GameWorld.getSettings().isDevMode()) {
-		    ((Player) entity).getPacketDispatch().sendMessage("You need to be wielding Zuriel's staff in order to cast this spell.");
-		    return false;
+			((Player) entity).getPacketDispatch().sendMessage("You need to be wielding Zuriel's staff in order to cast this spell.");
+			return false;
 		}
 		if (!meetsRequirements(entity, true, false)) {
 			return false;
@@ -157,7 +159,8 @@ public final class MiasmicSpells extends CombatSpell {
 				|| !entity.getProperties().isMultiZone() || !target.getProperties().isMultiZone()) {
 			return super.getTargets(entity, target);
 		}
-		List<Entity> list = getMultihitTargets(entity, target, 9);
+
+		List<Entity> list = MultihitTargetsKt.findMultihitTargets(target, entity, CombatStyle.MAGIC);
 		BattleState[] targets = new BattleState[list.size()];
 		int index = 0;
 		for (Entity e : list) {

@@ -72,7 +72,7 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 				player.sendChat("Go on puss...kill that rat!");
 				boolean cant = true;
 				NPC rat = null;
-				for (NPC n : RegionManager.getLocalNpcs(player.getLocation(), 10)) {
+				for (NPC n : RegionManager.getLocalNPCs(player.getLocation(), 10)) {
 					if (!n.getName().contains("rat")) {
 						cant = false;
 						continue;

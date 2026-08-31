@@ -1,14 +1,8 @@
-import core.cache.Cache
 import core.game.world.map.Region
-import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
-import core.game.world.map.build.LandscapeParser
-import org.junit.Assert
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import core.game.system.config.ServerConfigParser
-import core.game.system.config.XteaParser
 
 class RegionTests {
     companion object {
@@ -67,8 +61,8 @@ class RegionTests {
         Region.load(dynamic)
         val targetLoc = dynamic.baseLocation.transform(23, 17, 0)
         Assertions.assertEquals(null, RegionManager.getObject(targetLoc), "Object exists pre-copy?")
-        val replacement = base.planes[0].getRegionChunk(2, 2)
-        dynamic.replaceChunk(0, 2, 2, replacement.copy(dynamic.planes[0]), base)
+        val replacement = base.getChunks()[2][2][0]
+        dynamic.replaceChunk(0, 2, 2, replacement.copy(), base)
         Assertions.assertEquals(36782, RegionManager.getObject(targetLoc)?.id ?: -1, "Object does not exist at expected location!")
     }
 
@@ -79,8 +73,8 @@ class RegionTests {
         Region.load(dynamic, true)
         val targetLoc = dynamic.baseLocation.transform(23, 17, 0)
         Assertions.assertEquals(null, RegionManager.getObject(targetLoc), "Object exists pre-copy?")
-        val replacement = base.planes[0].getRegionChunk(2, 2)
-        dynamic.replaceChunk(0, 2, 2, replacement.copy(dynamic.planes[0]), base)
+        val replacement = base.getChunks()[2][2][0]
+        dynamic.replaceChunk(0, 2, 2, replacement.copy(), base)
         Assertions.assertEquals(36782, RegionManager.getObject(targetLoc)?.id ?: -1, "Object does not exist at expected location!")
     }
 
@@ -89,11 +83,10 @@ class RegionTests {
         val borders = DynamicRegion.reserveArea(8,8)
         val dynamic = DynamicRegion(-1, borders.southWestX shr 6, borders.southWestY shr 6)
         dynamic.borders = borders
-        dynamic.isUpdateAllPlanes = true
         RegionManager.addRegion(dynamic.id, dynamic)
         val targetLoc = dynamic.baseLocation.transform(23, 17, 0)
-        val replacement = base.planes[0].getRegionChunk(2,2)
-        dynamic.replaceChunk(0, 2, 2, replacement.copy(dynamic.planes[0]), base)
+        val replacement = base.getChunks()[2][2][0]
+        dynamic.replaceChunk(0, 2, 2, replacement.copy(), base)
         Assertions.assertEquals(36782, RegionManager.getObject(targetLoc)?.id ?: -1, "Object does not exist at expected location!")
     }
 
@@ -102,11 +95,10 @@ class RegionTests {
         val borders = DynamicRegion.reserveArea(8,8)
         val dynamic = DynamicRegion(-1, borders.southWestX shr 6, borders.southWestY shr 6)
         dynamic.borders = borders
-        dynamic.isUpdateAllPlanes = true
         RegionManager.addRegion(dynamic.id, dynamic)
         val targetLoc = dynamic.baseLocation.transform(23, 17, 0)
-        val replacement = base.planes[0].getRegionChunk(2,2)
-        dynamic.replaceChunk(0, 2, 2, replacement.copy(dynamic.planes[0]), base)
+        val replacement = base.getChunks()[2][2][0]
+        dynamic.replaceChunk(0, 2, 2, replacement.copy(), base)
         base.link(dynamic)
         Assertions.assertEquals(36782, RegionManager.getObject(targetLoc)?.id ?: -1, "Object does not exist at expected location!")
     }

@@ -1,0 +1,165 @@
+[
+  {
+    "mode": "add",
+    "id": "1814",
+    "location": "3090, 3475, 0",
+    "type": "4",
+    "direction": "nw"
+  },
+  {
+    "mode": "add",
+    "id": "2646",
+    "location": "2445, 3413, 0",
+    "direction": "nw"
+  },
+  {
+    "mode": "add",
+    "id": "2646",
+    "location": "2447, 3414, 0",
+    "direction": "e"
+  },
+  {
+    "mode": "add",
+    "id": "2646",
+    "location": "2447, 3421, 0",
+    "direction": "nw"
+  },
+  {
+    "comment": "Prison Pete Random",
+    "mode": "add",
+    "id": "36788",
+    "location": "2094, 4465, 0",
+    "type": "10",
+    "direction": "e"
+  },
+  {
+    "comment": "Green Portal",
+    "mode": "remove",
+    "id": "11371",
+    "location": "2085, 4457, 0"
+  },
+  {
+    "comment": "Lever",
+    "mode": "remove",
+    "id": "10817",
+    "location": "2083, 4460, 0"
+  },
+  {
+    "comment": "Lever",
+    "mode": "add",
+    "id": "26191",
+    "location": "2083, 4460, 0",
+    "type": "10",
+    "direction": "e"
+  },
+  {
+    "comment": "Window",
+    "mode": "add",
+    "id": "26184",
+    "location": "2084, 4459, 0",
+    "type": "0",
+    "direction": "n"
+  },
+  {
+    "comment": "Door",
+    "mode": "add",
+    "id": "26186",
+    "location": "2085, 4459, 0",
+    "type": "0",
+    "direction": "n"
+  },
+  {
+    "comment": "Door",
+    "mode": "add",
+    "id": "26188",
+    "location": "2086, 4459, 0",
+    "type": "0",
+    "direction": "n"
+  },
+  {
+    "comment": "Window",
+    "mode": "add",
+    "id": "26184",
+    "location": "2087, 4459, 0",
+    "type": "0",
+    "direction": "n"
+  },
+  {
+    "mode": "remove",
+    "id": "37670",
+    "location": "3292, 3299, 0"
+  },
+  {
+    "mode": "add",
+    "id": "37304",
+    "location": "3292, 3299, 0"
+  },
+  {
+    "mode": "add",
+    "id": "20987",
+    "location": "3821, 2996, 0"
+  },
+  {
+    "mode": "remove",
+    "id": "356",
+    "location": "2804, 3428, 0"
+  },
+  {
+    "mode": "add",
+    "id": "356",
+    "location": "2804, 3428, 0"
+  },
+  {
+    "mode": "remove",
+    "id": "20228",
+    "location": "2537, 3573, 0"
+  },
+  {
+    "mode": "add",
+    "id": "27663",
+    "location": "2537, 3573, 0",
+    "direction": "w"
+  },
+  {
+    "mode": "add",
+    "id": "39237",
+    "location": "2957, 3266, 0",
+    "direction": "n"
+  },
+  {
+    "mode": "add",
+    "id": "39245",
+    "location": "2956, 3270, 0",
+    "direction": "se"
+  },
+  {
+    "mode": "add",
+    "id": "39242",
+    "location": "2955, 3273, 0",
+    "direction": "w"
+  },
+  {
+    "mode": "add",
+    "id": "39241",
+    "location": "2955, 3274, 0"
+  },
+  {
+    "mode": "add",
+    "id": "20987",
+    "location": "2821, 2996, 0",
+    "direction": "s"
+  },
+  {
+    "mode": "add",
+    "id": "21301",
+    "location": "2662, 3162, 0",
+    "direction": "e"
+  },
+  {
+    "mode": "add",
+    "id": "4176",
+    "location": "2629, 3661, 2",
+    "type": "4",
+    "direction": "e"
+  }
+]

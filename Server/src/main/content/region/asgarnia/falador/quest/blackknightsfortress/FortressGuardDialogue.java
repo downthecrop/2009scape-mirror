@@ -200,8 +200,8 @@ public class FortressGuardDialogue extends DialoguePlugin {
 			break;
 		case 54:
 			end();
-			DoorActionHandler.handleAutowalkDoor(player, RegionManager.getObject(0, 3020, 3515));
-			List<NPC> npcs = RegionManager.getLocalNpcs(player);
+			DoorActionHandler.handleAutowalkDoor(player, RegionManager.getObject(3020, 3515, 0));
+			List<NPC> npcs = RegionManager.getLocalNPCs(player.getLocation());
 			for (NPC npc : npcs) {
 				if (npc.getId() == 179) {
 					npc.getProperties().getCombatPulse().attack(player);

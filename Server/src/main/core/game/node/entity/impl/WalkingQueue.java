@@ -6,13 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.item.GroundItem;
-import core.game.world.map.Direction;
-import core.game.world.map.Location;
-import core.game.world.map.Point;
-import core.game.world.map.RegionManager;
-import core.game.world.update.flag.chunk.ItemUpdateFlag;
+import core.game.world.map.*;
 import core.tools.Log;
-import core.tools.SystemLogger;
 
 import java.util.Deque;
 import java.util.ArrayDeque;
@@ -25,7 +20,6 @@ import static core.api.ContentAPIKt.*;
  * @author Emperor
  */
 public final class WalkingQueue {
-
 	/**
 	 * The walking queue.
 	 */
@@ -62,7 +56,7 @@ public final class WalkingQueue {
 	 */
 	private Location footPrint;
 
-        public ArrayList<GroundItem> routeItems = new ArrayList<GroundItem>();
+	public ArrayList<GroundItem> routeItems = new ArrayList<GroundItem>();
 
 	/**
 	 * Constructs a new {@code WalkingQueue} {@code Object}.
@@ -80,29 +74,31 @@ public final class WalkingQueue {
 		boolean isPlayer = entity instanceof Player;
 		this.walkDir = -1;
 		this.runDir = -1;
-		if(entity.getLocation() == null) {
+		Location prevLocation = entity.getLocation();
+		if (prevLocation == null) {
 			return;
 		}
 		if (updateTeleport()) {
 			return;
 		}
-		if (isPlayer && updateRegion(entity.getLocation(), true)) {
+		if (isPlayer && updateRegion(prevLocation, entity.getLocation(), true)) {
 			return;
 		}
-                if (hasTimerActive(entity, "frozen"))
-                    return;
+		if (hasTimerActive(entity, "frozen")) {
+			return;
+		}
 		Point point = walkingQueue.poll();
-                boolean drawPath = entity.getAttribute("routedraw", false);
+		boolean drawPath = entity.getAttribute("routedraw", false);
 		if (point == null) {
 			updateRunEnergy(false);
-                        if (isPlayer && drawPath) {
-                            for (GroundItem item : routeItems) {
-                                if (item != null) {
-                                    RegionManager.getRegionPlane(item.getLocation()).remove(item);    
-                                }
-                            }
-                            routeItems.clear();
-                        }
+			if (isPlayer && drawPath) {
+				for (GroundItem item : routeItems) {
+					if (item != null) {
+						RegionManager.getRegionChunk(item.getLocation()).remove(item);
+					}
+				}
+				routeItems.clear();
+			}
 			return;
 		}
 		if (isPlayer && ((Player) entity).getSettings().getRunEnergy() < 1.0) {
@@ -174,7 +170,7 @@ public final class WalkingQueue {
 			}
 			footPrint = entity.getLocation();
 			entity.setLocation(dest);
-			RegionManager.move(entity);
+			RegionManager.move(entity, prevLocation, dest);
 		}
 		this.walkDir = walkDirection;
 		this.runDir = runDirection;
@@ -190,9 +186,9 @@ public final class WalkingQueue {
 		if (player.getSettings().getWeight() > 0.0) {
 			rate *= 1 + (player.getSettings().getWeight() / 100);
 		}
-        if (hasTimerActive(player, "hamstrung")) {
-            rate *= 4;
-        }
+		if (hasTimerActive(player, "hamstrung")) {
+			rate *= 4;
+		}
 		return rate;
 	}
 
@@ -237,6 +233,7 @@ public final class WalkingQueue {
 	public boolean updateTeleport() {
 		if (entity.getProperties().getTeleportLocation() != null) {
 			reset(false);
+			Location prevLocation = entity.getLocation();
 			entity.setLocation(entity.getProperties().getTeleportLocation());
 			entity.getProperties().setTeleportLocation(null);
 			if (entity instanceof Player) {
@@ -245,13 +242,13 @@ public final class WalkingQueue {
 				if (last == null) {
 					last = p.getLocation();
 				}
-				if ((last.getRegionX() - entity.getLocation().getRegionX()) >= 4 || (last.getRegionX() - entity.getLocation().getRegionX()) <= -4) {
-					p.getPlayerFlags().setUpdateSceneGraph(true);
-				} else if ((last.getRegionY() - entity.getLocation().getRegionY()) >= 4 || (last.getRegionY() - entity.getLocation().getRegionY()) <= -4) {
+				int rx = last.getRegionX(), ry = last.getRegionY();
+				int cx = p.getLocation().getRegionX(), cy = p.getLocation().getRegionY();
+				if (Math.abs(rx - cx) >= 4 || Math.abs(ry - cy) >= 4) {
 					p.getPlayerFlags().setUpdateSceneGraph(true);
 				}
 			}
-			RegionManager.move(entity);
+			RegionManager.move(entity, prevLocation, entity.getLocation());
 			footPrint = entity.getLocation();
 			entity.getProperties().setTeleporting(true);
 			return true;
@@ -264,28 +261,19 @@ public final class WalkingQueue {
 	 * return true.
 	 * @return {@code True} if the region updated, {@code false} if not.
 	 */
-	public boolean updateRegion(Location location, boolean move) {
+	public boolean updateRegion(Location prevLocation, Location location, boolean move) {
 		Player p = (Player) entity;
 		Location lastRegion = p.getPlayerFlags().getLastSceneGraph();
 		if (lastRegion == null) {
 			lastRegion = location;
 		}
-		int rx = lastRegion.getRegionX();
-		int ry = lastRegion.getRegionY();
-		int cx = location.getRegionX();
-		int cy = location.getRegionY();
-		if ((rx - cx) >= 4) {
-			p.getPlayerFlags().setUpdateSceneGraph(true);
-		} else if ((rx - cx) <= -4) {
-			p.getPlayerFlags().setUpdateSceneGraph(true);
-		}
-		if ((ry - cy) >= 4) {
-			p.getPlayerFlags().setUpdateSceneGraph(true);
-		} else if ((ry - cy) <= -4) {
+		int rx = lastRegion.getRegionX(), ry = lastRegion.getRegionY();
+		int cx = location.getRegionX(), cy = location.getRegionY();
+		if (Math.abs(rx - cx) >= 4 || Math.abs(ry - cy) >= 4) {
 			p.getPlayerFlags().setUpdateSceneGraph(true);
 		}
 		if (move && p.getPlayerFlags().isUpdateSceneGraph()) {
-			RegionManager.move(entity);
+			RegionManager.move(entity, prevLocation, location);
 			return true;
 		}
 		return false;
@@ -320,13 +308,13 @@ public final class WalkingQueue {
 		if (point == null) {
 			return;
 		}
-                boolean drawRoute = entity.getAttribute("routedraw", false);
-                if (drawRoute && entity instanceof Player) {
-                    Player p = (Player) entity;
-                    GroundItem item = new GroundItem(new Item(13444), Location.create(x, y, p.getLocation().getZ()), p);
-                    routeItems.add (item);
-                    RegionManager.getRegionPlane(item.getLocation()).add(item);
-                }
+		boolean drawRoute = entity.getAttribute("routedraw", false);
+		if (drawRoute && entity instanceof Player) {
+			Player p = (Player) entity;
+			GroundItem item = new GroundItem(new Item(13444), Location.create(x, y, p.getLocation().getZ()), p);
+			routeItems.add (item);
+			RegionManager.getRegionChunk(item.getLocation()).add(item);
+		}
 		int diffX = x - point.getX(), diffY = y - point.getY();
 		int max = Math.max(Math.abs(diffX), Math.abs(diffY));
 		for (int i = 0; i < max; i++) {
@@ -363,9 +351,7 @@ public final class WalkingQueue {
 
 	/**
 	 * Checks if the entity is running.
-	 * @return {@code True} if a ctrl + click reward was performed, <br> the
-	 * player has the run option enabled or the NPC is a familiar, <p>
-	 * {@code false} if not.
+	 * @return {@code True} if a ctrl + click reward was performed, the player has the run option enabled or the NPC is a familiar, {@code False} if not.
 	 */
 	public boolean isRunningBoth() {
 		if (isRunDisabled()) return false;
@@ -404,7 +390,6 @@ public final class WalkingQueue {
 	 */
 	public void reset(boolean running) {
 		Location loc = entity.getLocation();
-
 		if (loc == null) {
 			log(this.getClass(), Log.ERR,
 				"The entity location provided was null."

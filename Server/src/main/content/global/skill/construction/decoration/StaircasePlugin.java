@@ -29,18 +29,18 @@ public final class StaircasePlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ClassScanner.definePlugin(new BuildDialogue());
 		ClassScanner.definePlugin(new ClimbPohLadder());
-        // 13497 - 13502 are normal stairs
-        // 13503 - 13506 are spiral stairs
+		// 13497 - 13502 are normal stairs
+		// 13503 - 13506 are spiral stairs
 		for (int i = 13497; i <= 13506; i++) {
 			SceneryDefinition.forId(i).getHandlers().put("option:climb", this);
 			SceneryDefinition.forId(i).getHandlers().put("option:climb-up", this);
 			SceneryDefinition.forId(i).getHandlers().put("option:climb-down", this);
 			SceneryDefinition.forId(i).getHandlers().put("option:remove-room", this);
 		}
-        // 13409 is dungeon entrance
+		// 13409 is dungeon entrance
 		SceneryDefinition.forId(13409).getHandlers().put("option:enter", this);
 		SceneryDefinition.forId(13409).getHandlers().put("option:remove-room", this);
-        // 13328 - 13330 are dungeon ladders
+		// 13328 - 13330 are dungeon ladders
 		for (int id = 13328; id <= 13330; id++) {
 			SceneryDefinition.forId(id).getHandlers().put("option:climb", this);
 			SceneryDefinition.forId(id).getHandlers().put("option:remove-room", this);
@@ -73,45 +73,43 @@ public final class StaircasePlugin extends OptionHandler {
 			SceneryBuilder.replace(object, object.transform(object.getId() - 3));
 			return true;
 		case "remove-room":
+			int currentZ = player.getLocation().getZ();
+			int chunkX = player.getLocation().getChunkX();
+			int chunkY = player.getLocation().getChunkY();
 
-            int currentZ = player.getLocation().getZ();
-            int chunkX = player.getLocation().getChunkX();
-            int chunkY = player.getLocation().getChunkY();
+			// must be in building mode
+			if(!player.getHouseManager().isBuildingMode()) {
+				player.getPacketDispatch().sendMessage("You can only do this in building mode.");
+				return true;
+			}
 
-            // must be in building mode
-            if(!player.getHouseManager().isBuildingMode()) {
-                player.getPacketDispatch().sendMessage("You can only do this in building mode.");
-                return true;
-            }
+			// if you're in the dungeon, try and remove the room at Z = 0 from the house region.
+			if (HouseManager.isInDungeon(player)) {
+				player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 0);
 
-            // if you're in the dungeon, try and remove the room at Z = 0 from the house region.
-            if (HouseManager.isInDungeon(player)) {
-                player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 0);
+			// From ground floor (z=0), stairs could lead to 1st floor (z=1) or the dungeon (z=3)
+			} else {
+				// garden dungeon entrance and oubliette ladders don't need a height selection
+				if (node.getId() == 13409 || node.getId() == 13675 || node.getId() == 13676 || node.getId() == 13677 || node.getId() == 13678 || node.getId() == 13679 || node.getId() == 13680) {
+					player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 3);
+				} else {
+					player.getDialogueInterpreter().sendOptions("Remove which room?", "Room Above", "Room Below", "Cancel");
+					player.getDialogueInterpreter().addAction((interId, btn) -> {
+						if (btn == 2) { // Above
+							player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, currentZ + 1);
+						} else if (btn == 3) { // Below
+							if (currentZ - 1 == -1) {
+								player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 3);
+							} else {
+								player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, currentZ - 1);
+							}
 
-            // From ground floor (z=0), stairs could lead to 1st floor (z=1) or the dungeon (z=3)
-            } else {
-                // garden dungeon entrance and oubliette ladders don't need a height selection
-                if(node.getId() == 13409 || node.getId() == 13675 || node.getId() == 13676 || node.getId() == 13677 || node.getId() == 13678 || node.getId() == 13679 || node.getId() == 13680) {
-                    player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 3);
-                } else {
-                    player.getDialogueInterpreter().sendOptions("Remove which room?", "Room Above", "Room Below", "Cancel");
-                    player.getDialogueInterpreter().addAction((interId, btn) -> {
-                        if (btn == 2) { // Above
-                            player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, currentZ + 1);
-                        } else if (btn == 3) { // Below
-                            if (currentZ - 1 == -1) {
-                                player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, 3);
-                            } else {
-                                player.getDialogueInterpreter().open("con:remove", null, new int[]{chunkX, chunkY}, currentZ - 1);
-                            }
+						}
+					});
+				}
 
-                        }
-                    });
-                }
-
-            }
-            return true;
-
+			}
+			return true;
 		case "climb":
 			if (HouseManager.isInDungeon(player)) {
 				climb(player, 1, house, object);
@@ -151,7 +149,7 @@ public final class StaircasePlugin extends OptionHandler {
 		if (plane < 0) { //Dungeon
 			plane = 3;
 		}
-		else if (player.getViewport().getRegion() == house.getDungeonRegion() && plane == 1) {//going up
+		else if (player.getLocation().getRegion() == house.getDungeonRegion() && plane == 1) {// going up
 			plane = 0;
 		}
 		Room room = house.getRooms()[plane][roomX][roomY];
@@ -165,7 +163,7 @@ public final class StaircasePlugin extends OptionHandler {
 			}
 		} else {
 			Location destination = l.transform(0, 0, z);
-			if (player.getViewport().getRegion() == house.getDungeonRegion()) {
+			if (player.getLocation().getRegion() == house.getDungeonRegion()) {
 				destination = house.getHouseRegion().getBaseLocation().transform(l.getLocalX(), l.getLocalY(), 0);
 			}
 			else if (plane == 3) {
@@ -417,7 +415,7 @@ public final class StaircasePlugin extends OptionHandler {
 					for (Direction d : dirs) {
 						if (d == room.getRotation()) {
 							r.setRotation(d);
-                            // todo this just puts a default set of stairs in the dungeon. The below code works for skill/quest hall, but not a dungeon entrance.
+							// todo this just puts a default set of stairs in the dungeon. The below code works for skill/quest hall, but not a dungeon entrance.
 							//Hotspot stairs = room.getStairs();
 							//int index = stairs != null ? stairs.getDecorationIndex() : -1;
 							BuildingUtils.buildRoom(player, r, plane, roomX, roomY, r.getExits(), true);

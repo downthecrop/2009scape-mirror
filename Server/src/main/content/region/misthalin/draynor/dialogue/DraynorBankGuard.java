@@ -1,12 +1,14 @@
 package content.region.misthalin.draynor.dialogue;
 
-import core.game.activity.ActivityManager;
+import content.region.misthalin.draynor.handlers.DBRCutscene;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+
+import static core.api.ContentAPIKt.getAttribute;
 
 /**
  * Represents the dialogue plugin used for the draynor bank guard npc.
@@ -15,7 +17,6 @@ import core.game.node.item.Item;
  */
 @Initializable
 public final class DraynorBankGuard extends DialoguePlugin {
-
 	/**
 	 * Represents the coins item needed to re-watch the recording.
 	 */
@@ -55,7 +56,7 @@ public final class DraynorBankGuard extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (!player.getSavedData().getGlobalData().isDraynorRecording()) {
+			if (!getAttribute(player, DBRCutscene.HAS_SEEN_RECORDING, false)) {
 				interpreter.sendOptions("Select an option", "Can I deposit my stuff here?", "That wall doesn't look very good.", "Sorry, I don't want anything.");
 				stage = 1;
 			} else {
@@ -325,7 +326,7 @@ public final class DraynorBankGuard extends DialoguePlugin {
 	 */
 	private void startRecording(Player player) {
 		end();
-		ActivityManager.start(player, "dbr cutscene", false);
+		new DBRCutscene(player).start();
 	}
 
 	@Override

@@ -42,11 +42,6 @@ public final class Skills {
 	public double experienceMultiplier = 1.0;
 
 	/**
-	 * The maximum experience multiplier.
-	 */
-	public static final double MAX_EXPERIENCE_MOD = 60.0;
-
-	/**
 	 * Represents an array of skill names.
 	 */
 	public static final String[] SKILL_NAME = { "Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecrafting", "Hunter", "Construction", "Summoning" };
@@ -252,9 +247,9 @@ public final class Skills {
 			staticLevels[slot] = newLevel;
 
 			if (entity instanceof Player) {
-                            player.updateAppearance();
-			    LevelUp.levelup(player, slot, amount);
-                            updateCombatLevel();
+				player.updateAppearance();
+				LevelUp.levelup(player, slot, amount);
+				updateCombatLevel();
 			}
 		}
 		if (entity instanceof Player) {
@@ -288,46 +283,6 @@ public final class Skills {
 		//Keywords for people ctrl + Fing the project
 		//xprate xp rate xp multiplier skilling rate
 		return experienceMultiplier;
-		/*if (!(entity instanceof Player)) {
-			return 1.0;
-		}
-		double mod = multiplyer ? (EXPERIENCE_MULTIPLIER) : 1;
-		Player p = (Player) entity;
-		if (p.getIronmanManager().getMode() == IronmanMode.ULTIMATE) {
-			mod /= 4;
-		} else if (p.getIronmanManager().getMode() == IronmanMode.STANDARD) {
-			mod /= 2;
-		}
-		//A boost for combat skills that are under level 65.
-		if(entity instanceof Player && !this.hasLevel(slot, 65) && isCombat(slot)){
-			mod *= 1.5;
-		}
-		//Grand Exchange region XP boost.
-		if(entity.getViewport().getRegion().getRegionId() == 12598){
-			mod += 1.5;
-		}
-		// Pest control, XP halved during the game
-		if (entity.getViewport().getRegion().getRegionId() == 10536) {
-			mod *= .5;
-		}
-		if (SystemManager.getSystemConfig().isDoubleExp()) {
-			mod *= 2;
-		}
-		if (HolidayEvent.getCurrent() != null) {
-			HolidayEvent.getCurrent().addExperience(p, slot, experience);
-		}
-		p.getAntiMacroHandler().registerExperience(slot, experience);
-		if (TutorialSession.getExtension(p).getStage() < TutorialSession.MAX_STAGE) {
-			mod = 1.0;
-		} else {
-			if (playerMod && p.getExperienceMod() != 0.0) {
-				mod *= p.getExperienceMod();
-			}
-		}
-		if (mod > MAX_EXPERIENCE_MOD ) {
-			return MAX_EXPERIENCE_MOD;
-		}
-		return mod;*/
 	}
 
 	/**
@@ -721,9 +676,6 @@ public final class Skills {
 		if (prayerPoints < 0) {
 			prayerPoints = 0;
 		}
-		// if (prayerPoints > staticLevels[PRAYER]) {
-		// prayerPoints = staticLevels[PRAYER];
-		// }
 		if (entity instanceof Player) {
 			PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
 		}

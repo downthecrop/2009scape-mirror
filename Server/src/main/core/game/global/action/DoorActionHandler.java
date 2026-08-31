@@ -1,6 +1,5 @@
 package core.game.global.action;
 
-import content.data.Quests;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -137,7 +136,7 @@ public final class DoorActionHandler {
                 return Unit.INSTANCE;
             });
         }
-		GameWorld.getPulser().submit(new Pulse(1) {
+        GameWorld.getPulser().submit(new Pulse(1) {
             boolean opened = false;
             @Override
             public boolean pulse() {
@@ -161,7 +160,7 @@ public final class DoorActionHandler {
                     }
 
                     // pass the al kharid gate
-                    if (object.getId() == 35549 || object.getId() == 35551 && player.getViewport().getRegion().getId() == 13106) {
+                    if (object.getId() == 35549 || object.getId() == 35551 && player.getLocation().getRegionId() == 13106) {
                         player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 0, 4);
                     }
 
@@ -425,7 +424,7 @@ public final class DoorActionHandler {
         }
         object.setCharge(IN_USE_CHARGE);
         second.setCharge(IN_USE_CHARGE);
-		GameWorld.getPulser().submit(new Pulse(1) {
+        GameWorld.getPulser().submit(new Pulse(1) {
             boolean opened = false;
 
             @Override
@@ -491,6 +490,10 @@ public final class DoorActionHandler {
         return null;
     }
 
+    private static Scenery getAdjacentDoor(Location location, int type) {
+        return RegionManager.getObject(location.getX(), location.getY(), location.getZ(), -1, type);
+    }
+
     /**
      * Gets the door next to this door.
      *
@@ -499,18 +502,17 @@ public final class DoorActionHandler {
      */
     public static Scenery getSecondDoor(Scenery object, Entity entity) {
         Location l = object.getLocation();
-        Player player = entity instanceof Player ? (Player) entity : null;
         Scenery o = null;
-        if ((o = RegionManager.getObject(l.transform(-1, 0, 0))) != null && o.getName().equals(object.getName())) {
+        if ((o = getAdjacentDoor(l.transform(-1, 0, 0), object.getType())) != null && o.getName().equals(object.getName())) {
             return o;
         }
-        if ((o = RegionManager.getObject(l.transform(1, 0, 0))) != null && o.getName().equals(object.getName())) {
+        if ((o = getAdjacentDoor(l.transform(1, 0, 0), object.getType())) != null && o.getName().equals(object.getName())) {
             return o;
         }
-        if ((o = RegionManager.getObject(l.transform(0, -1, 0))) != null && o.getName().equals(object.getName())) {
+        if ((o = getAdjacentDoor(l.transform(0, -1, 0), object.getType())) != null && o.getName().equals(object.getName())) {
             return o;
         }
-        if ((o = RegionManager.getObject(l.transform(0, 1, 0))) != null && o.getName().equals(object.getName())) {
+        if ((o = getAdjacentDoor(l.transform(0, 1, 0), object.getType())) != null && o.getName().equals(object.getName())) {
             return o;
         }
         return null;

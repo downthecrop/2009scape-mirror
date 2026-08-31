@@ -111,9 +111,9 @@ public final class NPCDropTables {
 			}
 			return;
 		}
-        announceIfRare(player, item);
+		announceIfRare(player, item);
 		if(item.getId() == 6199 && player instanceof Player){
-		    player.sendMessage("<col=990000>A mystery box has fallen on the ground.</col>");
+			player.sendMessage("<col=990000>A mystery box has fallen on the ground.</col>");
 		}
 		sendDropMessage(player, npc.getId(), item);
 		if (player == null) {
@@ -144,7 +144,7 @@ public final class NPCDropTables {
 		int itemId = item.getDefinition().isUnnoted() ? item.getId() : item.getNoteChange();
 		if (player != null && npc.getProperties().isMultiZone() && (item.getDefinition().isTradeable() || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal() && !player.getIronmanManager().isIronman()) {
 			Player looter = player;
-			List<Player> players = RegionManager.getLocalPlayers(npc, 16);
+			List<Player> players = RegionManager.getLocalPlayers(npc.getLocation(), 16);
 			List<Player> looters = new ArrayList<>(20);
 			for (Player p : players) {
 				if (p != null && p.getCommunication().getClan() != null && p.getCommunication().getClan() == player.getCommunication().getClan() && p.getCommunication().isLootShare() && p.getCommunication().getLootRequirement().ordinal() >= p.getCommunication().getClan().getLootRequirement().ordinal()) {

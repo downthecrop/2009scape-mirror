@@ -16,12 +16,8 @@ import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
-import core.game.world.map.Region
-import core.net.packet.PacketProcessor
-import core.plugin.ClassScanner
 import core.plugin.Plugin
 import core.tools.Log
-import org.rs09.consts.NPCs
 
 class PathfinderTests {
     companion object {init {TestUtils.preTestSetup(); GatheringSkillOptionListeners().defineListeners(); WoodcuttingListener().defineListeners() }; val NPC_TEST_LOC = ServerConstants.HOME_LOCATION!!.transform(2, 10, 0)}
@@ -49,7 +45,7 @@ class PathfinderTests {
 
     @Test fun movementPulseShouldStopEarlyIfNextToATileOccupiedByTargetObject() {
         val start = Location.create(2731, 3481)
-        val dest = RegionManager.getObject(0, 2720, 3475, 1307)
+        val dest = RegionManager.getObject(2720, 3475, 0, 1307, -1)
         val p = TestUtils.getMockPlayer("treefindtest")
         p.location = start
         p.init()

@@ -2,6 +2,8 @@ package content.global.skill.magic.ancient;
 
 import java.util.List;
 
+import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.MultihitTargetsKt;
 import core.game.node.entity.combat.spell.Runes;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -131,10 +133,10 @@ public final class IceSpells extends CombatSpell {
 			return;
 		}
 		int ticks = (type.ordinal() - 4) * 8;
-        if (hasTimerActive(victim, "frozen") || hasTimerActive(victim, "frozen:immunity")) {
-            if (type == SpellType.BARRAGE) { state.setFrozen(true); }
-            return;
-        }
+		if (hasTimerActive(victim, "frozen") || hasTimerActive(victim, "frozen:immunity")) {
+			if (type == SpellType.BARRAGE) { state.setFrozen(true); }
+			return;
+		}
 		registerTimer(victim, spawnTimer("frozen", ticks, true));
 	}
 
@@ -143,7 +145,8 @@ public final class IceSpells extends CombatSpell {
 		if (animation.getId() == 1978 || !entity.getProperties().isMultiZone() || !target.getProperties().isMultiZone()) {
 			return super.getTargets(entity, target);
 		}
-		List<Entity> list = getMultihitTargets(entity, target, 9);
+
+		List<Entity> list = MultihitTargetsKt.findMultihitTargets(target, entity, CombatStyle.MAGIC);
 		BattleState[] targets = new BattleState[list.size()];
 		int index = 0;
 		for (Entity e : list) {

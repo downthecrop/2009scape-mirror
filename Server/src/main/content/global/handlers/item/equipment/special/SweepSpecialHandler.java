@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.plugin.Initializable;
-import content.global.skill.summoning.familiar.Familiar;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.map.Direction;
-import core.game.world.map.Location;
-import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -22,6 +17,7 @@ import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playGlobalAudio;
+import static core.game.node.entity.combat.MultihitTargetsKt.findMultihitTargetsForDragonHalberd;
 
 /**
  * Handles the Dragon halberd special attack.
@@ -92,25 +88,11 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 		if (!entity.getProperties().isMultiZone() || !victim.getProperties().isMultiZone()) {
 			return new BattleState[]{state};
 		}
-		Location vl = victim.getLocation();
-		int x = vl.getX();
-		int y = vl.getY();
-		Direction dir = Direction.getDirection(x - entity.getLocation().getX(), y - entity.getLocation().getY());
 		List<BattleState> l = new ArrayList<>(20);
 		l.add(new BattleState(entity, victim));
-		for (Entity n : victim instanceof NPC ? RegionManager.getSurroundingNPCs(victim, 9, entity, victim) : RegionManager.getSurroundingPlayers(victim, 9, entity, victim)) {
-			if (n instanceof Familiar) {
-				continue;
-			}
-			if (!n.isAttackable(entity, CombatStyle.MELEE, false)) {
-				continue;
-			}
-			if (n.getLocation().equals(vl.transform(dir.getStepY(), dir.getStepX(), 0)) || n.getLocation().equals(vl.transform(-dir.getStepY(), -dir.getStepX(), 0))) {
-				l.add(new BattleState(entity, n));
-				if (l.size() >= 3) {
-					break;
-				}
-			}
+		List<Entity> list = findMultihitTargetsForDragonHalberd(victim, entity);
+		for (Entity n : list) {
+			l.add(new BattleState(entity, n));
 		}
 		return l.toArray(new BattleState[l.size()]);
 	}

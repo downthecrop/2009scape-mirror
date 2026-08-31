@@ -46,7 +46,6 @@ class HazeelCultListeners : InteractionListener {
                 questReq
                     ) {true} else false
 
-
             // check which raft this is.
             val x = node.location.x
 
@@ -173,18 +172,16 @@ class HazeelCultListeners : InteractionListener {
         }
 
         // chest with hazeel scroll. unlocks with key, opens, and contains the scroll.
-        onUseWith(IntType.SCENERY, CHEST_KEY, Scenery.CHEST_2856) { player, _, _ ->
+        onUseWith(IntType.SCENERY, CHEST_KEY, Scenery.CHEST_2856) { player, _, node ->
             sendMessage(player, "You unlock the chest.")
             animate(player, Animations.HUMAN_OPEN_CHEST_536)
-            addScenery(Scenery.CHEST_2857,CHEST_LOCATION, 2, 10)
-            removeScenery(core.game.node.scenery.Scenery(Scenery.CHEST_2856, Location(2565, 3272, 2)))
+            replaceScenery(node.asScenery(), Scenery.CHEST_2857, 20)
             return@onUseWith true
         }
 
         // chest with hazeel scroll. unlocks with key, opens, and contains the scroll.
-        on(Scenery.CHEST_2857, IntType.SCENERY, "Close") { _, _ ->
-            addScenery(Scenery.CHEST_2856, CHEST_LOCATION, 2, 10)
-            removeScenery(core.game.node.scenery.Scenery(Scenery.CHEST_2857, CHEST_LOCATION))
+        on(Scenery.CHEST_2857, IntType.SCENERY, "Close") { _, node ->
+            replaceScenery(node.asScenery(), Scenery.CHEST_2856, -1)
             return@on true
         }
 

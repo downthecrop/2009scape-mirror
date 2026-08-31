@@ -2,7 +2,7 @@ package core.game.world.update.flag;
 
 import core.game.world.map.Location;
 import core.game.world.map.RegionChunk;
-import core.game.world.map.Viewport;
+import core.game.world.update.MapChunkRenderer;
 
 /**
  * A class holding a player's updating flags.
@@ -18,11 +18,11 @@ public final class PlayerFlags {
 	/**
 	 * The last viewport.
 	 */
-	private RegionChunk[][] lastViewport = new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE];
+	private RegionChunk[][] lastViewport = new RegionChunk[MapChunkRenderer.BUILD_AREA_SIZE][MapChunkRenderer.BUILD_AREA_SIZE];
 
 	/**
 	 * The location the player was standing on when last scene graph update
-	 * occured.
+	 * occurred.
 	 */
 	private Location lastSceneGraph;
 

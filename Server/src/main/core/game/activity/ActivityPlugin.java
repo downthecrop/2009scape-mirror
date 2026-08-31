@@ -4,7 +4,6 @@ import core.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
-import core.game.world.map.Region;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.*;
 import core.game.world.map.zone.impl.MultiwayCombatZone;
@@ -108,7 +107,7 @@ public abstract class ActivityPlugin extends MapZone implements Plugin<Player> {
 				l = r.getBaseLocation();
 			}
 		}
-		ZoneBorders borders = new ZoneBorders(region.getX() << 6, region.getY() << 6, l.getX() + Region.SIZE, l.getY() + Region.SIZE);
+		ZoneBorders borders = new ZoneBorders(region.getX() << 6, region.getY() << 6, l.getX() + 64, l.getY() + 64);
 		RegionZone multiZone = multicombat ? new RegionZone(MultiwayCombatZone.getInstance(), borders) : null;
 		RegionZone zone = new RegionZone(this, borders);
 		for (DynamicRegion r : regions) {

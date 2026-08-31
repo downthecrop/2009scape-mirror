@@ -920,7 +920,7 @@ public enum RoomProperties {
 	public boolean[] getExits() {
 		Region region = RegionManager.forId(7503);
 		Region.load(region, true);
-		RegionChunk chunk = region.getPlanes()[0].getRegionChunk(chunkX, chunkY);
+		RegionChunk chunk = region.getChunks()[chunkX][chunkY][0];
 		return new boolean[] { isExit(chunk, 7, 3), isExit(chunk, 3, 0), isExit(chunk, 0, 3), isExit(chunk, 3, 7) };
 	}
 

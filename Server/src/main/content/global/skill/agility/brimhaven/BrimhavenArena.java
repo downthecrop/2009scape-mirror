@@ -229,7 +229,7 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                 DISPENSERS[index++] = Location.create(x, y, 3);
             }
         }
-		GameWorld.getPulser().submit(new Pulse(1) {
+        GameWorld.getPulser().submit(new Pulse(1) {
             @Override
             public boolean pulse() {
                 Region r = RegionManager.forId(11157);
@@ -237,9 +237,11 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                     return false;
                 }
                 if (GameWorld.getTicks() % 100 == 0) {
-                    for (RegionPlane plane : r.getPlanes()) {
-                        for (Player player : plane.getPlayers()) {
-                            setDispenser(player);
+                    for (int z = 0; z < 4; z++) {
+                        for (Player player : r.assemblePlayerList(z)) {
+                            if (player != null) {
+                                setDispenser(player);
+                            }
                         }
                     }
                     handlePlankSwitching();
@@ -248,19 +250,19 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                 if (GameWorld.getTicks() % ticks == 0) {
                     sawBladeActive = !sawBladeActive;
                     if (sawBladeActive) {
-                        Scenery object = RegionManager.getObject(3, 2788, 9579);
+                        Scenery object = RegionManager.getObject(2788, 9579, 3);
                         SceneryBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
-                        object = RegionManager.getObject(3, 2789, 9579);
+                        object = RegionManager.getObject(2789, 9579, 3);
                         SceneryBuilder.replace(object, object.transform(0), ticks);
 
-                        object = RegionManager.getObject(3, 2783, 9551);
+                        object = RegionManager.getObject(2783, 9551, 3);
                         SceneryBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
-                        object = RegionManager.getObject(3, 2783, 9552);
+                        object = RegionManager.getObject(2783, 9552, 3);
                         SceneryBuilder.replace(object, object.transform(0), ticks);
 
-                        object = RegionManager.getObject(3, 2761, 9584);
+                        object = RegionManager.getObject(2761, 9584, 3);
                         SceneryBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
-                        object = RegionManager.getObject(3, 2761, 9585);
+                        object = RegionManager.getObject(2761, 9585, 3);
                         SceneryBuilder.replace(object, object.transform(0), ticks);
                     }
                 }

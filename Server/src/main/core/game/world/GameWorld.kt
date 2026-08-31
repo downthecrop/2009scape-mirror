@@ -18,7 +18,9 @@ import core.ServerStore
 import core.auth.AuthProvider
 import core.auth.Auth
 import core.game.system.config.ConfigParser
+import core.game.world.map.RegionChunk
 import core.game.world.repository.Repository
+import core.game.world.update.ChunkUpdateTracker
 import core.plugin.ClassScanner
 import core.storage.AccountStorageProvider
 import core.tools.Log
@@ -164,6 +166,7 @@ object GameWorld {
     fun prompt(run: Boolean, directory: String?){
         log(GameWorld::class.java, Log.FINE, "Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
+        RegionChunk.dirtyListener = ChunkUpdateTracker
         //go overboard with checks to make sure dev mode authenticator never triggers on live
         Auth.configure()
         ConfigParser().prePlugin()

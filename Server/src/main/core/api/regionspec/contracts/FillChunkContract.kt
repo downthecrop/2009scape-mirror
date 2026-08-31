@@ -1,6 +1,6 @@
 package core.api.regionspec.contracts
 
-import core.game.world.map.BuildRegionChunk
+import core.game.world.map.Location
 import core.game.world.map.Region
 import core.game.world.map.RegionChunk
 import core.game.world.map.build.DynamicRegion
@@ -14,28 +14,22 @@ open class FillChunkContract(var chunk: RegionChunk? = null) : ChunkSpecContract
     var chunkDelegate: (Int, Int, Int, Region) -> RegionChunk? = {_,_,_,_ -> chunk}
 
     override fun populateChunks(dyn: DynamicRegion) {
-        for(plane in planes) {
-            for(x in 0 until 8)
-                for(y in 0 until 8)
-                    if(replaceCondition.invoke(x,y,plane)) {
-                        val chunk = getChunk(x,y,plane,dyn)
-                        dyn.replaceChunk(
-                            plane,
-                            x,
-                            y,
-                            chunk,
-                            sourceRegion
-                        )
+        for (plane in planes) {
+            for (x in 0 until 8)
+                for (y in 0 until 8)
+                    if (replaceCondition.invoke(x,y,plane)) {
+                        val chunk = getChunk(x,y,plane,dyn) ?: continue
+                        dyn.replaceChunk(plane, x, y, chunk, sourceRegion)
                         afterSetting(chunk, x, y, plane, dyn)
                     }
         }
     }
 
-    open fun getChunk(x: Int, y: Int, plane: Int, dyn: DynamicRegion) : BuildRegionChunk? {
-        return chunkDelegate.invoke(x, y, plane, sourceRegion)?.copy(dyn.planes[plane])
+    open fun getChunk(x: Int, y: Int, plane: Int, dyn: DynamicRegion) : RegionChunk? {
+        return chunkDelegate.invoke(x, y, plane, sourceRegion)?.copy()
     }
 
-    open fun afterSetting(chunk: BuildRegionChunk?, x: Int, y: Int, plane: Int, dyn: DynamicRegion) {}
+    open fun afterSetting(chunk: RegionChunk?, x: Int, y: Int, plane: Int, dyn: DynamicRegion) {}
 
     fun from(region: Region): FillChunkContract {
         this.sourceRegion = region

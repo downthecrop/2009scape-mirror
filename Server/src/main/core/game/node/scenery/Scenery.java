@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
+import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import static core.api.ContentAPIKt.*;
  * @author Emperor
  */
 public class Scenery extends Node {
-
 	/**
 	 * The object id.
 	 */
@@ -71,7 +71,39 @@ public class Scenery extends Node {
 	 * The scenery wrapper (used for object configurations).
 	 */
 	private Scenery wrapper;
-	
+
+	public enum Layer {
+		WALL,
+		WALL_DECOR,
+		GROUND,
+		GROUND_DECOR
+	}
+	/**
+	 * @return the authentic client scenery layer
+	 */
+	public Layer getLayer() {
+		if (type <= 3 || type == 9) { // walls
+			return Layer.WALL;
+		}
+		if (type <= 8) { // wall decors
+			return Layer.WALL_DECOR;
+		}
+		if (type <= 11) { // scenery
+			return Layer.GROUND;
+		}
+		if (type <= 17) { // roofs, same layer as scenery
+			return Layer.GROUND;
+		}
+		if (type <= 21) { // roof edges, same layer as scenery
+			return Layer.GROUND;
+		}
+		if (type == 22) { // ground decors
+			return Layer.GROUND_DECOR;
+		}
+		log(this.getClass(), Log.ERR, "Invalid scenery type " + type);
+		return null;
+	}
+
 	/**
 	 * Constructs a new scenery.
 	 * @param id The object id.

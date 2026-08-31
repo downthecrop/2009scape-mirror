@@ -372,7 +372,9 @@ class RevenantController : TickListener, Commands {
                 if (routeIdx == -1) {
                     GameWorld.Pulser.submit(object : Pulse() {
                         override fun pulse(): Boolean {
-                            Graphics.send(Graphics(86), revenantNPC.location)
+                            if (revenantNPC.location.region.isActive) {
+                                Graphics.send(Graphics(86), revenantNPC.location)
+                            }
                             return true
                         }
                     })

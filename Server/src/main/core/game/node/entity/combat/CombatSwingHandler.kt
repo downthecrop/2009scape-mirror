@@ -17,7 +17,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.RegionManager.getClippingFlag
-import core.game.world.map.path.Pathfinder
 import core.game.world.map.path.Pathfinder.*
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -25,7 +24,6 @@ import core.game.system.config.ItemConfigParser
 import core.tools.Log
 import org.rs09.consts.Sounds
 import java.util.*
-import kotlin.math.floor
 
 /**
  * Handles a combat swing.

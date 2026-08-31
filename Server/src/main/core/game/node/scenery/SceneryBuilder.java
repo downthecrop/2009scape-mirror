@@ -15,15 +15,12 @@ import static core.api.ContentAPIKt.log;
 
 /**
  * An aiding class for object constructing/removing.
- *
  * @author Emperor
  */
 public final class SceneryBuilder {
-
 	/**
 	 * Replaces a scenery.
-	 *
-	 * @param remove    The object to remove.
+	 * @param remove The object to remove.
 	 * @param construct The object to add.
 	 * @return {@code True} if successful.
 	 */
@@ -34,9 +31,9 @@ public final class SceneryBuilder {
 	/**
 	 * Replaces a scenery.
 	 *
-	 * @param remove    The object to remove.
+	 * @param remove The object to remove.
 	 * @param construct The object to add.
-	 * @param clip      If clipping should be adjusted.
+	 * @param clip If clipping should be adjusted.
 	 * @return {@code True} if successful.
 	 */
 	public static boolean replace(Scenery remove, Scenery construct, boolean clip, boolean permanent) {
@@ -71,9 +68,8 @@ public final class SceneryBuilder {
 
 	/**
 	 * Replaces the object client sided alone.
-	 *
-	 * @param remove       The object to remove.
-	 * @param construct    The object to replace with.
+	 * @param remove The object to remove.
+	 * @param construct The object to replace with.
 	 * @param restoreTicks The restoration ticks.
 	 * @return {@code True} if successful.
 	 */
@@ -93,9 +89,8 @@ public final class SceneryBuilder {
 
 	/**
 	 * Replaces a scenery temporarily.
-	 *
-	 * @param remove       The object to remove.
-	 * @param construct    The object to add.
+	 * @param remove The object to remove.
+	 * @param construct The object to add.
 	 * @param restoreTicks The amount of ticks before the object gets restored.
 	 * @return {@code True} if successful.
 	 */
@@ -105,9 +100,8 @@ public final class SceneryBuilder {
 
 	/**
 	 * Replaces a scenery temporarily.
-	 *
-	 * @param remove       The object to remove.
-	 * @param construct    The object to add.
+	 * @param remove The object to remove.
+	 * @param construct The object to add.
 	 * @param restoreTicks The amount of ticks before the object gets restored.
 	 * @return {@code True} if successful.
 	 */
@@ -151,7 +145,6 @@ public final class SceneryBuilder {
 
 	/**
 	 * Adds a scenery.
-	 *
 	 * @param object The object to add.
 	 * @return {@code True} if successful.
 	 */
@@ -161,10 +154,8 @@ public final class SceneryBuilder {
 
 	/**
 	 * Adds a scenery.
-	 *
 	 * @param object The object to add.
-	 * @param ticks  The amount of ticks this object should last for (-1 for
-	 *               permanent).
+	 * @param ticks The amount of ticks this object should last for (-1 for permanent).
 	 * @return {@code True} if successful.
 	 */
 	public static Constructed add(Scenery object, int ticks, final GroundItem... items) {
@@ -190,31 +181,7 @@ public final class SceneryBuilder {
 	}
 
 	/**
-	 * Removes all objects within a box
-	 * @param objectId - the object id to remove
-	 * @param southWest
-	 * @param northEast
-	 * @return
-	 */
-	public static boolean removeAll(int objectId, Location southWest, Location northEast) {
-		if (southWest.getX() > northEast.getX() || southWest.getY() > northEast.getY())
-			return false;
-
-		int differenceX = northEast.getX() - southWest.getX();
-		int differenceY = northEast.getY() - southWest.getY();
-
-		for (int x = 0; x <= differenceX; x++) {
-			for (int y = 0; y <= differenceY; y++){
-				Scenery object = new Scenery(objectId, Location.create(southWest.getX() + x, southWest.getY() + y, southWest.getZ()));
-				remove(object);
-			}
-		}
-		return true;
-	}
-
-	/**
 	 * Removes a scenery.
-	 *
 	 * @param object The object to remove.
 	 * @return {@code True} if successful.
 	 */
@@ -233,21 +200,18 @@ public final class SceneryBuilder {
 
 	/**
 	 * Removes a scenery.
-	 *
-	 * @param object       the object.
+	 * @param object the object.
 	 * @param respawnTicks the respawn ticks.
 	 * @return {@code True}if removed.
 	 */
 	public static boolean remove(final Scenery object, int respawnTicks) {
 		if (remove(object)) {
 			GameWorld.getPulser().submit(new Pulse(respawnTicks) {
-
 				@Override
 				public boolean pulse() {
 					add(object);
 					return true;
 				}
-
 			});
 			return true;
 		}
@@ -256,8 +220,7 @@ public final class SceneryBuilder {
 
 	/**
 	 * Updates the scenery on all the player's screen.
-	 *
-	 * @param objects The scenerys.
+	 * @param objects The sceneries.
 	 */
 	public static void update(Scenery... objects) {
 		for (Scenery o : objects) {

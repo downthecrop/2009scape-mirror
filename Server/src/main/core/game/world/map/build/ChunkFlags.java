@@ -1,5 +1,6 @@
 package core.game.world.map.build;
 
+import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
 import kotlin.Pair;
 
@@ -10,7 +11,7 @@ import static java.lang.Math.max;
  * @author Emperor
  *
  */
-public final class RegionFlags {
+public final class ChunkFlags {
 
 	public static final int TILE_OBJECT = 0x40000;
 	public static final int EMPTY_TILE = 0;
@@ -20,7 +21,7 @@ public final class RegionFlags {
 	/**
 	 * The plane.
 	 */
-	private final int plane;
+	private final int baseZ;
 
 	/**
 	 * If the region is members only.
@@ -49,23 +50,25 @@ public final class RegionFlags {
 
 	/**
 	 * Constructs a new {@code RegionFlags} {@code Object}.
-	 * @param x  The base x-coordinate (absolute).
+	 * @param x The base x-coordinate (absolute).
 	 * @param y The base y-coordinate (absolute).
-     */
-	public RegionFlags(int plane, int x, int y) {
-		this(plane, x, y, false);
+	 * @param z The base z-coordinate (absolute).
+	 */
+	public ChunkFlags(int x, int y, int z) {
+		this(x, y, z, false);
 	}
 
 	/**
 	 * Constructs a new {@code RegionFlags} {@code Object}.
-	 * @param x  The base x-coordinate (absolute).
+	 * @param x The base x-coordinate (absolute).
 	 * @param y The base y-coordinate (absolute).
-     */
-	public RegionFlags(int plane, int x, int y, boolean projectile) {
-		this.plane = plane;
+	 */
+	public ChunkFlags(int x, int y, int z, boolean projectile) {
 		this.baseX = x;
 		this.baseY = y;
+		this.baseZ = z;
 		this.projectile = projectile;
+		this.landscape = new boolean[RegionChunk.SIZE][RegionChunk.SIZE]; // all false by default, thanks Java
 	}
 
 	/**
@@ -126,10 +129,10 @@ public final class RegionFlags {
 	 * @param clipdata The clip data.
 	 */
 	public void flag(int x, int y, int clipdata) {
-		if (x > -1 && x < 64 && y > -1 && y < 64) {
+		if (x > -1 && x < 8 && y > -1 && y < 8) {
 			addFlag(x, y, clipdata);
 		} else {
-			RegionManager.addClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
+			RegionManager.addClippingFlag(baseZ, baseX + x, baseY + y, projectile, clipdata);
 		}
 	}
 
@@ -160,15 +163,15 @@ public final class RegionFlags {
 	 * @param clipdata The clip data.
 	 */
 	public void unflag(int x, int y, int clipdata) {
-		if (x > -1 && x < 64 && y > -1 && y < 64) {
+		if (x >= 0 && x < RegionChunk.SIZE && y >= 0 && y < RegionChunk.SIZE) {
 			removeFlag(x, y, clipdata);
 		} else {
-			RegionManager.removeClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
+			RegionManager.removeClippingFlag(baseZ, baseX + x, baseY + y, projectile, clipdata);
 		}
 	}
 
 	private Pair<Integer, Integer> getFlagIndex(int x, int y) {
-		return new Pair<>(((baseX >> 6) << 8) | (baseY >> 6), (plane * 64 * 64) + (x * 64) + y);
+		return new Pair<>((baseZ << 22) | ((baseX >> 3) << 11) | (baseY >> 3), (x * 8) + y);
 	}
 
 	public int getFlag(int x, int y) {
@@ -349,7 +352,7 @@ public final class RegionFlags {
 	}
 	
 	/**
-	 * Unlags a door object (type 0-3).
+	 * Unflags a door object (type 0-3).
 	 * @param x The x-coordinate
 	 * @param y The y-coordinate.
 	 * @param rotation The rotation.
@@ -515,8 +518,8 @@ public final class RegionFlags {
 	 * Gets the plane.
 	 * @return The plane.
 	 */
-	public int getPlane() {
-		return plane;
+	public int getBaseZ() {
+		return baseZ;
 	}
 
 	/**

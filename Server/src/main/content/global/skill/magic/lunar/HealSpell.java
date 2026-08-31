@@ -1,5 +1,6 @@
 package content.global.skill.magic.lunar;
 
+import core.game.bots.AIPlayer;
 import core.game.node.entity.combat.spell.MagicSpell;
 import core.game.node.entity.combat.spell.Runes;
 import core.plugin.Initializable;
@@ -111,11 +112,11 @@ public final class HealSpell extends MagicSpell {
 			playGlobalAudio(o.getLocation(), Sounds.LUNAR_HEAL_OTHER_INDIVIDUAL_2892);
 			o.graphics(GRAPHICS);
 		} else {
-			List<Player> players = RegionManager.getLocalPlayers(player, 1);
 			if (!super.meetsRequirements(player, true, true)) {
 				return false;
 			}
 			int percentage = (int) Math.ceil(player.getSkills().getLifepoints() * 0.75);
+			List<Player> players = RegionManager.getLocalPlayers(player.getLocation(), 1);
 			for (Iterator<Player> it = players.iterator(); it.hasNext();) {
 				Player p = it.next();
 				if (p == player || !p.getSettings().isAcceptAid() || !p.isActive() || p.getSkills().getLifepoints() == p.getSkills().getMaximumLifepoints()) {

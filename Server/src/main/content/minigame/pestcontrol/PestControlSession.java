@@ -9,7 +9,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
-import core.game.world.map.RegionPlane;
 import core.game.world.map.build.DynamicRegion;
 import core.tools.RandomFunction;
 
@@ -21,6 +20,7 @@ import static core.api.ContentAPIKt.*;
  * @author Emperor
  */
 public final class PestControlSession {
+	private static int STRANGE_PHANTOM_OBJECT_THAT_SHARES_A_TILE_WITH_A_BARRICADE = 25636;
 
 	/**
 	 * The barricade object offsets.
@@ -31,7 +31,7 @@ public final class PestControlSession {
 	 * The object ids of non-attackable barricades/gates.
 	 */
 	public static final int[] INVALID_OBJECT_IDS = {14230, 14231, 14232, // Barricades
-			14245, 14246, 14247, 14248, // Gates
+			14245, 14246, 14247, 14248 // Gates
 	};
 
 	/**
@@ -123,7 +123,7 @@ public final class PestControlSession {
 	 * @param message The message to send.
 	 */
 	public void sendMessage(String message) {
-		for (Player p : region.getPlanes()[0].getPlayers()) {
+		for (Player p : region.assemblePlayerList(0)) {
 			if (p.isActive()) {
 				p.getPacketDispatch().sendMessage(message);
 			}
@@ -136,7 +136,7 @@ public final class PestControlSession {
 	 * @param child The child id.
 	 */
 	public void sendString(String message, int child) {
-		for (Player p : region.getPlanes()[0].getPlayers()) {
+		for (Player p : region.assemblePlayerList(0)) {
 			if (p.isActive()) {
 				p.getPacketDispatch().sendString(message, 408, child);
 			}
@@ -164,9 +164,9 @@ public final class PestControlSession {
 	 * @param value The message value to send.
 	 */
 	public void sendConfig(int value) {
-		for (Player p : region.getPlanes()[0].getPlayers()) {
+		for (Player p : region.assemblePlayerList(0)) {
 			if (p.isActive()) {
-                                setVarp(p, 719, value);
+				setVarp(p, 719, value);
 			}
 		}
 	}
@@ -191,7 +191,7 @@ public final class PestControlSession {
 			message = "The red, south-western portal shield has dropped!";
 			break;
 		}
-		for (Player p : region.getPlanes()[0].getPlayers()) {
+		for (Player p : region.assemblePlayerList(0)) {
 			if (p.isActive()) {
 				p.getPacketDispatch().sendInterfaceConfig(408, 18 + (index << 1), true);
 				p.getPacketDispatch().sendMessage(message);
@@ -233,8 +233,7 @@ public final class PestControlSession {
 			}
 		}
 
-		for (Player p : remainingPlayers)
-		{
+		for (Player p : remainingPlayers) {
 			int priority = p.getAttribute("pc_prior", 0) + 1;
 			p.getPacketDispatch().sendMessage("You have been given priority level " + priority + " over other players in joining the next");
 			p.getPacketDispatch().sendMessage("game.");
@@ -264,7 +263,7 @@ public final class PestControlSession {
 		Random r = RandomFunction.RANDOM;
 		Location l = region.getBaseLocation();
 		p.getProperties().setTeleportLocation(l.transform(32 + r.nextInt(4), 49 + r.nextInt(6), 0));
-                setVarp(p, 1147, 0);
+		setVarp(p, 1147, 0);
 		p.getDialogueInterpreter().sendDialogues(3781, FacialExpression.FURIOUS, "You must defend the Void Knight while the portals are", "unsummoned. The ritual takes twenty minutes though,", "so you can help out by destroying them yourselves!", "Now GO GO GO!");
 	}
 
@@ -272,9 +271,15 @@ public final class PestControlSession {
 	 * Initializes the barricades list.
 	 */
 	private void initBarricadesList() {
-		RegionPlane p = region.getPlanes()[0];
-		for (Point point : OBJECT_OFFSETS) {
-			barricades.add(p.getObjects()[point.getX()][point.getY()]);
+		List<Scenery> objectList = region.assembleObjectList(0);
+		for (Scenery object : objectList) {
+			for (Point point : OBJECT_OFFSETS) {
+				if (object.getLocation().getLocalX() == point.getX() && object.getLocation().getLocalY() == point.getY()) {
+					if (object.getId() != STRANGE_PHANTOM_OBJECT_THAT_SHARES_A_TILE_WITH_A_BARRICADE) {
+						barricades.add(object);
+					}
+				}
+			}
 		}
 	}
 
@@ -385,5 +390,4 @@ public final class PestControlSession {
 	public List<Scenery> getBarricades() {
 		return barricades;
 	}
-
 }

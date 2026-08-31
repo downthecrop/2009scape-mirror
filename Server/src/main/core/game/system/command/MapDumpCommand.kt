@@ -1,7 +1,6 @@
 package core.game.system.command
 
 import core.game.node.entity.player.Player
-import core.game.system.command.CommandSet
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.plugin.Initializable
@@ -34,7 +33,7 @@ class MapDumpCommand : CommandPlugin() {
             for (x in 0 until xmax - 1) {
                 for (y in 0 until ymax - 1) {
                     for (z in 0 until zmax - 1) {
-                        val temp = RegionManager.getObject(z, x, y)
+                        val temp = RegionManager.getObject(x, y, z)
                         if (temp != null) {
                             GameObjectMap[Location(x, y, z)] = temp.id
                         }

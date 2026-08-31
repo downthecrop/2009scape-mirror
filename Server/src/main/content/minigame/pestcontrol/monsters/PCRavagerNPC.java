@@ -114,7 +114,7 @@ public class PCRavagerNPC extends AbstractNPC {
 					GameWorld.getPulser().submit(new Pulse(1, this, o) {
 						@Override
 						public boolean pulse() {
-							if (getViewport().getRegion().isActive() && session.getBarricades().remove(o)) {
+							if (getLocation().getRegion().isActive() && session.getBarricades().remove(o)) {
 								session.getBarricades().add(newTarget);
 								SceneryBuilder.replace(o, newTarget);
 							}
@@ -173,10 +173,10 @@ public class PCRavagerNPC extends AbstractNPC {
 		return true;
 	}
 
-    @Override
-    public boolean shouldPreventStacking(Entity mover) {
-        return mover instanceof NPC;
-    }
+	@Override
+	public boolean shouldPreventStacking(Entity mover) {
+		return mover instanceof NPC;
+	}
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {

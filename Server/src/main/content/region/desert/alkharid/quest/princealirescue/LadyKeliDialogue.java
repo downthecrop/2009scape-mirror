@@ -64,7 +64,7 @@ public final class LadyKeliDialogue extends DialoguePlugin {
 		case 60:
 		case 100:
 			npc.sendChat("You tricked me, and tied me up, Guards kill this stranger!");
-			List<NPC> npcc = RegionManager.getLocalNpcs(player);
+			List<NPC> npcc = RegionManager.getLocalNPCs(player.getLocation());
 			for (NPC n : npcc) {
 				if (n.getId() == 917) {
 					n.sendChat("Yes M'lady");

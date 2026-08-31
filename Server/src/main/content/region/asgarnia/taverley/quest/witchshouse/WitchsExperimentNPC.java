@@ -38,7 +38,7 @@ public class WitchsExperimentNPC extends AbstractNPC {
     @Override
     public void handleTickActions() {
         super.handleTickActions();
-        if(!p.isActive() || !RegionManager.getLocalPlayers(this).contains(p)){
+        if (!p.isActive() || !RegionManager.getLocalPlayers(location).contains(p)) {
             p.removeAttribute("witchs-experiment:npc_spawned");
             clear();
         }

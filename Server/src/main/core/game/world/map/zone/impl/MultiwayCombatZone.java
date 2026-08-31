@@ -3,7 +3,6 @@ package core.game.world.map.zone.impl;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.MapDistance;
 import core.game.world.map.RegionManager;
@@ -127,21 +126,21 @@ public final class MultiwayCombatZone extends MapZone {
 		if (e.getProperties().isNPCWalkable()) {
 			return true;
 		}
-        for (NPC n : RegionManager.getLocalNpcs(e, MapDistance.RENDERING.getDistance() / 2)) {
-            if (n.isInvisible() || !n.getDefinition().hasAttackOption() || n == e) {
-                continue;
-            }
-            if(n.shouldPreventStacking(e)) {
-                int s1 = e.size();
-                int s2 = n.size();
-                int x = destination.getX();
-                int y = destination.getY();
-                Location l = n.getLocation();
-                if(Pathfinder.isStandingIn(x, y, s1, s1, l.getX(), l.getY(), s2, s2)) {
-                    return false;
-                }
-            }
-        }
+		for (NPC n : RegionManager.getLocalNPCs(e.getLocation(), MapDistance.RENDERING.getDistance() / 2)) {
+			if (n.isInvisible() || !n.getDefinition().hasAttackOption() || n == e) {
+				continue;
+			}
+			if(n.shouldPreventStacking(e)) {
+				int s1 = e.size();
+				int s2 = n.size();
+				int x = destination.getX();
+				int y = destination.getY();
+				Location l = n.getLocation();
+				if(Pathfinder.isStandingIn(x, y, s1, s1, l.getX(), l.getY(), s2, s2)) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 

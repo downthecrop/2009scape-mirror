@@ -131,22 +131,22 @@ public class Player extends Entity {
 
 	public Boolean isAfkLogout;
 
-    private StorageState POHStorageState;
+	private StorageState POHStorageState;
 
-    public final Container POHStorageProxyContainer = new POHStorageProxyContainer(this);
+	public final Container POHStorageProxyContainer = new POHStorageProxyContainer(this);
 
-    public StorageState getPOHStorageState() {
-        if (POHStorageState == null) {
-            POHStorageState = new StorageState(this);
-        }
-        return POHStorageState;
-    }
+	public StorageState getPOHStorageState() {
+		if (POHStorageState == null) {
+			POHStorageState = new StorageState(this);
+		}
+		return POHStorageState;
+	}
 
-    public void setPOHStorageState(StorageState state) {
-        this.POHStorageState = state;
-    }
+	public void setPOHStorageState(StorageState state) {
+		this.POHStorageState = state;
+	}
 
-    /**
+	/**
 	 * The inventory.
 	 */
 	private final Container inventory = new Container(28).register(new InventoryListener(this));
@@ -854,11 +854,10 @@ public class Player extends Entity {
 		getInterfaceManager().setChatbox(null);
 		getPulseManager().clear();
 		getZoneMonitor().getZones().clear();
-		getViewport().setCurrentPlane(RegionManager.forId(66666).getPlanes()[3]);
 		playerFlags.setLastSceneGraph(null);
 		playerFlags.setUpdateSceneGraph(false);
-		playerFlags.setLastViewport(new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
-		renderInfo.getLocalNpcs().clear();
+		playerFlags.setLastViewport(new RegionChunk[MapChunkRenderer.BUILD_AREA_SIZE][MapChunkRenderer.BUILD_AREA_SIZE]);
+		renderInfo.getLocalNPCs().clear();
 		renderInfo.getLocalPlayers().clear();
 		renderInfo.setLastLocation(null);
 		renderInfo.setOnFirstCycle(true);
@@ -891,8 +890,8 @@ public class Player extends Entity {
 	 * @param login If the player is logging in.
 	 */
 	public void updateSceneGraph(boolean login) {
-		Region region = getViewport().getRegion();
-		if (region instanceof DynamicRegion || region == null && (region = RegionManager.forId(location.getRegionId())) instanceof DynamicRegion) {
+		Region region = getLocation().getRegion();
+		if (region instanceof DynamicRegion) {
 			PacketRepository.send(BuildDynamicScene.class, new DynamicSceneContext(this, login));
 		} else {
 			PacketRepository.send(UpdateSceneGraph.class, new SceneGraphContext(this, login));

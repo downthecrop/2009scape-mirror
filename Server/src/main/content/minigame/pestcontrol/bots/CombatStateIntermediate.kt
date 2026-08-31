@@ -7,8 +7,6 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import content.minigame.pestcontrol.PestControlHelper.GATE_ENTRIES
 import content.minigame.pestcontrol.PestControlHelper.getMyPestControlSession2
 import core.game.world.GameWorld
@@ -62,7 +60,7 @@ class CombatStateIntermediate(val bot: PestControlTestBot2) {
         if (portal != null) {
             if(bot.location.withinDistance(portal.location,10) && portal.isActive){
                 val spinners = ArrayList<NPC>()
-                RegionManager.getLocalNpcs(bot).forEach {
+                RegionManager.getLocalNPCs(bot.location).forEach {
                     if(it.name.toLowerCase().equals("spinner") && it.location.withinDistance(bot.location,10)) spinners.add(it)
                 }
                 if(spinners.isNotEmpty()){

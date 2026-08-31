@@ -136,7 +136,7 @@ public final class SoftclayPlugin extends UseWithHandler {
             player.getPacketDispatch().sendMessage("You mix the clay and water. You now have some soft, workable clay.");
             player.getInventory().add(SOFT_CLAY);
             player.getInventory().add(returnItem);
-            if (!player.getAchievementDiaryManager().hasCompletedTask(DiaryType.LUMBRIDGE, 0, 6) && player.getViewport().getRegion().getId() == 12341) {
+            if (!player.getAchievementDiaryManager().hasCompletedTask(DiaryType.LUMBRIDGE, 0, 6) && player.getLocation().getRegionId() == 12341) {
                 player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 0, 6);
             }
 			return true;

@@ -126,7 +126,7 @@ public class BurthorpeTrainNPC extends AbstractNPC {
 		case 1061:// sergant
 			sendChat(MESSAGES[RandomFunction.random(MESSAGES.length)]);
 			delay = System.currentTimeMillis() + 9000 + RandomFunction.random(1000, 5000);
-			final List<NPC> soldiers = RegionManager.getLocalNpcs(this);
+			final List<NPC> soldiers = RegionManager.getLocalNPCs(location);
 			NPC soldier = null;
 			while (soldier == null) {
 				soldier = soldiers.get(RandomFunction.random(soldiers.size()));
@@ -164,7 +164,7 @@ public class BurthorpeTrainNPC extends AbstractNPC {
 			GameWorld.getPulser().submit(new Pulse(2) {
 				@Override
 				public boolean pulse() {
-					final List<NPC> soldiers = RegionManager.getLocalNpcs(BurthorpeTrainNPC.this, 12);
+					final List<NPC> soldiers = RegionManager.getLocalNPCs(location, 12);
 					for (NPC n : soldiers) {
 						if (n.getId() != 1064) {
 							continue;

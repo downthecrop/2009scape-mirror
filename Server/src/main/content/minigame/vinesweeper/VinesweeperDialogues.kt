@@ -1,3 +1,5 @@
+package content.minigame.vinesweeper
+
 import core.game.component.Component
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item

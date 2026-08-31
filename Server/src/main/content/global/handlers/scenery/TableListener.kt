@@ -413,7 +413,7 @@ class TableListener : InteractionListener {
                 }
                 val droppedItem = used.dropItem
                 if (droppedItem.id == Items.COINS_995) playAudio(player, DROP_COINS_SOUND) else playAudio(player, DROP_ITEM_SOUND)
-                GroundItemManager.create(droppedItem, Location(nearestX, nearestY), player)
+                GroundItemManager.create(droppedItem, Location(nearestX, nearestY, player.location.z), player)
 
                 setAttribute(player, "droppedItem:${droppedItem.id}", getWorldTicks() + 2)
                 PlayerParser.save(player)

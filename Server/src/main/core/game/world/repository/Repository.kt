@@ -127,7 +127,7 @@ object Repository {
      */
     @JvmStatic
     fun findNPC(l: Location): NPC? {
-        for (n in RegionManager.getRegionPlane(l).npcs) {
+        for (n in RegionManager.getRegionChunk(l).npcs) {
             if (n.location == l) {
                 return n
             }

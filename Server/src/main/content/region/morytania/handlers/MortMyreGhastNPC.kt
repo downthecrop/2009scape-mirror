@@ -36,7 +36,9 @@ class MortMyreGhastNPC : AbstractNPC {
     override fun handleTickActions() {
         super.handleTickActions()
         if(id == ids[0] && RandomFunction.roll(35)){
-            val players = RegionManager.getLocalPlayers(this, 5).filter { !it.inCombat() }
+            val players = RegionManager.getLocalPlayers(location, 5).filter {
+                return@filter !it.inCombat()
+            }
             if(players.isNotEmpty()){
                 val player = players.random()
                 submitIndividualPulse(this, object : MovementPulse(this, player){

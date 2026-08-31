@@ -2,7 +2,7 @@ package content.region.misthalin.draynor.handlers
 
 import core.game.node.entity.Entity
 import core.game.world.map.Location
-import core.game.world.map.RegionManager.getLocalNpcs
+import core.game.world.map.RegionManager.getLocalNPCs
 import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
@@ -24,7 +24,7 @@ class DraynorManorHouseZone : MapZone("Draynor Manor House", true), Plugin<Any?>
     }
 
     override fun move(e: Entity, loc: Location?, destination: Location): Boolean {
-        for (n in getLocalNpcs(e, 5)) {
+        for (n in getLocalNPCs(e.location, 5)) {
             if (n.isInvisible() || n === e) {
                 continue
             }

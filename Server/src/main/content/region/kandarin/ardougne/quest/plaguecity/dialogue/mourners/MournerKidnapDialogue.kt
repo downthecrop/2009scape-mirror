@@ -56,7 +56,7 @@ class MournerKidnapDialogueFile : DialogueFile(){
         // Figure out who we are. It needs to be this since we can enter this dialogue from a door
         // Do this for the first time regardless of where we are
         if (stage == 0) {
-            RegionManager.getLocalNpcs(player!!, 2).forEach {
+            RegionManager.getLocalNPCs(player!!.location, 2).forEach {
                 if (it.id == NPCs.MOURNER_3216) {
                     closeMourner = it
                     resetFace(closeMourner!!)
@@ -78,7 +78,7 @@ class MournerKidnapDialogueFile : DialogueFile(){
                 2 -> npcl(FacialExpression.HALF_WORRIED, " This is highly irregular. Please wait...").also { stage++ }
                 3 -> {
                     // Look further for the other one
-                    RegionManager.getLocalNpcs(player!!, 10).forEach {
+                    RegionManager.getLocalNPCs(player!!.location, 10).forEach {
                         if (it.id == NPCs.MOURNER_3216 && it != closeMourner){
                             farMourner = it
                             resetFace(farMourner!!)

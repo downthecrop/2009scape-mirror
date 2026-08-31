@@ -8,6 +8,7 @@ import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs09.consts.*
@@ -100,7 +101,7 @@ class AlomoneDialogue(player: Player? = null) : DialoguePlugin(player) {
                 26 -> {
                     end()
                     removeItem(player, HAZEEL_SCROLL)
-                    val hazeel = player.findNpcInViewport(NPCs.HAZEEL_892)
+                    val hazeel = player.findNearbyNPC(NPCs.HAZEEL_892)
                     hazeel?.clear()
                     removeAttribute(player,"hazeelSpawned")
                     finishQuest(player, Quests.HAZEEL_CULT)
@@ -129,13 +130,10 @@ class AlomoneDialogue(player: Player? = null) : DialoguePlugin(player) {
     // this has the potential to remove other players' hazeels, but the player could still complete the quest by either continuing their
     // active dialogue or speaking to alomone, and just dealing with the fact that their hazeel is not on the map. relogging and restarting
     // the dialogue would get these players a new hazeel.
-    private fun Player.findNpcInViewport(npcId: Int): NPC? {
-        val viewport = viewport ?: return null
-        for (plane in viewport.viewingPlanes) {
-            for (npc in plane.npcs) {
-                if (npc.id == npcId) {
-                    return npc
-                }
+    private fun Player.findNearbyNPC(npcId: Int): NPC? {
+        for (npc in RegionManager.getLocalNPCs(location)) {
+            if (npc.id == npcId) {
+                return npc
             }
         }
         return null

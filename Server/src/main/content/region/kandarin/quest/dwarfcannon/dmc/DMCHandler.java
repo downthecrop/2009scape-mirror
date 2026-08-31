@@ -6,7 +6,6 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -51,10 +50,10 @@ public final class DMCHandler implements LogoutListener {
 	 */
 	private DMCRevolution direction = DMCRevolution.NORTH;
 
-        private CannonTimer timer;
+	private CannonTimer timer;
 
 	public DMCHandler() {
-	    this.player = null;
+		this.player = null;
 	}
 
 	/**
@@ -78,7 +77,7 @@ public final class DMCHandler implements LogoutListener {
 		Location l = cannon.getLocation().transform(1, 1, 0);
 		playGlobalAudio(l, Sounds.MCANNON_TURN_2877);
 		direction = DMCRevolution.values()[(direction.ordinal() + 1) % DMCRevolution.values().length];
-		for (NPC npc : RegionManager.getLocalNpcs(l, 10)) {
+		for (NPC npc : RegionManager.getLocalNPCs(l, 10)) {
 			if (direction.isInSight(npc.getLocation().getX() - l.getX(), npc.getLocation().getY() - l.getY()) && npc.isAttackable(player, CombatStyle.RANGE, false) && CombatSwingHandler.isProjectileClipped(npc, l, false)) {
 				int speed = (int) (25 + (l.getDistance(npc.getLocation()) * 10));
 				Projectile.create(l, npc.getLocation(), 53, 40, 36, 20, speed, 0, 128).send();
@@ -106,8 +105,8 @@ public final class DMCHandler implements LogoutListener {
 			return;
 		}
 		if (timer.isFiring()) {
-		    timer.setFiring(false);
-		    return;
+			timer.setFiring(false);
+			return;
 		}
 		if (cannonballs < 1) {
 			int amount = player.getInventory().getAmount(new Item(2));
@@ -127,7 +126,7 @@ public final class DMCHandler implements LogoutListener {
 				player.sendMessage("Your cannon is already fully loaded.");
 			}
 		}
-                timer.setFiring(true);
+		timer.setFiring(true);
 	}
 
 	/**
@@ -138,7 +137,7 @@ public final class DMCHandler implements LogoutListener {
 			return;
 		}
 		player.sendMessage("Your cannon has " + (decay ? "decayed" : "been destroyed") + "!");
-		for (Player p : RegionManager.getLocalPlayers(player)) {
+		for (Player p : RegionManager.getLocalPlayers(player.getLocation())) {
 			p.getPacketDispatch().sendPositionedGraphic(189, 0, 1, cannon.getLocation());
 		}
 		clear(false);
@@ -194,15 +193,15 @@ public final class DMCHandler implements LogoutListener {
 					player.getPacketDispatch().sendMessage("You add the furnace.");
 					SceneryBuilder.remove(object);
 					handler.configure(SceneryBuilder.add(object = object.transform(6)));
-                                        handler.timer = (CannonTimer) spawnTimer ("dmc:timer", handler);
-                                        registerTimer (player, handler.timer);
+					handler.timer = (CannonTimer) spawnTimer ("dmc:timer", handler);
+					registerTimer (player, handler.timer);
 					return true;
 				}
 				playGlobalAudio(player.getLocation(), Sounds.MCANNON_SETUP_2876);
-                if(count != 0) {
-                    SceneryBuilder.remove(object);
-                    SceneryBuilder.add(object = object.transform(object.getId() + 1));
-                }
+				if(count != 0) {
+					SceneryBuilder.remove(object);
+					SceneryBuilder.add(object = object.transform(object.getId() + 1));
+				}
 				return ++count == 4;
 			}
 		});

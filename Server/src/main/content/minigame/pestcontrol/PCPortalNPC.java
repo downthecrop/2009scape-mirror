@@ -8,12 +8,9 @@ import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.map.Direction;
-import core.game.world.map.Location;
-import core.game.world.map.RegionPlane;
+import core.game.world.map.*;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
-import content.minigame.pestcontrol.monsters.PCRavagerNPC;
 import content.minigame.pestcontrol.monsters.PCSpinnerNPC;
 
 /**
@@ -146,8 +143,9 @@ public final class PCPortalNPC extends AbstractNPC {
 	public void tick() {
 		super.tick();
 		if (session != null) {
-			RegionPlane plane = getViewport().getCurrentPlane();
-			if (plane != null && session.getTicks() % 35 - plane.getPlayers().size() == 0 && plane.getNpcs().size() < 100) {
+			Region region = RegionManager.forId(location.getRegionId());
+                        if ((session.getTicks() % 35 - region.assemblePlayerList(0).size()) == 0 && 
+                             region.assembleNpcList(0).size() < 100) {
 				spawnNPCs();
 			}
 			if (updateLifepoints && session.getTicks() % 10 == 0) {
@@ -187,9 +185,8 @@ public final class PCPortalNPC extends AbstractNPC {
 		int index = getDifficultyIndex();
 		Random r = RandomFunction.RANDOM;
 		int amount = index + 1;
-		if (getViewport().getCurrentPlane() != null) {
-			amount += getViewport().getCurrentPlane().getPlayers().size() / 10;
-		}
+		Region region = RegionManager.forId(location.getRegionId());
+		amount += region.assemblePlayerList(0).size() / 10;
 		if (getDifficultyIndex() == 0) {
 			amount += ((getDifficultyIndex() + 1) * 3) / 2;
 		}

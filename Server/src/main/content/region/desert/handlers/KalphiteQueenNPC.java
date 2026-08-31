@@ -211,7 +211,7 @@ public final class KalphiteQueenNPC extends AbstractNPC {
 		 */
 		private BattleState[] getRangeTargets(Entity e, Entity victim) {
 			List<BattleState> list = new ArrayList<>(20);
-			for (Entity t : RegionManager.getLocalPlayers(victim, -1 + (int) e.getCenterLocation().getDistance(victim.getLocation()))) {
+			for (Player t : RegionManager.getLocalPlayers(victim.getLocation(), -1 + (int) e.getCenterLocation().getDistance(victim.getLocation()))) {
 				if (t.isAttackable(e, CombatStyle.RANGE, false)) {
 					list.add(new BattleState(e, t));
 				}
@@ -315,12 +315,10 @@ public final class KalphiteQueenNPC extends AbstractNPC {
 				return;
 			}
 			if (style == CombatStyle.MAGIC) {
-				BattleState[] states = new BattleState[entity.getViewport().getCurrentPlane().getPlayers().size() + 1];
+				List<Player> localPlayers = RegionManager.getLocalPlayers(entity.getLocation());
+				BattleState[] states = new BattleState[localPlayers.size() + 1];
 				int index = 1;
-				if (states.length == 0) {
-					return;
-				}
-				for (Player p : entity.getViewport().getCurrentPlane().getPlayers()) {
+				for (Player p : localPlayers) {
 					if (p != victim) {
 						states[index++] = new BattleState(entity, p);
 					}

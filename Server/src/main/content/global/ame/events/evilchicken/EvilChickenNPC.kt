@@ -8,12 +8,14 @@ import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import content.global.ame.RandomEventNPC
+import core.api.sendMessage
 import core.api.utils.WeightBasedTable
 
 val ids = (2463..2468).toList()
 
 class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(2463) {
     val phrases = arrayOf("Bwuk","Bwuk bwuk bwuk","Flee from me, @name!","Begone, @name!","Bwaaaauuuk bwuk bwuk","MUAHAHAHAHAAA!")
+    var sentMessage = false
     override fun talkTo(npc: NPC) {}
 
     override fun init() {
@@ -31,13 +33,16 @@ class EvilChickenNPC(override var loot: WeightBasedTable? = null) : RandomEventN
     }
 
     override fun tick() {
-        if(!player.location.withinDistance(this.location,8)){
-            this.terminate()
-        }
-        if(getWorldTicks() % 10 == 0){
-            sendChat(phrases.random().replace("@name",player.username.capitalize()))
+        if (!sentMessage) {
+            if (!player.location.withinDistance(this.location, 8)) {
+                // https://www.youtube.com/watch?v=v9p_I_Tq3JE
+                sendMessage(player, "The Evil Chicken realises you're out of range and vanishes.")
+                sentMessage = true
+                terminate()
+            } else if (getWorldTicks() % 10 == 0) {
+                sendChat(phrases.random().replace("@name", player.username.capitalize()))
+            }
         }
         super.tick()
-        if(!player.viewport.currentPlane.npcs.contains(this)) this.clear()
     }
 }

@@ -5,8 +5,6 @@ import java.util.List;
 
 import core.game.consumable.Consumable;
 import content.data.consumables.Consumables;
-import core.game.consumable.Food;
-import content.data.consumables.effects.HealingEffect;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
@@ -33,7 +31,7 @@ public class PvMBots extends AIPlayer {
 
     public List<Entity> FindTargets(Entity entity, int radius) {
         List<Entity> targets = new ArrayList<>(20);
-        Object[] localNPCs = RegionManager.getLocalNpcs(entity,radius).toArray();
+        Object[] localNPCs = RegionManager.getLocalNPCs(entity.getLocation(), radius).toArray();
         int length = localNPCs.length;
         if(length > 5){length = 5;}
         for (int i = 0; i < length; i++) {
@@ -95,9 +93,9 @@ public class PvMBots extends AIPlayer {
 
     @Override
     public void tick() {
-		super.tick();
+        super.tick();
 
-		this.tick++;
+        this.tick++;
 
         //Despawn
         if (this.getSkills().getLifepoints() <= 5){
@@ -109,12 +107,12 @@ public class PvMBots extends AIPlayer {
         }
 
         //Npc Combat
-		/*if (this.tick % 10 == 0) {
-			if (!this.inCombat())
-				AttackNpcsInRadius(this, 5);
-		}*/
+        /*if (this.tick % 10 == 0) {
+            if (!this.inCombat())
+                AttackNpcsInRadius(this, 5);
+        }*/
 
-		if (this.tick == 100) this.tick = 0;
+        if (this.tick == 100) this.tick = 0;
 
         //this.eat();
         //this.getPrayer().toggle()

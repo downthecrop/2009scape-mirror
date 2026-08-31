@@ -70,7 +70,7 @@ public final class DagannothKingNPC extends AbstractNPC {
 			state.setEstimatedHit(RandomFunction.random(type.getMaxHit() - 5, type.getMaxHit()));
 		}
 		if (type != DagType.REX && RandomFunction.random(5) <= 2) {
-			List<Player> players = RegionManager.getLocalPlayers(this, 9);
+			List<Player> players = RegionManager.getLocalPlayers(location, 9);
 			if (players.size() <= 1) {
 				return;
 			}

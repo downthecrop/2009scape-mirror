@@ -8,6 +8,7 @@ import java.util.Random;
 import core.game.component.Component;
 import core.game.container.impl.EquipmentContainer;
 import core.game.activity.ActivityPlugin;
+import core.game.world.map.RegionChunk;
 import core.plugin.Initializable;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.skill.Skills;
@@ -30,6 +31,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneRestriction;
 import core.tools.RandomFunction;
+import org.rs09.consts.NPCs;
 
 import static core.api.ContentAPIKt.*;
 
@@ -145,7 +147,15 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 						lastVictor.getPacketDispatch().sendString("Current Champion: " + getChampionName(), INTERFACE_ID, 0);
 						resetDamagePulse(lastVictor);
 					}
-					RegionManager.forId(9552).getPlanes()[0].getNpcs().get(0).setAttribute("fp_champn", getChampionName());
+					RegionChunk[][][] chunks = RegionManager.forId(9552).getChunks();
+					for (int x = 0; x < 8; x++) {
+						for (int y = 0; y < 8; y++) {
+							List<NPC> npcs = chunks[x][y][0].getNpcs();
+							for (NPC npc : npcs) {
+								npc.setAttribute("fp_champn", getChampionName());
+							}
+						}
+					}
 				}
 				minutes = 0;
 			}
@@ -180,10 +190,15 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 	 * Resets the last victor.
 	 */
 	private void resetLastVictor() {
-		List<NPC> npcs = new ArrayList<>(RegionManager.forId(9552).getPlanes()[0].getNpcs());
-		for (NPC n : npcs) {
-			if (n.getId() == 2734 || n.getId() == 2739) {
-				n.clear();
+		RegionChunk[][][] chunks = RegionManager.forId(9552).getChunks();
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				List<NPC> npcs = new ArrayList<>(chunks[x][y][0].getNpcs());
+				for (NPC npc : npcs) {
+					if (npc.getId() == NPCs.TZ_KIH_2734 || npc.getId() == NPCs.TOK_XIL_2739) {
+						npc.clear();
+					}
+				}
 			}
 		}
 		if (lastVictor == null || !lastVictor.isActive()) {
@@ -355,7 +370,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 		}
 		int size = (LOBBY_PLAYERS.size() + WAR_PLAYERS.size()) - 1;
 		if (!WAR_PLAYERS.isEmpty()) {
-                        setVarp(WAR_PLAYERS.get(0), 560, size);
+			setVarp(WAR_PLAYERS.get(0), 560, size);
 		}
 		for (Iterator<Player> it = LOBBY_PLAYERS.iterator(); it.hasNext();) {
 			Player p = it.next();
@@ -367,7 +382,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 				}
 				p.getSkullManager().setSkullCheckDisabled(true);
 				p.getSkullManager().setWilderness(true);
-                                setVarp(p, 560, size);
+				setVarp(p, 560, size);
 				p.getProperties().setTeleportLocation(getZoneDestination());
 				p.getInteraction().set(Option._P_ATTACK);
 				tokkulAmount += p.getProperties().getCurrentCombatLevel();
@@ -449,7 +464,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 	 */
 	public static void sendPlayersRemaining(int value) {
 		for (Player p : WAR_PLAYERS) {
-                        setVarp(p, 560, value);
+			setVarp(p, 560, value);
 		}
 	}
 

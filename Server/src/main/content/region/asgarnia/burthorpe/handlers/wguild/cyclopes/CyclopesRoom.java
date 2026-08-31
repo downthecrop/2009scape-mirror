@@ -31,7 +31,6 @@ import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 import static core.api.ContentAPIKt.clearLogoutListener;
 import static core.api.ContentAPIKt.registerLogoutListener;
@@ -73,7 +72,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 							Pathfinder.find(p.getLocation(), Location.create(2847, 3541, 2)).walk(p);
 							p.lock(50);
 						} else {
-							Scenery object = RegionManager.getObject(2, 2847, 3541);
+							Scenery object = RegionManager.getObject(2847, 3541, 2);
 							if (object != null && p.getLocation().getX() == 2847 && p.getLocation().getY() == 3541) {
 								DoorActionHandler.handleAutowalkDoor(p, object);
 								leave(p);

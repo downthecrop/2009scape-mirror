@@ -29,7 +29,7 @@ public final class VoidSealPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		if (player.getViewport().getRegion().getRegionId() != 10536) {
+		if (player.getLocation().getRegionId() != 10536) {
 			player.getPacketDispatch().sendMessage("You can only use the seal in Pest Control.");
 			return true;
 		}
@@ -48,7 +48,7 @@ public final class VoidSealPlugin extends OptionHandler {
 			player.getInventory().replace(replace, item.getSlot());
 		}
 		player.graphics(Graphics.create(1177));
-		for (NPC npc : RegionManager.getLocalNpcs(player, 2)) {
+		for (NPC npc : RegionManager.getLocalNPCs(player.getLocation(), 2)) {
 			if (canTarget(npc)) {
 				npc.getImpactHandler().manualHit(player, 7 + RandomFunction.randomize(5), HitsplatType.NORMAL, 1);
 				npc.graphics(Graphics.create(1176));

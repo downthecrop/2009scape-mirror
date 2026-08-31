@@ -76,13 +76,13 @@ public final class SpinningPulse extends SkillPulse<Item> {
 
     @Override
     public boolean reward() {
-		int tickThreshhold = 4;
-		if (player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(2)
-				&& player.getLocation().withinDistance(Location.create(2711,3471,1))
-				&& player.getEquipment().get(EquipmentContainer.SLOT_HAT) != null
-				&& player.getEquipment().get(EquipmentContainer.SLOT_HAT).getId() == 14631) {
-			tickThreshhold = 2;
-		}
+        int tickThreshhold = 4;
+        if (player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(2)
+                && player.getLocation().withinDistance(Location.create(2711,3471,1))
+                && player.getEquipment().get(EquipmentContainer.SLOT_HAT) != null
+                && player.getEquipment().get(EquipmentContainer.SLOT_HAT).getId() == 14631) {
+            tickThreshhold = 2;
+        }
         if (++ticks % tickThreshhold != 0) {
             return false;
         }
@@ -92,7 +92,7 @@ public final class SpinningPulse extends SkillPulse<Item> {
             player.getSkills().addExperience(Skills.CRAFTING, type.getExp(), true);
 
             // Seers achievement diary
-            if (player.getViewport().getRegion().getId() == 10806
+            if (player.getLocation().getRegionId() == 10806
                     && !player.getAchievementDiaryManager().getDiary(DiaryType.SEERS_VILLAGE).isComplete(0, 4)) {
                 if (player.getAttribute("diary:seers:bowstrings-spun", 0) >= 4) {
                     player.setAttribute("/save:diary:seers:bowstrings-spun", 5);
