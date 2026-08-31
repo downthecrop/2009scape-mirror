@@ -1,8 +1,12 @@
 package content.global.skill.construction;
 
 
+import content.global.skill.construction.decoration.StaySeated;
 import core.api.Container;
 import core.game.world.map.Location;
+import core.net.packet.PacketRepository;
+import core.net.packet.context.PlayerContext;
+import core.net.packet.out.ClearMinimapFlag;
 import org.rs09.consts.Items;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
@@ -76,8 +80,26 @@ public final class HouseZone extends MapZone {
                     p.setLocation(house.getLocation().getExitLocation());
                     return kotlin.Unit.INSTANCE;
             });
+            removeTimer(pl, StaySeated.STAY_SEATED_IDENTIFIER);
         }
         return super.enter(e);
+    }
+
+    @Override
+    public boolean move(Entity e, Location from, Location to) {
+        if (e instanceof Player) {
+            Player p = (Player) e;
+            if (getAttribute(p, StaySeated.ATTRIBUTE_SEATED, false)) {
+                p.getPulseManager().clear();
+                p.getWalkingQueue().reset();
+                PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(p));
+                if (!getAttribute(p, StaySeated.ATTRIBUTE_STANDING_UP, false)) {
+                    StaySeated.unseat(p, false);
+                }
+                return false;
+            }
+        }
+        return super.move(e, from, to);
     }
 
     @Override

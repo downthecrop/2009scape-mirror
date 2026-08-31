@@ -1,4 +1,6 @@
 package content.global.skill.construction;
+
+import content.global.skill.construction.decoration.StaySeated;
 import core.api.regionspec.RegionSpecification;
 import core.api.regionspec.contracts.FillChunkContract;
 import core.game.dialogue.FacialExpression;
@@ -233,6 +235,7 @@ public final class HouseManager {
 			enter(player, enable);
 			player.getPacketDispatch().sendMessage("Building mode is now " + (buildingMode ? "on." : "off."));
 		}
+		StaySeated.Companion.unseat(player, true);
 	}
 
 	/**

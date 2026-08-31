@@ -17,6 +17,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static core.api.ContentAPIKt.getAttribute;
 import static core.game.world.map.RegionChunk.getRotatedPosition;
 
 /**
@@ -105,7 +106,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 			stage = 2;
 			return true;
 		}
-		this.door = (Scenery) player.getAttribute("con:hsobject");
+		this.door = getAttribute(player, ConstructionInterface.ATTRIBUTE_HOTSPOT_OBJ, null);
 		int[] pos = BuildingUtils.getRoomPosition(player, door);
 		roomX = pos[0];
 		roomY = pos[1];

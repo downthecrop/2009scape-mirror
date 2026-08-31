@@ -135,7 +135,9 @@ public enum RoomProperties {
 			new Hotspot(BuildHotspot.TOOL2, 6, 0),
 			new Hotspot(BuildHotspot.TOOL1, 1, 0),
 			new Hotspot(BuildHotspot.TOOL3, 0, 1),
-			new Hotspot(BuildHotspot.TOOL5, 0, 6)),
+			new Hotspot(BuildHotspot.TOOL5, 0, 6),
+			new Hotspot(BuildHotspot.CRAFTING_STOOL, 1, 3),
+			new Hotspot(BuildHotspot.WORKBENCH_STOOL, 3, 3)),
 
 	/**
 	 * Bedroom.

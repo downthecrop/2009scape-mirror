@@ -8,11 +8,11 @@ import core.game.world.map.path.ClipMaskSupplier;
  */
 public enum Direction {
 	/**
-	 * 0   1   2
+	 * 7   0   4
 	 *   \ | /
-	 * 3 - . - 4
+	 * 3 - . - 1
 	 *   / | \
-	 * 5   6   7
+	 * 6   2   5
 	 */
 
 
@@ -69,7 +69,7 @@ public enum Direction {
 	/**
 	 * The integer value.
 	 */
-	private final int value;
+	public final int value;
 
 	/**
 	 * The traversal flags.

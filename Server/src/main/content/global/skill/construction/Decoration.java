@@ -74,13 +74,13 @@ public enum Decoration {
 	/**
 	 * Parlour chair spot
 	 */
-	CRUDE_CHAIR      (13581, 8309, 1,  58,  new Item[] { new Item(Items.PLANK_960, 2) }),
-	WOODEN_CHAIR     (13582, 8310, 8,  87,  new Item[] { new Item(Items.PLANK_960, 3) }),
-	ROCKING_CHAIR    (13583, 8311, 14, 87,  new Item[] { new Item(Items.PLANK_960, 3) }),
-	OAK_CHAIR        (13584, 8312, 19, 120, new Item[] { new Item(Items.OAK_PLANK_8778, 2) }),
-	OAK_ARMCHAIR     (13585, 8313, 26, 180, new Item[] { new Item(Items.OAK_PLANK_8778, 3) }),
-	TEAK_ARMCHAIR    (13586, 8314, 35, 180, new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
-	MAHOGANY_ARMCHAIR(13587, 8315, 50, 280, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }),
+	CRUDE_CHAIR      (13581, 8309, 1,  58,  new Item[] { new Item(Items.PLANK_960, 2) }, Items.CRUDE_WOODEN_CHAIR_8496),
+	WOODEN_CHAIR     (13582, 8310, 8,  87,  new Item[] { new Item(Items.PLANK_960, 3) }, Items.WOODEN_CHAIR_8498),
+	ROCKING_CHAIR    (13583, 8311, 14, 87,  new Item[] { new Item(Items.PLANK_960, 3) }, Items.ROCKING_CHAIR_8500),
+	OAK_CHAIR        (13584, 8312, 19, 120, new Item[] { new Item(Items.OAK_PLANK_8778, 2) }, Items.OAK_CHAIR_8502),
+	OAK_ARMCHAIR     (13585, 8313, 26, 180, new Item[] { new Item(Items.OAK_PLANK_8778, 3) }, Items.OAK_ARMCHAIR_8504),
+	TEAK_ARMCHAIR    (13586, 8314, 35, 180, new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }, Items.TEAK_ARMCHAIR_8506),
+	MAHOGANY_ARMCHAIR(13587, 8315, 50, 280, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }, Items.MAHOGANY_ARMCHAIR_8508),
 
 	/**
 	 * Rugs rugs rugs
@@ -112,29 +112,26 @@ public enum Decoration {
 	/**
 	 * Bookcases
 	 */
-	WOODEN_BOOKCASE  (13597, 8319, 4,  115, new Item[] { new Item(Items.PLANK_960, 4) }),
-	OAK_BOOKCASE     (13598, 8320, 29, 180, new Item[] { new Item(Items.OAK_PLANK_8778, 3) }),
-	MAHOGANY_BOOKCASE(13599, 8321, 40, 420, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3) }),
+	WOODEN_BOOKCASE  (13597, 8319, 4,  115, new Item[] { new Item(Items.PLANK_960, 4) }, Items.WOODEN_BOOKCASE_8510),
+	OAK_BOOKCASE     (13598, 8320, 29, 180, new Item[] { new Item(Items.OAK_PLANK_8778, 3) }, Items.OAK_BOOKCASE_8512),
+	MAHOGANY_BOOKCASE(13599, 8321, 40, 420, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3) }, Items.MAHOGANY_BKCASE_8514),
 
 	/**
 	 * Kitchen Beer Barrels
-	 * TODO: These also require cooking levels!
-	 * Basic: 1, Cider: 14, Asgarnian: 24, Greenman's: 29, D.Bitter: 39, Chef's: 54
-	 *
 	 */
-	BASIC_BEER_BARREL   (13568, 8239, 7,  87,  new Item[] { new Item(Items.PLANK_960, 3) }),
-	CIDER_BARREL        (13569, 8240, 12, 91,  new Item[] { new Item(Items.PLANK_960, 3), new Item(Items.CIDER_5763, 8) }),
-	ASGARNIAN_ALE_BARREL(13570, 8241, 18, 184, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.ASGARNIAN_ALE_1905, 8) }),
-	GREENMANS_ALE_BARREL(13571, 8242, 26, 184, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.GREENMANS_ALE_1909, 8) }),
-	DRAGON_BITTER_BARREL(13572, 8243, 36, 224, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.DRAGON_BITTER_1911, 8), new Item(Items.STEEL_BAR_2353, 2) }),
-	CHEFS_DELIGHT_BARREL(13573, 8244, 48, 224, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.CHEFS_DELIGHT_5755, 8), new Item(Items.STEEL_BAR_2353, 2) }),
+	BASIC_BEER_BARREL   (13568, 8239, 7,  87,  new Item[] { new Item(Items.PLANK_960, 3) }, Items.BEER_BARREL_8516),
+	CIDER_BARREL        (13569, 8240, 12, 91,  new Item[] { new Item(Items.PLANK_960, 3), new Item(Items.CIDER_5763, 8) }, Items.CIDER_BARREL_8518),
+	ASGARNIAN_ALE_BARREL(13570, 8241, 18, 184, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.ASGARNIAN_ALE_1905, 8) }, Items.ASGARNIAN_ALE_8520),
+	GREENMANS_ALE_BARREL(13571, 8242, 26, 184, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.GREENMANS_ALE_1909, 8) }, Items.GREENMANS_ALE_8522),
+	DRAGON_BITTER_BARREL(13572, 8243, 36, 224, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.DRAGON_BITTER_1911, 8), new Item(Items.STEEL_BAR_2353, 2) }, Items.DRAGON_BITTER_8524),
+	CHEFS_DELIGHT_BARREL(13573, 8244, 48, 224, new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.CHEFS_DELIGHT_5755, 8), new Item(Items.STEEL_BAR_2353, 2) }, Items.CHEFS_DELIGHT_8526),
 
 	/**
 	 * Kitchen Tables!
 	 */
-	KITCHEN_WOODEN_TABLE(13577, 8246, 12, 87,  new Item[] { new Item(Items.PLANK_960, 3) }),
-	KITCHEN_OAK_TABLE   (13578, 8247, 32, 180, new Item[] { new Item(Items.OAK_PLANK_8778, 3) }),
-	KITCHEN_TEAK_TABLE  (13579, 8248, 52, 270, new Item[] { new Item(Items.TEAK_PLANK_8780, 3) }),
+	KITCHEN_WOODEN_TABLE(13577, 8246, 12, 87,  new Item[] { new Item(Items.PLANK_960, 3) }, Items.WOOD_KITCHEN_TABLE_8528),
+	KITCHEN_OAK_TABLE   (13578, 8247, 32, 180, new Item[] { new Item(Items.OAK_PLANK_8778, 3) }, Items.OAK_KITCHEN_TABLE_8530),
+	KITCHEN_TEAK_TABLE  (13579, 8248, 52, 270, new Item[] { new Item(Items.TEAK_PLANK_8780, 3) }, Items.TEAK_KITCHEN_TABLE_8532),
 
 	/**
 	 * Kitchen Stoves
@@ -182,24 +179,24 @@ public enum Decoration {
 	/**
 	 * Dining room tables
 	 */
-	DINING_TABLE_WOOD       (13293, 8246, 10, 115,  new Item[] { new Item(Items.PLANK_960, 4) }),
-	DINING_TABLE_OAK        (13294, 8247, 22, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }),
-	DINING_TABLE_CARVED_OAK (13295, 8247, 31, 360,  new Item[] { new Item(Items.OAK_PLANK_8778, 6) }),
-	DINING_TABLE_TEAK       (13296, 8248, 38, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }),
-	DINING_TABLE_CARVED_TEAK(13297, 8248, 45, 600,  new Item[] { new Item(Items.TEAK_PLANK_8780, 6), new Item(Items.BOLT_OF_CLOTH_8790, 4) }),
-	DINING_TABLE_MAHOGANY   (13298, 8120, 52, 840,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 6) }),
-	DINING_TABLE_OPULENT    (13299, 8121, 72, 3100, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 6), new Item(Items.BOLT_OF_CLOTH_8790, 4), new Item(Items.GOLD_LEAF_8784, 4), new Item(Items.MARBLE_BLOCK_8786, 2) }),
+	DINING_TABLE_WOOD       (13293, 8246, 10, 115,  new Item[] { new Item(Items.PLANK_960, 4) }, Items.WOOD_DINING_TABLE_8548),
+	DINING_TABLE_OAK        (13294, 8247, 22, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }, Items.OAK_DINING_TABLE_8550),
+	DINING_TABLE_CARVED_OAK (13295, 8247, 31, 360,  new Item[] { new Item(Items.OAK_PLANK_8778, 6) }, Items.CARVED_OAK_TABLE_8552),
+	DINING_TABLE_TEAK       (13296, 8248, 38, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }, Items.TEAK_TABLE_8554),
+	DINING_TABLE_CARVED_TEAK(13297, 8248, 45, 600,  new Item[] { new Item(Items.TEAK_PLANK_8780, 6), new Item(Items.BOLT_OF_CLOTH_8790, 4) }, Items.CARVED_TEAK_TABLE_8556),
+	DINING_TABLE_MAHOGANY   (13298, 8120, 52, 840,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 6) }, Items.MAHOGANY_TABLE_8558),
+	DINING_TABLE_OPULENT    (13299, 8121, 72, 3100, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 6), new Item(Items.BOLT_OF_CLOTH_8790, 4), new Item(Items.GOLD_LEAF_8784, 4), new Item(Items.MARBLE_BLOCK_8786, 2) }, Items.OPULENT_TABLE_8560),
 
 	/**
 	 * Dining room benches
 	 */
-	BENCH_WOODEN     (13300, 8108, 10, 115,  new Item[] { new Item(Items.PLANK_960, 4) }),
-	BENCH_OAK        (13301, 8109, 22, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }),
-	BENCH_CARVED_OAK (13302, 8110, 31, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }),
-	BENCH_TEAK       (13303, 8111, 38, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }),
-	BENCH_CARVED_TEAK(13304, 8112, 44, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }),
-	BENCH_MAHOGANY   (13305, 8113, 52, 560,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 6) }),
-	BENCH_GILDED     (13306, 8114, 61, 1760, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4), new Item(Items.GOLD_LEAF_8784, 4) }),
+	BENCH_WOODEN     (13300, 8108, 10, 115,  new Item[] { new Item(Items.PLANK_960, 4) }, Items.WOODEN_BENCH_8562),
+	BENCH_OAK        (13301, 8109, 22, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }, Items.OAK_BENCH_8564),
+	BENCH_CARVED_OAK (13302, 8110, 31, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }, Items.CARVED_OAK_BENCH_8566),
+	BENCH_TEAK       (13303, 8111, 38, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }, Items.TEAK_DINING_BENCH_8568),
+	BENCH_CARVED_TEAK(13304, 8112, 44, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }, Items.CARVED_TEAK_BENCH_8570),
+	BENCH_MAHOGANY   (13305, 8113, 52, 560,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 6) }, Items.MAHOGANY_BENCH_8572),
+	BENCH_GILDED     (13306, 8114, 61, 1760, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4), new Item(Items.GOLD_LEAF_8784, 4) }, Items.GILDED_BENCH_8574),
 
 	/**
 	 * Dining room bell-pulls
@@ -209,13 +206,19 @@ public enum Decoration {
 	FANCY_BELL_PULL(13309, 8101, 33, 58, new Item[] { new Item(Items.TEAK_PLANK_8780), new Item(Items.BOLT_OF_CLOTH_8790, 2), new Item(Items.GOLD_LEAF_8784) }),
 
 	/**
-	 * Workshop workbench
+	 * Workshop workbenches
 	 */
 	WORKBENCH_WOODEN     (13704, 8375, 17, 143,  new Item[] { new Item(Items.PLANK_960, 5) }),
 	WORKBENCH_OAK        (13705, 8376, 32, 300,  new Item[] { new Item(Items.OAK_PLANK_8778, 5) }),
 	WORKBENCH_STEEL_FRAME(13706, 8377, 46, 440,  new Item[] { new Item(Items.OAK_PLANK_8778, 6), new Item(Items.STEEL_BAR_2353, 4) }),
 	WORKBENCH_WITH_VICE  (13707, 8378, 62, 750,  new Item[] { new Item(Items.STEEL_FRAMED_BENCH_8377), new Item(Items.OAK_PLANK_8778, 2), new Item(Items.STEEL_BAR_2353) }),
 	WORKBENCH_WITH_LATHE (13708, 8379, 77, 1000, new Item[] { new Item(Items.OAK_WORKBENCH_8376), new Item(Items.OAK_PLANK_8778, 2), new Item(Items.STEEL_BAR_2353) }),
+
+	/**
+	 * Workshop stools (linked to workbench/crafting table hotspots)
+	 */
+	WORKSHOP_STOOL    (13719, -1, 1, 0),
+	WORKSHOP_STOOL_OAK(13720, -1, 1, 0),
 
 	/**
 	 * Workshop repair benches/stands
@@ -425,30 +428,30 @@ public enum Decoration {
 	/**
 	 * Bedroom decorations.
 	 */
-	WOODEN_BED        (13148, 8031, 20, 117,  new Item[] { new Item(Items.PLANK_960, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }),
-	OAK_BED           (13149, 8032, 30, 210,  new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }),
-	LARGE_OAK_BED     (13150, 8033, 34, 330,  new Item[] { new Item(Items.OAK_PLANK_8778, 5), new Item(Items.BOLT_OF_CLOTH_8790, 2) }),
-	TEAK_BED          (13151, 8034, 40, 300,  new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }),
-	LARGE_TEAK_BED    (13152, 8035, 45, 480,  new Item[] { new Item(Items.TEAK_PLANK_8780, 5), new Item(Items.BOLT_OF_CLOTH_8790, 2) }),
-	FOUR_POSTER       (13153, 8036, 53, 450,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }),
-	GILDED_FOUR_POSTER(13154, 8037, 60, 1330, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 5), new Item(Items.BOLT_OF_CLOTH_8790, 2), new Item(Items.GOLD_LEAF_8784, 2) }),
-	OAK_CLOCK         (13169, 8052, 25, 142,  new Item[] { new Item(Items.OAK_PLANK_8778, 2), new Item(Items.CLOCKWORK_8792) }),
-	TEAK_CLOCK        (13170, 8053, 55, 202,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2), new Item(Items.CLOCKWORK_8792) }),
-	GILDED_CLOCK      (13171, 8054, 85, 602,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.CLOCKWORK_8792), new Item(Items.GOLD_LEAF_8784) }),
-	SHAVING_STAND     (13162, 8045, 21, 30,   new Item[] { new Item(Items.PLANK_960), new Item(Items.MOLTEN_GLASS_1775) }),
-	OAK_SHAVING_STAND (13163, 8046, 29, 61,   new Item[] { new Item(Items.OAK_PLANK_8778), new Item(Items.MOLTEN_GLASS_1775) }),
-	OAK_DRESSER       (13164, 8047, 37, 121,  new Item[] { new Item(Items.OAK_PLANK_8778, 2), new Item(Items.MOLTEN_GLASS_1775) }),
-	TEAK_DRESSER      (13165, 8048, 46, 181,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2), new Item(Items.MOLTEN_GLASS_1775) }),
-	FANCY_TEAK_DRESSER(13166, 8049, 56, 182,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2), new Item(Items.MOLTEN_GLASS_1775, 2) }),
-	MAHOGANY_DRESSER  (13167, 8050, 64, 281,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.MOLTEN_GLASS_1775) }),
-	GILDED_DRESSER    (13168, 8051, 74, 582,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.MOLTEN_GLASS_1775, 2), new Item(Items.GOLD_LEAF_8784) }),
-	SHOE_BOX          (13155, 8038, 20, 58,   new Item[] { new Item(Items.PLANK_960, 2) }),
-	OAK_DRAWERS       (13156, 8039, 27, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }),
-	OAK_WARDROBE      (13157, 8040, 39, 180,  new Item[] { new Item(Items.OAK_PLANK_8778, 3) }),
-	TEAK_DRAWERS      (13158, 8041, 51, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
-	TEAK_WARDROBE     (13159, 8042, 63, 270,  new Item[] { new Item(Items.TEAK_PLANK_8780, 3) }),
-	MAHOGANY_WARDROBE (13160, 8043, 75, 420,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }),
-	GILDED_WARDROBE   (13161, 8044, 87, 720,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.GOLD_LEAF_8784) }),
+	WOODEN_BED        (13148, 8031, 20, 117,  new Item[] { new Item(Items.PLANK_960, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }, Items.WOODEN_BED_8576),
+	OAK_BED           (13149, 8032, 30, 210,  new Item[] { new Item(Items.OAK_PLANK_8778, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }, Items.OAK_BED_8578),
+	LARGE_OAK_BED     (13150, 8033, 34, 330,  new Item[] { new Item(Items.OAK_PLANK_8778, 5), new Item(Items.BOLT_OF_CLOTH_8790, 2) }, Items.LARGE_OAK_BED_8580),
+	TEAK_BED          (13151, 8034, 40, 300,  new Item[] { new Item(Items.TEAK_PLANK_8780, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }, Items.TEAK_BED_8582),
+	LARGE_TEAK_BED    (13152, 8035, 45, 480,  new Item[] { new Item(Items.TEAK_PLANK_8780, 5), new Item(Items.BOLT_OF_CLOTH_8790, 2) }, Items.LARGE_TEAK_BED_8584),
+	FOUR_POSTER       (13153, 8036, 53, 450,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3), new Item(Items.BOLT_OF_CLOTH_8790, 2) }, Items.FOUR_POSTER_8586),
+	GILDED_FOUR_POSTER(13154, 8037, 60, 1330, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 5), new Item(Items.BOLT_OF_CLOTH_8790, 2), new Item(Items.GOLD_LEAF_8784, 2) }, Items.GILDED_4_POSTER_8588),
+	OAK_CLOCK         (13169, 8052, 25, 142,  new Item[] { new Item(Items.OAK_PLANK_8778, 2), new Item(Items.CLOCKWORK_8792) }, Items.OAK_CLOCK_8590),
+	TEAK_CLOCK        (13170, 8053, 55, 202,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2), new Item(Items.CLOCKWORK_8792) }, Items.TEAK_CLOCK_8592),
+	GILDED_CLOCK      (13171, 8054, 85, 602,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.CLOCKWORK_8792), new Item(Items.GOLD_LEAF_8784) }, Items.GILDED_CLOCK_8594),
+	SHAVING_STAND     (13162, 8045, 21, 30,   new Item[] { new Item(Items.PLANK_960), new Item(Items.MOLTEN_GLASS_1775) }, Items.SHAVING_STAND_8596),
+	OAK_SHAVING_STAND (13163, 8046, 29, 61,   new Item[] { new Item(Items.OAK_PLANK_8778), new Item(Items.MOLTEN_GLASS_1775) }, Items.OAK_SHAVING_STAND_8598),
+	OAK_DRESSER       (13164, 8047, 37, 121,  new Item[] { new Item(Items.OAK_PLANK_8778, 2), new Item(Items.MOLTEN_GLASS_1775) }, Items.OAK_DRESSER_8600),
+	TEAK_DRESSER      (13165, 8048, 46, 181,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2), new Item(Items.MOLTEN_GLASS_1775) }, Items.TEAK_DRESSER_8602),
+	FANCY_TEAK_DRESSER(13166, 8049, 56, 182,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2), new Item(Items.MOLTEN_GLASS_1775, 2) }, Items.FANCY_TEAK_DRESSER_8604),
+	MAHOGANY_DRESSER  (13167, 8050, 64, 281,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.MOLTEN_GLASS_1775) }, Items.MAHOGANY_DRESSER_8606),
+	GILDED_DRESSER    (13168, 8051, 74, 582,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.MOLTEN_GLASS_1775, 2), new Item(Items.GOLD_LEAF_8784) }, Items.GILDED_DRESSER_8608),
+	SHOE_BOX          (13155, 8038, 20, 58,   new Item[] { new Item(Items.PLANK_960, 2) }, Items.SHOE_BOX_8610),
+	OAK_DRAWERS       (13156, 8039, 27, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }, Items.OAK_DRAWERS_8612),
+	OAK_WARDROBE      (13157, 8040, 39, 180,  new Item[] { new Item(Items.OAK_PLANK_8778, 3) }, Items.OAK_WARDROBE_8614),
+	TEAK_DRAWERS      (13158, 8041, 51, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }, Items.TEAK_DRAWERS_8616),
+	TEAK_WARDROBE     (13159, 8042, 63, 270,  new Item[] { new Item(Items.TEAK_PLANK_8780, 3) }, Items.TEAK_WARDROBE_8618),
+	MAHOGANY_WARDROBE (13160, 8043, 75, 420,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }, Items.MAHOGANY_DROBE_8620),
+	GILDED_WARDROBE   (13161, 8044, 87, 720,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2), new Item(Items.GOLD_LEAF_8784) }, Items.GILDED_WARDROBE_8622),
 
 	/**
 	 * Quest hall decorations.
@@ -502,31 +505,31 @@ public enum Decoration {
 	/**
 	 * Costume room decorations.
 	 */
-	OAK_TREASURE_CHEST     (18804, 9839, 48, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }),
-	TEAK_TREASURE_CHEST    (18806, 9840, 66, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
-	MAHOGANY_TREASURE_CHEST(18808, 9841, 84, 280,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }),
-	OAK_ARMOUR_CASE        (18778, 9826, 46, 180,  new Item[] { new Item(Items.OAK_PLANK_8778, 3) }),
-	TEAK_ARMOUR_CASE       (18780, 9827, 64, 270,  new Item[] { new Item(Items.TEAK_PLANK_8780, 3) }),
-	MGANY_ARMOUR_CASE      (18782, 9828, 82, 420,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3) }),
-	OAK_MAGIC_WARDROBE     (18784, 9829, 42, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }),
-	C_OAK_MAGIC_WARDROBE   (18786, 9830, 51, 360,  new Item[] { new Item(Items.OAK_PLANK_8778, 6) }),
-	TEAK_MAGIC_WARDROBE    (18788, 9831, 60, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }),
-	C_TEAK_MAGIC_WARDROBE  (18790, 9832, 69, 540,  new Item[] { new Item(Items.TEAK_PLANK_8780, 6) }),
-	MGANY_MAGIC_WARDROBE   (18792, 9833, 78, 560,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4) }),
-	GILDED_MAGIC_WARDROBE  (18794, 9834, 87, 860,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4), new Item(Items.GOLD_LEAF_8784) }),
-	MARBLE_MAGIC_WARDROBE  (18796, 9835, 96, 500,  new Item[] { new Item(Items.MARBLE_BLOCK_8786) }),
-	OAK_CAPE_RACK          (18766, 9817, 54, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }),
-	TEAK_CAPE_RACK         (18767, 9818, 63, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }),
-	MGANY_CAPE_RACK        (18768, 9819, 72, 560,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4) }),
-	GILDED_CAPE_RACK       (18769, 9820, 81, 860,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4), new Item(Items.GOLD_LEAF_8784) }),
-	MARBLE_CAPE_RACK       (18770, 9821, 90, 500,  new Item[] { new Item(Items.MARBLE_BLOCK_8786) }),
-	MAGIC_CAPE_RACK        (18771, 9822, 99, 1000, new Item[] { new Item(Items.MAGIC_STONE_8788) }),
-	OAK_TOY_BOX            (18798, 9836, 50, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }),
-	TEAK_TOY_BOX           (18800, 9837, 68, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
-	MAHOGANY_TOY_BOX       (18802, 9838, 86, 280,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }),
-	OAK_COSTUME_BOX        (18772, 9823, 44, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }),
-	TEAK_COSTUME_BOX       (18774, 9824, 62, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
-	MAHOGANY_COSTUME_BOX   (18776, 9825, 80, 280,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }),
+	OAK_TREASURE_CHEST     (18804, 9839, 48, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }, Items.OAK_TREASURE_CHEST_9862),
+	TEAK_TREASURE_CHEST    (18806, 9840, 66, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }, Items.TEAK_TREAS_CHEST_9863),
+	MAHOGANY_TREASURE_CHEST(18808, 9841, 84, 280,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }, Items.MGANY_TREAS_CHEST_9864),
+	OAK_ARMOUR_CASE        (18778, 9826, 46, 180,  new Item[] { new Item(Items.OAK_PLANK_8778, 3) }, Items.OAK_ARMOUR_CASE_9859),
+	TEAK_ARMOUR_CASE       (18780, 9827, 64, 270,  new Item[] { new Item(Items.TEAK_PLANK_8780, 3) }, Items.TEAK_ARMOUR_CASE_9860),
+	MGANY_ARMOUR_CASE      (18782, 9828, 82, 420,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3) }, Items.MGANY_ARMR_CASE_9861),
+	OAK_MAGIC_WARDROBE     (18784, 9829, 42, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }, Items.OAK_MAGIC_WARDROBE_9852),
+	C_OAK_MAGIC_WARDROBE   (18786, 9830, 51, 360,  new Item[] { new Item(Items.OAK_PLANK_8778, 6) }, Items.CARVED_OAK_MAGIC_WARDROBE_9853),
+	TEAK_MAGIC_WARDROBE    (18788, 9831, 60, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }, Items.TEAK_MAGIC_WARDROBE_9854),
+	C_TEAK_MAGIC_WARDROBE  (18790, 9832, 69, 540,  new Item[] { new Item(Items.TEAK_PLANK_8780, 6) }, Items.CARVED_TEAK_MAGIC_WARDROBE_9855),
+	MGANY_MAGIC_WARDROBE   (18792, 9833, 78, 560,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4) }, Items.MAHOGANY_MAGIC_WARDROBE_9856),
+	GILDED_MAGIC_WARDROBE  (18794, 9834, 87, 860,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4), new Item(Items.GOLD_LEAF_8784) }, Items.GILDED_MAGIC_WARDROBE_9857),
+	MARBLE_MAGIC_WARDROBE  (18796, 9835, 96, 500,  new Item[] { new Item(Items.MARBLE_BLOCK_8786) }, Items.MARBLE_MAGIC_WARDROBE_9858),
+	OAK_CAPE_RACK          (18766, 9817, 54, 240,  new Item[] { new Item(Items.OAK_PLANK_8778, 4) }, Items.OAK_CAPE_RACK_9843),
+	TEAK_CAPE_RACK         (18767, 9818, 63, 360,  new Item[] { new Item(Items.TEAK_PLANK_8780, 4) }, Items.TEAK_CAPE_RACK_9844),
+	MGANY_CAPE_RACK        (18768, 9819, 72, 560,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4) }, Items.MGANY_CAPE_RACK_9845),
+	GILDED_CAPE_RACK       (18769, 9820, 81, 860,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 4), new Item(Items.GOLD_LEAF_8784) }, Items.GILDED_CAPE_RACK_9846),
+	MARBLE_CAPE_RACK       (18770, 9821, 90, 500,  new Item[] { new Item(Items.MARBLE_BLOCK_8786) }, Items.MARBLE_CAPE_RACK_9847),
+	MAGIC_CAPE_RACK        (18771, 9822, 99, 1000, new Item[] { new Item(Items.MAGIC_STONE_8788) }, Items.MAGICAL_CAPE_RACK_9848),
+	OAK_TOY_BOX            (18798, 9836, 50, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }, Items.OAK_TOY_BOX_9849),
+	TEAK_TOY_BOX           (18800, 9837, 68, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }, Items.TEAK_TOY_BOX_9850),
+	MAHOGANY_TOY_BOX       (18802, 9838, 86, 280,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }, Items.MAHOGANY_TOY_BOX_9851),
+	OAK_COSTUME_BOX        (18772, 9823, 44, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }, Items.OAK_COSTUME_BOX_9865),
+	TEAK_COSTUME_BOX       (18774, 9824, 62, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }, Items.TEAK_COSTUME_BOX_9866),
+	MAHOGANY_COSTUME_BOX   (18776, 9825, 80, 280,  new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 2) }, Items.MAHOGANY_COS_BOX_9867),
 
 	/**
 	 * Chapel decorations.
@@ -684,6 +687,7 @@ public enum Decoration {
 	FREMENNIK_WINDOW         (13112, -1, 1, 0),
 	TROPICAL_WOOD_WINDOW     (10816, -1, 1, 0),
 	FANCY_STONE_WINDOW       (13117, -1, 1, 0),
+
 	;
 
 	/**
@@ -715,6 +719,11 @@ public enum Decoration {
 	 * The items that will be refunded.
 	 */
 	private final Item[] refundItems;
+
+	/**
+	 * The item id of the flatpack.
+	 */
+	private final int flatpackItemId;
 
 	/**
 	 * The tools required.
@@ -774,6 +783,11 @@ public enum Decoration {
 		this.reqsText = generateDefaultReqsText(items, getNailAmount());
 	}
 
+	Decoration(int objectId, int interfaceItem, int level, int experience, Item[] items, int flatpackItemId) {
+		this(objectId, interfaceItem, level, experience, new int[] { Items.HAMMER_2347, Items.SAW_8794 }, items, new Item[] {}, new String[] {}, flatpackItemId);
+		this.reqsText = generateDefaultReqsText(items, getNailAmount());
+	}
+
 	/**
 	 * Constructs a new object, default refund items, default requirements text.
 	 * @param objectId The object id.
@@ -827,6 +841,10 @@ public enum Decoration {
 	 * @param reqsText The requirements text to be shown in the interface.
 	 */
 	Decoration(int objectId, int interfaceItem, int level, int experience, int[] tools, Item[] items, Item[] refundItems, String[] reqsText) {
+		this(objectId, interfaceItem, level, experience, tools, items, refundItems, reqsText, -1);
+	}
+
+	Decoration(int objectId, int interfaceItem, int level, int experience, int[] tools, Item[] items, Item[] refundItems, String[] reqsText, int flatpackItemId) {
 		this.objectId = objectId;
 		this.objectIds = null;
 		this.interfaceItem = interfaceItem;
@@ -835,6 +853,7 @@ public enum Decoration {
 		this.tools = tools;
 		this.items = items;
 		this.refundItems = refundItems;
+		this.flatpackItemId = flatpackItemId;
 		if (reqsText.length > 0) {
 			System.arraycopy(reqsText, 0, this.reqsText, 0, reqsText.length);
 		}
@@ -881,6 +900,7 @@ public enum Decoration {
 		this.tools = tools;
 		this.items = items;
 		this.refundItems = refundItems;
+		this.flatpackItemId = -1;
 	}
 
 	/**
@@ -925,6 +945,15 @@ public enum Decoration {
 	public static Decoration forName(String name) {
 		for (Decoration d : Decoration.values()) {
 			if (d.name().equals(name)) {
+				return d;
+			}
+		}
+		return null;
+	}
+
+	public static Decoration forFlatpackItemId(int flatpackId) {
+		for (Decoration d : Decoration.values()) {
+			if (d.getFlatpackItemID() == flatpackId) {
 				return d;
 			}
 		}
@@ -1018,6 +1047,14 @@ public enum Decoration {
 	 */
 	public int[] getObjectIds() {
 		return objectIds;
+	}
+
+	/**
+	 * Gets the flatpack item ID if it exists.
+	 * @return the int ID.
+	 */
+	public int getFlatpackItemID() {
+		return flatpackItemId;
 	}
 
 	/**

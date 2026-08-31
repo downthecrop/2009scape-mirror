@@ -136,9 +136,13 @@ public final class BuildingUtils {
 	 * @param object The object.
 	 */
 	public static void buildDecoration(final Player player, final Hotspot hotspot, final Decoration deco, final Scenery object) {
+		buildDecoration(player, hotspot, deco, object, false, false);
+	}
+
+	public static void buildDecoration(final Player player, final Hotspot hotspot, final Decoration deco, final Scenery object, final boolean bypassCost, final boolean bypassXp) {
 		final int nailAmount = deco.getNailAmount();
 		final NailType type = nailAmount > 0 ? NailType.get(player, nailAmount) : null;
-		if (nailAmount > 0 && type == null) {
+		if (nailAmount > 0 && type == null && !bypassCost) {
 			player.getPacketDispatch().sendMessage("You don't have the right materials.");
 			return;
 		}
@@ -162,7 +166,7 @@ public final class BuildingUtils {
 			NailType nail = type;
 			@Override
 			public boolean pulse() {
-				if (nails > 0) {
+				if (nails > 0 && !bypassCost) {
 					if (!type.isBend()) {
 						player.getPacketDispatch().sendMessage("You use a nail.");
 						nails--;
@@ -186,12 +190,14 @@ public final class BuildingUtils {
 						}
 					}
 				}
-				if (player.getInventory().remove(deco.getItems()) || player.isAdmin()) {
+				if (bypassCost || player.isAdmin() || player.getInventory().remove(deco.getItems())) {
 					setDecoration(player, r, room, hotspot, object, deco);
-					player.getSkills().addExperience(Skills.CONSTRUCTION, deco.getExperience(), true);
+					if (!bypassXp) {
+						player.getSkills().addExperience(Skills.CONSTRUCTION, deco.getExperience(), true);
 
-					if (getObjectIdsThatGiveFarmingExperience().contains(deco.getObjectId())) {
-						player.getSkills().addExperience(Skills.FARMING, deco.getExperience(), true);
+						if (getObjectIdsThatGiveFarmingExperience().contains(deco.getObjectId())) {
+							player.getSkills().addExperience(Skills.FARMING, deco.getExperience(), true);
+						}
 					}
 					player.unlock();
 				}
@@ -446,7 +452,7 @@ public final class BuildingUtils {
 					for (int y = 0; y < 8; y++) {
 						for (BuildHotspot bh : linkedHotspots) {
 							Hotspot h = room.getHotspot(bh, x, y);
-							if (h != null) {
+							if (h != null && h.getDecorationIndex() >= 0) {
 								int objectId = bh.getDecorations()[h.getDecorationIndex()].getObjectId(style);
 								h.setDecorationIndex(-1);
 								int index = chunk.getIndex(x, y, objectId, -1);

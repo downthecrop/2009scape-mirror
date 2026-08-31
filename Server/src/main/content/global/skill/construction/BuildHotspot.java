@@ -65,14 +65,16 @@ public enum BuildHotspot {
 	 * Low-level Work shop hotspots.
 	 */
 	REPAIR(15448, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.REPAIR_BENCH, Decoration.WHETSTONE, Decoration.ARMOUR_STAND),
-	WORKBENCH(15439, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.WORKBENCH_WOODEN, Decoration.WORKBENCH_OAK,Decoration.WORKBENCH_STEEL_FRAME, Decoration.WORKBENCH_WITH_VICE,Decoration.WORKBENCH_WITH_LATHE),
-	CRAFTING(15441, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRAFTING_TABLE_1, Decoration.CRAFTING_TABLE_2,Decoration.CRAFTING_TABLE_3, Decoration.CRAFTING_TABLE_4),
+	WORKBENCH(15439, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.WORKBENCH_WOODEN, Decoration.WORKBENCH_OAK,Decoration.WORKBENCH_STEEL_FRAME, Decoration.WORKBENCH_WITH_VICE, Decoration.WORKBENCH_WITH_LATHE),
+	CRAFTING(15441, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.CRAFTING_TABLE_1, Decoration.CRAFTING_TABLE_2,Decoration.CRAFTING_TABLE_3, Decoration.CRAFTING_TABLE_4),
 	TOOL1(15443, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.TOOL_STORE_1, Decoration.TOOL_STORE_2,	Decoration.TOOL_STORE_3, Decoration.TOOL_STORE_4,	Decoration.TOOL_STORE_5),
 	TOOL2(15444, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.TOOL_STORE_1, Decoration.TOOL_STORE_2,Decoration.TOOL_STORE_3, Decoration.TOOL_STORE_4,Decoration.TOOL_STORE_5),
 	TOOL3(15445, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.TOOL_STORE_1, Decoration.TOOL_STORE_2,Decoration.TOOL_STORE_3, Decoration.TOOL_STORE_4,Decoration.TOOL_STORE_5),
 	TOOL4(15446, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.TOOL_STORE_1, Decoration.TOOL_STORE_2,Decoration.TOOL_STORE_3, Decoration.TOOL_STORE_4,Decoration.TOOL_STORE_5),
 	TOOL5(15447, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.TOOL_STORE_1, Decoration.TOOL_STORE_2,Decoration.TOOL_STORE_3, Decoration.TOOL_STORE_4,Decoration.TOOL_STORE_5),
 	HERALDRY(15450, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.PLUMING_STAND, Decoration.SHIELD_EASEL,Decoration.BANNER_EASEL),
+	WORKBENCH_STOOL(15440, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.WORKSHOP_STOOL, Decoration.WORKSHOP_STOOL,Decoration.WORKSHOP_STOOL_OAK, Decoration.WORKSHOP_STOOL_OAK,Decoration.WORKSHOP_STOOL_OAK),
+	CRAFTING_STOOL(15442, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.WORKSHOP_STOOL, Decoration.WORKSHOP_STOOL,Decoration.WORKSHOP_STOOL, Decoration.WORKSHOP_STOOL),
 	
 	/**
 	 * Bedroom hotspots.
@@ -386,6 +388,8 @@ public enum BuildHotspot {
 		linkedHotspots.add(new BuildHotspot[] { DUNGEON_DOOR_LEFT2, DUNGEON_DOOR_RIGHT2 });
 		linkedHotspots.add(new BuildHotspot[] { SMALL_PLANT_1, SMALL_PLANT1 });
 		linkedHotspots.add(new BuildHotspot[] { SHELVES, SHELVES_2 });
+		linkedHotspots.add(new BuildHotspot[] { WORKBENCH, WORKBENCH_STOOL });
+		linkedHotspots.add(new BuildHotspot[] { CRAFTING, CRAFTING_STOOL });
 	}
 	
 	/**

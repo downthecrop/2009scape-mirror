@@ -9,13 +9,15 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.log;
+import static core.api.ContentAPIKt.setAttribute;
 
 /**
  * The build option handling plugin.
@@ -48,7 +50,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 			player.getDialogueInterpreter().open("con:removedec", object);
 			return true;
 		}
-		player.setAttribute("con:hsobject", node);
+		setAttribute(player, ConstructionInterface.ATTRIBUTE_HOTSPOT_OBJ, node);
 		if (BuildingUtils.isDoorHotspot(object)) {
 			int[] pos = BuildingUtils.roomExists(player, object);
 			if (pos != null) {
@@ -71,8 +73,30 @@ public final class BuildOptionPlugin extends OptionHandler {
 			return true;
 		}
 
-		player.setAttribute("con:hotspot", hotspot);
-		BuildingUtils.openBuildInterface(player, hotspot.getHotspot());
+		BuildHotspot buildHotspot = hotspot.getHotspot();
+		BuildHotspot[] linked = BuildHotspot.getLinkedHotspots(buildHotspot);
+		if (linked != null && linked[0] != buildHotspot) {
+			Location locObj = object.getLocation();
+			Room room = player.getHouseManager().getRoom(locObj);
+			if (room == null) return true;
+			for (Hotspot h : room.getHotspots()) {
+				if (h.getHotspot() == linked[0]) {
+					int dx = h.getCurrentX() - locObj.getChunkOffsetX();
+					int dy = h.getCurrentY() - locObj.getChunkOffsetY();
+					Scenery primaryObj = RegionManager.getObject(locObj.transform(dx, dy, 0));
+					if (primaryObj != null) {
+						setAttribute(player, ConstructionInterface.ATTRIBUTE_HOTSPOT_OBJ, primaryObj);
+						setAttribute(player, ConstructionInterface.ATTRIBUTE_HOTSPOT, h);
+						BuildingUtils.openBuildInterface(player, linked[0]);
+					}
+					return true;
+				}
+			}
+			return true;
+		}
+
+		setAttribute(player, ConstructionInterface.ATTRIBUTE_HOTSPOT, hotspot);
+		BuildingUtils.openBuildInterface(player, buildHotspot);
 		return true;
 	}
 	
