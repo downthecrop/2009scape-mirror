@@ -90,9 +90,9 @@ class TheGolemQuest : Quest(Quests.THE_GOLEM, 70, 69, 1, 437, 0, 1, 10) {
         player.packetDispatch.sendItemZoomOnInterface(Items.STATUETTE_4618,230,277,5)
         drawReward(player, "1 quest point", ln++)
         drawReward(player, "1,000 Crafting XP",ln++)
-        drawReward(player, "1,000 Theiving XP", ln++)
-        rewardXP(player, Skills.CRAFTING, 3000.0)
-        rewardXP(player, Skills.THIEVING, 2000.0)
+        drawReward(player, "1,000 Thieving XP", ln++)
+        rewardXP(player, Skills.CRAFTING, 1000.0)
+        rewardXP(player, Skills.THIEVING, 1000.0)
     }
 
     override fun updateVarps(player: Player) {
