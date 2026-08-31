@@ -34382,11 +34382,24 @@
     "weight": "1"
   },
   {
+    "id": "3845",
+    "name": "Journal",
+    "examine": "A daily journal.",
+    "tradeable": "false",
+    "weight": "0.5"
+  },
+  {
+    "id": "3846",
+    "name": "Diary",
+    "examine": "Someone's Diary.",
+    "tradeable": "false",
+    "weight": "0.5"
+  },
+  {
     "id": "3847",
     "name": "Manual",
     "examine": "Looks like some kind of manual.",
     "archery_ticket_price": "0",
-    "destroy": "true",
     "durability": null,
     "tradeable": "false",
     "weight": "0.5"
@@ -34394,7 +34407,7 @@
   {
     "id": "3848",
     "name": "Lighthouse key",
-    "examine": "A key to the front door of the lighthouse. (Horror from the Deep)",
+    "examine": "A key to the front door of the lighthouse.",
     "archery_ticket_price": "0",
     "durability": null
   },

@@ -40,7 +40,9 @@ public final class DoorActionHandler {
      * @param object The object.
      */
     public static void handleDoor(final Player player, final Scenery object) {
-        final Scenery second = (object.getId() == 1530 || object.getId() == 1531) ? null : getSecondDoor(object, player);
+        // TODO: Maybe have this passed in as an optional parameter or overload handleDoor?
+        boolean ignoreSecondDoor = (object.getId() == 1512 || object.getId() == 1515); // Ignore second door for Ecteteria Castle (1512/1515).
+        final Scenery second = (object.getId() == 1530 || object.getId() == 1531 || ignoreSecondDoor) ? null : getSecondDoor(object, player);
         Scenery o = null;
         if (object instanceof Constructed && (o = ((Constructed) object).getReplaced()) != null) {
             DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
@@ -115,7 +117,7 @@ public final class DoorActionHandler {
             return false;
         }
         // TODO: Maybe have this passed in as an optional parameter or overload handleAutowalkDoor?
-        boolean ignoreSecondDoor = (object.getId() == 3628 || object.getId() == 3629 || object.getId() == 3630 || object.getId() == 3631|| object.getId() == 3632); // Ignore second door for Maze Random
+        boolean ignoreSecondDoor = (object.getId() == 3628 || object.getId() == 3629 || object.getId() == 3630 || object.getId() == 3631 || object.getId() == 3632 || object.getId() == 4545 || object.getId() == 4546); // Ignore second door for Maze Random (3626-3632) and HftD Strange Wall (4545-4546).
         final Scenery second = (object.getId() == 3 || ignoreSecondDoor) ? null : getSecondDoor(object, entity);
         entity.lock(4);
         final Location loc = entity.getLocation();

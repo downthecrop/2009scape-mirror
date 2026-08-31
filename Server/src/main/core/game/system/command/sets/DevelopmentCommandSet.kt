@@ -193,6 +193,28 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             player.impactHandler.manualHit(player, player.skills.lifepoints, HitsplatType.NORMAL)
         }
 
+        define("godbooks", Privilege.ADMIN, "::godbooks", "Resets god book save state and gives the player coins and pages to buy/finish a new set from Jossik.") { player, _ ->
+            val globalData = player.savedData.globalData
+
+            // reset save data
+            globalData.godPages = BooleanArray(4)
+            globalData.godBook = -1
+
+            // add coins and 1 of each page
+            addItem(player, Items.COINS_995, 15000)
+            var pagesAdded = 0
+            for (godBook in content.data.GodBook.values()) {
+                for (page in godBook.pages) {
+                    if (addItem(player, page.id, 1)) {
+                        pagesAdded++
+                    }
+                }
+            }
+
+            // end
+            sendMessage(player, "Reset god book save data for ${player.username}. Have a wonderful day.")
+        }
+
         define("struct", usage = "::struct <lt>struct-id<gt>", description = "Logs the struct definition for the given cache id.") {player, args ->
             val mapId = args[1].toIntOrNull() ?: return@define
 

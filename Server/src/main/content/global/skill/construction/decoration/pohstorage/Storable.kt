@@ -41,13 +41,13 @@ enum class Storable(
 ) {
     // Books - https://runescape.wiki/w/List_of_texts_and_tomes?oldid=848552
     AbyssalBook(Items.ABYSSAL_BOOK_5520, intArrayOf(Items.ABYSSAL_BOOK_5520), type = StorableFamily.BOOKCASE, "Abyssal Research Notes", bitIndex = 0), // abyss miniquest - IMPLEMENTED
-    AncientBook(Items.ANCIENT_BOOK_7633, intArrayOf(Items.ANCIENT_BOOK_7633), type = StorableFamily.BOOKCASE, "The Sleeping Seven", bitIndex = 1, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest
-    AncientDiary(Items.DIARY_3846, intArrayOf(Items.DIARY_3846), type = StorableFamily.BOOKCASE, "Ancient Diary", bitIndex = 2, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest
+    AncientBook(Items.ANCIENT_BOOK_7633, intArrayOf(Items.ANCIENT_BOOK_7633), type = StorableFamily.BOOKCASE, "The Sleeping Seven", bitIndex = 1, Quests.IN_AID_OF_THE_MYREQUE), // in aid of the myreque
+    AncientDiary(Items.DIARY_3846, intArrayOf(Items.DIARY_3846), type = StorableFamily.BOOKCASE, "Ancient Diary", bitIndex = 2, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest - IMPLEMENTED
     ArenaBook(Items.ARENA_BOOK_6891, intArrayOf(Items.ARENA_BOOK_6891), type = StorableFamily.BOOKCASE, "Magic Training Arena Lore Book", bitIndex = 3), // mage training arena minigame
     AstronomyBook(Items.ASTRONOMY_BOOK_600, intArrayOf(Items.ASTRONOMY_BOOK_600), type = StorableFamily.BOOKCASE, "Astronomy Book", bitIndex = 4, Quests.OBSERVATORY_QUEST), // observatory quest - IMPLEMENTED
     BatteredBook(Items.BATTERED_BOOK_2886, intArrayOf(Items.BATTERED_BOOK_2886), type = StorableFamily.BOOKCASE, "Book of the Elemental Shield", bitIndex = 5, Quests.ELEMENTAL_WORKSHOP_I), // elemental workshop I quest - IMPLEMENTED
     BatteredTome(Items.BATTERED_TOME_7634, intArrayOf(Items.BATTERED_TOME_7634), type = StorableFamily.BOOKCASE, "Histories of Hallowland", bitIndex = 6, Quests.IN_AID_OF_THE_MYREQUE), // in aid of myreque quest
-    BeatenBook(Items.BEATEN_BOOK_9717, intArrayOf(Items.BEATEN_BOOK_9717), type = StorableFamily.BOOKCASE, "Book of the Elemental Helm", bitIndex = 7, Quests.ELEMENTAL_WORKSHOP_II), // elemental workshop II quest
+    BeatenBook(Items.BEATEN_BOOK_9717, intArrayOf(Items.BEATEN_BOOK_9717), type = StorableFamily.BOOKCASE, "Book of the Elemental Helm", bitIndex = 7, Quests.ELEMENTAL_WORKSHOP_II), // elemental workshop II quest - IMPLEMENTED
     BigBookOfBangs(Items.BIG_BOOK_OF_BANGS_3230, intArrayOf(Items.BIG_BOOK_OF_BANGS_3230), type = StorableFamily.BOOKCASE, "Big Book of Bangs", bitIndex = 8, Quests.REGICIDE), // regicide quest
     BindingBook(Items.BINDING_BOOK_730, intArrayOf(Items.BINDING_BOOK_730), type = StorableFamily.BOOKCASE, "Book of Binding", bitIndex = 9, Quests.LEGENDS_QUEST), // legends quest - IMPLEMENTED
     BirdBook(Items.BIRD_BOOK_10173, intArrayOf(Items.BIRD_BOOK_10173), type = StorableFamily.BOOKCASE, "William Oddity's Guide to the Avian", bitIndex = 10, Quests.EAGLES_PEAK), // eagles peak quest
@@ -86,11 +86,11 @@ enum class Storable(
     HermansBook(Items.HERMANS_BOOK_7951, intArrayOf(Items.HERMANS_BOOK_7951), type = StorableFamily.BOOKCASE, "Dionysius: A Legend in His Own Lifetime", bitIndex = 43, Quests.SWAN_SONG), // swan song quest
     HistoryOfIban(Items.HISTORY_OF_IBAN_1494, intArrayOf(Items.HISTORY_OF_IBAN_1494), type = StorableFamily.BOOKCASE, "The Tale of Iban", bitIndex = 44, Quests.UNDERGROUND_PASS), // underground pass quest
     InstructionManual(Items.INSTRUCTION_MANUAL_5, intArrayOf(Items.INSTRUCTION_MANUAL_5), type = StorableFamily.BOOKCASE, "Dwarf Multicannon Manual", bitIndex = 45, Quests.DWARF_CANNON), // dwarf cannon quest - IMPLEMENTED
-    JossiksJournal(Items.JOURNAL_3845, intArrayOf(Items.JOURNAL_3845), type = StorableFamily.BOOKCASE, "Jossik's Diary", bitIndex = 46, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest
+    JossiksJournal(Items.JOURNAL_3845, intArrayOf(Items.JOURNAL_3845), type = StorableFamily.BOOKCASE, "Jossik's Diary", bitIndex = 46, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest - IMPLEMENTED
     LeatherBook(Items.LEATHER_BOOK_7635, intArrayOf(Items.LEATHER_BOOK_7635), type = StorableFamily.BOOKCASE, "Modern Day Morytania", bitIndex = 47, Quests.IN_AID_OF_THE_MYREQUE), // in aid of the myreque quest
-    Manual(Items.MANUAL_3847, intArrayOf(Items.MANUAL_3847), type = StorableFamily.BOOKCASE, "Lighthouse Manual", bitIndex = 48, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest
+    Manual(Items.MANUAL_3847, intArrayOf(Items.MANUAL_3847), type = StorableFamily.BOOKCASE, "Lighthouse Manual", bitIndex = 48, Quests.HORROR_FROM_THE_DEEP), // horror from the deep quest - IMPLEMENTED
     MoonclanManual(Items.MOONCLAN_MANUAL_9078, intArrayOf(Items.MOONCLAN_MANUAL_9078), type = StorableFamily.BOOKCASE, "Basics of Magic", bitIndex = 49, Quests.LUNAR_DIPLOMACY), // lunar diplomacy quest
-    MyNotes(Items.MY_NOTES_11339, intArrayOf(Items.MY_NOTES_11339), type = StorableFamily.BOOKCASE, "'My notes'", bitIndex = 50), // during barbarian training
+    MyNotes(Items.MY_NOTES_11339, intArrayOf(Items.MY_NOTES_11339), type = StorableFamily.BOOKCASE, "'My notes'", bitIndex = 50), // during barbarian training - IMPLEMENTED
     OldJournal(Items.OLD_JOURNAL_1493, intArrayOf(Items.OLD_JOURNAL_1493), type = StorableFamily.BOOKCASE, "The Journal of Randas", bitIndex = 51, Quests.UNDERGROUND_PASS), // underground pass quest
     OldTome(Items.OLD_TOME_13593, intArrayOf(Items.OLD_TOME_13593), type = StorableFamily.BOOKCASE, "Old Tome", bitIndex = 52, Quests.MEETING_HISTORY), // meeting history quest
     PrayerBook(Items.PRAYER_BOOK_10890, intArrayOf(Items.PRAYER_BOOK_10890), type = StorableFamily.BOOKCASE, "Prayer of Deliverance from Poisons", bitIndex = 53, Quests.THE_GREAT_BRAIN_ROBBERY), // the great brain robbery quest
@@ -104,7 +104,7 @@ enum class Storable(
     TheShieldOfArravBook(Items.BOOK_757, intArrayOf(Items.BOOK_757), type = StorableFamily.BOOKCASE, "The Shield of Arrav", bitIndex = 61, Quests.SHIELD_OF_ARRAV), // shield of arrav quest - IMPLEMENTED
     SinkethsDiary(Items.SINKETHS_DIARY_11002, intArrayOf(Items.SINKETHS_DIARY_11002), type = StorableFamily.BOOKCASE, "Sin'keth's Diary", bitIndex = 62, Quests.WHAT_LIES_BELOW), // what lies below quest - IMPLEMENTED
     StrongholdNotes(Items.STRONGHOLD_NOTES_9004, intArrayOf(Items.STRONGHOLD_NOTES_9004), type = StorableFamily.BOOKCASE, "Stronghold of Security - Notes", bitIndex = 63), // from stronghold of security - IMPLEMENTED
-    TarnsDiary(Items.TARNS_DIARY_10587, intArrayOf(Items.TARNS_DIARY_10587), type = StorableFamily.BOOKCASE, "The Diary of Tarn Razorlor", bitIndex = 64), // lair of tarn miniquest
+    TarnsDiary(Items.TARNS_DIARY_10587, intArrayOf(Items.TARNS_DIARY_10587), type = StorableFamily.BOOKCASE, "The Diary of Tarn Razorlor", bitIndex = 64), // lair of tarn miniquest - IMPLEMENTED
     Translation(Items.TRANSLATION_4655, intArrayOf(Items.TRANSLATION_4655), type = StorableFamily.BOOKCASE, "Translation Primer (Four Diamonds Translation)", bitIndex = 65, Quests.DESERT_TREASURE), // desert treasure quest - IMPLEMENTED
     TranslationBook(Items.TRANSLATION_BOOK_784, intArrayOf(Items.TRANSLATION_BOOK_784), type = StorableFamily.BOOKCASE, "Gnome-English Translation Dictionary", bitIndex = 66, Quests.THE_EYES_OF_GLOUPHRIE), // eyes of glouphrie quest - IMPLEMENTED
     TzhaarTouristGuide(Items.TZHAAR_TOURIST_GUIDE_13244, intArrayOf(Items.TZHAAR_TOURIST_GUIDE_13244), type = StorableFamily.BOOKCASE, "Tzhaar Tourist Guide", bitIndex = 67, Quests.TOKTZ_KET_DILL), // toktz-ket-dill quest

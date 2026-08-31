@@ -95,6 +95,7 @@ public final class MultiwayCombatZone extends MapZone {
 		registerRegion(9532); //Isle north of Jatizso
 		registerRegion(10810); //Eastern rock crabs
 		registerRegion(12590); //desert bandits
+		registerRegion(10140); // Fremennik Lighthouse Dungeon (Dagannoths)
 	}
 
 	@Override

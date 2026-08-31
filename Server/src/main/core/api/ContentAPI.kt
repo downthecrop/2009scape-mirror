@@ -1777,6 +1777,69 @@ fun setComponentVisibility(player: Player, iface: Int, child: Int, hide: Boolean
 }
 
 /**
+ * Sets the title component visibility for the player based on the provided options.
+ *
+ * @param player The player whose UI component will be modified.
+ * @param options The options determining the visibility of components (should be between 2 and 5).
+ * @throws IllegalArgumentException If options are outside the valid range.
+ */
+fun setTitle(
+    player: Player,
+    options: Int,
+) {
+    setComponentVisibility(
+        player,
+        if (options == 5) {
+            234
+        } else if (options == 4) {
+            232
+        } else if (options == 3) {
+            230
+        } else {
+            228
+        },
+        (4 + options),
+        true,
+    )
+    setComponentVisibility(
+        player,
+        if (options == 5) {
+            234
+        } else if (options == 4) {
+            232
+        } else if (options == 3) {
+            230
+        } else {
+            228
+        },
+        if (options == 2 || options == 4) 9 else 10,
+        false,
+    )
+    if (options > 5) {
+        throw java.lang.IllegalArgumentException(
+            "Expected option value between 2 and 5, got ${options::class.java.simpleName}.",
+        )
+    }
+}
+
+/**
+ * Sends a string to the player to display in a specified interface and child component.
+ *
+ * @param player The player to send the string to.
+ * @param string The string to display.
+ * @param iface The interface ID to display the string in.
+ * @param child The child component ID to display the string in.
+ */
+fun sendString(
+    player: Player,
+    string: String,
+    iface: Int,
+    child: Int,
+) {
+    player.packetDispatch.sendString(string, iface, child)
+}
+
+/**
  * Closes any open (non-chat) interfaces for the player
  * @param player the player to close the interface for
  */

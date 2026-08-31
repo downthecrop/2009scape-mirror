@@ -3,7 +3,7 @@ package content.data;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
-import static core.api.ContentAPIKt.hasRequirement;
+import static core.api.ContentAPIKt.isQuestComplete;
 
 /**
  * A god book.
@@ -100,7 +100,7 @@ public enum GodBook {
 	 * @param page the page.
 	 */
 	public void insertPage(Player player, Item book, Item page) {
-                if (!hasRequirement(player, Quests.HORROR_FROM_THE_DEEP))
+                if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP))
                         return;
 		if (hasPage(player, book, page)) {
 			player.sendMessage("The book already has that page.");

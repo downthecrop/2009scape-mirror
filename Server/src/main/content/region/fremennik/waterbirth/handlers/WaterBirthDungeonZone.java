@@ -196,9 +196,6 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 					break;
 				}
 				return true;
-			case 10217:
-				player.sendMessage("You need to have completed Horror from the Deep in order to do this.");
-				return true;
 			case 10230:
 				player.teleport(Location.create(2899, 4450, 0));
 				return true;

@@ -92,7 +92,11 @@ class ItemQuestRequirementListener : InteractionListener {
 
     private val godBooks = intArrayOf (
         Items.HOLY_BOOK_3840,
-        Items.UNHOLY_BOOK_3842
+        Items.UNHOLY_BOOK_3842,
+        Items.BOOK_OF_BALANCE_3844,
+        Items.DAMAGED_BOOK_3839,
+        Items.DAMAGED_BOOK_3841,
+        Items.DAMAGED_BOOK_3843
     )
 
     private val pharaohScepters = (9044..9051).toIntArray()

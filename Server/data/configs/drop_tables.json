@@ -20428,8 +20428,8 @@
         "maxAmount": "1"
       }
     ],
-    "ids": "1338",
-    "description": "Chaos Tunnels / Lighthouse Dagannoths",
+    "ids": "2887",
+    "description": "Chaos Tunnels Dagannoths",
     "main": [
       {
         "minAmount": "1",
@@ -60012,6 +60012,236 @@
     "charm": [],
     "ids": "4343",
     "description": "",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [
+      {
+        "minAmount": "1",
+        "weight": "50.0",
+        "id": "0",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.2",
+        "id": "12158",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "4.2",
+        "id": "12159",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "4.2",
+        "id": "12160",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "0.6",
+        "id": "12163",
+        "maxAmount": "1"
+      }
+    ],
+    "ids": "1338,1339,1349,1341,1342,1343",
+    "description": "Dagannoth (Lighthouse Dungeon)",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "16.0",
+        "id": "1239",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "15.0",
+        "id": "1237",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.95",
+        "id": "1243",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "15",
+        "weight": "10.0",
+        "id": "555",
+        "maxAmount": "15"
+      },
+      {
+        "minAmount": "15",
+        "weight": "5.0",
+        "id": "886",
+        "maxAmount": "15"
+      },
+      {
+        "minAmount": "3",
+        "weight": "2.95",
+        "id": "828",
+        "maxAmount": "3"
+      },
+      {
+        "minAmount": "1",
+        "weight": "3.3",
+        "id": "3006",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "50.0",
+        "id": "301",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "11.0",
+        "id": "345",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "11.0",
+        "id": "327",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "6.5",
+        "id": "311",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "314",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "313",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "377",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "359",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "401",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.95",
+        "id": "413",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.95",
+        "id": "411",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "56",
+        "weight": "50.0",
+        "id": "995",
+        "maxAmount": "56"
+      },
+      {
+        "minAmount": "25",
+        "weight": "50.0",
+        "id": "995",
+        "maxAmount": "25"
+      },
+      {
+        "minAmount": "44",
+        "weight": "50.0",
+        "id": "995",
+        "maxAmount": "44"
+      },
+      {
+        "minAmount": "41",
+        "weight": "50.0",
+        "id": "995",
+        "maxAmount": "41"
+      },
+      {
+        "minAmount": "12",
+        "weight": "5.0",
+        "id": "45",
+        "maxAmount": "12"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.95",
+        "id": "405",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.95",
+        "id": "2158",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.95",
+        "id": "5733",
+        "maxAmount": "1"
+      }
+    ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "894",
+    "description": "Hazeel Cultist",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "893",
+    "description": "Clivet from Hazeel Cult",
     "main": []
   }
 ]
