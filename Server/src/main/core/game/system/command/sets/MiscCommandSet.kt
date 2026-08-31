@@ -123,7 +123,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             notify(player,"Object: " + RegionManager.getObject(l).also{obj = it} + ".")
             notify(player,"Object Varp: " + obj?.definition?.configFile?.varpId + " offset: " + obj?.definition?.configFile?.startBit + " size: " + (obj?.definition?.configFile?.startBit?.minus(obj?.definition?.configFile?.startBit!!)))
             log(this::class.java, Log.FINE,  "Viewport: " + l.getSceneX(player.playerFlags.lastSceneGraph) + "," + l.getSceneY(player.playerFlags.lastSceneGraph))
-            val loc = "Location.create(" + l.x + ", " + l.y + ", " + l.z + ")"
+            val loc = "Location(" + l.x + ", " + l.y + ", " + l.z + ")"
             log(this::class.java, Log.FINE,  loc + "; " + player.playerFlags.lastSceneGraph + ", " + l.localX + ", " + l.localY)
             try {
                 val stringSelection = StringSelection(loc)
