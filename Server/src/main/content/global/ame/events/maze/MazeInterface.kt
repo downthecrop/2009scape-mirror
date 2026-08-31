@@ -91,8 +91,8 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
         )
 
         fun initMaze(player: Player) {
-            setAttribute(player, MAZE_ATTRIBUTE_TICKS_LEFT, 300)
-            setVarp(player, MAZE_TIMER_VARP, (getAttribute<Int>(player, MAZE_ATTRIBUTE_TICKS_LEFT, 0) / 3),false)
+            setAttribute(player, MAZE_ATTRIBUTE_TICKS_LEFT, 500)
+            setVarp(player, MAZE_TIMER_VARP, (getAttribute<Int>(player, MAZE_ATTRIBUTE_TICKS_LEFT, 0) + 4) / 5,false)
             openOverlay(player, MAZE_TIMER_INTERFACE)
             sendMessage(player, "You need to reach the maze center, then you'll be returned to where you were.")
             sendNPCDialogue(player, NPCs.MYSTERIOUS_OLD_MAN_410, "You need to reach the maze center, then you'll be returned to where you were.")
@@ -101,7 +101,7 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
         fun calculateLoot(player: Player) {
             val randomNumber = (0..8).random()
             val totalLevel = player.getSkills().totalLevel.toDouble()
-            val rewardPotential = getAttribute(player, MAZE_ATTRIBUTE_TICKS_LEFT, 0).toDouble() / 300.0
+            val rewardPotential = getAttribute(player, MAZE_ATTRIBUTE_TICKS_LEFT, 0).toDouble() / 500.0
             val itemDivisor = ITEM_DIVISOR[randomNumber]
             val itemQuantity = (totalLevel * rewardPotential * 3.33) / itemDivisor
             // sendMessage(player, "Maze reward calculation: $totalLevel * $rewardPotential * 3.33 / $itemDivisor = $itemQuantity")
@@ -269,7 +269,7 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
             if (getAttribute(entity, MAZE_ATTRIBUTE_TICKS_LEFT, 0) > 0) {
                 setAttribute(entity, MAZE_ATTRIBUTE_TICKS_LEFT, getAttribute(entity, MAZE_ATTRIBUTE_TICKS_LEFT, 0) - 1)
             }
-            setVarp(entity, MAZE_TIMER_VARP, (getAttribute(entity, MAZE_ATTRIBUTE_TICKS_LEFT, 0) / 3), false)
+            setVarp(entity, MAZE_TIMER_VARP, (getAttribute(entity, MAZE_ATTRIBUTE_TICKS_LEFT, 0) + 4) / 5, false)
         }
     }
 
