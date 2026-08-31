@@ -89,6 +89,13 @@ public enum FacialExpression {
     STRUGGLE(9865), //TODO: More?
     //9855-9857 are like disgusted? does it just repeat after this?
 
+    //Chatheads for werewolves
+    WEREWOLF_SAD(6550),
+    WEREWOLF_NEUTRAL(6551),
+    WEREWOLF_SUSPICIOUS(6552),
+    WEREWOLF_THINKING(6553),
+    WEREWOLF_HAPPY(6555),
+
     //Child Chathead?
     CHILD_ANGRY(7168),
     CHILD_SIDE_EYE(7169),
