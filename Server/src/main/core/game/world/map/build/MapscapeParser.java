@@ -48,14 +48,14 @@ public final class MapscapeParser {
 						}
 						if (value <= 49) { //Overlay data
 							int val = buffer.get() & 0xFF;
-							if (val != 42 && val > 0) {
+							if (val > 0) {
 								landscape[chunkOffsetX][chunkOffsetY] = true;
 							}
 						} else if (value <= 81) {
 							mapscape[z][localX][localY] = (byte) (value - 49);
 						} else {
 							int val = (byte) (value - 81) & 0xFF; //Underlay data
-							if (val != 42 && val > 0) {
+							if (val > 0) {
 								landscape[chunkOffsetX][chunkOffsetY] = true;
 							}
 						}

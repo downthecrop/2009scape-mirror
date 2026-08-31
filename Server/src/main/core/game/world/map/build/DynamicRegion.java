@@ -1,5 +1,7 @@
 package core.game.world.map.build;
 
+import content.global.skill.summoning.familiar.Familiar;
+import core.game.interaction.QueueStrength;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
@@ -14,6 +16,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static core.api.ContentAPIKt.queueScript;
+import static core.api.ContentAPIKt.restartScript;
+import static core.api.ContentAPIKt.stopExecuting;
 
 /**
  * Represents a dynamically constructed region.
@@ -322,7 +328,25 @@ public final class DynamicRegion extends Region {
 					for (int z = 0; z < PLANES; z++) {
 						RegionChunk chunk = chunks[x][y][z];
 						for (NPC npc : new ArrayList<>(chunk.getNpcs())) {
-							npc.clear();
+							if (npc instanceof Familiar) {
+								Familiar fam = (Familiar) npc;
+								Location locOwner = fam.getOwner().getLocation();
+								fam.setInvisible(true);
+								RegionManager.move(fam, fam.getLocation(), locOwner);
+								fam.setLocation(locOwner);
+								queueScript(fam, 0, QueueStrength.STRONG, false, (Integer stage) -> {
+									if (fam.call()) {
+										fam.getWalkingQueue().update();
+										return stopExecuting(fam);
+									}
+									else {
+										return restartScript(fam);
+									}
+								});
+							}
+							else {
+								npc.clear();
+							}
 						}
 						for (GroundItem item : new ArrayList<>(chunk.getItems())) {
 							GroundItemManager.destroy(item);

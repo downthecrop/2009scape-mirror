@@ -283,7 +283,7 @@ object RegionManager {
             // Check if ALL target tiles are unclipped
             for (x in 0 until node.size()) {
                 for (y in 0 until node.size()) {
-                    if (isClipped(l.transform(x, y, 0))) {
+                    if (!isTeleportPermitted(l.transform(x, y, 0))) {
                         continue@outer
                     }
                 }

@@ -396,7 +396,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 
 	@Override
 	public void onRegionInactivity() {
-		call();
+		if (call()) {
+			getWalkingQueue().update();
+		}
 	}
 
 	@Override
