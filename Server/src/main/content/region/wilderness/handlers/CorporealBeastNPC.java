@@ -68,7 +68,7 @@ public final class CorporealBeastNPC extends NPCBehavior {
 		if (state.getStyle() == CombatStyle.MELEE || state.getStyle() == CombatStyle.RANGE) {
 			Weapon w = state.getWeapon();
 			String name = w != null ? w.getName() : "";
-			if (w == null || name.toLowerCase().indexOf("spear") == -1) {
+			if (!name.toLowerCase().contains("spear") && !name.toLowerCase().contains("hasta")) {
 				if (state.getEstimatedHit() > 0) {
 					state.setEstimatedHit(state.getEstimatedHit() / 2);
 				}
