@@ -128,7 +128,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 					return true;
 				}
 				teleport(entity.asPlayer(), target.asScenery());
-				break;
+				return true;
 			}
 		}
 		return super.interact(entity, target, option);
@@ -209,6 +209,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 		addLink(3239, 5498, 3244, 5495);
 		addLink(3233, 5470, 3241, 5469);
 		addLink(3241, 5445, 3233, 5445);
+		addLink(3250, 5448, 3254, 5451);
 		addLink(3259, 5446, 3265, 5491);
 		addLink(3260, 5491, 3266, 5446);
 		addLink(3218, 5478, 3215, 5475);
