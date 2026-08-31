@@ -64,6 +64,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             }
 
             grave.ticksRemaining--
+            grave.ticksSinceDeath++
         }
     }
 
@@ -252,6 +253,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
             for ((uid,grave) in activeGraves) {
                 val g = JSONObject()
                 g["ticksRemaining"] = grave.ticksRemaining
+                g["ticksSinceDeath"] = grave.ticksSinceDeath
                 g["location"] = grave.location.toString()
                 g["type"] = grave.type.ordinal
                 g["username"] = grave.ownerUsername
@@ -275,6 +277,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
                 val uid = (entry.key as String).toInt()
                 val type = g["type"].toString().toInt()
                 val ticks = g["ticksRemaining"].toString().toInt()
+                val ticksSinceDeath = g["ticksSinceDeath"]?.toString()?.toInt() ?: 0
                 val location = Location.fromString(g["location"].toString())
                 val username = g["username"].toString()
 
@@ -290,6 +293,7 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
 
                 val grave = produceGrave(GraveType.values()[type])
                 grave.setupFromJsonParams(uid, ticks, location, items.toTypedArray(), username)
+                grave.ticksSinceDeath = ticksSinceDeath
                 activeGraves[uid] = grave
             }
         }

@@ -27,6 +27,8 @@ class Grave : AbstractNPC {
 
     var ticksRemaining = -1
 
+    var ticksSinceDeath = 0
+
     constructor() : super(NPCs.GRAVESTONE_6571, Location.create(0,0,0), false)
     private constructor(id: Int, location: Location) : super(id, location)
     
@@ -166,11 +168,19 @@ class Grave : AbstractNPC {
     fun retrieveFormattedText(): String {
         return type.text
             .replace("@name", ownerUsername)
-            .replace("@mins", getFormattedTimeRemaining())
+            .replace("@mins", getFormattedTimeSinceDeath())
     }
 
     fun getFormattedTimeRemaining() : String {
-        val seconds = ticksToSeconds(ticksRemaining)
+        return formatDuration(ticksRemaining)
+    }
+
+    fun getFormattedTimeSinceDeath() : String {
+        return formatDuration(ticksSinceDeath)
+    }
+
+    private fun formatDuration(ticks: Int) : String {
+        val seconds = ticksToSeconds(ticks)
         val timeQty = if (seconds / 60 > 0) seconds / 60 else seconds
         val timeUnit = (if (seconds / 60 > 0) "minute" else "second") + if (timeQty > 1) "s" else ""
         return "$timeQty $timeUnit"
