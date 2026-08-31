@@ -8,6 +8,7 @@ import core.game.dialogue.FacialExpression
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
@@ -211,7 +212,7 @@ class PlagueCityListeners : InteractionListener {
             if (getQuestStage(player, Quests.PLAGUE_CITY) >= 7) {
                 if (inEquipment(player, Items.GAS_MASK_1506)){
                     animate(player, GO_INTO_PIPE,true)
-                    queueScript(player, 3) {
+                    queueScript(player, 3, QueueStrength.SOFT) {
                         teleport(player, Location(2529, 3304, 0))
                         sendDialogue(player, "You climb up through the sewer pipe.")
                         return@queueScript stopExecuting(player)
