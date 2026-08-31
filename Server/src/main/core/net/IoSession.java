@@ -261,6 +261,7 @@ public class IoSession {
 			object = null;
 		} catch (IOException e) {
 			e.printStackTrace();
+			if (getPlayer() != null) getPlayer().clear();
 		}
 	}
 

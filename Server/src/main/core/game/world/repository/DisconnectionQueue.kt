@@ -40,9 +40,10 @@ class DisconnectionQueue {
                 val ticksNeeded = secondsToTicks(seconds)
                 if ((queueTimers[it.key] ?: Int.MAX_VALUE) >= ticksNeeded) {
                     it.value?.player?.let { player ->
-                        player.finishClear()
-                        Repository.removePlayer(player)
-                        remove(it.key)
+                        try { player.finishClear() } finally {
+                            Repository.removePlayer(player)
+                            remove(it.key)
+                        }
                         log(this::class.java, Log.WARN, "Force-clearing ${it.key} after 15 minutes of being in the disconnection queue!")
                     }
                 }
@@ -66,7 +67,7 @@ class DisconnectionQueue {
             return false
         }
         player.packetDispatch.sendLogout()
-        player.finishClear()
+        try { player.finishClear() } catch (t: Throwable) { t.printStackTrace() }
         Repository.removePlayer(player)
         try {
             if(player.communication.clan != null)

@@ -117,6 +117,7 @@ public final class NioReactor implements Runnable {
 				iterator.remove();
 				try {
 					if (!key.isValid() || !key.channel().isOpen()) {
+						eventHandler.disconnect(key, null);
 						key.cancel();
 						continue;
 					}

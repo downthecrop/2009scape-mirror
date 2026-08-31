@@ -7,6 +7,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
+import core.game.world.repository.Repository;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -179,9 +180,10 @@ public final class PacketDispatch {
 	}
 
 	/**
-	 * Send the logout packet.
+	 * Queues the player for disconnection and sends the logout packet.
 	 */
 	public void sendLogout() {
+		Repository.getDisconnectionQueue().add(player);
 		PacketRepository.send(Logout.class, getContext());
 	}
 
