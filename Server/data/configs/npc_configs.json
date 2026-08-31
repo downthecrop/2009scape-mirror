@@ -25513,7 +25513,8 @@
   },
   {
     "id": "2059",
-    "name": "Zavistic Rarve"
+    "name": "Zavistic Rarve",
+    "examine": "The Grand Secretary of the Wizards' Guild in Yanille."
   },
   {
     "id": "2060",
@@ -35999,7 +36000,8 @@
   },
   {
     "id": "3108",
-    "name": "Bert"
+    "name": "Bert",
+    "examine": "Bert seems to be covered in sand from head to toe."
   },
   {
     "id": "3109",
@@ -36028,11 +36030,13 @@
   },
   {
     "id": "3113",
-    "name": "Sandy"
+    "name": "Sandy",
+    "examine": "He seems to be distracted, looking out of the window at something."
   },
   {
     "id": "3114",
-    "name": "Mazion"
+    "name": "Mazion",
+    "examine": "Mazion seems to be covered in sand."
   },
   {
     "id": "3115",

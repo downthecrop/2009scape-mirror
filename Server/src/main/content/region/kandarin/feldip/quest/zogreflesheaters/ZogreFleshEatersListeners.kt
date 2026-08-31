@@ -1,5 +1,6 @@
 package content.region.kandarin.feldip.quest.zogreflesheaters
 
+import content.region.kandarin.yanille.handlers.ZavisticRarveBellSpawn
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
@@ -26,6 +27,8 @@ class ZogreFleshEatersListeners : InteractionListener {
                 setVarbit(player, ZogreFleshEaters.varbitSithikOgre, 1)
             }
         }
+
+        private const val SOUND_WIZARDS_GUILD_BELL_1959 = 1959
     }
 
     override fun defineListeners() {
@@ -230,8 +233,10 @@ class ZogreFleshEatersListeners : InteractionListener {
         // Zavistic Bell, Stage 2,3,4,5,6 and on (Actually should be standalone.
         on(Scenery.BELL_6847, SCENERY, "ring") { player, node ->
             sendMessage(player, "You ring the bell.")
-            // TODO: Make Zavistic appear at the bell area.
-            openDialogue(player, content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile(), NPC(NPCs.ZAVISTIC_RARVE_2059))
+            playAudio(player, SOUND_WIZARDS_GUILD_BELL_1959)
+            val zavistic = ZavisticRarveBellSpawn.getOrSpawn(player, Location.create(2598, 3087, 0))
+            face(player, zavistic)
+            openDialogue(player, content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile(viaBell = true), zavistic)
             return@on true
         }
 

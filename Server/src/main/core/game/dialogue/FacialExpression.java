@@ -53,10 +53,12 @@ public enum FacialExpression {
     WORRIED(9743),
     HALF_WORRIED(9745), //Not on the wiki, first half of worried
     AMAZED(9746),
+    AMAZED_TALKING(9749),
     EXTREMELY_SHOCKED(9750),
     GUILTY(9758),
     HALF_GUILTY(9760), //Not on the wiki, first half of guilty
     SAD(9761),
+    SAD_TALKING(9764),
     CRYING(9765),
     HALF_CRYING(9768), //Not on the wiki, but plays the first half of the crying animation
     AFRAID(9772),

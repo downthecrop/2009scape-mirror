@@ -3,6 +3,7 @@ package content.global.handlers.item.withitem
 import content.data.Dyes
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -46,6 +47,10 @@ class CapeDyer : UseWithHandler(*CAPES.copyOfRange(0,CAPES.size - 1).toIntArray(
             player.inventory.add(product.product)
             player.inventory.add(Item(Items.VIAL_229))
             player.sendMessage("You dye the cape.")
+
+            if (product == Cape.PINK) {
+                player.achievementDiaryManager.finishTask(player, DiaryType.FALADOR, 2, 5)
+            }
         }
         return true
     }

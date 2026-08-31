@@ -3,12 +3,20 @@ package content.region.kandarin.feldip.quest.zogreflesheaters
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
-import core.game.dialogue.FacialExpression
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import org.rs09.consts.Items
 
-class ZavisticRarveDialogueFile : DialogueBuilderFile() {
+open class ZavisticRarveDialogueFile : DialogueBuilderFile() {
+
+    /** Used by the shared Zavistic dialogue router to continue Zogre Flesh Eaters without replaying Zavistic's intro. */
+    protected open fun shouldSkipIntro(): Boolean = false
+    private fun zavisticIntro(builder: DialogueBuilder): DialogueBuilder {
+        return if (shouldSkipIntro()) {
+            builder
+        } else {
+            content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile.dialogueInitialTalk(builder)
+        }
+    }
 
     companion object {
         private fun hasEvidences(player: Player): Int {
@@ -60,7 +68,7 @@ class ZavisticRarveDialogueFile : DialogueBuilderFile() {
 
     override fun create(b: DialogueBuilder) {
         b.onQuestStages(ZogreFleshEaters.questName, 2)
-                .let { content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile.dialogueInitialTalk(it) }
+                .let { zavisticIntro(it) }
                 .branch { player ->
                     return@branch if (inInventory(player, Items.BLACK_PRISM_4808) && inInventory(player, Items.TORN_PAGE_4809) ) {
                         3
@@ -132,7 +140,7 @@ class ZavisticRarveDialogueFile : DialogueBuilderFile() {
 
 
         b.onQuestStages(ZogreFleshEaters.questName, 3,4)
-                .let { content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile.dialogueInitialTalk(it) }
+                .let { zavisticIntro(it) }
                 .let { builder ->
                     val returnJoin = b.placeholder()
                     builder.goto(returnJoin)
@@ -235,7 +243,7 @@ class ZavisticRarveDialogueFile : DialogueBuilderFile() {
                     }
                 }
         b.onQuestStages(ZogreFleshEaters.questName, 5)
-                .let { content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile.dialogueInitialTalk(it) }
+                .let { zavisticIntro(it) }
                 .npcl("Have you used that potion yet?")
                 .branch { player ->
                     return@branch if (inInventory(player, Items.STRANGE_POTION_4836) ) { 1 } else { 0 }
@@ -258,7 +266,7 @@ class ZavisticRarveDialogueFile : DialogueBuilderFile() {
 
 
         b.onQuestStages(ZogreFleshEaters.questName, 6,7,8,9)
-                .let { content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile.dialogueInitialTalk(it) }
+                .let { zavisticIntro(it) }
                 .npcl("Don't you worry about Sithik, he's not likely to be moving from his bed for a long time. When he eventually does get better, he's going to be sent before a disciplinary tribunal, then we'll sort out what's what.")
                 .playerl("Thanks for your help with all of this.")
                 .npcl("Ooohh, no thanks required. It's I who should be thanking you my friend...your investigative mind has shown how vigilant we really should be for this type of evil use of the magical arts.")
@@ -266,6 +274,10 @@ class ZavisticRarveDialogueFile : DialogueBuilderFile() {
                     content.region.kandarin.yanille.dialogue.ZavisticRarveDialogueFile.defaultTalk(builder)
                 }
     }
+}
+
+class ZavisticRarveDialogueFileNoIntro : ZavisticRarveDialogueFile() {
+    override fun shouldSkipIntro(): Boolean = true
 }
 
 /** Dialogues when you use stuff on him. */

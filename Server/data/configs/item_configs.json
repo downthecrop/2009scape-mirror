@@ -59749,7 +59749,7 @@
     "examine": "A severed hand covered with sand.",
     "archery_ticket_price": "0",
     "destroy": "true",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to Bert in Yanille to get another sandy hand.",
     "durability": null,
     "tradeable": "false"
   },
@@ -59786,9 +59786,9 @@
   {
     "id": "6949",
     "name": "A magic scroll",
-    "examine": "Maybe I should read this...",
+    "examine": "This scroll glows with an inner light.",
     "archery_ticket_price": "0",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Speak to Bert in Yanille to find another magical scroll.",
     "durability": null
   },
   {
@@ -59880,7 +59880,7 @@
     "examine": "A handful of sand from Sandy's pocket.",
     "archery_ticket_price": "0",
     "destroy": "true",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "Pickpocket Sandy in Brimhaven to get more sand.",
     "durability": null,
     "tradeable": "false"
   },
