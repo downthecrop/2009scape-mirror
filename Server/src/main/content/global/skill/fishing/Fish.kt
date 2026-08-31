@@ -32,11 +32,21 @@ enum class Fish(val id: Int, val level: Int, val experience: Double, val lowChan
     MANTA_RAY(Items.RAW_MANTA_RAY_389, 81, 46.0, 0.0, 0.0),
     SEAWEED(Items.SEAWEED_401, 16, 1.0, 0.63, 0.219),
     CASKET(Items.CASKET_405, 16, 10.0, 0.63, 0.219),
-    OYSTER(Items.OYSTER_407, 16, 10.0, 0.63, 0.219);
+    OYSTER(Items.OYSTER_407, 16, 10.0, 0.63, 0.219),
+    LEAPING_TROUT(Items.LEAPING_TROUT_11328, 48, 50.0, 0.43, 0.35),
+    LEAPING_SALMON(Items.LEAPING_SALMON_11330, 58, 70.0, 0.25, 0.28),
+    LEAPING_STURGEON(Items.LEAPING_STURGEON_11332, 70, 80.0, 0.19, 0.25);
 
     companion object {
         val fishMap: HashMap<Int, Fish> = HashMap()
         val bigFishMap: HashMap<Fish, Int> = HashMap()
+
+        // Barehand fishing requirements (Fishing levels are 55/70/96)
+        // Source: https://runescape.wiki/w/Barbarian_Training?oldid=834497#Bare_Hand_Fishing
+        val barehandFishingReq = mapOf(TUNA to 55, SWORDFISH to 70, SHARK to 96)
+        val barehandStrengthReq = mapOf(TUNA to 35, SWORDFISH to 50, SHARK to 76)
+        val barehandStrengthXp = mapOf(TUNA to 8.0, SWORDFISH to 10.0, SHARK to 11.0)
+
         init {
             for(fish in values()) {
                 fishMap[fish.id] = fish

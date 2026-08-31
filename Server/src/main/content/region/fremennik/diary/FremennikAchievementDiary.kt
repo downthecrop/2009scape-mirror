@@ -23,8 +23,6 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     companion object {
         private const val ATTRIBUTE_SEAWEED_PICKED = "diary:fremennik:seaweed-picked"
         private const val ATTRIBUTE_ROCK_CRAB_KILLCOUNT = "diary:fremennik:rock-crabs-killed"
-        private const val ATTRIBUTE_BARBARIAN_FISHING_TRAINING = "barbtraining:fishing"
-        private const val ATTRIBUTE_BARBARIAN_HUNTING_TRAINING = "barbtraining:hunting"
         private const val ATTRIBUTE_DAGANNOTHS_KILLCOUNT = "diary:fremennik:dagannoths-killed"
 
         private val WINDSWEPT_TREE_AREA = ZoneBorders(2743, 3718, 2750, 3737)
@@ -91,7 +89,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
             const val COMPLETE_BARBARIAN_OUTPOST_AGILITY_COURSE = 2
             const val LUNAR_ISLE_MINE_PURE_ESSENCE = 3
             const val MAKE_BARBARIAN_PYRE_SHIP_ARCTIC_PINE = 4
-            const val CATCH_TUNE_WITHOUT_HARPOON = 5
+            const val CATCH_TUNA_WITHOUT_HARPOON = 5
             const val BAKE_PIE_WITH_MAGIC = 6
             const val KILL_MITHRIL_DRAGON = 7
             const val GET_MAHOGANY_FROM_ETCETERIA = 8
@@ -105,22 +103,6 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                  EasyTasks.MAINLAND_FIND_HIGHEST_TREE
         )
     )
-
-    override fun onAttributeSet(player: Player, event: AttributeSetEvent) {
-        when (event.attribute) {
-            "/save:$ATTRIBUTE_BARBARIAN_FISHING_TRAINING" -> {
-                if (event.value !is Boolean) return
-
-                if (event.value) {
-                    finishTask(
-                        player,
-                        DiaryLevel.EASY,
-                            EasyTasks.OTTO_GODBLESSED_LEARN_BARBARIAN_FISHING
-                    )
-                }
-            }
-        }
-    }
 
     override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
         when (event.dialogue) {

@@ -1,5 +1,6 @@
 package content.global.skill.prayer
 
+import content.region.kandarin.quest.barbariantraining.BarbarianTraining
 import core.api.*
 import core.game.event.BoneBuryEvent
 import core.game.interaction.Clocks
@@ -34,7 +35,14 @@ class BoneBuryListener : InteractionListener {
             queueScript(player, 1, QueueStrength.STRONG) {
                 if (removeBones(player, node.asItem())) {
                     sendMessage(player, "You bury the bones.")
-                    rewardXP(player, Skills.PRAYER, bones.experience)
+                    val bonusCharges = getAttribute(player, BarbarianTraining.attributePyrePrayerBonus, 0)
+                    val xp = if (bonusCharges > 0) {
+                        setAttribute(player, BarbarianTraining.attributePyrePrayerBonus, bonusCharges - 1)
+                        bones.experience * 4.0
+                    } else {
+                        bones.experience
+                    }
+                    rewardXP(player, Skills.PRAYER, xp)
                     player.dispatch(BoneBuryEvent(bones.itemId))
                 }
                 return@queueScript stopExecuting(player)

@@ -16,7 +16,8 @@ import org.rs09.consts.NPCs
 
 /**
  * Represents the spirit graahk's dialogue
- * @author Splinter & Bishop
+ * @author Splinter
+ * @author Bishop
  * @version 2.0
  */
 @Initializable

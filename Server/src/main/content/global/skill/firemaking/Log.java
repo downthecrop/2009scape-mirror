@@ -7,24 +7,24 @@ import java.util.HashMap;
  * @author 'Vexia
  */
 public enum Log {
-	NORMAL(1511, 1, 180, 2732, 40),
-	ACHEY(2862, 1, 180, 2732, 40),
-	OAK(1521, 15, 200, 2732, 60), 
-	WILLOW(1519, 30, 250, 2732, 90), 
-	TEAK(6333, 35, 300, 2732, 105), 
-	ARCTIC_PINE(10810, 42, 500, 2732, 125),
-	MAPLE(1517, 45, 300, 2732, 135),
-	MAHOGANY(6332, 50, 300, 2732, 157.5), 
-	EUCALYPTUS(12581, 58, 300, 2732, 193.5), 
-	YEW(1515, 60, 400, 2732, 202.5), 
-	MAGIC(1513, 75, 450, 2732, 303.8), 
-	CURSED_MAGIC(13567, 82, 650, 2732, 303.8), 
-	PURPLE(10329, 1, 200, 20001, 50),
-	WHITE(10328, 1, 200, 20000, 50),
-	BLUE(7406, 1, 200, 11406, 50),
-	GREEN(7405, 1, 200, 11405, 50), 
-	RED(7404, 1, 200, 11404, 50), 
-	JOGRE(3125, 1, 200, 3862, 50);
+	NORMAL(1511, 1, 180, 2732, 40, 21),
+	ACHEY(2862, 1, 180, 2732, 40, 21),
+	OAK(1521, 15, 200, 2732, 60, 35),
+	WILLOW(1519, 30, 250, 2732, 90, 50),
+	TEAK(6333, 35, 300, 2732, 105, 55),
+	ARCTIC_PINE(10810, 42, 500, 2732, 125, 62),
+	MAPLE(1517, 45, 300, 2732, 135, 65),
+	MAHOGANY(6332, 50, 300, 2732, 157.5, 70),
+	EUCALYPTUS(12581, 58, 300, 2732, 193.5, 78),
+	YEW(1515, 60, 400, 2732, 202.5, 80),
+	MAGIC(1513, 75, 450, 2732, 303.8, 95),
+	CURSED_MAGIC(13567, 82, 650, 2732, 303.8, -1),
+	PURPLE(10329, 1, 200, 20001, 50, 21),
+	WHITE(10328, 1, 200, 20000, 50, 21),
+	BLUE(7406, 1, 200, 11406, 50, 21),
+	GREEN(7405, 1, 200, 11405, 50, 21),
+	RED(7404, 1, 200, 11404, 50, 21),
+	JOGRE(3125, 1, 200, 3862, 50, -1);
 
 	public static HashMap<Integer,Log> logMap = new HashMap<>();
 	static{
@@ -62,19 +62,27 @@ public enum Log {
 	private final double xp;
 
 	/**
+	 * The required level for bow-firemaking.
+	 */
+	private final int barbLevel;
+
+	/**
 	 * Constructs a new {@code FireMakingDefinitions.java} {@code Object}.
-	 * @param logId the log id.
-	 * @param level the level.
-	 * @param life the life.
-	 * @param fireId the fire id.
-	 * @param xp the experience.
-     */
-	Log(int logId, int level, int life, int fireId, double xp) {
+	 *
+	 * @param logId     the log id.
+	 * @param level     the level.
+	 * @param life      the life.
+	 * @param fireId    the fire id.
+	 * @param xp        the experience.
+	 * @param barbLevel the required level for bow-firemaking.
+	 */
+	Log(int logId, int level, int life, int fireId, double xp, int barbLevel) {
 		this.logId = logId;
 		this.level = level;
 		this.life = life;
 		this.fireId = fireId;
 		this.xp = xp;
+		this.barbLevel = barbLevel;
 	}
 
 	/**
@@ -115,6 +123,14 @@ public enum Log {
 	 */
 	public double getXp() {
 		return xp;
+	}
+
+	/**
+	 * Gets the required level for bow-firemaking.
+	 * @return The required level for bow-firemaking.
+	 */
+	public int getBarbLevel() {
+		return barbLevel;
 	}
 
 	/**

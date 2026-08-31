@@ -14,7 +14,8 @@ import org.rs09.consts.NPCs
 
 /**
  * Represents the Spirit Graahk familiar.
- * @author Aero & Bishop
+ * @author Aero
+ * @author Bishop
  */
 @Initializable
 class SpiritGraahkNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.SPIRIT_GRAAHK_7363) :

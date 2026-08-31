@@ -1,9 +1,8 @@
 package content.global.skill.herblore
 
-import content.global.skill.herblore.BarbarianPotion
+import content.region.kandarin.quest.barbariantraining.BarbarianTraining
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.node.Node
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
@@ -11,7 +10,11 @@ import core.api.hasLevelStat
 import core.api.sendMessage
 import core.api.removeItem
 import core.api.addItem
+import core.api.getAttribute
+import core.api.setAttribute
 import core.api.rewardXP
+import core.api.sendDialogue
+import org.rs09.consts.Items
 
 /**
  * Represents the barbarian mixing listener.
@@ -35,6 +38,11 @@ class BarbarianMixListener : InteractionListener {
     }
 
     fun handle(player: Player, inputPotion: Node, egg: Node): Boolean {
+        // Check if player has started barbarian herblore training
+        val herbloreStage = getAttribute(player, BarbarianTraining.attributeHerblore, 0)
+        if (herbloreStage == 0) {
+            return false
+        }
         val potion: BarbarianPotion? = BarbarianPotion.forId(inputPotion.getId())
         if(potion == null){
             return false
@@ -54,6 +62,12 @@ class BarbarianMixListener : InteractionListener {
         }
         addItem(player, potion.getProduct()) //Add output potion
         rewardXP(player, Skills.HERBLORE, potion.getExp()) //Add exp
+        sendMessage(player, "You combine your potion with the fish eggs.")
+        // Progress Barbarian training if this is your first attack mix
+        if (herbloreStage == 1 && potion.getProduct() == Items.ATTACK_MIX2_11429) {
+            setAttribute(player, BarbarianTraining.attributeHerblore, 2)
+            sendDialogue(player, "You feel you have learned more of barbarian ways. Otto might wish to talk to you more.")
+        }
         return true
     }
 }

@@ -9941,7 +9941,8 @@
   },
   {
     "id": "754",
-    "name": "Peaceful barbarian spirit"
+    "name": "Peaceful barbarian spirit",
+    "examine": "Ascending to rest."
   },
   {
     "id": "755",
@@ -58066,7 +58067,7 @@
   {
     "id": "5364",
     "name": "Confused barbarian",
-    "examine": "It appears to be intelligent and savage.",
+    "examine": "He looks about, blankly.",
     "attack_level": "70",
     "attack_speed": "6",
     "defence_level": "50",

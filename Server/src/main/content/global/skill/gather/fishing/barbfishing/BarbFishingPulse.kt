@@ -1,102 +1,107 @@
 package content.global.skill.gather.fishing.barbfishing
 
+import content.global.skill.fishing.Fish
+import content.region.kandarin.quest.barbariantraining.BarbarianTraining
+import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.system.command.sets.STATS_BASE
+import core.game.system.command.sets.STATS_FISH
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import core.tools.colorize
+import org.rs09.consts.NPCs
 
 /**
  * Pulse used for barbarian fishing
  * @author Ceikry
+ * @author Bishop
  */
-class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(1176)) {
+class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(NPCs.FISHING_SPOT_2722)) {
     override fun checkRequirements(): Boolean {
-        /*if(player.getAttribute("barbtraining:fishing:completed",false) == false){
-            player.sendMessage(colorize("%RYou need to complete barbarian fishing training to fish here."))
-            return false
-        }*/
-        if(player.skills.getLevel(Skills.FISHING) < 48){
-            player.sendMessage(colorize("%RYou need a fishing level of at least 48 to fish here."))
+        if(!hasLevelDyn(player, Skills.FISHING, 48)){
+            sendDialogue(player, "You need a Fishing level of at least 48 to catch these fish.")
             return false
         }
-        if(player.skills.getLevel(Skills.AGILITY) < 15 || player.skills.getLevel(Skills.STRENGTH) < 15){
-            player.sendMessage(colorize("%RYou need a strength and agility level of at least 15 to fish here."))
+        if(!hasLevelDyn(player, Skills.AGILITY, 15) || !hasLevelDyn(player, Skills.STRENGTH, 15)){
+            sendDialogue(player, "You need a strength and agility level of at least 15 to fish here.")
             return false
         }
-        if(!player.inventory.containsItem(Item(11323))){
-            player.sendMessage(colorize("%RYou need a barbarian fishing rod to fish here."))
+        if(!inInventory(player, Items.BARBARIAN_ROD_11323)){
+            sendDialogue(player, "You need a barbarian fishing rod to fish here.")
             return false
         }
-        if(player.inventory.isFull){
-            player.sendMessage("You don't have enough space in your inventory.")
+        if(freeSlots(player) == 0){
+            sendDialogue(player, "You can't carry any more fish.")
             return false
         }
-        if(!(player.inventory.containsItem(Item(Items.FEATHER_314)) || player.inventory.containsItem(Item(Items.FISH_OFFCUTS_11334)))){
-            player.sendMessage("You don't have any bait with which to fish.")
+        if(BAITS.none { inInventory(player, it) }){
+            sendDialogue(player, "You don't have any bait with which to fish.")
             return false
         }
         return true
     }
 
+    companion object {
+        private val BAITS = intArrayOf(
+            Items.FISH_OFFCUTS_11334,
+            Items.FEATHER_314,
+            Items.FISHING_BAIT_313,
+            Items.ROE_11324,
+            Items.CAVIAR_11326,
+        )
+    }
+
     override fun animate() {
-        player.animator.animate(Animation(622))
+        animate(player, Animation(622))
     }
 
     override fun reward(): Boolean {
-        if (delay == 1){
+        if (delay == 1) {
             super.setDelay(5)
             return false
         }
-        val stragiXP = arrayOf(5,6,7)
-        val fishXP = arrayOf(50,70,80)
-        val reward = getRandomFish()
-        val success = rollSuccess(when(reward.id){
-            11328 -> 48
-            11330 -> 58
-            11332 -> 70
-            else -> 99
-        })
-        val index = (when(reward.id){
-            11328 -> 0
-            11330 -> 1
-            11332 -> 2
-            else -> 0
-        })
-        if(success){
-            if(!player.inventory.remove(Item(Items.FISH_OFFCUTS_11334))) {
-                player.inventory.remove(Item(Items.FEATHER_314))
+        val fishingLevel = getDynLevel(player, Skills.FISHING)
+        val boostedLevel = fishingLevel + getFamiliarBoost(player, Skills.FISHING)
+        val strength = getDynLevel(player, Skills.STRENGTH)
+        val agility = getDynLevel(player, Skills.AGILITY)
+
+        var caught: Fish? = null
+        for (f in arrayOf(Fish.LEAPING_TROUT, Fish.LEAPING_SALMON, Fish.LEAPING_STURGEON)) {
+            if (f.level > fishingLevel) continue
+            if (f == Fish.LEAPING_SALMON && (strength < 30 || agility < 30)) continue
+            if (f == Fish.LEAPING_STURGEON && (strength < 45 || agility < 45)) continue
+            if (RandomFunction.random(0.0, 1.0) < f.getSuccessChance(boostedLevel)) {
+                caught = f
+                break
             }
-            player.inventory.add(reward)
-            player.skills.addExperience(Skills.FISHING,fishXP[index].toDouble())
-            player.skills.addExperience(Skills.AGILITY,stragiXP[index].toDouble())
-            player.skills.addExperience(Skills.STRENGTH,stragiXP[index].toDouble())
-            player.sendMessage("You manage to catch a ${reward.name.toLowerCase()}.")
+        }
+
+        if (caught != null) {
+            BAITS.firstOrNull { removeItem(player, Item(it, 1)) }
+            addItem(player, caught.id, 1)
+            rewardXP(player, Skills.FISHING, caught.experience)
+            val strAgiXP = when (caught) {
+                Fish.LEAPING_TROUT    -> 5.0
+                Fish.LEAPING_SALMON   -> 6.0
+                Fish.LEAPING_STURGEON -> 7.0
+                else -> 5.0
+            }
+            rewardXP(player, Skills.AGILITY, strAgiXP)
+            rewardXP(player, Skills.STRENGTH, strAgiXP)
+            var fishCaught = getAttribute(player, "$STATS_BASE:$STATS_FISH", 0)
+            setAttribute(player, "/save:$STATS_BASE:$STATS_FISH", ++fishCaught)
+            sendMessage(player, "You catch a ${getItemName(caught.id).lowercase()}.")
+            // Progress Barbarian training if this is your first heavy rod catch
+            if (getAttribute(player, BarbarianTraining.attributeRod, 0) == 1) {
+                setAttribute(player, BarbarianTraining.attributeRod, 2)
+                sendDialogue(player, "You feel you have learned more of barbarian ways. Otto might wish to talk to you more.")
+            }
         }
         super.setDelay(5)
-        return player.inventory.freeSlots() == 0
+        return freeSlots(player) == 0
     }
-
-    fun rollSuccess(fish: Int): Boolean{
-        val level = 1 + player.skills.getLevel(Skills.FISHING) + player.familiarManager.getBoost(Skills.FISHING)
-        val hostRatio: Double = Math.random() * fish
-        val clientRatio: Double = Math.random() * (level * 3.0 - fish)
-        return hostRatio < clientRatio
-    }
-
-    fun getRandomFish(): Item{
-        val fish = arrayOf(11328,11330,11332)
-        val fishing = player.skills.getLevel(Skills.FISHING)
-        val strength = player.skills.getLevel(Skills.STRENGTH)
-        val agility = player.skills.getLevel(Skills.AGILITY)
-        var possibleIndex = 0
-        if(fishing >= 58 && (strength >= 30 && agility >= 30)) possibleIndex++
-        if(fishing >= 70 && (strength >= 45 && agility >= 45)) possibleIndex++
-        return Item(fish[RandomFunction.random(possibleIndex + 1)])
-    }
-
 }

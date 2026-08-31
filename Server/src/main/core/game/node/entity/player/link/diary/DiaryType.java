@@ -348,7 +348,7 @@ public enum DiaryType {
                             "Kill five rock crabs on the shore near Rellekka or on<br><br>Waterbirth Island",
                             "Find the highest tree on the Fremennik mainland",
                             "View the rewards in the Barbarian Assault tutorial", // TODO: Move this to appropriate dialogue once Barbarian Assault is implemented
-                            "Speak to Otto Godblessed about barbarian training", // TODO: Move this to an appropriate point once the entirety of Barbarian training is implemented
+                            "Speak to Otto Godblessed about barbarian training",
                             "Collect three seaweed from the shore north-east of Rellekka",
                             "Find the Hunting Expert on the northern ice plains", // TODO: Transcribe the appropriate authentic dialogue for this NPC. Mockup dialogue implemented as a bandaid.
                             "Catch a fish off one of Rellekka's piers", // TODO: Make this check for any Fishing Spots within the Rellekkan region ID list. Currently only checks the "Cage/Harpoon" Fishing spots at the northeastern most pier.
@@ -369,14 +369,14 @@ public enum DiaryType {
                             "Steal a fish from the fishing stall in the Rellekka<br><br>marketplace" // TODO
                     },
                     {
-                            "Kill three dagannoths in the first layer of the Waterbirth<br><br>Island Dungeon", // TODO
+                            "Kill three dagannoths in the first layer of the Waterbirth<br><br>Island Dungeon",
                             "Wear rockshell, spined or skeletal armour and have the<br><br>locals use an honorific with your Fremennik name", // TODO
                             "Complete the Barbarian Outpost Agility Course", // TODO
                             "Mine pure essence on Lunar Isle", // TODO
-                            "Make a barbarian pyre ship from arctic pine", // TODO
-                            "Catch a tuna without a harpoon", // TODO
+                            "Make a barbarian pyre ship from arctic pine",
+                            "Catch a tuna without a harpoon",
                             "Bake a pie using Magic", // TODO
-                            "Kill a Mithril dragon", // TODO
+                            "Kill a Mithril dragon",
                             "Get mahogany from your Etceterian subjects" // TODO
                     }
             },

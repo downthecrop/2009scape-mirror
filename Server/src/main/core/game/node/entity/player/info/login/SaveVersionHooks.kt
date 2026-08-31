@@ -2,10 +2,12 @@ package core.game.node.entity.player.info.login
 
 import content.data.Quests
 import content.global.skill.summoning.pet.Pets
-import content.region.kandarin.ardougne.quest.plaguecity.PlagueCity
+import content.region.fremennik.diary.FremennikAchievementDiary.Companion.EasyTasks
+import content.region.kandarin.quest.barbariantraining.BarbarianTraining
 import core.ServerConstants
 import core.api.*
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.tools.Log
 import org.rs09.consts.Items
@@ -95,6 +97,20 @@ class SaveVersionHooks : LoginListener {
                 replaceAllItems(player, Items.ADAMANT_SHIELDH3_10672, Items.ADAMANT_SHIELDH3_7346)
                 replaceAllItems(player, Items.ADAMANT_SHIELDH4_10675, Items.ADAMANT_SHIELDH4_7352)
                 replaceAllItems(player, Items.ADAMANT_SHIELDH5_10678, Items.ADAMANT_SHIELDH5_7358)
+            }
+
+            if (player.version < 5) {
+                // Migrate barbarian heavy rod training attribute
+                if (getAttribute(player, "/save:barbtraining:fishing", false)) {
+                    removeAttribute(player, "/save:barbtraining:fishing")
+                    setAttribute(player, BarbarianTraining.attributeRod, 1)
+                    setVarbit(player, 3757, 1, true)
+                    player.achievementDiaryManager.finishTask(player, DiaryType.FREMENNIK,0, EasyTasks.OTTO_GODBLESSED_LEARN_BARBARIAN_FISHING)
+                }
+                // Delete attribute for nonexistent barb hunting training
+                if (getAttribute(player, "/save:barbtraining:hunting", false)) {
+                    removeAttribute(player, "/save:barbtraining:hunting")
+                }
             }
 
             // Finish up

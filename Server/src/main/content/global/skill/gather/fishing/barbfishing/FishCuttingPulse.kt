@@ -1,10 +1,11 @@
 package content.global.skill.gather.fishing.barbfishing
 
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
+import core.tools.RandomFunction
 import org.rs09.consts.Items
 
 /**
@@ -12,35 +13,68 @@ import org.rs09.consts.Items
  * @param player the player running the pulse
  * @param fish the fish being cut
  * @author Ceikry
+ * @author Bishop
  */
+
 class FishCuttingPulse(val player: Player, val fish: Int) : Pulse(0){
     fun checkRequirements(): Boolean {
-        if(!(player.inventory.freeSlots() >= 2 || (player.inventory.freeSlots() >= 1 && player.inventory.containsItem(Item(
-                Items.FISH_OFFCUTS_11334))))){
-            player.sendMessage("You do not have enough space to do that.")
+        if(!(freeSlots(player) >= 2 ||
+            (freeSlots(player) >= 1 && inInventory(player, Items.FISH_OFFCUTS_11334)))){
+            sendMessage(player, "You don't have enough space in your pack to attempt cutting open the fish.")
             return false
         }
         return true
     }
 
     override fun pulse(): Boolean {
-        player.animator.animate(Animation(1248))
-        player.inventory.remove(Item(fish))
 
-        player.inventory.add(Item(Items.FISH_OFFCUTS_11334))
+        val odds = when (fish) {
+            Items.LEAPING_TROUT_11328 -> 100
+            Items.LEAPING_SALMON_11330 -> 85
+            Items.LEAPING_STURGEON_11332 -> 70
+            else -> return false
+        }
 
-        player.inventory.add(Item(when(fish){
-            11328, 11330 -> Items.ROE_11324
-            11332 -> Items.CAVIAR_11326
-            else -> 0
-        }))
+        val offcutSuccess = RandomFunction.random(odds) < 50
+        val roeSuccess    = RandomFunction.random(100)  < 50
 
-        player.skills.addExperience(Skills.COOKING,when(fish){
-            11328,11330 -> 10.0
-            11332 -> 15.0
-            else -> 0.0
-        })
-
+        if (removeItem(player, fish.asItem())) {
+            animate(player, Animation(5244))
+            when {
+                (offcutSuccess && roeSuccess) -> {
+                    addItemOrDrop(player, Items.FISH_OFFCUTS_11334)
+                    if (fish == Items.LEAPING_STURGEON_11332) {
+                        addItemOrDrop(player, Items.CAVIAR_11326)
+                        rewardXP(player, Skills.COOKING, 15.0)
+                        sendMessage(player, "You cut open the fish and extract some fish cuts and caviar.")
+                    } else {
+                        addItemOrDrop(player, Items.ROE_11324)
+                        rewardXP(player, Skills.COOKING, 10.0)
+                        sendMessage(player, "You cut open the fish and extract some fish cuts and roe.")
+                    }
+                }
+                (roeSuccess) -> {
+                    if (fish == Items.LEAPING_STURGEON_11332) {
+                        addItemOrDrop(player, Items.CAVIAR_11326)
+                        rewardXP(player, Skills.COOKING, 15.0)
+                        sendMessage(player, "You cut open the fish and extract caviar, but the rest of the fish is reduced to")
+                        sendMessage(player, "useless fragments, which you discard.")
+                    } else  {
+                        addItemOrDrop(player, Items.ROE_11324)
+                        rewardXP(player, Skills.COOKING, 10.0)
+                        sendMessage(player, "You cut open the fish and extract roe, but the rest of the fish is reduced to")
+                        sendMessage(player, "useless fragments, which you discard.")
+                    }
+                }
+                // It appears that you can't get cutoffs without also getting roe or caviar
+                // Thus, passing only the offcuts roll is a total failure
+                else -> {
+                    sendMessage(player, "You fail to gain anything useful and reduce the fish to fragments, not even")
+                    sendMessage(player, "usable as bait.")
+                }
+            }
         return true
+        }
+        else return false
     }
 }

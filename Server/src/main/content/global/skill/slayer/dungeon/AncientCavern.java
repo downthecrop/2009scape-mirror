@@ -1,6 +1,7 @@
 package content.global.skill.slayer.dungeon;
 
 import static core.api.ContentAPIKt.*;
+import content.region.kandarin.quest.barbariantraining.BarbarianTraining;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
@@ -30,6 +31,7 @@ import core.net.packet.out.MinimapState;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 
 /**
  * Handles the ancient cavern.
@@ -40,8 +42,44 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 
 	/**
 	 * The loots recieved when rummaging a skeleton.
+	 * Each entry has equal 1/3 weight: bones, mangled bones, or a random ancient page.
 	 */
-	private static final Item[] LOOTS = new Item[] { new Item(526), new Item(11337), new Item(11341) };
+	private static final Item[] LOOTS = new Item[] {
+		new Item(Items.BONES_526),
+		new Item(Items.MANGLED_BONES_11337),
+	};
+
+	/**
+	 * The ancient pages that may be found when rummaging a skeleton (1/3 chance as a group).
+	 */
+	private static final Item[] ANCIENT_PAGES = new Item[] {
+		new Item(Items.ANCIENT_PAGE_11341),
+		new Item(Items.ANCIENT_PAGE_11342),
+		new Item(Items.ANCIENT_PAGE_11343),
+		new Item(Items.ANCIENT_PAGE_11344),
+		new Item(Items.ANCIENT_PAGE_11345),
+		new Item(Items.ANCIENT_PAGE_11346),
+		new Item(Items.ANCIENT_PAGE_11347),
+		new Item(Items.ANCIENT_PAGE_11348),
+		new Item(Items.ANCIENT_PAGE_11349),
+		new Item(Items.ANCIENT_PAGE_11350),
+		new Item(Items.ANCIENT_PAGE_11351),
+		new Item(Items.ANCIENT_PAGE_11352),
+		new Item(Items.ANCIENT_PAGE_11353),
+		new Item(Items.ANCIENT_PAGE_11354),
+		new Item(Items.ANCIENT_PAGE_11355),
+		new Item(Items.ANCIENT_PAGE_11356),
+		new Item(Items.ANCIENT_PAGE_11357),
+		new Item(Items.ANCIENT_PAGE_11358),
+		new Item(Items.ANCIENT_PAGE_11359),
+		new Item(Items.ANCIENT_PAGE_11360),
+		new Item(Items.ANCIENT_PAGE_11361),
+		new Item(Items.ANCIENT_PAGE_11362),
+		new Item(Items.ANCIENT_PAGE_11363),
+		new Item(Items.ANCIENT_PAGE_11364),
+		new Item(Items.ANCIENT_PAGE_11365),
+		new Item(Items.ANCIENT_PAGE_11366),
+	};
 
 	/**
 	 * The skeleton barbarian id.
@@ -52,7 +90,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 	 * Constructs a new {@code AnicentCavern} {@code Object}.
 	 */
 	public AncientCavern() {
-		super("ancient cavern", true, ZoneRestriction.CANNON);
+		super("ancient cavern", true, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS);
 	}
 
 	@Override
@@ -68,6 +106,17 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 
 			@Override
 			public boolean handle(final Player player, Node node, String option) {
+				final boolean hasStartedPyre = getAttribute(player, BarbarianTraining.attributePyreShip, 0) >= 1;
+				final boolean hasBeenWarned = getAttribute(player, BarbarianTraining.attributeWhirlpool, false);
+				final int currentHp = player.getSkills().getLifepoints();
+				if (player.getFamiliarManager().hasFamiliar()) {
+					sendMessage(player, "You can't take a follower into the whirlpool."); // Placeholder
+					return true;
+				}
+				if (hasStartedPyre && !hasBeenWarned) {
+					openDialogue(player, new WhirlpoolWarningDialogue(() -> handle(player, node, option)));
+					return true;
+				}
 				lock(player, 30);
 				AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(0, -6, 0), Animation.create(6723), 10, 0.0, null);
 				GameWorld.getPulser().submit(new Pulse(1, player) {
@@ -83,10 +132,18 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 							player.getAnimator().reset();
 							player.getInterfaceManager().close();
 							player.getInterfaceManager().closeOverlay();
-							player.getProperties().setTeleportLocation(Location.create(1763, 5365, 1));
-							player.getPacketDispatch().sendMessages("You dive into the swirling maelstorm of the whirlpool.", "You are swirled beneath the water, the darkness and pressure are overwhelming.", "Mystical forces guide you into a cavern below the whirlpool.");
+							if (hasStartedPyre) {
+								player.getProperties().setTeleportLocation(Location.create(1763, 5365, 1));
+								player.getPacketDispatch().sendMessages("You dive into the swirling maelstorm of the whirlpool.", "You are swirled beneath the water, the darkness and pressure are overwhelming.", "Mystical forces guide you into a cavern below the whirlpool.");
+							} else {
+								player.getProperties().setTeleportLocation(Location.create(2531, 3446, 0));
+								player.getPacketDispatch().sendMessages("You are swept, out of control, through horrific underwater currents.", "You are swirled beneath the water, dashed against sharp rocks.", "You find yourself on the banks of the river, far below the lake.");
+							}
 							break;
 						case 8:
+							if (!hasStartedPyre) {
+								player.getImpactHandler().manualHit(player, (int) Math.ceil(currentHp * 0.12), HitsplatType.NORMAL);
+							}
 							unlock(player);
 							return true;
 						}
@@ -187,10 +244,12 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 		player.getPacketDispatch().sendMessages("You rummage in the sharp, slimy pile of bones in search of something useful...");
 		if (random == 0) {
 			if (!fullInvy) {
-				player.getInventory().add(LOOTS[RandomFunction.random(LOOTS.length)], player);
-				player.getPacketDispatch().sendMessage("...you find something and stow it in your pack.");
+				int category = RandomFunction.random(3);
+				Item loot = category < 2 ? LOOTS[category] : ANCIENT_PAGES[RandomFunction.random(ANCIENT_PAGES.length)];
+				addItemOrDrop(player, loot.getId(), 1);
+				sendMessage(player, "...you find something and stow it in your pack.");
 			} else {
-				player.getPacketDispatch().sendMessage("...you find something, but it drops to the floor.");
+				sendMessage(player, "...you find something, but it drops to the floor.");
 			}
 		} else if (random == 1) {
 			NPC spawn = NPC.create(SKELETONS[RandomFunction.random(SKELETONS.length)], object.getLocation());
@@ -233,7 +292,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 
 	@Override
 	public void configure() {
-		register(new ZoneBorders(1723, 5296, 1831, 5394));
+		register(new ZoneBorders(1723, 5278, 1831, 5394));
 	}
 
 }

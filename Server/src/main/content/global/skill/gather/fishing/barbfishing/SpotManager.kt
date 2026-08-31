@@ -7,6 +7,7 @@ import core.api.TickListener
 import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import core.tools.RandomFunction
+import org.rs09.consts.NPCs
 
 /**
  * Manages fishing spot spawning and relocation
@@ -55,7 +56,7 @@ fun getNewLoc(): Location {
     return loc
 }
 
-class BarbFishingSpot(var loc: Location? = null, var ttl: Int) : NPC(1176){
+class BarbFishingSpot(var loc: Location? = null, var ttl: Int) : NPC(NPCs.FISHING_SPOT_2722){
     init {
         location = loc
     }

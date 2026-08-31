@@ -2,6 +2,7 @@ package content.global.handlers.npc
 
 import content.data.consumables.Consumables
 import content.global.skill.cooking.fermenting.CalquatDecant
+import content.region.kandarin.quest.barbariantraining.BarbarianTraining
 import core.api.*
 import core.game.consumable.Potion
 import core.game.dialogue.DialogueFile
@@ -118,7 +119,7 @@ class DecantListener : InteractionListener {
         // Barbarian decanting: use a 4-dose potion and an empty vial together to make two 2-dose potions
         onUseWith(IntType.ITEM, potions, Items.VIAL_229) { player, used, with ->
             // Check if player has started barbarian herblore training
-            if (getAttribute(player, "/save:barbtraining:herblore", 0) == 0) {
+            if (getAttribute(player, BarbarianTraining.attributeHerblore, 0) == 0) {
                 return@onUseWith false
             }
 
