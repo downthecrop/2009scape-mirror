@@ -35112,7 +35112,7 @@
   {
     "id": "4077",
     "name": "Crystal-mine key",
-    "examine": "A key I found in the lower levels of the Morytanian mines. (Haunted Mine) / As the 'Innocent-looking key': A shiny key sitting quietly on a crate.",
+    "examine": "Abandoned Mine key.",
     "archery_ticket_price": "0",
     "durability": null
   },
@@ -39294,7 +39294,7 @@
   {
     "id": "4522",
     "name": "Oil lamp",
-    "examine": "Empty: An oil lamp with no oil in it.Filled: Not the genie sort.",
+    "examine": "Filled: Not the genie sort.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -39314,7 +39314,7 @@
   {
     "id": "4524",
     "name": "Oil lamp",
-    "examine": "Empty: An oil lamp with no oil in it.Filled: Not the genie sort.",
+    "examine": "Not the genie sort.",
     "archery_ticket_price": "0",
     "durability": null,
     "shop_price": "10",
@@ -39324,7 +39324,7 @@
   {
     "id": "4525",
     "name": "Oil lamp",
-    "examine": "Empty: An oil lamp with no oil in it.Filled: Not the genie sort.",
+    "examine": "An oil lamp with no oil in it.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -39344,7 +39344,7 @@
   {
     "id": "4527",
     "name": "Candle lantern",
-    "examine": "Lit: A flickering candle in a glass cage.Unlit: a candle in a glass cage.Without candle: Put a candle in to complete it.",
+    "examine": "Put a candle in to complete it.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -39363,7 +39363,7 @@
   {
     "id": "4529",
     "name": "Candle lantern",
-    "examine": "Lit: A flickering candle in a glass cage.Unlit: a candle in a glass cage.Without candle: Put a candle in to complete it.",
+    "examine": "A candle in a glass cage.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -39382,7 +39382,7 @@
   {
     "id": "4531",
     "name": "Candle lantern",
-    "examine": "Lit: A flickering candle in a glass cage.Unlit: a candle in a glass cage.Without candle: Put a candle in to complete it.",
+    "examine": "A flickering candle in a glass cage.",
     "archery_ticket_price": "0",
     "durability": null,
     "tradeable": "true",
@@ -39391,7 +39391,7 @@
   {
     "id": "4532",
     "name": "Candle lantern",
-    "examine": "Lit: A flickering candle in a glass cage.Unlit: a candle in a glass cage.Without candle: Put a candle in to complete it.",
+    "examine": "A candle in a glass cage.",
     "archery_ticket_price": "0",
     "durability": null,
     "requirements": "{4,11}",
@@ -39408,7 +39408,7 @@
   {
     "id": "4534",
     "name": "Candle lantern",
-    "examine": "Lit: A flickering candle in a glass cage.Unlit: a candle in a glass cage.Without candle: Put a candle in to complete it.",
+    "examine": "A flickering candle in a glass cage.",
     "archery_ticket_price": "0",
     "durability": null,
     "tradeable": "true",
@@ -39417,7 +39417,7 @@
   {
     "id": "4535",
     "name": "Oil lantern",
-    "examine": "Unfuelled: Put oil in to complete it. Unlit: An unlit oil lantern. Lit:  It lights your way through the dark places of the earth.",
+    "examine": "Put oil in to complete it.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -39436,7 +39436,7 @@
   {
     "id": "4537",
     "name": "Oil lantern",
-    "examine": "Unfuelled: Put oil in to complete it. Unlit: An unlit oil lantern. Lit:  It lights your way through the dark places of the earth.",
+    "examine": "An unlit oil lantern.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -39455,7 +39455,7 @@
   {
     "id": "4539",
     "name": "Oil lantern",
-    "examine": "Unfuelled: Put oil in to complete it. Unlit: An unlit oil lantern. Lit:  It lights your way through the dark places of the earth.",
+    "examine": "It lights your way through the dark places of the earth.",
     "archery_ticket_price": "0",
     "durability": null,
     "tradeable": "true",
@@ -75866,7 +75866,7 @@
     "examine": "A pouch for storing crossbow bolts.",
     "archery_ticket_price": "0",
     "destroy": "true",
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "You can get another pouch from Hirko in Keldagrim.",
     "durability": null,
     "shop_price": "1500",
     "tradeable": "false",

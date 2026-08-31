@@ -33,12 +33,14 @@ enum class EnchantedJewellery(
                     "Sumona in Pollnivneach.",
                     "Morytania Slayer Tower.",
                     "Rellekka Slayer Caves.",
+                    "Tarn's Lair.",
                     "Nowhere. Give me a slayer update."
             ),
             arrayOf(
                     Location.create(3361, 2994, 0),
                     Location.create(3428, 3535, 0),
                     Location.create(2792, 3615, 0),
+                    Location.create(3187, 4601, 0),
             ),
             true,
             Items.RING_OF_SLAYING8_13281,
@@ -238,6 +240,13 @@ enum class EnchantedJewellery(
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
         if (!canTeleport(player, nextJewellery)) {
+            return false
+        }
+        // Access to Tarn's Lair has a quest prereq.
+        if (this == RING_OF_SLAYING && buttonID == 3
+            && !isQuestComplete(player, Quests.HAUNTED_MINE)
+        ) {
+            sendMessage(player, "You must complete the Haunted Mine quest to access Tarn's Lair.")
             return false
         }
         val location = getLocation(buttonID)

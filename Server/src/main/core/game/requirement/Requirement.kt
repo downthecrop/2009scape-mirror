@@ -126,7 +126,7 @@ enum class QuestRequirements(val quest: Quests, vararg val requirements: Require
     HORROR_DEEP (Quests.HORROR_FROM_THE_DEEP, SkillReq(Skills.AGILITY, 35, true)),
     THRONE (Quests.THRONE_OF_MISCELLANIA, QuestReq(HERO), QuestReq(FREM_TRIALS)),
     MONKEY (Quests.MONKEY_MADNESS, QuestReq(GRAND_TREE), QuestReq(GNOME_VILLAGE)),
-    MINE (Quests.HAUNTED_MINE, QuestReq(PRIEST), SkillReq(Skills.CRAFTING, 35, true)),
+    MINE (Quests.HAUNTED_MINE, QuestReq(PRIEST), SkillReq(Skills.CRAFTING, 35, true), SkillReq(Skills.AGILITY, 15, true)),
     TROLL_ROMANCE (Quests.TROLL_ROMANCE, QuestReq(TROLL_STRONGHOLD), SkillReq(Skills.AGILITY, 28, true)),
     SEARCH_MYREQUE (Quests.IN_SEARCH_OF_THE_MYREQUE, QuestReq(NATURE_SPIRIT), SkillReq(Skills.AGILITY, 25, true)),
     FENKENSTRAIN (Quests.CREATURE_OF_FENKENSTRAIN, QuestReq(PRIEST), QuestReq(RESTLESS_GHOST), SkillReq(Skills.THIEVING, 25, true), SkillReq(Skills.CRAFTING, 20, true)),

@@ -20,10 +20,12 @@ import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.sendMessage;
 
 /**
  * Handles the pick option of interactive scenery (non-farming cabbages,
  * potatoes, bananas, etc)
+ *
  * @author Emperor
  * @version 1.0
  */
@@ -37,10 +39,10 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		for(PickingPlant p : PickingPlant.values()){
-			SceneryDefinition.forId(p.objectId).getHandlers().put("option:pick",this);
+		for (PickingPlant p : PickingPlant.values()) {
+			SceneryDefinition.forId(p.objectId).getHandlers().put("option:pick", this);
 		}
-        SceneryDefinition.forId(3511).getHandlers().put("option:take-cutting",this);
+		SceneryDefinition.forId(3511).getHandlers().put("option:take-cutting", this);
 		return this;
 	}
 
@@ -95,9 +97,9 @@ public final class FieldPickingPlugin extends OptionHandler {
 					full = object.transform(2073);
 					SceneryBuilder.replace(object, full);
 				}
-                boolean isBloomPlant = plant == PickingPlant.FUNGI_ON_LOG
-                    || plant == PickingPlant.BUDDING_BRANCH
-                    || plant == PickingPlant.GOLDEN_PEAR_BUSH;
+				boolean isBloomPlant = plant == PickingPlant.FUNGI_ON_LOG
+						|| plant == PickingPlant.BUDDING_BRANCH
+						|| plant == PickingPlant.GOLDEN_PEAR_BUSH;
 				if (isBloomPlant) {
 					full = object.transform(object.getId() - 1);
 					SceneryBuilder.replace(object, full);
@@ -105,10 +107,12 @@ public final class FieldPickingPlugin extends OptionHandler {
 				if (!isBloomPlant) {
 					SceneryBuilder.replace(plant == PickingPlant.BANANA_TREE_4 ? full : object, object.transform(banana ? plant.respawn : 0), banana ? 300 : plant.respawn);
 				}
-				if (!plant.name().startsWith("NETTLES")) {
-					player.getPacketDispatch().sendMessage("You pick a " + reward.getName().toLowerCase() + ".");
+				if (plant.name().startsWith("NETTLES")) {
+					sendMessage(player, "You pick a handful of nettles.");
+				} else if (plant.name().startsWith("GLOWING")) {
+					sendMessage(player, "You pull the fungus from the water, it is very cold to the touch.");
 				} else {
-					player.getPacketDispatch().sendMessage("You pick a handful of nettles.");
+					sendMessage(player, "You pick a " + reward.getName().toLowerCase() + ".");
 				}
 				return true;
 			}
@@ -118,9 +122,10 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 	/**
 	 * Method used to handle the flax picking.
+	 *
 	 * @param player the player.
 	 * @param object the object.
-	 * @param plant the plank.
+	 * @param plant  the plank.
 	 */
 	private void handleFlaxPick(final Player player, final Scenery object, final PickingPlant plant) {
 		int charge = object.getCharge();
@@ -138,6 +143,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 	/**
 	 * Represents a plant to be picked.
+	 *
 	 * @author Emperor
 	 */
 	private static enum PickingPlant {
@@ -222,9 +228,10 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 		/**
 		 * Constructs a new {@code FieldPickingPlugin {@code Object}.
+		 *
 		 * @param objectId the object id.
-		 * @param reward the reward.
-		 * @param respawn the resapwn.
+		 * @param reward   the reward.
+		 * @param respawn  the resapwn.
 		 */
 		private PickingPlant(int objectId, int reward, int respawn) {
 			this.objectId = objectId;
@@ -234,6 +241,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 		/**
 		 * Gets the picking plant by the id.
+		 *
 		 * @param objectId the id.
 		 * @return the picking plant.
 		 */

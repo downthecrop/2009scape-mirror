@@ -811,14 +811,14 @@
 1003: 2 red orbs on both hand sides, with tentacles coming out of it
 1004: BORK, growing
 1005: BORK, looks like a statue of him breaking
-1006: Yellow orb(s), big, they fly inwards and shrink
-1007: Yellow orb(s), big, they just stay there
-1008: Yellow orb(s), big, looks like it hits a wall?
+1006: Yellow orb(s), big, they fly inwards and shrink (lotr - tarn)
+1007: Yellow orb(s), big, they just stay there (lotr - tarn)
+1008: Yellow orb(s), big, looks like it hits a wall? (lotr - tarn)
 1009: 2 purple orbs on both hand sides, with tentacles coming out of it
 1010: Giant purple orb with tentacles coming out of it
 1011: Giant purple orb with tentacles, expands and disapears
-1012: Enchanting a necklace, ISN'T the original one
-1013: Giant red orb with tentacles coming out of it
+1012: Enchanting the salve amulet (e) (lotr - tarn)
+1013: Giant red orb with tentacles coming out of it (lotr - tarn)
 1014: Falling Ice shard, penguin quest/island
 1015: Enter clockwork penguin suit
 1016: Leave clockworkpenguin suit

@@ -14,9 +14,11 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.IronmanMode
+import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 /**
@@ -39,7 +41,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
         NPCs.GHOST_BANKER_1702, NPCs.GNOME_BANKER_166, NPCs.NARDAH_BANKER_3046, NPCs.MAGNUS_GRAM_5488, NPCs.TZHAAR_KET_ZUH_2619,
         NPCs.SIRSAL_BANKER_4519, NPCs.FADLI_958, NPCs.BANK_TUTOR_4907, NPCs.JADE_4296,
         NPCs.OGRESS_BANKER_7049, NPCs.OGRESS_BANKER_7050,
-        NPCs.BANKER_6538
+        NPCs.BANKER_6538, NPCs.ODOVACAR_5383
     )
 
     companion object {
@@ -61,11 +63,35 @@ class BankerNPC : AbstractNPC, InteractionListener {
             return false
         }
 
+        private const val ODOVACAR_FEE = 100
+
+        /**
+         * Handles special access requirements for bankers that charge a fee.
+         * @return true if banking may proceed, false if it should be blocked.
+         */
+        fun canAccessBank(player: Player, npc: NPC): Boolean {
+            if (npc.id != NPCs.ODOVACAR_5383) {
+                return true
+            }
+
+            if (removeItem(player, Item(Items.COINS_995, ODOVACAR_FEE))) {
+                sendMessage(player, "You pay 100 coins to use the travelling bank.")
+                return true
+            }
+
+            return false
+        }
+
         fun attemptBank(player: Player, node: Node): Boolean {
             val npc = node as NPC
 
             if (checkLunarIsleRestriction(player, node)) {
                 openDialogue(player, npc.id, npc)
+                return true
+            }
+
+            if (!canAccessBank(player, node)) {
+                sendMessage(player, "You need 100 coins to use the travelling bank.")
                 return true
             }
 
@@ -158,7 +184,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
     }
 
     class BankerDialogueLabellerFile : DialogueLabeller() {
-        val BANKERS_WITH_EXTRA_OPTION = intArrayOf(NPCs.BANK_TUTOR_4907, NPCs.JADE_4296, NPCs.BANKER_6538)
+        val BANKERS_WITH_EXTRA_OPTION = intArrayOf(NPCs.BANK_TUTOR_4907, NPCs.JADE_4296, NPCs.BANKER_6538, NPCs.ODOVACAR_5383)
 
         override fun addConversation() {
             exec { player, npc ->
@@ -198,6 +224,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             options(
                 DialogueOption("how to use", "How do I use the bank?") { _, npc -> return@DialogueOption npc.id == NPCs.BANK_TUTOR_4907 },
                 DialogueOption("who is the bounty hunter banker", "Who are you?") { _, npc -> return@DialogueOption npc.id == NPCs.BANKER_6538 },
+                DialogueOption("who is odovacar", "Who are you?") { _, npc -> return@DialogueOption npc.id == NPCs.ODOVACAR_5383 },
                 DialogueOption("access", "I'd like to access my bank account please.", expression = ChatAnim.ASKING),
                 DialogueOption("buy second bank", "I'd like to open a secondary bank account.") { player, _ -> return@DialogueOption ServerConstants.SECOND_BANK && !hasActivatedSecondaryBankAccount(player) },
                 DialogueOption("switch second bank", "I'd like to switch to my primary bank account.") { player, _ -> return@DialogueOption hasActivatedSecondaryBankAccount(player) && isUsingSecondaryBankAccount(player) },
@@ -242,9 +269,43 @@ class BankerNPC : AbstractNPC, InteractionListener {
             npc(ChatAnim.NEUTRAL, "How inconsiderate of me, dear @g[sir,madam]. My name is Maximillian Sackville and I conduct operations here on behalf of The Bank of Gielinor.")
             goto("main options")
 
-            label("access")
-            exec { player, _ -> openBankAccount(player) }
+            label("who is odovacar")
+            npc("How frightfully rude of me, my dear @g[chap,lady]. My name is Odovacar and I work for that excellent enterprise, the Bank of Gielinor.")
+            player("If you work for the bank, what are you doing here?")
+            npc("As part of our ongoing service to provide you, the customer, with an absolutely world-class banking experience, we are investigating the option of opening a chain of travelling banks.")
+            npc("These will provide you, our esteemed customer, with the convenience of having banking facilities where they will be of optimum use to you. Such as here!")
+            player("Huh?")
+            npc("I am the first of a new generation of travelling bankers that will wander the perilous areas of the world to provide you, the valued customer, with a bank when you need it most!")
+            player("So I can access my bank account simply by talking to you?")
+            npc("Absolutely correct, dear @g[sir,lady].")
+            npc("I must warn you, however, that due to the significantly increased overheads of an enterprise such as this, there is a small bank charge of 100gp every time you want to access your account.")
+            options(
+                DialogueOption("access", "Sounds fair; here's the money. Can I access my account now?"),
+                DialogueOption("payafterbank", "Let me open my account and then I'll pay you."),
+                DialogueOption("nopay2bank", "That's preposterous! I'm not paying to withdraw my own money!")
+            )
+
+            label("payafterbank")
+            npc("It's not that I don't trust you, old @g[chap,girl], but as the old adage goes, 'money comes before friends'.")
             goto("nowhere")
+
+            label("nopay2bank")
+            npc("I'm sorry to hear that, @g[sir,madam]. If you should reconsider, because I believe this service offers excellent value for money, do not hesitate to contact me.")
+            goto("nowhere")
+
+            label("nomoney")
+            npc("I'm afraid you don't have the necessary funds with you at this time so I can't allow you to access your account. Please come again, when you have 100 gold to cover the fee.")
+            goto("nowhere")
+
+            label("access")
+            exec { player, npc ->
+                if (!canAccessBank(player, npc)) {
+                    goto("nomoney")
+                } else {
+                    openBankAccount(player)
+                    goto("nowhere")
+                }
+            }
 
             label("buy second bank")
             npc("Certainly. We offer secondary accounts to all our customers.")

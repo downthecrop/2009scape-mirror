@@ -196,7 +196,7 @@ public enum Master {
 			// new Task(Tasks.SCABARITES, 9, new Integer[]{30, 60}),
 			new Task(Tasks.SPIRTUAL_MAGES, 10),
 			new Task(Tasks.SPIRTUAL_WARRIORS, 10),
-			// new Task(Tasks.TERROR_DOGS, 10, new Integer[]{30, 60}),
+			new Task(Tasks.TERROR_DOGS, 10, new Integer[]{30, 60}),
 			new Task(Tasks.TROLLS, 10),
 			new Task(Tasks.TUROTHS, 15)),
 			// new Task(Tasks.WARPED_TORTOISE, 15)),

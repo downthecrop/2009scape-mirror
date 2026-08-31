@@ -204,7 +204,14 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_DAMAGE))
                     effectiveStrengthLevel *= styleStrengthBonus
                 else effectiveStrengthLevel *= 64
-                if (getSlayerTask(entity)?.let { task ->
+
+                val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
+
+                // strength bonus for specialized equipments (salve amulets, slayer equips)
+                val amuletId = getItemFromEquipment(entity, EquipmentSlot.NECK)?.id ?: 0
+                if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
+                    effectiveStrengthLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
+                } else if (getSlayerTask(entity)?.let { task ->
                     val victimId = entity.properties.combatPulse?.getVictim()?.id ?: 0
                     task.ids.contains(victimId) || (task == Tasks.KALPHITES && (victimId == 1158)) // Kalphite Queen phase 1
                 } == true) {
@@ -287,8 +294,22 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
      * @return true if so
      */
     private fun checkUndead(name: String): Boolean {
-        return (name == "Zombie" || name.contains("rmoured") || name == "Ankou" || name == "Crawling Hand" || name == "Banshee" || name == "Ghost" || name == "Ghast" || name == "Mummy" || name.contains("Revenant")
-                || name == "Skeleton" || name == "Zogre" || name == "Spiritual Mage")
+        return (name == "Aberrant spectre"
+                || name == "Ankou"
+                || name.contains("anshee") // 'Banshee' and 'Mighty banshee'
+                || name == "Crawling Hand"
+                || name == "Ghost"
+                || name == "Ghast"
+                || name == "Mummy"
+                || name == "Tarn"
+                || name.contains("Revenant")
+                || name.contains("Shade")
+                || name.contains("keleton") // various 'Skeleton' and 'skeleton'
+                || name == "Skogre"
+                || name == "Tortured Soul"
+                || name.contains("Undead")
+                || name == "Zogre"
+                || name.contains("ombie")) // various 'Zombie' and 'zombie'
     }
 
     /**

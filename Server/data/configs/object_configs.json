@@ -7608,6 +7608,18 @@
     "ids": "2050,2051,2052,2053"
   },
   {
+    "examine": "A door leading somewhere.",
+    "ids": "20527"
+  },
+  {
+    "examine": "This door is blocked by a huge slab of stone.",
+    "ids": "20528"
+  },
+  {
+    "examine": "Bars caging off an area.",
+    "ids": "20531"
+  },
+  {
     "examine": "It's a door.",
     "ids": "2054,2055"
   },
@@ -7672,6 +7684,10 @@
     "ids": "2081,2082,2083,2084,2085,2086,2087,2088"
   },
   {
+    "examine": "A pillar I could stand on.",
+    "ids": "20872,20873,20874,20875,20876,20877,20878,20879,20880,20881,20882,20883,20884,20885,20886,20887,20888,20889"
+  },
+  {
     "examine": "Ornamental.",
     "ids": "2089"
   },
@@ -7682,6 +7698,10 @@
   {
     "examine": "A rocky outcrop.",
     "ids": "2090,2091,2092,2093,2094,2095,2096,2097,2098,2099,2100,2101,2102,2103,2104,2105,2106,2107,2108,2109,2110,2111"
+  },
+  {
+    "examine": "There's something different about the floor.",
+    "ids": "20915,20916,20960"
   },
   {
     "examine": "Its eyes stare off into the distance...",
@@ -8640,6 +8660,10 @@
     "ids": "2520,2521"
   },
   {
+    "examine": "A log jammed by the current, perhaps rideable.",
+    "ids": "25216"
+  },
+  {
     "examine": "It's a flight of stairs.",
     "ids": "2522,2523"
   },
@@ -8656,12 +8680,36 @@
     "ids": "2526,2527"
   },
   {
+    "examine": "A barbarian's bed.",
+    "ids": "25268"
+  },
+  {
+    "examine": "A barbarian table.",
+    "ids": "25269"
+  },
+  {
+    "examine": "A barbarian chair.",
+    "ids": "25270"
+  },
+  {
+    "examine": "Crazy-looking whirlpool.",
+    "ids": "25274"
+  },
+  {
     "examine": "The door is closed.",
     "ids": "2528"
   },
   {
+    "examine": "A patch of ash-strewn ground.",
+    "ids": "25286"
+  },
+  {
     "examine": "A door.",
     "ids": "2529"
+  },
+  {
+    "examine": "Fit for a barbarian burial.",
+    "ids": "25290"
   },
   {
     "examine": "Used for storage.",
@@ -8680,12 +8728,20 @@
     "ids": "2534"
   },
   {
+    "examine": "A barbarian's anvil.",
+    "ids": "25349"
+  },
+  {
     "examine": "The door is closed.",
     "ids": "2535"
   },
   {
     "examine": "A door.",
     "ids": "2536"
+  },
+  {
+    "examine": "A pile of old barbarian bones.",
+    "ids": "25362"
   },
   {
     "examine": "The door is closed.",
@@ -11292,6 +11348,10 @@
     "ids": "3827,3828"
   },
   {
+    "examine": "The portal to the runecrafting guild.",
+    "ids": "38279"
+  },
+  {
     "examine": "I hope this holds!",
     "ids": "3829"
   },
@@ -11682,6 +11742,10 @@
   {
     "examine": "The remains of someone lie inside.",
     "ids": "402"
+  },
+  {
+    "examine": "An ancient metallic anvil, completely undamaged or corroded despite its age.",
+    "ids": "40200"
   },
   {
     "examine": "A barrel.",
@@ -13357,7 +13421,7 @@
   },
   {
     "examine": "It looks cramped and dark.",
-    "ids": "4920,4921,4922"
+    "ids": "4920,4921,4922,20524"
   },
   {
     "examine": "These stairs seem to have been hewn out of the rock itself.",

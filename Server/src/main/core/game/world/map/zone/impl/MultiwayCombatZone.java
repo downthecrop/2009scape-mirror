@@ -79,6 +79,8 @@ public final class MultiwayCombatZone extends MapZone {
 		register(new ZoneBorders(2487, 10113, 2563, 10174));
 		registerRegion(7236);
 		registerRegion(7492);
+		registerRegion(12615); // Tarn's Lair (main lair)
+		registerRegion(12616); // Tarn's Lair (terror dogs and boss fight)
 		registerRegion(7748);
 		registerRegion(12610);
 		register(new ZoneBorders(3097, 4224, 3225, 4317));

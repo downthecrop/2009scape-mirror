@@ -12659,6 +12659,7 @@
     "melee_animation": "0",
     "range_animation": "0",
     "range_level": "1",
+    "respawn_delay": "60",
     "safespot": null,
     "strength_level": "1",
     "weakness": "7"
@@ -18940,7 +18941,7 @@
   {
     "id": "1538",
     "name": "Corpse",
-    "examine": "Well",
+    "examine": "Well, at least he doesn't have to worry about getting 'black lung'.",
     "aggressive": "true",
     "attack_level": "1",
     "death_animation": "0",
@@ -18978,17 +18979,23 @@
   {
     "id": "1540",
     "name": "Treus Dayth",
+    "examine": "Eek! A ghost!",
     "aggressive": "true",
-    "attack_level": "1",
+    "attack_level": "70",
+    "combat_style": "0",
     "death_animation": "5542",
     "defence_animation": "5541",
-    "defence_level": "1",
+    "defence_level": "100",
+    "facing_booth": "",
     "lifepoints": "100",
+    "magic_level": "1",
     "melee_animation": "5540",
+    "projectile": "309",
+    "range_animation": "5545",
     "range_level": "1",
     "respawn_delay": "60",
     "safespot": null,
-    "strength_level": "1"
+    "strength_level": "70"
   },
   {
     "id": "1541",
@@ -19004,31 +19011,38 @@
   },
   {
     "id": "1542",
-    "name": "Loading crane"
+    "name": "Loading crane",
+    "examine": "Those are some of the biggest teeth I've ever seen."
   },
   {
     "id": "1543",
-    "name": "Innocent-looking key"
+    "name": "Innocent-looking key",
+    "examine": "A shiny key sitting quietly on a crate."
   },
   {
     "id": "1544",
-    "name": "Mine cart"
+    "name": "Mine cart",
+    "examine": "Big, metal and wheeled."
   },
   {
     "id": "1545",
-    "name": "Mine cart"
+    "name": "Mine cart",
+    "examine": "Big, metal and wheeled."
   },
   {
     "id": "1546",
-    "name": "Mine cart"
+    "name": "Mine cart",
+    "examine": "Big, metal and wheeled."
   },
   {
     "id": "1547",
-    "name": "Mine cart"
+    "name": "Mine cart",
+    "examine": "Big, metal and wheeled."
   },
   {
     "id": "1548",
-    "name": "Mine cart"
+    "name": "Mine cart",
+    "examine": "Big, metal and wheeled."
   },
   {
     "id": "1549",
@@ -19072,6 +19086,7 @@
   {
     "id": "1551",
     "name": "Mischievous ghost",
+    "examine": "The ghost looks like he's up to something.",
     "attack_level": "1",
     "combat_audio": "436,439,438",
     "defence_level": "1",
@@ -27695,7 +27710,6 @@
     "death_animation": "196",
     "defence_animation": "193",
     "defence_level": "1",
-    "force_talk": "",
     "lifepoints": "3",
     "melee_animation": "190",
     "range_level": "1",
@@ -49414,7 +49428,8 @@
   },
   {
     "id": "4558",
-    "name": "Hirko"
+    "name": "Hirko",
+    "examine": "A seller of crossbow parts."
   },
   {
     "id": "4559",
@@ -58780,6 +58795,7 @@
   {
     "id": "5393",
     "name": "Zombie",
+    "examine": "Could his name be 'Lurch'?",
     "aggressive": "true",
     "attack_level": "1",
     "combat_audio": "931,923,922",
@@ -58797,6 +58813,7 @@
   {
     "id": "5394",
     "name": "Zombie",
+    "examine": "Could his name be 'Lurch'?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
     "death_animation": "5569",
@@ -58812,10 +58829,14 @@
   {
     "id": "5395",
     "name": "Zombie",
+    "examine": "Has anybody told him he's dead?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58824,10 +58845,14 @@
   {
     "id": "5396",
     "name": "Zombie",
+    "examine": "Dave? Is that you?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58836,10 +58861,14 @@
   {
     "id": "5397",
     "name": "Zombie",
+    "examine": "Why don't zombies ever wash?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58848,10 +58877,14 @@
   {
     "id": "5398",
     "name": "Zombie",
+    "examine": "A shambling pile of rotten flesh.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58860,10 +58893,14 @@
   {
     "id": "5399",
     "name": "Zombie",
+    "examine": "He needs lessons on walking.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58872,10 +58909,14 @@
   {
     "id": "5400",
     "name": "Zombie",
+    "examine": "He needs lessons on walking.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58884,10 +58925,14 @@
   {
     "id": "5401",
     "name": "Zombie",
+    "examine": "One of the undead.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58896,10 +58941,14 @@
   {
     "id": "5402",
     "name": "Zombie",
+    "examine": "A disgusting zombie.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58908,10 +58957,14 @@
   {
     "id": "5403",
     "name": "Zombie",
+    "examine": "A disgusting zombie.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58920,6 +58973,7 @@
   {
     "id": "5404",
     "name": "Zombie",
+    "examine": "Can't a body get any rest around here?",
     "aggressive": "true",
     "attack_level": "1",
     "combat_audio": "931,923,922",
@@ -58937,10 +58991,14 @@
   {
     "id": "5405",
     "name": "Zombie",
+    "examine": "Can't a body get any rest around here?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58949,10 +59007,14 @@
   {
     "id": "5406",
     "name": "Zombie",
+    "examine": "Brains...",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58961,10 +59023,14 @@
   {
     "id": "5407",
     "name": "Zombie",
+    "examine": "All skin and bones.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58973,10 +59039,14 @@
   {
     "id": "5408",
     "name": "Zombie",
+    "examine": "All skin and bones.",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58985,10 +59055,14 @@
   {
     "id": "5409",
     "name": "Zombie",
+    "examine": "Why zombies? Why now?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -58997,10 +59071,14 @@
   {
     "id": "5410",
     "name": "Zombie",
+    "examine": "Why zombies? Why now?",
     "attack_level": "1",
     "combat_audio": "931,923,922",
+    "death_animation": "5569",
+    "defence_animation": "5567",
     "defence_level": "1",
     "lifepoints": "40",
+    "melee_animation": "5578",
     "range_level": "1",
     "safespot": null,
     "slayer_exp": "30",
@@ -59087,67 +59165,75 @@
   },
   {
     "id": "5415",
-    "name": "Terror dog statue"
+    "name": "Terror dog statue",
+    "examine": "A terrifying statue."
   },
   {
     "id": "5416",
-    "name": "Terror dog statue"
+    "name": "Terror dog statue",
+    "examine": "A terrifying statue."
   },
   {
     "id": "5417",
     "name": "Terror dog",
     "examine": "A terrifying dog beast.",
     "aggressive": "true",
-    "attack_level": "47",
+    "attack_level": "110",
     "attack_speed": "5",
     "death_animation": "5628",
-    "defence_animation": "0",
-    "defence_level": "47",
-    "lifepoints": "134",
-    "magic_animation": "0",
+    "defence_animation": "5626",
+    "defence_level": "78",
+    "lifepoints": "87",
+    "magic_animation": "",
+    "magic_level": "1",
     "melee_animation": "5625",
-    "range_animation": "0",
+    "range_animation": "",
     "range_level": "1",
     "respawn_delay": "60",
     "safespot": null,
-    "strength_level": "47",
+    "strength_level": "104",
     "weakness": "1"
   },
   {
     "id": "5418",
     "name": "Terror dog",
+    "examine": "A terrifying dog beast.",
     "aggressive": "true",
-    "attack_level": "1",
+    "attack_level": "100",
     "attack_speed": "5",
     "death_animation": "5627",
     "defence_animation": "5626",
-    "defence_level": "1",
+    "defence_level": "74",
     "lifepoints": "82",
+    "magic_level": "1",
     "melee_animation": "5625",
     "range_level": "1",
     "respawn_delay": "60",
     "safespot": null,
-    "strength_level": "1"
+    "strength_level": "90",
+    "weakness": "1"
   },
   {
     "id": "5419",
-    "name": "Tarn"
+    "name": "Tarn",
+    "examine": "A mad man."
   },
   {
     "id": "5420",
     "name": "Tarn",
+    "examine": "A mad man.",
     "aggressive": "true",
-    "attack_level": "1",
+    "attack_level": "",
     "attack_speed": "6",
-    "death_animation": "5619",
-    "defence_animation": "5618",
+    "death_animation": "",
+    "defence_animation": "",
     "defence_level": "1",
     "lifepoints": "65",
-    "melee_animation": "5617",
-    "range_level": "1",
-    "respawn_delay": "60",
+    "melee_animation": "",
+    "range_level": "",
+    "respawn_delay": "",
     "safespot": null,
-    "strength_level": "1"
+    "strength_level": ""
   },
   {
     "id": "5421",
@@ -59157,14 +59243,15 @@
     "attack_level": "57",
     "attack_speed": "6",
     "death_animation": "5619",
-    "defence_animation": "0",
+    "defence_animation": "5618",
     "defence_level": "57",
-    "lifepoints": "325",
-    "magic_animation": "0",
+    "lifepoints": "85",
+    "magic_animation": "5613",
     "melee_animation": "5617",
+    "projectile": "1013",
     "range_animation": "0",
-    "range_level": "1",
-    "respawn_delay": "60",
+    "range_level": "",
+    "respawn_delay": "",
     "safespot": null,
     "strength_level": "57",
     "weakness": "6"
