@@ -2577,14 +2577,14 @@
   {
     "id": "296",
     "name": "Glarial's urn",
-    "examine": "An urn containing Glarial's ashes./An empty urn made for Glarial's ashes.",
+    "examine": "An urn containing Glarial's ashes.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "297",
     "name": "Glarial's urn",
-    "examine": "An urn containing Glarial's ashes./An empty urn made for Glarial's ashes.",
+    "examine": "An empty urn made for Glarial's ashes.",
     "archery_ticket_price": "0",
     "durability": null
   },

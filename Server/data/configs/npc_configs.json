@@ -4899,7 +4899,8 @@
   },
   {
     "id": "302",
-    "name": "Hadley"
+    "name": "Hadley",
+    "examine": "Could do with losing a bit of weight."
   },
   {
     "id": "303",
@@ -4907,11 +4908,13 @@
   },
   {
     "id": "304",
-    "name": "Almera"
+    "name": "Almera",
+    "examine": "Nice hair."
   },
   {
     "id": "305",
-    "name": "Hudon"
+    "name": "Hudon",
+    "examine": "Looks young."
   },
   {
     "id": "306",

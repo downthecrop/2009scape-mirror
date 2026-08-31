@@ -595,6 +595,26 @@ fun resetAnimator(player: Player) {
 }
 
 /**
+ * Sets a player's render animation to a given animation.
+ * @param player the player whose render animation to set
+ * @param animation the ID of the render animation to set
+ */
+fun renderAnimation(player: Player, animation: Int) {
+    player.appearance.setAnimations(Animation(animation))
+    player.appearance.sync()
+}
+
+/**
+ * Resets a player's render animation to the default.
+ * @param player the player whose render animation to reset
+ */
+fun resetRenderAnimation(player: Player) {
+    player.appearance.setDefaultAnimations()
+    player.appearance.setAnimations()
+    player.appearance.sync()
+}
+
+/**
  *  Get the number of ticks an animation lasts
  *  @param animation the Animation object to check the duration of
  *  @return the number of ticks the given animation lasts for

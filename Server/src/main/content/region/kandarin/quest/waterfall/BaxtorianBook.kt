@@ -5,7 +5,9 @@ import content.global.handlers.iface.BookInterface
 import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
-import core.api.setAttribute
+import core.api.getQuestStage
+import core.api.sendMessage
+import core.api.setQuestStage
 import core.api.storeBookInHouse
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -13,140 +15,191 @@ import core.game.node.entity.player.Player
 import org.rs09.consts.Items
 
 /**
- * Baxtorian Book
+ * The Book on Baxtorian
  * @author ovenbreado
- * @author Splinter
+ * @author Bishop
  */
+
 class BaxtorianBook : InteractionListener {
 
     companion object {
+        private const val RED = "<col=8A0808>"
+
         private val TITLE = "Book on Baxtorian"
         private val CONTENTS = arrayOf(
             PageSet(
                 Page(
-                    BookLine("The missing relics", 55),
+                    BookLine(RED + "The missing relics", 55),
                     BookLine("", 56),
-                    BookLine("    Many artefacts of", 57),
-                    BookLine("elven history were lost", 58),
-                    BookLine("after the fourth age. The", 59),
-                    BookLine("greatest loss to our", 60),
-                    BookLine("collections of elf history", 61),
-                    BookLine("were the hidden treasures", 62),
-                    BookLine("of Baxtorian.", 63),
-                    BookLine("  Some believe these", 64),
-                    BookLine("treasures are still", 65)
+                    BookLine("Many artefacts of elven", 57),
+                    BookLine("history were lost after the", 58),
+                    BookLine("fourth age, following the", 59),
+                    BookLine("departure of the elven", 60),
+                    BookLine("colonies from these lands.", 61),
+                    BookLine("The greatest loss to our", 62),
+                    BookLine("collections of elf history", 63),
+                    BookLine("were the hidden treasures", 64),
+                    BookLine("of Baxtorian. Some", 65)
                 ),
                 Page(
-                    BookLine("unclaimed, but it is more", 66),
-                    BookLine("commonly believed that", 67),
-                    BookLine("dwarf miners recovered", 68),
-                    BookLine("the treasure at the", 69),
-                    BookLine("beginning of the third", 70),
-                    BookLine("age. Another great loss", 71),
-                    BookLine("was Glarial's pebble, a key", 72),
-                    BookLine("which allowed her family", 73),
-                    BookLine("to visit her tomb.", 74),
-                    BookLine("    The stone was taken", 75),
-                    BookLine("by a gnome family over a", 76)
-                )
-            ),
-            PageSet(
-                Page(
-                    BookLine("century ago. It is", 55),
-                    BookLine("believed that the gnomes'", 56),
-                    BookLine("descendant Golrie still has", 57),
-                    BookLine("the stone hidden in the", 58),
-                    BookLine("caves under the gnome", 59),
-                    BookLine("tree village.", 60),
-                    BookLine("", 61),
-                    BookLine("The sonnet of Baxtorian", 62),
-                    BookLine("", 63),
-                    BookLine("The love between", 64),
-                    BookLine("Baxtorian and Glarial was", 65)
-                ), Page(
-                    BookLine("said to have lasted over a", 66),
-                    BookLine("century. They lived a", 67),
-                    BookLine("peaceful life learning and", 68),
-                    BookLine("teaching the laws of", 69),
-                    BookLine("nature. When Baxtorian's", 70),
-                    BookLine("kingdom was invaded by", 71),
-                    BookLine("the dark forces he left on", 72),
-                    BookLine("a five year campaign. He", 73),
-                    BookLine("returned to find his", 74),
-                    BookLine("people slaughtered and his", 75),
-                    BookLine("wife taken by the enemy.", 76)
-                )
-            ),
-            PageSet(
-                Page(
-                    BookLine("    After years of", 55),
-                    BookLine("searching for his love he", 56),
-                    BookLine("finally gave up and", 57),
-                    BookLine("returned to the home he", 58),
-                    BookLine("made for Glarial under", 59),
-                    BookLine("the Baxtorian Waterfall.", 60),
-                    BookLine("Once he entered he", 61),
-                    BookLine("never returned. Only", 62),
-                    BookLine("Glarial had the power to", 63),
-                    BookLine("also enter the waterfall.", 64),
-                    BookLine("  Since Baxtorian", 65)
-                ),
-                Page(
-                    BookLine("entered no one but her", 66),
-                    BookLine("can follow him in, it's as if", 67),
-                    BookLine("the powers of nature still", 68),
-                    BookLine("work to protect him.", 69),
-                    BookLine("", 70),
-                    BookLine("The power of nature", 71),
+                    BookLine("believe these treasures", 66),
+                    BookLine("are still unclaimed, but it", 67),
+                    BookLine("is more commonly", 68),
+                    BookLine("believed that dwarf miners", 69),
+                    BookLine("recovered the treasure", 70),
+                    BookLine("early in the 5th Age.", 71),
                     BookLine("", 72),
-                    BookLine("    Glarial and Baxtorian", 73),
-                    BookLine("were masters of nature.", 74),
-                    BookLine("Trees would grow, hills", 75),
-                    BookLine("form and rivers flood on", 76)
+                    BookLine("Another great loss was", 73),
+                    BookLine("Glarial's pebble, a key", 74),
+                    BookLine("which allowed her family", 75),
+                    BookLine("to visit her tomb.", 76)
                 )
             ),
             PageSet(
                 Page(
-                    BookLine("their command. Baxtorian", 55),
-                    BookLine("in particular had", 56),
-                    BookLine("perfected rune lore. It", 57),
-                    BookLine("was said that he could", 58),
-                    BookLine("uses the stones to control", 59),
-                    BookLine("water, earth, and air.", 60),
-                    BookLine("", 61),
-                    BookLine("Ode to eternity", 62),
+                    BookLine("The pebble was taken by", 55),
+                    BookLine("a gnome many years", 56),
+                    BookLine("ago. It is hoped that", 57),
+                    BookLine("descendents " /*sic*/+ "of that", 58),
+                    BookLine("gnome may still have the", 59),
+                    BookLine("pebble hidden in their", 60),
+                    BookLine("cave under the Tree", 61),
+                    BookLine("Gnome Village.", 62),
                     BookLine("", 63),
-                    BookLine("A short piece written by", 64),
-                    BookLine("Baxtorian himself.", 65)
+                    BookLine("Unfortunately the maze", 64),
+                    BookLine("around that village makes", 65)
                 ),
                 Page(
-                    BookLine("", 66),
-                    BookLine("What care I for this", 67),
-                    BookLine("mortal coil,", 68),
-                    BookLine("where treasures are yet", 69),
-                    BookLine("so frail,", 70),
-                    BookLine("for it is you that is my", 71),
-                    BookLine("life blood,", 72),
-                    BookLine("the wine to my holy grail", 73),
-                    BookLine("and if I see the", 74),
-                    BookLine("judgement day,", 75),
-                    BookLine("when the gods fill the air", 76)
+                    BookLine("it difficult to contact the", 66),
+                    BookLine("gnomes to investigate this", 67),
+                    BookLine("matter.", 68),
+                    BookLine("", 69),
+                    BookLine("", 70),
+                    BookLine("", 71),
+                    BookLine("", 72),
+                    BookLine("", 73),
+                    BookLine("", 74),
+                    BookLine("", 75),
+                    BookLine("", 76)
                 )
             ),
             PageSet(
                 Page(
-                    BookLine("with dust,", 55),
-                    BookLine("I'll happily choke on your", 56),
-                    BookLine("memory,", 57),
-                    BookLine("as my kingdom turns to", 58),
-                    BookLine("rust", 59)
+                    BookLine(RED + "The fall of Baxtorian", 55),
+                    BookLine("", 56),
+                    BookLine("The love between", 57),
+                    BookLine("Baxtorian and Glarial was", 58),
+                    BookLine("said to have lasted over a", 59),
+                    BookLine("century. They lived a", 60),
+                    BookLine("peaceful life learning and", 61),
+                    BookLine("teaching the laws of", 62),
+                    BookLine("nature.", 63),
+                    BookLine("", 64),
+                    BookLine("When their homeland in", 65)
+                ),
+                Page(
+                    BookLine("the far west was plunged", 66),
+                    BookLine("into chaos by dark forces,", 67),
+                    BookLine("Baxtorian left on a", 68),
+                    BookLine("dangerous campaign that", 69),
+                    BookLine("lasted for five years. He", 70),
+                    BookLine("survived to return to this", 71),
+                    BookLine("land, but found his people", 72),
+                    BookLine("slaughtered and his wife", 73),
+                    BookLine("taken by the enemy.", 74),
+                    BookLine("", 75),
+                    BookLine("After years of searching", 76)
                 )
-            )
+            ),
+            PageSet(
+                Page(
+                    BookLine("for his love he finally", 55),
+                    BookLine("gave up and returned to", 56),
+                    BookLine("the home he made for", 57),
+                    BookLine("Glarial under the", 58),
+                    BookLine("Baxtorian Waterfall.", 59),
+                    BookLine("Once he entered he", 60),
+                    BookLine("never returned.", 61),
+                    BookLine("", 62),
+                    BookLine("Only he and Glarial had", 63),
+                    BookLine("the power to enter the", 64),
+                    BookLine("waterfall. Since Baxtorian", 65)
+                ),
+                Page(
+                    BookLine("entered, no-one else can", 66),
+                    BookLine("follow him in, it's as if the", 67),
+                    BookLine("powers of nature still", 68),
+                    BookLine("work to protect his peace.", 69),
+                    BookLine("", 70),
+                    BookLine("", 71),
+                    BookLine("", 72),
+                    BookLine("", 73),
+                    BookLine("", 74),
+                    BookLine("", 75),
+                    BookLine("", 76)
+                )
+            ),
+            PageSet(
+                Page(
+                    BookLine(RED + "The power of nature", 55),
+                    BookLine("", 56),
+                    BookLine("Glarial and Baxtorian", 57),
+                    BookLine("were masters of nature.", 58),
+                    BookLine("Trees and flowers would", 59),
+                    BookLine("grow, hills form and", 60),
+                    BookLine("rivers flood on their", 61),
+                    BookLine("command.", 62),
+                    BookLine("", 63),
+                    BookLine("Baxtorian in particular", 64),
+                    BookLine("had perfected rune lore.", 65)
+                ),
+                Page(
+                    BookLine("It was said that he could", 66),
+                    BookLine("use the stones to control", 67),
+                    BookLine("water, earth and air.", 68),
+                    BookLine("", 69),
+                    BookLine("", 70),
+                    BookLine("", 71),
+                    BookLine("", 72),
+                    BookLine("", 73),
+                    BookLine("", 74),
+                    BookLine("", 75),
+                    BookLine("", 76)
+                )
+            ),
+            PageSet(
+                Page(
+                    BookLine(RED + "Ode to eternity", 55),
+                    BookLine("", 56),
+                    BookLine("(A short piece written by", 57),
+                    BookLine("Baxtorian himself.)", 58),
+                    BookLine("", 59),
+                    BookLine("What care I for this", 60),
+                    BookLine("mortal coil,", 61),
+                    BookLine("where treasures are yet", 62),
+                    BookLine("so frail,", 63),
+                    BookLine("for it is you that is my", 64),
+                    BookLine("life blood,", 65)
+                ),
+                Page(
+                    BookLine("the wine to my holy grail", 66),
+                    BookLine("and if I see the", 67),
+                    BookLine("judgement day,", 68),
+                    BookLine("when the gods fill the air", 69),
+                    BookLine("with dust,", 70),
+                    BookLine("I'll happily choke on your", 71),
+                    BookLine("memory,", 72),
+                    BookLine("as my kingdom turns to", 73),
+                    BookLine("rust.", 74),
+                    BookLine("", 75),
+                    BookLine("", 76)
+                )
+            ),
         )
         private fun display(player: Player, pageNum: Int, buttonID: Int) : Boolean {
             BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
-            if (player.questRepository.getQuest(Quests.WATERFALL_QUEST).getStage(player) == 20) {
-                player.questRepository.getQuest(Quests.WATERFALL_QUEST).setStage(player, 30)
+            if (getQuestStage(player, Quests.WATERFALL_QUEST) == 20) {
+                setQuestStage(player, Quests.WATERFALL_QUEST, 30)
             }
             return true
         }
@@ -154,6 +207,8 @@ class BaxtorianBook : InteractionListener {
 
     override fun defineListeners() {
         on(Items.BOOK_ON_BAXTORIAN_292, IntType.ITEM, "read") { player, node ->
+            sendMessage(player, "The book is old with many pages missing.")
+            sendMessage(player, "A few are translated from elven into common tongue.")
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
             storeBookInHouse(player, node)
             return@on true
