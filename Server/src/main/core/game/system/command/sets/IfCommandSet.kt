@@ -41,7 +41,7 @@ class IfCommandSet : Commands {
 
             for (child in def.children) {
                 if (child.type != ComponentType.TEXT) continue
-                notify(player, logToConsole = true, message = "$child - ${child.text} - ${child.activeText}")
+                notify(player, logToConsole = true, message = "$child - ${child.text} - ${child.activeText} - X:${child.baseX}/Y:${child.baseY}")
             }
         }
 
@@ -54,7 +54,7 @@ class IfCommandSet : Commands {
 
             for (child in def.children) {
                 if (child.type != ComponentType.MODEL) continue
-                notify(player, logToConsole = true, message = "$child - ${child.modelId}/${child.activeModelId} - Anim: ${child.modelAnimId}/${child.activeModelAnimId}")
+                notify(player, logToConsole = true, message = "$child - ${child.modelId}/${child.activeModelId} - Anim: ${child.modelAnimId}/${child.activeModelAnimId} - Pos X:${child.baseX}/Y:${child.baseY}")
             }
         }
     }

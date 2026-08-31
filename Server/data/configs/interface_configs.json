@@ -858,6 +858,12 @@
     "tabIndex": "-1"
   },
   {
+    "id": "683",
+    "interfaceType": "3",
+    "walkable": "true",
+    "tabIndex": "-1"
+  },
+  {
     "id": "695",
     "interfaceType": "7",
     "walkable": "true",
