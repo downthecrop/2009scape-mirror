@@ -52,20 +52,25 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		CombatStyle.MELEE.getSwingHandler().register(4153, this);
-		CombatStyle.MELEE.getSwingHandler().register(14792, this);
 		return this;
 	}
 
 	@Override
 	public int swing(Entity entity, Entity victim, BattleState state) {
 		Player p = (Player) entity;
+		boolean canMelee = MeleeSwingHandler.Companion.canMelee(p, victim, 1);
 		if (victim == null) {
 			victim = p.getProperties().getCombatPulse().getLastVictim();
-			if (victim == null || GameWorld.getTicks() - p.getAttribute("combat-stop", -1) > 2 || !MeleeSwingHandler.Companion.canMelee(p, victim, 1)) {
+			if (victim == null || GameWorld.getTicks() - p.getAttribute("combat-stop", -1) > 2 || !canMelee) {
 				p.getPacketDispatch().sendMessage("Warning: Since the maul's special is an instant attack, it will be wasted when used ");
 				p.getPacketDispatch().sendMessage("on a first strike.");
 				return -1;
 			}
+		} else {
+			canMelee = canMelee && p.continueAttack(victim, CombatStyle.MELEE, true); //this is what checks wildy rules, e.g. "The level difference between you and your opponent is too great."
+		}
+		if (!canMelee) {
+			return -1;
 		}
 		if (DeathTask.isDead(victim)) {
 			return -1;

@@ -111,6 +111,7 @@ public final class BankContainer extends Container {
 	 * Open the bank.
 	 */
 	public void open() {
+		// basic stuff
 		if (open) {
 			return;
 		}
@@ -125,17 +126,23 @@ public final class BankContainer extends Container {
 			BankContainer.this.close();
 			return true;
 		});
+		// send interface settings
+		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
+		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
+		player.getBank().setTabConfigurations();
+		player.getBank().sendBankSpace();
+		// now we can open the bank
 		player.getInterfaceManager().openSingleTab(new Component(763));
-		super.refresh();
+		// now we can populate the bank
+		refresh();
 		player.getInventory().refresh();
 		player.getInventory().getListeners().add(listener);
 		setVarp(player, 1249, lastAmountX);
-		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0, 5)).enableExamine().enableSlotSwitch().build();
-		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		open = true;
 	}
 	
 	public void open(Player player) {
+		// basic stuff, again
 		if (open) {
 			return;
 		}
@@ -150,15 +157,20 @@ public final class BankContainer extends Container {
 			BankContainer.this.close();
 			return true;
 		});
-		player.getInterfaceManager().openSingleTab(new Component(763));
-		refresh(listener);
-		player.getInventory().refresh();
-		player.getInventory().getListeners().add(player.getBank().listener);
-		setVarp(player, 1249, lastAmountX);
+		// send interface settings, again, but more
 		player.getPacketDispatch().sendIfaceSettings(1278, 73, 762, 0, SIZE);
 		int settings = new IfaceSettingsBuilder().enableOptions(new IntRange(0,5)).enableExamine().enableSlotSwitch().build();
 		player.getPacketDispatch().sendIfaceSettings(settings, 0, 763, 0, 27);
 		player.getPacketDispatch().sendRunScript(1451, "");
+		player.getBank().setTabConfigurations();
+		player.getBank().sendBankSpace();
+		// now we can open the bank
+		player.getInterfaceManager().openSingleTab(new Component(763));
+		// now we can populate the bank
+		refresh(listener);
+		player.getInventory().refresh();
+		player.getInventory().getListeners().add(player.getBank().listener);
+		setVarp(player, 1249, lastAmountX);
 		open = true;
 	}
 
