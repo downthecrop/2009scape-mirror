@@ -3,6 +3,8 @@ package core.game.system.command.sets
 import content.global.activity.jobs.JobManager
 import content.global.skill.construction.decoration.pohstorage.Storable
 import content.global.skill.construction.decoration.pohstorage.StorableFamily
+import content.global.skill.herblore.FinishedPotion
+import content.global.skill.herblore.UnfinishedPotion
 import core.api.*
 import core.cache.Cache
 import core.cache.def.impl.DataMap
@@ -67,6 +69,28 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
             }
+        }
+
+        define("potionkit", Privilege.ADMIN, "", "Adds 1000x of each potion ingredient to the player's bank."){player,_ ->
+            val items = mutableSetOf<Int>()
+
+            // get base and ingredients from UnfinishedPotion
+            for (unf in UnfinishedPotion.values()) {
+                items.add(unf.base.id)
+                items.add(unf.ingredient.id)
+            }
+
+            // get secondary ingredients from FinishedPotion
+            for (fin in FinishedPotion.values()) {
+                items.add(fin.ingredient.id)
+            }
+
+            // add to bank
+            for (id in items) {
+                addItem(player, id, 1000, Container.BANK)
+            }
+            sendMessage(player, "Added potion items to bank. Use ::bank to withdraw them.")
+            openBankAccount(player)
         }
 
         /**

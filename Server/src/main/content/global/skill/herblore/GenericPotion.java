@@ -65,7 +65,7 @@ public final class GenericPotion {
 	 * @return the transformed potion.
 	 */
 	public static GenericPotion transform(final FinishedPotion potion) {
-		return new GenericPotion(potion.getUnfinished().getPotion(), potion.getIngredient(), potion.getLevel(), potion.getExperience(), potion.getPotion());
+		return new GenericPotion(potion.getUnfinished(), potion.getIngredient(), potion.getLevel(), potion.getExperience(), potion.getPotion());
 	}
 
 	/**

@@ -25,32 +25,13 @@ public enum class BrutalArrows(val nailItem: Int, val level: Int, val product: I
     }
 }
 /**
- * This handles potions and fletching related to zogre flesh eaters.
+ * This handles fletching related to zogre flesh eaters.
  *
- * Relicym's Balm is unique to zogre flesh eaters.
- * Maybe move this to herblore when it can handle quest requirements better.
+ * Maybe move this to fletching when it can handle quest requirements better.
  */
-class ZogrePotionAndFletchingListeners  : InteractionListener {
+class ZogreFletchingListeners  : InteractionListener {
 
     override fun defineListeners() {
-        // ROGUES_PURSE_POTIONUNF_4840 is already in UnfinishedPotion.java
-        onUseWith(IntType.ITEM, Items.ROGUES_PURSE_POTIONUNF_4840, Items.CLEAN_SNAKE_WEED_1526) { player, used, with ->
-            if (!hasLevelStat(player, Skills.HERBLORE, 8)) {
-                sendMessage(player, "You need a herblore level of 8 to make this mix.")
-                return@onUseWith true
-            }
-            if (getQuestStage(player, ZogreFleshEaters.questName) < 7) {
-                sendMessage(player, "You need to have partially completed Zogre Flesh Eaters to make this mix.")
-                return@onUseWith true
-            }
-
-            if(removeItem(player, used) && removeItem(player, with)) {
-                sendMessage(player, "You add the snake weed to the rogues purse solution and make Relicyms Balm.")
-                addItem(player, Items.RELICYMS_BALM3_4844)
-                rewardXP(player, Skills.HERBLORE, 40.0)
-            }
-            return@onUseWith true
-        }
 
         // FletchingListeners.kt
         // ACHEY_TREE_LOGS_2862 -> UNSTRUNG_COMP_BOW_4825 -> COMP_OGRE_BOW_4827

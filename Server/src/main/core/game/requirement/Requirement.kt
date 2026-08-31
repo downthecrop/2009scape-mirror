@@ -197,5 +197,6 @@ enum class QuestRequirements(val quest: Quests, vararg val requirements: Require
     SEERGAZE (Quests.LEGACY_OF_SEERGAZE, QuestReq(HALLOWVALE), SkillReq(Skills.AGILITY, 29), SkillReq(Skills.CONSTRUCTION, 20), SkillReq(Skills.CRAFTING, 47), SkillReq(Skills.FIREMAKING, 40), SkillReq(Skills.MAGIC, 49), SkillReq(Skills.MINING, 35), SkillReq(Skills.SLAYER, 31)),
     SMOKING_KILLS (Quests.SMOKING_KILLS, QuestReq(RESTLESS_GHOST), QuestReq(ICTHLARIN), SkillReq(Skills.CRAFTING, 25), SkillReq(Skills.SLAYER, 35)),
     WHILE_GUTHIX_SLEEPS (Quests.WHILE_GUTHIX_SLEEPS, SkillReq(Skills.SUMMONING, 23), SkillReq(Skills.HUNTER, 55), SkillReq(Skills.THIEVING, 60), SkillReq(Skills.DEFENCE, 65), SkillReq(Skills.FARMING, 65), SkillReq(Skills.HERBLORE, 65), SkillReq(Skills.MAGIC, 75), QuestReq(DEFENDER_VARROCK), QuestReq(DREAM_MENTOR), QuestReq(SAND), QuestReq(KINGS_RANSOM), QuestReq(LEGEND), QuestReq(MEP_2), QuestReq(PATH_GLOUPHRIE), QuestReq(RFD), QuestReq(SUMMERS_END), QuestReq(SWAN), QuestReq(TEARS_OF_GUTHIX), QuestReq(ZOGRE)),
-    ALL_FIRED_UP (Quests.ALL_FIRED_UP, QuestReq(PRIEST), SkillReq(Skills.FIREMAKING, 43))
+    ALL_FIRED_UP (Quests.ALL_FIRED_UP, QuestReq(PRIEST), SkillReq(Skills.FIREMAKING, 43)),
+    KENNITHS_CONCERNS (Quests.KENNITHS_CONCERNS, QuestReq(SLUG_MENACE), SkillReq(Skills.MINING, 46)),
 }

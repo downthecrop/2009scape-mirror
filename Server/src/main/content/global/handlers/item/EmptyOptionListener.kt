@@ -1,5 +1,7 @@
 package content.global.handlers.item
 
+import content.global.skill.herblore.FinishedPotion
+import content.global.skill.herblore.UnfinishedPotion
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.IntType
@@ -80,7 +82,9 @@ class EmptyOptionListener : InteractionListener {
         BURNT_GNOMEBOWL(Items.BURNT_GNOMEBOWL_2175, Items.GNOMEBOWL_MOULD_2166, "You empty the contents of the gnomebowl onto the floor."),
         BURNT_EGG(Items.BURNT_EGG_7090, Items.BOWL_1923, "You empty the contents of the bowl onto the floor."),
         BURNT_ONION(Items.BURNT_ONION_7092, Items.BOWL_1923, "You empty the contents of the bowl onto the floor."),
-        BURNT_MUSHROOM(Items.BURNT_MUSHROOM_7094, Items.BOWL_1923, "You empty the contents of the bowl onto the floor.");
+        BURNT_MUSHROOM(Items.BURNT_MUSHROOM_7094, Items.BOWL_1923, "You empty the contents of the bowl onto the floor."),
+        COCONUT_MILK(Items.COCONUT_MILK_5935, Items.VIAL_229, "You empty the vial.", Sounds.LIQUID_2401),
+        IMP_REPEL(Items.IMP_REPELLENT_11262, Items.VIAL_229, "You empty the vial.", Sounds.LIQUID_2401);
 
         companion object {
             var emptyItemMap = HashMap<Int, Int?>()
@@ -89,15 +93,47 @@ class EmptyOptionListener : InteractionListener {
             var emptyItemList = ArrayList<Int>()
 
             init {
+                // add all the above manually-defined items
                 for (item in values()) {
                     emptyItemMap.putIfAbsent(item.fullId, item.emptyId)
                     emptyMessageMap.putIfAbsent(item.fullId, item.emptyMessage)
                     emptyAudioMap.putIfAbsent(item.fullId, item.audioId)
                     emptyItemList.add(item.fullId)
                 }
+
+                // add finished potion products
+                for (finishedPotion in FinishedPotion.values()) {
+                    val potionId = finishedPotion.potion.id
+
+                    emptyItemMap.putIfAbsent(potionId, Items.VIAL_229)
+                    emptyMessageMap.putIfAbsent(potionId, "You empty the vial.")
+                    emptyAudioMap.putIfAbsent(potionId, Sounds.LIQUID_2401)
+
+                    if (!emptyItemList.contains(potionId)) {
+                        emptyItemList.add(potionId)
+                    }
+                }
+
+                // add unfinished potion products
+                for (unfinishedPotion in UnfinishedPotion.values()) {
+                    val potionId = unfinishedPotion.potion.id
+
+                    emptyItemMap.putIfAbsent(potionId, Items.VIAL_229)
+                    emptyMessageMap.putIfAbsent(potionId, "You empty the vial.")
+                    emptyAudioMap.putIfAbsent(potionId, Sounds.LIQUID_2401)
+
+                    if (!emptyItemList.contains(potionId)) {
+                        emptyItemList.add(potionId)
+                    }
+                }
+
+                // todo this legacy line loads a bunch of random shit that may or may not have empty options. It'd be better to define these all in the future in a controlled manner (e.g. this pulls items like Items.SUPER_KEBAB_4608 and Items.VOICE_OF_DOOM_POTION_11788)
+                // add some strings that might catch anything else
                 for (item in ItemDefinition.getDefinitions().values)
                     if (item.name.contains("potion") || item.name.contains("brew") || item.name.contains("poison") || item.name.lowercase(Locale.getDefault()).contains("serum") || item.name.contains("cure") || item.name.contains("mix") || item.name.contains("balm") || item.name.contains("Super ")) {
-                        emptyItemList.add(item.id)
+                        if (!emptyItemList.contains(item.id)) {
+                            emptyItemList.add(item.id)
+                        }
                     }
             }
 

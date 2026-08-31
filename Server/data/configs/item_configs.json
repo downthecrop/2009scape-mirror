@@ -31234,7 +31234,7 @@
   {
     "id": "3416",
     "name": "Serum 208 (4)",
-    "examine": "3 doses permanent serum 208 as described in Herbi Flax's diary.",
+    "examine": "4 doses permanent serum 208 as described in Herbi Flax's diary.",
     "archery_ticket_price": "0",
     "durability": null,
     "shop_price": "208"
@@ -51213,6 +51213,11 @@
     "tradeable": "true"
   },
   {
+    "id": "5936",
+    "name": "Weapon poison+(unf)",
+    "examine": "A vial of coconut milk and a cactus spine."
+  },
+  {
     "id": "5937",
     "name": "Weapon poison+",
     "examine": "A vial of extra-strong weapon poison, for spears and daggers.",
@@ -51228,6 +51233,11 @@
     "durability": null,
     "ge_buy_limit": "1000",
     "tradeable": "true"
+  },
+  {
+    "id": "5939",
+    "name": "Weapon poison++(unf)",
+    "examine": "A vial of coconut milk and some deadly nightshade."
   },
   {
     "id": "5940",
@@ -51248,9 +51258,14 @@
     "tradeable": "true"
   },
   {
+    "id": "5942",
+    "name": "Antipoison+(unf)",
+    "examine": "A vial of coconut milk and a toadflax."
+  },
+  {
     "id": "5943",
     "name": "Antipoison+(4)",
-    "examine": "N doses of extra-stong antipoison potion",
+    "examine": "4 doses of extra-stong antipoison potion.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "1000",
@@ -51268,7 +51283,7 @@
   {
     "id": "5945",
     "name": "Antipoison+(3)",
-    "examine": "N doses of extra-stong antipoison potion",
+    "examine": "3 doses of extra-stong antipoison potion.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "1000",
@@ -51286,7 +51301,7 @@
   {
     "id": "5947",
     "name": "Antipoison+(2)",
-    "examine": "N doses of extra-stong antipoison potion",
+    "examine": "2 doses of extra-stong antipoison potion.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "1000",
@@ -51304,7 +51319,7 @@
   {
     "id": "5949",
     "name": "Antipoison+(1)",
-    "examine": "N doses of extra-stong antipoison potion",
+    "examine": "1 dose of extra-stong antipoison potion.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "1000",
@@ -51318,6 +51333,11 @@
     "durability": null,
     "ge_buy_limit": "1000",
     "tradeable": "true"
+  },
+  {
+    "id": "5951",
+    "name": "Antipoison++(unf)",
+    "examine": "A vial of coconut milk and an irit."
   },
   {
     "id": "5952",
@@ -73754,12 +73774,42 @@
     "weight": "1"
   },
   {
+    "id": "9019",
+    "name": "Magic essence(unf)",
+    "examine": "I need another ingredient to finish this Magic essence potion.",
+    "tradeable": "false"
+  },
+  {
     "id": "9020",
     "name": "Queen's secateurs",
     "examine": "Contains the Fairy Queen's magical essence.",
     "archery_ticket_price": "0",
     "durability": null,
     "equipment_slot": "3"
+  },
+  {
+    "id": "9021",
+    "name": "Magic essence(4)",
+    "examine": "4 doses of Magic essence potion.",
+    "tradeable": "false"
+  },
+  {
+    "id": "9022",
+    "name": "Magic essence(3)",
+    "examine": "3 doses of Magic essence potion.",
+    "tradeable": "false"
+  },
+  {
+    "id": "9023",
+    "name": "Magic essence(2)",
+    "examine": "2 doses of Magic essence potion.",
+    "tradeable": "false"
+  },
+  {
+    "id": "9024",
+    "name": "Magic essence(1)",
+    "examine": "1 doses of Magic essence potion.",
+    "tradeable": "false"
   },
   {
     "id": "9025",
@@ -89042,7 +89092,7 @@
   {
     "id": "10925",
     "name": "Sanfew serum(4)",
-    "examine": "A \"X\" dose Sanfew Serum.",
+    "examine": "A 4 dose Sanfew Serum.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -89059,7 +89109,7 @@
   {
     "id": "10927",
     "name": "Sanfew serum(3)",
-    "examine": "A \"X\" dose Sanfew Serum.",
+    "examine": "A 3 dose Sanfew Serum.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -89076,7 +89126,7 @@
   {
     "id": "10929",
     "name": "Sanfew serum(2)",
-    "examine": "A \"X\" dose Sanfew Serum.",
+    "examine": "A 2 dose Sanfew Serum.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -89093,7 +89143,7 @@
   {
     "id": "10931",
     "name": "Sanfew serum(1)",
-    "examine": "A \"X\" dose Sanfew Serum.",
+    "examine": "A 1 dose Sanfew Serum.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
@@ -89150,7 +89200,7 @@
   {
     "id": "10937",
     "name": "Nail beast nails",
-    "examine": "The claws from a nail beast",
+    "examine": "The claws from a nail beast.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
