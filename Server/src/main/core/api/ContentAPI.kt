@@ -1804,10 +1804,10 @@ fun closeAllInterfaces(player: Player) {
  * Sends a dialogue that uses the player's chathead.
  * @param player the player to send the dialogue to
  * @param msg the message to send.
- * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+ * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.NEUTRAL
  * @param hide should the continue button be hidden?
  */
-fun sendPlayerDialogue(player: Player, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY, hide: Boolean = false) {
+fun sendPlayerDialogue(player: Player, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.NEUTRAL, hide: Boolean = false) {
     player.dialogueInterpreter.sendDialogues(player, expr, hide, *splitLines(msg))
 }
 
@@ -1826,10 +1826,10 @@ fun sendPlayerOnInterface(player: Player, iface: Int, child: Int) {
  * @param player the player to send the dialogue to
  * @param npc the ID of the NPC to use for the chathead
  * @param msg the message to send.
- * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+ * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.NEUTRAL
  * @param hide should the continue button be hidden?
  */
-fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.FRIENDLY,
+fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: core.game.dialogue.FacialExpression = core.game.dialogue.FacialExpression.NEUTRAL,
                     hide: Boolean = false) {
     player.dialogueInterpreter.sendDialogues(npc, expr, hide,  *splitLines(msg))
 }
