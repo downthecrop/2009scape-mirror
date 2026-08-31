@@ -20,7 +20,7 @@ public final class ImpJarCreatePlugin extends UseWithHandler {
 	/**
 	 * The flower ids.
 	 */
-	private static final int[] FLOWERS = new int[] { 2460, 2461, 2462, 2463, 2464, 2465, 2466, 2467, 2468, 2469, 2470, 2471, 2472, 2473, 2474, 2475, 2476, 2477 };
+	private static final int[] FLOWERS = new int[] { 2460, 2461, 2462, 2463, 2464, 2465, 2466, 2467, 2468, 2469, 2470, 2471, 2472, 2473, 2474, 2475, 2476, 2477, 6010, 6012 };
 
 	/**
 	 * Constructs a new {@code ImpJarCreatePlugin} {@code Object}.
