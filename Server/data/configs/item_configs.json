@@ -80474,21 +80474,21 @@
   {
     "id": "10027",
     "name": "Imp-in-a-box(2)",
-    "examine": "A magical catching box.",
+    "examine": "A full magical catching box.",
     "archery_ticket_price": "0",
     "durability": null,
     "shop_price": "720",
-    "tradeable": "true",
+    "tradeable": "false",
     "weight": "1"
   },
   {
     "id": "10028",
     "name": "Imp-in-a-box(1)",
-    "examine": "A magical catching box.",
+    "examine": "A half-full magical catching box.",
     "archery_ticket_price": "0",
     "durability": null,
     "shop_price": "720",
-    "tradeable": "true",
+    "tradeable": "false",
     "weight": "1"
   },
   {
