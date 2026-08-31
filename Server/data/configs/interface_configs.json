@@ -216,6 +216,12 @@
     "tabIndex": "-1"
   },
   {
+    "id": "170",
+    "interfaceType": "1",
+    "walkable": "true",
+    "tabIndex": "-1"
+  },
+  {
     "id": "172",
     "interfaceType": "4",
     "walkable": "false",
