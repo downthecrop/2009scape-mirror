@@ -1,0 +1,189 @@
+// 411:0
+[com_0]
+type=layer
+x=17
+y=27
+width=160
+height=53
+op1=Select
+onload=script93(event_com)
+onmouseover=script95(event_com)
+onmouseleave=script93(event_com)
+
+// 411:1
+[com_1]
+type=layer
+x=17
+y=83
+width=160
+height=53
+op1=Select
+onload=script93(event_com)
+onmouseover=script95(event_com)
+onmouseleave=script93(event_com)
+
+// 411:2
+[com_2]
+type=layer
+x=17
+y=139
+width=160
+height=53
+op1=Select
+onload=script93(event_com)
+onmouseover=script95(event_com)
+onmouseleave=script93(event_com)
+
+// 411:3
+[com_3]
+type=layer
+x=17
+y=196
+width=160
+height=53
+op1=Select
+onload=script93(event_com)
+onmouseover=script95(event_com)
+onmouseleave=script93(event_com)
+
+// 411:4
+[com_4]
+type=text
+x=19
+y=4
+width=151
+height=14
+textfont=b12_full
+text=Defence style
+textalignh=1
+textshadow=yes
+colour=0xff9935
+
+// 411:5
+[com_5]
+type=model
+x=21
+y=32
+width=43
+height=40
+model=model_15376
+modelorigin_x=0
+modelorigin_y=16
+modelangle_x=39
+modelangle_y=1676
+modelangle_z=0
+modelzoom=554
+modelanim=seq_4165
+unknown100=64972
+unknown101=1124
+
+// 411:6
+[com_6]
+type=text
+x=17
+y=27
+width=153
+height=53
+textfont=p12_full
+text=Use stab defence
+textalignh=2
+textalignv=1
+textshadow=yes
+colour=0xff9935
+
+// 411:7
+[com_7]
+type=model
+x=18
+y=87
+width=48
+height=46
+model=model_15373
+modelorigin_x=0
+modelorigin_y=14
+modelangle_x=11
+modelangle_y=1619
+modelangle_z=0
+modelzoom=554
+modelanim=seq_4165
+unknown100=64975
+unknown101=1121
+
+// 411:8
+[com_8]
+type=text
+x=17
+y=83
+width=153
+height=53
+textfont=p12_full
+text=Use blunt defence
+textalignh=2
+textalignv=1
+textshadow=yes
+colour=0xff9935
+
+// 411:9
+[com_9]
+type=model
+x=23
+y=149
+width=37
+height=31
+model=model_15375
+modelorigin_x=4
+modelorigin_y=13
+modelangle_x=0
+modelangle_y=1950
+modelangle_z=0
+modelzoom=500
+modelanim=seq_4165
+unknown100=65036
+unknown101=1013
+
+// 411:10
+[com_10]
+type=text
+x=17
+y=139
+width=153
+height=53
+textfont=p12_full
+text= Use slash defence
+textalignh=2
+textalignv=1
+textshadow=yes
+colour=0xff9935
+
+// 411:11
+[com_11]
+type=text
+x=17
+y=196
+width=153
+height=53
+textfont=p12_full
+text= Use magic defence
+textalignh=2
+textalignv=1
+textshadow=yes
+colour=0xff9935
+
+// 411:12
+[com_12]
+type=model
+x=24
+y=207
+width=34
+height=35
+model=model_15374
+modelorigin_x=0
+modelorigin_y=17
+modelangle_x=0
+modelangle_y=1573
+modelangle_z=0
+modelzoom=528
+modelanim=seq_4165
+unknown100=65002
+unknown101=1071
+

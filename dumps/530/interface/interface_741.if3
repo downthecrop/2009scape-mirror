@@ -1,0 +1,142 @@
+// 741:0
+[com_0]
+type=rectangle
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+colour=0x46341d
+fill=yes
+trans=160
+
+// 741:1
+[com_1]
+type=model
+x=15
+y=14
+width=480
+height=301
+layer=com_11
+model=model_26397
+modelorigin_x=-2
+modelorigin_y=33
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=1009
+unknown100=63934
+unknown101=3000
+
+// 741:2
+[com_2]
+type=layer
+x=68
+y=121
+width=359
+height=160
+layer=com_11
+
+// 741:3
+[com_3]
+type=layer
+x=438
+y=121
+width=16
+height=160
+layer=com_11
+
+// 741:4
+[com_4]
+type=text
+x=109
+y=64
+width=340
+height=27
+layer=com_11
+textfont=q8_full
+textalignh=1
+textalignv=1
+colour=0x46320a
+
+// 741:5
+[com_5]
+type=text
+x=150
+y=36
+width=239
+height=23
+layer=com_11
+textfont=quill_oblique_large
+text=Congratulations!
+textalignh=1
+textalignv=1
+colour=0x46320a
+
+// 741:6
+[com_6]
+type=text
+x=136
+y=91
+width=286
+height=12
+layer=com_11
+textfont=q8_full
+textalignh=1
+textalignv=1
+colour=0x46320a
+
+// 741:7
+[com_7]
+type=graphic
+x=46
+y=50
+width=55
+height=54
+layer=com_11
+
+// 741:8
+[com_8]
+type=rectangle
+x=101
+y=107
+width=331
+height=1
+layer=com_11
+colour=0x46320a
+fill=yes
+trans=200
+
+// 741:9
+[com_9]
+type=graphic
+x=432
+y=35
+width=26
+height=23
+layer=com_11
+graphic="close_buttons,6"
+op1=Close
+onmouseover=script44(interface_741:com_9, "close_buttons,7")
+onmouseleave=script44(interface_741:com_9, "close_buttons,6")
+onop=script29
+onclick=script29
+
+// 741:10
+[com_10]
+type=layer
+width=512
+height=334
+layer=com_11
+opbase= 
+onload=script972
+onvartransmit=script972
+onvartransmitlist=varplayer_1230
+
+// 741:11
+[com_11]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+

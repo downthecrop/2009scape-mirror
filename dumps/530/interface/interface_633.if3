@@ -1,0 +1,360 @@
+// 633:0
+[com_0]
+type=rectangle
+x=17
+y=25
+width=488
+height=305
+colour=0x000000
+fill=yes
+trans=200
+
+// 633:1
+[com_1]
+type=graphic
+x=14
+y=25
+width=485
+height=300
+graphic=tradebacking
+tiling=yes
+
+// 633:2
+[com_2]
+type=graphic
+y=53
+width=32
+height=241
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 633:3
+[com_3]
+type=graphic
+x=13
+y=20
+width=32
+height=32
+graphic="v2_stone_borders,4"
+
+// 633:4
+[com_4]
+type=graphic
+x=480
+y=51
+width=32
+height=243
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 633:5
+[com_5]
+type=graphic
+x=44
+y=7
+width=424
+height=34
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 633:6
+[com_6]
+type=graphic
+x=45
+y=306
+width=423
+height=32
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 633:7
+[com_7]
+type=graphic
+x=13
+y=294
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 633:8
+[com_8]
+type=graphic
+x=468
+y=20
+width=32
+height=32
+graphic="v2_stone_borders,5"
+
+// 633:9
+[com_9]
+type=graphic
+x=468
+y=294
+width=32
+height=32
+graphic="v2_stone_borders,7"
+
+// 633:10
+[com_10]
+type=graphic
+x=24
+y=35
+width=465
+height=32
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 633:11
+[com_11]
+type=graphic
+x=13
+y=37
+width=32
+height=32
+graphic="v2_stone_borders,9"
+
+// 633:12
+[com_12]
+type=graphic
+x=468
+y=37
+width=32
+height=32
+graphic="v2_stone_borders,10"
+
+// 633:13
+[com_13]
+type=model
+x=31
+y=63
+width=62
+height=241
+model=model_3276
+modelorigin_x=6
+modelorigin_y=113
+modelangle_x=105
+modelangle_y=312
+modelangle_z=0
+modelzoom=1031
+unknown100=0
+unknown101=3000
+
+// 633:14
+[com_14]
+type=layer
+x=344
+y=262
+width=105
+height=43
+
+// 633:15
+[com_15]
+type=text
+x=30
+y=30
+width=450
+height=16
+textfont=b12_full
+text=You are Victorious!
+textalignh=1
+textshadow=yes
+colour=0xe1981f
+
+// 633:16
+[com_16]
+type=rectangle
+x=6
+y=6
+width=94
+height=32
+layer=com_14
+colour=0x000000
+fill=yes
+
+// 633:17
+[com_17]
+type=text
+x=6
+y=6
+width=93
+height=32
+layer=com_14
+textfont=p12_full
+text=Close
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0x008000
+op1=Claim
+onmouseover=script45(event_com, 0x00ab00)
+onmouseleave=script45(event_com, 0x008000)
+onop=script29
+
+// 633:18
+[com_18]
+type=text
+x=4
+y=11
+width=122
+height=15
+layer=com_32
+textfont=p12_full
+text=The Defeated:
+textshadow=yes
+colour=0xbf751d
+
+// 633:19
+[com_19]
+type=text
+x=4
+y=37
+width=51
+height=14
+layer=com_32
+textfont=p12_full
+text=Name:
+textshadow=yes
+colour=0xbf751d
+
+// 633:20
+[com_20]
+type=text
+x=4
+y=61
+width=34
+height=14
+layer=com_32
+textfont=p12_full
+text=Combat Level:
+textshadow=yes
+colour=0xbf751d
+
+// 633:21
+[com_21]
+type=text
+x=90
+y=61
+width=31
+height=13
+layer=com_32
+textfont=p12_full
+text=126
+textshadow=yes
+colour=0xaaaaaa
+
+// 633:22
+[com_22]
+type=text
+x=48
+y=37
+width=70
+height=14
+layer=com_32
+textfont=p12_full
+text=Crunchy
+textshadow=yes
+colour=0xaaaaaa
+
+// 633:23
+[com_23]
+type=graphic
+x=346
+y=264
+width=32
+height=32
+graphic="v2_stone_borders,4"
+
+// 633:24
+[com_24]
+type=graphic
+x=346
+y=272
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 633:25
+[com_25]
+type=graphic
+x=416
+y=264
+width=32
+height=32
+graphic="v2_stone_borders,5"
+
+// 633:26
+[com_26]
+type=graphic
+x=416
+y=272
+width=32
+height=32
+graphic="v2_stone_borders,7"
+
+// 633:27
+[com_27]
+type=graphic
+x=376
+y=251
+width=42
+height=37
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 633:28
+[com_28]
+type=graphic
+x=375
+y=284
+width=43
+height=32
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 633:29
+[com_29]
+type=model
+x=348
+y=157
+width=99
+height=85
+model=model_3278
+modelorigin_x=0
+modelorigin_y=27
+modelangle_x=2047
+modelangle_y=514
+modelangle_z=0
+modelzoom=1275
+unknown100=0
+unknown101=3000
+
+// 633:30
+[com_30]
+type=graphic
+x=474
+y=30
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 633:31
+[com_31]
+type=layer
+x=467
+y=23
+width=32
+height=32
+hide=yes
+
+// 633:32
+[com_32]
+type=layer
+x=125
+y=101
+width=168
+height=89
+

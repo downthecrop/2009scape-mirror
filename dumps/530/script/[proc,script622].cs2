@@ -1,0 +1,17 @@
+// 622
+[proc,script622]
+if (%varplayer_1118 = 1) {
+    if_sethide(false, interface_105:com_16);
+    if_sethide(false, interface_105:com_126);
+    if_sethide(false, interface_105:com_156);
+    if_sethide(false, interface_105:com_192);
+    if_sethide(false, interface_105:com_197);
+    if_sethide(false, interface_105:com_200);
+} else {
+    if_sethide(true, interface_105:com_16);
+    if_sethide(true, interface_105:com_126);
+    if_sethide(true, interface_105:com_156);
+    if_sethide(true, interface_105:com_192);
+    if_sethide(true, interface_105:com_197);
+    if_sethide(true, interface_105:com_200);
+}

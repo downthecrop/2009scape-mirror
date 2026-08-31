@@ -1,0 +1,5 @@
+// 826
+[clientscript,script826]
+def_int $int0 = clientclock;
+if_setontimer("script827($int0)", interface_465:com_2);
+sound_synth(synth_4437, 1, 58);

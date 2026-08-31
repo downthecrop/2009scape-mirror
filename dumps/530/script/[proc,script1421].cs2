@@ -1,0 +1,48 @@
+// 1421
+[proc,script1421](int $int0)
+def_string $string0 = "";
+switch_int ($int0) {
+    case 1 :
+        $string0 = enum(int, string, enum_1697, %varplayerbit_5146);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 130)", interface_575:com_3);
+    case 2 :
+        $string0 = enum(int, string, enum_1698, %varplayerbit_5147);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 160)", interface_575:com_4);
+    case 3 :
+        $string0 = enum(int, string, enum_1699, %varplayerbit_5148);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_5);
+    case 4 :
+        $string0 = enum(int, string, enum_1700, %varplayerbit_5149);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_6);
+    case 5 :
+        $string0 = enum(int, string, enum_1701, %varplayerbit_5150);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_7);
+    case 6 :
+        $string0 = enum(int, string, enum_1702, %varplayerbit_5151);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_8);
+    case 7 :
+        $string0 = enum(int, string, enum_1703, %varplayerbit_5152);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_9);
+    case 8 :
+        $string0 = enum(int, string, enum_1704, %varplayerbit_5153);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_10);
+    case 9 :
+        $string0 = enum(int, string, enum_1705, %varplayerbit_5154);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_11);
+    case 10 :
+        $string0 = enum(int, string, enum_1706, %varplayerbit_5155);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_12);
+    case 11 :
+        $string0 = enum(int, string, enum_1707, %varplayerbit_5156);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_13);
+    case 12 :
+        $string0 = enum(int, string, enum_1708, %varplayerbit_5157);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_14);
+    case 13 :
+        $string0 = enum(int, string, enum_1709, %varplayerbit_5158);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_15);
+    case 14 :
+        $string0 = enum(int, string, enum_1710, %varplayerbit_5159);
+        if_setonmouserepeat("script38(event_com, interface_575:com_2, $string0, 25, 200)", interface_575:com_16);
+}
+%varclient_2 = 0;

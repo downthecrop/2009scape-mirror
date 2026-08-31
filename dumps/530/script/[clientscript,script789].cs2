@@ -1,0 +1,39 @@
+// 789
+[clientscript,script789](component $component0)
+if (($component0 = interface_134:com_36 | $component0 = interface_134:com_37 | $component0 = interface_134:com_38 | $component0 = interface_134:com_40 | $component0 = interface_134:com_48 | $component0 = interface_134:com_50 | $component0 = interface_134:com_51 | $component0 = interface_134:com_49 | $component0 = interface_134:com_52) & map_members = false) {
+    return;
+}
+if ($component0 = interface_134:com_52 & %varplayerbit_4302 < 110) {
+    return;
+}
+if ($component0 = interface_134:com_37 & %varplayer_80 < 4) {
+    return;
+}
+if ($component0 = interface_134:com_51 & %varplayerbit_2187 = 0) {
+    return;
+}
+if_sethide(true, interface_134:com_4);
+if_sethide(true, interface_134:com_21);
+if_sethide(true, interface_134:com_22);
+if_sethide(true, interface_134:com_23);
+if_sethide(true, interface_134:com_24);
+if_sethide(true, interface_134:com_25);
+if_sethide(true, interface_134:com_27);
+if_sethide(true, interface_134:com_5);
+if_sethide(true, interface_134:com_6);
+if_sethide(true, interface_134:com_8);
+if_sethide(true, interface_134:com_26);
+if_sethide(true, interface_134:com_9);
+if_sethide(true, interface_134:com_12);
+if_sethide(true, interface_134:com_13);
+if_sethide(true, interface_134:com_7);
+if_sethide(true, interface_134:com_15);
+if_sethide(true, interface_134:com_16);
+if_sethide(true, interface_134:com_17);
+if_sethide(true, interface_134:com_18);
+if_sethide(true, interface_134:com_10);
+if_sethide(true, interface_134:com_11);
+if_sethide(true, interface_134:com_19);
+if_sethide(true, interface_134:com_14);
+if_sethide(true, interface_134:com_20);
+if_sethide(false, $component0);

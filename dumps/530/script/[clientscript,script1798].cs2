@@ -1,0 +1,61 @@
+// 1798
+[clientscript,script1798](component $component0, component $component1)
+def_int $int2 = 0;
+def_int $int3 = 0;
+while ($int2 < 12) {
+    switch_int ($int2) {
+        case 0 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_58);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_59);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_60);
+        case 1 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_61);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_62);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_63);
+        case 2 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_64);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_65);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_66);
+        case 3 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_67);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_68);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_69);
+        case 4 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_70);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_71);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_72);
+        case 5 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_73);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_74);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_75);
+        case 6 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_76);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_77);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_78);
+        case 7 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_79);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_80);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_81);
+        case 8 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_82);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_83);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_84);
+        case 9 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_85);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_86);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_87);
+        case 10 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_88);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_89);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_90);
+        case 11 :
+            if_setposition(25, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_91);
+            if_setposition(4, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_92);
+            if_setposition(0, $int3, ^setpos_abs_left, ^setpos_abs_top, interface_791:com_93);
+    }
+    $int3 = calc($int3 + 17);
+    $int2 = calc($int2 + 1);
+}
+if_setscrollsize(0, $int3, $component0);
+if_setscrollpos(0, 0, $component0);
+~script31($component1, $component0, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");

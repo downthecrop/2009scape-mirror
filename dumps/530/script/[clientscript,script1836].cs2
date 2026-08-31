@@ -1,0 +1,52 @@
+// 1836
+[clientscript,script1836]
+if (%varclient_246 ! %varplayerbit_5280) {
+    %varclient_246 = %varplayerbit_5280;
+    ~script1770;
+}
+if (%varclient_247 ! %varplayerbit_5281) {
+    %varclient_247 = %varplayerbit_5281;
+    ~script1771;
+}
+if (~script42(%varclient_248) ! %varplayerbit_5282) {
+    %varclient_248 = ~script734(%varplayerbit_5282);
+    ~script1772;
+}
+if (~script42(%varclient_249) ! %varplayerbit_5283) {
+    %varclient_249 = ~script734(%varplayerbit_5283);
+    ~script1773;
+}
+if (~script42(%varclient_250) ! %varplayerbit_5284) {
+    %varclient_250 = ~script734(%varplayerbit_5284);
+    ~script1774;
+}
+if (%varclient_252 ! %varplayerbit_5286) {
+    %varclient_252 = %varplayerbit_5286;
+    ~script1775;
+}
+if (~script42(%varclient_251) ! %varplayerbit_5285) {
+    %varclient_251 = ~script734(%varplayerbit_5285);
+    ~script1776;
+}
+if (~script42(%varclient_256) ! %varplayerbit_5290) {
+    %varclient_256 = ~script734(%varplayerbit_5290);
+    ~script1777;
+}
+if (~script42(%varclient_253) ! %varplayerbit_5287) {
+    %varclient_253 = ~script734(%varplayerbit_5287);
+    ~script1778;
+}
+if (~script42(%varclient_254) ! %varplayerbit_5288) {
+    %varclient_254 = ~script734(%varplayerbit_5288);
+    ~script1779;
+}
+if (~script42(%varclient_255) ! %varplayerbit_5289) {
+    %varclient_255 = ~script734(%varplayerbit_5289);
+    ~script1780;
+}
+if (%varclient_257 ! %varplayerbit_5292) {
+    %varclient_257 = %varplayerbit_5292;
+    ~script1781;
+}
+%varclient_258 = ~script734(%varplayerbit_5293);
+~script1782;

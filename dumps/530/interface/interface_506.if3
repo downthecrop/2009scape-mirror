@@ -1,0 +1,272 @@
+// 506:0
+[com_0]
+type=graphic
+x=28
+y=48
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:1
+[com_1]
+type=graphic
+x=58
+y=48
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:2
+[com_2]
+type=graphic
+x=84
+y=48
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:3
+[com_3]
+type=graphic
+x=110
+y=48
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:4
+[com_4]
+type=graphic
+x=128
+y=48
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:5
+[com_5]
+type=text
+x=41
+y=50
+width=115
+height=31
+textfont=p12_full
+text=Talk to puppet
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Talk-to-puppet
+
+// 506:6
+[com_6]
+type=text
+x=28
+y=5
+width=137
+height=41
+textfont=quill_oblique_large
+text=Jester Controls
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xbf751d
+
+// 506:7
+[com_7]
+type=graphic
+x=28
+y=88
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:8
+[com_8]
+type=graphic
+x=58
+y=88
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:9
+[com_9]
+type=text
+x=33
+y=93
+width=56
+height=27
+textfont=p12_full
+text=Dance
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Dance
+
+// 506:10
+[com_10]
+type=graphic
+x=98
+y=88
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:11
+[com_11]
+type=graphic
+x=128
+y=88
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:12
+[com_12]
+type=text
+x=102
+y=94
+width=59
+height=26
+textfont=p12_full
+text=Juggle
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Juggle
+
+// 506:13
+[com_13]
+type=graphic
+x=28
+y=128
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:14
+[com_14]
+type=graphic
+x=58
+y=128
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:15
+[com_15]
+type=text
+x=32
+y=134
+width=58
+height=26
+textfont=p12_full
+text=Skip
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Skip
+
+// 506:16
+[com_16]
+type=graphic
+x=98
+y=128
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:17
+[com_17]
+type=graphic
+x=128
+y=128
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:18
+[com_18]
+type=text
+x=103
+y=134
+width=55
+height=26
+textfont=p12_full
+text=Pie
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Pie
+
+// 506:19
+[com_19]
+type=graphic
+x=28
+y=168
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:20
+[com_20]
+type=graphic
+x=58
+y=168
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:21
+[com_21]
+type=text
+x=33
+y=173
+width=55
+height=27
+textfont=p12_full
+text=Jig
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Jig
+
+// 506:22
+[com_22]
+type=graphic
+x=98
+y=168
+width=36
+height=36
+graphic="miscgraphics,4"
+
+// 506:23
+[com_23]
+type=graphic
+x=128
+y=168
+width=36
+height=36
+graphic="miscgraphics,6"
+
+// 506:24
+[com_24]
+type=text
+x=102
+y=173
+width=57
+height=27
+textfont=p12_full
+text=Bow
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=Bow
+

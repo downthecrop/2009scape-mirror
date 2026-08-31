@@ -1,0 +1,8 @@
+// 925
+[clientscript,script925]
+if (%varplayerbit_4538 >= 43) {
+    return;
+}
+if_settext("<"Earlgrey"> (1000)", interface_725:com_20);
+if_settext("<"Fairtrade"> (1000)", interface_725:com_22);
+%varclient_185 = 0;

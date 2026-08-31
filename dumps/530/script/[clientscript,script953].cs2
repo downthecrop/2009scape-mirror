@@ -1,0 +1,7 @@
+// 953
+[clientscript,script953](component $component0, component $component1)
+if (%varclient_2 = 0) {
+    ~script915($component0);
+    if_setcolour(0xe5b219, $component1);
+    %varclient_2 = 1;
+}

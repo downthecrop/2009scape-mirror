@@ -1,0 +1,82 @@
+// 2032
+[clientscript,script2032]
+if_sethide(true, interface_366:com_2);
+if_sethide(true, interface_366:com_3);
+if_sethide(true, interface_366:com_4);
+if_sethide(true, interface_366:com_5);
+if_sethide(true, interface_366:com_6);
+if_sethide(true, interface_366:com_7);
+if_sethide(true, interface_366:com_8);
+if_sethide(true, interface_366:com_9);
+if_sethide(true, interface_366:com_10);
+if_sethide(true, interface_366:com_11);
+if_sethide(true, interface_366:com_12);
+if_sethide(true, interface_366:com_13);
+if_sethide(true, interface_366:com_14);
+if_sethide(true, interface_366:com_15);
+if_sethide(true, interface_366:com_16);
+if_sethide(true, interface_366:com_17);
+if_sethide(true, interface_366:com_18);
+if_sethide(true, interface_366:com_19);
+if_sethide(true, interface_366:com_20);
+if_sethide(true, interface_366:com_21);
+if (%varplayer_391 > 0) {
+    if_sethide(false, interface_366:com_2);
+}
+if (%varplayer_391 > 4) {
+    if_sethide(false, interface_366:com_3);
+}
+if (%varplayer_391 > 9) {
+    if_sethide(false, interface_366:com_4);
+}
+if (%varplayer_391 > 14) {
+    if_sethide(false, interface_366:com_5);
+}
+if (%varplayer_391 > 19) {
+    if_sethide(false, interface_366:com_6);
+}
+if (%varplayer_391 > 24) {
+    if_sethide(false, interface_366:com_7);
+}
+if (%varplayer_391 > 29) {
+    if_sethide(false, interface_366:com_8);
+}
+if (%varplayer_391 > 34) {
+    if_sethide(false, interface_366:com_9);
+}
+if (%varplayer_391 > 39) {
+    if_sethide(false, interface_366:com_10);
+}
+if (%varplayer_391 > 44) {
+    if_sethide(false, interface_366:com_11);
+}
+if (%varplayer_391 > 49) {
+    if_sethide(false, interface_366:com_12);
+}
+if (%varplayer_391 > 54) {
+    if_sethide(false, interface_366:com_13);
+}
+if (%varplayer_391 > 59) {
+    if_sethide(false, interface_366:com_14);
+}
+if (%varplayer_391 > 64) {
+    if_sethide(false, interface_366:com_15);
+}
+if (%varplayer_391 > 69) {
+    if_sethide(false, interface_366:com_16);
+}
+if (%varplayer_391 > 74) {
+    if_sethide(false, interface_366:com_17);
+}
+if (%varplayer_391 > 79) {
+    if_sethide(false, interface_366:com_18);
+}
+if (%varplayer_391 > 84) {
+    if_sethide(false, interface_366:com_19);
+}
+if (%varplayer_391 > 89) {
+    if_sethide(false, interface_366:com_20);
+}
+if (%varplayer_391 > 94) {
+    if_sethide(false, interface_366:com_21);
+}

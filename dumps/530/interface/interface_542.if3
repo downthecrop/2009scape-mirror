@@ -1,0 +1,607 @@
+// 542:0
+[com_0]
+type=graphic
+x=17
+y=26
+width=480
+height=293
+graphic=tradebacking
+tiling=yes
+opbase=  
+
+// 542:1
+[com_1]
+type=graphic
+y=26
+width=28
+height=290
+graphic="v2_stone_borders,1"
+tiling=yes
+opbase= 
+
+// 542:2
+[com_2]
+type=graphic
+x=479
+y=26
+width=47
+height=285
+graphic="v2_stone_borders,3"
+tiling=yes
+opbase= 
+
+// 542:3
+[com_3]
+type=graphic
+x=15
+y=302
+width=462
+height=26
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 542:4
+[com_4]
+type=graphic
+x=14
+y=10
+width=464
+height=34
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+
+// 542:5
+[com_5]
+type=graphic
+x=467
+y=290
+width=32
+height=32
+graphic="v2_stone_borders,7"
+opbase= 
+
+// 542:6
+[com_6]
+type=graphic
+x=13
+y=290
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 542:7
+[com_7]
+type=graphic
+x=13
+y=23
+width=32
+height=32
+graphic="v2_stone_borders,4"
+opbase= 
+
+// 542:8
+[com_8]
+type=graphic
+x=467
+y=23
+width=32
+height=32
+graphic="v2_stone_borders,5"
+opbase= 
+
+// 542:9
+[com_9]
+type=graphic
+x=16
+y=38
+width=478
+height=35
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 542:10
+[com_10]
+type=graphic
+x=13
+y=40
+width=32
+height=32
+graphic="v2_stone_borders,9"
+tiling=yes
+
+// 542:11
+[com_11]
+type=graphic
+x=467
+y=40
+width=32
+height=32
+graphic="v2_stone_borders,10"
+tiling=yes
+
+// 542:12
+[com_12]
+type=graphic
+x=471
+y=32
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 542:13
+[com_13]
+type=text
+x=25
+y=22
+width=467
+height=38
+textfont=b12_full
+text=What would you like to make?
+textalignh=1
+textalignv=1
+colour=0xff9900
+
+// 542:14
+[com_14]
+type=layer
+x=348
+y=83
+width=75
+height=94
+
+// 542:15
+[com_15]
+type=layer
+x=170
+y=200
+width=75
+height=96
+
+// 542:16
+[com_16]
+type=layer
+x=79
+y=80
+width=75
+height=96
+
+// 542:17
+[com_17]
+type=layer
+x=168
+y=79
+width=77
+height=90
+
+// 542:18
+[com_18]
+type=layer
+x=255
+y=84
+width=75
+height=92
+
+// 542:19
+[com_19]
+type=layer
+x=255
+y=197
+width=72
+height=92
+
+// 542:20
+[com_20]
+type=layer
+x=78
+y=195
+width=76
+height=101
+
+// 542:21
+[com_21]
+type=layer
+x=351
+y=192
+width=76
+height=96
+
+// 542:22
+[com_22]
+type=text
+x=348
+y=140
+width=75
+height=36
+textfont=p12_full
+text=Vial
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 33)
+
+// 542:23
+[com_23]
+type=text
+x=170
+y=260
+width=75
+height=36
+textfont=p12_full
+text=Orb
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 46)
+
+// 542:24
+[com_24]
+type=text
+x=79
+y=140
+width=75
+height=36
+textfont=p12_full
+text=Beer Glass
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 1)
+
+// 542:25
+[com_25]
+type=text
+x=169
+y=132
+width=75
+height=36
+textfont=p12_full
+text=Candle Lantern
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 4)
+
+// 542:26
+[com_26]
+type=text
+x=255
+y=140
+width=75
+height=36
+textfont=p12_full
+text=Oil lamp
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 12)
+
+// 542:27
+[com_27]
+type=text
+x=256
+y=252
+width=71
+height=37
+textfont=p12_full
+text=Lantern Lens
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 49)
+
+// 542:28
+[com_28]
+type=text
+x=78
+y=260
+width=75
+height=36
+textfont=p12_full
+text=Fish Bowl
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 42)
+
+// 542:29
+[com_29]
+type=text
+x=351
+y=252
+width=75
+height=36
+textfont=p12_full
+text=Dorgeshuun Light Orb  
+textlineheight=16
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script541(event_com, 87)
+
+// 542:30
+[com_30]
+type=model
+x=2
+width=70
+height=92
+layer=com_14
+model=model_2747
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=116
+modelangle_y=1942
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 542:31
+[com_31]
+type=model
+x=4
+y=-19
+width=64
+height=96
+layer=com_15
+model=model_2428
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=590
+modelangle_y=868
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 542:32
+[com_32]
+type=model
+x=-1
+y=-8
+width=64
+height=96
+layer=com_16
+model=model_2548
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=147
+modelangle_y=40
+modelangle_z=0
+modelzoom=450
+unknown100=0
+unknown101=3000
+
+// 542:33
+[com_33]
+type=model
+x=8
+y=-3
+width=64
+height=96
+layer=com_17
+model=model_5745
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=53
+modelangle_y=1965
+modelangle_z=0
+modelzoom=741
+unknown100=0
+unknown101=3000
+
+// 542:34
+[com_34]
+type=model
+x=8
+y=-7
+width=64
+height=96
+layer=com_18
+model=model_5754
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=197
+modelangle_y=1921
+modelangle_z=0
+modelzoom=687
+unknown100=0
+unknown101=3000
+
+// 542:35
+[com_35]
+type=model
+x=8
+y=-21
+width=64
+height=96
+layer=com_19
+model=model_5740
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=427
+modelangle_y=2031
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 542:36
+[com_36]
+type=model
+x=8
+y=7
+width=59
+height=79
+layer=com_20
+model=model_14186
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=125
+modelangle_y=2042
+modelangle_z=0
+modelzoom=800
+unknown100=0
+unknown101=3000
+
+// 542:37
+[com_37]
+type=model
+x=2
+y=-4
+width=70
+height=92
+layer=com_21
+model=model_23615
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=116
+modelangle_y=1942
+modelangle_z=0
+modelzoom=550
+unknown100=0
+unknown101=3000
+
+// 542:38
+[com_38]
+type=text
+width=75
+height=93
+layer=com_14
+textfont=q8_full
+textalignh=1
+colour=0x000000
+opbase=<col=ff9040>Vial
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 33)
+
+// 542:39
+[com_39]
+type=text
+width=74
+height=95
+layer=com_15
+textfont=q8_full
+textalignh=1
+colour=0x000000
+opbase=<col=ff9040>Orb
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 46)
+
+// 542:40
+[com_40]
+type=text
+width=75
+height=96
+layer=com_16
+textfont=q8_full
+textalignh=1
+colour=0x000000
+opbase=<col=ff9040>Beer Glass
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 1)
+
+// 542:41
+[com_41]
+type=text
+width=77
+height=90
+layer=com_17
+textfont=q8_full
+textalignh=1
+colour=0x000000
+opbase=<col=ff9040>Candle Lantern
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 4)
+
+// 542:42
+[com_42]
+type=text
+width=75
+height=92
+layer=com_18
+textfont=q8_full
+textalignh=1
+textshadow=yes
+colour=0x000000
+opbase=<col=ff9040>Oil Lamp
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 12)
+
+// 542:43
+[com_43]
+type=text
+width=72
+height=92
+layer=com_19
+textfont=q8_full
+textalignh=1
+textshadow=yes
+colour=0x000000
+opbase=<col=ff9040>Lantern Lens
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 49)
+
+// 542:44
+[com_44]
+type=text
+width=76
+height=101
+layer=com_20
+textfont=q8_full
+textalignh=1
+textshadow=yes
+colour=0x000000
+opbase=<col=ff9040>Fish Bowl
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 42)
+
+// 542:45
+[com_45]
+type=text
+width=75
+height=95
+layer=com_21
+textfont=q8_full
+textalignh=1
+textshadow=yes
+colour=0x000000
+opbase=<col=ff9040>Light Orb
+op1=Make 1
+op2=Make 5
+op3=Make All
+op4=Make X
+onload=script542(event_com, 87)
+

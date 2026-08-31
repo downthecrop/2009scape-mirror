@@ -1,0 +1,411 @@
+// 767
+[proc,script767](obj $obj0)(obj, obj, obj, obj, obj, obj, obj, obj, obj, int, int, int, int, int, int, int, int, int)
+def_obj $objarray0(9);
+def_int $intarray1(9);
+def_int $int1 = 0;
+if (enum(obj, int, enum_1270, $obj0) > 0) {
+    $objarray0($int1) = obj_12183;
+    $intarray1($int1) = enum(obj, int, enum_1270, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1190, $obj0) > 0) {
+    $objarray0($int1) = obj_12158;
+    $intarray1($int1) = enum(obj, int, enum_1190, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1194, $obj0) > 0) {
+    $objarray0($int1) = obj_12159;
+    $intarray1($int1) = enum(obj, int, enum_1194, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1191, $obj0) > 0) {
+    $objarray0($int1) = obj_12161;
+    $intarray1($int1) = enum(obj, int, enum_1191, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1210, $obj0) > 0) {
+    $objarray0($int1) = obj_12163;
+    $intarray1($int1) = enum(obj, int, enum_1210, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1215, $obj0) > 0) {
+    $objarray0($int1) = obj_12162;
+    $intarray1($int1) = enum(obj, int, enum_1215, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1218, $obj0) > 0) {
+    $objarray0($int1) = obj_12160;
+    $intarray1($int1) = enum(obj, int, enum_1218, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1232, $obj0) > 0) {
+    $objarray0($int1) = obj_12168;
+    $intarray1($int1) = enum(obj, int, enum_1232, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1233, $obj0) > 0) {
+    $objarray0($int1) = obj_12164;
+    $intarray1($int1) = enum(obj, int, enum_1233, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1234, $obj0) > 0) {
+    $objarray0($int1) = obj_12165;
+    $intarray1($int1) = enum(obj, int, enum_1234, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1235, $obj0) > 0) {
+    $objarray0($int1) = obj_12166;
+    $intarray1($int1) = enum(obj, int, enum_1235, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1236, $obj0) > 0) {
+    $objarray0($int1) = obj_12167;
+    $intarray1($int1) = enum(obj, int, enum_1236, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1189, $obj0) > 0) {
+    $objarray0($int1) = obj_2859;
+    $intarray1($int1) = enum(obj, int, enum_1189, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1192, $obj0) > 0) {
+    $objarray0($int1) = obj_2138;
+    $intarray1($int1) = enum(obj, int, enum_1192, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1193, $obj0) > 0) {
+    $objarray0($int1) = obj_6291;
+    $intarray1($int1) = enum(obj, int, enum_1193, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1195, $obj0) > 0) {
+    $objarray0($int1) = obj_440;
+    $intarray1($int1) = enum(obj, int, enum_1195, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1196, $obj0) > 0) {
+    $objarray0($int1) = obj_1783;
+    $intarray1($int1) = enum(obj, int, enum_1196, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1197, $obj0) > 0) {
+    $objarray0($int1) = obj_3138;
+    $intarray1($int1) = enum(obj, int, enum_1197, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1198, $obj0) > 0) {
+    $objarray0($int1) = obj_3325;
+    $intarray1($int1) = enum(obj, int, enum_1198, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1199, $obj0) > 0) {
+    $objarray0($int1) = obj_12156;
+    $intarray1($int1) = enum(obj, int, enum_1199, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1200, $obj0) > 0) {
+    $objarray0($int1) = obj_12153;
+    $intarray1($int1) = enum(obj, int, enum_1200, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1201, $obj0) > 0) {
+    $objarray0($int1) = obj_1635;
+    $intarray1($int1) = enum(obj, int, enum_1201, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1317, $obj0) > 0) {
+    $objarray0($int1) = obj_2150;
+    $intarray1($int1) = enum(obj, int, enum_1317, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1203, $obj0) > 0) {
+    $objarray0($int1) = obj_1963;
+    $intarray1($int1) = enum(obj, int, enum_1203, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1204, $obj0) > 0) {
+    $objarray0($int1) = obj_6979;
+    $intarray1($int1) = enum(obj, int, enum_1204, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1205, $obj0) > 0) {
+    $objarray0($int1) = obj_10020;
+    $intarray1($int1) = enum(obj, int, enum_1205, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1206, $obj0) > 0) {
+    $objarray0($int1) = obj_237;
+    $intarray1($int1) = enum(obj, int, enum_1206, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1207, $obj0) > 0) {
+    $objarray0($int1) = obj_10818;
+    $intarray1($int1) = enum(obj, int, enum_1207, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1208, $obj0) > 0) {
+    $objarray0($int1) = obj_7939;
+    $intarray1($int1) = enum(obj, int, enum_1208, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1209, $obj0) > 0) {
+    $objarray0($int1) = obj_6287;
+    $intarray1($int1) = enum(obj, int, enum_1209, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1211, $obj0) > 0) {
+    $objarray0($int1) = obj_6667;
+    $intarray1($int1) = enum(obj, int, enum_1211, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1212, $obj0) > 0) {
+    $objarray0($int1) = obj_3226;
+    $intarray1($int1) = enum(obj, int, enum_1212, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1202, $obj0) > 0) {
+    $objarray0($int1) = obj_5933;
+    $intarray1($int1) = enum(obj, int, enum_1202, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1216, $obj0) > 0) {
+    $objarray0($int1) = obj_6032;
+    $intarray1($int1) = enum(obj, int, enum_1216, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1217, $obj0) > 0) {
+    $objarray0($int1) = obj_3363;
+    $intarray1($int1) = enum(obj, int, enum_1217, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1219, $obj0) > 0) {
+    $objarray0($int1) = obj_12109;
+    $intarray1($int1) = enum(obj, int, enum_1219, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1220, $obj0) > 0) {
+    $objarray0($int1) = obj_12111;
+    $intarray1($int1) = enum(obj, int, enum_1220, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1221, $obj0) > 0) {
+    $objarray0($int1) = obj_12113;
+    $intarray1($int1) = enum(obj, int, enum_1221, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1222, $obj0) > 0) {
+    $objarray0($int1) = obj_12115;
+    $intarray1($int1) = enum(obj, int, enum_1222, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1223, $obj0) > 0) {
+    $objarray0($int1) = obj_12117;
+    $intarray1($int1) = enum(obj, int, enum_1223, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1224, $obj0) > 0) {
+    $objarray0($int1) = obj_12119;
+    $intarray1($int1) = enum(obj, int, enum_1224, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1225, $obj0) > 0) {
+    $objarray0($int1) = obj_12121;
+    $intarray1($int1) = enum(obj, int, enum_1225, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1226, $obj0) > 0) {
+    $objarray0($int1) = obj_1444;
+    $intarray1($int1) = enum(obj, int, enum_1226, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1227, $obj0) > 0) {
+    $objarray0($int1) = obj_6034;
+    $intarray1($int1) = enum(obj, int, enum_1227, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1228, $obj0) > 0) {
+    $objarray0($int1) = obj_383;
+    $intarray1($int1) = enum(obj, int, enum_1228, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1230, $obj0) > 0) {
+    $objarray0($int1) = obj_10099;
+    $intarray1($int1) = enum(obj, int, enum_1230, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1229, $obj0) > 0) {
+    $objarray0($int1) = obj_10103;
+    $intarray1($int1) = enum(obj, int, enum_1229, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1231, $obj0) > 0) {
+    $objarray0($int1) = obj_2353;
+    $intarray1($int1) = enum(obj, int, enum_1231, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1238, $obj0) > 0) {
+    $objarray0($int1) = obj_6319;
+    $intarray1($int1) = enum(obj, int, enum_1238, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1240, $obj0) > 0) {
+    $objarray0($int1) = obj_2351;
+    $intarray1($int1) = enum(obj, int, enum_1240, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1239, $obj0) > 0) {
+    $objarray0($int1) = obj_10095;
+    $intarray1($int1) = enum(obj, int, enum_1239, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1241, $obj0) > 0) {
+    $objarray0($int1) = obj_3095;
+    $intarray1($int1) = enum(obj, int, enum_1241, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1242, $obj0) > 0) {
+    $objarray0($int1) = obj_2134;
+    $intarray1($int1) = enum(obj, int, enum_1242, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1244, $obj0) > 0) {
+    $objarray0($int1) = obj_1933;
+    $intarray1($int1) = enum(obj, int, enum_1244, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1245, $obj0) > 0) {
+    $objarray0($int1) = obj_1519;
+    $intarray1($int1) = enum(obj, int, enum_1245, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1243, $obj0) > 0) {
+    $objarray0($int1) = obj_6010;
+    $intarray1($int1) = enum(obj, int, enum_1243, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1249, $obj0) > 0) {
+    $objarray0($int1) = obj_249;
+    $intarray1($int1) = enum(obj, int, enum_1249, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1248, $obj0) > 0) {
+    $objarray0($int1) = obj_1965;
+    $intarray1($int1) = enum(obj, int, enum_1248, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1246, $obj0) > 0) {
+    $objarray0($int1) = obj_590;
+    $intarray1($int1) = enum(obj, int, enum_1246, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1247, $obj0) > 0) {
+    $objarray0($int1) = obj_2132;
+    $intarray1($int1) = enum(obj, int, enum_1247, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1250, $obj0) > 0) {
+    $objarray0($int1) = obj_10033;
+    $intarray1($int1) = enum(obj, int, enum_1250, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1251, $obj0) > 0) {
+    $objarray0($int1) = obj_9978;
+    $intarray1($int1) = enum(obj, int, enum_1251, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1252, $obj0) > 0) {
+    $objarray0($int1) = obj_1937;
+    $intarray1($int1) = enum(obj, int, enum_1252, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1253, $obj0) > 0) {
+    $objarray0($int1) = obj_311;
+    $intarray1($int1) = enum(obj, int, enum_1253, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1254, $obj0) > 0) {
+    $objarray0($int1) = obj_9736;
+    $intarray1($int1) = enum(obj, int, enum_1254, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1255, $obj0) > 0) {
+    $objarray0($int1) = obj_8431;
+    $intarray1($int1) = enum(obj, int, enum_1255, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1256, $obj0) > 0) {
+    $objarray0($int1) = obj_10117;
+    $intarray1($int1) = enum(obj, int, enum_1256, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1257, $obj0) > 0) {
+    $objarray0($int1) = obj_2462;
+    $intarray1($int1) = enum(obj, int, enum_1257, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1258, $obj0) > 0) {
+    $objarray0($int1) = obj_1438;
+    $intarray1($int1) = enum(obj, int, enum_1258, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1259, $obj0) > 0) {
+    $objarray0($int1) = obj_1440;
+    $intarray1($int1) = enum(obj, int, enum_1259, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1260, $obj0) > 0) {
+    $objarray0($int1) = obj_1442;
+    $intarray1($int1) = enum(obj, int, enum_1260, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1261, $obj0) > 0) {
+    $objarray0($int1) = obj_571;
+    $intarray1($int1) = enum(obj, int, enum_1261, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1262, $obj0) > 0) {
+    $objarray0($int1) = obj_6155;
+    $intarray1($int1) = enum(obj, int, enum_1262, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1263, $obj0) > 0) {
+    $objarray0($int1) = obj_10149;
+    $intarray1($int1) = enum(obj, int, enum_1263, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1264, $obj0) > 0) {
+    $objarray0($int1) = obj_2349;
+    $intarray1($int1) = enum(obj, int, enum_1264, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1265, $obj0) > 0) {
+    $objarray0($int1) = obj_2359;
+    $intarray1($int1) = enum(obj, int, enum_1265, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1266, $obj0) > 0) {
+    $objarray0($int1) = obj_2361;
+    $intarray1($int1) = enum(obj, int, enum_1266, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1267, $obj0) > 0) {
+    $objarray0($int1) = obj_2363;
+    $intarray1($int1) = enum(obj, int, enum_1267, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1268, $obj0) > 0) {
+    $objarray0($int1) = obj_1115;
+    $intarray1($int1) = enum(obj, int, enum_1268, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_1269, $obj0) > 0) {
+    $objarray0($int1) = obj_1119;
+    $intarray1($int1) = enum(obj, int, enum_1269, $obj0);
+    $int1 = calc($int1 + 1);
+}
+if (enum(obj, int, enum_2160, $obj0) > 0) {
+    $objarray0($int1) = obj_14616;
+    $intarray1($int1) = enum(obj, int, enum_2160, $obj0);
+    $int1 = calc($int1 + 1);
+}
+return($objarray0(0), $objarray0(1), $objarray0(2), $objarray0(3), $objarray0(4), $objarray0(5), $objarray0(6), $objarray0(7), $objarray0(8), $intarray1(0), $intarray1(1), $intarray1(2), $intarray1(3), $intarray1(4), $intarray1(5), $intarray1(6), $intarray1(7), $intarray1(8));

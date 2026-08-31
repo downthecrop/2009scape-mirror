@@ -1,0 +1,37 @@
+// 1452
+[clientscript,script1452](int $int0)
+if (clientclock < $int0) {
+    return;
+} else {
+    if_setontimer(null, interface_762:com_73);
+}
+def_int $int1 = 0;
+def_int $int2 = 0;
+def_int $int3 = 0;
+def_int $int4 = 0;
+def_int $int5 = inv_size(inv_95);
+~script41(interface_762:com_74);
+$int1, $int2 = ~script1467(%varplayerbit_4893);
+while ($int3 < $int5) {
+    if (cc_find(interface_762:com_73, $int3) = true) {
+        cc_sethide(true);
+        if (inv_getobj(inv_95, $int3) ! null) {
+            ~script1453($int3);
+        } else {
+            cc_setobject(null, -1);
+            cc_clearops;
+        }
+    }
+    $int3 = calc($int3 + 1);
+}
+if (%varplayerbit_4893 = 0) {
+    ~script1479(%varclientstring_22);
+} else if (%varplayerbit_4893 = 1) {
+    ~script1456;
+} else {
+    ~script1457(~script1467(%varplayerbit_4893));
+}
+if (%varplayerbit_4893 ! 0 & %varclient_188 = 1) {
+    ~script1474;
+}
+~script1459;

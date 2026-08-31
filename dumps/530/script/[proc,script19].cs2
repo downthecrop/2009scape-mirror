@@ -1,0 +1,124 @@
+// 19
+[proc,script19](obj $obj0)(int)
+def_int $int1 = 0;
+if ($obj0 = obj_556) {
+    if (inv_total(inv_94, obj_1381) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1397) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1405) > 0) {
+        return(99999999);
+    }
+    $int1 = calc(inv_total(inv_93, obj_556) + ~script1(inv_93, obj_4697) + ~script1(inv_93, obj_4695) + ~script1(inv_93, obj_4696));
+    if (%varplayerbit_4540 = 2 | %varplayerbit_4540 = 3 | %varplayerbit_5493 ! 0) {
+        $int1 = calc($int1 + inv_total(inv_93, obj_12850));
+    }
+    return($int1);
+}
+if ($obj0 = obj_555) {
+    if (inv_total(inv_94, obj_1383) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1395) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1403) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_6562) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_6563) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_11736) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_11738) > 0) {
+        return(99999999);
+    }
+    $int1 = calc(inv_total(inv_93, obj_555) + ~script1(inv_93, obj_4694) + ~script1(inv_93, obj_4695) + ~script1(inv_93, obj_4698));
+    if (%varplayerbit_4540 = 2 | %varplayerbit_4540 = 3 | %varplayerbit_5493 ! 0) {
+        $int1 = calc($int1 + inv_total(inv_93, obj_12850));
+    }
+    return($int1);
+}
+if ($obj0 = obj_557) {
+    if (inv_total(inv_94, obj_1385) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1399) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1407) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_3053) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_3054) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_6562) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_6563) > 0) {
+        return(99999999);
+    }
+    $int1 = calc(inv_total(inv_93, obj_557) + ~script1(inv_93, obj_4696) + ~script1(inv_93, obj_4699) + ~script1(inv_93, obj_4698));
+    if (%varplayerbit_4540 = 2 | %varplayerbit_4540 = 3 | %varplayerbit_5493 ! 0) {
+        $int1 = calc($int1 + inv_total(inv_93, obj_12850));
+    }
+    return($int1);
+}
+if ($obj0 = obj_554) {
+    if (inv_total(inv_94, obj_1387) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1393) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_1401) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_3053) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_3054) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_11736) > 0) {
+        return(99999999);
+    }
+    if (~script1(inv_94, obj_11738) > 0) {
+        return(99999999);
+    }
+    $int1 = calc(inv_total(inv_93, obj_554) + ~script1(inv_93, obj_4694) + ~script1(inv_93, obj_4697) + ~script1(inv_93, obj_4699));
+    if (%varplayerbit_4540 = 2 | %varplayerbit_4540 = 3 | %varplayerbit_5493 ! 0) {
+        $int1 = calc($int1 + inv_total(inv_93, obj_12850));
+    }
+    return($int1);
+}
+if ($obj0 = obj_8843) {
+    return(calc(~script1(inv_94, obj_2416) + ~script1(inv_94, obj_8841)));
+}
+if ($obj0 = obj_1409 | $obj0 = obj_4170 | $obj0 = obj_2415 | $obj0 = obj_2417) {
+    return(~script1(inv_94, $obj0));
+}
+if ($obj0 = obj_13867) {
+    if (~script1(inv_94, obj_13869) > 0) {
+        return(~script1(inv_94, obj_13869));
+    } else if (~script1(inv_94, obj_13941) > 0) {
+        return(~script1(inv_94, obj_13941));
+    } else if (~script1(inv_94, obj_13943) > 0) {
+        return(~script1(inv_94, obj_13943));
+    } else {
+        return(~script1(inv_94, $obj0));
+    }
+}
+if ((%varplayerbit_4540 = 2 | %varplayerbit_4540 = 3 | %varplayerbit_5493 ! 0) & ($obj0 = obj_559 | $obj0 = obj_558 | $obj0 = obj_564 | $obj0 = obj_562 | $obj0 = obj_561 | $obj0 = obj_560 | $obj0 = obj_563 | $obj0 = obj_566 | $obj0 = obj_565 | $obj0 = obj_9075)) {
+    return(calc(~script1(inv_93, $obj0) + ~script1(inv_93, obj_12851)));
+}
+return(~script1(inv_93, $obj0));

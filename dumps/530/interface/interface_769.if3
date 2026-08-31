@@ -1,0 +1,48 @@
+// 769:0
+[com_0]
+type=text
+y=4
+width=506
+height=17
+textfont=tutorial_font
+textalignh=1
+textalignv=1
+colour=0x000000
+onload=script1513
+onvartransmit=script1513
+ontimer=script1512
+onvartransmitlist=varplayer_170
+
+// 769:1
+[com_1]
+type=text
+x=10
+y=20
+width=490
+height=93
+textfont=tutorial_font
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 769:2
+[com_2]
+type=text
+x=10
+y=20
+width=490
+height=93
+textfont=tutorial_font
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 769:3
+[com_3]
+type=graphic
+x=10
+y=48
+width=32
+height=36
+hide=yes
+

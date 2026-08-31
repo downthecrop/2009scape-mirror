@@ -1,0 +1,13 @@
+// 1131
+[proc,script1131]
+if (getwindowmode >= 1) {
+    if_setcolour(0x996600, interface_742:com_40);
+    ~script1355("Always `All'", interface_742:com_89, interface_742:com_90, interface_742:com_91, null, tradebacking_dark, ^white, p11_full);
+    return;
+}
+def_int $int0 = 0;
+if (unknown_command_6102 = true) {
+    $int0 = 1;
+}
+if_setcolour(0xe1981f, interface_742:com_40);
+~script1435(enum_1578, $int0, 1, interface_742:com_89, interface_742:com_90, interface_742:com_91, null, tradebacking_dark, "scrollbar_v2,1", 788, tradebacking_light, 0xcf0000, ^white, ^yellow, p11_full, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");

@@ -1,0 +1,12 @@
+// 576
+[proc,script576]
+if_setobject(null, -1, interface_389:com_15);
+cc_deleteall(interface_389:com_4);
+if (string_length(%varclientstring_22) > 0) {
+    if_sethide(true, interface_389:com_5);
+    ~script577(%varclientstring_22);
+} else {
+    if_sethide(false, interface_389:com_5);
+    if_setscrollsize(0, 15, interface_389:com_4);
+    ~script578;
+}

@@ -1,0 +1,1213 @@
+// 301:0
+[com_0]
+type=rectangle
+x=19
+y=24
+width=476
+height=232
+colour=0x999999
+fill=yes
+trans=150
+
+// 301:1
+[com_1]
+type=graphic
+x=27
+y=69
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+
+// 301:2
+[com_2]
+type=graphic
+x=27
+y=100
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+
+// 301:3
+[com_3]
+type=graphic
+x=27
+y=131
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+
+// 301:4
+[com_4]
+type=graphic
+x=27
+y=162
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+opbase= 
+
+// 301:5
+[com_5]
+type=graphic
+x=27
+y=193
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+opbase= 
+
+// 301:6
+[com_6]
+type=graphic
+x=275
+y=69
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+opbase= 
+
+// 301:7
+[com_7]
+type=graphic
+x=275
+y=100
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+
+// 301:8
+[com_8]
+type=graphic
+x=275
+y=131
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+opbase= 
+
+// 301:9
+[com_9]
+type=graphic
+x=275
+y=162
+width=210
+height=25
+graphic=assist_buttton
+trans=180
+
+// 301:10
+[com_10]
+type=text
+x=27
+y=221
+width=460
+height=32
+textfont=p11_full
+text=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xfab432
+
+// 301:11
+[com_11]
+type=rectangle
+x=274
+y=192
+width=212
+height=27
+colour=0x000000
+fill=yes
+trans=150
+opbase= 
+onmouserepeat=script529(event_com)
+
+// 301:12
+[com_12]
+type=rectangle
+x=274
+y=192
+width=212
+height=27
+colour=0xb19773
+trans=150
+opbase= 
+onmouserepeat=script529(event_com)
+
+// 301:13
+[com_13]
+type=layer
+x=26
+y=68
+width=212
+height=27
+hide=yes
+
+// 301:14
+[com_14]
+type=rectangle
+x=26
+y=68
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+opbase= 
+
+// 301:15
+[com_15]
+type=rectangle
+x=10
+y=18
+width=212
+height=27
+layer=com_97
+colour=0xffff33
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_13, null)
+onmouseleave=script526(true, interface_301:com_13, interface_301:com_17)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_88, "staticons2,0", "staticons2_off,0", interface_301:com_14)
+onrelease=script534(interface_301:com_17)
+onhold=script533(interface_301:com_17)
+
+// 301:16
+[com_16]
+type=rectangle
+width=212
+height=27
+layer=com_13
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:17
+[com_17]
+type=rectangle
+width=212
+height=27
+layer=com_13
+colour=0xffffff
+trans=25
+
+// 301:18
+[com_18]
+type=layer
+x=26
+y=99
+width=212
+height=27
+hide=yes
+
+// 301:19
+[com_19]
+type=rectangle
+x=26
+y=99
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:20
+[com_20]
+type=rectangle
+x=10
+y=49
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_18, null)
+onmouseleave=script526(true, interface_301:com_18, interface_301:com_22)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_89, "staticons,10", "staticons_off,10", interface_301:com_19)
+onrelease=script534(interface_301:com_22)
+onhold=script533(interface_301:com_22)
+
+// 301:21
+[com_21]
+type=rectangle
+width=212
+height=27
+layer=com_18
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:22
+[com_22]
+type=rectangle
+width=212
+height=27
+layer=com_18
+colour=0xffffff
+trans=25
+
+// 301:23
+[com_23]
+type=layer
+x=26
+y=130
+width=212
+height=27
+hide=yes
+
+// 301:24
+[com_24]
+type=rectangle
+x=26
+y=130
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:25
+[com_25]
+type=rectangle
+x=10
+y=80
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_23, null)
+onmouseleave=script526(true, interface_301:com_23, interface_301:com_27)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_90, "staticons,11", "staticons_off,11", interface_301:com_24)
+onrelease=script534(interface_301:com_27)
+onhold=script533(interface_301:com_27)
+
+// 301:26
+[com_26]
+type=rectangle
+width=212
+height=27
+layer=com_23
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:27
+[com_27]
+type=rectangle
+width=212
+height=27
+layer=com_23
+colour=0xffffff
+trans=25
+
+// 301:28
+[com_28]
+type=layer
+x=26
+y=161
+width=212
+height=27
+hide=yes
+
+// 301:29
+[com_29]
+type=rectangle
+x=26
+y=161
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:30
+[com_30]
+type=rectangle
+x=10
+y=111
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_28, null)
+onmouseleave=script526(true, interface_301:com_28, interface_301:com_32)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_91, "staticons2,6", "staticons2_off,6", interface_301:com_29)
+onrelease=script534(interface_301:com_32)
+onhold=script533(interface_301:com_32)
+
+// 301:31
+[com_31]
+type=rectangle
+width=212
+height=27
+layer=com_28
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:32
+[com_32]
+type=rectangle
+width=212
+height=27
+layer=com_28
+colour=0xffffff
+trans=25
+
+// 301:33
+[com_33]
+type=layer
+x=26
+y=192
+width=212
+height=27
+hide=yes
+opbase= 
+
+// 301:34
+[com_34]
+type=rectangle
+x=26
+y=192
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:35
+[com_35]
+type=rectangle
+x=10
+y=142
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_33, null)
+onmouseleave=script526(true, interface_301:com_33, interface_301:com_37)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_92, "staticons2,2", "staticons2_off,2", interface_301:com_34)
+onrelease=script534(interface_301:com_37)
+onhold=script533(interface_301:com_37)
+
+// 301:36
+[com_36]
+type=rectangle
+width=212
+height=27
+layer=com_33
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:37
+[com_37]
+type=rectangle
+width=212
+height=27
+layer=com_33
+colour=0xffffff
+trans=25
+
+// 301:38
+[com_38]
+type=layer
+x=274
+y=68
+width=212
+height=27
+hide=yes
+
+// 301:39
+[com_39]
+type=rectangle
+x=274
+y=68
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:40
+[com_40]
+type=rectangle
+x=258
+y=18
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_38, null)
+onmouseleave=script526(true, interface_301:com_38, interface_301:com_42)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_93, "staticons,5", "staticons_off,5", interface_301:com_39)
+onrelease=script534(interface_301:com_42)
+onhold=script533(interface_301:com_42)
+
+// 301:41
+[com_41]
+type=rectangle
+width=212
+height=27
+layer=com_38
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:42
+[com_42]
+type=rectangle
+width=212
+height=27
+layer=com_38
+colour=0xffffff
+trans=25
+
+// 301:43
+[com_43]
+type=layer
+x=274
+y=99
+width=212
+height=27
+hide=yes
+
+// 301:44
+[com_44]
+type=rectangle
+x=274
+y=99
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:45
+[com_45]
+type=rectangle
+x=258
+y=49
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_43, null)
+onmouseleave=script526(true, interface_301:com_43, interface_301:com_47)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_94, "staticons,13", "staticons_off,13", interface_301:com_44)
+onrelease=script534(interface_301:com_47)
+onhold=script533(interface_301:com_47)
+
+// 301:46
+[com_46]
+type=rectangle
+width=212
+height=27
+layer=com_43
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:47
+[com_47]
+type=rectangle
+width=212
+height=27
+layer=com_43
+colour=0xffffff
+trans=25
+
+// 301:48
+[com_48]
+type=layer
+x=274
+y=130
+width=212
+height=27
+hide=yes
+
+// 301:49
+[com_49]
+type=rectangle
+x=274
+y=130
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:50
+[com_50]
+type=rectangle
+x=258
+y=80
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_48, null)
+onmouseleave=script526(true, interface_301:com_48, interface_301:com_52)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_95, "staticons,15", "staticons_off,15", interface_301:com_49)
+onrelease=script534(interface_301:com_52)
+onhold=script533(interface_301:com_52)
+
+// 301:51
+[com_51]
+type=rectangle
+width=212
+height=27
+layer=com_48
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:52
+[com_52]
+type=rectangle
+width=212
+height=27
+layer=com_48
+colour=0xffffff
+trans=25
+
+// 301:53
+[com_53]
+type=layer
+x=274
+y=161
+width=212
+height=27
+hide=yes
+
+// 301:54
+[com_54]
+type=rectangle
+x=274
+y=161
+width=212
+height=27
+colour=0x006666
+fill=yes
+trans=125
+
+// 301:55
+[com_55]
+type=rectangle
+x=258
+y=111
+width=212
+height=27
+layer=com_97
+colour=0xffff00
+fill=yes
+trans=254
+op1=Toggle Skill On / Off
+onmouseover=script526(false, interface_301:com_53, null)
+onmouseleave=script526(true, interface_301:com_53, interface_301:com_57)
+onmouserepeat=script529(event_com)
+onclick=script531(interface_301:com_96, "staticons,8", "staticons_off,8", interface_301:com_54)
+onrelease=script534(interface_301:com_57)
+onhold=script533(interface_301:com_57)
+
+// 301:56
+[com_56]
+type=rectangle
+width=212
+height=27
+layer=com_53
+colour=0x006666
+fill=yes
+trans=225
+
+// 301:57
+[com_57]
+type=rectangle
+width=212
+height=27
+layer=com_53
+colour=0xffffff
+trans=25
+
+// 301:58
+[com_58]
+type=graphic
+x=472
+y=32
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+trans=20
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 301:59
+[com_59]
+type=graphic
+x=16
+y=24
+width=32
+height=27
+graphic="v2_borders_slim,4"
+tiling=yes
+trans=64
+
+// 301:60
+[com_60]
+type=graphic
+x=16
+y=227
+width=32
+height=32
+graphic="v2_borders_slim,6"
+trans=64
+
+// 301:61
+[com_61]
+type=graphic
+x=465
+y=227
+width=32
+height=32
+graphic="v2_borders_slim,7"
+trans=64
+opbase= 
+
+// 301:62
+[com_62]
+type=graphic
+x=465
+y=24
+width=32
+height=27
+graphic="v2_borders_slim,5"
+tiling=yes
+trans=64
+
+// 301:63
+[com_63]
+type=graphic
+x=48
+y=11
+width=417
+height=32
+graphic="v2_borders_slim,0"
+tiling=yes
+trans=64
+
+// 301:64
+[com_64]
+type=graphic
+x=3
+y=63
+width=32
+height=164
+graphic="v2_borders_slim,1"
+tiling=yes
+trans=64
+
+// 301:65
+[com_65]
+type=graphic
+x=48
+y=243
+width=417
+height=32
+graphic="v2_borders_slim,0"
+tiling=yes
+trans=64
+
+// 301:66
+[com_66]
+type=graphic
+x=477
+y=62
+width=32
+height=165
+graphic="v2_borders_slim,3"
+tiling=yes
+trans=64
+
+// 301:67
+[com_67]
+type=graphic
+x=16
+y=40
+width=32
+height=32
+graphic="v2_borders_slim,9"
+trans=64
+
+// 301:68
+[com_68]
+type=graphic
+x=23
+y=38
+width=466
+height=32
+graphic="v2_borders_slim,8"
+tiling=yes
+trans=64
+
+// 301:69
+[com_69]
+type=graphic
+x=465
+y=40
+width=32
+height=32
+graphic="v2_borders_slim,10"
+trans=64
+
+// 301:70
+[com_70]
+type=text
+x=58
+y=75
+width=135
+height=16
+textfont=p12_full
+text=Runecrafting XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_71)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:71
+[com_71]
+type=text
+x=192
+y=75
+width=35
+height=16
+textfont=p12_full
+text=XP
+textshadow=yes
+colour=0xf3922a
+onload=script521
+onstattransmit=script522(event_com, runecraft)
+onstattransmitlist=runecraft
+
+// 301:72
+[com_72]
+type=text
+x=58
+y=106
+width=135
+height=16
+textfont=p12_full
+text=Crafting XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_73)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:73
+[com_73]
+type=text
+x=192
+y=106
+width=35
+height=16
+textfont=p12_full
+text=XP
+textshadow=yes
+colour=0xf3922a
+onstattransmit=script522(event_com, crafting)
+onstattransmitlist=crafting
+
+// 301:74
+[com_74]
+type=text
+x=58
+y=136
+width=135
+height=16
+textfont=p12_full
+text=Fletching XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_75)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:75
+[com_75]
+type=text
+x=192
+y=136
+width=35
+height=16
+textfont=p12_full
+text=XP
+textshadow=yes
+colour=0xf3922a
+opbase=m
+onstattransmit=script522(event_com, fletching)
+onstattransmitlist=fletching
+
+// 301:76
+[com_76]
+type=text
+x=58
+y=168
+width=135
+height=16
+textfont=p12_full
+text=Construction XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_77)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:77
+[com_77]
+type=text
+x=192
+y=168
+width=35
+height=16
+textfont=p12_full
+text=XP
+textshadow=yes
+colour=0xf3922a
+onstattransmit=script522(event_com, construction)
+onstattransmitlist=construction
+
+// 301:78
+[com_78]
+type=text
+x=58
+y=199
+width=135
+height=16
+textfont=p12_full
+text=Farming XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_79)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:79
+[com_79]
+type=text
+x=192
+y=199
+width=35
+height=16
+textfont=p12_full
+text=XP
+textshadow=yes
+colour=0xf3922a
+opbase=m
+onstattransmit=script522(event_com, farming)
+onstattransmitlist=farming
+
+// 301:80
+[com_80]
+type=text
+x=305
+y=75
+width=135
+height=16
+textfont=p12_full
+text=Magic XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_81)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:81
+[com_81]
+type=text
+x=439
+y=75
+width=35
+height=16
+textfont=p12_full
+text=XP 
+textshadow=yes
+colour=0xf3922a
+onload=script521
+onstattransmit=script522(event_com, magic)
+onstattransmitlist=magic
+
+// 301:82
+[com_82]
+type=text
+x=305
+y=106
+width=135
+height=16
+textfont=p12_full
+text=Smithing XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_83)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:83
+[com_83]
+type=text
+x=439
+y=106
+width=35
+height=16
+textfont=p12_full
+text=XP 
+textshadow=yes
+colour=0xf3922a
+onload=script521
+onstattransmit=script522(event_com, smithing)
+onstattransmitlist=smithing
+
+// 301:84
+[com_84]
+type=text
+x=305
+y=136
+width=135
+height=16
+textfont=p12_full
+text=Cooking XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_85)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:85
+[com_85]
+type=text
+x=439
+y=136
+width=35
+height=16
+textfont=p12_full
+text=XP 
+textshadow=yes
+colour=0xf3922a
+onload=script521
+onstattransmit=script522(event_com, cooking)
+onstattransmitlist=cooking
+
+// 301:86
+[com_86]
+type=text
+x=305
+y=168
+width=135
+height=16
+textfont=p12_full
+text=Herblore XP
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_87)
+onvartransmitlist=varplayer_1088,varplayer_1087
+
+// 301:87
+[com_87]
+type=text
+x=439
+y=168
+width=35
+height=16
+textfont=p12_full
+text=XP 
+textshadow=yes
+colour=0xf3922a
+opbase=m
+onstattransmit=script522(event_com, herblore)
+onstattransmitlist=herblore
+
+// 301:88
+[com_88]
+type=graphic
+x=29
+y=69
+width=25
+height=25
+graphic="staticons2,0"
+trans=20
+onload=script527
+onvartransmit=script527
+onvartransmitlist=varplayer_1087
+
+// 301:89
+[com_89]
+type=graphic
+x=29
+y=101
+width=25
+height=25
+graphic="staticons,10"
+trans=20
+
+// 301:90
+[com_90]
+type=graphic
+x=29
+y=130
+width=25
+height=25
+graphic="staticons,11"
+trans=20
+
+// 301:91
+[com_91]
+type=graphic
+x=29
+y=161
+width=25
+height=25
+graphic="staticons2,6"
+trans=20
+
+// 301:92
+[com_92]
+type=graphic
+x=29
+y=193
+width=25
+height=25
+graphic="staticons2,2"
+trans=20
+
+// 301:93
+[com_93]
+type=graphic
+x=277
+y=68
+width=25
+height=25
+graphic="staticons,5"
+trans=20
+
+// 301:94
+[com_94]
+type=graphic
+x=277
+y=100
+width=25
+height=25
+graphic="staticons,13"
+trans=20
+
+// 301:95
+[com_95]
+type=graphic
+x=277
+y=131
+width=25
+height=25
+graphic="staticons,15"
+trans=20
+
+// 301:96
+[com_96]
+type=graphic
+x=277
+y=163
+width=25
+height=25
+graphic="staticons,8"
+trans=20
+
+// 301:97
+[com_97]
+type=layer
+x=16
+y=50
+width=486
+height=212
+
+// 301:98
+[com_98]
+type=text
+x=273
+y=149
+width=135
+height=16
+layer=com_97
+textfont=p12_full
+text=Total XP earned
+textshadow=yes
+colour=0xfab432
+onvartransmit=script524(event_com, interface_301:com_99)
+onvartransmitlist=varplayer_1088
+
+// 301:99
+[com_99]
+type=text
+x=425
+y=149
+width=35
+height=16
+layer=com_97
+textfont=p12_full
+text=XP 
+textshadow=yes
+colour=0xf3922a
+onvartransmit=script535(event_com)
+onvartransmitlist=varplayer_1088
+
+// 301:100
+[com_100]
+type=layer
+x=179
+y=52
+width=115
+height=133
+layer=com_97
+onmouseleave=script40(interface_301:com_100)
+
+// 301:101
+[com_101]
+type=text
+x=20
+y=34
+width=448
+height=18
+textfont=b12_full
+text=Assist System XP Display - You are assisting <name>
+textalignh=1
+textshadow=yes
+colour=0xff9900
+

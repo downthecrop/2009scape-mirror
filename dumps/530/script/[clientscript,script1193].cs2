@@ -1,0 +1,8 @@
+// 1193
+[clientscript,script1193](int $int0, component $component1)
+def_int $int2 = ~script1345($int0, $component1);
+if ($int2 = 0) {
+    unknown_command_6006(false);
+} else {
+    unknown_command_6006(true);
+}

@@ -1,0 +1,95 @@
+// 526:0
+[com_0]
+type=model
+x=-38
+y=-40
+width=19047
+height=20413
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+model=model_25719
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=64237
+unknown101=3000
+modelobjwidth=595
+modelobjheight=416
+
+// 526:1
+[com_1]
+type=model
+x=5
+y=3
+width=497
+height=363
+layer=com_5
+model=model_25720
+modelorigin_x=0
+modelorigin_y=-13
+modelangle_x=539
+modelangle_y=0
+modelangle_z=0
+modelzoom=451
+unknown100=64180
+unknown101=3000
+
+// 526:2
+[com_2]
+type=text
+x=100
+y=77
+width=300
+height=151
+layer=com_5
+textfont=q8_full
+text=This is an interface type test.
+colour=0x332208
+
+// 526:3
+[com_3]
+type=model
+x=34
+y=34
+width=32
+height=32
+layer=com_5
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 526:4
+[com_4]
+type=graphic
+x=239
+y=-150
+width=26
+height=23
+xmode=abs_centre
+ymode=abs_centre
+layer=com_5
+graphic="close_buttons,6"
+op1=Close
+onmouseover=script44(interface_526:com_4, "close_buttons,7")
+onmouseleave=script44(interface_526:com_4, "close_buttons,6")
+onop=script29
+
+// 526:5
+[com_5]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+

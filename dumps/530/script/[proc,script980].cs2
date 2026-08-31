@@ -1,0 +1,188 @@
+// 980
+[proc,script980](int $int0, int $int1)(int, obj, string, string)
+switch_int ($int0) {
+    case 0 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_882, "Bronze arrow", "You can now fletch <col=000080>bronze arrows</col>.");
+            case 1 :
+                return(5, obj_2866, "Ogre arrow<br> (after starting Big Chompy Bird Hunting)", "You now have the Fletching level required to fletch <col=000080>ogre arrows</col> (after starting Big Chompy Bird Hunting).");
+            case 2 :
+                return(7, obj_4773, "Bronze 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>bronze 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 3 :
+                return(15, obj_884, "Iron arrow", "You can now fletch <col=000080>iron arrows</col>.");
+            case 4 :
+                return(18, obj_4778, "Iron 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>iron 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 5 :
+                return(30, obj_886, "Steel arrow", "You can now fletch <col=000080>steel arrows</col>.");
+            case 6 :
+                return(33, obj_4783, "Steel 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>steel 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 7 :
+                return(38, obj_4788, "Black 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>black 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 8 :
+                return(45, obj_888, "Mithril arrow", "You can now fletch <col=000080>mithril arrows</col>.");
+            case 9 :
+                return(49, obj_4793, "Mithril 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>mithril 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 10 :
+                return(52, obj_13278, "Broad leaf arrows<br> (after Smoking Kills)", "You can now fletch <col=000080>broad leaf arrows</col> (after Smoking Kills).");
+            case 11 :
+                return(60, obj_890, "Adamant arrow", "You can now fletch <col=000080>adamant arrows</col>.");
+            case 12 :
+                return(62, obj_4798, "Adamant 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>adamant 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 13 :
+                return(75, obj_892, "Rune arrow", "You can now fletch <col=000080>rune arrows</col>.");
+            case 14 :
+                return(77, obj_4803, "Rune 'brutal' arrow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>rune 'brutal' arrows</col> (after starting Zogre Flesh Eaters).");
+            case 15 :
+                return(90, obj_11212, "Dragon arrow", "You can now fletch <col=000080>dragon arrows</col>.");
+        }
+    case 1 :
+        switch_int ($int1) {
+            case 0 :
+                return(5, obj_841, "Shortbow", "You can now fletch <col=000080>shortbows</col>.");
+            case 1 :
+                return(10, obj_839, "Longbow", "You can now fletch <col=000080>longbows</col>.");
+            case 2 :
+                return(20, obj_843, "Oak shortbow", "You can now fletch <col=000080>oak shortbows</col>.");
+            case 3 :
+                return(25, obj_845, "Oak longbow", "You can now fletch <col=000080>oak longbows</col>.");
+            case 4 :
+                return(30, obj_4827, "Ogre composite bow<br> (after starting Zogre Flesh Eaters)", "You now have the Fletching level required to fletch <col=000080>ogre composite bows</col> (after starting Zogre Flesh Eaters).");
+            case 5 :
+                return(35, obj_849, "Willow shortbow", "You can now fletch <col=000080>willow shortbows</col>.");
+            case 6 :
+                return(40, obj_847, "Willow longbow", "You can now fletch <col=000080>willow longbows</col>.");
+            case 7 :
+                return(50, obj_853, "Maple shortbow", "You can now fletch <col=000080>maple shortbows</col>.");
+            case 8 :
+                return(55, obj_851, "Maple longbow", "You can now fletch <col=000080>maple longbows</col>.");
+            case 9 :
+                return(65, obj_857, "Yew shortbow", "You can now fletch <col=000080>yew shortbows</col>.");
+            case 10 :
+                return(70, obj_855, "Yew longbow", "You can now fletch <col=000080>yew longbows</col>.");
+            case 11 :
+                return(80, obj_861, "Magic shortbow", "You can now fletch <col=000080>magic shortbows</col>.");
+            case 12 :
+                return(85, obj_859, "Magic longbow", "You can now fletch <col=000080>magic longbows</col>.");
+        }
+    case 2 :
+        switch_int ($int1) {
+            case 0 :
+                return(9, obj_877, "Bronze bolt", "You can now fletch <col=000080>bronze bolts</col>.");
+            case 1 :
+                return(11, obj_879, "Opal-tipped bronze bolt", "You can now fletch <col=000080>opal-tipped bronze bolts</col>.");
+            case 2 :
+                return(24, obj_9139, "Blurite bolt<br> (after The Knight's Sword)", "You now have the Fletching level required to fletch <col=000080>blurite bolts</col> (after The Knight's Sword).");
+            case 3 :
+                return(26, obj_9335, "Jade-tipped blurite bolt<br> (after The Knight's Sword)", "You now have the Fletching level required to fletch <col=000080>jade-tipped blurite bolts</col> (after The Knight's Sword).");
+            case 4 :
+                return(32, obj_10158, "Kebbit-tipped hunting bolt", "You can now fletch <col=000080>kebbit-tipped hunting bolts</col>.");
+            case 5 :
+                return(39, obj_9140, "Iron bolt", "You can now fletch <col=000080>iron bolts</col>.");
+            case 6 :
+                return(41, obj_880, "Pearl-tipped iron bolt", "You can now fletch <col=000080>pearl-tipped iron bolts</col>.");
+            case 7 :
+                return(42, obj_10159, "Long kebbit-tipped hunting bolt", "You can now fletch <col=000080>long kebbit-tipped hunting bolts</col>.");
+            case 8 :
+                return(43, obj_9145, "Silver bolt", "You can now fletch <col=000080>silver bolts</col>.");
+            case 9 :
+                return(46, obj_9141, "Steel bolt", "You can now fletch <col=000080>steel bolts</col>.");
+            case 10 :
+                return(48, obj_9336, "Red topaz-tipped steel bolt", "You can now fletch <col=000080>red topaz-tipped steel bolts</col>.");
+            case 11 :
+                return(51, obj_881, "Barbed bolts", "You can now fletch <col=000080>barbed bolts</col>.");
+            case 12 :
+                return(54, obj_9142, "Mithril bolt", "You can now fletch <col=000080>mithril bolts</col>.");
+            case 13 :
+                return(55, obj_13279, "Broad leaf bolts<br> (after Smoking Kills)", "You can now fletch <col=000080>broad leaf bolts</col> (after Smoking Kills).");
+            case 14 :
+                return(56, obj_9337, "Sapphire-tipped mithril bolt", "You can now fletch <col=000080>sapphire-tipped mithril bolts</col>.");
+            case 15 :
+                return(58, obj_9338, "Emerald-tipped mithril bolt", "You can now fletch <col=000080>emerald-tipped mithril bolts</col>.");
+            case 16 :
+                return(59, obj_9418, "Mithril grapple-tipped bolt", "You can now fletch <col=000080>mithril grapple-tipped bolts</col>.");
+            case 17 :
+                return(61, obj_9143, "Adamantite bolt", "You can now fletch <col=000080>adamantite bolts</col>.");
+            case 18 :
+                return(63, obj_9339, "Ruby-tipped adamantite bolt", "You can now fletch <col=000080>ruby-tipped adamantite bolts</col>.");
+            case 19 :
+                return(65, obj_9340, "Diamond-tipped adamantite bolt", "You can now fletch <col=000080>diamond-tipped adamantite bolts</col>.");
+            case 20 :
+                return(69, obj_9144, "Runite bolt", "You can now fletch <col=000080>runite bolts</col>.");
+            case 21 :
+                return(71, obj_9341, "Dragonstone-tipped runite bolt", "You can now fletch <col=000080>dragonstone-tipped runite bolts</col>.");
+            case 22 :
+                return(73, obj_9342, "Onyx-tipped runite bolt", "You can now fletch <col=000080>onyx-tipped runite bolts</col>.");
+        }
+    case 3 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_806, "Bronze dart", "You can now fletch <col=000080>bronze darts</col>.");
+            case 1 :
+                return(22, obj_807, "Iron dart", "You can now fletch <col=000080>iron darts</col>.");
+            case 2 :
+                return(37, obj_808, "Steel dart", "You can now fletch <col=000080>steel darts</col>.");
+            case 3 :
+                return(52, obj_809, "Mithril dart", "You can now fletch <col=000080>mithril darts</col>.");
+            case 4 :
+                return(67, obj_810, "Adamant dart", "You can now fletch <col=000080>adamant darts</col>.");
+            case 5 :
+                return(81, obj_811, "Rune dart", "You can now fletch <col=000080>rune darts</col>.");
+            case 6 :
+                return(95, obj_11230, "Dragon dart", "You can now fletch <col=000080>dragon darts</col>.");
+        }
+    case 4 :
+        switch_int ($int1) {
+            case 0 :
+                return(9, obj_9440, "Bronze/wooden crossbow", "You can now fletch <col=000080>bronze and wooden crossbows</col>.");
+            case 1 :
+                return(24, obj_9442, "Blurite/oak crossbow<br> (after The Knight's Sword)", "You now have the Fletching level required to fletch <col=000080>blurite and oak crossbows</col> (after The Knight's Sword).");
+            case 2 :
+                return(39, obj_9444, "Iron/willow crossbow", "You can now fletch <col=000080>iron and willow crossbows</col>.");
+            case 3 :
+                return(46, obj_9446, "Steel/teak crossbow", "You can now fletch <col=000080>steel and teak crossbows</col>.");
+            case 4 :
+                return(54, obj_9448, "Mithril/maple crossbow", "You can now fletch <col=000080>mithril and maple crossbows</col>.");
+            case 5 :
+                return(61, obj_9450, "Adamantite/mahogany crossbow", "You can now fletch <col=000080>adamantite and mahogany crossbows</col>.");
+            case 6 :
+                return(69, obj_9452, "Runite/yew crossbow", "You can now fletch <col=000080>runite and yew crossbows</col>.");
+        }
+    case 5 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_14192, "Stealing Creation - class 1 bow", "Members can now fletch <col=000080>class 1 bows</col> in the Stealing Creation minigame.");
+            case 1 :
+                return(1, obj_14202, "Stealing Creation - class 1 arrow", "You can now fletch <col=000080>class 1 arrows</col> in the Stealing Creation minigame.");
+            case 2 :
+                return(20, obj_14194, "Stealing Creation - class 2 bow", "Members can now fletch <col=000080>class 2 bows</col> in the Stealing Creation minigame.");
+            case 3 :
+                return(20, obj_14203, "Stealing Creation - class 2 arrow", "You can now fletch <col=000080>class 2 arrows</col> in the Stealing Creation minigame.");
+            case 4 :
+                return(40, obj_14196, "Stealing Creation - class 3 bow", "Members can now fletch <col=000080>class 3 bows</col> in the Stealing Creation minigame.");
+            case 5 :
+                return(40, obj_14204, "Stealing Creation - class 3 arrow", "You can now fletch <col=000080>class 3 arrows</col> in the Stealing Creation minigame.");
+            case 6 :
+                return(53, obj_14611, "Phoenix lair - cinnamon weaving ribbon", "Members can now fletch <col=000080>cinnamon weaving ribbon</col> in the phoenix lair.");
+            case 7 :
+                return(53, obj_14612, "Phoenix lair - sassafras weaving ribbon", "Members can now fletch <col=000080>sassafras weaving ribbon</col> in the phoenix lair.");
+            case 8 :
+                return(53, obj_14613, "Phoenix lair - ailanthus weaving ribbon", "Members can now fletch <col=000080>ailanthus weaving ribbon</col> in the phoenix lair.");
+            case 9 :
+                return(53, obj_14614, "Phoenix lair - cedar weaving ribbon", "Members can now fletch <col=000080>cedar weaving ribbon</col> in the phoenix lair.");
+            case 10 :
+                return(53, obj_14615, "Phoenix Lair - mastic weaving ribbon", "Members can now fletch <col=000080>mastic weaving ribbon</col> in the phoenix lair.");
+            case 11 :
+                return(60, obj_14198, "Stealing Creation - class 4 bow", "Members can now fletch <col=000080>class 4 bows</col> in the Stealing Creation minigame.");
+            case 12 :
+                return(60, obj_14205, "Stealing Creation - class 4 arrow", "You can now fletch <col=000080>class 4 arrows</col> in the Stealing Creation minigame.");
+            case 13 :
+                return(80, obj_14200, "Stealing Creation - class 5 bow", "Members can now fletch <col=000080>class 5 bows</col> in the Stealing Creation minigame.");
+            case 14 :
+                return(80, obj_14206, "Stealing Creation - class 5 arrow", "You can now fletch <col=000080>class 5 arrows</col> in the Stealing Creation minigame.");
+        }
+    case 6 :
+        if ($int1 = 0) {
+            return(99, obj_9783, "Skill mastery", "<col=000080>Congratulations! You are now a master of <col=800000>Fletching<col=000080>. Why not visit <col=800000>Hickton<col=000080> who runs the <col=800000>bow and arrow shop<col=000080> in <col=800000>Catherby<col=000080>? He has something special that is only available to true masters of the <col=800000>Fletching<col=000080> skill!");
+        }
+}

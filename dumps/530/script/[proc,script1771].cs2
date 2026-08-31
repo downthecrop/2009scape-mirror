@@ -1,0 +1,81 @@
+// 1771
+[proc,script1771]
+if (%varclient_247 = 0) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_99);
+    ~script1783(interface_791:com_96, interface_791:com_97, null, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_99);
+}
+if (%varclient_247 = 1) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_59);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_59, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_59);
+}
+if (%varclient_247 = 2) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_62);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_62, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_62);
+}
+if (%varclient_247 = 3) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_65);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_65, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_65);
+}
+if (%varclient_247 = 4) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_68);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_68, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_68);
+}
+if (%varclient_247 = 5) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_71);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_71, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_71);
+}
+if (%varclient_247 = 6) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_74);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_74, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_74);
+}
+if (%varclient_247 = 7) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_77);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_77, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_77);
+}
+if (%varclient_247 = 8) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_80);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_80, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_80);
+}
+if (%varclient_247 = 9) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_83);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_83, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_83);
+}
+if (%varclient_247 = 10) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_86);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_86, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_86);
+}
+if (%varclient_247 = 11) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_89);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_89, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_89);
+}
+if (%varclient_247 = 12) {
+    if_setgraphic("options_radio_buttons,2", interface_791:com_92);
+    ~script1783(interface_791:com_96, interface_791:com_97, interface_791:com_92, -1);
+} else {
+    if_setgraphic("options_radio_buttons,0", interface_791:com_92);
+}
+~script1784;

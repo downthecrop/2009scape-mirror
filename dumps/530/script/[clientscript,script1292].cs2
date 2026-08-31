@@ -1,0 +1,49 @@
+// 1292
+[clientscript,script1292](component $component0, obj $obj1, component $component2, component $component3)
+if ($obj1 = obj_5329) {
+    if (inv_total(inv_93, obj_7409) > 0) {
+        $obj1 = obj_7409;
+    }
+} else if ($obj1 = obj_6797) {
+    if (inv_total(inv_93, obj_5340) > 0) {
+        $obj1 = obj_5340;
+        if_setopbase("<col=ff9040>Watering Can (8)", $component0);
+    } else if (inv_total(inv_93, obj_5339) > 0) {
+        $obj1 = obj_5339;
+        if_setopbase("<col=ff9040>Watering Can (7)", $component0);
+    } else if (inv_total(inv_93, obj_5338) > 0) {
+        $obj1 = obj_5338;
+        if_setopbase("<col=ff9040>Watering Can (6)", $component0);
+    } else if (inv_total(inv_93, obj_5337) > 0) {
+        $obj1 = obj_5337;
+        if_setopbase("<col=ff9040>Watering Can (5)", $component0);
+    } else if (inv_total(inv_93, obj_5336) > 0) {
+        $obj1 = obj_5336;
+        if_setopbase("<col=ff9040>Watering Can (4)", $component0);
+    } else if (inv_total(inv_93, obj_5335) > 0) {
+        $obj1 = obj_5335;
+        if_setopbase("<col=ff9040>Watering Can (3)", $component0);
+    } else if (inv_total(inv_93, obj_5334) > 0) {
+        $obj1 = obj_5334;
+        if_setopbase("<col=ff9040>Watering Can (2)", $component0);
+    } else if (inv_total(inv_93, obj_5333) > 0) {
+        $obj1 = obj_5333;
+        if_setopbase("<col=ff9040>Watering Can (1)", $component0);
+    } else if (inv_total(inv_93, obj_5331) > 0) {
+        $obj1 = obj_5331;
+        if_setopbase("<col=ff9040>Watering Can (0)", $component0);
+    } else {
+        if_setopbase("<col=ff9040>Watering Can", $component0);
+    }
+}
+if_setobject($obj1, -1, $component0);
+if_setoutline(1, $component0);
+def_int $int4 = ~script1293($obj1);
+if_settext(tostring($int4), $component3);
+if ($int4 > 0) {
+    if_setcolour(0x7dd764, $component2);
+    if_setcolour(0x7dd764, $component3);
+} else {
+    if_setcolour(0x872300, $component2);
+    if_setcolour(0x872300, $component3);
+}

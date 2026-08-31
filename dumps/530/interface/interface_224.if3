@@ -1,0 +1,121 @@
+// 224:0
+[com_0]
+type=rectangle
+x=-1
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+colour=0x433621
+fill=yes
+
+// 224:1
+[com_1]
+type=model
+x=17
+y=9
+width=484
+height=315
+layer=com_8
+model=model_4652
+modelorigin_x=-20
+modelorigin_y=-11
+modelangle_x=377
+modelangle_y=5
+modelangle_z=0
+modelzoom=907
+unknown100=64132
+unknown101=3000
+
+// 224:2
+[com_2]
+type=text
+x=237
+y=148
+width=148
+height=18
+layer=com_8
+textfont=q8_full
+text=Waterbirth Island
+textalignh=1
+colour=0x282315
+
+// 224:3
+[com_3]
+type=text
+x=224
+y=80
+width=120
+height=16
+layer=com_8
+textfont=q8_full
+text=Miscellania
+textalignh=1
+colour=0x282315
+
+// 224:4
+[com_4]
+type=text
+x=328
+y=95
+width=92
+height=16
+layer=com_8
+textfont=q8_full
+text=Etceteria
+textalignh=1
+colour=0x282315
+
+// 224:5
+[com_5]
+type=text
+x=391
+y=276
+width=75
+height=18
+layer=com_8
+textfont=q8_full
+text=Rellekka
+colour=0x282315
+
+// 224:6
+[com_6]
+type=text
+x=88
+y=165
+width=122
+height=18
+layer=com_8
+textfont=q8_full
+text=Neitiznot & Jatizso
+textalignh=1
+colour=0x282315
+
+// 224:7
+[com_7]
+type=model
+x=93
+y=101
+width=358
+height=195
+layer=com_8
+model=model_4628
+modelorigin_x=-17
+modelorigin_y=-28
+modelangle_x=346
+modelangle_y=60
+modelangle_z=0
+modelzoom=1395
+unknown100=63871
+unknown101=3000
+
+// 224:8
+[com_8]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+

@@ -1,0 +1,4 @@
+// 1219
+[clientscript,script1219](int $int0)
+detail_stereo($int0);
+~script1220;

@@ -1,0 +1,35 @@
+// 481:0
+[com_0]
+type=model
+x=80
+y=-9
+width=57543
+height=33707
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+model=model_20468
+modelorigin_x=-5
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=354
+modelanim=seq_5062
+unknown100=65285
+unknown101=800
+modelobjwidth=1798
+modelobjheight=687
+
+// 481:1
+[com_1]
+type=rectangle
+width=17607
+height=19628
+widthmode=proportion
+heightmode=proportion
+colour=0xccccff
+fill=yes
+trans=150
+

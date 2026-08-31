@@ -1,0 +1,17 @@
+// 179
+[proc,script179](int $int0)(int)
+switch_int ($int0) {
+    case 1 :
+        return(%varclient_44);
+    case 2 :
+        return(%varclient_45);
+    case 3 :
+        return(%varclient_46);
+    case 4 :
+        return(%varclient_47);
+    case 5 :
+        return(%varclient_48);
+    case 6 :
+        return(%varclient_49);
+}
+return(0);

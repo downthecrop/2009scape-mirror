@@ -1,0 +1,51 @@
+// 760:0
+[com_0]
+type=text
+x=100
+y=20
+width=400
+height=93
+textfont=tutorial_font
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 760:1
+[com_1]
+type=model
+x=10
+y=20
+width=90
+height=93
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+
+// 760:2
+[com_2]
+type=graphic
+x=10
+y=20
+width=90
+height=93
+
+// 760:3
+[com_3]
+type=text
+x=1
+y=111
+width=504
+height=17
+textfont=tutorial_font
+text=Click here to continue
+textalignh=1
+colour=0x0000ff
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^blue)
+

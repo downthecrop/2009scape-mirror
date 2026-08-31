@@ -1,0 +1,5 @@
+// 1944
+[clientscript,script1944]
+if_settext("", interface_802:com_16);
+if_sethide(true, interface_802:com_19);
+%varclient_581 = 0;

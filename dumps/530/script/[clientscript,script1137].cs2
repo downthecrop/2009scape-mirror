@@ -1,0 +1,8 @@
+// 1137
+[clientscript,script1137](int $int0, component $component1)
+def_int $int2 = ~script1345($int0, $component1);
+if ($int2 = 0) {
+    detail_flickering_on(false);
+} else if ($int2 = 1) {
+    detail_flickering_on(true);
+}

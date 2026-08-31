@@ -1,0 +1,244 @@
+// 1174
+[proc,script1174](component $component0)
+%varclient_175 = clientclock;
+~script41(interface_744:com_1);
+%varclient_1 = 0;
+switch_component ($component0) {
+    case interface_744:com_403, interface_744:com_404, interface_744:com_405, interface_744:com_406, interface_744:com_409, interface_744:com_410 :
+        if_sethide(true, interface_744:com_131);
+        if_sethide(false, interface_744:com_132);
+        if_sethide(true, interface_744:com_133);
+    case interface_744:com_176 :
+        if_sethide(true, interface_744:com_131);
+        if_sethide(true, interface_744:com_132);
+        if_setsize(if_getwidth(interface_744:com_133), 10, ^setsize_abs, ^setsize_minus, interface_744:com_133);
+        if_sethide(false, interface_744:com_133);
+    case interface_744:com_138 :
+        if_sethide(true, interface_744:com_131);
+        if_sethide(true, interface_744:com_132);
+        if_setsize(if_getwidth(interface_744:com_133), 440, ^setsize_abs, ^setsize_abs, interface_744:com_133);
+        if_sethide(false, interface_744:com_133);
+    case default :
+        if_sethide(false, interface_744:com_131);
+        if_sethide(true, interface_744:com_132);
+        if_sethide(true, interface_744:com_133);
+}
+if_setontimer(null, interface_744:com_134);
+%varclient_174 = 0;
+if ($component0 = interface_744:com_226) {
+    if (map_world ! -1) {
+        if_settext(~script1889, interface_744:com_254);
+    } else {
+        if_settext("World Select", interface_744:com_254);
+    }
+    ~script1868;
+    %varclient_547 = 0;
+    ~script1895(1, interface_744:com_230, interface_744:com_229, interface_744:com_234, null, null, null, interface_744:com_231, interface_744:com_232, interface_744:com_233, null, null, null, ^white, 0x461e00);
+    ~script1216(interface_744:com_272, interface_744:com_249);
+    if_sethide(false, interface_744:com_226);
+} else {
+    if_sethide(true, interface_744:com_226);
+}
+if ($component0 = interface_744:com_237) {
+    %varclient_174 = 6;
+    %varclient_183 = 500;
+    if_settext("Changing in <tostring(calc(%varclient_183 / 50 + 1))> seconds...", interface_744:com_240);
+    if_setontimer("script1892", interface_744:com_237);
+    if_sethide(false, interface_744:com_237);
+} else {
+    if_sethide(true, interface_744:com_237);
+}
+if ($component0 = interface_744:com_241) {
+    if_sethide(false, interface_744:com_241);
+    if_setonclick(null, interface_744:com_334);
+    if_setontimer("script1180", interface_744:com_134);
+    if (map_world = -1) {
+        if_settext("World: Auto", interface_744:com_333);
+    } else {
+        if_settext(~script1889, interface_744:com_333);
+    }
+    if_settext(%varclientstring_32, interface_744:com_340);
+    %varclientstring_33 = "";
+    if_settext(%varclientstring_33, interface_744:com_346);
+    if (compare(%varclientstring_32, "") ! 0) {
+        %varclient_174 = 2;
+    } else {
+        %varclient_174 = 1;
+    }
+} else {
+    if_sethide(true, interface_744:com_241);
+    %varclientstring_33 = "";
+    login_resetreply;
+}
+def_string $string0 = "";
+def_string $string1 = "";
+if ($component0 = interface_744:com_411) {
+    if_setsize(0, calc(paraheight(if_gettext(interface_744:com_135), if_getwidth(interface_744:com_135), p12_full) * 15 + 5), ^setsize_minus, ^setsize_abs, interface_744:com_135);
+    if_setposition(0, min(calc((if_getheight(interface_744:com_411) + if_getheight(interface_744:com_135)) / 2 + 45), calc(if_getheight(interface_744:com_411) - if_getheight(interface_744:com_137))), ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_137);
+    $string0 = if_gettext(interface_744:com_136);
+    if (string_length($string0) > 0) {
+        $string1 = "<col=461e00><u=461e00><$string0></u></col>";
+        if_settext($string1, interface_744:com_136);
+        if_setonmouseleave("script68(interface_744:com_136, $string1)", interface_744:com_136);
+        $string1 = "<col=ffffff><u=ffffff><$string0></u></col>";
+        if_setonmouseover("script68(interface_744:com_136, $string1)", interface_744:com_136);
+        if_setposition(0, min(calc((if_getheight(interface_744:com_411) + if_getheight(interface_744:com_135)) / 2 + 15), calc(if_gety(interface_744:com_137) - if_getheight(interface_744:com_136))), ^setpos_abs_centre, ^setpos_abs_top, interface_744:com_136);
+        if_sethide(false, interface_744:com_136);
+    } else {
+        if_setonmouseover(null, interface_744:com_136);
+        if_setonmouseleave(null, interface_744:com_136);
+        if_setonclick(null, interface_744:com_136);
+        if_sethide(true, interface_744:com_136);
+    }
+    if_sethide(false, interface_744:com_411);
+} else {
+    if_sethide(true, interface_744:com_411);
+    if_settext("", interface_744:com_136);
+    if_setonclick(null, interface_744:com_136);
+}
+if ($component0 = interface_744:com_403) {
+    if_sethide(false, interface_744:com_403);
+    unknown_command_5606;
+    ~script1388;
+    if_settext("Please input your date of birth:", interface_744:com_361);
+    if_setcolour(0x461e00, interface_744:com_361);
+} else {
+    if_sethide(true, interface_744:com_403);
+}
+if ($component0 = interface_744:com_404) {
+    if_sethide(false, interface_744:com_404);
+    unknown_command_5606;
+} else {
+    if_sethide(true, interface_744:com_404);
+}
+if ($component0 = interface_744:com_405) {
+    if_sethide(false, interface_744:com_405);
+    unknown_command_5606;
+    if_settext("Please input a username, then click `Next' to check that it is available.", interface_744:com_385);
+    if_setcolour(0x461e00, interface_744:com_385);
+    if_settext("Usernames can be a maximum of 12 characters long and may contain letters, numbers and underscores. Note: first letters will be capitalised and underscores will be converted into spaces. For example, the username red_rooster would display in the game as Red Rooster.", interface_744:com_386);
+    if_setcolour(0x461e00, interface_744:com_386);
+    if_setontimer("script1227", interface_744:com_134);
+    %varclient_174 = 3;
+} else {
+    if_sethide(true, interface_744:com_405);
+}
+def_string $string2 = %varclientstring_34;
+if ($component0 = interface_744:com_406) {
+    unknown_command_5606;
+    if_sethide(false, interface_744:com_406);
+    if_setcolour(0x461e00, interface_744:com_395);
+    if (compare($string2, "") ! 0) {
+        if_settext("Congratulations! The username <col=8c320a><$string2></col> is currently available.", interface_744:com_395);
+    } else {
+        if_settext("Congratulations! That username is currently available.", interface_744:com_395);
+    }
+} else {
+    if_sethide(true, interface_744:com_406);
+}
+if ($component0 = interface_744:com_409) {
+    unknown_command_5606;
+    if_settext("Please choose a password and click `Create' to create your account.", interface_744:com_413);
+    if_setcolour(0x461e00, interface_744:com_413);
+    if_sethide(false, interface_744:com_409);
+    if_setontimer("script1228", interface_744:com_134);
+    %varclient_174 = 4;
+} else {
+    if_sethide(true, interface_744:com_409);
+}
+def_int $int1 = 0;
+def_int $int2 = 0;
+def_int $int3 = 1;
+def_int $int4 = 0;
+if ($component0 = interface_744:com_410) {
+    if_sethide(false, interface_744:com_410);
+    $int1 = date_runeday;
+    if ($int1 < 2303) {
+        $int1 = 2303;
+        if_settext("We have reason to believe that you are under 13. For this reason, your account has been locked into Quick Chat until you are of a suitable age. Please review out Terms & Conditions for more information.", interface_744:com_412);
+    }
+    $int2 = date_runeday_fromdate(%varclient_179, %varclient_180, %varclient_181);
+    if (%varclient_180 > 1) {
+        while ($int3 <= 13) {
+            if (date_isleapyear(calc(%varclient_181 + $int3)) = true) {
+                $int4 = calc($int4 + 366);
+            } else {
+                $int4 = calc($int4 + 365);
+            }
+            $int3 = calc($int3 + 1);
+        }
+    } else {
+        while ($int3 <= 13) {
+            if (date_isleapyear(calc(%varclient_181 + ($int3 - 1))) = true) {
+                $int4 = calc($int4 + 366);
+            } else {
+                $int4 = calc($int4 + 365);
+            }
+            $int3 = calc($int3 + 1);
+        }
+    }
+    if (calc($int2 + $int4) > $int1) {
+        if_sethide(false, interface_744:com_430);
+    } else {
+        if_sethide(true, interface_744:com_430);
+    }
+} else {
+    if_sethide(true, interface_744:com_410);
+}
+if ($component0 = interface_744:com_138) {
+    ~script1895(2, interface_744:com_275, interface_744:com_154, interface_744:com_155, interface_744:com_276, interface_744:com_151, interface_744:com_152, interface_744:com_277, interface_744:com_148, interface_744:com_149, interface_744:com_278, interface_744:com_145, interface_744:com_146, ^white, 0x461e00);
+    $int3 = calc(fullscreen_modecount * 15);
+    $int3 = min($int3, 240);
+    $int3 = max($int3, 40);
+    if_setsize(if_getwidth(interface_744:com_284), calc($int3 + 2), ^setsize_abs, ^setsize_abs, interface_744:com_284);
+    if_setsize(if_getwidth(interface_744:com_285), $int3, ^setsize_abs, ^setsize_abs, interface_744:com_285);
+    if_setsize(if_getwidth(interface_744:com_286), $int3, ^setsize_abs, ^setsize_abs, interface_744:com_286);
+    ~script1169(interface_744:com_283, interface_744:com_284, interface_744:com_285, interface_744:com_286, graphic_884, "drop_down_arrow_scroll,0", "drop_down_arrow_scroll,2", graphic_1402, 0x7f0000, 0xffc61a, p11_full, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+    ~script1185(interface_744:com_28, interface_744:com_274);
+    ~script1192;
+    ~script1194;
+    ~script1196;
+    ~script1198;
+    ~script1200;
+    ~script1202;
+    ~script1204;
+    ~script1206;
+    ~script1208;
+    ~script1210;
+    ~script1222;
+    ~script1329;
+    ~script1359;
+    if_sethide(false, interface_744:com_138);
+} else {
+    ~script1349(interface_744:com_293, interface_744:com_294, interface_744:com_295, null, 2);
+    ~script1349(interface_744:com_290, interface_744:com_291, interface_744:com_292, null, 2);
+    ~script1349(interface_744:com_287, interface_744:com_288, interface_744:com_289, null, 2);
+    ~script1349(interface_744:com_108, interface_744:com_109, interface_744:com_110, null, 2);
+    ~script1349(interface_744:com_17, interface_744:com_18, interface_744:com_19, null, 2);
+    ~script1349(interface_744:com_42, interface_744:com_43, interface_744:com_44, null, 2);
+    ~script1349(interface_744:com_64, interface_744:com_65, interface_744:com_66, null, 2);
+    ~script1349(interface_744:com_86, interface_744:com_87, interface_744:com_88, null, 2);
+    ~script1349(interface_744:com_100, interface_744:com_101, interface_744:com_102, null, 2);
+    ~script1349(interface_744:com_9, interface_744:com_10, interface_744:com_11, null, 2);
+    ~script1349(interface_744:com_34, interface_744:com_35, interface_744:com_36, null, 2);
+    ~script1349(interface_744:com_56, interface_744:com_57, interface_744:com_58, null, 2);
+    ~script1349(interface_744:com_78, interface_744:com_79, interface_744:com_80, null, 2);
+    ~script1349(interface_744:com_283, interface_744:com_284, interface_744:com_285, interface_744:com_286, 2);
+    if_sethide(true, interface_744:com_138);
+}
+if ($component0 = interface_744:com_402) {
+    ~script1217(interface_744:com_304, interface_744:com_315);
+    ~script1216(interface_744:com_314, interface_744:com_316);
+    ~script1218(interface_744:com_325, interface_744:com_305);
+    ~script1220;
+    if_sethide(false, interface_744:com_402);
+} else {
+    if_sethide(true, interface_744:com_402);
+}
+if ($component0 = interface_744:com_176) {
+    ~script1873;
+    if_sethide(false, interface_744:com_176);
+    if_sethide(true, interface_744:com_138);
+} else {
+    if_sethide(true, interface_744:com_176);
+}

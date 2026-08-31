@@ -1,0 +1,8 @@
+// 1433
+[clientscript,script1433]
+if (getwindowmode >= 1) {
+    if_setonvarctransmit("script1434{varclient_184}", interface_746:com_4);
+    if_setonvarctransmit("script1434{varclient_184}", interface_548:com_1);
+}
+if_setonvarctransmit("script1547{varclient_5}", interface_752:com_3);
+if_setonresize("script721", interface_746:com_0);

@@ -1,0 +1,28 @@
+// 1718
+[proc,script1718]
+def_graphic $graphic0 = graphic_1438;
+def_graphic $graphic1 = graphic_1437;
+if_setgraphic(graphic_1437, interface_771:com_151);
+if_setgraphic(graphic_1437, interface_771:com_152);
+if_setgraphic(graphic_1437, interface_771:com_153);
+if_setgraphic(graphic_1437, interface_771:com_154);
+if_setgraphic(graphic_1437, interface_771:com_155);
+if_setgraphic(graphic_1437, interface_771:com_156);
+if_setgraphic(graphic_1437, interface_771:com_157);
+if_setgraphic(graphic_1437, interface_771:com_158);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_151);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_152);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_153);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_154);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_155);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_156);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_157);
+if_setonmouseover("script44(event_com, $graphic0)", interface_771:com_158);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_151);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_152);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_153);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_154);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_155);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_156);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_157);
+if_setonmouseleave("script299(interface_771:com_400, event_com, $graphic1)", interface_771:com_158);

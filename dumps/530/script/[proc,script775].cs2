@@ -1,0 +1,15 @@
+// 775
+[proc,script775](obj $obj0)(int, string, obj)
+if (%varplayer_448 = obj_12073) {
+    return(36, "Bronze Bull Rush", obj_12461);
+} else if (%varplayer_448 = obj_12075) {
+    return(46, "Iron Bull Rush", obj_12462);
+} else if (%varplayer_448 = obj_12077) {
+    return(56, "Steel Bull Rush", obj_12463);
+} else if (%varplayer_448 = obj_12079) {
+    return(66, "Mithril Bull Rush", obj_12464);
+} else if (%varplayer_448 = obj_12081) {
+    return(76, "Adamant Bull Rush", obj_12465);
+} else if (%varplayer_448 = obj_12083) {
+    return(86, "Rune Bull Rush", obj_12466);
+}

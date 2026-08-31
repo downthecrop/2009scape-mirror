@@ -1,0 +1,55 @@
+// 56
+[proc,script56](int $int0)(int)
+switch_int ($int0) {
+    case 0 :
+        if (calc(%varplayerbit_3578 + %varplayerbit_3599 + %varplayerbit_3611) = 6) {
+            return(2);
+        } else if (%varplayerbit_3576 = 0) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 1 :
+        if (calc(%varplayerbit_3982 + %varplayerbit_3983 + %varplayerbit_3984) = 3) {
+            return(2);
+        } else if (%varplayerbit_3981 = 0) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 3 :
+        if (calc(%varplayerbit_4942 + %varplayerbit_4944 + %varplayerbit_4945) = 3) {
+            return(2);
+        } else if (%varplayerbit_4940 = 0) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 4 :
+        if (~script1987 = 1) {
+            return(2);
+        } else if (%varplayerbit_5644 = 0) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 5 :
+        if (calc(%varplayerbit_5688 + %varplayerbit_5689 + %varplayerbit_5690) = 3) {
+            return(2);
+        } else if (%varplayerbit_5687 = 0) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 6 :
+        if (calc(%varplayerbit_5779 + %varplayerbit_5780 + %varplayerbit_5781) = 3) {
+            return(2);
+        } else if (%varplayerbit_5778 = 0) {
+            return(0);
+        } else {
+            return(1);
+        }
+    case 2 :
+        return(0);
+}
+return(-1);

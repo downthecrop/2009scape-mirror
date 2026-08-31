@@ -1,0 +1,80 @@
+// 1417
+[clientscript,script1417]
+if (%varplayerbit_2375 > 0) {
+    if_setcolour(^green, interface_428:com_7);
+}
+if (%varplayerbit_2375 > 20) {
+    if_setcolour(^green, interface_428:com_8);
+}
+if (%varplayerbit_2375 > 40) {
+    if_setcolour(^green, interface_428:com_9);
+}
+if (%varplayerbit_2375 > 60) {
+    if_setcolour(^green, interface_428:com_10);
+}
+if (%varplayerbit_2375 > 80) {
+    if_setcolour(^green, interface_428:com_11);
+}
+if (%varplayerbit_2375 > 100) {
+    if_setcolour(^green, interface_428:com_12);
+}
+if (%varplayerbit_2375 > 120) {
+    if_setcolour(^green, interface_428:com_13);
+}
+if (%varplayerbit_2375 > 140) {
+    if_setcolour(^green, interface_428:com_14);
+}
+if (%varplayerbit_2375 > 160) {
+    if_setcolour(^green, interface_428:com_15);
+}
+if (%varplayerbit_2375 > 180) {
+    if_setcolour(^green, interface_428:com_16);
+}
+if (%varplayerbit_2375 > 200) {
+    if_setcolour(^green, interface_428:com_17);
+}
+if (%varplayerbit_2375 > 220) {
+    if_setcolour(^green, interface_428:com_18);
+}
+if (%varplayerbit_2375 > 240) {
+    if_setcolour(^green, interface_428:com_19);
+}
+if (%varplayerbit_2375 > 260) {
+    if_setcolour(^green, interface_428:com_20);
+}
+if (%varplayerbit_2375 > 280) {
+    if_setcolour(^green, interface_428:com_21);
+}
+if (%varplayerbit_2375 > 300) {
+    if_setcolour(^green, interface_428:com_22);
+}
+if (%varplayerbit_2375 > 320) {
+    if_setcolour(^green, interface_428:com_23);
+}
+if (%varplayerbit_2375 > 340) {
+    if_setcolour(^green, interface_428:com_24);
+}
+if (%varplayerbit_2375 > 360) {
+    if_setcolour(^green, interface_428:com_25);
+}
+if (%varplayerbit_2375 > 380) {
+    if_setcolour(^green, interface_428:com_26);
+}
+if (%varplayerbit_2375 > 400) {
+    if_setcolour(^green, interface_428:com_27);
+}
+if (%varplayerbit_2375 > 420) {
+    if_setcolour(^green, interface_428:com_28);
+}
+if (%varplayerbit_2375 > 440) {
+    if_setcolour(^green, interface_428:com_29);
+}
+if (%varplayerbit_2375 > 460) {
+    if_setcolour(^green, interface_428:com_30);
+}
+if (%varplayerbit_2375 > 480) {
+    if_setcolour(^green, interface_428:com_31);
+}
+if (%varplayerbit_2375 > 499) {
+    if_setcolour(^green, interface_428:com_32);
+}

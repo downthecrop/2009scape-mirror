@@ -1,0 +1,3 @@
+// 116
+[clientscript,script116]
+if_settext("<tostring(%varplayer_531)> %", interface_209:com_4);

@@ -1,0 +1,19 @@
+// 1795
+[proc,script1795](component $component0, component $component1)
+def_graphic $graphic2 = "options_radio_buttons,0";
+def_graphic $graphic3 = "options_radio_buttons,2";
+if (%varplayerbit_5279 = 1) {
+    if (%varplayerbit_5295 = 1) {
+        if_setgraphic($graphic3, $component1);
+        if_setonop("script44($component1, $graphic2)", $component0);
+    } else {
+        if_setgraphic($graphic2, $component1);
+        if_setonop("script44($component1, $graphic3)", $component0);
+    }
+} else if (%varplayerbit_5294 = 1) {
+    if_setgraphic($graphic3, $component1);
+    if_setonop("script44($component1, $graphic2)", $component0);
+} else {
+    if_setgraphic($graphic2, $component1);
+    if_setonop("script44($component1, $graphic3)", $component0);
+}

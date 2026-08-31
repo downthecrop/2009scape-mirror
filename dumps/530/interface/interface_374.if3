@@ -1,0 +1,238 @@
+// 374:0
+[com_0]
+type=graphic
+x=80
+y=202
+width=36
+height=36
+graphic="miscgraphics,7"
+
+// 374:1
+[com_1]
+type=graphic
+x=65
+y=202
+width=36
+height=36
+graphic="miscgraphics,7"
+
+// 374:2
+[com_2]
+type=graphic
+x=39
+y=202
+width=36
+height=36
+graphic="miscgraphics,7"
+
+// 374:3
+[com_3]
+type=graphic
+x=97
+y=202
+width=36
+height=36
+graphic="miscgraphics,8"
+
+// 374:4
+[com_4]
+type=graphic
+x=119
+y=202
+width=36
+height=36
+graphic="miscgraphics,8"
+
+// 374:5
+[com_5]
+type=text
+contenttype=205
+x=43
+y=207
+width=110
+height=25
+textfont=b12_full
+text=Stop Viewing
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xffffff
+op1=Exit
+targetverb=Exit
+onmouseover=script45(event_com, ^yellow)
+onmouseleave=script45(event_com, ^white)
+
+// 374:6
+[com_6]
+type=model
+x=81
+y=99
+width=28
+height=28
+model=model_9298
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=166
+modelangle_y=63
+modelangle_z=0
+modelzoom=2280
+modelanim=seq_2657
+unknown100=0
+unknown101=3000
+
+// 374:7
+[com_7]
+type=model
+x=25
+y=46
+width=28
+height=28
+model=model_9298
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=166
+modelangle_y=63
+modelangle_z=0
+modelzoom=2280
+modelanim=seq_2657
+unknown100=0
+unknown101=3000
+
+// 374:8
+[com_8]
+type=model
+x=137
+y=46
+width=28
+height=28
+model=model_9298
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=166
+modelangle_y=63
+modelangle_z=0
+modelzoom=2280
+modelanim=seq_2657
+unknown100=0
+unknown101=3000
+
+// 374:9
+[com_9]
+type=model
+x=25
+y=152
+width=28
+height=28
+model=model_9298
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=166
+modelangle_y=63
+modelangle_z=0
+modelzoom=2280
+modelanim=seq_2657
+unknown100=0
+unknown101=3000
+
+// 374:10
+[com_10]
+type=model
+x=137
+y=152
+width=28
+height=28
+model=model_9298
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=166
+modelangle_y=63
+modelangle_z=0
+modelzoom=2280
+modelanim=seq_2657
+unknown100=0
+unknown101=3000
+
+// 374:11
+[com_11]
+type=text
+x=60
+y=119
+width=69
+height=14
+textfont=p12_full
+text=Centre
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+op1=View
+targetverb=View
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0xff981f)
+
+// 374:12
+[com_12]
+type=text
+x=5
+y=66
+width=95
+height=13
+textfont=p12_full
+text=North-West
+textshadow=yes
+colour=0xff981f
+op1=View
+targetverb=View
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0xff981f)
+
+// 374:13
+[com_13]
+type=text
+x=102
+y=66
+width=82
+height=14
+textfont=p12_full
+text=North-East
+textalignh=2
+textshadow=yes
+colour=0xff981f
+op1=View
+targetverb=View
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0xff981f)
+
+// 374:14
+[com_14]
+type=text
+x=98
+y=173
+width=85
+height=14
+textfont=p12_full
+text=South-East
+textalignh=2
+textshadow=yes
+colour=0xff981f
+op1=View
+targetverb=View
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0xff981f)
+
+// 374:15
+[com_15]
+type=text
+x=4
+y=172
+width=89
+height=15
+textfont=p12_full
+text=South-West
+textshadow=yes
+colour=0xff981f
+op1=View
+targetverb=View
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0xff981f)
+

@@ -1,0 +1,14 @@
+// 1576
+[clientscript,script1576]
+if (%varplayerbit_5009 = 0) {
+    return;
+}
+~script1361(interface_771:com_52);
+if_setonmouseleave("script40(interface_771:com_399)", interface_771:com_52);
+if_setonmouseover(null, interface_771:com_52);
+if_setonmouseleave("script1358(interface_771:com_399, event_com)", interface_771:com_49);
+if_setonmouseover("script97(event_com)", interface_771:com_49);
+~script680(interface_771:com_49);
+setgender(1);
+%varclient_196 = 1;
+~script1714;

@@ -1,0 +1,9 @@
+// 596
+[clientscript,script596]
+def_string $string0 = null;
+if (%varclient_84 > 0) {
+    %varclient_84 = calc(%varclient_84 - 1);
+    $string0 = ~script46(%varclient_84, ",");
+    if_settext($string0, interface_105:com_150);
+    ~script602;
+}

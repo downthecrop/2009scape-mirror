@@ -1,0 +1,732 @@
+// 134:0
+[com_0]
+type=model
+x=15
+y=23
+width=480
+height=301
+model=model_26397
+modelorigin_x=-2
+modelorigin_y=33
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=1009
+unknown100=64430
+unknown101=2026
+
+// 134:1
+[com_1]
+type=text
+x=42
+y=40
+width=400
+height=34
+textfont=quill_oblique_large
+text=Choose the stat you wish to be advanced
+colour=0x46320a
+opbase= 
+
+// 134:2
+[com_2]
+type=text
+x=373
+y=259
+width=81
+height=33
+textfont=quill_oblique_large
+text=Confirm
+colour=0x46320a
+op1=Confirm
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0x46320a)
+onvartransmit=script790
+onvartransmitlist=varplayer_261
+
+// 134:3
+[com_3]
+type=rectangle
+x=42
+y=70
+width=416
+height=1
+colour=0x46320a
+fill=yes
+trans=200
+
+// 134:4
+[com_4]
+type=rectangle
+x=47
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:5
+[com_5]
+type=rectangle
+x=107
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:6
+[com_6]
+type=rectangle
+x=167
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:7
+[com_7]
+type=rectangle
+x=287
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:8
+[com_8]
+type=rectangle
+x=227
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:9
+[com_9]
+type=rectangle
+x=347
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:10
+[com_10]
+type=rectangle
+x=407
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:11
+[com_11]
+type=rectangle
+x=47
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:12
+[com_12]
+type=rectangle
+x=107
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:13
+[com_13]
+type=rectangle
+x=167
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:14
+[com_14]
+type=rectangle
+x=227
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:15
+[com_15]
+type=rectangle
+x=287
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:16
+[com_16]
+type=rectangle
+x=347
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:17
+[com_17]
+type=rectangle
+x=407
+y=190
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:18
+[com_18]
+type=rectangle
+x=167
+y=245
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:19
+[com_19]
+type=rectangle
+x=227
+y=245
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:20
+[com_20]
+type=rectangle
+x=287
+y=245
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:21
+[com_21]
+type=rectangle
+x=107
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:22
+[com_22]
+type=rectangle
+x=167
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:23
+[com_23]
+type=rectangle
+x=227
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:24
+[com_24]
+type=rectangle
+x=287
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:25
+[com_25]
+type=rectangle
+x=407
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:26
+[com_26]
+type=rectangle
+x=347
+y=80
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:27
+[com_27]
+type=rectangle
+x=47
+y=135
+width=55
+height=55
+hide=yes
+colour=0x46320a
+fill=yes
+trans=180
+
+// 134:28
+[com_28]
+type=graphic
+x=443
+y=40
+width=26
+height=23
+graphic="close_buttons,6"
+op1=Close
+onmouseleave=script44(interface_134:com_28, "close_buttons,6")
+onop=script29
+onmouserepeat=script44(interface_134:com_28, "close_buttons,7")
+
+// 134:29
+[com_29]
+type=graphic
+x=47
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,0"
+opbase=Attack
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Attack", 50, 150)
+onclick=script789(interface_134:com_4)
+
+// 134:30
+[com_30]
+type=graphic
+x=107
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,1"
+opbase=Strength
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Strength", 50, 150)
+onclick=script789(interface_134:com_21)
+
+// 134:31
+[com_31]
+type=graphic
+x=284
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,2"
+opbase=Defence
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Defence", 50, 150)
+onclick=script789(interface_134:com_24)
+
+// 134:32
+[com_32]
+type=graphic
+x=164
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,3"
+opbase=Ranged
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Ranged", 50, 150)
+onclick=script789(interface_134:com_22)
+
+// 134:33
+[com_33]
+type=graphic
+x=47
+y=135
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,4"
+opbase=Prayer
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Prayer", 50, 150)
+onclick=script789(interface_134:com_27)
+
+// 134:34
+[com_34]
+type=graphic
+x=408
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,6"
+opbase=Hitpoints
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Hitpoints", 50, 150)
+onclick=script789(interface_134:com_25)
+
+// 134:35
+[com_35]
+type=graphic
+x=224
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,5"
+opbase=Magic
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Magic", 50, 150)
+onclick=script789(interface_134:com_23)
+
+// 134:36
+[com_36]
+type=graphic
+x=107
+y=135
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,7"
+opbase=Agility
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Agility", 50, 150)
+onclick=script789(interface_134:com_5)
+
+// 134:37
+[com_37]
+type=graphic
+x=167
+y=135
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,8"
+opbase=Herblore
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Herblore", 50, 150)
+onclick=script789(interface_134:com_6)
+
+// 134:38
+[com_38]
+type=graphic
+x=226
+y=134
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,9"
+opbase=Thieving
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Thieving", 50, 150)
+onclick=script789(interface_134:com_8)
+
+// 134:39
+[com_39]
+type=graphic
+x=342
+y=80
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,10"
+opbase=Crafting
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Crafting", 50, 150)
+onclick=script789(interface_134:com_26)
+
+// 134:40
+[com_40]
+type=graphic
+x=163
+y=246
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,11"
+opbase=Fletching
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Fletching", 50, 150)
+onclick=script789(interface_134:com_18)
+
+// 134:41
+[com_41]
+type=graphic
+x=107
+y=189
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,12"
+opbase=Mining
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Mining", 50, 150)
+onclick=script789(interface_134:com_12)
+
+// 134:42
+[com_42]
+type=graphic
+x=166
+y=190
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,13"
+opbase=Smithing
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Smithing", 50, 150)
+onclick=script789(interface_134:com_13)
+
+// 134:43
+[com_43]
+type=graphic
+x=285
+y=135
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,14"
+opbase=Fishing
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Fishing", 50, 150)
+onclick=script789(interface_134:com_7)
+
+// 134:44
+[com_44]
+type=graphic
+x=345
+y=190
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,16"
+opbase=Firemaking
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Firemaking", 50, 150)
+onclick=script789(interface_134:com_16)
+
+// 134:45
+[com_45]
+type=graphic
+x=284
+y=190
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,15"
+opbase=Cooking
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Cooking", 50, 150)
+onclick=script789(interface_134:com_15)
+
+// 134:46
+[com_46]
+type=graphic
+x=402
+y=190
+width=55
+height=54
+layer=com_53
+graphic="staticons_high_res,17"
+opbase=Woodcutting
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Woodcutting", 50, 150)
+onclick=script789(interface_134:com_17)
+
+// 134:47
+[com_47]
+type=graphic
+x=347
+y=135
+width=55
+height=54
+layer=com_53
+graphic="staticons2_high_res,0"
+opbase=Runecraft
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Runecrafting", 50, 150)
+onclick=script789(interface_134:com_9)
+
+// 134:48
+[com_48]
+type=graphic
+x=407
+y=135
+width=55
+height=54
+layer=com_53
+graphic="staticons2_high_res,1"
+opbase=Slayer
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Slayer", 50, 150)
+onclick=script789(interface_134:com_10)
+
+// 134:49
+[com_49]
+type=graphic
+x=227
+y=190
+width=55
+height=54
+layer=com_53
+graphic="staticons2_high_res,5"
+opbase=Hunter
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Hunter", 50, 150)
+onclick=script789(interface_134:com_14)
+
+// 134:50
+[com_50]
+type=graphic
+x=47
+y=189
+width=55
+height=54
+layer=com_53
+graphic="staticons2_high_res,2"
+opbase=Farming
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Farming", 50, 150)
+onclick=script789(interface_134:com_11)
+
+// 134:51
+[com_51]
+type=graphic
+x=227
+y=243
+width=55
+height=54
+layer=com_53
+graphic="staticons2_high_res,6"
+opbase=Construction
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Construction", 50, 150)
+onclick=script789(interface_134:com_19)
+
+// 134:52
+[com_52]
+type=graphic
+x=286
+y=243
+width=55
+height=54
+layer=com_53
+graphic="staticons2_high_res,7"
+opbase=Summoning
+op1=Select
+onmouseleave=script40(interface_134:com_54)
+onmouserepeat=script38(event_com, interface_134:com_54, "Summoning", 50, 150)
+onclick=script789(interface_134:com_20)
+
+// 134:53
+[com_53]
+type=layer
+width=512
+height=334
+
+// 134:54
+[com_54]
+type=layer
+x=121
+y=67
+width=193
+height=126
+layer=com_53
+

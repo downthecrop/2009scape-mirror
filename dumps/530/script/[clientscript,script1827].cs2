@@ -1,0 +1,17 @@
+// 1827
+[clientscript,script1827](int $int0)
+if (~script1820($int0) = false) {
+    return;
+}
+if (map_members = false) {
+    if (%varclient_252 = 1) {
+        %varclient_252 = 2;
+    } else if (%varclient_252 = 2) {
+        %varclient_252 = 3;
+    } else {
+        %varclient_252 = 1;
+    }
+} else {
+    %varclient_252 = calc((%varclient_252 + 1) % 4);
+}
+~script1775;

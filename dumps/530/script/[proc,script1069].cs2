@@ -1,0 +1,24 @@
+// 1069
+[proc,script1069]
+%varclient_126 = %varclient_131;
+%varclientstring_27 = %varclientstring_28;
+%varclient_127 = 0;
+if (if_gethide(interface_137:com_0) = true) {
+    if (getwindowmode >= 2) {
+        if_setgraphic(chat_background, interface_752:com_1);
+        if_setalpha(false, interface_752:com_1);
+        if_sethide(false, interface_752:com_1);
+        if_sethide(false, interface_752:com_2);
+    }
+    if_sethide(true, interface_137:com_50);
+    if_setonkey(null, interface_137:com_51);
+    if_sethide(false, interface_137:com_0);
+    if_sethide(true, interface_137:com_7);
+    if_sethide(true, interface_137:com_9);
+    if_sethide(true, interface_137:com_13);
+    if_sethide(false, interface_137:com_17);
+    if_sethide(false, interface_137:com_1);
+    if_sethide(true, interface_137:com_3);
+    if_setscrollpos(0, 0, interface_137:com_17);
+}
+~script1071(interface_137:com_1, %varclient_130, -1);

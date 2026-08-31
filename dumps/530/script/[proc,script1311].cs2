@@ -1,0 +1,17 @@
+// 1311
+[proc,script1311]
+if_sethide(true, interface_548:com_83);
+if_sethide(true, interface_548:com_84);
+if_sethide(true, interface_548:com_85);
+if_sethide(true, interface_548:com_86);
+if_sethide(true, interface_548:com_87);
+if_sethide(true, interface_548:com_88);
+if_sethide(true, interface_548:com_89);
+if_sethide(true, interface_548:com_90);
+if_sethide(true, interface_548:com_91);
+if_sethide(true, interface_548:com_92);
+if_sethide(true, interface_548:com_93);
+if_sethide(true, interface_548:com_94);
+if_sethide(true, interface_548:com_95);
+if_sethide(true, interface_548:com_96);
+if_sethide(true, interface_548:com_97);

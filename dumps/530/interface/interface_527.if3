@@ -1,0 +1,3204 @@
+// 527:0
+[com_0]
+type=model
+x=100
+y=6
+width=338
+height=325
+layer=com_2
+model=model_25517
+modelorigin_x=5
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=655
+unknown100=65036
+unknown101=3000
+
+// 527:1
+[com_1]
+type=model
+x=-18
+y=-133
+width=550
+height=537
+layer=com_189
+model=model_25513
+modelorigin_x=0
+modelorigin_y=-2
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=655
+unknown100=59
+unknown101=3000
+
+// 527:2
+[com_2]
+type=layer
+width=512
+height=334
+layer=com_189
+hide=yes
+
+// 527:3
+[com_3]
+type=layer
+width=512
+height=334
+layer=com_189
+hide=yes
+
+// 527:4
+[com_4]
+type=text
+x=10
+y=10
+width=32
+height=32
+layer=com_71
+textfont=b12_full
+text=1st Age
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:5
+[com_5]
+type=layer
+width=512
+height=334
+layer=com_189
+hide=yes
+
+// 527:6
+[com_6]
+type=graphic
+x=478
+y=8
+width=26
+height=23
+layer=com_189
+graphic="close_buttons,2"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,3")
+onmouseleave=script44(event_com, "close_buttons,2")
+onop=script29
+
+// 527:7
+[com_7]
+type=layer
+width=512
+height=334
+layer=com_189
+hide=yes
+
+// 527:8
+[com_8]
+type=model
+x=292
+y=73
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_9)
+onmouseleave=script69(true, interface_527:com_9)
+
+// 527:9
+[com_9]
+type=layer
+x=264
+y=72
+width=90
+height=48
+layer=com_2
+hide=yes
+
+// 527:10
+[com_10]
+type=text
+x=1
+y=5
+width=89
+height=32
+layer=com_9
+textfont=b12_full
+text=Arrowheads display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:11
+[com_11]
+type=model
+x=225
+y=176
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_12)
+onmouseleave=script69(true, interface_527:com_12)
+
+// 527:12
+[com_12]
+type=layer
+x=198
+y=175
+width=92
+height=48
+layer=com_2
+hide=yes
+
+// 527:13
+[com_13]
+type=text
+x=21
+y=5
+width=50
+height=32
+layer=com_12
+textfont=b12_full
+text=Saranthium coin display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:14
+[com_14]
+type=model
+x=225
+y=123
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_15)
+onmouseleave=script69(true, interface_527:com_15)
+
+// 527:15
+[com_15]
+type=layer
+x=198
+y=122
+width=92
+height=48
+layer=com_2
+hide=yes
+
+// 527:16
+[com_16]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_15
+textfont=b12_full
+text=Senntisten coin display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:17
+[com_17]
+type=model
+x=225
+y=23
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_18)
+onmouseleave=script69(true, interface_527:com_18)
+
+// 527:18
+[com_18]
+type=layer
+x=188
+y=22
+width=102
+height=48
+layer=com_2
+hide=yes
+
+// 527:19
+[com_19]
+type=text
+y=10
+width=102
+height=32
+layer=com_18
+textfont=b12_full
+text=Jewellery display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:20
+[com_20]
+type=model
+x=226
+y=74
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_21)
+onmouseleave=script69(true, interface_527:com_21)
+
+// 527:21
+[com_21]
+type=layer
+x=197
+y=73
+width=92
+height=48
+layer=com_2
+hide=yes
+
+// 527:22
+[com_22]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_21
+textfont=b12_full
+text=Pottery display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:23
+[com_23]
+type=model
+x=292
+y=122
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_24)
+onmouseleave=script69(true, interface_527:com_24)
+
+// 527:24
+[com_24]
+type=layer
+x=263
+y=121
+width=92
+height=60
+layer=com_2
+hide=yes
+
+// 527:25
+[com_25]
+type=text
+width=90
+height=60
+layer=com_24
+textfont=b12_full
+text=Ancient Saradomin symbol display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:26
+[com_26]
+type=model
+x=293
+y=177
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_27)
+onmouseleave=script69(true, interface_527:com_27)
+
+// 527:27
+[com_27]
+type=layer
+x=264
+y=174
+width=92
+height=60
+layer=com_2
+hide=yes
+
+// 527:28
+[com_28]
+type=text
+width=90
+height=60
+layer=com_27
+textfont=b12_full
+text=Old Saradomin symbol display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:29
+[com_29]
+type=model
+x=355
+y=121
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_30)
+onmouseleave=script69(true, interface_527:com_30)
+
+// 527:30
+[com_30]
+type=layer
+x=326
+y=120
+width=92
+height=50
+layer=com_2
+hide=yes
+
+// 527:31
+[com_31]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_30
+textfont=b12_full
+text=Zaros tablet display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:32
+[com_32]
+type=model
+x=354
+y=177
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_33)
+onmouseleave=script69(true, interface_527:com_33)
+
+// 527:33
+[com_33]
+type=layer
+x=326
+y=174
+width=92
+height=50
+layer=com_2
+hide=yes
+
+// 527:34
+[com_34]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_33
+textfont=b12_full
+text=Ancient talisman display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:35
+[com_35]
+type=model
+x=291
+y=24
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_36)
+onmouseleave=script69(true, interface_527:com_36)
+
+// 527:36
+[com_36]
+type=layer
+x=263
+y=23
+width=92
+height=50
+layer=com_2
+hide=yes
+
+// 527:37
+[com_37]
+type=text
+x=22
+y=8
+width=50
+height=32
+layer=com_36
+textfont=b12_full
+text=Vase display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:38
+[com_38]
+type=model
+x=156
+y=176
+width=38
+height=48
+layer=com_2
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2448
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_39)
+onmouseleave=script69(true, interface_527:com_39)
+
+// 527:39
+[com_39]
+type=layer
+x=126
+y=174
+width=92
+height=50
+layer=com_2
+hide=yes
+
+// 527:40
+[com_40]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_39
+textfont=b12_full
+text=Soil layers display
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:41
+[com_41]
+type=text
+x=124
+y=50
+width=89
+height=32
+layer=com_2
+textfont=p12_full
+text=Stairs to<br>Natural History<br>exhibit
+textalignh=1
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Natural History exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:42
+[com_42]
+type=text
+x=347
+y=40
+width=89
+height=32
+layer=com_2
+textfont=p12_full
+text=Stairs to<br>Timeline<br>exhibit
+textalignh=1
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Timeline exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:43
+[com_43]
+type=text
+x=222
+y=261
+width=89
+height=32
+layer=com_2
+textfont=p12_full
+text=Dig Site cleaning area
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:44
+[com_44]
+type=text
+x=433
+y=301
+width=89
+height=32
+layer=com_2
+textfont=b12_full
+text=Level up
+textalignh=1
+textalignv=2
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Timeline exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:45
+[com_45]
+type=model
+x=100
+y=6
+width=338
+height=325
+layer=com_3
+model=model_25518
+modelorigin_x=5
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=655
+unknown100=0
+unknown101=3000
+onmouseleave=script69(true, interface_527:com_9)
+
+// 527:46
+[com_46]
+type=model
+x=290
+y=38
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_70)
+onmouseleave=script69(true, interface_527:com_70)
+
+// 527:47
+[com_47]
+type=model
+x=221
+y=38
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_73)
+onmouseleave=script69(true, interface_527:com_73)
+
+// 527:48
+[com_48]
+type=model
+x=187
+y=38
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_75)
+onmouseleave=script69(true, interface_527:com_75)
+
+// 527:49
+[com_49]
+type=model
+x=153
+y=38
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_77)
+onmouseleave=script69(true, interface_527:com_77)
+
+// 527:50
+[com_50]
+type=model
+x=116
+y=108
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_79)
+onmouseleave=script69(true, interface_527:com_79)
+
+// 527:51
+[com_51]
+type=model
+x=182
+y=108
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_81)
+onmouseleave=script69(true, interface_527:com_81)
+
+// 527:52
+[com_52]
+type=model
+x=251
+y=107
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_83)
+onmouseleave=script69(true, interface_527:com_83)
+
+// 527:53
+[com_53]
+type=model
+x=148
+y=108
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_85)
+onmouseleave=script69(true, interface_527:com_85)
+
+// 527:54
+[com_54]
+type=model
+x=217
+y=108
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_87)
+onmouseleave=script69(true, interface_527:com_87)
+
+// 527:55
+[com_55]
+type=model
+x=323
+y=108
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_89)
+onmouseleave=script69(true, interface_527:com_89)
+
+// 527:56
+[com_56]
+type=model
+x=287
+y=108
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_91)
+onmouseleave=script69(true, interface_527:com_91)
+
+// 527:57
+[com_57]
+type=model
+x=256
+y=38
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_71)
+onmouseleave=script69(true, interface_527:com_71)
+
+// 527:58
+[com_58]
+type=model
+x=390
+y=182
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_93)
+onmouseleave=script69(true, interface_527:com_93)
+
+// 527:59
+[com_59]
+type=model
+x=356
+y=182
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_95)
+onmouseleave=script69(true, interface_527:com_95)
+
+// 527:60
+[com_60]
+type=model
+x=322
+y=183
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_97)
+onmouseleave=script69(true, interface_527:com_97)
+
+// 527:61
+[com_61]
+type=model
+x=252
+y=182
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_99)
+onmouseleave=script69(true, interface_527:com_99)
+
+// 527:62
+[com_62]
+type=model
+x=219
+y=182
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_101)
+onmouseleave=script69(true, interface_527:com_101)
+
+// 527:63
+[com_63]
+type=model
+x=182
+y=244
+width=33
+height=41
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2830
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_103)
+onmouseleave=script69(true, interface_527:com_103)
+
+// 527:64
+[com_64]
+type=model
+x=215
+y=243
+width=35
+height=43
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2702
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_105)
+onmouseleave=script69(true, interface_527:com_105)
+
+// 527:65
+[com_65]
+type=model
+x=249
+y=243
+width=35
+height=43
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2702
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_107)
+onmouseleave=script69(true, interface_527:com_107)
+
+// 527:66
+[com_66]
+type=model
+x=284
+y=243
+width=35
+height=43
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2702
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_109)
+onmouseleave=script69(true, interface_527:com_109)
+
+// 527:67
+[com_67]
+type=model
+x=318
+y=243
+width=35
+height=43
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2702
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_111)
+onmouseleave=script69(true, interface_527:com_111)
+
+// 527:68
+[com_68]
+type=model
+x=352
+y=244
+width=35
+height=43
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2702
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_113)
+onmouseleave=script69(true, interface_527:com_113)
+
+// 527:69
+[com_69]
+type=model
+x=287
+y=181
+width=35
+height=44
+layer=com_3
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63736
+unknown101=3000
+onmouseover=script69(false, interface_527:com_114)
+onmouseleave=script69(true, interface_527:com_114)
+
+// 527:70
+[com_70]
+type=layer
+x=257
+y=33
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:71
+[com_71]
+type=layer
+x=245
+y=29
+width=52
+height=54
+layer=com_3
+hide=yes
+
+// 527:72
+[com_72]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_70
+textfont=b12_full
+text=1st-2nd Ages
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:73
+[com_73]
+type=layer
+x=191
+y=33
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:74
+[com_74]
+type=text
+x=22
+y=5
+width=50
+height=32
+layer=com_73
+textfont=b12_full
+text=End of<br>2nd Age
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:75
+[com_75]
+type=layer
+x=152
+y=33
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:76
+[com_76]
+type=text
+x=7
+y=5
+width=83
+height=32
+layer=com_75
+textfont=b12_full
+text=3rd Age<br>4000 years long
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:77
+[com_77]
+type=layer
+x=124
+y=33
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:78
+[com_78]
+type=text
+y=5
+width=92
+height=49
+layer=com_77
+textfont=b12_full
+text=3rd Age<br>yr 3000-4000
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:79
+[com_79]
+type=layer
+x=85
+y=108
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:80
+[com_80]
+type=text
+y=5
+width=92
+height=32
+layer=com_79
+textfont=b12_full
+text=4th Age<br>2000 yrs long
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:81
+[com_81]
+type=layer
+x=159
+y=103
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:82
+[com_82]
+type=text
+y=10
+width=92
+height=32
+layer=com_81
+textfont=b12_full
+text=4th Age<br>yr 1-200
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:83
+[com_83]
+type=layer
+x=223
+y=102
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:84
+[com_84]
+type=text
+y=10
+width=92
+height=32
+layer=com_83
+textfont=b12_full
+text=4th Age<br>yr 500-900
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:85
+[com_85]
+type=layer
+x=125
+y=103
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:86
+[com_86]
+type=text
+y=10
+width=92
+height=32
+layer=com_85
+textfont=b12_full
+text=4th Age<br>yr 1-100
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:87
+[com_87]
+type=layer
+x=194
+y=103
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:88
+[com_88]
+type=text
+y=9
+width=92
+height=32
+layer=com_87
+textfont=b12_full
+text=4th Age<br>yr 31-60
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:89
+[com_89]
+type=layer
+x=291
+y=103
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:90
+[com_90]
+type=text
+y=7
+width=92
+height=46
+layer=com_89
+textfont=b12_full
+text=4th Age<br>yr 1100-1200
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:91
+[com_91]
+type=layer
+x=263
+y=103
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:92
+[com_92]
+type=text
+y=9
+width=92
+height=41
+layer=com_91
+textfont=b12_full
+text=4th Age<br>yr 700-800
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:93
+[com_93]
+type=layer
+x=357
+y=177
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:94
+[com_94]
+type=text
+y=9
+width=92
+height=32
+layer=com_93
+textfont=b12_full
+text=4th Age<br>yr 1777
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:95
+[com_95]
+type=layer
+x=323
+y=177
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:96
+[com_96]
+type=text
+y=10
+width=92
+height=32
+layer=com_95
+textfont=b12_full
+text=4th Age<br>yr 1937
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:97
+[com_97]
+type=layer
+x=289
+y=178
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:98
+[com_98]
+type=text
+y=5
+width=92
+height=32
+layer=com_97
+textfont=b12_full
+text=5th Age<br>currently 169 years old
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:99
+[com_99]
+type=layer
+x=219
+y=177
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:100
+[com_100]
+type=text
+y=10
+width=92
+height=32
+layer=com_99
+textfont=b12_full
+text=5th Age<br>yr 8
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:101
+[com_101]
+type=layer
+x=186
+y=177
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:102
+[com_102]
+type=text
+y=10
+width=92
+height=32
+layer=com_101
+textfont=b12_full
+text=5th Age<br>yr 9
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:103
+[com_103]
+type=layer
+x=149
+y=239
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:104
+[com_104]
+type=text
+y=10
+width=92
+height=32
+layer=com_103
+textfont=b12_full
+text=5th Age<br>yr 12
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:105
+[com_105]
+type=layer
+x=183
+y=239
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:106
+[com_106]
+type=text
+y=9
+width=92
+height=32
+layer=com_105
+textfont=b12_full
+text=5th Age<br>yr 20
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:107
+[com_107]
+type=layer
+x=217
+y=239
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:108
+[com_108]
+type=text
+y=10
+width=92
+height=32
+layer=com_107
+textfont=b12_full
+text=5th Age<br>yr 23
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:109
+[com_109]
+type=layer
+x=252
+y=239
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:110
+[com_110]
+type=text
+y=9
+width=92
+height=32
+layer=com_109
+textfont=b12_full
+text=5th Age<br>yr 42-62
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:111
+[com_111]
+type=layer
+x=286
+y=239
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:112
+[com_112]
+type=text
+y=10
+width=92
+height=32
+layer=com_111
+textfont=b12_full
+text=5th Age<br>yr 47
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:113
+[com_113]
+type=layer
+x=320
+y=240
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:114
+[com_114]
+type=layer
+x=255
+y=177
+width=92
+height=50
+layer=com_3
+hide=yes
+
+// 527:115
+[com_115]
+type=text
+y=10
+width=92
+height=32
+layer=com_114
+textfont=b12_full
+text=5th Age<br>yr 7
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:116
+[com_116]
+type=text
+y=10
+width=92
+height=32
+layer=com_113
+textfont=b12_full
+text=5th Age<br>yr 62
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:117
+[com_117]
+type=text
+x=350
+y=40
+width=89
+height=32
+layer=com_3
+textfont=p12_full
+text=Stairs to<br>Dig Site<br>exhibit
+textalignh=1
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Dig Site exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:118
+[com_118]
+type=text
+x=97
+y=197
+width=89
+height=32
+layer=com_3
+textfont=p12_full
+text=Stairs to<br>Timeline<br>exhibit
+textalignh=1
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Timeline exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:119
+[com_119]
+type=text
+x=433
+y=302
+width=89
+height=32
+layer=com_3
+textfont=b12_full
+text=Level up
+textalignh=1
+textalignv=2
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Timeline exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:120
+[com_120]
+type=text
+x=10
+y=302
+width=89
+height=32
+layer=com_3
+textfont=b12_full
+text=Level down
+textalignh=1
+textalignv=2
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Dig Site exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:121
+[com_121]
+type=model
+x=100
+y=6
+width=338
+height=325
+layer=com_5
+model=model_25519
+modelorigin_x=5
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=655
+unknown100=0
+unknown101=3000
+
+// 527:122
+[com_122]
+type=model
+x=362
+y=48
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=79
+modelangle_y=1803
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_123)
+onmouseleave=script69(true, interface_527:com_123)
+
+// 527:123
+[com_123]
+type=layer
+x=330
+y=44
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:124
+[com_124]
+type=text
+y=7
+width=92
+height=32
+layer=com_123
+textfont=b12_full
+text=5th Age<br>yr 136
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:125
+[com_125]
+type=model
+x=214
+y=170
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=79
+modelangle_y=1803
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_126)
+onmouseleave=script69(true, interface_527:com_126)
+
+// 527:126
+[com_126]
+type=layer
+x=182
+y=166
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:127
+[com_127]
+type=text
+y=10
+width=92
+height=32
+layer=com_126
+textfont=b12_full
+text=5th Age<br>yr 70
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:128
+[com_128]
+type=model
+x=292
+y=48
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=79
+modelangle_y=1803
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_129)
+onmouseleave=script69(true, interface_527:com_129)
+
+// 527:129
+[com_129]
+type=layer
+x=260
+y=44
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:130
+[com_130]
+type=text
+y=10
+width=92
+height=32
+layer=com_129
+textfont=b12_full
+text=5th Age<br>yr 132
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:131
+[com_131]
+type=model
+x=364
+y=170
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_132)
+onmouseleave=script69(true, interface_527:com_132)
+
+// 527:132
+[com_132]
+type=layer
+x=332
+y=166
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:133
+[com_133]
+type=text
+y=10
+width=92
+height=32
+layer=com_132
+textfont=b12_full
+text=5th Age<br>yr 154
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:134
+[com_134]
+type=model
+x=215
+y=236
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_135)
+onmouseleave=script69(true, interface_527:com_135)
+
+// 527:135
+[com_135]
+type=layer
+x=183
+y=232
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:136
+[com_136]
+type=text
+y=9
+width=92
+height=32
+layer=com_135
+textfont=b12_full
+text=5th Age<br>yr 169
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:137
+[com_137]
+type=model
+x=290
+y=236
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_138)
+onmouseleave=script69(true, interface_527:com_138)
+
+// 527:138
+[com_138]
+type=layer
+x=258
+y=232
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:139
+[com_139]
+type=text
+y=8
+width=92
+height=32
+layer=com_138
+textfont=b12_full
+text=5th Age<br>yr 169
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:140
+[com_140]
+type=model
+x=362
+y=107
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_141)
+onmouseleave=script69(true, interface_527:com_141)
+
+// 527:141
+[com_141]
+type=layer
+x=330
+y=103
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:142
+[com_142]
+type=text
+y=9
+width=92
+height=32
+layer=com_141
+textfont=b12_full
+text=5th Age<br>yr 143
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:143
+[com_143]
+type=model
+x=363
+y=236
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_144)
+onmouseleave=script69(true, interface_527:com_144)
+
+// 527:144
+[com_144]
+type=layer
+x=331
+y=232
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:145
+[com_145]
+type=text
+y=7
+width=92
+height=32
+layer=com_144
+textfont=b12_full
+text=5th Age<br>yr 162-163
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:146
+[com_146]
+type=model
+x=257
+y=152
+width=94
+height=42
+layer=com_5
+model=model_25515
+modelorigin_x=3
+modelorigin_y=-4
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2148
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_147)
+onmouseleave=script69(true, interface_527:com_147)
+
+// 527:147
+[com_147]
+type=layer
+x=268
+y=122
+width=78
+height=94
+layer=com_5
+hide=yes
+
+// 527:148
+[com_148]
+type=text
+y=30
+width=78
+height=32
+layer=com_147
+textfont=b12_full
+text=5th Age<br>yr 20
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:149
+[com_149]
+type=model
+x=6791
+y=1233
+width=1031
+height=2459
+widthmode=proportion
+heightmode=proportion
+xmode=proportion_left
+ymode=proportion_top
+layer=com_5
+model=model_25520
+modelorigin_x=0
+modelorigin_y=24
+modelangle_x=15
+modelangle_y=1915
+modelangle_z=0
+modelzoom=1636
+unknown100=64536
+unknown101=3000
+modelobjwidth=32
+modelobjheight=50
+onmouseover=script69(false, interface_527:com_150)
+onmouseleave=script69(true, interface_527:com_150)
+
+// 527:150
+[com_150]
+type=layer
+x=183
+y=26
+width=78
+height=50
+layer=com_5
+hide=yes
+
+// 527:151
+[com_151]
+type=text
+y=7
+width=78
+height=32
+layer=com_150
+textfont=b12_full
+text=5th Age<br>yr 98
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:152
+[com_152]
+type=text
+x=10
+y=302
+width=89
+height=32
+layer=com_5
+textfont=b12_full
+text=Level down
+textalignh=1
+textalignv=2
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Timeline exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:153
+[com_153]
+type=text
+x=98
+y=209
+width=89
+height=32
+layer=com_5
+textfont=p12_full
+text=Stairs to<br>Timeline<br>exhibit
+textalignh=1
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Timeline exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:154
+[com_154]
+type=model
+x=215
+y=105
+width=35
+height=44
+layer=com_5
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=64036
+unknown101=3000
+onmouseover=script69(false, interface_527:com_155)
+onmouseleave=script69(true, interface_527:com_155)
+
+// 527:155
+[com_155]
+type=layer
+x=187
+y=101
+width=92
+height=50
+layer=com_5
+hide=yes
+
+// 527:156
+[com_156]
+type=text
+width=92
+height=32
+layer=com_155
+textfont=b12_full
+text=5th Age<br>yr 70
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 527:157
+[com_157]
+type=model
+x=50
+y=8
+width=395
+height=316
+layer=com_7
+model=model_25516
+modelorigin_x=0
+modelorigin_y=39
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=1039
+unknown100=64012
+unknown101=3000
+
+// 527:158
+[com_158]
+type=model
+x=185
+y=260
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_190)
+onmouseleave=script69(true, interface_527:com_190)
+
+// 527:159
+[com_159]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_190
+textfont=b12_full
+text=Terrorbird display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:160
+[com_160]
+type=model
+x=278
+y=260
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_191)
+onmouseleave=script69(true, interface_527:com_191)
+
+// 527:161
+[com_161]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_191
+textfont=b12_full
+text=Kalphite Queen<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:162
+[com_162]
+type=model
+x=64
+y=197
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_192)
+onmouseleave=script69(true, interface_527:com_192)
+
+// 527:163
+[com_163]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_192
+textfont=b12_full
+text=Mole<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:164
+[com_164]
+type=model
+x=119
+y=197
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_193)
+onmouseleave=script69(true, interface_527:com_193)
+
+// 527:165
+[com_165]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_193
+textfont=b12_full
+text=Penguin<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:166
+[com_166]
+type=model
+x=64
+y=90
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_194)
+onmouseleave=script69(true, interface_527:com_194)
+
+// 527:167
+[com_167]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_194
+textfont=b12_full
+text=Camel<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:168
+[com_168]
+type=model
+x=119
+y=90
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_195)
+onmouseleave=script69(true, interface_527:com_195)
+
+// 527:169
+[com_169]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_195
+textfont=b12_full
+text=Leech<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:170
+[com_170]
+type=model
+x=341
+y=197
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_196)
+onmouseleave=script69(true, interface_527:com_196)
+
+// 527:171
+[com_171]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_196
+textfont=b12_full
+text=Monkey<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:172
+[com_172]
+type=model
+x=396
+y=197
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_197)
+onmouseleave=script69(true, interface_527:com_197)
+
+// 527:173
+[com_173]
+type=text
+width=16391
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_197
+textfont=b12_full
+text=Sea slug<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:174
+[com_174]
+type=model
+x=341
+y=90
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_198)
+onmouseleave=script69(true, interface_527:com_198)
+
+// 527:175
+[com_175]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_198
+textfont=b12_full
+text=Snail<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:176
+[com_176]
+type=model
+x=396
+y=90
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_199)
+onmouseleave=script69(true, interface_527:com_199)
+
+// 527:177
+[com_177]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_199
+textfont=b12_full
+text=Snake<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:178
+[com_178]
+type=model
+x=115
+y=20
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_200)
+onmouseleave=script69(true, interface_527:com_200)
+
+// 527:179
+[com_179]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_200
+textfont=b12_full
+text=Lizard<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:180
+[com_180]
+type=model
+x=188
+y=20
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_201)
+onmouseleave=script69(true, interface_527:com_201)
+
+// 527:181
+[com_181]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_201
+textfont=b12_full
+text=Battle tortoise<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:182
+[com_182]
+type=model
+x=279
+y=20
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_202)
+onmouseleave=script69(true, interface_527:com_202)
+
+// 527:183
+[com_183]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_202
+textfont=b12_full
+text=Dragon<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:184
+[com_184]
+type=model
+x=347
+y=20
+width=35
+height=44
+layer=com_7
+model=model_25514
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=80
+modelangle_y=1807
+modelangle_z=0
+modelzoom=2660
+unknown100=63661
+unknown101=3000
+onmouseover=script69(false, interface_527:com_203)
+onmouseleave=script69(true, interface_527:com_203)
+
+// 527:185
+[com_185]
+type=text
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_203
+textfont=b12_full
+text=Wyvern<br>display
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 527:186
+[com_186]
+type=text
+x=10
+y=301
+width=89
+height=32
+layer=com_2
+textfont=b12_full
+text=Level down
+textalignh=1
+textalignv=2
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Natural History exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:187
+[com_187]
+type=text
+x=433
+y=302
+width=89
+height=32
+layer=com_7
+textfont=b12_full
+text=Level up
+textalignh=1
+textalignv=2
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Dig Site exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:188
+[com_188]
+type=text
+x=204
+y=144
+width=89
+height=32
+layer=com_7
+textfont=p12_full
+text=Stairs to<br>Dig Site<br>exhibit
+textalignh=1
+textshadow=yes
+colour=0xbf751d
+op1=Stairs to Dig Site exhibit
+onmouseover=script45(event_com, 0xe1981f)
+onmouseleave=script45(event_com, 0xbf751d)
+
+// 527:189
+[com_189]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+
+// 527:190
+[com_190]
+type=layer
+x=115
+y=240
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:191
+[com_191]
+type=layer
+x=215
+y=240
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:192
+[com_192]
+type=layer
+y=180
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:193
+[com_193]
+type=layer
+x=55
+y=180
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:194
+[com_194]
+type=layer
+y=70
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:195
+[com_195]
+type=layer
+x=55
+y=70
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:196
+[com_196]
+type=layer
+x=275
+y=180
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:197
+[com_197]
+type=layer
+x=330
+y=180
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:198
+[com_198]
+type=layer
+x=275
+y=70
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:199
+[com_199]
+type=layer
+x=340
+y=70
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:200
+[com_200]
+type=layer
+x=50
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:201
+[com_201]
+type=layer
+x=125
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:202
+[com_202]
+type=layer
+x=215
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:203
+[com_203]
+type=layer
+x=290
+width=160
+height=80
+layer=com_7
+hide=yes
+
+// 527:204
+[com_204]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+
+// 527:205
+[com_205]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+layer=com_204
+
+// 527:206
+[com_206]
+type=graphic
+x=-260
+width=32
+height=334
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 527:207
+[com_207]
+type=graphic
+y=-171
+width=462
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 527:208
+[com_208]
+type=graphic
+y=170
+width=512
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 527:209
+[com_209]
+type=graphic
+x=259
+width=32
+height=334
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 527:210
+[com_210]
+type=graphic
+x=-247
+y=-158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,4"
+tiling=yes
+
+// 527:211
+[com_211]
+type=graphic
+x=247
+y=-158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,5"
+tiling=yes
+
+// 527:212
+[com_212]
+type=graphic
+x=247
+y=158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,7"
+tiling=yes
+
+// 527:213
+[com_213]
+type=graphic
+x=-247
+y=158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,6"
+tiling=yes
+
+// 527:214
+[com_214]
+type=layer
+width=8192
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_right
+ymode=abs_centre
+layer=com_205
+
+// 527:215
+[com_215]
+type=layer
+width=8188
+height=16391
+widthmode=proportion
+heightmode=proportion
+ymode=abs_centre
+layer=com_205
+
+// 527:216
+[com_216]
+type=layer
+width=16391
+height=8192
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+layer=com_205
+
+// 527:217
+[com_217]
+type=layer
+width=16391
+height=8182
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_205
+
+// 527:218
+[com_218]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+layer=com_205
+
+// 527:219
+[com_219]
+type=graphic
+width=256
+height=16384
+widthmode=minus
+heightmode=proportion
+ymode=abs_centre
+layer=com_215
+graphic=tradebacking
+tiling=yes
+outline=2
+
+// 527:220
+[com_220]
+type=graphic
+width=256
+height=16391
+widthmode=minus
+heightmode=proportion
+xmode=abs_right
+ymode=abs_centre
+layer=com_214
+graphic=tradebacking
+tiling=yes
+outline=2
+
+// 527:221
+[com_221]
+type=graphic
+width=16391
+height=167
+widthmode=proportion
+heightmode=minus
+xmode=abs_centre
+layer=com_216
+graphic=tradebacking
+tiling=yes
+outline=2
+
+// 527:222
+[com_222]
+type=graphic
+width=16391
+height=166
+widthmode=proportion
+heightmode=minus
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_217
+graphic=tradebacking
+tiling=yes
+outline=2
+

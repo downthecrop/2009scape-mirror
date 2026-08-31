@@ -1,0 +1,28 @@
+// 1047
+[proc,script1047](chatphrase $chatphrase0)
+%varclient_129 = 0;
+def_string $string0 = chatphrase_gettext($chatphrase0);
+if (%varclient_126 = 1) {
+    $string0 = "To <%varclientstring_27>: <col=800000><$string0>";
+} else if (%varclient_126 = 2) {
+    $string0 = "[<col=0000ff><clan_getchatdisplayname><col=000000>]: <col=800000><$string0>";
+} else {
+    $string0 = "<col=0000ff><$string0>";
+}
+if_sethide(true, interface_137:com_50);
+if_setonkey(null, interface_137:com_51);
+if_sethide(false, interface_137:com_0);
+if_sethide(false, interface_137:com_7);
+if_sethide(true, interface_137:com_9);
+if_sethide(true, interface_137:com_13);
+if_sethide(true, interface_137:com_17);
+if_sethide(true, interface_137:com_1);
+if_sethide(false, interface_137:com_3);
+if_setcolour(^black, interface_137:com_3);
+if_settextfont(p12_full, interface_137:com_3);
+if_settextalign(^settextalign_left, ^settextalign_centre, 0, interface_137:com_3);
+if_settext($string0, interface_137:com_3);
+if_settextshadow(false, interface_137:com_3);
+cc_deleteall(interface_137:com_7);
+if_settext("Please enter a value: *", interface_137:com_8);
+if_setonkey("script1048(event_keycode, event_keychar, interface_137:com_1, interface_137:com_8, $chatphrase0)", interface_137:com_7);

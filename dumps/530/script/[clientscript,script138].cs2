@@ -1,0 +1,11 @@
+// 138
+[clientscript,script138]
+if (%varclient_5 = 7 | %varclient_5 = 8 | %varclient_5 = 9) {
+    if_sethide(true, interface_752:com_3);
+    if_sethide(true, interface_752:com_6);
+    if_sethide(false, interface_752:com_7);
+    %varclient_5 = 0;
+}
+if (getwindowmode >= 2) {
+    ~script1364;
+}

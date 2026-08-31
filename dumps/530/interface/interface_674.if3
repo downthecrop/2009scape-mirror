@@ -1,0 +1,34 @@
+// 674:0
+[com_0]
+type=text
+x=50
+y=20
+width=445
+height=92
+textfont=tutorial_font
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 674:1
+[com_1]
+type=graphic
+x=10
+y=45
+width=32
+height=32
+
+// 674:2
+[com_2]
+type=text
+x=1
+y=111
+width=504
+height=17
+textfont=tutorial_font
+text=Click here to continue
+textalignh=1
+colour=0x0000ff
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^blue)
+

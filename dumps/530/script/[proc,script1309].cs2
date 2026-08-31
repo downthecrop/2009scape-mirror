@@ -1,0 +1,62 @@
+// 1309
+[proc,script1309](int $int0)
+def_int $int1 = ~script1305;
+if ($int0 = 1) {
+    if ($int1 ! 0) {
+        if_setgraphic(null, interface_746:com_41);
+    }
+    if ($int1 ! 1) {
+        if_setgraphic(null, interface_746:com_42);
+    }
+    if ($int1 ! 2) {
+        if_setgraphic(null, interface_746:com_43);
+    }
+    if ($int1 ! 3) {
+        if_setgraphic(null, interface_746:com_44);
+    }
+    if ($int1 ! 4) {
+        if_setgraphic(null, interface_746:com_45);
+    }
+    if ($int1 ! 5) {
+        if_setgraphic(null, interface_746:com_46);
+    }
+    if ($int1 ! 6) {
+        if_setgraphic(null, interface_746:com_47);
+    }
+    if ($int1 ! 7) {
+        if_setgraphic(null, interface_746:com_48);
+    }
+    if ($int1 ! 8) {
+        if_setgraphic(null, interface_746:com_49);
+    }
+    if ($int1 ! 9) {
+        if_setgraphic(null, interface_746:com_50);
+    }
+    if ($int1 ! 10) {
+        if_setgraphic(null, interface_746:com_51);
+    }
+    if ($int1 ! 11) {
+        if_setgraphic(null, interface_746:com_52);
+    }
+    if ($int1 ! 12) {
+        if_setgraphic(null, interface_746:com_53);
+    }
+    if ($int1 ! 13) {
+        if_setgraphic(null, interface_746:com_54);
+    }
+} else {
+    if_setgraphic(null, interface_746:com_41);
+    if_setgraphic(null, interface_746:com_42);
+    if_setgraphic(null, interface_746:com_43);
+    if_setgraphic(null, interface_746:com_44);
+    if_setgraphic(null, interface_746:com_45);
+    if_setgraphic(null, interface_746:com_46);
+    if_setgraphic(null, interface_746:com_47);
+    if_setgraphic(null, interface_746:com_48);
+    if_setgraphic(null, interface_746:com_49);
+    if_setgraphic(null, interface_746:com_50);
+    if_setgraphic(null, interface_746:com_51);
+    if_setgraphic(null, interface_746:com_52);
+    if_setgraphic(null, interface_746:com_53);
+    if_setgraphic(null, interface_746:com_54);
+}

@@ -1,0 +1,125 @@
+// 94:0
+[com_0]
+type=model
+x=265
+y=27
+width=35
+height=29
+model=model_8685
+modelorigin_x=2
+modelorigin_y=-1
+modelangle_x=291
+modelangle_y=2032
+modelangle_z=0
+modelzoom=1463
+unknown100=63851
+unknown101=2953
+
+// 94:1
+[com_1]
+type=model
+x=376
+y=29
+width=25
+height=24
+model=model_8684
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=400
+modelangle_y=2030
+modelangle_z=0
+modelzoom=2278
+unknown100=62828
+unknown101=4574
+
+// 94:2
+[com_2]
+type=text
+y=-1
+width=333
+height=32
+xmode=abs_centre
+textfont=q8_full
+text=Are you sure you want to destroy this object?
+textalignh=1
+textalignv=1
+colour=0x800000
+
+// 94:3
+[com_3]
+type=text
+x=269
+y=32
+width=100
+height=17
+textfont=q8_full
+text=Yes.
+textalignh=1
+colour=0x000000
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+
+// 94:4
+[com_4]
+type=text
+x=376
+y=32
+width=100
+height=17
+textfont=q8_full
+text=No.
+textalignh=1
+colour=0x000000
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^black)
+
+// 94:5
+[com_5]
+type=graphic
+x=12
+y=8
+width=57
+height=13
+xmode=abs_right
+graphic="sworddecor,0"
+
+// 94:6
+[com_6]
+type=graphic
+x=12
+y=9
+width=57
+height=13
+graphic="sworddecor,1"
+
+// 94:7
+[com_7]
+type=text
+x=6
+y=67
+width=494
+height=58
+textfont=q8_full
+text=Single_Line_Text
+textalignh=1
+colour=0x000088
+
+// 94:8
+[com_8]
+type=text
+x=80
+y=41
+width=145
+height=16
+textfont=p12_full
+text=Name
+colour=0x000000
+
+// 94:9
+[com_9]
+type=graphic
+x=24
+y=29
+width=32
+height=32
+

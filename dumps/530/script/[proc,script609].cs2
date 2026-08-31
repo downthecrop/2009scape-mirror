@@ -1,0 +1,8 @@
+// 609
+[proc,script609]
+if (%varclient_83 <= 0) {
+    %varclient_83 = 100;
+} else {
+    %varclient_83 = calc(%varclient_83 + 10);
+}
+if_setontimer("script610", interface_105:com_155);

@@ -1,0 +1,41 @@
+// 515:0
+[com_0]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+
+// 515:1
+[com_1]
+type=model
+width=39
+height=27280
+widthmode=proportion
+heightmode=proportion
+layer=com_0
+model=model_23154
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=61
+modelanim=seq_1921
+unknown100=65013
+unknown101=3000
+modelobjwidth=1
+modelobjheight=556
+
+// 515:2
+[com_2]
+type=rectangle
+width=16391
+height=16384
+widthmode=proportion
+heightmode=proportion
+layer=com_0
+colour=0x006633
+fill=yes
+trans=196
+

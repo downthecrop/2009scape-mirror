@@ -1,0 +1,20 @@
+// 1714
+[proc,script1714]
+~script1710;
+baseidkit(7, enum(int, idkit, enum_689, %varclient_87));
+baseidkit(1, null);
+baseidkit(9, enum(int, idkit, enum_1129, %varclient_89));
+baseidkit(10, enum(int, idkit, enum_1131, %varclient_90));
+baseidkit(11, enum(int, idkit, enum_1133, %varclient_91));
+baseidkit(12, enum(int, idkit, enum_1135, %varclient_92));
+baseidkit(13, enum(int, idkit, enum_1137, %varclient_93));
+basecolour(0, %varplayerbit_4215);
+basecolour(1, %varplayerbit_4216);
+basecolour(2, %varplayerbit_4217);
+basecolour(3, %varplayerbit_4218);
+basecolour(4, %varplayerbit_4219);
+~script1717;
+~script1718;
+~script1719;
+~script1720;
+~script1721;

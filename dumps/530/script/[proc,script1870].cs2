@@ -1,0 +1,17 @@
+// 1870
+[proc,script1870](int $int0)
+if (%varclient_546 = 1) {
+    if_settext("<col=7f0000>N/A</col>", interface_744:com_256);
+    if_setgraphic(graphic_1555, interface_744:com_255);
+    if_setonclick(null, interface_744:com_236);
+    if_setonmouseover(null, interface_744:com_236);
+    if_setonmouseleave(null, interface_744:com_236);
+    return;
+}
+def_graphic $graphic1 = graphic_1551;
+def_graphic $graphic2 = graphic_1552;
+if_settext(tostring($int0), interface_744:com_256);
+if_setgraphic($graphic1, interface_744:com_255);
+if_setonclick("script1871($int0, 2)", interface_744:com_236);
+if_setonmouseover("script1872(interface_744:com_255, $graphic2, interface_744:com_256, 0xffe1be)", interface_744:com_236);
+if_setonmouseleave("script1872(interface_744:com_255, $graphic1, interface_744:com_256, 0x461e00)", interface_744:com_236);

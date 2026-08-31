@@ -1,0 +1,9 @@
+// 1293
+[proc,script1293](obj $obj0)(int)
+if ($obj0 = obj_5329 | $obj0 = obj_7409) {
+    return(calc(inv_total(inv_93, obj_5329) + inv_total(inv_93, obj_7409)));
+}
+if ($obj0 = obj_6797 | $obj0 = obj_5340 | $obj0 = obj_5339 | $obj0 = obj_5338 | $obj0 = obj_5337 | $obj0 = obj_5336 | $obj0 = obj_5335 | $obj0 = obj_5334 | $obj0 = obj_5333 | $obj0 = obj_5331) {
+    return(calc(inv_total(inv_93, obj_5340) + inv_total(inv_93, obj_5339) + inv_total(inv_93, obj_5338) + inv_total(inv_93, obj_5337) + inv_total(inv_93, obj_5336) + inv_total(inv_93, obj_5335) + inv_total(inv_93, obj_5334) + inv_total(inv_93, obj_5333) + inv_total(inv_93, obj_5331)));
+}
+return(inv_total(inv_93, $obj0));

@@ -1,0 +1,11 @@
+// 1534
+[clientscript,script1534](component $component0, int $int1)
+if ($int1 ! 1) {
+    return;
+}
+if (~script42(%varclient_214) = 1) {
+    %varclient_214 = false;
+} else {
+    %varclient_214 = true;
+}
+~script1741($component0);

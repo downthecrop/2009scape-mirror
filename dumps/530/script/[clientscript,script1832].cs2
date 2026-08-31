@@ -1,0 +1,11 @@
+// 1832
+[clientscript,script1832](int $int0)
+if (~script1820($int0) = false) {
+    return;
+}
+if (%varclient_255 = false) {
+    %varclient_255 = true;
+} else {
+    %varclient_255 = false;
+}
+~script1780;

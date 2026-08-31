@@ -1,0 +1,114 @@
+// 1750
+[clientscript,script1750]
+if (%varplayerbit_2309 = 1) {
+    if_setgraphic("emotes,31", interface_464:com_32);
+} else {
+    if_setgraphic("emotes_locked,11", interface_464:com_32);
+}
+if (%varplayerbit_2310 = 1) {
+    if_setgraphic("emotes,29", interface_464:com_30);
+} else {
+    if_setgraphic("emotes_locked,9", interface_464:com_30);
+}
+if (%varplayerbit_2311 = 1) {
+    if_setgraphic("emotes,32", interface_464:com_33);
+} else {
+    if_setgraphic("emotes_locked,12", interface_464:com_33);
+}
+if (%varplayerbit_2312 = 1) {
+    if_setgraphic("emotes,30", interface_464:com_31);
+} else {
+    if_setgraphic("emotes_locked,10", interface_464:com_31);
+}
+if (%varplayerbit_532 >= 7) {
+    if_setgraphic("emotes,26", interface_464:com_24);
+    if_setgraphic("emotes,27", interface_464:com_25);
+} else {
+    if_setgraphic("emotes_locked,6", interface_464:com_24);
+    if_setgraphic("emotes_locked,7", interface_464:com_25);
+}
+if (%varplayerbit_1367 = 1) {
+    if_setgraphic("emotes,25", interface_464:com_29);
+} else {
+    if_setgraphic("emotes_locked,5", interface_464:com_29);
+}
+if (%varplayerbit_1368 = 1) {
+    if_setgraphic("emotes,22", interface_464:com_26);
+} else {
+    if_setgraphic("emotes_locked,2", interface_464:com_26);
+}
+if (%varplayerbit_1369 = 1) {
+    if_setgraphic("emotes,23", interface_464:com_27);
+} else {
+    if_setgraphic("emotes_locked,3", interface_464:com_27);
+}
+if (%varplayerbit_1370 = 1) {
+    if_setgraphic("emotes,24", interface_464:com_28);
+} else {
+    if_setgraphic("emotes_locked,4", interface_464:com_28);
+}
+if (%varplayerbit_1371 = 1) {
+    if_setgraphic("emotes,28", interface_464:com_37);
+} else {
+    if_setgraphic("emotes_locked,8", interface_464:com_37);
+}
+if (%varplayerbit_1920 = 1) {
+    if_setgraphic("emotes,34", interface_464:com_35);
+} else {
+    if_setgraphic("emotes_locked,14", interface_464:com_35);
+}
+if (%varplayerbit_1921 = 1) {
+    if_setgraphic("emotes,33", interface_464:com_34);
+} else {
+    if_setgraphic("emotes_locked,13", interface_464:com_34);
+}
+if (%varplayerbit_2055 = 1) {
+    if_setgraphic("emotes,35", interface_464:com_38);
+} else {
+    if_setgraphic("emotes_locked,15", interface_464:com_38);
+}
+if (%varplayerbit_2787 = 1) {
+    if_setgraphic("emotes,36", interface_464:com_39);
+} else {
+    if_setgraphic("emotes_locked,16", interface_464:com_39);
+}
+if (%varplayerbit_4075 = 12) {
+    if_setgraphic("emotes,37", interface_464:com_36);
+} else {
+    if_setgraphic("emotes_locked,17", interface_464:com_36);
+}
+if (%varplayerbit_4202 = 1) {
+    if_setgraphic("emotes,38", interface_464:com_40);
+} else {
+    if_setgraphic("emotes_locked,18", interface_464:com_40);
+}
+if (%varplayerbit_4394 = 1) {
+    if_setgraphic("emotes,39", interface_464:com_41);
+} else {
+    if_setgraphic("emotes_locked,19", interface_464:com_41);
+}
+if (%varplayerbit_4476 = 1) {
+    if_setgraphic("emotes,40", interface_464:com_42);
+} else {
+    if_setgraphic("emotes_locked,20", interface_464:com_42);
+}
+if (%varplayerbit_4884 = 1) {
+    if_setgraphic("emotes,41", interface_464:com_43);
+} else {
+    if_setgraphic("emotes_locked,21", interface_464:com_43);
+}
+if (%varplayerbit_5490 = 1) {
+    if_setgraphic("emotes,42", interface_464:com_44);
+} else {
+    if_setgraphic("emotes_locked,22", interface_464:com_44);
+}
+if (%varplayerbit_5732 = 1) {
+    if_setgraphic("emotes,44", interface_464:com_45);
+} else {
+    if_setgraphic("emotes_locked,24", interface_464:com_45);
+}
+if (%varplayerbit_5641 = 1) {
+    if_setgraphic("emotes,45", interface_464:com_46);
+} else {
+    if_setgraphic("emotes_locked,25", interface_464:com_46);
+}

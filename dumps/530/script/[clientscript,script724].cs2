@@ -1,0 +1,38 @@
+// 724
+[clientscript,script724](component $component0, int $int1, int $int2, string $string0)
+if ($component0 = interface_745:com_1 & %varclient_616 = 0) {
+    return;
+}
+def_int $int3 = 0;
+def_int $int4 = 0;
+def_int $int5 = 0;
+def_component $component6 = null;
+def_component $component7 = null;
+def_component $component8 = null;
+if (%varclient_1 < calc(clientclock + 25)) {
+    if (%varclient_1 < clientclock) {
+        %varclient_1 = clientclock;
+    }
+    %varclient_1 = calc(%varclient_1 + 2);
+    return;
+}
+%varclient_1 = calc(clientclock + 25 + 10);
+if (%varclient_2 ! 1) {
+    $int5 = calc(parawidth($string0, 1000, p12_full) + 8);
+    if (getwindowmode < 2) {
+        $component6 = interface_548:com_8;
+        $component8 = interface_548:com_100;
+        $component7 = interface_548:com_7;
+    } else {
+        $component6 = interface_746:com_18;
+        $component8 = interface_746:com_22;
+        $component7 = interface_746:com_17;
+    }
+    $int3 = calc(if_getx($component7) + if_getx($component0) + $int1 - $int5);
+    $int4 = calc(if_gety($component7) + if_gety($component0) + $int2 - 17);
+    if_sethide(false, $component6);
+    if_setsize($int5, 17, ^setsize_abs, ^setsize_abs, $component6);
+    if_setposition($int3, $int4, ^setpos_abs_left, ^setpos_abs_top, $component6);
+    if_settext($string0, $component8);
+    %varclient_2 = 1;
+}

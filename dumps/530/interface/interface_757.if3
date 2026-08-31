@@ -1,0 +1,55 @@
+// 757:0
+[com_0]
+type=model
+x=41
+y=51
+width=32
+height=32
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=40
+modelangle_y=166
+modelangle_z=0
+modelzoom=796
+unknown100=0
+unknown101=796
+
+// 757:1
+[com_1]
+type=text
+x=132
+y=1
+width=370
+height=17
+textfont=q8_full
+text=Name
+textalignh=1
+colour=0x800000
+
+// 757:2
+[com_2]
+type=text
+x=132
+y=17
+width=370
+height=95
+textfont=q8_full
+text=Line1
+textalignh=1
+colour=0x000000
+
+// 757:3
+[com_3]
+type=text
+x=132
+y=111
+width=370
+height=17
+textfont=q8_full
+text=Click here to continue
+textalignh=1
+colour=0x0000ff
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^blue)
+

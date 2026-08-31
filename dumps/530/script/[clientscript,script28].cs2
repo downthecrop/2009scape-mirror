@@ -1,0 +1,6 @@
+// 28
+[clientscript,script28]
+if (%varplayer_281 < 1000 & %varplayerbit_4895 = 2) {
+    return;
+}
+if_setgraphic("loot_icon,2", interface_589:com_14);

@@ -1,0 +1,18 @@
+// 395:0
+[com_0]
+type=model
+width=1353
+height=1187
+xmode=abs_centre
+ymode=abs_centre
+model=model_35731
+modelorigin_x=12
+modelorigin_y=-3
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=450
+modelanim=seq_6169
+unknown100=64272
+unknown101=3000
+

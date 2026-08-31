@@ -1,0 +1,26 @@
+// 1796
+[clientscript,script1796](component $component0)
+%varclient_246 = 0;
+%varclient_247 = 0;
+%varclient_248 = false;
+%varclient_249 = false;
+%varclient_250 = false;
+%varclient_251 = false;
+if (map_members = false) {
+    %varclient_252 = 1;
+    %varclient_253 = false;
+    ~script1775;
+    ~script1778;
+} else {
+    %varclient_252 = 0;
+    %varclient_253 = false;
+}
+%varclient_254 = false;
+%varclient_255 = false;
+%varclient_256 = false;
+%varclient_257 = 0;
+%varclient_258 = false;
+%varclient_259 = 0;
+if_setonvartransmit("script1836{varplayer_1305, varplayer_1149}", $component0);
+if_setonvarctransmit("script1837{varclient_259}", $component0);
+if_setonvarcstrtransmit("script1838($component0){varclientstring_37}", $component0);

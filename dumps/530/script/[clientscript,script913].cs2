@@ -1,0 +1,20 @@
+// 913
+[clientscript,script913](component $component0)
+if_sethide(true, interface_728:com_20);
+if_sethide(true, interface_728:com_21);
+if_sethide(true, interface_728:com_22);
+if_sethide(true, interface_728:com_23);
+if_sethide(true, interface_728:com_17);
+if_sethide(true, interface_728:com_4);
+if_sethide(true, interface_728:com_5);
+if_sethide(true, interface_728:com_6);
+if_sethide(true, interface_728:com_7);
+if_sethide(true, interface_728:com_8);
+if_sethide(true, interface_728:com_9);
+if_sethide(true, interface_728:com_10);
+if_sethide(true, interface_728:com_11);
+if_sethide(true, interface_728:com_12);
+if_sethide(true, interface_728:com_13);
+if_sethide(true, interface_728:com_14);
+~script41(interface_728:com_25);
+if_sethide(true, $component0);

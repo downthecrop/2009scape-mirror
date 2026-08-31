@@ -1,0 +1,14 @@
+// 1830
+[clientscript,script1830](int $int0)
+if (map_members = false) {
+    return;
+}
+if (~script1820($int0) = false) {
+    return;
+}
+if (%varclient_253 = false) {
+    %varclient_253 = true;
+} else {
+    %varclient_253 = false;
+}
+~script1778;

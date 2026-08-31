@@ -1,0 +1,404 @@
+// 805:0
+[com_0]
+type=graphic
+x=7
+y=25
+width=498
+height=302
+graphic=tradebacking
+tiling=yes
+
+// 805:1
+[com_1]
+type=graphic
+x=-13
+y=51
+width=32
+height=251
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 805:2
+[com_2]
+type=graphic
+y=20
+width=32
+height=32
+graphic="v2_stone_borders,4"
+
+// 805:3
+[com_3]
+type=graphic
+x=492
+y=52
+width=32
+height=250
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 805:4
+[com_4]
+type=graphic
+x=32
+y=7
+width=448
+height=34
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 805:5
+[com_5]
+type=graphic
+x=32
+y=314
+width=448
+height=32
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 805:6
+[com_6]
+type=graphic
+y=302
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 805:7
+[com_7]
+type=graphic
+x=480
+y=20
+width=32
+height=32
+graphic="v2_stone_borders,5"
+
+// 805:8
+[com_8]
+type=graphic
+x=480
+y=302
+width=32
+height=32
+graphic="v2_stone_borders,7"
+
+// 805:9
+[com_9]
+type=graphic
+x=11
+y=35
+width=490
+height=32
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 805:10
+[com_10]
+type=graphic
+y=37
+width=32
+height=32
+graphic="v2_stone_borders,9"
+
+// 805:11
+[com_11]
+type=graphic
+x=480
+y=37
+width=32
+height=32
+graphic="v2_stone_borders,10"
+
+// 805:12
+[com_12]
+type=graphic
+x=485
+y=30
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 805:13
+[com_13]
+type=rectangle
+x=6
+y=300
+width=499
+height=27
+colour=0x000000
+fill=yes
+trans=200
+
+// 805:14
+[com_14]
+type=graphic
+x=241
+y=54
+width=32
+height=244
+graphic="v2_stone_borders,24"
+tiling=yes
+
+// 805:15
+[com_15]
+type=text
+x=19
+y=30
+width=474
+height=16
+textfont=b12_full
+text=Giving items to: Unknown
+textalignh=1
+textshadow=yes
+colour=0xff981f
+onvartransmit=script141
+onvartransmitlist=varplayer_1042,varplayer_1043
+
+// 805:16
+[com_16]
+type=layer
+x=223
+y=146
+width=65
+height=32
+op1=Accept
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+
+// 805:17
+[com_17]
+type=text
+x=223
+y=146
+width=65
+height=32
+textfont=p12_full
+text=Accept
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0x00c000
+
+// 805:18
+[com_18]
+type=layer
+x=223
+y=199
+width=65
+height=32
+op1=Decline
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script93(event_com)
+
+// 805:19
+[com_19]
+type=text
+x=223
+y=199
+width=65
+height=32
+textfont=p12_full
+text=Decline
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xc00000
+
+// 805:20
+[com_20]
+type=rectangle
+x=213
+y=78
+width=91
+height=47
+colour=0x221717
+fill=yes
+
+// 805:21
+[com_21]
+type=text
+x=215
+y=80
+width=82
+height=41
+textfont=p11_full
+text=Name
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 805:22
+[com_22]
+type=graphic
+x=238
+y=59
+width=40
+height=32
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 805:23
+[com_23]
+type=graphic
+x=207
+y=73
+width=32
+height=32
+graphic="v2_stone_borders,18"
+
+// 805:24
+[com_24]
+type=graphic
+x=274
+y=73
+width=32
+height=32
+graphic="v2_stone_borders,19"
+
+// 805:25
+[com_25]
+type=graphic
+x=207
+y=97
+width=32
+height=32
+graphic="v2_stone_borders,20"
+
+// 805:26
+[com_26]
+type=graphic
+x=274
+y=97
+width=32
+height=32
+graphic="v2_stone_borders,21"
+
+// 805:27
+[com_27]
+type=graphic
+x=239
+y=109
+width=35
+height=32
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 805:28
+[com_28]
+type=graphic
+x=6
+y=285
+width=499
+height=32
+graphic="v2_stone_borders,23"
+tiling=yes
+
+// 805:29
+[com_29]
+type=layer
+x=7
+y=26
+width=497
+height=301
+onload=script172
+
+// 805:30
+[com_30]
+type=layer
+x=21
+y=72
+width=185
+height=223
+
+// 805:31
+[com_31]
+type=layer
+x=21
+y=72
+width=185
+height=223
+
+// 805:32
+[com_32]
+type=text
+x=56
+y=56
+width=119
+height=14
+textfont=p12_full
+text=Your Offer
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 805:33
+[com_33]
+type=text
+x=131
+y=281
+width=252
+height=15
+textfont=p12_full
+text=Waiting for other player
+textalignh=1
+textshadow=yes
+colour=0xffffff
+
+// 805:34
+[com_34]
+type=layer
+x=466
+y=22
+width=32
+height=32
+hide=yes
+
+// 805:35
+[com_35]
+type=model
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 805:36
+[com_36]
+type=model
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 805:37
+[com_37]
+type=layer
+x=10
+y=10
+width=10
+height=10
+layer=com_38
+
+// 805:38
+[com_38]
+type=layer
+width=512
+height=334
+

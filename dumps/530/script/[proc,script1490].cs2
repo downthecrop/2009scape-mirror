@@ -1,0 +1,14 @@
+// 1490
+[proc,script1490]
+def_string $string0 = "";
+if (%varplayer_304 = 0) {
+    if_setgraphic("bank_buttons_new2,0", interface_762:com_14);
+    if_setgraphic("bank_buttons_new1,2", interface_762:com_15);
+    $string0 = "Switch to insert items mode";
+} else {
+    if_setgraphic("bank_buttons_new2,2", interface_762:com_14);
+    if_setgraphic("bank_buttons_new1,3", interface_762:com_15);
+    $string0 = "Switch to swap items mode";
+}
+if_setop(1, $string0, interface_762:com_14);
+if_setonmouserepeat("script38(event_com, interface_762:com_101, $string0, 25, 150)", interface_762:com_14);

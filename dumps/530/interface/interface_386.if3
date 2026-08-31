@@ -1,0 +1,23 @@
+// 386:0
+[com_0]
+type=model
+x=7
+y=7
+width=23079
+height=19873
+widthmode=proportion
+heightmode=proportion
+xmode=proportion_centre
+ymode=proportion_centre
+model=model_7128
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=162
+unknown100=65070
+unknown101=3000
+modelobjwidth=721
+modelobjheight=405
+

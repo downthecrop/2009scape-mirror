@@ -1,0 +1,460 @@
+// 1364
+[proc,script1364]
+def_int $int0 = 0;
+if (if_hassubmodal(interface_549:com_2, interface_378) = false) {
+    if (map_members = false) {
+        if_sethide(true, interface_22:com_5);
+    } else {
+        if_sethide(true, interface_17:com_4);
+    }
+} else if (map_members = false) {
+    if_sethide(false, interface_22:com_5);
+} else {
+    if_sethide(false, interface_17:com_4);
+}
+if (getwindowmode >= 2) {
+    if (if_gethide(interface_752:com_7) = true & (if_gethide(interface_752:com_3) = false | if_gethide(interface_752:com_6) = false)) {
+        if_sethide(false, interface_746:com_70);
+        if_setgraphic(chat_background, interface_752:com_1);
+        if_sethide(false, interface_752:com_1);
+        if_sethide(false, interface_752:com_2);
+        if_setalpha(false, interface_752:com_1);
+    } else if (if_hassub(interface_752:com_12) = true) {
+        if_sethide(false, interface_746:com_70);
+        if_sethide(false, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_11) = true) {
+        if_sethide(false, interface_746:com_70);
+        if_sethide(true, interface_752:com_12);
+        if_sethide(false, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_10) = true) {
+        if_sethide(false, interface_746:com_70);
+        if_sethide(true, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(false, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_9) = true) {
+        if_sethide(false, interface_746:com_70);
+        if_sethide(true, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(false, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_8) = true) {
+        if (%varclient_41 = -1) {
+            if_sethide(true, interface_746:com_70);
+        } else {
+            if_sethide(false, interface_746:com_70);
+        }
+        if_sethide(true, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(false, interface_752:com_8);
+        if_sethide(false, interface_752:com_1);
+        if (if_gethide(interface_137:com_0) = false) {
+            if_setgraphic(chat_background, interface_752:com_1);
+            if_setalpha(false, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_sethide(true, interface_752:com_2);
+            if_setgraphic(graphic_1247, interface_752:com_1);
+            if_setalpha(true, interface_752:com_1);
+            if_sethide(true, interface_137:com_53);
+            if_sethide(false, interface_137:com_54);
+            if_sethide(false, interface_137:com_55);
+            ~script1301(interface_137:com_57, interface_137:com_56);
+            while ($int0 < 100) {
+                if_settextshadow(true, enum(int, component, enum_579, $int0));
+                if_setcolour(^white, enum(int, component, enum_579, $int0));
+                $int0 = calc($int0 + 1);
+            }
+            if_settextshadow(true, interface_137:com_51);
+            if_setcolour(^white, interface_137:com_51);
+            if_settext("<chat_playername><img=3>: <col=7fa9ff><escape(%varclientstring_1)>*", interface_137:com_51);
+            ~script84;
+        }
+    }
+    ~script722;
+    if (if_hassub(interface_746:com_76) = true) {
+        if_sethide(true, interface_746:com_40);
+        if_sethide(true, interface_746:com_55);
+        if_sethide(true, interface_746:com_77);
+        if_sethide(true, interface_746:com_12);
+        if_sethide(false, interface_746:com_76);
+        if_sethide(false, interface_746:com_74);
+    } else {
+        if_sethide(false, interface_746:com_40);
+        if_sethide(false, interface_746:com_55);
+        if_sethide(false, interface_746:com_77);
+        if_sethide(false, interface_746:com_12);
+        if_sethide(true, interface_746:com_76);
+        if (if_gethide(interface_746:com_93) = false | if_gethide(interface_746:com_94) = false | if_gethide(interface_746:com_95) = false | if_gethide(interface_746:com_96) = false | if_gethide(interface_746:com_97) = false | if_gethide(interface_746:com_98) = false | if_gethide(interface_746:com_99) = false | if_gethide(interface_746:com_100) = false | if_gethide(interface_746:com_101) = false | if_gethide(interface_746:com_102) = false | if_gethide(interface_746:com_103) = false | if_gethide(interface_746:com_104) = false | if_gethide(interface_746:com_105) = false | if_gethide(interface_746:com_106) = false | if_gethide(interface_746:com_107) = false) {
+            if_sethide(false, interface_746:com_74);
+        } else {
+            if_sethide(true, interface_746:com_74);
+        }
+    }
+    if (if_hassub(interface_746:com_93) = true) {
+        if_sethide(false, interface_746:com_56);
+        if_sethide(false, interface_746:com_41);
+    } else {
+        if_sethide(true, interface_746:com_56);
+        if_sethide(true, interface_746:com_41);
+    }
+    if (if_hassub(interface_746:com_94) = true) {
+        if_sethide(false, interface_746:com_57);
+        if_sethide(false, interface_746:com_42);
+    } else {
+        if_sethide(true, interface_746:com_57);
+        if_sethide(true, interface_746:com_42);
+    }
+    if (if_hassub(interface_746:com_95) = true) {
+        if_sethide(false, interface_746:com_58);
+        if_sethide(false, interface_746:com_43);
+    } else {
+        if_sethide(true, interface_746:com_58);
+        if_sethide(true, interface_746:com_43);
+    }
+    if (if_hassub(interface_746:com_96) = true) {
+        if_sethide(false, interface_746:com_59);
+        if_sethide(false, interface_746:com_44);
+    } else {
+        if_sethide(true, interface_746:com_59);
+        if_sethide(true, interface_746:com_44);
+    }
+    if (if_hassub(interface_746:com_97) = true) {
+        if_sethide(false, interface_746:com_60);
+        if_sethide(false, interface_746:com_45);
+    } else {
+        if_sethide(true, interface_746:com_60);
+        if_sethide(true, interface_746:com_45);
+    }
+    if (if_hassub(interface_746:com_98) = true) {
+        if_sethide(false, interface_746:com_61);
+        if_sethide(false, interface_746:com_46);
+    } else {
+        if_sethide(true, interface_746:com_61);
+        if_sethide(true, interface_746:com_46);
+    }
+    if (if_hassub(interface_746:com_99) = true) {
+        if_sethide(false, interface_746:com_62);
+        if_sethide(false, interface_746:com_47);
+    } else {
+        if_sethide(true, interface_746:com_62);
+        if_sethide(true, interface_746:com_47);
+    }
+    if (if_hassub(interface_746:com_100) = true) {
+        if_sethide(false, interface_746:com_63);
+        if_sethide(false, interface_746:com_48);
+    } else {
+        if_sethide(true, interface_746:com_63);
+        if_sethide(true, interface_746:com_48);
+    }
+    if (if_hassub(interface_746:com_101) = true) {
+        if_sethide(false, interface_746:com_64);
+        if_sethide(false, interface_746:com_49);
+    } else {
+        if_sethide(true, interface_746:com_64);
+        if_sethide(true, interface_746:com_49);
+    }
+    if (if_hassub(interface_746:com_102) = true) {
+        if_sethide(false, interface_746:com_65);
+        if_sethide(false, interface_746:com_50);
+    } else {
+        if_sethide(true, interface_746:com_65);
+        if_sethide(true, interface_746:com_50);
+    }
+    if (if_hassub(interface_746:com_103) = true) {
+        if_sethide(false, interface_746:com_66);
+        if_sethide(false, interface_746:com_51);
+    } else {
+        if_sethide(true, interface_746:com_66);
+        if_sethide(true, interface_746:com_51);
+    }
+    if (if_hassub(interface_746:com_104) = true) {
+        if_sethide(false, interface_746:com_67);
+        if_sethide(false, interface_746:com_52);
+    } else {
+        if_sethide(true, interface_746:com_67);
+        if_sethide(true, interface_746:com_52);
+    }
+    if (if_hassub(interface_746:com_105) = true) {
+        if_sethide(false, interface_746:com_68);
+        if_sethide(false, interface_746:com_53);
+    } else {
+        if_sethide(true, interface_746:com_68);
+        if_sethide(true, interface_746:com_53);
+    }
+    if (if_hassub(interface_746:com_106) = true) {
+        if_sethide(false, interface_746:com_69);
+        if_sethide(false, interface_746:com_54);
+    } else {
+        if_sethide(true, interface_746:com_69);
+        if_sethide(true, interface_746:com_54);
+    }
+    if_sethide(false, interface_746:com_7);
+    ~script1313;
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_0);
+    if_setsize(115, 35, ^setsize_abs, ^setsize_abs, interface_745:com_0);
+    if_setposition(80, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_1);
+    if_setposition(40, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_2);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_3);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_4);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_5);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_6);
+    if_setsize(35, 35, ^setsize_abs, ^setsize_abs, interface_745:com_1);
+    if_setsize(35, 35, ^setsize_abs, ^setsize_abs, interface_745:com_2);
+    if_setsize(35, 35, ^setsize_abs, ^setsize_abs, interface_745:com_3);
+    if_setsize(35, 35, ^setsize_abs, ^setsize_abs, interface_745:com_4);
+    if_setsize(35, 35, ^setsize_abs, ^setsize_abs, interface_745:com_5);
+    if_setsize(35, 35, ^setsize_abs, ^setsize_abs, interface_745:com_6);
+    if_setgraphic(overlay_multiway_big, interface_745:com_1);
+    if_setgraphic(graphic_1562, interface_745:com_2);
+    if_setgraphic(graphic_1579, interface_745:com_3);
+    if_setgraphic(graphic_1580, interface_745:com_4);
+    if_setgraphic(graphic_1581, interface_745:com_6);
+} else {
+    if (%varclient_41 = -1) {
+        %varclient_41 = 0;
+        ~script181(0);
+        ~script178;
+        ~script84;
+        ~script89;
+    }
+    if_setgraphic(chat_background, interface_752:com_1);
+    if_sethide(false, interface_752:com_1);
+    if_sethide(false, interface_752:com_2);
+    if_setalpha(false, interface_752:com_1);
+    if (if_hassub(interface_752:com_12) = true) {
+        if_sethide(false, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+    } else if (if_hassub(interface_752:com_11) = true) {
+        if_sethide(true, interface_752:com_12);
+        if_sethide(false, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+    } else if (if_hassub(interface_752:com_10) = true) {
+        if_sethide(true, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(false, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+    } else if (if_hassub(interface_752:com_9) = true) {
+        if_sethide(true, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(false, interface_752:com_9);
+        if_sethide(true, interface_752:com_8);
+    } else if (if_hassub(interface_752:com_8) = true) {
+        if_sethide(true, interface_752:com_12);
+        if_sethide(true, interface_752:com_11);
+        if_sethide(true, interface_752:com_10);
+        if_sethide(true, interface_752:com_9);
+        if_sethide(false, interface_752:com_8);
+        if_sethide(false, interface_137:com_53);
+        if_sethide(true, interface_137:com_54);
+        if_sethide(true, interface_137:com_55);
+        ~script1301(interface_137:com_57, interface_137:com_56);
+        while ($int0 < 100) {
+            if_settextshadow(false, enum(int, component, enum_579, $int0));
+            if_setcolour(^black, enum(int, component, enum_579, $int0));
+            $int0 = calc($int0 + 1);
+        }
+        if_settextshadow(false, interface_137:com_51);
+        if_setcolour(^black, interface_137:com_51);
+        if_settext("<chat_playername><img=3>: <col=0000ff><escape(%varclientstring_1)>*", interface_137:com_51);
+        ~script84;
+    }
+    if (if_hassub(interface_548:com_80) = true) {
+        if_sethide(true, interface_548:com_18);
+        if_sethide(true, interface_548:com_36);
+        if_sethide(true, interface_548:com_81);
+        if_sethide(true, interface_548:com_69);
+    } else {
+        if_sethide(false, interface_548:com_18);
+        if_sethide(false, interface_548:com_36);
+        if_sethide(false, interface_548:com_81);
+        if_sethide(false, interface_548:com_69);
+    }
+    if (if_hassub(interface_548:com_83) = true) {
+        if_sethide(false, interface_548:com_45);
+        if_sethide(false, interface_548:com_38);
+    } else {
+        if_sethide(true, interface_548:com_45);
+        if_sethide(true, interface_548:com_38);
+    }
+    if (if_hassub(interface_548:com_84) = true) {
+        if_sethide(false, interface_548:com_46);
+        if_sethide(false, interface_548:com_39);
+    } else {
+        if_sethide(true, interface_548:com_46);
+        if_sethide(true, interface_548:com_39);
+    }
+    if (if_hassub(interface_548:com_85) = true) {
+        if_sethide(false, interface_548:com_47);
+        if_sethide(false, interface_548:com_40);
+    } else {
+        if_sethide(true, interface_548:com_47);
+        if_sethide(true, interface_548:com_40);
+    }
+    if (if_hassub(interface_548:com_86) = true) {
+        if_sethide(false, interface_548:com_48);
+        if_sethide(false, interface_548:com_41);
+    } else {
+        if_sethide(true, interface_548:com_48);
+        if_sethide(true, interface_548:com_41);
+    }
+    if (if_hassub(interface_548:com_87) = true) {
+        if_sethide(false, interface_548:com_49);
+        if_sethide(false, interface_548:com_42);
+    } else {
+        if_sethide(true, interface_548:com_49);
+        if_sethide(true, interface_548:com_42);
+    }
+    if (if_hassub(interface_548:com_88) = true) {
+        if_sethide(false, interface_548:com_50);
+        if_sethide(false, interface_548:com_43);
+    } else {
+        if_sethide(true, interface_548:com_50);
+        if_sethide(true, interface_548:com_43);
+    }
+    if (if_hassub(interface_548:com_89) = true) {
+        if_sethide(false, interface_548:com_51);
+        if_sethide(false, interface_548:com_44);
+    } else {
+        if_sethide(true, interface_548:com_51);
+        if_sethide(true, interface_548:com_44);
+    }
+    if (if_hassub(interface_548:com_90) = true) {
+        if_sethide(false, interface_548:com_27);
+        if_sethide(false, interface_548:com_20);
+    } else {
+        if_sethide(true, interface_548:com_27);
+        if_sethide(true, interface_548:com_20);
+    }
+    if (if_hassub(interface_548:com_91) = true) {
+        if_sethide(false, interface_548:com_28);
+        if_sethide(false, interface_548:com_21);
+    } else {
+        if_sethide(true, interface_548:com_28);
+        if_sethide(true, interface_548:com_21);
+    }
+    if (if_hassub(interface_548:com_92) = true) {
+        if_sethide(false, interface_548:com_29);
+        if_sethide(false, interface_548:com_22);
+    } else {
+        if_sethide(true, interface_548:com_29);
+        if_sethide(true, interface_548:com_22);
+    }
+    if (if_hassub(interface_548:com_93) = true) {
+        if_sethide(false, interface_548:com_30);
+        if_sethide(false, interface_548:com_23);
+    } else {
+        if_sethide(true, interface_548:com_30);
+        if_sethide(true, interface_548:com_23);
+    }
+    if (if_hassub(interface_548:com_94) = true) {
+        if_sethide(false, interface_548:com_31);
+        if_sethide(false, interface_548:com_24);
+    } else {
+        if_sethide(true, interface_548:com_31);
+        if_sethide(true, interface_548:com_24);
+    }
+    if (if_hassub(interface_548:com_95) = true) {
+        if_sethide(false, interface_548:com_32);
+        if_sethide(false, interface_548:com_25);
+    } else {
+        if_sethide(true, interface_548:com_32);
+        if_sethide(true, interface_548:com_25);
+    }
+    if (if_hassub(interface_548:com_96) = true) {
+        if_sethide(false, interface_548:com_33);
+        if_sethide(false, interface_548:com_26);
+    } else {
+        if_sethide(true, interface_548:com_33);
+        if_sethide(true, interface_548:com_26);
+    }
+    ~script1337;
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_0);
+    if_setsize(82, 25, ^setsize_abs, ^setsize_abs, interface_745:com_0);
+    if_setposition(57, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_1);
+    if_setposition(28, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_2);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_3);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_4);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_5);
+    if_setposition(0, 0, ^setpos_abs_left, ^setpos_abs_top, interface_745:com_6);
+    if_setsize(25, 25, ^setsize_abs, ^setsize_abs, interface_745:com_1);
+    if_setsize(25, 25, ^setsize_abs, ^setsize_abs, interface_745:com_2);
+    if_setsize(25, 25, ^setsize_abs, ^setsize_abs, interface_745:com_3);
+    if_setsize(25, 25, ^setsize_abs, ^setsize_abs, interface_745:com_4);
+    if_setsize(25, 25, ^setsize_abs, ^setsize_abs, interface_745:com_5);
+    if_setsize(25, 25, ^setsize_abs, ^setsize_abs, interface_745:com_6);
+    if_setgraphic(overlay_multiway, interface_745:com_1);
+    if_setgraphic(assist_overlay, interface_745:com_2);
+    if_setgraphic(graphic_1576, interface_745:com_3);
+    if_setgraphic(graphic_1578, interface_745:com_4);
+    if_setgraphic(graphic_1577, interface_745:com_6);
+    if (if_hassuboverlay(interface_548:com_11, interface_759) = true) {
+        if_sethide(false, interface_548:com_74);
+        if_sethide(false, interface_548:com_15);
+        if_sethide(false, interface_548:com_77);
+        if_sethide(false, interface_548:com_82);
+        if_sethide(false, interface_548:com_37);
+        if_sethide(false, interface_548:com_19);
+    } else {
+        if_sethide(true, interface_548:com_74);
+        if_sethide(true, interface_548:com_15);
+        if_sethide(true, interface_548:com_77);
+        if_sethide(true, interface_548:com_82);
+        if_sethide(true, interface_548:com_37);
+        if_sethide(true, interface_548:com_19);
+    }
+}

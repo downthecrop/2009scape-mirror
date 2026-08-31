@@ -1,0 +1,12 @@
+// 561
+[clientscript,script561]
+if (%varplayerbit_4157 = 1) {
+    if_setgraphic("radio_buttons,1", interface_640:com_22);
+} else {
+    if_setgraphic("radio_buttons,0", interface_640:com_22);
+}
+if (%varplayerbit_4157 = 2) {
+    if_setgraphic("radio_buttons,1", interface_640:com_21);
+} else {
+    if_setgraphic("radio_buttons,0", interface_640:com_21);
+}

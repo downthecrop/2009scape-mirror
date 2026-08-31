@@ -1,0 +1,7 @@
+// 677
+[clientscript,script677]
+if (%varplayer_1135 = 0) {
+    if_settext("", interface_647:com_24);
+} else {
+    if_settext(tostring(%varplayer_1135), interface_647:com_24);
+}

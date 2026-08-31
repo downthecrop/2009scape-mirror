@@ -1,0 +1,806 @@
+// 493:0
+[com_0]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+
+// 493:1
+[com_1]
+type=model
+x=3
+y=5
+width=55
+height=54
+layer=com_53
+model=model_20571
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64343
+unknown101=2160
+onmouseover=script67(interface_493:com_1, model_20571)
+onmouseleave=script67(interface_493:com_1, null)
+
+// 493:2
+[com_2]
+type=model
+x=9
+y=2
+width=45
+height=57
+layer=com_54
+model=model_20565
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64343
+unknown101=2161
+onmouseover=script67(interface_493:com_2, model_20565)
+onmouseleave=script67(interface_493:com_2, null)
+
+// 493:3
+[com_3]
+type=model
+x=5
+y=3
+width=49
+height=60
+layer=com_55
+model=model_20568
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64340
+unknown101=2162
+onmouseover=script67(interface_493:com_3, model_20568)
+onmouseleave=script67(interface_493:com_3, null)
+
+// 493:4
+[com_4]
+type=model
+x=-1
+width=63
+height=61
+layer=com_20
+model=model_20562
+modelorigin_x=1
+modelorigin_y=-1
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64339
+unknown101=2163
+onmouseover=script67(interface_493:com_4, model_20562)
+onmouseleave=script67(interface_493:com_4, null)
+
+// 493:5
+[com_5]
+type=model
+x=2
+y=22
+width=510
+height=289
+layer=com_0
+model=model_19339
+modelorigin_x=5
+modelorigin_y=14
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=721
+unknown100=64781
+unknown101=1468
+
+// 493:6
+[com_6]
+type=text
+x=51
+y=28
+width=225
+height=17
+layer=com_0
+textfont=b12_full
+text=Player 2 Interface Screen
+textshadow=yes
+colour=0xff981f
+
+// 493:7
+[com_7]
+type=text
+x=401
+y=235
+width=40
+height=14
+layer=com_0
+textfont=p12_full
+text=Decline
+textshadow=yes
+colour=0xff981f
+op1=Decline
+onmouseover=script45(interface_493:com_7, ^white)
+onmouseleave=script45(interface_493:com_7, 0xff981f)
+
+// 493:8
+[com_8]
+type=model
+x=225
+y=94
+width=60
+height=58
+layer=com_0
+model=model_20560
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64351
+unknown101=2162
+op1=Attacker
+
+// 493:9
+[com_9]
+type=text
+x=227
+y=153
+width=60
+height=14
+layer=com_0
+textfont=p12_full
+text=Attacker
+textalignh=1
+textshadow=yes
+colour=0xff981f
+op1=Attacker
+onmouseover=script45(interface_493:com_9, ^white)
+onmouseleave=script45(interface_493:com_9, 0xff981f)
+
+// 493:10
+[com_10]
+type=model
+x=295
+y=105
+width=47
+height=56
+layer=com_0
+model=model_20567
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64351
+unknown101=2161
+op1=Defender
+
+// 493:11
+[com_11]
+type=text
+x=280
+y=167
+width=75
+height=15
+layer=com_0
+textfont=p12_full
+text=Defender
+textalignh=1
+textshadow=yes
+colour=0xff981f
+op1=Defender
+onmouseover=script45(interface_493:com_11, ^white)
+onmouseleave=script45(interface_493:com_11, 0xff981f)
+
+// 493:12
+[com_12]
+type=text
+x=351
+y=154
+width=60
+height=15
+layer=com_0
+textfont=p12_full
+text=Collector
+textalignh=1
+textshadow=yes
+colour=0xff981f
+op1=Collector
+onmouseover=script45(interface_493:com_12, ^white)
+onmouseleave=script45(interface_493:com_12, 0xff981f)
+
+// 493:13
+[com_13]
+type=model
+x=361
+y=95
+width=41
+height=53
+layer=com_0
+model=model_20564
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64356
+unknown101=2160
+op1=Collector
+
+// 493:14
+[com_14]
+type=model
+x=420
+y=108
+width=51
+height=51
+layer=com_0
+model=model_20570
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=585
+modelangle_y=0
+modelangle_z=0
+modelzoom=1074
+unknown100=64353
+unknown101=2159
+op1=Healer
+
+// 493:15
+[com_15]
+type=text
+x=416
+y=168
+width=60
+height=15
+layer=com_0
+textfont=p12_full
+text=Healer
+textalignh=1
+textshadow=yes
+colour=0xff981f
+op1=Healer
+onmouseover=script45(interface_493:com_15, ^white)
+onmouseleave=script45(interface_493:com_15, 0xff981f)
+
+// 493:16
+[com_16]
+type=model
+x=317
+y=187
+width=43
+height=45
+layer=com_0
+model=model_8685
+modelorigin_x=2
+modelorigin_y=-2
+modelangle_x=444
+modelangle_y=2020
+modelangle_z=0
+modelzoom=1168
+unknown100=64224
+unknown101=2344
+op1=Accept
+onmouseover=script67(interface_493:com_16, model_20558)
+onmouseleave=script67(interface_493:com_16, model_8685)
+
+// 493:17
+[com_17]
+type=text
+x=319
+y=234
+width=39
+height=14
+layer=com_0
+textfont=p12_full
+text=Accept
+textshadow=yes
+colour=0xff981f
+op1=Accept
+onmouseover=script45(interface_493:com_17, ^white)
+onmouseleave=script45(interface_493:com_17, 0xff981f)
+
+// 493:18
+[com_18]
+type=model
+x=399
+y=187
+width=43
+height=45
+layer=com_0
+model=model_8684
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=501
+modelangle_y=2014
+modelangle_z=0
+modelzoom=1296
+unknown100=64068
+unknown101=2593
+op1=Decline
+onmouseover=script67(interface_493:com_18, model_20530)
+onmouseleave=script67(interface_493:com_18, model_8684)
+
+// 493:19
+[com_19]
+type=text
+x=278
+y=73
+width=195
+height=14
+layer=com_0
+textfont=b12_full
+text=None
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 493:20
+[com_20]
+type=layer
+x=224
+y=93
+width=63
+height=65
+layer=com_0
+hide=yes
+
+// 493:21
+[com_21]
+type=layer
+x=278
+y=251
+width=191
+height=32
+layer=com_0
+hide=yes
+
+// 493:22
+[com_22]
+type=text
+x=279
+y=252
+width=189
+height=30
+layer=com_0
+textfont=p12_full
+text=Waiting for player 1 to accept...
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 493:23
+[com_23]
+type=text
+x=81
+y=43
+width=103
+height=15
+layer=com_0
+textfont=b12_full
+text=The team:
+textshadow=yes
+colour=0xff981f
+
+// 493:24
+[com_24]
+type=text
+x=44
+y=75
+width=50
+height=15
+layer=com_0
+textfont=p12_full
+text=Name
+textshadow=yes
+colour=0xff981f
+
+// 493:25
+[com_25]
+type=text
+x=44
+y=93
+width=44
+height=15
+layer=com_0
+textfont=p12_full
+text=Role
+textshadow=yes
+colour=0xff981f
+
+// 493:26
+[com_26]
+type=text
+x=44
+y=59
+width=101
+height=15
+layer=com_0
+textfont=p12_full
+text=--- Leader ---
+textshadow=yes
+colour=0xff981f
+
+// 493:27
+[com_27]
+type=text
+x=45
+y=117
+width=101
+height=15
+layer=com_0
+textfont=p12_full
+text=--- Followers ---
+textshadow=yes
+colour=0xff981f
+
+// 493:28
+[com_28]
+type=text
+x=93
+y=75
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:29
+[com_29]
+type=text
+x=94
+y=133
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:30
+[com_30]
+type=text
+x=94
+y=174
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:31
+[com_31]
+type=text
+x=94
+y=214
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:32
+[com_32]
+type=text
+x=93
+y=256
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:33
+[com_33]
+type=text
+x=93
+y=93
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:34
+[com_34]
+type=text
+x=94
+y=151
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:35
+[com_35]
+type=text
+x=94
+y=192
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:36
+[com_36]
+type=text
+x=94
+y=232
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:37
+[com_37]
+type=text
+x=93
+y=274
+width=108
+height=15
+layer=com_0
+textfont=p12_full
+text=none set
+textshadow=yes
+colour=0xff981f
+
+// 493:38
+[com_38]
+type=text
+x=201
+y=58
+width=30
+height=15
+layer=com_0
+textfont=p12_full
+text=Wave
+textshadow=yes
+colour=0xff981f
+
+// 493:39
+[com_39]
+type=text
+x=209
+y=79
+width=8
+height=14
+layer=com_0
+textfont=p12_full
+text=0
+textshadow=yes
+colour=0xff981f
+
+// 493:40
+[com_40]
+type=text
+x=210
+y=141
+width=8
+height=14
+layer=com_0
+textfont=p12_full
+text=0
+textshadow=yes
+colour=0xff981f
+
+// 493:41
+[com_41]
+type=text
+x=210
+y=183
+width=8
+height=14
+layer=com_0
+textfont=p12_full
+text=0
+textshadow=yes
+colour=0xff981f
+
+// 493:42
+[com_42]
+type=text
+x=210
+y=223
+width=8
+height=14
+layer=com_0
+textfont=p12_full
+text=0
+textshadow=yes
+colour=0xff981f
+
+// 493:43
+[com_43]
+type=text
+x=210
+y=267
+width=8
+height=14
+layer=com_0
+textfont=p12_full
+text=0
+textshadow=yes
+colour=0xff981f
+
+// 493:44
+[com_44]
+type=text
+x=279
+y=38
+width=196
+height=31
+layer=com_0
+textfont=b12_full
+text=Please select a role!<br>Current Role:
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 493:45
+[com_45]
+type=text
+x=45
+y=133
+width=50
+height=15
+layer=com_0
+textfont=p12_full
+text=Name
+textshadow=yes
+colour=0xff981f
+
+// 493:46
+[com_46]
+type=text
+x=45
+y=151
+width=44
+height=15
+layer=com_0
+textfont=p12_full
+text=Role
+textshadow=yes
+colour=0xff981f
+
+// 493:47
+[com_47]
+type=text
+x=45
+y=174
+width=50
+height=15
+layer=com_0
+textfont=p12_full
+text=Name
+textshadow=yes
+colour=0xff981f
+
+// 493:48
+[com_48]
+type=text
+x=45
+y=192
+width=44
+height=15
+layer=com_0
+textfont=p12_full
+text=Role
+textshadow=yes
+colour=0xff981f
+
+// 493:49
+[com_49]
+type=text
+x=45
+y=214
+width=50
+height=15
+layer=com_0
+textfont=p12_full
+text=Name
+textshadow=yes
+colour=0xff981f
+
+// 493:50
+[com_50]
+type=text
+x=45
+y=232
+width=44
+height=15
+layer=com_0
+textfont=p12_full
+text=Role
+textshadow=yes
+colour=0xff981f
+
+// 493:51
+[com_51]
+type=text
+x=44
+y=256
+width=50
+height=15
+layer=com_0
+textfont=p12_full
+text=Name
+textshadow=yes
+colour=0xff981f
+
+// 493:52
+[com_52]
+type=text
+x=44
+y=274
+width=44
+height=15
+layer=com_0
+textfont=p12_full
+text=Role
+textshadow=yes
+colour=0xff981f
+
+// 493:53
+[com_53]
+type=layer
+x=415
+y=101
+width=63
+height=65
+layer=com_0
+hide=yes
+
+// 493:54
+[com_54]
+type=layer
+x=350
+y=91
+width=63
+height=65
+layer=com_0
+hide=yes
+
+// 493:55
+[com_55]
+type=layer
+x=289
+y=100
+width=63
+height=65
+layer=com_0
+hide=yes
+

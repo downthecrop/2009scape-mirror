@@ -1,0 +1,12 @@
+// 1398
+[clientscript,script1398](component $component0, model $model1)
+if_setmodel(model_10111, interface_282:com_19);
+if_setmodel(model_10113, interface_282:com_20);
+if_setmodel(model_10109, interface_282:com_18);
+if_setmodel(model_10107, interface_282:com_17);
+if_setmodel(model_10105, interface_282:com_16);
+if_setmodel(model_10103, interface_282:com_15);
+if_setmodel(model_10101, interface_282:com_14);
+if_setmodel(model_10099, interface_282:com_13);
+if_setmodel($model1, $component0);
+return;

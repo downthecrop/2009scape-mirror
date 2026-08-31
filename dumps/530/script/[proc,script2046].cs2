@@ -1,0 +1,7 @@
+// 2046
+[proc,script2046]
+cc_deleteall(interface_755:com_6);
+cc_deleteall(interface_755:com_7);
+cc_deleteall(interface_755:com_8);
+cc_deleteall(interface_755:com_9);
+cc_deleteall(interface_755:com_10);

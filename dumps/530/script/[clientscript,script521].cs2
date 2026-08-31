@@ -1,0 +1,11 @@
+// 521
+[clientscript,script521]
+%varclient_54 = stat_visible_xp(runecraft);
+%varclient_55 = stat_visible_xp(crafting);
+%varclient_57 = stat_visible_xp(fletching);
+%varclient_58 = stat_visible_xp(cooking);
+%varclient_60 = stat_visible_xp(construction);
+%varclient_61 = stat_visible_xp(herblore);
+%varclient_64 = stat_visible_xp(magic);
+%varclient_66 = stat_visible_xp(smithing);
+%varclient_62 = stat_visible_xp(farming);

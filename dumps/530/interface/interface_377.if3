@@ -1,0 +1,82 @@
+// 377:0
+[com_0]
+type=model
+x=1
+y=-22
+width=152
+height=97
+layer=com_3
+model=model_8854
+modelorigin_x=23
+modelorigin_y=4
+modelangle_x=247
+modelangle_y=2030
+modelangle_z=0
+modelzoom=400
+unknown100=64313
+unknown101=3000
+
+// 377:1
+[com_1]
+type=model
+x=121
+y=-13
+width=130
+height=73
+layer=com_3
+model=model_8855
+modelorigin_x=-2
+modelorigin_y=12
+modelangle_x=236
+modelangle_y=2046
+modelangle_z=0
+modelzoom=537
+unknown100=64134
+unknown101=3000
+
+// 377:2
+[com_2]
+type=layer
+x=40
+y=17
+width=165
+height=20
+layer=com_3
+
+// 377:3
+[com_3]
+type=layer
+y=8
+width=224
+height=73
+
+// 377:4
+[com_4]
+type=text
+x=131
+y=2
+width=29
+height=12
+layer=com_2
+textfont=p11_full
+text=****
+textshadow=yes
+colour=0xe1981f
+onvartransmit=script1102
+onvartransmitlist=varplayer_535
+
+// 377:5
+[com_5]
+type=text
+x=6
+y=2
+width=116
+height=12
+layer=com_2
+textfont=p11_full
+text=<col=00ff00>* <col=ffff00>Tai Bwo Favour <col=00ff00>*
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff981f
+

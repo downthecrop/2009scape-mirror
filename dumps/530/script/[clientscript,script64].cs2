@@ -1,0 +1,6 @@
+// 64
+[clientscript,script64]
+if_settext("<tostring(%varplayerbit_3637)>/<tostring(163)>", interface_532:com_1);
+if (%varplayerbit_3637 = 163) {
+    if_setcolour(^green, interface_532:com_1);
+}

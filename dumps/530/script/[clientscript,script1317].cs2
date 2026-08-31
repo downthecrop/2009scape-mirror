@@ -1,0 +1,14 @@
+// 1317
+[clientscript,script1317]
+if_setmodel(model_18789, interface_262:com_0);
+if_setmodel(model_18813, interface_262:com_28);
+if_setmodel(model_18814, interface_262:com_29);
+if (%varplayerbit_4835 < 1) {
+    if_setmodel(null, interface_262:com_29);
+}
+if (%varplayerbit_4835 < 2) {
+    if_setmodel(null, interface_262:com_28);
+}
+if (%varplayerbit_4835 < 3) {
+    if_setmodel(null, interface_262:com_0);
+}

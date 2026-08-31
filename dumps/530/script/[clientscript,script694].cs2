@@ -1,0 +1,10 @@
+// 694
+[clientscript,script694](string $string0, string $string1, string $string2)
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string0, 25, 180)", interface_335:com_41);
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string0, 25, 180)", interface_335:com_73);
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string0, 25, 180)", interface_335:com_74);
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string1, 25, 180)", interface_335:com_40);
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string1, 25, 180)", interface_335:com_75);
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string2, 25, 180)", interface_335:com_42);
+if_setonmouserepeat("script38(event_com, interface_335:com_81, $string2, 25, 180)", interface_335:com_76);
+%varclient_2 = 0;

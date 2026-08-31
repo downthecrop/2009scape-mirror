@@ -1,0 +1,42 @@
+// 1048
+[clientscript,script1048](int $key0, char $char1, component $component2, component $component3, chatphrase $chatphrase4)
+if ($key0 = ^key_escape) {
+    ~script1054;
+    return;
+}
+if ($key0 = ^key_home) {
+    ~script1050(%varclient_126, %varclientstring_27);
+    return;
+}
+def_int $int5 = string_length(tostring(%varclient_129));
+def_int $int6 = string_indexof_char("0123456789", $char1, 0);
+if ($key0 = ^key_return) {
+    if ($int5 > 0) {
+        ~script1074($component2, $chatphrase4, %varclient_129);
+    } else {
+        ~script1054;
+    }
+    return;
+}
+if ($key0 = ^key_backspace) {
+    if ($int5 > 0) {
+        %varclient_129 = calc(%varclient_129 / 10);
+    } else if (%varclient_127 = 0) {
+        ~script1054;
+    } else {
+        if_sethide(true, interface_137:com_7);
+        if_sethide(true, interface_137:com_9);
+        if_sethide(true, interface_137:com_13);
+        if_sethide(false, interface_137:com_17);
+        if_sethide(false, interface_137:com_1);
+        if_sethide(true, interface_137:com_3);
+        return;
+    }
+} else if ($int6 >= 0 & $int5 < 10 & calc(%varclient_129 * 10 + $int6) > 0) {
+    %varclient_129 = calc(%varclient_129 * 10 + $int6);
+}
+if (%varclient_129 > 0) {
+    if_settext("Please enter a value: <tostring(%varclient_129)>*", $component3);
+} else {
+    if_settext("Please enter a value: *", $component3);
+}

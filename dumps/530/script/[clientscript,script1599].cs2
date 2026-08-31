@@ -1,0 +1,14 @@
+// 1599
+[clientscript,script1599]
+def_int $int0 = 11;
+def_enum $enum1 = enum_1130;
+if (gender = 1) {
+    $int0 = 10;
+    $enum1 = enum_1131;
+}
+if (%varclient_90 = 0) {
+    %varclient_90 = $int0;
+} else {
+    %varclient_90 = calc(%varclient_90 - 1);
+}
+baseidkit(3, enum(int, idkit, $enum1, %varclient_90));

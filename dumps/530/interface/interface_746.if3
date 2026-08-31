@@ -1,0 +1,1210 @@
+// 746:0
+[com_0]
+type=layer
+contenttype=1337
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+
+// 746:1
+[com_1]
+type=layer
+contenttype=1405
+x=225
+y=5
+width=150
+height=100
+xmode=abs_right
+
+// 746:2
+[com_2]
+type=layer
+width=160
+height=158
+xmode=abs_right
+noclickthrough=yes
+
+// 746:3
+[com_3]
+type=layer
+width=219
+height=164
+widthmode=minus
+heightmode=minus
+
+// 746:4
+[com_4]
+type=layer
+width=16384
+height=16384
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+onload=script1433
+onvartransmit=script1094
+onvartransmitlist=varplayer_1241
+
+// 746:5
+[com_5]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+onload=script725(event_com, interface_746:com_6)
+
+// 746:6
+[com_6]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+
+// 746:7
+[com_7]
+type=layer
+width=220
+height=186
+xmode=abs_right
+noclickthrough=yes
+
+// 746:8
+[com_8]
+type=graphic
+contenttype=1338
+x=7
+y=5
+width=152
+height=152
+xmode=abs_right
+layer=com_7
+graphic=mapmask
+
+// 746:9
+[com_9]
+type=graphic
+width=164
+height=164
+xmode=abs_right
+layer=com_7
+graphic=map_ring
+
+// 746:10
+[com_10]
+type=graphic
+contenttype=1339
+x=131
+y=5
+width=33
+height=33
+xmode=abs_right
+layer=com_7
+graphic=graphic_1186
+
+// 746:11
+[com_11]
+type=graphic
+x=126
+width=43
+height=43
+xmode=abs_right
+layer=com_7
+graphic=compass_ring
+
+// 746:12
+[com_12]
+type=graphic
+x=1
+y=1
+width=22
+height=21
+xmode=abs_right
+layer=com_7
+graphic="fullscreen_logout_button,0"
+op1=Log Out
+onmouseover=script44(event_com, "fullscreen_logout_button,1")
+onmouseleave=script44(event_com, "fullscreen_logout_button,0")
+onop=script1303(99)
+
+// 746:13
+[com_13]
+type=layer
+x=152
+y=38
+width=57
+height=34
+xmode=abs_right
+layer=com_7
+
+// 746:14
+[com_14]
+type=layer
+x=155
+y=74
+width=57
+height=34
+xmode=abs_right
+layer=com_7
+
+// 746:15
+[com_15]
+type=layer
+x=143
+y=107
+width=57
+height=34
+xmode=abs_right
+layer=com_7
+noclickthrough=yes
+
+// 746:16
+[com_16]
+type=layer
+x=120
+y=136
+width=57
+height=34
+xmode=abs_right
+layer=com_7
+
+// 746:17
+[com_17]
+type=layer
+x=5
+y=172
+width=115
+height=35
+xmode=abs_right
+
+// 746:18
+[com_18]
+type=layer
+x=42
+y=177
+width=38
+height=17
+xmode=abs_right
+hide=yes
+op10= 
+
+// 746:19
+[com_19]
+type=text
+x=36
+y=207
+width=53
+height=19
+xmode=abs_right
+textfont=p12_full
+textalignh=1
+textshadow=yes
+colour=0xff981d
+onload=script1141
+
+// 746:20
+[com_20]
+type=rectangle
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+layer=com_18
+colour=0xffffa0
+fill=yes
+op10= 
+
+// 746:21
+[com_21]
+type=rectangle
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+layer=com_18
+colour=0x000000
+op10= 
+
+// 746:22
+[com_22]
+type=text
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+layer=com_18
+textfont=p12_full
+textalignh=1
+textalignv=1
+colour=0x000000
+op10= 
+
+// 746:23
+[com_23]
+type=layer
+width=519
+height=23
+ymode=abs_bottom
+noclickthrough=yes
+onload=script139(event_com)
+onvartransmit=script1389
+onvartransmitlist=varplayer_466
+
+// 746:24
+[com_24]
+type=layer
+width=462
+height=36
+xmode=abs_right
+ymode=abs_bottom
+noclickthrough=yes
+
+// 746:25
+[com_25]
+type=layer
+width=462
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_24
+
+// 746:26
+[com_26]
+type=graphic
+x=396
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:27
+[com_27]
+type=graphic
+x=363
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:28
+[com_28]
+type=graphic
+x=330
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:29
+[com_29]
+type=graphic
+x=297
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:30
+[com_30]
+type=graphic
+x=264
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:31
+[com_31]
+type=graphic
+x=231
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:32
+[com_32]
+type=graphic
+x=198
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:33
+[com_33]
+type=graphic
+x=429
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:34
+[com_34]
+type=graphic
+x=165
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:35
+[com_35]
+type=graphic
+x=132
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:36
+[com_36]
+type=graphic
+x=99
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:37
+[com_37]
+type=graphic
+x=66
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:38
+[com_38]
+type=graphic
+x=33
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:39
+[com_39]
+type=graphic
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_25
+graphic=graphic_1128
+
+// 746:40
+[com_40]
+type=layer
+width=462
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_24
+onload=script114
+
+// 746:41
+[com_41]
+type=graphic
+x=396
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,1,0
+op1=Combat Styles
+onop=script1303(0)
+
+// 746:42
+[com_42]
+type=graphic
+x=363
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,2,0
+op1=Stats
+onop=script1303(1)
+
+// 746:43
+[com_43]
+type=graphic
+x=330
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,3,0
+op1=Quest List
+onop=script1303(2)
+
+// 746:44
+[com_44]
+type=graphic
+x=297
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,4,0
+op1=Inventory
+onload=script115(-1)
+onop=script1303(3)
+
+// 746:45
+[com_45]
+type=graphic
+x=264
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,5,0
+op1=Worn Equipment
+onop=script1303(4)
+
+// 746:46
+[com_46]
+type=graphic
+x=231
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,6,0
+op1=Prayer List
+onop=script1303(5)
+
+// 746:47
+[com_47]
+type=graphic
+x=198
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,7,0
+op1=Magic Spellbook
+onop=script1303(6)
+
+// 746:48
+[com_48]
+type=graphic
+x=429
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+op1=Follower Details
+onop=script1303(7)
+
+// 746:49
+[com_49]
+type=graphic
+x=165
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+opkey1=0,8,0
+op1=Friends List
+onop=script1303(8)
+
+// 746:50
+[com_50]
+type=graphic
+x=132
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+op1=Ignore List
+onop=script1303(9)
+
+// 746:51
+[com_51]
+type=graphic
+x=99
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+op1=Clan Chat
+onop=script1303(10)
+
+// 746:52
+[com_52]
+type=graphic
+x=66
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+op1=Options
+onop=script1303(11)
+
+// 746:53
+[com_53]
+type=graphic
+x=33
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+op1=Emotes
+onop=script1303(12)
+
+// 746:54
+[com_54]
+type=graphic
+width=33
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_40
+graphic="side_stone_highlights,4"
+tiling=yes
+op1=Music Player
+onop=script1303(13)
+
+// 746:55
+[com_55]
+type=layer
+width=462
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_24
+onvarctransmit=script1765
+onvarctransmitlist=varclient_232,varclient_233,varclient_234,varclient_235,varclient_236,varclient_237,varclient_238,varclient_239,varclient_240,varclient_241,varclient_242,varclient_243,varclient_244,varclient_245
+
+// 746:56
+[com_56]
+type=graphic
+x=394
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,0"
+
+// 746:57
+[com_57]
+type=graphic
+x=364
+y=1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,1"
+
+// 746:58
+[com_58]
+type=graphic
+x=330
+y=-1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,2"
+
+// 746:59
+[com_59]
+type=graphic
+x=298
+y=2
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,3"
+
+// 746:60
+[com_60]
+type=graphic
+x=265
+y=-2
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,4"
+
+// 746:61
+[com_61]
+type=graphic
+x=232
+y=1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,5"
+
+// 746:62
+[com_62]
+type=graphic
+x=199
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,6"
+
+// 746:63
+[com_63]
+type=graphic
+x=430
+y=-1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,15"
+
+// 746:64
+[com_64]
+type=graphic
+x=165
+y=-1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,7"
+
+// 746:65
+[com_65]
+type=graphic
+x=132
+y=-1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,8"
+
+// 746:66
+[com_66]
+type=graphic
+x=99
+y=-1
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,14"
+
+// 746:67
+[com_67]
+type=graphic
+x=65
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,10"
+
+// 746:68
+[com_68]
+type=graphic
+x=33
+y=-3
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,11"
+
+// 746:69
+[com_69]
+type=graphic
+y=-3
+width=32
+height=36
+xmode=abs_right
+ymode=abs_bottom
+layer=com_55
+graphic="side_icons,12"
+
+// 746:70
+[com_70]
+type=layer
+y=23
+width=519
+height=142
+ymode=abs_bottom
+
+// 746:71
+[com_71]
+type=layer
+x=9
+y=164
+width=512
+height=69
+ymode=abs_bottom
+
+// 746:72
+[com_72]
+type=layer
+x=9
+y=164
+width=512
+height=69
+ymode=abs_bottom
+
+// 746:73
+[com_73]
+type=layer
+y=36
+width=200
+height=271
+xmode=abs_right
+ymode=abs_bottom
+
+// 746:74
+[com_74]
+type=layer
+width=200
+height=271
+layer=com_73
+hide=yes
+onload=script1087(event_com, 0)
+
+// 746:75
+[com_75]
+type=graphic
+width=190
+height=261
+layer=com_76
+graphic=graphic_1131
+alpha=yes
+
+// 746:76
+[com_76]
+type=layer
+contenttype=1354
+x=5
+y=5
+width=190
+height=261
+layer=com_73
+noclickthrough=yes
+
+// 746:77
+[com_77]
+type=layer
+x=5
+y=5
+width=190
+height=261
+layer=com_73
+
+// 746:78
+[com_78]
+type=graphic
+width=190
+height=261
+layer=com_107
+graphic=graphic_1131
+alpha=yes
+
+// 746:79
+[com_79]
+type=graphic
+width=190
+height=261
+layer=com_106
+graphic=graphic_1131
+alpha=yes
+
+// 746:80
+[com_80]
+type=graphic
+width=190
+height=261
+layer=com_105
+graphic=graphic_1131
+alpha=yes
+
+// 746:81
+[com_81]
+type=graphic
+width=190
+height=261
+layer=com_104
+graphic=graphic_1131
+alpha=yes
+
+// 746:82
+[com_82]
+type=graphic
+width=190
+height=261
+layer=com_103
+graphic=graphic_1131
+alpha=yes
+
+// 746:83
+[com_83]
+type=graphic
+width=190
+height=261
+layer=com_102
+graphic=graphic_1131
+alpha=yes
+
+// 746:84
+[com_84]
+type=graphic
+width=190
+height=261
+layer=com_101
+graphic=graphic_1131
+alpha=yes
+
+// 746:85
+[com_85]
+type=graphic
+width=190
+height=261
+layer=com_100
+graphic=graphic_1131
+alpha=yes
+
+// 746:86
+[com_86]
+type=graphic
+width=190
+height=261
+layer=com_99
+graphic=graphic_1131
+alpha=yes
+
+// 746:87
+[com_87]
+type=graphic
+width=190
+height=261
+layer=com_98
+graphic=graphic_1131
+alpha=yes
+
+// 746:88
+[com_88]
+type=graphic
+width=190
+height=261
+layer=com_97
+graphic=graphic_1131
+alpha=yes
+
+// 746:89
+[com_89]
+type=graphic
+width=190
+height=261
+layer=com_96
+graphic=graphic_1131
+alpha=yes
+
+// 746:90
+[com_90]
+type=graphic
+width=190
+height=261
+layer=com_95
+graphic=graphic_1131
+alpha=yes
+
+// 746:91
+[com_91]
+type=graphic
+width=190
+height=261
+layer=com_94
+graphic=graphic_1131
+alpha=yes
+
+// 746:92
+[com_92]
+type=graphic
+width=190
+height=261
+layer=com_93
+graphic=graphic_1131
+alpha=yes
+
+// 746:93
+[com_93]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:94
+[com_94]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:95
+[com_95]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:96
+[com_96]
+type=layer
+width=190
+height=261
+layer=com_77
+noclickthrough=yes
+
+// 746:97
+[com_97]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:98
+[com_98]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:99
+[com_99]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:100
+[com_100]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:101
+[com_101]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:102
+[com_102]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:103
+[com_103]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:104
+[com_104]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:105
+[com_105]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:106
+[com_106]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:107
+[com_107]
+type=layer
+width=190
+height=261
+layer=com_77
+hide=yes
+noclickthrough=yes
+
+// 746:108
+[com_108]
+type=model
+x=8
+y=11
+width=31
+height=52
+hide=yes
+model=model_41760
+modelorigin_x=0
+modelorigin_y=-4
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=1512
+modelanim=seq_10221
+modelorthog=yes
+unknown100=64598
+unknown101=3015
+opbase=<col=ff9040>Arrow
+op10=Examine
+
+// 746:109
+[com_109]
+type=graphic
+x=1
+y=129
+width=43
+height=43
+xmode=abs_right
+layer=com_7
+graphic=compass_ring
+op10=  
+
+// 746:110
+[com_110]
+type=graphic
+x=181
+y=134
+width=34
+height=34
+layer=com_7
+graphic=graphic_1408
+op1=World Map
+op10= 
+
+// 746:111
+[com_111]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+

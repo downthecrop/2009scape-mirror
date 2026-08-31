@@ -1,0 +1,12 @@
+// 573
+[proc,script573]
+cc_deleteall(interface_389:com_4);
+if_sethide(false, interface_752:com_7);
+if_sethide(true, interface_752:com_3);
+if_sethide(true, interface_752:com_6);
+if_setonkey(null, interface_389:com_9);
+if_setondialogabort(null, interface_389:com_9);
+if_setontimer(null, interface_389:com_9);
+if (getwindowmode >= 2) {
+    ~script1364;
+}

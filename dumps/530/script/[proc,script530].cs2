@@ -1,0 +1,29 @@
+// 530
+[proc,script530](component $component0)(int, string)
+if ($component0 = interface_301:com_15) {
+    return(%varplayerbit_4090, "Runecrafting");
+}
+if ($component0 = interface_301:com_20) {
+    return(%varplayerbit_4091, "Crafting");
+}
+if ($component0 = interface_301:com_25) {
+    return(%varplayerbit_4093, "Fletching");
+}
+if ($component0 = interface_301:com_30) {
+    return(%varplayerbit_4095, "Construction");
+}
+if ($component0 = interface_301:com_35) {
+    return(%varplayerbit_4096, "Farming");
+}
+if ($component0 = interface_301:com_40) {
+    return(%varplayerbit_4098, "Magic");
+}
+if ($component0 = interface_301:com_45) {
+    return(%varplayerbit_4100, "Smithing");
+}
+if ($component0 = interface_301:com_50) {
+    return(%varplayerbit_4101, "Cooking");
+}
+if ($component0 = interface_301:com_55) {
+    return(%varplayerbit_4102, "Herblore");
+}

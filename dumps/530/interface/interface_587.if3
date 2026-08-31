@@ -1,0 +1,55 @@
+// 587:0
+[com_0]
+type=model
+x=139
+y=15
+width=249
+height=288
+layer=com_3
+model=model_27222
+modelorigin_x=0
+modelorigin_y=3
+modelangle_x=532
+modelangle_y=0
+modelangle_z=0
+modelzoom=814
+unknown100=63989
+unknown101=3000
+
+// 587:1
+[com_1]
+type=text
+x=211
+y=51
+width=149
+height=176
+layer=com_3
+textfont=quill_oblique_large
+text=Meet at Camel We'll storm She'll ensure w The servants silence.
+textalignh=2
+textalignv=1
+colour=0x46320a
+opbase=rm
+
+// 587:2
+[com_2]
+type=graphic
+x=333
+y=33
+width=26
+height=23
+layer=com_3
+graphic="close_buttons,6"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,7")
+onmouseleave=script44(event_com, "close_buttons,6")
+onop=script29
+
+// 587:3
+[com_3]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+

@@ -1,0 +1,5 @@
+// 1933
+[clientscript,script1933]
+if_sethide(true, interface_811:com_4);
+if_setcolour(0xc8aa64, interface_811:com_5);
+~script41(interface_811:com_35);

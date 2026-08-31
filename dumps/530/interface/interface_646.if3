@@ -1,0 +1,151 @@
+// 646:0
+[com_0]
+type=graphic
+x=5
+y=4
+width=502
+height=324
+graphic=tradebacking
+tiling=yes
+
+// 646:1
+[com_1]
+type=graphic
+x=-13
+y=30
+width=32
+height=273
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 646:2
+[com_2]
+type=graphic
+y=1
+width=32
+height=32
+graphic="v2_stone_borders,4"
+
+// 646:3
+[com_3]
+type=graphic
+x=492
+y=32
+width=32
+height=271
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 646:4
+[com_4]
+type=graphic
+x=32
+y=-12
+width=450
+height=29
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 646:5
+[com_5]
+type=graphic
+x=31
+y=314
+width=450
+height=36
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 646:6
+[com_6]
+type=graphic
+y=302
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 646:7
+[com_7]
+type=graphic
+x=480
+y=1
+width=32
+height=32
+graphic="v2_stone_borders,5"
+
+// 646:8
+[com_8]
+type=graphic
+x=480
+y=302
+width=32
+height=32
+graphic="v2_stone_borders,7"
+
+// 646:9
+[com_9]
+type=model
+x=184
+y=30
+width=146
+height=255
+model=model_29916
+modelorigin_x=0
+modelorigin_y=102
+modelangle_x=135
+modelangle_y=24
+modelangle_z=0
+modelzoom=781
+modelanim=seq_7374
+unknown100=0
+unknown101=3000
+
+// 646:10
+[com_10]
+type=graphic
+x=16
+y=16
+width=25
+height=25
+graphic=grand_exchange_icon_25
+
+// 646:11
+[com_11]
+type=text
+x=50
+y=289
+width=408
+height=32
+textfont=p12_full
+text=Step 4 : With your items placed on the Grand Exchange system, just wait a while and we will let you know when your items are traded.
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xbf751d
+
+// 646:12
+[com_12]
+type=graphic
+x=472
+y=21
+width=16
+height=16
+graphic="catcon_catapult_arrows,2"
+op1=Continue
+onmouseover=script44(event_com, "catcon_catapult_arrows,3")
+onmouseleave=script44(event_com, "catcon_catapult_arrows,2")
+
+// 646:13
+[com_13]
+type=text
+x=375
+y=21
+width=106
+height=16
+textfont=p12_full
+text=Click to continue
+colour=0xbf751d
+op1=Continue
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, 0xbf751d)
+

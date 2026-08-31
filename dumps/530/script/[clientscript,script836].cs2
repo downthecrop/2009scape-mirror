@@ -1,0 +1,10 @@
+// 836
+[clientscript,script836]
+if (%varplayerbit_4393 = 1 | %varplayerbit_542 = 1) {
+    return;
+}
+if (%varplayer_19 = 1) {
+    ~script39(interface_187:com_11, interface_187:com_15, "Track loop on.", 25, 189);
+} else {
+    ~script39(interface_187:com_11, interface_187:com_15, "Track loop off.", 25, 189);
+}

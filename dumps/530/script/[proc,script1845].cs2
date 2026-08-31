@@ -1,0 +1,17 @@
+// 1845
+[proc,script1845]
+~script1895(3, interface_742:com_26, interface_742:com_27, interface_742:com_28, interface_742:com_29, interface_742:com_33, interface_742:com_34, interface_742:com_30, interface_742:com_14, interface_742:com_15, interface_742:com_31, interface_742:com_11, interface_742:com_12, ^white, 0xe1981f);
+~script1169(interface_742:com_92, interface_742:com_93, interface_742:com_95, interface_742:com_94, tradebacking_dark, "scrollbar_v2,1", "scrollbar_v2,1", tradebacking_light, ^white, ^yellow, p11_full, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+~script1118;
+~script1119;
+~script1120;
+~script1121;
+~script785;
+~script1124;
+~script1125;
+~script1126;
+~script1127;
+~script1128;
+~script1129;
+~script1130;
+~script1131;

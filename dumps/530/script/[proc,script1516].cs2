@@ -1,0 +1,24 @@
+// 1516
+[proc,script1516]
+if_sethide(false, interface_768:com_5);
+if_sethide(false, interface_768:com_6);
+if_sethide(false, interface_768:com_10);
+if (%varplayer_170 = 1 & string_length(if_gettext(interface_768:com_8)) > 0) {
+    if_sethide(false, interface_768:com_8);
+    if_sethide(true, interface_768:com_7);
+    if_setposition(14, 27, ^setpos_abs_left, ^setpos_abs_top, interface_768:com_7);
+    if_setsize(478, 110, ^setsize_abs, ^setsize_abs, interface_768:com_7);
+    if_setposition(14, 27, ^setpos_abs_left, ^setpos_abs_top, interface_768:com_8);
+    if_setsize(478, 110, ^setsize_abs, ^setsize_abs, interface_768:com_8);
+    if_sethide(true, interface_768:com_9);
+    return;
+} else {
+    if_sethide(false, interface_768:com_7);
+    if_setposition(62, 27, ^setpos_abs_left, ^setpos_abs_top, interface_768:com_7);
+    if_setsize(430, 110, ^setsize_abs, ^setsize_abs, interface_768:com_7);
+    if_sethide(true, interface_768:com_8);
+    if_setposition(62, 27, ^setpos_abs_left, ^setpos_abs_top, interface_768:com_8);
+    if_setsize(430, 110, ^setsize_abs, ^setsize_abs, interface_768:com_8);
+    if_sethide(false, interface_768:com_9);
+    return;
+}

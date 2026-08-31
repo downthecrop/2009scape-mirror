@@ -1,0 +1,11 @@
+// 527
+[clientscript,script527]
+~script528(%varplayerbit_4090, "staticons2,0", "staticons2_off,0", interface_301:com_88, interface_301:com_14);
+~script528(%varplayerbit_4091, "staticons,10", "staticons_off,10", interface_301:com_89, interface_301:com_19);
+~script528(%varplayerbit_4093, "staticons,11", "staticons_off,11", interface_301:com_90, interface_301:com_24);
+~script528(%varplayerbit_4095, "staticons2,6", "staticons2_off,6", interface_301:com_91, interface_301:com_29);
+~script528(%varplayerbit_4096, "staticons2,2", "staticons2_off,2", interface_301:com_92, interface_301:com_34);
+~script528(%varplayerbit_4098, "staticons,5", "staticons_off,5", interface_301:com_93, interface_301:com_39);
+~script528(%varplayerbit_4100, "staticons,13", "staticons_off,13", interface_301:com_94, interface_301:com_44);
+~script528(%varplayerbit_4101, "staticons,15", "staticons_off,15", interface_301:com_95, interface_301:com_49);
+~script528(%varplayerbit_4102, "staticons,8", "staticons_off,8", interface_301:com_96, interface_301:com_54);

@@ -1,0 +1,6 @@
+// 649
+[clientscript,script649](component $component0, component $component1, string $string0, int $int2, int $int3)
+if (if_gethide(interface_105:com_16) = false) {
+    return;
+}
+~script39($component0, $component1, $string0, $int2, $int3);

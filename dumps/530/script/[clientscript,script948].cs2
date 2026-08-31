@@ -1,0 +1,23 @@
+// 948
+[clientscript,script948]
+if (%varplayerbit_4538 >= 61) {
+    mes("The game has ended.");
+    if_close;
+    return;
+}
+if (%varclient_185 = %varplayerbit_4538) {
+    return;
+}
+if (%varclient_185 = -1) {
+    while (%varclient_185 < %varplayerbit_4538) {
+        %varclient_185 = calc(%varclient_185 + 1);
+        ~script949(%varclient_185, 0);
+    }
+    ~script928(%varplayerbit_4538, "Teapotspout", "Hotwater", interface_726:com_121);
+    return;
+}
+%varclient_185 = %varplayerbit_4538;
+~script949(%varplayerbit_4538, 1);
+if (%varplayerbit_4538 < calc(61 - 1)) {
+    ~script928(%varplayerbit_4538, "Teapotspout", "Hotwater", interface_726:com_121);
+}

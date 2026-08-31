@@ -1,0 +1,5 @@
+// 515
+[clientscript,script515]
+%varclient_51 = 300;
+%varclient_50 = 0;
+%varclient_52 = 0;

@@ -1,0 +1,12 @@
+// 1237
+[clientscript,script1237]
+if (compare(%varclientstring_35, %varclientstring_36) ! 0) {
+    if_settext("The values in the `Password' and `Confirm Password' boxes are not the same.", interface_744:com_413);
+    if_setcolour(0x8c320a, interface_744:com_413);
+    return;
+}
+if_sethide(true, interface_744:com_427);
+if_settext("Please wait...", interface_744:com_428);
+if_setonclick(null, interface_744:com_428);
+unknown_command_5605(%varclientstring_34, %varclientstring_35, %varclient_179, %varclient_180, %varclient_181, %varclient_182);
+if_setontimer("script1238", interface_744:com_409);

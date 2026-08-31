@@ -1,0 +1,14124 @@
+// 0
+[spotanim_0]
+model=model_3015
+seq=seq_85
+
+// 1
+[spotanim_1]
+model=model_17549
+seq=seq_86
+
+// 2
+[spotanim_2]
+model=model_3018
+seq=seq_88
+
+// 3
+[spotanim_3]
+model=model_3017
+seq=seq_87
+
+// 4
+[spotanim_4]
+model=model_3019
+seq=seq_70
+
+// 5
+[spotanim_5]
+model=model_3019
+seq=seq_71
+
+// 6
+[spotanim_6]
+model=model_2886
+seq=seq_150
+
+// 7
+[spotanim_7]
+model=model_3351
+seq=seq_135
+
+// 8
+[spotanim_8]
+model=model_2296
+seq=seq_496
+
+// 9
+[spotanim_9]
+model=model_3136
+recol1s=15789
+recol1d=8456
+recol2s=16846
+recol2d=8456
+
+// 10
+[spotanim_10]
+model=model_3136
+recol1s=15789
+recol1d=8354
+recol2s=16846
+recol2d=8354
+
+// 11
+[spotanim_11]
+model=model_3136
+
+// 12
+[spotanim_12]
+model=model_3136
+recol1s=15789
+recol1d=6346
+recol2s=16846
+recol2d=6346
+
+// 13
+[spotanim_13]
+model=model_3136
+recol1s=15789
+recol1d=6438
+recol2s=16846
+recol2d=6438
+
+// 14
+[spotanim_14]
+model=model_3136
+recol1s=15789
+recol1d=3171
+recol2s=16846
+recol2d=3171
+
+// 15
+[spotanim_15]
+model=model_3136
+recol1s=15789
+recol1d=3272
+recol2s=16846
+recol2d=3272
+
+// 16
+[spotanim_16]
+model=model_3136
+recol1s=15789
+recol1d=17181
+recol2s=16846
+recol2d=17181
+recol3s=10368
+recol3d=9816
+recol4s=15392
+recol4d=17181
+recol5s=10368
+recol5d=17181
+
+// 17
+[spotanim_17]
+model=model_3132
+
+// 18
+[spotanim_18]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=8456
+recol2s=16846
+recol2d=8456
+
+// 19
+[spotanim_19]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=8354
+recol2s=16846
+recol2d=8354
+
+// 20
+[spotanim_20]
+model=model_3142
+seq=seq_366
+
+// 21
+[spotanim_21]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=6346
+recol2s=16846
+recol2d=6346
+
+// 22
+[spotanim_22]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=6438
+recol2s=16846
+recol2d=6438
+
+// 23
+[spotanim_23]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=3171
+recol2s=16846
+recol2d=3171
+
+// 24
+[spotanim_24]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=6476
+recol2s=16846
+recol2d=6476
+
+// 25
+[spotanim_25]
+model=model_3142
+seq=seq_366
+recol1s=15789
+recol1d=17181
+recol2s=16846
+recol2d=17181
+recol3s=10368
+recol3d=9816
+recol4s=15392
+recol4d=17181
+recol5s=10368
+recol5d=17181
+
+// 26
+[spotanim_26]
+model=model_3141
+seq=seq_366
+
+// 27
+[spotanim_27]
+model=model_3135
+
+// 28
+[spotanim_28]
+model=model_3143
+seq=seq_367
+
+// 29
+[spotanim_29]
+model=model_3208
+seq=seq_375
+
+// 30
+[spotanim_30]
+model=model_3208
+seq=seq_374
+
+// 31
+[spotanim_31]
+model=model_2223
+seq=seq_914
+recol1s=22204
+recol1d=13506
+
+// 32
+[spotanim_32]
+model=model_3349
+
+// 33
+[spotanim_33]
+model=model_3350
+seq=seq_922
+
+// 34
+[spotanim_34]
+model=model_3131
+recol1s=22131
+recol1d=0
+
+// 35
+[spotanim_35]
+model=model_3148
+seq=seq_372
+recol1s=16846
+recol1d=8456
+
+// 36
+[spotanim_36]
+model=model_3148
+seq=seq_372
+recol1s=16846
+recol1d=8354
+
+// 37
+[spotanim_37]
+model=model_3148
+seq=seq_372
+
+// 38
+[spotanim_38]
+model=model_3148
+seq=seq_372
+recol1s=16846
+recol1d=6346
+
+// 39
+[spotanim_39]
+model=model_3148
+seq=seq_372
+recol1s=16846
+recol1d=6438
+
+// 40
+[spotanim_40]
+model=model_3148
+seq=seq_372
+recol1s=16846
+recol1d=4226
+
+// 41
+[spotanim_41]
+model=model_3148
+seq=seq_372
+recol1s=16846
+recol1d=6476
+
+// 42
+[spotanim_42]
+model=model_3147
+seq=seq_371
+recol1s=16846
+recol1d=8456
+
+// 43
+[spotanim_43]
+model=model_3147
+seq=seq_371
+recol1s=16846
+recol1d=8354
+
+// 44
+[spotanim_44]
+model=model_3147
+seq=seq_371
+
+// 45
+[spotanim_45]
+model=model_3147
+seq=seq_371
+recol1s=16846
+recol1d=6346
+
+// 46
+[spotanim_46]
+model=model_3147
+seq=seq_371
+recol1s=16846
+recol1d=6438
+
+// 47
+[spotanim_47]
+model=model_3147
+seq=seq_371
+recol1s=16846
+recol1d=4226
+
+// 48
+[spotanim_48]
+model=model_3147
+seq=seq_371
+recol1s=16846
+recol1d=6476
+
+// 49
+[spotanim_49]
+model=model_3152
+seq=seq_375
+
+// 50
+[spotanim_50]
+model=model_3150
+seq=seq_374
+
+// 51
+[spotanim_51]
+model=model_3151
+seq=seq_375
+
+// 52
+[spotanim_52]
+model=model_3149
+seq=seq_374
+
+// 53
+[spotanim_53]
+model=model_3133
+
+// 54
+[spotanim_54]
+model=model_3154
+seq=seq_373
+
+// 55
+[spotanim_55]
+model=model_3153
+seq=seq_375
+
+// 56
+[spotanim_56]
+model=model_519
+seq=seq_451
+
+// 57
+[spotanim_57]
+model=model_2294
+seq=seq_454
+
+// 58
+[spotanim_58]
+model=model_2294
+seq=seq_455
+
+// 59
+[spotanim_59]
+model=model_2320
+seq=seq_456
+
+// 60
+[spotanim_60]
+model=model_2321
+seq=seq_457
+
+// 61
+[spotanim_61]
+model=model_2322
+seq=seq_458
+
+// 62
+[spotanim_62]
+model=model_2323
+seq=seq_459
+
+// 63
+[spotanim_63]
+model=model_2325
+seq=seq_460
+
+// 64
+[spotanim_64]
+model=model_2325
+seq=seq_461
+
+// 65
+[spotanim_65]
+model=model_2326
+seq=seq_462
+
+// 66
+[spotanim_66]
+model=model_2326
+seq=seq_463
+
+// 67
+[spotanim_67]
+model=model_14209
+seq=seq_489
+
+// 68
+[spotanim_68]
+model=model_2223
+seq=seq_465
+
+// 69
+[spotanim_69]
+model=model_2223
+seq=seq_465
+recol1s=22204
+recol1d=32225
+
+// 70
+[spotanim_70]
+model=model_3140
+
+// 71
+[spotanim_71]
+model=model_3116
+seq=seq_693
+recol1s=32384
+recol1d=256
+recol2s=32288
+recol2d=8488
+recol3s=31808
+recol3d=4292
+
+// 72
+[spotanim_72]
+model=model_2850
+seq=seq_341
+recol1s=32736
+recol1d=32192
+recol2s=17856
+recol2d=32767
+recol3s=15648
+recol3d=32767
+
+// 73
+[spotanim_73]
+model=model_7410
+seq=seq_224
+
+// 74
+[spotanim_74]
+model=model_2321
+seq=seq_643
+
+// 75
+[spotanim_75]
+model=model_3073
+
+// 76
+[spotanim_76]
+model=model_3066
+seq=seq_647
+ambient=100
+contrast=100
+
+// 77
+[spotanim_77]
+model=model_3068
+seq=seq_648
+resizeh=56
+ambient=50
+contrast=50
+
+// 78
+[spotanim_78]
+model=model_2267
+seq=seq_901
+ambient=75
+contrast=75
+
+// 79
+[spotanim_79]
+model=model_3069
+seq=seq_650
+rotation=270
+
+// 80
+[spotanim_80]
+model=model_3070
+seq=seq_706
+ambient=40
+contrast=40
+
+// 81
+[spotanim_81]
+model=model_3071
+seq=seq_705
+
+// 82
+[spotanim_82]
+model=model_3073
+seq=seq_651
+
+// 83
+[spotanim_83]
+model=model_3072
+seq=seq_649
+recol1s=10575
+recol1d=5120
+recol2s=11631
+recol2d=7168
+recol3s=13742
+recol3d=9216
+recol4s=13743
+recol4d=11296
+recol5s=14799
+recol5d=13344
+recol6s=16846
+recol6d=15392
+
+// 84
+[spotanim_84]
+model=model_3074
+seq=seq_652
+
+// 85
+[spotanim_85]
+model=model_3080
+seq=seq_653
+ambient=40
+contrast=40
+
+// 86
+[spotanim_86]
+model=model_33372
+seq=seq_328
+
+// 87
+[spotanim_87]
+model=model_3079
+seq=seq_655
+ambient=60
+contrast=60
+
+// 88
+[spotanim_88]
+model=model_3077
+seq=seq_656
+ambient=60
+contrast=60
+
+// 89
+[spotanim_89]
+model=model_3078
+seq=seq_657
+ambient=60
+contrast=60
+
+// 90
+[spotanim_90]
+model=model_3083
+seq=seq_658
+ambient=30
+contrast=30
+recol1s=21535
+recol1d=27484
+
+// 91
+[spotanim_91]
+model=model_3081
+seq=seq_659
+ambient=30
+contrast=30
+recol1s=15392
+recol1d=27484
+recol2s=25664
+recol2d=32767
+recol3s=32736
+recol3d=1118
+
+// 92
+[spotanim_92]
+model=model_3082
+seq=seq_660
+ambient=30
+contrast=30
+recol1s=15392
+recol1d=27484
+recol2s=25664
+recol2d=32767
+recol3s=32736
+recol3d=1118
+
+// 93
+[spotanim_93]
+model=model_3083
+seq=seq_658
+ambient=40
+contrast=40
+recol1s=21535
+recol1d=12638
+
+// 94
+[spotanim_94]
+model=model_3081
+seq=seq_659
+ambient=40
+contrast=40
+recol1s=15392
+recol1d=12638
+recol2s=25664
+recol2d=21212
+recol3s=32736
+recol3d=24350
+
+// 95
+[spotanim_95]
+model=model_3082
+seq=seq_660
+ambient=50
+contrast=50
+recol1s=15392
+recol1d=12638
+recol2s=25664
+recol2d=21212
+recol3s=32736
+recol3d=24350
+
+// 96
+[spotanim_96]
+model=model_3083
+seq=seq_658
+ambient=30
+contrast=30
+recol1s=21535
+recol1d=13696
+
+// 97
+[spotanim_97]
+model=model_3081
+seq=seq_659
+ambient=30
+contrast=30
+recol1s=15392
+recol1d=13696
+recol2s=25664
+recol2d=22112
+recol3s=32736
+recol3d=1986
+
+// 98
+[spotanim_98]
+model=model_3082
+seq=seq_660
+ambient=30
+contrast=30
+recol1s=15392
+recol1d=13696
+recol2s=25664
+recol2d=22112
+recol3s=32736
+recol3d=1986
+
+// 99
+[spotanim_99]
+model=model_3083
+seq=seq_658
+ambient=60
+contrast=60
+recol1s=21535
+recol1d=31808
+
+// 100
+[spotanim_100]
+model=model_3081
+seq=seq_659
+ambient=60
+contrast=60
+recol1s=15392
+recol1d=31808
+recol2s=25664
+recol2d=32288
+
+// 101
+[spotanim_101]
+model=model_3082
+seq=seq_660
+ambient=60
+contrast=60
+recol1s=15392
+recol1d=31808
+recol2s=25664
+recol2d=32288
+
+// 102
+[spotanim_102]
+model=model_3092
+seq=seq_668
+ambient=75
+contrast=75
+
+// 103
+[spotanim_103]
+model=model_3093
+seq=seq_669
+ambient=75
+contrast=75
+
+// 104
+[spotanim_104]
+model=model_3094
+seq=seq_670
+ambient=75
+contrast=75
+
+// 105
+[spotanim_105]
+model=model_3095
+seq=seq_671
+ambient=40
+contrast=40
+
+// 106
+[spotanim_106]
+model=model_3096
+seq=seq_672
+ambient=40
+contrast=40
+
+// 107
+[spotanim_107]
+model=model_3097
+seq=seq_673
+ambient=40
+contrast=40
+
+// 108
+[spotanim_108]
+model=model_3098
+seq=seq_674
+ambient=75
+contrast=75
+
+// 109
+[spotanim_109]
+model=model_3100
+seq=seq_675
+ambient=75
+contrast=75
+
+// 110
+[spotanim_110]
+model=model_3102
+seq=seq_676
+ambient=75
+contrast=75
+
+// 111
+[spotanim_111]
+model=model_38114
+seq=seq_667
+contrast=40
+ambient=40
+
+// 112
+[spotanim_112]
+model=model_38114
+seq=seq_665
+contrast=20
+ambient=20
+
+// 113
+[spotanim_113]
+model=model_38114
+seq=seq_666
+contrast=20
+ambient=20
+
+// 114
+[spotanim_114]
+model=model_3103
+seq=seq_677
+ambient=40
+contrast=40
+
+// 115
+[spotanim_115]
+model=model_3103
+seq=seq_678
+ambient=40
+contrast=40
+
+// 116
+[spotanim_116]
+model=model_3103
+seq=seq_679
+ambient=40
+contrast=40
+
+// 117
+[spotanim_117]
+model=model_3083
+seq=seq_658
+ambient=30
+contrast=30
+recol1s=21535
+recol1d=27484
+
+// 118
+[spotanim_118]
+model=model_3084
+seq=seq_661
+ambient=50
+contrast=50
+recol1s=32736
+recol1d=16846
+recol2s=32288
+recol2d=32767
+recol3s=31808
+recol3d=22131
+
+// 119
+[spotanim_119]
+model=model_3085
+seq=seq_662
+ambient=50
+contrast=50
+recol1s=31808
+recol1d=22131
+recol2s=32288
+recol2d=32767
+
+// 120
+[spotanim_120]
+model=model_3083
+seq=seq_658
+ambient=60
+contrast=60
+recol1s=21535
+recol1d=1118
+
+// 121
+[spotanim_121]
+model=model_3084
+seq=seq_661
+ambient=60
+contrast=60
+recol1s=32736
+recol1d=1118
+recol2s=32288
+recol2d=1566
+recol3s=31808
+recol3d=17981
+
+// 122
+[spotanim_122]
+model=model_3085
+seq=seq_662
+ambient=60
+contrast=60
+recol1s=31808
+recol1d=17981
+recol2s=32288
+recol2d=1566
+
+// 123
+[spotanim_123]
+model=model_3083
+seq=seq_658
+ambient=40
+contrast=40
+recol1s=21535
+recol1d=13696
+
+// 124
+[spotanim_124]
+model=model_3084
+seq=seq_661
+ambient=40
+contrast=40
+recol1s=32736
+recol1d=480
+recol2s=32288
+recol2d=1986
+recol3s=31808
+recol3d=14656
+
+// 125
+[spotanim_125]
+model=model_3085
+seq=seq_662
+ambient=40
+contrast=40
+recol1s=31808
+recol1d=14656
+recol2s=32288
+recol2d=1986
+
+// 126
+[spotanim_126]
+model=model_3083
+seq=seq_658
+ambient=60
+contrast=60
+recol1s=21535
+recol1d=31808
+
+// 127
+[spotanim_127]
+model=model_3084
+seq=seq_661
+ambient=60
+contrast=60
+
+// 128
+[spotanim_128]
+model=model_3085
+seq=seq_662
+ambient=60
+contrast=60
+
+// 129
+[spotanim_129]
+model=model_3083
+seq=seq_658
+ambient=60
+contrast=60
+recol1s=21535
+recol1d=31808
+
+// 130
+[spotanim_130]
+model=model_3087
+seq=seq_663
+ambient=60
+contrast=60
+
+// 131
+[spotanim_131]
+model=model_3088
+seq=seq_664
+ambient=60
+contrast=60
+
+// 132
+[spotanim_132]
+model=model_3083
+seq=seq_658
+ambient=50
+contrast=50
+recol1s=21535
+recol1d=27484
+
+// 133
+[spotanim_133]
+model=model_3087
+seq=seq_663
+ambient=50
+contrast=50
+recol1s=32384
+recol1d=16846
+recol2s=32288
+recol2d=32767
+recol3s=31808
+recol3d=22131
+
+// 134
+[spotanim_134]
+model=model_3088
+seq=seq_664
+ambient=50
+contrast=50
+recol1s=31808
+recol1d=22131
+recol2s=32288
+recol2d=32767
+recol3s=5962
+recol3d=16846
+
+// 135
+[spotanim_135]
+model=model_3083
+seq=seq_658
+ambient=60
+contrast=60
+recol1s=21535
+recol1d=1118
+
+// 136
+[spotanim_136]
+model=model_3087
+seq=seq_663
+ambient=60
+contrast=60
+recol1s=32384
+recol1d=17981
+recol2s=32288
+recol2d=1566
+recol3s=31808
+recol3d=1118
+
+// 137
+[spotanim_137]
+model=model_3088
+seq=seq_664
+ambient=60
+contrast=60
+recol1s=31808
+recol1d=1118
+recol2s=32288
+recol2d=1566
+recol3s=5962
+recol3d=17981
+
+// 138
+[spotanim_138]
+model=model_3083
+seq=seq_658
+ambient=40
+contrast=40
+recol1s=21535
+recol1d=13696
+
+// 139
+[spotanim_139]
+model=model_3087
+seq=seq_663
+ambient=40
+contrast=40
+recol1s=32384
+recol1d=480
+recol2s=32288
+recol2d=1986
+recol3s=31808
+recol3d=14656
+
+// 140
+[spotanim_140]
+model=model_3088
+seq=seq_664
+ambient=40
+contrast=40
+recol1s=31808
+recol1d=14656
+recol2s=32288
+recol2d=1986
+recol3s=5962
+recol3d=480
+
+// 141
+[spotanim_141]
+model=model_3104
+seq=seq_680
+ambient=40
+contrast=40
+
+// 142
+[spotanim_142]
+model=model_3105
+seq=seq_681
+ambient=40
+contrast=40
+
+// 143
+[spotanim_143]
+model=model_3106
+seq=seq_682
+ambient=75
+contrast=75
+
+// 144
+[spotanim_144]
+model=model_3107
+seq=seq_683
+ambient=75
+contrast=75
+
+// 145
+[spotanim_145]
+model=model_3108
+seq=seq_684
+ambient=40
+contrast=40
+
+// 146
+[spotanim_146]
+model=model_3109
+seq=seq_685
+ambient=40
+contrast=40
+
+// 147
+[spotanim_147]
+model=model_3110
+seq=seq_686
+ambient=40
+contrast=40
+
+// 148
+[spotanim_148]
+model=model_40627
+seq=seq_4854
+ambient=30
+
+// 149
+[spotanim_149]
+model=model_3112
+seq=seq_688
+recol1s=15422
+recol1d=1118
+
+// 150
+[spotanim_150]
+model=model_3112
+seq=seq_688
+recol1s=15422
+recol1d=32569
+
+// 151
+[spotanim_151]
+model=model_3112
+seq=seq_688
+recol1s=15422
+recol1d=480
+
+// 152
+[spotanim_152]
+model=model_3112
+seq=seq_688
+recol1s=15422
+recol1d=31808
+
+// 153
+[spotanim_153]
+model=model_3113
+seq=seq_689
+
+// 154
+[spotanim_154]
+model=model_3113
+seq=seq_690
+
+// 155
+[spotanim_155]
+model=model_3114
+seq=seq_691
+ambient=60
+contrast=60
+
+// 156
+[spotanim_156]
+model=model_3115
+seq=seq_692
+ambient=60
+contrast=60
+
+// 157
+[spotanim_157]
+model=model_3116
+seq=seq_693
+ambient=60
+contrast=60
+
+// 158
+[spotanim_158]
+model=model_3114
+seq=seq_691
+ambient=50
+contrast=50
+recol1s=32384
+recol1d=22131
+recol2s=32288
+recol2d=32767
+recol3s=31808
+recol3d=16846
+
+// 159
+[spotanim_159]
+model=model_3115
+seq=seq_692
+ambient=50
+contrast=50
+recol1s=32384
+recol1d=22131
+recol2s=32288
+recol2d=32767
+recol3s=31808
+recol3d=16846
+
+// 160
+[spotanim_160]
+model=model_3116
+seq=seq_693
+ambient=50
+contrast=50
+recol1s=32384
+recol1d=22131
+recol2s=32288
+recol2d=32767
+recol3s=31808
+recol3d=16846
+
+// 161
+[spotanim_161]
+model=model_3114
+seq=seq_691
+ambient=40
+contrast=40
+recol1s=32384
+recol1d=17981
+recol2s=32288
+recol2d=1566
+recol3s=31808
+recol3d=1118
+
+// 162
+[spotanim_162]
+model=model_3115
+seq=seq_692
+ambient=60
+contrast=60
+recol1s=32384
+recol1d=17981
+recol2s=32288
+recol2d=1566
+recol3s=31808
+recol3d=1118
+
+// 163
+[spotanim_163]
+model=model_3116
+seq=seq_693
+ambient=60
+contrast=60
+recol1s=32384
+recol1d=17981
+recol2s=32288
+recol2d=1566
+recol3s=31808
+recol3d=1118
+
+// 164
+[spotanim_164]
+model=model_3114
+seq=seq_691
+ambient=40
+contrast=40
+recol1s=32384
+recol1d=14656
+recol2s=32288
+recol2d=1986
+recol3s=31808
+recol3d=480
+
+// 165
+[spotanim_165]
+model=model_3115
+seq=seq_692
+ambient=40
+contrast=40
+recol1s=32384
+recol1d=14656
+recol2s=32288
+recol2d=1986
+recol3s=31808
+recol3d=480
+
+// 166
+[spotanim_166]
+model=model_3116
+seq=seq_693
+ambient=40
+contrast=40
+recol1s=32384
+recol1d=14656
+recol2s=32288
+recol2d=1986
+recol3s=31808
+recol3d=480
+
+// 167
+[spotanim_167]
+model=model_3117
+seq=seq_694
+ambient=75
+contrast=75
+
+// 168
+[spotanim_168]
+model=model_3099
+seq=seq_675
+ambient=75
+contrast=75
+
+// 169
+[spotanim_169]
+model=model_3118
+seq=seq_695
+ambient=75
+contrast=75
+
+// 170
+[spotanim_170]
+model=model_3119
+seq=seq_696
+ambient=40
+contrast=40
+
+// 171
+[spotanim_171]
+model=model_3120
+seq=seq_697
+ambient=40
+contrast=40
+
+// 172
+[spotanim_172]
+model=model_3122
+seq=seq_698
+ambient=40
+contrast=40
+
+// 173
+[spotanim_173]
+model=model_3123
+seq=seq_699
+ambient=40
+contrast=40
+
+// 174
+[spotanim_174]
+model=model_3124
+seq=seq_700
+ambient=40
+contrast=40
+
+// 175
+[spotanim_175]
+model=model_3121
+seq=seq_698
+ambient=40
+contrast=40
+
+// 176
+[spotanim_176]
+model=model_3125
+seq=seq_701
+
+// 177
+[spotanim_177]
+model=model_3126
+seq=seq_702
+ambient=40
+contrast=40
+
+// 178
+[spotanim_178]
+model=model_3127
+seq=seq_703
+ambient=40
+contrast=40
+
+// 179
+[spotanim_179]
+model=model_3128
+seq=seq_704
+ambient=40
+contrast=40
+
+// 180
+[spotanim_180]
+model=model_3130
+seq=seq_704
+ambient=40
+contrast=40
+
+// 181
+[spotanim_181]
+model=model_3129
+seq=seq_704
+ambient=40
+contrast=40
+
+// 182
+[spotanim_182]
+model=model_2240
+seq=seq_731
+
+// 183
+[spotanim_183]
+model=model_2239
+seq=seq_732
+
+// 184
+[spotanim_184]
+model=model_3076
+seq=seq_328
+recol1s=16846
+recol1d=2304
+
+// 185
+[spotanim_185]
+model=model_3087
+seq=seq_663
+recol1s=31808
+recol1d=32635
+recol2s=32288
+recol2d=32701
+recol3s=32384
+recol3d=32569
+
+// 186
+[spotanim_186]
+model=model_3067
+seq=seq_790
+
+// 187
+[spotanim_187]
+model=model_3068
+seq=seq_648
+resizeh=56
+recol1s=20503
+recol1d=30569
+
+// 188
+[spotanim_188]
+model=model_3076
+seq=seq_328
+resizeh=256
+
+// 189
+[spotanim_189]
+model=model_3076
+seq=seq_328
+resizeh=512
+resizev=320
+
+// 190
+[spotanim_190]
+model=model_2886
+seq=seq_151
+resizeh=352
+resizev=352
+
+// 191
+[spotanim_191]
+model=model_3351
+seq=seq_136
+resizeh=224
+resizev=224
+
+// 192
+[spotanim_192]
+model=model_3151
+seq=seq_375
+recol1s=16846
+recol1d=1114
+recol2s=32767
+recol2d=18077
+
+// 193
+[spotanim_193]
+model=model_3149
+seq=seq_374
+recol1s=16846
+recol1d=1114
+recol2s=32767
+recol2d=18077
+
+// 194
+[spotanim_194]
+model=model_3083
+seq=seq_658
+recol1s=21535
+recol1d=2115
+
+// 195
+[spotanim_195]
+model=model_3081
+seq=seq_659
+recol1s=15392
+recol1d=2115
+recol2s=25664
+recol2d=4147
+recol3s=32736
+recol3d=32767
+
+// 196
+[spotanim_196]
+model=model_3082
+seq=seq_660
+recol1s=15392
+recol1d=2115
+recol2s=25664
+recol2d=4147
+recol3s=32736
+recol3d=32767
+
+// 197
+[spotanim_197]
+model=model_2267
+seq=seq_901
+resizeh=128
+resizev=384
+recol1s=32480
+recol1d=2115
+recol2s=32384
+recol2d=4147
+recol3s=32192
+recol3d=32767
+
+// 198
+[spotanim_198]
+model=model_3116
+seq=seq_693
+recol1s=32384
+recol1d=32767
+recol2s=32288
+recol2d=27483
+recol3s=31808
+recol3d=20092
+
+// 199
+[spotanim_199]
+model=model_411
+seq=seq_913
+
+// 200
+[spotanim_200]
+model=model_3138
+recol1s=16846
+recol1d=8354
+
+// 201
+[spotanim_201]
+model=model_3138
+recol1s=16846
+recol1d=8456
+
+// 202
+[spotanim_202]
+model=model_3138
+
+// 203
+[spotanim_203]
+model=model_3138
+recol1s=16846
+recol1d=3174
+
+// 204
+[spotanim_204]
+model=model_3138
+recol1s=16846
+recol1d=6438
+
+// 205
+[spotanim_205]
+model=model_3138
+recol1s=16846
+recol1d=6476
+
+// 206
+[spotanim_206]
+model=model_3144
+seq=seq_368
+recol1s=16846
+recol1d=8354
+
+// 207
+[spotanim_207]
+model=model_3144
+seq=seq_368
+recol1s=16846
+recol1d=8456
+
+// 208
+[spotanim_208]
+model=model_3144
+seq=seq_368
+
+// 209
+[spotanim_209]
+model=model_3144
+seq=seq_368
+recol1s=16846
+recol1d=3174
+
+// 210
+[spotanim_210]
+model=model_3144
+seq=seq_368
+recol1s=16846
+recol1d=6438
+
+// 211
+[spotanim_211]
+model=model_3144
+seq=seq_368
+recol1s=16846
+recol1d=6476
+
+// 212
+[spotanim_212]
+model=model_3139
+recol1s=16846
+recol1d=8354
+recol2s=15789
+recol2d=8354
+
+// 213
+[spotanim_213]
+model=model_3139
+recol1s=16846
+recol1d=8456
+recol2s=15789
+recol2d=8456
+
+// 214
+[spotanim_214]
+model=model_3139
+recol1s=15789
+recol1d=16846
+
+// 215
+[spotanim_215]
+model=model_3139
+recol1s=16846
+recol1d=2114
+recol2s=15789
+recol2d=2114
+
+// 216
+[spotanim_216]
+model=model_3139
+recol1s=16846
+recol1d=3174
+recol2s=15789
+recol2d=3174
+
+// 217
+[spotanim_217]
+model=model_3139
+recol1s=16846
+recol1d=6438
+recol2s=15789
+recol2d=6438
+
+// 218
+[spotanim_218]
+model=model_3139
+recol1s=16846
+recol1d=6476
+recol2s=15789
+recol2d=6476
+
+// 219
+[spotanim_219]
+model=model_3145
+seq=seq_369
+recol1s=16846
+recol1d=8354
+recol2s=15789
+recol2d=8354
+
+// 220
+[spotanim_220]
+model=model_3145
+seq=seq_369
+recol1s=16846
+recol1d=8456
+recol2s=15789
+recol2d=8456
+
+// 221
+[spotanim_221]
+model=model_3145
+seq=seq_369
+recol1s=15789
+recol1d=16846
+
+// 222
+[spotanim_222]
+model=model_3145
+seq=seq_369
+recol1s=16846
+recol1d=2114
+recol2s=15789
+recol2d=2114
+
+// 223
+[spotanim_223]
+model=model_3145
+seq=seq_369
+recol1s=16846
+recol1d=3174
+recol2s=15789
+recol2d=3174
+
+// 224
+[spotanim_224]
+model=model_3145
+seq=seq_369
+recol1s=16846
+recol1d=6438
+recol2s=15789
+recol2d=6438
+
+// 225
+[spotanim_225]
+model=model_3145
+seq=seq_369
+recol1s=16846
+recol1d=6476
+recol2s=15789
+recol2d=6476
+
+// 226
+[spotanim_226]
+model=model_3131
+recol1s=22131
+recol1d=8354
+
+// 227
+[spotanim_227]
+model=model_3131
+recol1s=22131
+recol1d=8456
+
+// 228
+[spotanim_228]
+model=model_3131
+recol1s=22131
+recol1d=16846
+
+// 229
+[spotanim_229]
+model=model_3131
+recol1s=22131
+recol1d=3174
+
+// 230
+[spotanim_230]
+model=model_3131
+recol1s=22131
+recol1d=6438
+
+// 231
+[spotanim_231]
+model=model_3131
+recol1s=22131
+recol1d=6476
+
+// 232
+[spotanim_232]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=8354
+
+// 233
+[spotanim_233]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=8456
+
+// 234
+[spotanim_234]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=16846
+
+// 235
+[spotanim_235]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=3174
+
+// 236
+[spotanim_236]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=6438
+
+// 237
+[spotanim_237]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=6476
+
+// 238
+[spotanim_238]
+model=model_3370
+seq=seq_930
+ambient=40
+contrast=40
+
+// 239
+[spotanim_239]
+model=model_11875
+seq=seq_449
+
+// 240
+[spotanim_240]
+model=model_3446
+seq=seq_1023
+
+// 241
+[spotanim_241]
+model=model_3440
+seq=seq_1024
+
+// 242
+[spotanim_242]
+model=model_3136
+resizeh=192
+resizev=192
+recol1s=10368
+recol1d=11556
+recol2s=15392
+recol2d=32767
+recol3s=16846
+recol3d=23252
+recol4s=15789
+recol4d=28655
+recol5s=20017
+recol5d=32728
+
+// 243
+[spotanim_243]
+model=model_3142
+seq=seq_366
+resizeh=192
+resizev=192
+recol1s=10368
+recol1d=11556
+recol2s=15392
+recol2d=32767
+recol3s=16846
+recol3d=23252
+recol4s=15789
+recol4d=28655
+recol5s=20017
+recol5d=32728
+
+// 244
+[spotanim_244]
+model=model_166
+seq=seq_1053
+
+// 245
+[spotanim_245]
+model=model_3070
+seq=seq_1054
+ambient=40
+contrast=40
+
+// 246
+[spotanim_246]
+model=model_2318
+seq=seq_1055
+ambient=60
+contrast=60
+recol1s=32745
+recol1d=31874
+
+// 247
+[spotanim_247]
+model=model_2318
+seq=seq_1055
+ambient=60
+contrast=60
+recol1s=32745
+recol1d=12761
+
+// 248
+[spotanim_248]
+model=model_3480
+seq=seq_1059
+ambient=50
+contrast=50
+
+// 249
+[spotanim_249]
+model=model_3473
+ambient=60
+contrast=60
+
+// 250
+[spotanim_250]
+model=model_3473
+seq=seq_366
+ambient=60
+contrast=60
+
+// 251
+[spotanim_251]
+model=model_3479
+seq=seq_1061
+ambient=50
+contrast=50
+
+// 252
+[spotanim_252]
+model=model_3478
+seq=seq_1063
+ambient=50
+contrast=50
+
+// 253
+[spotanim_253]
+model=model_3477
+seq=seq_1065
+ambient=50
+contrast=50
+
+// 254
+[spotanim_254]
+model=model_3070
+seq=seq_1066
+ambient=40
+contrast=40
+
+// 255
+[spotanim_255]
+model=model_3569
+seq=seq_1102
+
+// 256
+[spotanim_256]
+model=model_3473
+seq=seq_1075
+ambient=60
+contrast=60
+
+// 257
+[spotanim_257]
+model=model_3472
+seq=seq_1069
+
+// 258
+[spotanim_258]
+model=model_3474
+seq=seq_1070
+ambient=60
+contrast=60
+recol1s=16846
+recol1d=6476
+
+// 259
+[spotanim_259]
+model=model_3569
+seq=seq_1102
+recol1s=19424
+recol1d=32736
+
+// 260
+[spotanim_260]
+model=model_3593
+seq=seq_1096
+
+// 261
+[spotanim_261]
+model=model_3600
+seq=seq_1097
+
+// 262
+[spotanim_262]
+model=model_3591
+seq=seq_1098
+
+// 263
+[spotanim_263]
+model=model_3567
+seq=seq_1099
+ambient=30
+contrast=30
+
+// 264
+[spotanim_264]
+model=model_3568
+seq=seq_1101
+ambient=30
+contrast=30
+
+// 265
+[spotanim_265]
+model=model_3559
+seq=seq_1090
+recol1s=15784
+recol1d=30655
+recol2s=18991
+recol2d=30655
+recol3s=0
+recol3d=30655
+recol4s=12320
+recol4d=30655
+recol5s=31712
+recol5d=30655
+recol6s=32761
+recol6d=32761
+
+// 266
+[spotanim_266]
+model=model_3116
+seq=seq_693
+recol1s=32384
+recol1d=16352
+recol2s=32288
+recol2d=1634
+recol3s=31808
+recol3d=1986
+
+// 267
+[spotanim_267]
+model=model_3076
+seq=seq_328
+resizeh=168
+resizev=168
+recol1s=16846
+recol1d=16352
+
+// 268
+[spotanim_268]
+model=model_3087
+seq=seq_663
+recol1s=31808
+recol1d=320
+recol2s=32288
+recol2d=1986
+recol3s=32384
+recol3d=16352
+
+// 269
+[spotanim_269]
+model=model_3082
+seq=seq_660
+ambient=50
+contrast=50
+recol1s=15392
+recol1d=320
+recol2s=25664
+recol2d=1634
+recol3s=32736
+recol3d=16352
+
+// 270
+[spotanim_270]
+model=model_3644
+seq=seq_1109
+
+// 271
+[spotanim_271]
+model=model_2321
+seq=seq_457
+recol1s=16846
+recol1d=32591
+
+// 272
+[spotanim_272]
+model=model_3668
+seq=seq_1076
+
+// 273
+[spotanim_273]
+model=model_26300
+seq=seq_370
+recol1s=22131
+recol1d=0
+
+// 274
+[spotanim_274]
+model=model_3778
+seq=seq_924
+ambient=50
+contrast=50
+
+// 275
+[spotanim_275]
+model=model_3776
+seq=seq_1143
+
+// 276
+[spotanim_276]
+model=model_3775
+
+// 277
+[spotanim_277]
+model=model_3809
+seq=seq_1160
+ambient=50
+contrast=50
+
+// 278
+[spotanim_278]
+model=model_24592
+seq=seq_1173
+
+// 279
+[spotanim_279]
+model=model_24603
+seq=seq_1171
+
+// 280
+[spotanim_280]
+model=model_24601
+seq=seq_6271
+ambient=75
+contrast=75
+
+// 281
+[spotanim_281]
+model=model_16940
+seq=seq_4575
+ambient=75
+contrast=75
+recol1s=28573
+recol1d=23356
+
+// 282
+[spotanim_282]
+model=model_4005
+seq=seq_1204
+ambient=60
+contrast=60
+
+// 283
+[spotanim_283]
+model=model_4004
+seq=seq_1204
+ambient=60
+contrast=60
+
+// 284
+[spotanim_284]
+model=model_4003
+seq=seq_1204
+ambient=60
+contrast=60
+
+// 285
+[spotanim_285]
+model=model_4006
+seq=seq_1204
+ambient=60
+contrast=60
+
+// 286
+[spotanim_286]
+model=model_3962
+seq=seq_1229
+
+// 287
+[spotanim_287]
+model=model_3960
+seq=seq_1230
+
+// 288
+[spotanim_288]
+model=model_4050
+resizeh=64
+resizev=64
+
+// 289
+[spotanim_289]
+model=model_4050
+resizeh=64
+resizev=64
+recol1s=64
+recol1d=12320
+
+// 290
+[spotanim_290]
+model=model_4075
+seq=seq_371
+
+// 291
+[spotanim_291]
+model=model_3070
+seq=seq_1257
+ambient=40
+contrast=40
+
+// 292
+[spotanim_292]
+model=model_4139
+seq=seq_1305
+
+// 293
+[spotanim_293]
+model=model_4142
+seq=seq_1285
+
+// 294
+[spotanim_294]
+model=model_4588
+
+// 295
+[spotanim_295]
+model=model_4588
+recol1s=11626
+recol1d=20017
+
+// 296
+[spotanim_296]
+model=model_4588
+recol1s=11626
+recol1d=13743
+
+// 297
+[spotanim_297]
+model=model_4588
+recol1s=11626
+recol1d=15591
+
+// 298
+[spotanim_298]
+model=model_4588
+recol1s=11626
+recol1d=19879
+
+// 299
+[spotanim_299]
+model=model_4588
+recol1s=11626
+recol1d=8680
+
+// 300
+[spotanim_300]
+model=model_4588
+recol1s=11626
+recol1d=17961
+
+// 301
+[spotanim_301]
+model=model_38118
+seq=seq_9638
+ambient=100
+contrast=100
+recol1s=14459
+recol1d=25764
+
+// 302
+[spotanim_302]
+model=model_2321
+seq=seq_457
+recol1s=16846
+recol1d=32591
+
+// 303
+[spotanim_303]
+model=model_4848
+seq=seq_1432
+recol1s=14732
+recol1d=11560
+
+// 304
+[spotanim_304]
+model=model_3140
+recol1s=14732
+recol1d=11560
+
+// 305
+[spotanim_305]
+model=model_3116
+seq=seq_693
+recol1s=32384
+recol1d=256
+recol2s=32288
+recol2d=8488
+recol3s=31808
+recol3d=4292
+
+// 306
+[spotanim_306]
+model=model_3478
+seq=seq_1063
+ambient=50
+contrast=50
+recol1s=31747
+recol1d=15376
+
+// 307
+[spotanim_307]
+model=model_4922
+seq=seq_1448
+
+// 308
+[spotanim_308]
+model=model_3091
+seq=seq_1447
+
+// 309
+[spotanim_309]
+model=model_4922
+seq=seq_1449
+
+// 310
+[spotanim_310]
+model=model_4086
+seq=seq_1261
+contrast=30
+ambient=30
+
+// 311
+[spotanim_311]
+model=model_4975
+seq=seq_1503
+
+// 312
+[spotanim_312]
+model=model_3137
+recol1s=16846
+recol1d=8354
+
+// 313
+[spotanim_313]
+model=model_3137
+recol1s=16846
+recol1d=8456
+
+// 314
+[spotanim_314]
+model=model_3137
+
+// 315
+[spotanim_315]
+model=model_3137
+recol1s=16846
+recol1d=6346
+
+// 316
+[spotanim_316]
+model=model_3137
+recol1s=16846
+recol1d=6438
+
+// 317
+[spotanim_317]
+model=model_3137
+recol1s=16846
+recol1d=6476
+
+// 318
+[spotanim_318]
+model=model_3134
+recol1s=16846
+recol1d=8354
+
+// 319
+[spotanim_319]
+model=model_3134
+recol1s=16846
+recol1d=8456
+
+// 320
+[spotanim_320]
+model=model_3134
+
+// 321
+[spotanim_321]
+model=model_3134
+recol1s=16846
+recol1d=6346
+
+// 322
+[spotanim_322]
+model=model_3134
+recol1s=16846
+recol1d=6438
+
+// 323
+[spotanim_323]
+model=model_3134
+recol1s=16846
+recol1d=6476
+
+// 324
+[spotanim_324]
+model=model_3073
+
+// 325
+[spotanim_325]
+model=model_5115
+seq=seq_366
+
+// 326
+[spotanim_326]
+model=model_5115
+
+// 327
+[spotanim_327]
+model=model_5092
+seq=seq_1575
+ambient=50
+
+// 328
+[spotanim_328]
+model=model_5091
+seq=seq_1577
+ambient=60
+contrast=60
+
+// 329
+[spotanim_329]
+model=model_3082
+seq=seq_660
+ambient=60
+contrast=60
+recol1s=25664
+recol1d=17040
+recol2s=15392
+recol2d=13934
+recol3s=32736
+recol3d=18162
+
+// 330
+[spotanim_330]
+model=model_5091
+seq=seq_1577
+ambient=60
+contrast=60
+recol1s=17040
+recol1d=17042
+
+// 331
+[spotanim_331]
+model=model_3082
+seq=seq_660
+ambient=60
+contrast=60
+recol1s=25664
+recol1d=12812
+recol2s=15392
+recol2d=9708
+recol3s=32736
+recol3d=14928
+
+// 332
+[spotanim_332]
+model=model_2318
+seq=seq_1055
+ambient=60
+contrast=60
+recol1s=32745
+recol1d=8201
+
+// 333
+[spotanim_333]
+model=model_5075
+seq=seq_1543
+
+// 334
+[spotanim_334]
+model=model_7412
+seq=seq_1569
+resizeh=64
+resizev=64
+
+// 335
+[spotanim_335]
+model=model_7412
+seq=seq_1570
+resizeh=64
+resizev=64
+
+// 336
+[spotanim_336]
+model=model_7412
+seq=seq_1571
+resizeh=64
+resizev=64
+
+// 337
+[spotanim_337]
+model=model_7411
+seq=seq_1573
+
+// 338
+[spotanim_338]
+model=model_5147
+seq=seq_371
+
+// 339
+[spotanim_339]
+model=model_3080
+seq=seq_653
+ambient=40
+contrast=40
+
+// 340
+[spotanim_340]
+model=model_5415
+seq=seq_1668
+ambient=50
+contrast=50
+
+// 341
+[spotanim_341]
+model=model_5416
+seq=seq_1669
+ambient=50
+contrast=50
+
+// 342
+[spotanim_342]
+model=model_5802
+seq=seq_1813
+ambient=100
+contrast=100
+
+// 343
+[spotanim_343]
+model=model_5801
+seq=seq_1817
+ambient=100
+contrast=100
+
+// 344
+[spotanim_344]
+model=model_5800
+seq=seq_1821
+
+// 345
+[spotanim_345]
+model=model_5799
+seq=seq_1822
+
+// 346
+[spotanim_346]
+model=model_3088
+seq=seq_664
+
+// 347
+[spotanim_347]
+model=model_6035
+seq=seq_1873
+ambient=100
+contrast=100
+
+// 348
+[spotanim_348]
+model=model_3070
+seq=seq_1874
+ambient=40
+contrast=40
+
+// 349
+[spotanim_349]
+model=model_3809
+seq=seq_1160
+ambient=50
+contrast=50
+
+// 350
+[spotanim_350]
+model=model_6360
+seq=seq_1916
+
+// 351
+[spotanim_351]
+model=model_6358
+seq=seq_1918
+
+// 352
+[spotanim_352]
+model=model_6358
+seq=seq_1919
+
+// 353
+[spotanim_353]
+model=model_6306
+seq=seq_1924
+
+// 354
+[spotanim_354]
+model=model_6288
+seq=seq_1951
+
+// 355
+[spotanim_355]
+model=model_6285
+seq=seq_1936
+
+// 356
+[spotanim_356]
+model=model_6286
+seq=seq_1937
+
+// 357
+[spotanim_357]
+model=model_6373
+seq=seq_1956
+
+// 358
+[spotanim_358]
+model=model_6306
+seq=seq_1924
+ambient=60
+contrast=60
+recol1s=26591
+recol1d=29597
+
+// 359
+[spotanim_359]
+model=model_3116
+seq=seq_693
+ambient=60
+contrast=60
+recol1s=32384
+recol1d=32767
+recol2s=32288
+recol2d=29597
+recol3s=31808
+recol3d=27484
+
+// 360
+[spotanim_360]
+model=model_6388
+seq=seq_1958
+
+// 361
+[spotanim_361]
+model=model_6387
+seq=seq_1959
+
+// 362
+[spotanim_362]
+model=model_6384
+seq=seq_1960
+
+// 363
+[spotanim_363]
+model=model_6383
+seq=seq_1961
+
+// 364
+[spotanim_364]
+model=model_6383
+resizeh=256
+resizev=256
+seq=seq_1961
+
+// 365
+[spotanim_365]
+model=model_6383
+resizeh=512
+resizev=512
+seq=seq_1961
+
+// 366
+[spotanim_366]
+model=model_1204
+seq=seq_1962
+
+// 367
+[spotanim_367]
+model=model_6385
+seq=seq_1963
+
+// 368
+[spotanim_368]
+model=model_14215
+seq=seq_1964
+
+// 369
+[spotanim_369]
+model=model_6381
+seq=seq_1965
+
+// 370
+[spotanim_370]
+model=model_6381
+resizeh=256
+resizev=256
+seq=seq_1965
+
+// 371
+[spotanim_371]
+model=model_6381
+resizeh=512
+resizev=512
+seq=seq_1965
+
+// 372
+[spotanim_372]
+model=model_6380
+seq=seq_1968
+
+// 373
+[spotanim_373]
+model=model_6378
+seq=seq_1970
+
+// 374
+[spotanim_374]
+model=model_6379
+seq=seq_1969
+
+// 375
+[spotanim_375]
+model=model_6377
+seq=seq_1971
+
+// 376
+[spotanim_376]
+model=model_6376
+seq=seq_1966
+
+// 377
+[spotanim_377]
+model=model_6375
+seq=seq_1967
+
+// 378
+[spotanim_378]
+model=model_6394
+seq=seq_1974
+
+// 379
+[spotanim_379]
+model=model_6393
+seq=seq_1973
+
+// 380
+[spotanim_380]
+model=model_6395
+seq=seq_1975
+
+// 381
+[spotanim_381]
+model=model_6392
+seq=seq_1973
+
+// 382
+[spotanim_382]
+model=model_6390
+seq=seq_1976
+
+// 383
+[spotanim_383]
+model=model_6389
+seq=seq_1977
+
+// 384
+[spotanim_384]
+model=model_6403
+seq=seq_1980
+ambient=100
+contrast=100
+
+// 385
+[spotanim_385]
+model=model_6401
+seq=seq_1982
+ambient=100
+contrast=100
+
+// 386
+[spotanim_386]
+model=model_6402
+seq=seq_1981
+ambient=100
+contrast=100
+
+// 387
+[spotanim_387]
+model=model_6400
+seq=seq_1983
+ambient=100
+contrast=100
+
+// 388
+[spotanim_388]
+model=model_6399
+seq=seq_1984
+ambient=100
+contrast=100
+
+// 389
+[spotanim_389]
+model=model_6397
+seq=seq_1985
+ambient=100
+contrast=100
+
+// 390
+[spotanim_390]
+model=model_6398
+seq=seq_1986
+ambient=100
+contrast=100
+
+// 391
+[spotanim_391]
+model=model_6396
+seq=seq_1987
+ambient=100
+contrast=100
+
+// 392
+[spotanim_392]
+model=model_6404
+seq=seq_1988
+
+// 393
+[spotanim_393]
+model=model_17550
+seq=seq_1990
+ambient=60
+
+// 394
+[spotanim_394]
+model=model_17550
+seq=seq_1990
+ambient=60
+recol1s=18691
+recol1d=5344
+recol2s=19776
+recol2d=6401
+recol3s=19810
+recol3d=7458
+recol4s=20867
+recol4d=8515
+recol5s=21890
+recol5d=9572
+
+// 395
+[spotanim_395]
+model=model_17550
+seq=seq_1990
+ambient=60
+recol1s=18691
+recol1d=32767
+recol2s=19776
+recol2d=27519
+recol3s=19810
+recol3d=23292
+recol4s=20867
+recol4d=18077
+recol5s=21890
+recol5d=16986
+
+// 396
+[spotanim_396]
+model=model_17550
+seq=seq_1990
+ambient=60
+recol1s=18691
+recol1d=1112
+recol2s=19776
+recol2d=5337
+recol3s=19810
+recol3d=10585
+recol4s=20867
+recol4d=15865
+recol5s=21890
+recol5d=21145
+
+// 397
+[spotanim_397]
+model=model_6542
+seq=seq_2058
+
+// 398
+[spotanim_398]
+model=model_6636
+seq=seq_2083
+
+// 399
+[spotanim_399]
+model=model_6638
+seq=seq_2084
+
+// 400
+[spotanim_400]
+model=model_6634
+seq=seq_2086
+ambient=50
+contrast=50
+
+// 401
+[spotanim_401]
+model=model_6635
+seq=seq_2087
+ambient=50
+contrast=50
+
+// 402
+[spotanim_402]
+model=model_3076
+seq=seq_328
+recol1s=16846
+recol1d=12672
+
+// 403
+[spotanim_403]
+model=model_6820
+seq=seq_366
+resizeh=160
+resizev=160
+
+// 404
+[spotanim_404]
+model=model_6820
+resizeh=160
+resizev=160
+
+// 405
+[spotanim_405]
+model=model_2321
+seq=seq_457
+recol1s=16846
+recol1d=5284
+
+// 406
+[spotanim_406]
+model=model_14184
+seq=seq_2132
+recol1s=16846
+recol1d=5284
+
+// 407
+[spotanim_407]
+model=model_7463
+
+// 408
+[spotanim_408]
+model=model_7547
+
+// 409
+[spotanim_409]
+model=model_7732
+seq=seq_1535
+ambient=50
+contrast=50
+
+// 410
+[spotanim_410]
+model=model_8230
+seq=seq_2294
+
+// 411
+[spotanim_411]
+model=model_8229
+seq=seq_2296
+recol1s=30654
+recol1d=19911
+
+// 412
+[spotanim_412]
+model=model_8253
+seq=seq_2307
+
+// 413
+[spotanim_413]
+model=model_8253
+seq=seq_2307
+recol1s=13088
+recol1d=13506
+recol2s=352
+recol2d=17926
+recol3s=6528
+recol3d=13506
+
+// 414
+[spotanim_414]
+model=model_8254
+seq=seq_2307
+
+// 415
+[spotanim_415]
+model=model_8254
+seq=seq_2307
+recol1s=13088
+recol1d=13506
+recol2s=352
+recol2d=17926
+recol3s=6528
+recol3d=13506
+
+// 416
+[spotanim_416]
+model=model_8328
+seq=seq_2328
+resizeh=115
+resizev=115
+
+// 417
+[spotanim_417]
+model=model_3446
+seq=seq_2329
+resizeh=115
+resizev=115
+
+// 418
+[spotanim_418]
+model=model_8328
+seq=seq_2328
+resizeh=115
+resizev=115
+recol1s=11747
+recol1d=7500
+
+// 419
+[spotanim_419]
+model=model_3446
+seq=seq_2329
+resizeh=115
+resizev=115
+recol1s=11747
+recol1d=7500
+
+// 420
+[spotanim_420]
+model=model_8328
+seq=seq_2328
+resizeh=115
+resizev=115
+recol1s=11747
+recol1d=18659
+
+// 421
+[spotanim_421]
+model=model_3446
+seq=seq_2329
+resizeh=115
+resizev=115
+recol1s=11747
+recol1d=18659
+
+// 422
+[spotanim_422]
+model=model_8328
+seq=seq_2328
+resizeh=115
+resizev=115
+recol1s=11747
+recol1d=25218
+
+// 423
+[spotanim_423]
+model=model_3446
+seq=seq_2329
+resizeh=115
+resizev=115
+recol1s=11747
+recol1d=25218
+
+// 424
+[spotanim_424]
+model=model_8328
+seq=seq_2328
+resizeh=115
+resizev=115
+
+// 425
+[spotanim_425]
+model=model_3446
+seq=seq_2329
+resizeh=115
+resizev=115
+
+// 426
+[spotanim_426]
+model=model_6854
+seq=seq_706
+ambient=60
+contrast=60
+
+// 427
+[spotanim_427]
+model=model_8908
+seq=seq_2381
+
+// 428
+[spotanim_428]
+model=model_8907
+seq=seq_2404
+
+// 429
+[spotanim_429]
+model=model_3082
+seq=seq_660
+recol1s=15392
+recol1d=20354
+recol2s=25664
+recol2d=20354
+recol3s=32736
+recol3d=20354
+
+// 430
+[spotanim_430]
+model=model_3082
+seq=seq_660
+recol1s=15392
+recol1d=30179
+recol2s=25664
+recol2d=30179
+recol3s=32736
+recol3d=30179
+
+// 431
+[spotanim_431]
+model=model_3082
+seq=seq_660
+recol1s=15392
+recol1d=32635
+recol2s=25664
+recol2d=32635
+recol3s=32736
+recol3d=32635
+
+// 432
+[spotanim_432]
+model=model_21514
+seq=seq_2554
+
+// 433
+[spotanim_433]
+model=model_9109
+seq=seq_2558
+ambient=60
+contrast=60
+
+// 434
+[spotanim_434]
+model=model_9109
+seq=seq_2559
+ambient=60
+contrast=60
+
+// 435
+[spotanim_435]
+model=model_9109
+seq=seq_2560
+ambient=60
+contrast=60
+
+// 436
+[spotanim_436]
+model=model_9249
+seq=seq_2596
+contrast=15
+ambient=20
+
+// 437
+[spotanim_437]
+model=model_9250
+seq=seq_2597
+contrast=15
+ambient=20
+
+// 438
+[spotanim_438]
+model=model_3154
+seq=seq_373
+contrast=15
+ambient=20
+resizeh=64
+resizev=64
+
+// 439
+[spotanim_439]
+model=model_9334
+seq=seq_2616
+
+// 440
+[spotanim_440]
+model=model_6434
+seq=seq_1990
+
+// 441
+[spotanim_441]
+model=model_9250
+seq=seq_2617
+
+// 442
+[spotanim_442]
+model=model_14291
+seq=seq_2615
+
+// 443
+[spotanim_443]
+model=model_9340
+ambient=60
+contrast=60
+
+// 444
+[spotanim_444]
+model=model_9341
+seq=seq_2640
+ambient=60
+contrast=60
+resizeh=200
+resizev=200
+
+// 445
+[spotanim_445]
+model=model_9335
+seq=seq_2648
+ambient=60
+contrast=60
+
+// 446
+[spotanim_446]
+model=model_9336
+seq=seq_2649
+ambient=60
+contrast=60
+
+// 447
+[spotanim_447]
+model=model_9334
+seq=seq_2658
+ambient=60
+contrast=60
+
+// 448
+[spotanim_448]
+model=model_9337
+seq=seq_2659
+ambient=60
+contrast=60
+
+// 449
+[spotanim_449]
+model=model_9338
+seq=seq_2659
+ambient=60
+contrast=60
+
+// 450
+[spotanim_450]
+model=model_9339
+seq=seq_2659
+ambient=60
+contrast=60
+
+// 451
+[spotanim_451]
+model=model_9342
+seq=seq_2660
+ambient=60
+contrast=60
+
+// 452
+[spotanim_452]
+model=model_3113
+seq=seq_2718
+recol1s=32736
+recol1d=16416
+recol2s=11489
+recol2d=8458
+
+// 453
+[spotanim_453]
+model=model_9637
+seq=seq_2719
+ambient=60
+contrast=60
+
+// 454
+[spotanim_454]
+model=model_9655
+seq=seq_2722
+ambient=20
+
+// 455
+[spotanim_455]
+model=model_6404
+seq=seq_2725
+
+// 456
+[spotanim_456]
+model=model_2223
+seq=seq_914
+resizeh=256
+resizev=256
+
+// 457
+[spotanim_457]
+model=model_9837
+seq=seq_2789
+ambient=15
+contrast=10
+
+// 458
+[spotanim_458]
+model=model_9838
+seq=seq_2789
+ambient=15
+contrast=10
+
+// 459
+[spotanim_459]
+model=model_9837
+seq=seq_2790
+ambient=10
+contrast=10
+
+// 460
+[spotanim_460]
+model=model_9838
+seq=seq_2790
+ambient=10
+contrast=10
+
+// 461
+[spotanim_461]
+model=model_9837
+seq=seq_2791
+ambient=15
+contrast=10
+
+// 462
+[spotanim_462]
+model=model_9838
+seq=seq_2791
+ambient=15
+contrast=10
+
+// 463
+[spotanim_463]
+model=model_9837
+seq=seq_2792
+ambient=15
+contrast=10
+
+// 464
+[spotanim_464]
+model=model_9838
+seq=seq_2792
+ambient=15
+contrast=10
+
+// 465
+[spotanim_465]
+model=model_9908
+seq=seq_2814
+
+// 466
+[spotanim_466]
+model=model_9918
+seq=seq_2828
+
+// 467
+[spotanim_467]
+model=model_9916
+seq=seq_2830
+
+// 468
+[spotanim_468]
+model=model_9917
+seq=seq_2832
+
+// 469
+[spotanim_469]
+model=model_9915
+seq=seq_2834
+
+// 470
+[spotanim_470]
+model=model_2259
+seq=seq_480
+resizeh=90
+resizev=90
+recol1s=3301
+recol1d=11725
+
+// 471
+[spotanim_471]
+model=model_3473
+ambient=60
+contrast=60
+recol1s=11080
+recol1d=32569
+
+// 472
+[spotanim_472]
+model=model_3473
+seq=seq_366
+ambient=60
+contrast=60
+recol1s=11080
+recol1d=32569
+
+// 473
+[spotanim_473]
+model=model_9948
+seq=seq_2872
+ambient=60
+contrast=50
+
+// 474
+[spotanim_474]
+model=model_9949
+seq=seq_2873
+ambient=30
+contrast=20
+
+// 475
+[spotanim_475]
+model=model_9950
+seq=seq_2874
+ambient=10
+contrast=15
+
+// 476
+[spotanim_476]
+model=model_9951
+seq=seq_2875
+ambient=10
+contrast=10
+
+// 477
+[spotanim_477]
+model=model_9952
+seq=seq_2848
+ambient=30
+contrast=30
+
+// 478
+[spotanim_478]
+model=model_9961
+
+// 479
+[spotanim_479]
+model=model_9975
+seq=seq_2877
+contrast=15
+ambient=20
+
+// 480
+[spotanim_480]
+model=model_9908
+seq=seq_2814
+
+// 481
+[spotanim_481]
+model=model_9996
+seq=seq_2883
+
+// 482
+[spotanim_482]
+model=model_10004
+seq=seq_2892
+recol1s=23356
+recol1d=27651
+
+// 483
+[spotanim_483]
+model=model_9995
+seq=seq_2889
+ambient=30
+
+// 484
+[spotanim_484]
+model=model_10057
+seq=seq_2896
+ambient=30
+contrast=30
+
+// 485
+[spotanim_485]
+model=model_10058
+seq=seq_2896
+ambient=30
+contrast=30
+
+// 486
+[spotanim_486]
+model=model_10047
+seq=seq_2895
+resizeh=30
+resizev=40
+ambient=40
+contrast=30
+
+// 487
+[spotanim_487]
+model=model_10215
+seq=seq_2916
+
+// 488
+[spotanim_488]
+model=model_10288
+seq=seq_2965
+ambient=30
+
+// 489
+[spotanim_489]
+model=model_3097
+seq=seq_673
+ambient=40
+contrast=40
+recol1s=32767
+recol1d=14287
+
+// 490
+[spotanim_490]
+model=model_10290
+seq=seq_2960
+ambient=10
+
+// 491
+[spotanim_491]
+model=model_10284
+ambient=10
+
+// 492
+[spotanim_492]
+model=model_3097
+seq=seq_673
+ambient=40
+contrast=40
+recol1s=32767
+recol1d=31808
+
+// 493
+[spotanim_493]
+model=model_10291
+seq=seq_2956
+ambient=10
+
+// 494
+[spotanim_494]
+model=model_10287
+ambient=10
+seq=seq_2957
+
+// 495
+[spotanim_495]
+model=model_10286
+seq=seq_2969
+ambient=10
+
+// 496
+[spotanim_496]
+model=model_10286
+seq=seq_2970
+ambient=10
+
+// 497
+[spotanim_497]
+model=model_17403
+seq=seq_4631
+ambient=40
+
+// 498
+[spotanim_498]
+model=model_17550
+ambient=40
+seq=seq_1990
+
+// 499
+[spotanim_499]
+model=model_10360
+seq=seq_2990
+ambient=40
+
+// 500
+[spotanim_500]
+model=model_10359
+ambient=40
+seq=seq_2991
+
+// 501
+[spotanim_501]
+model=model_10361
+seq=seq_2992
+ambient=40
+
+// 502
+[spotanim_502]
+model=model_3085
+seq=seq_662
+ambient=40
+recol1s=31808
+recol1d=1464
+recol2s=32288
+recol2d=7998
+
+// 503
+[spotanim_503]
+model=model_7732
+seq=seq_2996
+ambient=50
+contrast=50
+recol1s=21756
+recol1d=6381
+recol2s=19547
+recol2d=7438
+recol3s=15414
+recol3d=8495
+recol4s=22758
+recol4d=9552
+recol5s=21635
+recol5d=10609
+
+// 504
+[spotanim_504]
+model=model_7732
+seq=seq_2996
+ambient=50
+contrast=50
+recol1s=21756
+recol1d=6381
+recol2s=19547
+recol2d=7438
+recol3s=15414
+recol3d=8495
+recol4s=22758
+recol4d=9552
+recol5s=21635
+recol5d=10609
+
+// 505
+[spotanim_505]
+model=model_3116
+seq=seq_693
+ambient=60
+contrast=60
+resizeh=64
+resizev=64
+recol1s=32384
+recol1d=29044
+recol2s=32288
+recol2d=25873
+recol3s=31808
+recol3d=21710
+
+// 506
+[spotanim_506]
+model=model_10530
+seq=seq_3020
+ambient=15
+contrast=15
+
+// 507
+[spotanim_507]
+model=model_10529
+seq=seq_3016
+recol1s=19945
+recol1d=16548
+recol2s=16774
+recol2d=12320
+recol3s=14661
+recol3d=8192
+
+// 508
+[spotanim_508]
+model=model_10529
+seq=seq_3017
+recol1s=19945
+recol1d=16548
+recol2s=16774
+recol2d=12320
+recol3s=14661
+recol3d=8192
+
+// 509
+[spotanim_509]
+model=model_10529
+seq=seq_3018
+recol1s=19945
+recol1d=16548
+recol2s=16774
+recol2d=12320
+recol3s=14661
+recol3d=8192
+
+// 510
+[spotanim_510]
+model=model_10529
+seq=seq_3019
+recol1s=19945
+recol1d=16548
+recol2s=16774
+recol2d=12320
+recol3s=14661
+recol3d=8192
+
+// 511
+[spotanim_511]
+model=model_10529
+seq=seq_3016
+recol1s=19945
+recol1d=7414
+recol2s=16774
+recol2d=2195
+recol3s=14661
+recol3d=79
+
+// 512
+[spotanim_512]
+model=model_10529
+seq=seq_3017
+recol1s=19945
+recol1d=7414
+recol2s=16774
+recol2d=2195
+recol3s=14661
+recol3d=79
+
+// 513
+[spotanim_513]
+model=model_10529
+seq=seq_3018
+recol1s=19945
+recol1d=7414
+recol2s=16774
+recol2d=2195
+recol3s=14661
+recol3d=79
+
+// 514
+[spotanim_514]
+model=model_10529
+seq=seq_3019
+recol1s=19945
+recol1d=7414
+recol2s=16774
+recol2d=2195
+recol3s=14661
+recol3d=79
+
+// 515
+[spotanim_515]
+model=model_10529
+seq=seq_3016
+recol1s=19945
+recol1d=2498
+recol2s=16774
+recol2d=384
+recol3s=14661
+recol3d=256
+
+// 516
+[spotanim_516]
+model=model_10529
+seq=seq_3017
+recol1s=19945
+recol1d=2498
+recol2s=16774
+recol2d=384
+recol3s=14661
+recol3d=256
+
+// 517
+[spotanim_517]
+model=model_10529
+seq=seq_3018
+recol1s=19945
+recol1d=2498
+recol2s=16774
+recol2d=384
+recol3s=14661
+recol3d=256
+
+// 518
+[spotanim_518]
+model=model_10529
+seq=seq_3019
+recol1s=19945
+recol1d=2498
+recol2s=16774
+recol2d=384
+recol3s=14661
+recol3d=256
+
+// 519
+[spotanim_519]
+model=model_10678
+seq=seq_3024
+ambient=10
+contrast=10
+
+// 520
+[spotanim_520]
+model=model_10645
+seq=seq_3021
+ambient=10
+contrast=10
+
+// 521
+[spotanim_521]
+model=model_10645
+seq=seq_3021
+ambient=10
+contrast=10
+recol1s=24307
+recol1d=25365
+
+// 522
+[spotanim_522]
+model=model_10645
+seq=seq_3021
+ambient=10
+contrast=10
+recol1s=24307
+recol1d=18991
+
+// 523
+[spotanim_523]
+model=model_10645
+seq=seq_3021
+ambient=10
+contrast=10
+recol1s=24307
+recol1d=21204
+
+// 524
+[spotanim_524]
+model=model_10738
+seq=seq_3051
+ambient=20
+
+// 525
+[spotanim_525]
+model=model_10973
+seq=seq_3079
+ambient=50
+
+// 526
+[spotanim_526]
+model=model_10973
+seq=seq_3080
+ambient=50
+
+// 527
+[spotanim_527]
+model=model_10973
+seq=seq_3081
+ambient=50
+
+// 528
+[spotanim_528]
+model=model_10973
+seq=seq_3082
+ambient=50
+
+// 529
+[spotanim_529]
+model=model_10973
+seq=seq_3083
+ambient=50
+
+// 530
+[spotanim_530]
+model=model_10973
+seq=seq_3084
+ambient=50
+recol1s=32588
+recol1d=32192
+recol2s=32659
+recol2d=32192
+
+// 531
+[spotanim_531]
+model=model_10973
+seq=seq_3085
+ambient=50
+recol1s=32588
+recol1d=32192
+recol2s=32659
+recol2d=32192
+
+// 532
+[spotanim_532]
+model=model_10973
+seq=seq_3086
+ambient=50
+recol1s=32588
+recol1d=32192
+recol2s=32659
+recol2d=32192
+
+// 533
+[spotanim_533]
+model=model_10973
+seq=seq_3087
+ambient=50
+recol1s=32588
+recol1d=32192
+recol2s=32659
+recol2d=32192
+
+// 534
+[spotanim_534]
+model=model_29175
+seq=seq_7279
+rotation=90
+
+// 535
+[spotanim_535]
+model=model_10973
+seq=seq_3089
+ambient=50
+recol1s=32588
+recol1d=31808
+recol2s=32659
+recol2d=32139
+
+// 536
+[spotanim_536]
+model=model_6395
+seq=seq_1975
+
+// 537
+[spotanim_537]
+model=model_6379
+seq=seq_1969
+recol1s=32037
+recol1d=28437
+recol2s=29760
+recol2d=16878
+
+// 538
+[spotanim_538]
+model=model_6375
+seq=seq_1967
+recol1s=27877
+recol1d=28437
+recol2s=29859
+recol2d=16878
+recol3s=24740
+recol3d=16878
+recol4s=24644
+recol4d=13707
+recol5s=28736
+recol5d=6308
+
+// 539
+[spotanim_539]
+model=model_6381
+seq=seq_1965
+recol1s=27516
+recol1d=28437
+
+// 540
+[spotanim_540]
+model=model_1204
+seq=seq_1962
+recol1s=27516
+recol1d=28437
+
+// 541
+[spotanim_541]
+model=model_2223
+seq=seq_914
+recol1s=22204
+recol1d=4779
+
+// 542
+[spotanim_542]
+model=model_11163
+seq=seq_3124
+
+// 543
+[spotanim_543]
+model=model_11182
+
+// 544
+[spotanim_544]
+model=model_11183
+
+// 545
+[spotanim_545]
+model=model_11167
+seq=seq_3125
+recol1s=13605
+recol1d=7297
+recol2s=12548
+recol2d=9410
+recol3s=11491
+recol3d=8353
+recol4s=10434
+recol4d=9410
+
+// 546
+[spotanim_546]
+model=model_14195
+seq=seq_3126
+
+// 547
+[spotanim_547]
+model=model_11165
+seq=seq_3127
+
+// 548
+[spotanim_548]
+model=model_14319
+seq=seq_3138
+ambient=20
+
+// 549
+[spotanim_549]
+model=model_14319
+seq=seq_3139
+ambient=20
+
+// 550
+[spotanim_550]
+model=model_11219
+seq=seq_3150
+ambient=30
+
+// 551
+[spotanim_551]
+model=model_11221
+seq=seq_3151
+ambient=30
+
+// 552
+[spotanim_552]
+model=model_11220
+seq=seq_3152
+ambient=30
+
+// 553
+[spotanim_553]
+model=model_11219
+seq=seq_3150
+ambient=30
+recol1s=8136
+recol1d=31808
+recol2s=1606
+recol2d=19488
+
+// 554
+[spotanim_554]
+model=model_11218
+seq=seq_3153
+ambient=30
+
+// 555
+[spotanim_555]
+model=model_11220
+seq=seq_3152
+ambient=30
+recol1s=8136
+recol1d=31808
+recol2s=1606
+recol2d=19488
+
+// 556
+[spotanim_556]
+model=model_11222
+seq=seq_3150
+ambient=30
+
+// 557
+[spotanim_557]
+model=model_11222
+seq=seq_3151
+ambient=30
+
+// 558
+[spotanim_558]
+model=model_11223
+seq=seq_3156
+ambient=30
+
+// 559
+[spotanim_559]
+model=model_11224
+seq=seq_3158
+ambient=30
+
+// 560
+[spotanim_560]
+model=model_11227
+seq=seq_3171
+
+// 561
+[spotanim_561]
+model=model_14214
+seq=seq_3179
+
+// 562
+[spotanim_562]
+model=model_11290
+seq=seq_3180
+
+// 563
+[spotanim_563]
+model=model_11291
+seq=seq_3180
+
+// 564
+[spotanim_564]
+model=model_11288
+seq=seq_3180
+
+// 565
+[spotanim_565]
+model=model_11289
+seq=seq_3180
+
+// 566
+[spotanim_566]
+model=model_11293
+seq=seq_3180
+
+// 567
+[spotanim_567]
+model=model_6288
+seq=seq_1951
+
+// 568
+[spotanim_568]
+model=model_11980
+seq=seq_3258
+ambient=40
+
+// 569
+[spotanim_569]
+model=model_11981
+seq=seq_3258
+ambient=40
+
+// 570
+[spotanim_570]
+model=model_12081
+seq=seq_3316
+ambient=10
+
+// 571
+[spotanim_571]
+model=model_12078
+seq=seq_3317
+ambient=10
+
+// 572
+[spotanim_572]
+model=model_12079
+seq=seq_3318
+ambient=10
+
+// 573
+[spotanim_573]
+model=model_12080
+seq=seq_3319
+ambient=10
+
+// 574
+[spotanim_574]
+model=model_4938
+seq=seq_1479
+ambient=30
+
+// 575
+[spotanim_575]
+model=model_12642
+seq=seq_3336
+ambient=30
+contrast=30
+
+// 576
+[spotanim_576]
+model=model_12642
+seq=seq_3336
+ambient=20
+contrast=20
+recol1s=2014
+recol1d=1
+recol2s=13982
+recol2d=1
+recol3s=9782
+recol3d=1
+
+// 577
+[spotanim_577]
+model=model_12641
+seq=seq_3330
+ambient=10
+contrast=10
+recol1s=32593
+recol1d=23249
+recol2s=27410
+recol2d=19057
+recol3s=22162
+recol3d=14830
+recol4s=16910
+recol4d=10667
+recol5s=12517
+recol5d=23714
+
+// 578
+[spotanim_578]
+model=model_12641
+seq=seq_3330
+ambient=10
+contrast=10
+resizeh=220
+resizev=220
+
+// 579
+[spotanim_579]
+model=model_13844
+seq=seq_3347
+
+// 580
+[spotanim_580]
+model=model_3076
+seq=seq_328
+
+// 581
+[spotanim_581]
+model=model_13492
+seq=seq_3404
+
+// 582
+[spotanim_582]
+model=model_13491
+seq=seq_3409
+recol1s=12582
+recol1d=5251
+recol2s=10500
+recol2d=5250
+recol3s=4128
+recol3d=3171
+
+// 583
+[spotanim_583]
+model=model_14196
+seq=seq_3446
+
+// 584
+[spotanim_584]
+model=model_14196
+seq=seq_3447
+
+// 585
+[spotanim_585]
+model=model_14196
+seq=seq_3448
+
+// 586
+[spotanim_586]
+model=model_14196
+seq=seq_3449
+
+// 587
+[spotanim_587]
+model=model_13731
+seq=seq_3470
+
+// 588
+[spotanim_588]
+model=model_3142
+seq=seq_9882
+recol1s=10368
+recol1d=11556
+recol2s=15392
+recol2d=32767
+recol3s=16846
+recol3d=23252
+recol4s=15789
+recol4d=28655
+recol5s=20017
+recol5d=32728
+
+// 589
+[spotanim_589]
+model=model_14307
+seq=seq_3354
+
+// 590
+[spotanim_590]
+model=model_14307
+seq=seq_3355
+
+// 591
+[spotanim_591]
+model=model_13709
+seq=seq_3357
+
+// 592
+[spotanim_592]
+model=model_14308
+seq=seq_3354
+
+// 593
+[spotanim_593]
+model=model_14309
+seq=seq_3354
+
+// 594
+[spotanim_594]
+model=model_14310
+seq=seq_3354
+
+// 595
+[spotanim_595]
+model=model_14311
+seq=seq_3354
+
+// 596
+[spotanim_596]
+model=model_14306
+seq=seq_3354
+
+// 597
+[spotanim_597]
+model=model_14313
+seq=seq_3354
+
+// 598
+[spotanim_598]
+model=model_14312
+seq=seq_3354
+
+// 599
+[spotanim_599]
+model=model_14314
+seq=seq_3354
+
+// 600
+[spotanim_600]
+model=model_14315
+seq=seq_3354
+
+// 601
+[spotanim_601]
+model=model_13691
+ambient=40
+seq=seq_3350
+
+// 602
+[spotanim_602]
+model=model_2531
+seq=seq_3354
+
+// 603
+[spotanim_603]
+model=model_13745
+seq=seq_3440
+ambient=25
+resizeh=32
+resizev=32
+
+// 604
+[spotanim_604]
+model=model_14037
+seq=seq_3548
+
+// 605
+[spotanim_605]
+model=model_10004
+seq=seq_3549
+
+// 606
+[spotanim_606]
+model=model_10004
+seq=seq_2892
+
+// 607
+[spotanim_607]
+model=model_10008
+seq=seq_3554
+ambient=40
+contrast=144
+
+// 608
+[spotanim_608]
+model=model_14038
+seq=seq_3556
+
+// 609
+[spotanim_609]
+model=model_14036
+seq=seq_3567
+ambient=40
+
+// 610
+[spotanim_610]
+model=model_13121
+seq=seq_3590
+
+// 611
+[spotanim_611]
+model=model_13121
+seq=seq_3591
+
+// 612
+[spotanim_612]
+model=model_13195
+seq=seq_3604
+
+// 613
+[spotanim_613]
+model=model_12957
+seq=seq_3607
+
+// 614
+[spotanim_614]
+model=model_12898
+seq=seq_3610
+
+// 615
+[spotanim_615]
+model=model_13194
+seq=seq_3628
+
+// 616
+[spotanim_616]
+model=model_13130
+seq=seq_3629
+
+// 617
+[spotanim_617]
+model=model_13133
+seq=seq_3631
+
+// 618
+[spotanim_618]
+model=model_13133
+seq=seq_3632
+
+// 619
+[spotanim_619]
+model=model_13133
+seq=seq_3633
+
+// 620
+[spotanim_620]
+model=model_13131
+seq=seq_3637
+
+// 621
+[spotanim_621]
+model=model_13131
+seq=seq_3638
+
+// 622
+[spotanim_622]
+model=model_2223
+seq=seq_465
+recol1s=22204
+recol1d=14722
+
+// 623
+[spotanim_623]
+model=model_13198
+seq=seq_3682
+ambient=40
+contrast=30
+
+// 624
+[spotanim_624]
+model=model_12905
+seq=seq_3706
+
+// 625
+[spotanim_625]
+model=model_14164
+seq=seq_3744
+
+// 626
+[spotanim_626]
+model=model_2318
+seq=seq_504
+ambient=100
+contrast=100
+recol1s=32745
+recol1d=20460
+
+// 627
+[spotanim_627]
+model=model_14165
+seq=seq_3725
+ambient=40
+contrast=40
+
+// 628
+[spotanim_628]
+model=model_14166
+
+// 629
+[spotanim_629]
+model=model_3080
+seq=seq_3746
+ambient=50
+contrast=50
+recol1s=16846
+recol1d=16904
+
+// 630
+[spotanim_630]
+model=model_14286
+seq=seq_3805
+
+// 631
+[spotanim_631]
+model=model_14285
+seq=seq_3808
+
+// 632
+[spotanim_632]
+model=model_14284
+seq=seq_3834
+
+// 633
+[spotanim_633]
+model=model_7412
+seq=seq_1569
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=4756
+
+// 634
+[spotanim_634]
+model=model_7412
+seq=seq_1570
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=4756
+
+// 635
+[spotanim_635]
+model=model_7412
+seq=seq_1571
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=4756
+
+// 636
+[spotanim_636]
+model=model_7412
+seq=seq_1569
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=19475
+
+// 637
+[spotanim_637]
+model=model_7412
+seq=seq_1570
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=19475
+
+// 638
+[spotanim_638]
+model=model_7412
+seq=seq_1571
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=19475
+
+// 639
+[spotanim_639]
+model=model_7412
+seq=seq_1569
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=19463
+
+// 640
+[spotanim_640]
+model=model_7412
+seq=seq_1570
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=19463
+
+// 641
+[spotanim_641]
+model=model_7412
+seq=seq_1571
+resizeh=64
+resizev=64
+recol1s=11875
+recol1d=19463
+
+// 642
+[spotanim_642]
+model=model_24023
+seq=seq_3850
+
+// 643
+[spotanim_643]
+model=model_24022
+seq=seq_3864
+
+// 644
+[spotanim_644]
+model=model_24024
+seq=seq_6108
+
+// 645
+[spotanim_645]
+model=model_23901
+seq=seq_3854
+
+// 646
+[spotanim_646]
+model=model_14559
+seq=seq_3883
+ambient=30
+
+// 647
+[spotanim_647]
+model=model_14561
+seq=seq_3884
+ambient=30
+
+// 648
+[spotanim_648]
+model=model_14560
+seq=seq_3885
+ambient=30
+
+// 649
+[spotanim_649]
+model=model_14558
+seq=seq_3889
+ambient=30
+
+// 650
+[spotanim_650]
+model=model_14558
+seq=seq_3889
+ambient=30
+recol1s=25098
+recol1d=24085
+recol2s=24041
+recol2d=23028
+recol3s=22984
+recol3d=21971
+recol4s=21927
+recol4d=20914
+
+// 651
+[spotanim_651]
+model=model_14558
+seq=seq_3889
+ambient=30
+recol1s=25098
+recol1d=13767
+recol2s=24041
+recol2d=12710
+recol3s=22984
+recol3d=11653
+recol4s=21927
+recol4d=10596
+
+// 652
+[spotanim_652]
+model=model_14558
+seq=seq_3889
+ambient=30
+recol1s=25098
+recol1d=18592
+recol2s=24041
+recol2d=17504
+recol3s=22984
+recol3d=16448
+recol4s=21927
+recol4d=15392
+
+// 653
+[spotanim_653]
+model=model_14558
+seq=seq_3889
+ambient=30
+recol1s=25098
+recol1d=136
+recol2s=24041
+recol2d=103
+recol3s=22984
+recol3d=70
+recol4s=21927
+recol4d=37
+
+// 654
+[spotanim_654]
+model=model_14533
+seq=seq_3905
+
+// 655
+[spotanim_655]
+model=model_14554
+seq=seq_3923
+
+// 656
+[spotanim_656]
+model=model_14555
+
+// 657
+[spotanim_657]
+model=model_14555
+seq=seq_3924
+
+// 658
+[spotanim_658]
+model=model_14557
+seq=seq_3912
+
+// 659
+[spotanim_659]
+model=model_14760
+seq=seq_3941
+
+// 660
+[spotanim_660]
+model=model_14759
+seq=seq_3942
+
+// 661
+[spotanim_661]
+model=model_14775
+seq=seq_3946
+
+// 662
+[spotanim_662]
+model=model_14923
+seq=seq_3995
+
+// 663
+[spotanim_663]
+model=model_14921
+seq=seq_3974
+
+// 664
+[spotanim_664]
+model=model_14922
+seq=seq_3975
+
+// 665
+[spotanim_665]
+model=model_3134
+recol1s=16846
+recol1d=0
+
+// 666
+[spotanim_666]
+model=model_14948
+seq=seq_4000
+
+// 667
+[spotanim_667]
+model=model_14948
+seq=seq_4002
+
+// 668
+[spotanim_668]
+model=model_14997
+seq=seq_4020
+
+// 669
+[spotanim_669]
+model=model_15097
+seq=seq_4025
+
+// 670
+[spotanim_670]
+model=model_15097
+seq=seq_4026
+
+// 671
+[spotanim_671]
+model=model_15098
+seq=seq_4027
+ambient=10
+
+// 672
+[spotanim_672]
+model=model_15091
+seq=seq_4035
+
+// 673
+[spotanim_673]
+model=model_15091
+seq=seq_4032
+
+// 674
+[spotanim_674]
+model=model_15091
+seq=seq_4033
+
+// 675
+[spotanim_675]
+model=model_15091
+seq=seq_4034
+
+// 676
+[spotanim_676]
+model=model_3081
+seq=seq_659
+ambient=40
+contrast=40
+recol1s=15392
+recol1d=10830
+recol2s=25664
+recol2d=18164
+recol3s=32736
+recol3d=24506
+
+// 677
+[spotanim_677]
+model=model_3082
+seq=seq_660
+ambient=50
+contrast=50
+recol1s=15392
+recol1d=10830
+recol2s=25664
+recol2d=18164
+recol3s=32736
+recol3d=24506
+
+// 678
+[spotanim_678]
+model=model_12734
+seq=seq_4072
+
+// 679
+[spotanim_679]
+model=model_15376
+seq=seq_4165
+
+// 680
+[spotanim_680]
+model=model_15373
+seq=seq_4165
+
+// 681
+[spotanim_681]
+model=model_15375
+seq=seq_4165
+
+// 682
+[spotanim_682]
+model=model_15374
+seq=seq_4165
+
+// 683
+[spotanim_683]
+model=model_15378
+seq=seq_4176
+
+// 684
+[spotanim_684]
+model=model_15395
+seq=seq_4187
+
+// 685
+[spotanim_685]
+model=model_15394
+seq=seq_4187
+
+// 686
+[spotanim_686]
+model=model_15393
+seq=seq_4187
+
+// 687
+[spotanim_687]
+model=model_15392
+seq=seq_4187
+
+// 688
+[spotanim_688]
+model=model_15391
+seq=seq_4187
+
+// 689
+[spotanim_689]
+model=model_15377
+seq=seq_4186
+
+// 690
+[spotanim_690]
+model=model_15384
+
+// 691
+[spotanim_691]
+model=model_15534
+seq=seq_4213
+
+// 692
+[spotanim_692]
+model=model_15531
+seq=seq_4214
+
+// 693
+[spotanim_693]
+model=model_15528
+seq=seq_4215
+
+// 694
+[spotanim_694]
+model=model_15535
+seq=seq_4216
+
+// 695
+[spotanim_695]
+model=model_15530
+seq=seq_4212
+
+// 696
+[spotanim_696]
+model=model_15569
+
+// 697
+[spotanim_697]
+model=model_15569
+seq=seq_5286
+
+// 698
+[spotanim_698]
+model=model_15570
+ambient=30
+
+// 699
+[spotanim_699]
+model=model_15570
+seq=seq_367
+ambient=30
+
+// 700
+[spotanim_700]
+model=model_15533
+seq=seq_4223
+
+// 701
+[spotanim_701]
+model=model_15525
+seq=seq_4224
+
+// 702
+[spotanim_702]
+model=model_15526
+seq=seq_4224
+
+// 703
+[spotanim_703]
+model=model_15527
+seq=seq_4224
+
+// 704
+[spotanim_704]
+model=model_15532
+seq=seq_4225
+ambient=50
+contrast=50
+
+// 705
+[spotanim_705]
+model=model_3143
+seq=seq_4229
+
+// 706
+[spotanim_706]
+model=model_15834
+seq=seq_4248
+
+// 707
+[spotanim_707]
+model=model_15834
+seq=seq_4249
+
+// 708
+[spotanim_708]
+model=model_15837
+seq=seq_4251
+
+// 709
+[spotanim_709]
+model=model_15836
+seq=seq_4252
+rotation=180
+recol1s=5285
+recol1d=11396
+
+// 710
+[spotanim_710]
+model=model_15836
+seq=seq_4252
+rotation=180
+recol1s=5285
+recol1d=8463
+
+// 711
+[spotanim_711]
+model=model_15835
+seq=seq_4261
+
+// 712
+[spotanim_712]
+model=model_40520
+seq=seq_4277
+ambient=64
+
+// 713
+[spotanim_713]
+model=model_15916
+seq=seq_4279
+ambient=10
+
+// 714
+[spotanim_714]
+model=model_16043
+seq=seq_4286
+ambient=10
+
+// 715
+[spotanim_715]
+model=model_16422
+seq=seq_4334
+ambient=30
+contrast=40
+
+// 716
+[spotanim_716]
+model=model_16438
+seq=seq_4351
+
+// 717
+[spotanim_717]
+model=model_16437
+seq=seq_4351
+
+// 718
+[spotanim_718]
+model=model_16436
+seq=seq_4351
+
+// 719
+[spotanim_719]
+model=model_288
+seq=seq_4353
+ambient=25
+
+// 720
+[spotanim_720]
+model=model_11227
+seq=seq_4382
+
+// 721
+[spotanim_721]
+model=model_16832
+seq=seq_4407
+
+// 722
+[spotanim_722]
+model=model_16826
+seq=seq_4419
+ambient=40
+
+// 723
+[spotanim_723]
+model=model_16829
+seq=seq_4415
+ambient=40
+
+// 724
+[spotanim_724]
+model=model_16829
+seq=seq_4416
+ambient=40
+recol1s=23356
+recol1d=14694
+recol2s=18173
+recol2d=11524
+
+// 725
+[spotanim_725]
+model=model_16828
+seq=seq_4417
+ambient=40
+
+// 726
+[spotanim_726]
+model=model_16828
+seq=seq_4417
+ambient=40
+recol1s=28468
+recol1d=20677
+
+// 727
+[spotanim_727]
+model=model_16823
+seq=seq_4418
+ambient=40
+recol1s=27547
+recol1d=25126
+recol2s=6682
+recol2d=28325
+
+// 728
+[spotanim_728]
+model=model_16824
+seq=seq_4421
+recol1s=27547
+recol1d=31607
+recol2s=6682
+recol2d=12580
+recol3s=29163
+recol3d=29591
+recol4s=28660
+recol4d=11522
+
+// 729
+[spotanim_729]
+model=model_16822
+seq=seq_4420
+recol1s=27547
+recol1d=20187
+recol2s=6682
+recol2d=19165
+recol3s=29163
+recol3d=27547
+recol4s=28660
+recol4d=28660
+
+// 730
+[spotanim_730]
+model=model_16824
+seq=seq_4421
+ambient=40
+recol1s=27547
+recol1d=29657
+recol2s=6682
+recol2d=29675
+recol3s=29163
+recol3d=23485
+
+// 731
+[spotanim_731]
+model=model_16822
+seq=seq_4420
+recol1s=27547
+recol1d=18354
+recol2s=6682
+recol2d=8841
+recol3s=29163
+recol3d=3524
+recol4s=28660
+recol4d=9738
+
+// 732
+[spotanim_732]
+model=model_16823
+seq=seq_4418
+ambient=40
+
+// 733
+[spotanim_733]
+model=model_16823
+seq=seq_4418
+ambient=40
+recol1s=27547
+recol1d=13675
+recol2s=6682
+recol2d=18927
+recol3s=29163
+recol3d=28407
+
+// 734
+[spotanim_734]
+model=model_16825
+seq=seq_4414
+
+// 735
+[spotanim_735]
+model=model_16826
+seq=seq_4419
+ambient=40
+recol1s=28696
+recol1d=32635
+
+// 736
+[spotanim_736]
+model=model_16825
+seq=seq_4414
+ambient=40
+recol1s=22459
+recol1d=32681
+recol2s=32681
+recol2d=32767
+recol3s=32635
+recol3d=22459
+recol4s=32767
+recol4d=32635
+
+// 737
+[spotanim_737]
+model=model_16826
+seq=seq_4419
+ambient=40
+recol1s=28696
+recol1d=32681
+
+// 738
+[spotanim_738]
+model=model_16825
+seq=seq_4414
+ambient=40
+recol1s=22459
+recol1d=32767
+recol2s=32681
+recol2d=32767
+recol3s=32635
+recol3d=22459
+recol4s=32767
+recol4d=32635
+
+// 739
+[spotanim_739]
+model=model_16826
+seq=seq_4419
+ambient=40
+recol1s=28696
+recol1d=32767
+
+// 740
+[spotanim_740]
+model=model_16826
+seq=seq_4419
+ambient=40
+recol1s=28696
+recol1d=20677
+
+// 741
+[spotanim_741]
+model=model_16826
+seq=seq_4419
+ambient=40
+recol1s=28696
+recol1d=26554
+
+// 742
+[spotanim_742]
+model=model_16822
+seq=seq_4420
+recol1s=27547
+recol1d=26554
+recol2s=6682
+recol2d=32727
+recol3s=29163
+recol3d=32767
+recol4s=28660
+recol4d=32727
+
+// 743
+[spotanim_743]
+model=model_16826
+seq=seq_4419
+ambient=40
+recol1s=28696
+recol1d=6682
+
+// 744
+[spotanim_744]
+model=model_16823
+seq=seq_4418
+ambient=40
+recol1s=27547
+recol1d=27547
+recol2s=6682
+recol2d=27547
+recol3s=29163
+recol3d=27547
+
+// 745
+[spotanim_745]
+model=model_16823
+seq=seq_4418
+ambient=40
+recol1s=27547
+recol1d=27547
+recol2s=6682
+recol2d=27547
+recol3s=29163
+recol3d=6682
+
+// 746
+[spotanim_746]
+model=model_16821
+seq=seq_4422
+ambient=40
+recol1s=27547
+recol1d=25126
+recol2s=6682
+recol2d=28325
+
+// 747
+[spotanim_747]
+model=model_16827
+seq=seq_4423
+ambient=30
+
+// 748
+[spotanim_748]
+model=model_16822
+seq=seq_4420
+ambient=40
+recol1s=29163
+recol1d=26400
+recol2s=6682
+recol2d=19488
+
+// 749
+[spotanim_749]
+model=model_16940
+seq=seq_4443
+ambient=30
+
+// 750
+[spotanim_750]
+model=model_16942
+seq=seq_4444
+ambient=30
+
+// 751
+[spotanim_751]
+model=model_16933
+seq=seq_4445
+ambient=30
+
+// 752
+[spotanim_752]
+model=model_16941
+seq=seq_4446
+ambient=30
+
+// 753
+[spotanim_753]
+model=model_16939
+seq=seq_4447
+ambient=30
+
+// 754
+[spotanim_754]
+model=model_16932
+seq=seq_4448
+ambient=30
+
+// 755
+[spotanim_755]
+model=model_16936
+seq=seq_4449
+ambient=30
+
+// 756
+[spotanim_756]
+model=model_16935
+seq=seq_4450
+ambient=30
+
+// 757
+[spotanim_757]
+model=model_16934
+seq=seq_4451
+ambient=30
+
+// 758
+[spotanim_758]
+model=model_16943
+seq=seq_4452
+ambient=30
+
+// 759
+[spotanim_759]
+model=model_16937
+seq=seq_4463
+ambient=30
+
+// 760
+[spotanim_760]
+model=model_16938
+seq=seq_4453
+ambient=10
+
+// 761
+[spotanim_761]
+model=model_16938
+seq=seq_4461
+ambient=10
+
+// 762
+[spotanim_762]
+model=model_16931
+
+// 763
+[spotanim_763]
+model=model_38114
+seq=seq_9626
+contrast=20
+ambient=20
+
+// 764
+[spotanim_764]
+model=model_38114
+seq=seq_9636
+contrast=20
+ambient=20
+
+// 765
+[spotanim_765]
+model=model_17149
+seq=seq_4541
+
+// 766
+[spotanim_766]
+model=model_17148
+seq=seq_4542
+
+// 767
+[spotanim_767]
+model=model_17150
+seq=seq_4543
+
+// 768
+[spotanim_768]
+model=model_17151
+seq=seq_4548
+
+// 769
+[spotanim_769]
+model=model_17150
+seq=seq_4545
+
+// 770
+[spotanim_770]
+model=model_17170
+seq=seq_4550
+
+// 771
+[spotanim_771]
+model=model_17169
+seq=seq_4554
+
+// 772
+[spotanim_772]
+model=model_17169
+seq=seq_4555
+
+// 773
+[spotanim_773]
+model=model_17171
+seq=seq_4556
+
+// 774
+[spotanim_774]
+model=model_17104
+seq=seq_4584
+
+// 775
+[spotanim_775]
+model=model_1202
+seq=seq_114
+contrast=20
+ambient=50
+
+// 776
+[spotanim_776]
+model=model_16960
+seq=seq_4478
+
+// 777
+[spotanim_777]
+model=model_17510
+seq=seq_4601
+
+// 778
+[spotanim_778]
+model=model_17512
+seq=seq_4605
+
+// 779
+[spotanim_779]
+model=model_17511
+seq=seq_4611
+
+// 780
+[spotanim_780]
+model=model_17511
+seq=seq_4613
+
+// 781
+[spotanim_781]
+model=model_17511
+seq=seq_4612
+
+// 782
+[spotanim_782]
+model=model_17533
+seq=seq_4625
+
+// 783
+[spotanim_783]
+model=model_17534
+seq=seq_3941
+
+// 784
+[spotanim_784]
+model=model_16832
+seq=seq_4735
+
+// 785
+[spotanim_785]
+model=model_16832
+seq=seq_4737
+
+// 786
+[spotanim_786]
+model=model_16832
+seq=seq_4736
+
+// 787
+[spotanim_787]
+model=model_18029
+seq=seq_4730
+resizeh=64
+resizev=96
+
+// 788
+[spotanim_788]
+model=model_45463
+seq=seq_11149
+
+// 789
+[spotanim_789]
+model=model_11320
+seq=seq_4792
+ambient=60
+contrast=60
+
+// 790
+[spotanim_790]
+model=model_18478
+seq=seq_4808
+
+// 791
+[spotanim_791]
+model=model_18477
+seq=seq_4810
+ambient=30
+contrast=10
+
+// 792
+[spotanim_792]
+model=model_18425
+seq=seq_4827
+
+// 793
+[spotanim_793]
+model=model_18496
+seq=seq_1646
+
+// 794
+[spotanim_794]
+model=model_18496
+seq=seq_4833
+
+// 795
+[spotanim_795]
+model=model_18425
+seq=seq_4827
+
+// 796
+[spotanim_796]
+model=model_18419
+seq=seq_4832
+rotation=180
+
+// 797
+[spotanim_797]
+model=model_18427
+seq=seq_4836
+
+// 798
+[spotanim_798]
+model=model_18380
+seq=seq_4837
+
+// 799
+[spotanim_799]
+model=model_18426
+seq=seq_4840
+ambient=20
+
+// 800
+[spotanim_800]
+model=model_1202
+seq=seq_115
+contrast=20
+ambient=50
+
+// 801
+[spotanim_801]
+model=model_1202
+seq=seq_116
+contrast=20
+ambient=50
+
+// 802
+[spotanim_802]
+model=model_1202
+seq=seq_117
+contrast=20
+ambient=50
+
+// 803
+[spotanim_803]
+model=model_1202
+seq=seq_118
+contrast=20
+ambient=50
+
+// 804
+[spotanim_804]
+model=model_1202
+seq=seq_137
+contrast=20
+ambient=50
+
+// 805
+[spotanim_805]
+model=model_3136
+recol1s=16846
+recol1d=32767
+recol2s=15789
+recol2d=32503
+recol3s=10368
+recol3d=3208
+recol4s=15392
+recol4d=12756
+
+// 806
+[spotanim_806]
+model=model_3142
+seq=seq_366
+recol1s=16846
+recol1d=32767
+recol2s=15789
+recol2d=32503
+recol3s=10368
+recol3d=3208
+recol4s=15392
+recol4d=12756
+
+// 807
+[spotanim_807]
+model=model_18778
+seq=seq_4882
+
+// 808
+[spotanim_808]
+model=model_18867
+seq=seq_4886
+
+// 809
+[spotanim_809]
+model=model_18651
+seq=seq_1053
+
+// 810
+[spotanim_810]
+model=model_18869
+seq=seq_4893
+
+// 811
+[spotanim_811]
+model=model_18868
+seq=seq_4893
+
+// 812
+[spotanim_812]
+model=model_19079
+seq=seq_4938
+
+// 813
+[spotanim_813]
+model=model_19083
+seq=seq_4940
+
+// 814
+[spotanim_814]
+model=model_19084
+seq=seq_4942
+
+// 815
+[spotanim_815]
+model=model_19089
+seq=seq_4944
+
+// 816
+[spotanim_816]
+model=model_19086
+seq=seq_4946
+ambient=60
+
+// 817
+[spotanim_817]
+model=model_19069
+seq=seq_4948
+ambient=40
+
+// 818
+[spotanim_818]
+model=model_19074
+seq=seq_4950
+
+// 819
+[spotanim_819]
+model=model_19078
+seq=seq_4952
+
+// 820
+[spotanim_820]
+model=model_19072
+seq=seq_4954
+
+// 821
+[spotanim_821]
+model=model_19073
+seq=seq_4956
+
+// 822
+[spotanim_822]
+model=model_19092
+seq=seq_4958
+
+// 823
+[spotanim_823]
+model=model_19071
+seq=seq_4960
+ambient=60
+
+// 824
+[spotanim_824]
+model=model_19075
+seq=seq_4962
+ambient=30
+
+// 825
+[spotanim_825]
+model=model_19076
+seq=seq_4964
+ambient=30
+
+// 826
+[spotanim_826]
+model=model_19091
+seq=seq_4966
+
+// 827
+[spotanim_827]
+model=model_34567
+seq=seq_9465
+ambient=30
+
+// 828
+[spotanim_828]
+model=model_19090
+seq=seq_4982
+
+// 829
+[spotanim_829]
+model=model_19085
+seq=seq_4980
+ambient=60
+
+// 830
+[spotanim_830]
+model=model_19070
+seq=seq_4978
+
+// 831
+[spotanim_831]
+model=model_19077
+seq=seq_4976
+ambient=60
+
+// 832
+[spotanim_832]
+model=model_19087
+seq=seq_4974
+ambient=60
+
+// 833
+[spotanim_833]
+model=model_19081
+seq=seq_4972
+
+// 834
+[spotanim_834]
+model=model_19082
+seq=seq_4972
+
+// 835
+[spotanim_835]
+model=model_19080
+seq=seq_4970
+ambient=40
+
+// 836
+[spotanim_836]
+model=model_5026
+seq=seq_3354
+
+// 837
+[spotanim_837]
+model=model_19109
+seq=seq_283
+recol1s=16846
+recol1d=13671
+recol2s=15919
+recol2d=13638
+recol3s=32761
+recol3d=25260
+
+// 838
+[spotanim_838]
+model=model_19109
+seq=seq_4990
+recol1s=16846
+recol1d=13671
+recol2s=15919
+recol2d=13638
+recol3s=32761
+recol3d=25260
+
+// 839
+[spotanim_839]
+model=model_8895
+seq=seq_3354
+recol1s=17795
+recol1d=13635
+recol2s=22023
+recol2d=18883
+recol3s=12835
+recol3d=10723
+
+// 840
+[spotanim_840]
+model=model_19158
+seq=seq_5003
+
+// 841
+[spotanim_841]
+model=model_19156
+seq=seq_5004
+resizeh=100
+resizev=100
+
+// 842
+[spotanim_842]
+model=model_19161
+seq=seq_5005
+
+// 843
+[spotanim_843]
+model=model_19160
+seq=seq_5007
+resizeh=100
+resizev=100
+
+// 844
+[spotanim_844]
+model=model_19160
+seq=seq_5008
+resizeh=100
+resizev=100
+
+// 845
+[spotanim_845]
+model=model_19160
+seq=seq_5009
+resizeh=100
+resizev=100
+
+// 846
+[spotanim_846]
+model=model_19157
+seq=seq_5010
+resizeh=100
+resizev=100
+
+// 847
+[spotanim_847]
+model=model_19157
+seq=seq_5011
+resizeh=100
+resizev=100
+
+// 848
+[spotanim_848]
+model=model_19159
+seq=seq_4984
+
+// 849
+[spotanim_849]
+model=model_19155
+seq=seq_5014
+
+// 850
+[spotanim_850]
+model=model_3776
+seq=seq_5017
+
+// 851
+[spotanim_851]
+model=model_19153
+seq=seq_5019
+
+// 852
+[spotanim_852]
+model=model_19154
+seq=seq_5020
+
+// 853
+[spotanim_853]
+model=model_2491
+seq=seq_3354
+recol1s=26112
+recol1d=21856
+recol2s=32454
+recol2d=26050
+
+// 854
+[spotanim_854]
+model=model_2822
+seq=seq_3354
+
+// 855
+[spotanim_855]
+model=model_19163
+seq=seq_5034
+recol1s=8423
+recol1d=8454
+
+// 856
+[spotanim_856]
+model=model_19162
+seq=seq_5035
+recol1s=8423
+recol1d=8454
+
+// 857
+[spotanim_857]
+model=model_19162
+seq=seq_5036
+recol1s=8423
+recol1d=8454
+
+// 858
+[spotanim_858]
+model=model_2223
+seq=seq_914
+recol1s=22204
+recol1d=32767
+
+// 859
+[spotanim_859]
+model=model_20501
+seq=seq_5060
+
+// 860
+[spotanim_860]
+model=model_20502
+seq=seq_5064
+
+// 861
+[spotanim_861]
+model=model_20502
+seq=seq_5065
+
+// 862
+[spotanim_862]
+model=model_20502
+seq=seq_5066
+
+// 863
+[spotanim_863]
+model=model_20728
+seq=seq_5392
+ambient=10
+
+// 864
+[spotanim_864]
+model=model_20728
+seq=seq_5392
+ambient=10
+recol1s=192
+recol1d=23356
+
+// 865
+[spotanim_865]
+model=model_11220
+seq=seq_5399
+ambient=30
+
+// 866
+[spotanim_866]
+model=model_20730
+seq=seq_5398
+ambient=30
+
+// 867
+[spotanim_867]
+model=model_20731
+seq=seq_5401
+ambient=10
+recol1s=32693
+recol1d=192
+
+// 868
+[spotanim_868]
+model=model_20731
+seq=seq_5401
+ambient=10
+recol1s=32693
+recol1d=12320
+
+// 869
+[spotanim_869]
+model=model_20731
+seq=seq_5401
+ambient=10
+recol1s=32693
+recol1d=4230
+
+// 870
+[spotanim_870]
+model=model_20729
+seq=seq_5403
+ambient=10
+
+// 871
+[spotanim_871]
+model=model_20729
+seq=seq_5404
+ambient=10
+
+// 872
+[spotanim_872]
+model=model_20729
+seq=seq_5405
+ambient=10
+
+// 873
+[spotanim_873]
+model=model_20726
+seq=seq_5406
+ambient=10
+recol1s=28336
+recol1d=192
+
+// 874
+[spotanim_874]
+model=model_20726
+seq=seq_5406
+ambient=10
+recol1s=28336
+recol1d=12320
+
+// 875
+[spotanim_875]
+model=model_20726
+seq=seq_5406
+ambient=10
+recol1s=28336
+recol1d=4230
+
+// 876
+[spotanim_876]
+model=model_20731
+seq=seq_5401
+ambient=10
+recol1s=32693
+recol1d=192
+
+// 877
+[spotanim_877]
+model=model_19767
+seq=seq_5143
+
+// 878
+[spotanim_878]
+model=model_19768
+seq=seq_5144
+
+// 879
+[spotanim_879]
+model=model_19770
+seq=seq_5156
+
+// 880
+[spotanim_880]
+model=model_19769
+seq=seq_5143
+
+// 881
+[spotanim_881]
+model=model_19766
+seq=seq_5144
+
+// 882
+[spotanim_882]
+model=model_19771
+seq=seq_5145
+
+// 883
+[spotanim_883]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=32736
+recol2s=27380
+recol2d=29568
+recol3s=25266
+recol3d=22176
+recol4s=24175
+recol4d=20064
+
+// 884
+[spotanim_884]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=32736
+recol2s=27380
+recol2d=29568
+recol3s=25266
+recol3d=22176
+recol4s=24175
+recol4d=20064
+
+// 885
+[spotanim_885]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=32736
+recol2s=27380
+recol2d=29568
+recol3s=25266
+recol3d=22176
+recol4s=24175
+recol4d=20064
+
+// 886
+[spotanim_886]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=10605
+recol2s=27380
+recol2d=8491
+recol3s=25266
+recol3d=3206
+recol4s=24175
+recol4d=4263
+
+// 887
+[spotanim_887]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=10605
+recol2s=27380
+recol2d=8491
+recol3s=25266
+recol3d=3206
+recol4s=24175
+recol4d=4263
+
+// 888
+[spotanim_888]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=10605
+recol2s=27380
+recol2d=8491
+recol3s=25266
+recol3d=3206
+recol4s=24175
+recol4d=4263
+
+// 889
+[spotanim_889]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=19488
+recol2s=27380
+recol2d=16416
+recol3s=25266
+recol3d=10240
+recol4s=24175
+recol4d=8192
+
+// 890
+[spotanim_890]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=19488
+recol2s=27380
+recol2d=16416
+recol3s=25266
+recol3d=10240
+recol4s=24175
+recol4d=8192
+
+// 891
+[spotanim_891]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=19488
+recol2s=27380
+recol2d=16416
+recol3s=25266
+recol3d=10240
+recol4s=24175
+recol4d=8192
+
+// 892
+[spotanim_892]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=32331
+recol2s=27380
+recol2d=32297
+recol3s=25266
+recol3d=32294
+recol4s=24175
+recol4d=30116
+
+// 893
+[spotanim_893]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=32331
+recol2s=27380
+recol2d=32297
+recol3s=25266
+recol3d=32294
+recol4s=24175
+recol4d=30116
+
+// 894
+[spotanim_894]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=32331
+recol2s=27380
+recol2d=32297
+recol3s=25266
+recol3d=32294
+recol4s=24175
+recol4d=30116
+
+// 895
+[spotanim_895]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=10958
+recol2s=27380
+recol2d=8844
+recol3s=25266
+recol3d=1606
+recol4s=24175
+recol4d=1540
+
+// 896
+[spotanim_896]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=10958
+recol2s=27380
+recol2d=8844
+recol3s=25266
+recol3d=1606
+recol4s=24175
+recol4d=1540
+
+// 897
+[spotanim_897]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=10958
+recol2s=27380
+recol2d=8844
+recol3s=25266
+recol3d=1606
+recol4s=24175
+recol4d=1540
+
+// 898
+[spotanim_898]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=26073
+recol2s=27380
+recol2d=22966
+recol3s=25266
+recol3d=19797
+recol4s=24175
+recol4d=18676
+
+// 899
+[spotanim_899]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=26073
+recol2s=27380
+recol2d=22966
+recol3s=25266
+recol3d=19797
+recol4s=24175
+recol4d=18676
+
+// 900
+[spotanim_900]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=26073
+recol2s=27380
+recol2d=22966
+recol3s=25266
+recol3d=19797
+recol4s=24175
+recol4d=18676
+
+// 901
+[spotanim_901]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=32536
+recol2s=27380
+recol2d=32436
+recol3s=25266
+recol3d=32304
+recol4s=24175
+recol4d=29266
+
+// 902
+[spotanim_902]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=32536
+recol2s=27380
+recol2d=32436
+recol3s=25266
+recol3d=32304
+recol4s=24175
+recol4d=29266
+
+// 903
+[spotanim_903]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=32536
+recol2s=27380
+recol2d=32436
+recol3s=25266
+recol3d=32304
+recol4s=24175
+recol4d=29266
+
+// 904
+[spotanim_904]
+model=model_19769
+seq=seq_5143
+recol1s=32563
+recol1d=13675
+recol2s=27380
+recol2d=11561
+recol3s=25266
+recol3d=8456
+recol4s=24175
+recol4d=6342
+
+// 905
+[spotanim_905]
+model=model_19766
+seq=seq_5144
+recol1s=32563
+recol1d=13675
+recol2s=27380
+recol2d=11561
+recol3s=25266
+recol3d=8456
+recol4s=24175
+recol4d=6342
+
+// 906
+[spotanim_906]
+model=model_19771
+seq=seq_5145
+recol1s=32563
+recol1d=13675
+recol2s=27380
+recol2d=11561
+recol3s=25266
+recol3d=8456
+recol4s=24175
+recol4d=6342
+
+// 907
+[spotanim_907]
+model=model_19978
+seq=seq_5159
+
+// 908
+[spotanim_908]
+model=model_19461
+seq=seq_5186
+
+// 909
+[spotanim_909]
+model=model_19461
+seq=seq_5186
+recol1s=13707
+recol1d=10336
+recol2s=13706
+recol2d=10336
+recol3s=11592
+recol3d=7232
+recol4s=12649
+recol4d=9312
+recol5s=13706
+recol5d=11424
+recol6s=12650
+recol6d=10336
+
+// 910
+[spotanim_910]
+model=model_19460
+seq=seq_5214
+ambient=10
+recol1s=11902
+recol1d=10240
+recol2s=16061
+recol2d=0
+recol3s=30686
+recol3d=10240
+recol4s=32687
+recol4d=23616
+
+// 911
+[spotanim_911]
+model=model_19460
+seq=seq_5214
+ambient=10
+recol1s=11902
+recol1d=29597
+recol2s=16061
+recol2d=29597
+recol3s=30686
+recol3d=32767
+recol4s=32687
+recol4d=22298
+
+// 912
+[spotanim_912]
+model=model_19460
+seq=seq_5214
+ambient=10
+recol1s=27551
+recol1d=21404
+recol2s=32687
+recol2d=20316
+recol3s=30686
+recol3d=11924
+
+// 913
+[spotanim_913]
+model=model_19460
+seq=seq_5214
+ambient=10
+recol1s=27551
+recol1d=25664
+recol2s=11902
+recol2d=32106
+recol3s=16061
+recol3d=31808
+recol4s=30686
+recol4d=27944
+
+// 914
+[spotanim_914]
+model=model_19459
+seq=seq_5214
+ambient=10
+recol1s=11902
+recol1d=10240
+recol2s=16061
+recol2d=0
+recol3s=30686
+recol3d=10240
+recol4s=32687
+recol4d=23616
+
+// 915
+[spotanim_915]
+model=model_19459
+seq=seq_5214
+ambient=10
+recol1s=11902
+recol1d=29597
+recol2s=16061
+recol2d=29597
+recol3s=30686
+recol3d=32767
+recol4s=32687
+recol4d=22298
+
+// 916
+[spotanim_916]
+model=model_19459
+seq=seq_5214
+ambient=10
+recol1s=27551
+recol1d=21404
+recol2s=32687
+recol2d=20316
+recol3s=30686
+recol3d=11924
+
+// 917
+[spotanim_917]
+model=model_19459
+seq=seq_5214
+ambient=10
+recol1s=27551
+recol1d=25664
+recol2s=11902
+recol2d=25664
+recol3s=16061
+recol3d=31808
+recol4s=30686
+recol4d=31808
+
+// 918
+[spotanim_918]
+model=model_19974
+seq=seq_5198
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+
+// 919
+[spotanim_919]
+model=model_19974
+seq=seq_5198
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+rotation=90
+
+// 920
+[spotanim_920]
+model=model_19974
+seq=seq_5198
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+rotation=180
+
+// 921
+[spotanim_921]
+model=model_19974
+seq=seq_5198
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+rotation=270
+
+// 922
+[spotanim_922]
+model=model_19974
+seq=seq_5199
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+
+// 923
+[spotanim_923]
+model=model_19974
+seq=seq_5200
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+
+// 924
+[spotanim_924]
+model=model_19974
+seq=seq_5201
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+
+// 925
+[spotanim_925]
+model=model_19974
+seq=seq_5201
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+rotation=90
+
+// 926
+[spotanim_926]
+model=model_19974
+seq=seq_5201
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+rotation=180
+
+// 927
+[spotanim_927]
+model=model_19974
+seq=seq_5201
+resizeh=72
+resizev=72
+ambient=15
+contrast=15
+rotation=270
+
+// 928
+[spotanim_928]
+model=model_19389
+seq=seq_5272
+resizeh=96
+resizev=96
+recol1s=21535
+recol1d=8288
+
+// 929
+[spotanim_929]
+model=model_19389
+seq=seq_5272
+resizeh=96
+resizev=96
+recol1s=8288
+recol1d=0
+recol2s=10468
+recol2d=2114
+recol3s=11525
+recol3d=4229
+recol4s=12582
+recol4d=6342
+recol5s=13639
+recol5d=8456
+recol6s=9411
+recol6d=4229
+
+// 930
+[spotanim_930]
+model=model_19389
+seq=seq_5272
+resizeh=96
+resizev=96
+recol1s=13639
+recol1d=24242
+recol2s=12582
+recol2d=24242
+recol3s=11525
+recol3d=19879
+recol4s=10468
+recol4d=20935
+recol5s=9411
+recol5d=21992
+recol6s=8288
+recol6d=0
+
+// 931
+[spotanim_931]
+model=model_9598
+seq=seq_5205
+resizeh=96
+resizev=96
+ambient=60
+contrast=60
+
+// 932
+[spotanim_932]
+model=model_19982
+seq=seq_5218
+
+// 933
+[spotanim_933]
+model=model_19881
+seq=seq_5223
+
+// 934
+[spotanim_934]
+model=model_19881
+seq=seq_5223
+rotation=90
+
+// 935
+[spotanim_935]
+model=model_19881
+seq=seq_5223
+rotation=180
+
+// 936
+[spotanim_936]
+model=model_19881
+seq=seq_5223
+rotation=270
+
+// 937
+[spotanim_937]
+model=model_19375
+seq=seq_5232
+contrast=12
+ambient=12
+
+// 938
+[spotanim_938]
+model=model_19375
+seq=seq_5233
+contrast=12
+ambient=12
+
+// 939
+[spotanim_939]
+model=model_19376
+seq=seq_5232
+contrast=12
+ambient=12
+
+// 940
+[spotanim_940]
+model=model_19376
+seq=seq_5233
+contrast=12
+ambient=12
+
+// 941
+[spotanim_941]
+model=model_19374
+seq=seq_5232
+contrast=12
+ambient=12
+
+// 942
+[spotanim_942]
+model=model_19374
+seq=seq_5233
+contrast=12
+ambient=12
+
+// 943
+[spotanim_943]
+model=model_23901
+seq=seq_6093
+
+// 944
+[spotanim_944]
+model=model_23902
+seq=seq_5240
+
+// 945
+[spotanim_945]
+model=model_23902
+seq=seq_5241
+
+// 946
+[spotanim_946]
+model=model_23902
+seq=seq_5242
+
+// 947
+[spotanim_947]
+model=model_19920
+seq=seq_5274
+resizeh=96
+resizev=96
+recol1s=8288
+recol1d=10468
+
+// 948
+[spotanim_948]
+model=model_19920
+seq=seq_5274
+resizeh=96
+resizev=96
+recol1s=13639
+recol1d=13573
+recol2s=12582
+recol2d=13540
+recol3s=11525
+recol3d=12483
+recol4s=10468
+recol4d=10402
+recol5s=9411
+recol5d=10369
+recol6s=8288
+recol6d=10402
+
+// 949
+[spotanim_949]
+model=model_19920
+seq=seq_5274
+resizeh=96
+resizev=96
+recol1s=8288
+recol1d=25403
+recol2s=10468
+recol2d=26461
+recol3s=11525
+recol3d=27519
+recol4s=12582
+recol4d=29631
+recol5s=13639
+recol5d=31743
+recol6s=9411
+recol6d=25403
+
+// 950
+[spotanim_950]
+model=model_19920
+seq=seq_5274
+resizeh=96
+resizev=96
+recol1s=8288
+recol1d=22055
+recol2s=10468
+recol2d=22056
+recol3s=11525
+recol3d=23112
+recol4s=12582
+recol4d=24168
+recol5s=13639
+recol5d=26248
+recol6s=9411
+recol6d=22055
+
+// 951
+[spotanim_951]
+model=model_19916
+seq=seq_5274
+resizeh=96
+resizev=96
+recol1s=13639
+recol1d=13573
+recol2s=12582
+recol2d=13540
+recol3s=11525
+recol3d=12483
+recol4s=10468
+recol4d=10402
+recol5s=9411
+recol5d=10369
+recol6s=8288
+recol6d=10402
+
+// 952
+[spotanim_952]
+model=model_19394
+seq=seq_5264
+ambient=60
+contrast=60
+
+// 953
+[spotanim_953]
+model=model_19394
+seq=seq_5264
+recol1s=15392
+recol1d=2242
+recol2s=15712
+recol2d=4580
+recol3s=32736
+recol3d=12236
+
+// 954
+[spotanim_954]
+model=model_19393
+seq=seq_5265
+
+// 955
+[spotanim_955]
+model=model_19799
+seq=seq_5286
+
+// 956
+[spotanim_956]
+model=model_20089
+seq=seq_5287
+rotation=180
+recol1s=15648
+recol1d=16846
+recol2s=17856
+recol2d=16846
+recol3s=32736
+recol3d=16846
+
+// 957
+[spotanim_957]
+model=model_20089
+seq=seq_5287
+rotation=270
+recol1s=15648
+recol1d=16846
+recol2s=17856
+recol2d=16846
+recol3s=32736
+recol3d=16846
+
+// 958
+[spotanim_958]
+model=model_20089
+seq=seq_5287
+recol1s=15648
+recol1d=16846
+recol2s=17856
+recol2d=16846
+recol3s=32736
+recol3d=16846
+
+// 959
+[spotanim_959]
+model=model_20089
+seq=seq_5287
+rotation=90
+recol1s=15648
+recol1d=16846
+recol2s=17856
+recol2d=16846
+recol3s=32736
+recol3d=16846
+
+// 960
+[spotanim_960]
+model=model_2850
+seq=seq_5288
+recol1s=15648
+recol1d=16846
+recol2s=17856
+recol2d=16846
+recol3s=32736
+recol3d=16846
+
+// 961
+[spotanim_961]
+model=model_20089
+seq=seq_5289
+
+// 962
+[spotanim_962]
+model=model_20089
+seq=seq_5290
+
+// 963
+[spotanim_963]
+model=model_20089
+seq=seq_5291
+
+// 964
+[spotanim_964]
+model=model_20089
+seq=seq_5292
+
+// 965
+[spotanim_965]
+model=model_20092
+seq=seq_5304
+
+// 966
+[spotanim_966]
+model=model_20092
+seq=seq_5294
+
+// 967
+[spotanim_967]
+model=model_40577
+seq=seq_5314
+
+// 968
+[spotanim_968]
+model=model_20367
+seq=seq_5348
+
+// 969
+[spotanim_969]
+model=model_20352
+seq=seq_5353
+ambient=20
+
+// 970
+[spotanim_970]
+model=model_20390
+seq=seq_5358
+ambient=20
+
+// 971
+[spotanim_971]
+model=model_11220
+seq=seq_5359
+ambient=20
+
+// 972
+[spotanim_972]
+model=model_20457
+seq=seq_5382
+
+// 973
+[spotanim_973]
+model=model_20458
+seq=seq_5381
+
+// 974
+[spotanim_974]
+model=model_20731
+seq=seq_5402
+ambient=10
+recol1s=32693
+recol1d=4230
+
+// 975
+[spotanim_975]
+model=model_20722
+seq=seq_5433
+ambient=10
+
+// 976
+[spotanim_976]
+model=model_20723
+seq=seq_5434
+ambient=10
+
+// 977
+[spotanim_977]
+model=model_20725
+seq=seq_5435
+ambient=10
+recol1s=28336
+recol1d=192
+
+// 978
+[spotanim_978]
+model=model_20725
+seq=seq_5435
+ambient=10
+recol1s=28336
+recol1d=12320
+
+// 979
+[spotanim_979]
+model=model_20725
+seq=seq_5435
+ambient=10
+recol1s=28336
+recol1d=4230
+
+// 980
+[spotanim_980]
+model=model_20725
+seq=seq_5434
+ambient=10
+
+// 981
+[spotanim_981]
+model=model_3070
+seq=seq_5437
+ambient=40
+contrast=40
+
+// 982
+[spotanim_982]
+model=model_20822
+seq=seq_5459
+
+// 983
+[spotanim_983]
+model=model_20827
+seq=seq_5463
+
+// 984
+[spotanim_984]
+model=model_20823
+seq=seq_5460
+
+// 985
+[spotanim_985]
+model=model_20824
+seq=seq_5461
+recol1s=32192
+recol1d=10571
+recol2s=31808
+recol2d=7400
+recol3s=15392
+recol3d=1058
+
+// 986
+[spotanim_986]
+model=model_20825
+seq=seq_5462
+
+// 987
+[spotanim_987]
+model=model_20826
+seq=seq_5465
+
+// 988
+[spotanim_988]
+model=model_20826
+seq=seq_5467
+
+// 989
+[spotanim_989]
+model=model_20826
+seq=seq_5469
+
+// 990
+[spotanim_990]
+model=model_20826
+seq=seq_5466
+
+// 991
+[spotanim_991]
+model=model_20826
+seq=seq_5468
+
+// 992
+[spotanim_992]
+model=model_20826
+seq=seq_5470
+
+// 993
+[spotanim_993]
+model=model_19799
+seq=seq_5477
+
+// 994
+[spotanim_994]
+model=model_21206
+seq=seq_5515
+
+// 995
+[spotanim_995]
+model=model_21206
+seq=seq_5516
+
+// 996
+[spotanim_996]
+model=model_21207
+seq=seq_5526
+ambient=30
+contrast=30
+recol1s=21535
+recol1d=13696
+
+// 997
+[spotanim_997]
+model=model_21207
+seq=seq_5526
+ambient=60
+contrast=60
+recol1s=21535
+recol1d=31808
+
+// 998
+[spotanim_998]
+model=model_21411
+seq=seq_5529
+ambient=40
+contrast=40
+
+// 999
+[spotanim_999]
+model=model_21501
+seq=seq_5634
+contrast=40
+ambient=40
+recol1s=32739
+recol1d=10850
+
+// 1000
+[spotanim_1000]
+model=model_21501
+seq=seq_5635
+contrast=40
+ambient=40
+recol1s=32739
+recol1d=10850
+
+// 1001
+[spotanim_1001]
+model=model_21501
+seq=seq_5636
+contrast=40
+ambient=40
+recol1s=32739
+recol1d=10850
+
+// 1002
+[spotanim_1002]
+model=model_21384
+seq=seq_5614
+contrast=40
+ambient=40
+
+// 1003
+[spotanim_1003]
+model=model_21384
+seq=seq_5610
+contrast=40
+ambient=40
+
+// 1004
+[spotanim_1004]
+model=model_21379
+seq=seq_5612
+
+// 1005
+[spotanim_1005]
+model=model_21385
+seq=seq_5630
+
+// 1006
+[spotanim_1006]
+model=model_21501
+seq=seq_5634
+
+// 1007
+[spotanim_1007]
+model=model_21501
+seq=seq_5635
+
+// 1008
+[spotanim_1008]
+model=model_21501
+seq=seq_5636
+
+// 1009
+[spotanim_1009]
+model=model_21500
+seq=seq_5638
+
+// 1010
+[spotanim_1010]
+model=model_21500
+seq=seq_5639
+
+// 1011
+[spotanim_1011]
+model=model_21500
+seq=seq_5640
+
+// 1012
+[spotanim_1012]
+model=model_21508
+seq=seq_5659
+
+// 1013
+[spotanim_1013]
+model=model_21384
+seq=seq_5660
+
+// 1014
+[spotanim_1014]
+model=model_21807
+seq=seq_5712
+
+// 1015
+[spotanim_1015]
+model=model_21543
+seq=seq_5715
+resizeh=75
+resizev=75
+
+// 1016
+[spotanim_1016]
+model=model_21543
+seq=seq_5717
+resizeh=75
+resizev=75
+
+// 1017
+[spotanim_1017]
+model=model_21808
+seq=seq_5727
+contrast=25
+ambient=25
+
+// 1018
+[spotanim_1018]
+model=model_21810
+seq=seq_5747
+ambient=40
+contrast=40
+
+// 1019
+[spotanim_1019]
+model=model_21809
+seq=seq_5748
+ambient=40
+contrast=40
+
+// 1020
+[spotanim_1020]
+model=model_22149
+seq=seq_5758
+
+// 1021
+[spotanim_1021]
+model=model_22150
+seq=seq_5757
+
+// 1022
+[spotanim_1022]
+model=model_22151
+seq=seq_5780
+
+// 1023
+[spotanim_1023]
+model=model_22151
+
+// 1024
+[spotanim_1024]
+model=model_22327
+seq=seq_5811
+
+// 1025
+[spotanim_1025]
+model=model_22768
+seq=seq_5820
+
+// 1026
+[spotanim_1026]
+model=model_22769
+seq=seq_5835
+
+// 1027
+[spotanim_1027]
+model=model_23152
+seq=seq_5871
+
+// 1028
+[spotanim_1028]
+model=model_23153
+seq=seq_5899
+
+// 1029
+[spotanim_1029]
+model=model_23852
+seq=seq_6009
+
+// 1030
+[spotanim_1030]
+model=model_23857
+seq=seq_6019
+
+// 1031
+[spotanim_1031]
+model=model_23857
+seq=seq_6020
+
+// 1032
+[spotanim_1032]
+model=model_23857
+seq=seq_6021
+
+// 1033
+[spotanim_1033]
+model=model_23857
+seq=seq_6022
+
+// 1034
+[spotanim_1034]
+model=model_23715
+seq=seq_6065
+contrast=40
+ambient=40
+
+// 1035
+[spotanim_1035]
+model=model_23716
+seq=seq_6056
+resizeh=86
+resizev=86
+
+// 1036
+[spotanim_1036]
+model=model_23869
+seq=seq_6074
+
+// 1037
+[spotanim_1037]
+model=model_21499
+seq=seq_6097
+
+// 1038
+[spotanim_1038]
+model=model_23962
+seq=seq_6105
+
+// 1039
+[spotanim_1039]
+model=model_23901
+seq=seq_3856
+
+// 1040
+[spotanim_1040]
+model=model_24026
+seq=seq_3858
+
+// 1041
+[spotanim_1041]
+model=model_24027
+seq=seq_3858
+
+// 1042
+[spotanim_1042]
+model=model_24028
+seq=seq_3858
+
+// 1043
+[spotanim_1043]
+model=model_24029
+seq=seq_3858
+
+// 1044
+[spotanim_1044]
+model=model_24030
+seq=seq_3858
+
+// 1045
+[spotanim_1045]
+model=model_24031
+seq=seq_3858
+
+// 1046
+[spotanim_1046]
+model=model_14417
+seq=seq_6110
+
+// 1047
+[spotanim_1047]
+model=model_5810
+seq=seq_5272
+
+// 1048
+[spotanim_1048]
+model=model_24153
+seq=seq_6119
+contrast=40
+ambient=40
+
+// 1049
+[spotanim_1049]
+model=model_24511
+seq=seq_6142
+
+// 1050
+[spotanim_1050]
+model=model_24512
+seq=seq_6144
+
+// 1051
+[spotanim_1051]
+model=model_24512
+seq=seq_6145
+
+// 1052
+[spotanim_1052]
+model=model_24513
+seq=seq_6148
+
+// 1053
+[spotanim_1053]
+model=model_24511
+seq=seq_6191
+
+// 1054
+[spotanim_1054]
+model=model_24540
+seq=seq_6216
+
+// 1055
+[spotanim_1055]
+model=model_24600
+seq=seq_6269
+
+// 1056
+[spotanim_1056]
+model=model_3809
+seq=seq_6302
+
+// 1057
+[spotanim_1057]
+model=model_24989
+seq=seq_6357
+
+// 1058
+[spotanim_1058]
+model=model_24989
+seq=seq_6358
+
+// 1059
+[spotanim_1059]
+model=model_25016
+seq=seq_6306
+
+// 1060
+[spotanim_1060]
+model=model_25017
+seq=seq_6306
+
+// 1061
+[spotanim_1061]
+model=model_25009
+seq=seq_6307
+
+// 1062
+[spotanim_1062]
+model=model_25012
+seq=seq_6309
+
+// 1063
+[spotanim_1063]
+model=model_25011
+seq=seq_6308
+
+// 1064
+[spotanim_1064]
+model=model_25018
+seq=seq_6316
+
+// 1065
+[spotanim_1065]
+model=model_25021
+seq=seq_6355
+
+// 1066
+[spotanim_1066]
+model=model_25014
+seq=seq_6326
+
+// 1067
+[spotanim_1067]
+model=model_25013
+seq=seq_6327
+
+// 1068
+[spotanim_1068]
+model=model_25021
+seq=seq_6323
+
+// 1069
+[spotanim_1069]
+model=model_25022
+seq=seq_6333
+
+// 1070
+[spotanim_1070]
+model=model_25022
+seq=seq_6334
+
+// 1071
+[spotanim_1071]
+model=model_25019
+seq=seq_6335
+
+// 1072
+[spotanim_1072]
+model=model_25019
+seq=seq_6336
+
+// 1073
+[spotanim_1073]
+model=model_25020
+seq=seq_6337
+
+// 1074
+[spotanim_1074]
+model=model_25010
+seq=seq_6353
+ambient=30
+contrast=30
+
+// 1075
+[spotanim_1075]
+model=model_25015
+seq=seq_6352
+
+// 1076
+[spotanim_1076]
+model=model_24540
+seq=seq_6460
+
+// 1077
+[spotanim_1077]
+model=model_25884
+seq=seq_6498
+
+// 1078
+[spotanim_1078]
+model=model_26080
+seq=seq_6516
+
+// 1079
+[spotanim_1079]
+model=model_26191
+seq=seq_6543
+recol1s=8551
+recol1d=17572
+recol2s=7494
+recol2d=13411
+recol3s=6437
+recol3d=11297
+recol4s=5251
+recol4d=9475
+recol5s=7365
+recol5d=10500
+
+// 1080
+[spotanim_1080]
+model=model_26192
+seq=seq_6543
+recol1s=5353
+recol1d=4193
+recol2s=7467
+recol2d=4195
+recol3s=3239
+recol3d=3137
+
+// 1081
+[spotanim_1081]
+model=model_26193
+seq=seq_6543
+recol1s=6437
+recol1d=13444
+recol2s=7494
+recol2d=11330
+recol3s=8551
+recol3d=9216
+recol4s=13574
+recol4d=17870
+recol5s=14631
+recol5d=19984
+recol6s=15688
+recol6d=22131
+
+// 1082
+[spotanim_1082]
+model=model_26194
+seq=seq_6543
+recol1s=15857
+recol1d=6309
+recol2s=13743
+recol2d=5252
+recol3s=11629
+recol3d=3138
+recol4s=3239
+recol4d=15591
+recol5s=5353
+recol5d=14501
+recol6s=7467
+recol6d=13411
+
+// 1083
+[spotanim_1083]
+model=model_26195
+seq=seq_6543
+recol1s=15857
+recol1d=6309
+recol2s=13743
+recol2d=5252
+recol3s=11629
+recol3d=3138
+recol4s=8551
+recol4d=6309
+recol5s=7494
+recol5d=5252
+recol6s=6437
+recol6d=3138
+
+// 1084
+[spotanim_1084]
+model=model_26196
+seq=seq_6543
+recol1s=8551
+recol1d=21139
+recol2s=7494
+recol2d=20080
+recol3s=6437
+recol3d=17966
+recol4s=15857
+recol4d=21139
+recol5s=13743
+recol5d=20080
+recol6s=11629
+recol6d=17966
+
+// 1085
+[spotanim_1085]
+model=model_26197
+seq=seq_6543
+recol1s=8551
+recol1d=4261
+recol2s=7494
+recol2d=3204
+recol3s=6437
+recol3d=2147
+recol4s=15688
+recol4d=13444
+recol5s=14631
+recol5d=11363
+recol6s=13574
+recol6d=9282
+
+// 1086
+[spotanim_1086]
+model=model_26198
+seq=seq_6543
+recol1s=7467
+recol1d=15491
+recol2s=5353
+recol2d=13410
+recol3s=3239
+recol3d=11297
+recol4s=8551
+recol4d=21139
+recol5s=7494
+recol5d=20080
+recol6s=6437
+recol6d=17966
+
+// 1087
+[spotanim_1087]
+model=model_26199
+seq=seq_6543
+recol1s=24178
+recol1d=3204
+recol2s=19853
+recol2d=2147
+recol3s=13610
+recol3d=1090
+recol4s=15856
+recol4d=14434
+recol5s=11629
+recol5d=15491
+recol6s=8458
+recol6d=16548
+
+// 1088
+[spotanim_1088]
+model=model_26203
+seq=seq_6543
+recol1s=24178
+recol1d=21074
+recol2s=19853
+recol2d=19984
+recol3s=13610
+recol3d=17903
+recol4s=11622
+recol4d=14468
+recol5s=23213
+recol5d=13411
+recol6s=16872
+recol6d=11330
+
+// 1089
+[spotanim_1089]
+model=model_26204
+seq=seq_6543
+recol1s=15856
+recol1d=17440
+recol2s=11629
+recol2d=12417
+recol3s=8458
+recol3d=7234
+
+// 1090
+[spotanim_1090]
+model=model_26205
+seq=seq_6543
+recol1s=23213
+recol1d=21107
+recol2s=16872
+recol2d=19984
+recol3s=11622
+recol3d=17870
+
+// 1091
+[spotanim_1091]
+model=model_26206
+seq=seq_6543
+recol1s=7467
+recol1d=15491
+recol2s=5353
+recol2d=13410
+recol3s=3239
+recol3d=11297
+recol4s=8551
+recol4d=21139
+recol5s=7494
+recol5d=20080
+recol6s=6437
+recol6d=17966
+
+// 1092
+[spotanim_1092]
+model=model_26207
+seq=seq_6543
+recol1s=24178
+recol1d=3204
+recol2s=19853
+recol2d=2147
+recol3s=13610
+recol3d=1090
+recol4s=15856
+recol4d=14434
+recol5s=11629
+recol5d=15491
+recol6s=8458
+recol6d=16548
+
+// 1093
+[spotanim_1093]
+model=model_26208
+seq=seq_6543
+recol1s=15856
+recol1d=17440
+recol2s=11629
+recol2d=12417
+recol3s=8458
+recol3d=7234
+recol4s=24178
+recol4d=17440
+recol5s=19853
+recol5d=12417
+recol6s=13610
+recol6d=7234
+
+// 1094
+[spotanim_1094]
+model=model_26209
+seq=seq_6543
+recol1s=24178
+recol1d=17440
+recol2s=19853
+recol2d=12417
+recol3s=13610
+recol3d=7234
+recol4s=23213
+recol4d=4195
+recol5s=16872
+recol5d=5252
+recol6s=11622
+recol6d=6309
+
+// 1095
+[spotanim_1095]
+model=model_26210
+seq=seq_6543
+recol1s=24178
+recol1d=16515
+recol2s=19853
+recol2d=15458
+recol3s=13610
+recol3d=14401
+
+// 1096
+[spotanim_1096]
+model=model_26200
+seq=seq_6543
+recol1s=24178
+recol1d=16515
+recol2s=19853
+recol2d=15458
+recol3s=13610
+recol3d=14401
+
+// 1097
+[spotanim_1097]
+model=model_26201
+seq=seq_6543
+recol1s=15856
+recol1d=17440
+recol2s=11629
+recol2d=12417
+recol3s=8458
+recol3d=7234
+recol4s=24178
+recol4d=17440
+recol5s=19853
+recol5d=12417
+recol6s=13610
+recol6d=7234
+
+// 1098
+[spotanim_1098]
+model=model_26202
+seq=seq_6543
+
+// 1099
+[spotanim_1099]
+model=model_26391
+seq=seq_6585
+
+// 1100
+[spotanim_1100]
+model=model_26390
+seq=seq_6586
+
+// 1101
+[spotanim_1101]
+model=model_26393
+seq=seq_6590
+
+// 1102
+[spotanim_1102]
+model=model_26393
+seq=seq_6589
+
+// 1103
+[spotanim_1103]
+model=model_26393
+seq=seq_6588
+
+// 1104
+[spotanim_1104]
+model=model_26293
+seq=seq_366
+recol1s=15789
+recol1d=8354
+recol2s=16846
+recol2d=8354
+
+// 1105
+[spotanim_1105]
+model=model_26293
+seq=seq_366
+recol1s=15789
+recol1d=8456
+recol2s=16846
+recol2d=8456
+
+// 1106
+[spotanim_1106]
+model=model_26293
+seq=seq_366
+
+// 1107
+[spotanim_1107]
+model=model_26293
+seq=seq_366
+recol1s=15789
+recol1d=6346
+recol2s=16846
+recol2d=6346
+
+// 1108
+[spotanim_1108]
+model=model_26293
+seq=seq_366
+recol1s=15789
+recol1d=6438
+recol2s=16846
+recol2d=6438
+
+// 1109
+[spotanim_1109]
+model=model_26293
+seq=seq_366
+recol1s=15789
+recol1d=6476
+recol2s=16846
+recol2d=6476
+
+// 1110
+[spotanim_1110]
+model=model_26293
+seq=seq_366
+recol1s=15789
+recol1d=17181
+recol2s=16846
+recol2d=17181
+recol3s=10368
+recol3d=9816
+recol4s=15392
+recol4d=17181
+recol5s=10368
+recol5d=17181
+
+// 1111
+[spotanim_1111]
+model=model_26294
+seq=seq_366
+
+// 1112
+[spotanim_1112]
+model=model_26292
+seq=seq_366
+
+// 1113
+[spotanim_1113]
+model=model_26295
+seq=seq_366
+
+// 1114
+[spotanim_1114]
+model=model_26297
+seq=seq_366
+
+// 1115
+[spotanim_1115]
+model=model_26296
+
+// 1116
+[spotanim_1116]
+model=model_26298
+seq=seq_366
+
+// 1117
+[spotanim_1117]
+model=model_26383
+seq=seq_6591
+
+// 1118
+[spotanim_1118]
+model=model_26384
+seq=seq_6602
+
+// 1119
+[spotanim_1119]
+model=model_26385
+seq=seq_6612
+ambient=25
+
+// 1120
+[spotanim_1120]
+model=model_26377
+seq=seq_6622
+ambient=25
+
+// 1121
+[spotanim_1121]
+model=model_26378
+seq=seq_6622
+ambient=25
+
+// 1122
+[spotanim_1122]
+model=model_26379
+seq=seq_6622
+ambient=25
+
+// 1123
+[spotanim_1123]
+model=model_26301
+seq=seq_370
+
+// 1124
+[spotanim_1124]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=14962
+recol2s=6343
+recol2d=21159
+recol3s=7400
+recol3d=21159
+recol4s=8457
+recol4d=21159
+recol5s=17572
+recol5d=21159
+
+// 1125
+[spotanim_1125]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=27412
+recol2s=6343
+recol2d=27412
+recol3s=7400
+recol3d=9441
+recol4s=8457
+recol4d=27412
+recol5s=17572
+recol5d=27412
+
+// 1126
+[spotanim_1126]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=23094
+recol2s=6343
+recol2d=23094
+recol3s=7400
+recol3d=23168
+recol4s=8457
+recol4d=23094
+recol5s=17572
+recol5d=21044
+
+// 1127
+[spotanim_1127]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=28008
+recol2s=6343
+recol2d=28170
+recol3s=7400
+recol3d=28170
+recol4s=8457
+recol4d=23908
+recol5s=17572
+recol5d=28170
+
+// 1128
+[spotanim_1128]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=10564
+recol2s=6343
+recol2d=4388
+recol3s=7400
+recol3d=4388
+recol4s=8457
+recol4d=9609
+recol5s=17572
+recol5d=4388
+
+// 1129
+[spotanim_1129]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=29393
+recol2s=6343
+recol2d=32564
+recol3s=7400
+recol3d=22933
+recol4s=8457
+recol4d=32564
+recol5s=17572
+recol5d=32564
+
+// 1130
+[spotanim_1130]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=11725
+recol2s=6343
+recol2d=231
+recol3s=7400
+recol3d=5615
+recol4s=8457
+recol4d=231
+recol5s=17572
+recol5d=231
+
+// 1131
+[spotanim_1131]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=19977
+recol2s=6343
+recol2d=16840
+recol3s=7400
+recol3d=21122
+recol4s=8457
+recol4d=21122
+recol5s=17572
+recol5d=16840
+
+// 1132
+[spotanim_1132]
+model=model_26380
+seq=seq_6621
+recol1s=5286
+recol1d=11558
+recol2s=6343
+recol2d=16840
+recol3s=7400
+recol3d=4324
+recol4s=8457
+recol4d=11558
+recol5s=17572
+recol5d=9609
+
+// 1133
+[spotanim_1133]
+model=model_26380
+seq=seq_6621
+
+// 1134
+[spotanim_1134]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=14962
+recol2s=6343
+recol2d=21159
+recol3s=7400
+recol3d=21159
+recol4s=8457
+recol4d=21159
+recol5s=17572
+recol5d=21159
+
+// 1135
+[spotanim_1135]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=27412
+recol2s=6343
+recol2d=27412
+recol3s=7400
+recol3d=9441
+recol4s=8457
+recol4d=27412
+recol5s=17572
+recol5d=27412
+
+// 1136
+[spotanim_1136]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=23094
+recol2s=6343
+recol2d=23094
+recol3s=7400
+recol3d=23168
+recol4s=8457
+recol4d=23094
+recol5s=17572
+recol5d=21044
+
+// 1137
+[spotanim_1137]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=28008
+recol2s=6343
+recol2d=28170
+recol3s=7400
+recol3d=28170
+recol4s=8457
+recol4d=23908
+recol5s=17572
+recol5d=28170
+
+// 1138
+[spotanim_1138]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=10564
+recol2s=6343
+recol2d=4388
+recol3s=7400
+recol3d=4388
+recol4s=8457
+recol4d=9609
+recol5s=17572
+recol5d=4388
+
+// 1139
+[spotanim_1139]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=29393
+recol2s=6343
+recol2d=32564
+recol3s=7400
+recol3d=22933
+recol4s=8457
+recol4d=32564
+recol5s=17572
+recol5d=32564
+
+// 1140
+[spotanim_1140]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=11725
+recol2s=6343
+recol2d=231
+recol3s=7400
+recol3d=5615
+recol4s=8457
+recol4d=231
+recol5s=17572
+recol5d=231
+
+// 1141
+[spotanim_1141]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=19977
+recol2s=6343
+recol2d=16840
+recol3s=7400
+recol3d=21122
+recol4s=8457
+recol4d=21122
+recol5s=17572
+recol5d=16840
+
+// 1142
+[spotanim_1142]
+model=model_26381
+seq=seq_6619
+recol1s=5286
+recol1d=11558
+recol2s=6343
+recol2d=16840
+recol3s=7400
+recol3d=4324
+recol4s=8457
+recol4d=11558
+recol5s=17572
+recol5d=9609
+
+// 1143
+[spotanim_1143]
+model=model_26381
+seq=seq_6619
+
+// 1144
+[spotanim_1144]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=14962
+recol2s=6343
+recol2d=21159
+recol3s=7400
+recol3d=21159
+recol4s=8457
+recol4d=21159
+recol5s=17572
+recol5d=21159
+
+// 1145
+[spotanim_1145]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=27412
+recol2s=6343
+recol2d=27412
+recol3s=7400
+recol3d=9441
+recol4s=8457
+recol4d=27412
+recol5s=17572
+recol5d=27412
+
+// 1146
+[spotanim_1146]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=23094
+recol2s=6343
+recol2d=23094
+recol3s=7400
+recol3d=23168
+recol4s=8457
+recol4d=23094
+recol5s=17572
+recol5d=21044
+
+// 1147
+[spotanim_1147]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=28008
+recol2s=6343
+recol2d=28170
+recol3s=7400
+recol3d=28170
+recol4s=8457
+recol4d=23908
+recol5s=17572
+recol5d=28170
+
+// 1148
+[spotanim_1148]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=10564
+recol2s=6343
+recol2d=4388
+recol3s=7400
+recol3d=4388
+recol4s=8457
+recol4d=9609
+recol5s=17572
+recol5d=4388
+
+// 1149
+[spotanim_1149]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=29393
+recol2s=6343
+recol2d=32564
+recol3s=7400
+recol3d=22933
+recol4s=8457
+recol4d=32564
+recol5s=17572
+recol5d=32564
+
+// 1150
+[spotanim_1150]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=11725
+recol2s=6343
+recol2d=231
+recol3s=7400
+recol3d=5615
+recol4s=8457
+recol4d=231
+recol5s=17572
+recol5d=231
+
+// 1151
+[spotanim_1151]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=19977
+recol2s=6343
+recol2d=16840
+recol3s=7400
+recol3d=21122
+recol4s=8457
+recol4d=21122
+recol5s=17572
+recol5d=16840
+
+// 1152
+[spotanim_1152]
+model=model_26381
+seq=seq_6620
+recol1s=5286
+recol1d=11558
+recol2s=6343
+recol2d=16840
+recol3s=7400
+recol3d=4324
+recol4s=8457
+recol4d=11558
+recol5s=17572
+recol5d=9609
+
+// 1153
+[spotanim_1153]
+model=model_26381
+seq=seq_6620
+
+// 1154
+[spotanim_1154]
+model=model_26594
+seq=seq_6647
+
+// 1155
+[spotanim_1155]
+model=model_26593
+seq=seq_6648
+ambient=60
+
+// 1156
+[spotanim_1156]
+model=model_26606
+seq=seq_6667
+
+// 1157
+[spotanim_1157]
+model=model_26607
+seq=seq_6668
+
+// 1158
+[spotanim_1158]
+model=model_26607
+seq=seq_6669
+
+// 1159
+[spotanim_1159]
+model=model_26607
+seq=seq_6670
+
+// 1160
+[spotanim_1160]
+model=model_26598
+seq=seq_6690
+
+// 1161
+[spotanim_1161]
+model=model_26598
+seq=seq_6691
+
+// 1162
+[spotanim_1162]
+model=model_26598
+seq=seq_6692
+
+// 1163
+[spotanim_1163]
+model=model_26598
+seq=seq_6693
+
+// 1164
+[spotanim_1164]
+model=model_26598
+seq=seq_6694
+
+// 1165
+[spotanim_1165]
+model=model_26597
+seq=seq_6697
+
+// 1166
+[spotanim_1166]
+model=model_26595
+seq=seq_6698
+
+// 1167
+[spotanim_1167]
+model=model_26596
+seq=seq_6699
+
+// 1168
+[spotanim_1168]
+model=model_26598
+seq=seq_6701
+
+// 1169
+[spotanim_1169]
+model=model_26688
+seq=seq_6721
+
+// 1170
+[spotanim_1170]
+model=model_17149
+seq=seq_6760
+
+// 1171
+[spotanim_1171]
+model=model_28996
+seq=seq_7230
+ambient=10
+
+// 1172
+[spotanim_1172]
+model=model_28994
+seq=seq_7234
+ambient=10
+
+// 1173
+[spotanim_1173]
+model=model_26586
+seq=seq_6852
+
+// 1174
+[spotanim_1174]
+model=model_26877
+seq=seq_6848
+
+// 1175
+[spotanim_1175]
+model=model_27162
+seq=seq_6877
+
+// 1176
+[spotanim_1176]
+model=model_27156
+seq=seq_6889
+ambient=20
+
+// 1177
+[spotanim_1177]
+model=model_27160
+seq=seq_6888
+ambient=20
+
+// 1178
+[spotanim_1178]
+model=model_14446
+seq=seq_1126
+
+// 1179
+[spotanim_1179]
+model=model_27229
+seq=seq_6924
+
+// 1180
+[spotanim_1180]
+model=model_27228
+seq=seq_6930
+
+// 1181
+[spotanim_1181]
+model=model_27711
+seq=seq_6936
+
+// 1182
+[spotanim_1182]
+model=model_27711
+seq=seq_6937
+
+// 1183
+[spotanim_1183]
+model=model_27711
+seq=seq_6938
+
+// 1184
+[spotanim_1184]
+model=model_28178
+seq=seq_7020
+ambient=30
+contrast=30
+
+// 1185
+[spotanim_1185]
+model=model_28220
+seq=seq_7021
+ambient=30
+contrast=30
+
+// 1186
+[spotanim_1186]
+model=model_28179
+seq=seq_7022
+ambient=30
+contrast=30
+
+// 1187
+[spotanim_1187]
+model=model_28217
+seq=seq_7012
+recol1s=15789
+recol1d=6346
+recol2s=16846
+recol2d=7403
+recol3s=15392
+recol3d=11795
+
+// 1188
+[spotanim_1188]
+model=model_28217
+seq=seq_7013
+recol1s=15789
+recol1d=6346
+recol2s=16846
+recol2d=7403
+recol3s=15392
+recol3d=11795
+
+// 1189
+[spotanim_1189]
+model=model_28173
+seq=seq_6948
+
+// 1190
+[spotanim_1190]
+model=model_28240
+seq=seq_6957
+
+// 1191
+[spotanim_1191]
+model=model_28238
+seq=seq_6958
+
+// 1192
+[spotanim_1192]
+model=model_28236
+seq=seq_6959
+
+// 1193
+[spotanim_1193]
+model=model_28239
+seq=seq_6961
+
+// 1194
+[spotanim_1194]
+model=model_28174
+seq=seq_6968
+
+// 1195
+[spotanim_1195]
+model=model_28201
+seq=seq_6969
+
+// 1196
+[spotanim_1196]
+model=model_28176
+seq=seq_6970
+
+// 1197
+[spotanim_1197]
+model=model_28177
+seq=seq_6970
+
+// 1198
+[spotanim_1198]
+model=model_28177
+seq=seq_6970
+recol1s=32701
+recol1d=14044
+recol2s=28341
+recol2d=12987
+recol3s=21074
+recol3d=12953
+recol4s=18960
+recol4d=10873
+
+// 1199
+[spotanim_1199]
+model=model_28237
+seq=seq_6960
+
+// 1200
+[spotanim_1200]
+model=model_28216
+seq=seq_7006
+contrast=30
+ambient=30
+
+// 1201
+[spotanim_1201]
+model=model_27793
+seq=seq_7027
+contrast=20
+ambient=20
+
+// 1202
+[spotanim_1202]
+model=model_28202
+seq=seq_7026
+contrast=20
+ambient=20
+
+// 1203
+[spotanim_1203]
+model=model_28202
+seq=seq_7025
+contrast=20
+ambient=20
+
+// 1204
+[spotanim_1204]
+model=model_28202
+seq=seq_7028
+contrast=20
+ambient=20
+
+// 1205
+[spotanim_1205]
+model=model_27795
+seq=seq_7029
+contrast=20
+ambient=20
+
+// 1206
+[spotanim_1206]
+model=model_28218
+seq=seq_7030
+contrast=20
+ambient=20
+
+// 1207
+[spotanim_1207]
+model=model_28219
+seq=seq_7031
+contrast=20
+ambient=20
+
+// 1208
+[spotanim_1208]
+model=model_28180
+seq=seq_7032
+contrast=20
+ambient=20
+
+// 1209
+[spotanim_1209]
+model=model_28180
+seq=seq_7034
+contrast=20
+ambient=20
+
+// 1210
+[spotanim_1210]
+model=model_28221
+seq=seq_7035
+contrast=20
+ambient=20
+
+// 1211
+[spotanim_1211]
+model=model_28221
+seq=seq_7036
+contrast=20
+ambient=20
+
+// 1212
+[spotanim_1212]
+model=model_28172
+seq=seq_7037
+contrast=20
+ambient=20
+
+// 1213
+[spotanim_1213]
+model=model_28172
+seq=seq_7038
+contrast=20
+ambient=20
+
+// 1214
+[spotanim_1214]
+model=model_28262
+seq=seq_7053
+contrast=60
+ambient=60
+
+// 1215
+[spotanim_1215]
+model=model_28263
+seq=seq_7054
+contrast=60
+ambient=60
+
+// 1216
+[spotanim_1216]
+model=model_28266
+seq=seq_7055
+contrast=60
+ambient=60
+
+// 1217
+[spotanim_1217]
+model=model_28265
+seq=seq_7056
+contrast=60
+ambient=60
+
+// 1218
+[spotanim_1218]
+model=model_28264
+seq=seq_7057
+contrast=60
+ambient=60
+
+// 1219
+[spotanim_1219]
+model=model_28273
+seq=seq_7065
+contrast=30
+ambient=30
+
+// 1220
+[spotanim_1220]
+model=model_28195
+seq=seq_7068
+ambient=30
+
+// 1221
+[spotanim_1221]
+model=model_28223
+seq=seq_7069
+ambient=30
+
+// 1222
+[spotanim_1222]
+model=model_28249
+seq=seq_7075
+ambient=30
+
+// 1223
+[spotanim_1223]
+model=model_28211
+seq=seq_7077
+ambient=30
+
+// 1224
+[spotanim_1224]
+model=model_28175
+seq=seq_7076
+ambient=30
+
+// 1225
+[spotanim_1225]
+model=model_11224
+seq=seq_7079
+ambient=30
+
+// 1226
+[spotanim_1226]
+model=model_28289
+seq=seq_7080
+
+// 1227
+[spotanim_1227]
+model=model_28350
+seq=seq_7107
+
+// 1228
+[spotanim_1228]
+model=model_28347
+seq=seq_7083
+
+// 1229
+[spotanim_1229]
+model=model_28347
+seq=seq_7085
+
+// 1230
+[spotanim_1230]
+model=model_17150
+seq=seq_7149
+ambient=10
+
+// 1231
+[spotanim_1231]
+model=model_28548
+seq=seq_7148
+ambient=64
+contrast=94
+
+// 1232
+[spotanim_1232]
+model=model_17150
+seq=seq_7150
+ambient=10
+
+// 1233
+[spotanim_1233]
+model=model_28849
+seq=seq_7204
+
+// 1234
+[spotanim_1234]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=8354
+
+// 1235
+[spotanim_1235]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=8456
+
+// 1236
+[spotanim_1236]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=16846
+
+// 1237
+[spotanim_1237]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=0
+
+// 1238
+[spotanim_1238]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=3174
+
+// 1239
+[spotanim_1239]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=6438
+
+// 1240
+[spotanim_1240]
+model=model_26300
+seq=seq_581
+recol1s=22131
+recol1d=6476
+
+// 1241
+[spotanim_1241]
+model=model_29121
+seq=seq_7250
+ambient=15
+
+// 1242
+[spotanim_1242]
+model=model_26301
+seq=seq_581
+
+// 1243
+[spotanim_1243]
+model=model_28995
+seq=seq_7251
+ambient=32
+
+// 1244
+[spotanim_1244]
+model=model_29175
+seq=seq_7279
+
+// 1245
+[spotanim_1245]
+model=model_29167
+seq=seq_7292
+
+// 1246
+[spotanim_1246]
+model=model_29173
+seq=seq_7294
+
+// 1247
+[spotanim_1247]
+model=model_29222
+seq=seq_7300
+contrast=20
+ambient=20
+
+// 1248
+[spotanim_1248]
+model=model_29248
+seq=seq_7306
+
+// 1249
+[spotanim_1249]
+model=model_29242
+seq=seq_7306
+
+// 1250
+[spotanim_1250]
+model=model_29237
+seq=seq_7306
+
+// 1251
+[spotanim_1251]
+model=model_29245
+seq=seq_7306
+
+// 1252
+[spotanim_1252]
+model=model_29246
+seq=seq_7306
+
+// 1253
+[spotanim_1253]
+model=model_29241
+seq=seq_7306
+
+// 1254
+[spotanim_1254]
+model=model_29248
+seq=seq_7305
+
+// 1255
+[spotanim_1255]
+model=model_29242
+seq=seq_7305
+
+// 1256
+[spotanim_1256]
+model=model_29237
+seq=seq_7305
+
+// 1257
+[spotanim_1257]
+model=model_29245
+seq=seq_7305
+
+// 1258
+[spotanim_1258]
+model=model_29246
+seq=seq_7305
+
+// 1259
+[spotanim_1259]
+model=model_29241
+seq=seq_7305
+
+// 1260
+[spotanim_1260]
+model=model_29535
+seq=seq_7334
+
+// 1261
+[spotanim_1261]
+model=model_29535
+seq=seq_7335
+
+// 1262
+[spotanim_1262]
+model=model_29535
+seq=seq_7336
+
+// 1263
+[spotanim_1263]
+model=model_29543
+seq=seq_7344
+
+// 1264
+[spotanim_1264]
+model=model_29546
+seq=seq_7337
+
+// 1265
+[spotanim_1265]
+model=model_29546
+seq=seq_7338
+recol1s=31808
+recol1d=1464
+recol2s=32384
+recol2d=4143
+recol3s=32754
+recol3d=28605
+
+// 1266
+[spotanim_1266]
+model=model_29547
+seq=seq_7339
+
+// 1267
+[spotanim_1267]
+model=model_29549
+seq=seq_7340
+ambient=30
+
+// 1268
+[spotanim_1268]
+model=model_29550
+seq=seq_7341
+ambient=30
+
+// 1269
+[spotanim_1269]
+model=model_29537
+seq=seq_7345
+
+// 1270
+[spotanim_1270]
+model=model_29544
+seq=seq_7355
+
+// 1271
+[spotanim_1271]
+model=model_28463
+seq=seq_7362
+
+// 1272
+[spotanim_1272]
+model=model_41123
+seq=seq_10376
+
+// 1273
+[spotanim_1273]
+model=model_41121
+seq=seq_7393
+ambient=64
+contrast=12
+
+// 1274
+[spotanim_1274]
+model=model_30266
+seq=seq_7488
+ambient=64
+contrast=12
+
+// 1275
+[spotanim_1275]
+model=model_30154
+seq=seq_7525
+ambient=32
+contrast=64
+
+// 1276
+[spotanim_1276]
+model=model_30178
+seq=seq_7494
+ambient=20
+contrast=20
+
+// 1277
+[spotanim_1277]
+model=model_30178
+seq=seq_7495
+ambient=20
+contrast=20
+
+// 1278
+[spotanim_1278]
+model=model_30179
+seq=seq_7511
+
+// 1279
+[spotanim_1279]
+model=model_30181
+seq=seq_7509
+
+// 1280
+[spotanim_1280]
+model=model_30154
+seq=seq_7527
+ambient=32
+contrast=64
+
+// 1281
+[spotanim_1281]
+model=model_20502
+seq=seq_5065
+
+// 1282
+[spotanim_1282]
+model=model_20502
+seq=seq_5066
+
+// 1283
+[spotanim_1283]
+model=model_30293
+seq=seq_7547
+ambient=64
+contrast=12
+
+// 1284
+[spotanim_1284]
+model=model_30297
+seq=seq_7548
+ambient=64
+contrast=12
+
+// 1285
+[spotanim_1285]
+model=model_30295
+seq=seq_7549
+ambient=64
+contrast=12
+
+// 1286
+[spotanim_1286]
+model=model_30291
+seq=seq_7561
+
+// 1287
+[spotanim_1287]
+model=model_30288
+seq=seq_7566
+ambient=64
+contrast=12
+
+// 1288
+[spotanim_1288]
+model=model_30294
+seq=seq_7567
+ambient=64
+contrast=12
+
+// 1289
+[spotanim_1289]
+model=model_30296
+seq=seq_7568
+ambient=64
+contrast=12
+
+// 1290
+[spotanim_1290]
+model=model_30290
+seq=seq_7569
+ambient=32
+
+// 1291
+[spotanim_1291]
+model=model_30290
+seq=seq_7570
+ambient=32
+
+// 1292
+[spotanim_1292]
+model=model_30295
+seq=seq_7572
+ambient=64
+contrast=12
+
+// 1293
+[spotanim_1293]
+model=model_3142
+seq=seq_7624
+
+// 1294
+[spotanim_1294]
+model=model_3142
+seq=seq_7642
+
+// 1295
+[spotanim_1295]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+
+// 1296
+[spotanim_1296]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=16025
+
+// 1297
+[spotanim_1297]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=23260
+
+// 1298
+[spotanim_1298]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32658
+
+// 1299
+[spotanim_1299]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=27435
+
+// 1300
+[spotanim_1300]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32767
+
+// 1301
+[spotanim_1301]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=25469
+
+// 1302
+[spotanim_1302]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32558
+
+// 1303
+[spotanim_1303]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=23422
+
+// 1304
+[spotanim_1304]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=15856
+
+// 1305
+[spotanim_1305]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32767
+
+// 1306
+[spotanim_1306]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32767
+
+// 1307
+[spotanim_1307]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32390
+
+// 1308
+[spotanim_1308]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=16106
+
+// 1309
+[spotanim_1309]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=29311
+
+// 1310
+[spotanim_1310]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=32747
+
+// 1311
+[spotanim_1311]
+model=model_31427
+seq=seq_7662
+ambient=32
+contrast=32
+recol1s=23356
+recol1d=10433
+
+// 1312
+[spotanim_1312]
+model=model_31459
+seq=seq_8369
+contrast=20
+ambient=20
+
+// 1313
+[spotanim_1313]
+model=model_31427
+seq=seq_7662
+contrast=20
+ambient=20
+recol1s=23356
+recol1d=25402
+
+// 1314
+[spotanim_1314]
+model=model_31388
+seq=seq_7663
+ambient=60
+contrast=60
+
+// 1315
+[spotanim_1315]
+model=model_31388
+seq=seq_7663
+ambient=60
+contrast=60
+resizeh=200
+resizev=200
+
+// 1316
+[spotanim_1316]
+model=model_31136
+seq=seq_7661
+ambient=30
+contrast=30
+
+// 1317
+[spotanim_1317]
+model=model_31434
+seq=seq_7811
+ambient=40
+contrast=40
+
+// 1318
+[spotanim_1318]
+model=model_31440
+seq=seq_7812
+ambient=40
+contrast=40
+
+// 1319
+[spotanim_1319]
+model=model_31388
+seq=seq_7663
+ambient=60
+contrast=60
+
+// 1320
+[spotanim_1320]
+model=model_31491
+seq=seq_8017
+ambient=60
+contrast=60
+
+// 1321
+[spotanim_1321]
+model=model_31415
+seq=seq_8015
+ambient=30
+
+// 1322
+[spotanim_1322]
+model=model_31506
+seq=seq_8016
+ambient=60
+contrast=60
+
+// 1323
+[spotanim_1323]
+model=model_31386
+seq=seq_8270
+contrast=30
+ambient=30
+
+// 1324
+[spotanim_1324]
+model=model_31418
+seq=seq_8278
+ambient=20
+contrast=20
+
+// 1325
+[spotanim_1325]
+model=model_31418
+seq=seq_8280
+ambient=20
+contrast=20
+
+// 1326
+[spotanim_1326]
+model=model_31478
+seq=seq_8110
+ambient=64
+contrast=64
+
+// 1327
+[spotanim_1327]
+model=model_31487
+seq=seq_8111
+ambient=64
+contrast=64
+
+// 1328
+[spotanim_1328]
+model=model_31410
+seq=seq_8253
+ambient=30
+contrast=30
+
+// 1329
+[spotanim_1329]
+model=model_31493
+seq=seq_8262
+ambient=30
+contrast=30
+
+// 1330
+[spotanim_1330]
+model=model_31410
+seq=seq_8254
+ambient=30
+contrast=30
+
+// 1331
+[spotanim_1331]
+model=model_31452
+seq=seq_8322
+ambient=30
+contrast=30
+
+// 1332
+[spotanim_1332]
+model=model_31404
+seq=seq_8323
+ambient=30
+contrast=30
+
+// 1333
+[spotanim_1333]
+model=model_31416
+seq=seq_8299
+contrast=30
+
+// 1334
+[spotanim_1334]
+model=model_31416
+seq=seq_8300
+contrast=30
+
+// 1335
+[spotanim_1335]
+model=model_31390
+seq=seq_8018
+ambient=40
+contrast=64
+
+// 1336
+[spotanim_1336]
+model=model_31390
+seq=seq_8019
+ambient=40
+contrast=64
+
+// 1337
+[spotanim_1337]
+model=model_31451
+seq=seq_8203
+
+// 1338
+[spotanim_1338]
+model=model_31407
+seq=seq_7686
+ambient=60
+contrast=40
+
+// 1339
+[spotanim_1339]
+model=model_31407
+seq=seq_7685
+ambient=60
+contrast=40
+
+// 1340
+[spotanim_1340]
+model=model_31465
+seq=seq_8166
+contrast=32
+
+// 1341
+[spotanim_1341]
+model=model_31445
+seq=seq_8167
+contrast=32
+
+// 1342
+[spotanim_1342]
+model=model_31514
+seq=seq_8168
+
+// 1343
+[spotanim_1343]
+seq=seq_8169
+model=model_31458
+
+// 1344
+[spotanim_1344]
+model=model_31401
+seq=seq_7733
+
+// 1345
+[spotanim_1345]
+model=model_31466
+seq=seq_7734
+contrast=20
+ambient=20
+
+// 1346
+[spotanim_1346]
+model=model_31393
+seq=seq_8002
+
+// 1347
+[spotanim_1347]
+model=model_31393
+seq=seq_8003
+
+// 1348
+[spotanim_1348]
+model=model_31393
+seq=seq_8004
+
+// 1349
+[spotanim_1349]
+model=model_31416
+seq=seq_8299
+contrast=30
+recol1s=11561
+recol1d=24170
+recol2s=13675
+recol2d=25261
+recol3s=14732
+recol3d=26318
+recol4s=15789
+recol4d=28398
+recol5s=16846
+recol5d=28432
+recol6s=17903
+recol6d=29489
+
+// 1350
+[spotanim_1350]
+model=model_31416
+seq=seq_8300
+contrast=30
+recol1s=11561
+recol1d=24170
+recol2s=13675
+recol2d=25261
+recol3s=14732
+recol3d=26318
+recol4s=15789
+recol4d=28398
+recol5s=16846
+recol5d=28432
+recol6s=17903
+recol6d=29489
+
+// 1351
+[spotanim_1351]
+model=model_28272
+seq=seq_8119
+contrast=40
+ambient=40
+
+// 1352
+[spotanim_1352]
+model=model_31517
+seq=seq_8120
+contrast=25
+ambient=25
+
+// 1353
+[spotanim_1353]
+model=model_31512
+seq=seq_8121
+contrast=25
+ambient=25
+
+// 1354
+[spotanim_1354]
+model=model_31480
+seq=seq_8125
+contrast=40
+ambient=40
+resizeh=112
+resizev=112
+
+// 1355
+[spotanim_1355]
+model=model_31480
+seq=seq_8126
+contrast=40
+ambient=40
+
+// 1356
+[spotanim_1356]
+model=model_31425
+seq=seq_8268
+contrast=64
+ambient=64
+
+// 1357
+[spotanim_1357]
+model=model_31425
+seq=seq_8269
+contrast=64
+ambient=64
+
+// 1358
+[spotanim_1358]
+model=model_31414
+seq=seq_8057
+contrast=64
+ambient=64
+
+// 1359
+[spotanim_1359]
+model=model_31496
+seq=seq_7960
+
+// 1360
+[spotanim_1360]
+model=model_31497
+seq=seq_8367
+
+// 1361
+[spotanim_1361]
+model=model_31490
+seq=seq_7856
+contrast=30
+ambient=30
+
+// 1362
+[spotanim_1362]
+model=model_31492
+seq=seq_7857
+contrast=20
+ambient=20
+
+// 1363
+[spotanim_1363]
+model=model_31492
+seq=seq_7859
+contrast=20
+ambient=20
+
+// 1364
+[spotanim_1364]
+model=model_31394
+seq=seq_7757
+contrast=0
+ambient=64
+
+// 1365
+[spotanim_1365]
+model=model_31131
+seq=seq_7912
+ambient=64
+
+// 1366
+[spotanim_1366]
+model=model_31131
+seq=seq_7914
+ambient=64
+
+// 1367
+[spotanim_1367]
+model=model_31129
+seq=seq_7916
+ambient=64
+
+// 1368
+[spotanim_1368]
+model=model_31515
+seq=seq_7917
+ambient=48
+contrast=64
+
+// 1369
+[spotanim_1369]
+model=model_31130
+seq=seq_7918
+ambient=64
+
+// 1370
+[spotanim_1370]
+model=model_31500
+seq=seq_7920
+contrast=6
+ambient=16
+
+// 1371
+[spotanim_1371]
+model=model_31500
+seq=seq_7921
+contrast=6
+ambient=16
+
+// 1372
+[spotanim_1372]
+model=model_31420
+seq=seq_7922
+contrast=6
+ambient=16
+
+// 1373
+[spotanim_1373]
+model=model_31477
+seq=seq_7884
+
+// 1374
+[spotanim_1374]
+model=model_31437
+seq=seq_7885
+
+// 1375
+[spotanim_1375]
+model=model_31477
+seq=seq_7886
+
+// 1376
+[spotanim_1376]
+model=model_31477
+seq=seq_7888
+
+// 1377
+[spotanim_1377]
+model=model_31477
+seq=seq_7889
+
+// 1378
+[spotanim_1378]
+model=model_31477
+seq=seq_7890
+contrast=20
+ambient=20
+
+// 1379
+[spotanim_1379]
+model=model_31402
+seq=seq_8073
+ambient=40
+resizeh=112
+resizev=112
+
+// 1380
+[spotanim_1380]
+model=model_31402
+seq=seq_8074
+ambient=40
+
+// 1381
+[spotanim_1381]
+model=model_31512
+seq=seq_8121
+contrast=25
+ambient=25
+recol1s=32758
+recol1d=23452
+
+// 1382
+[spotanim_1382]
+model=model_31391
+seq=seq_7902
+ambient=30
+
+// 1383
+[spotanim_1383]
+model=model_31391
+seq=seq_7901
+ambient=30
+
+// 1384
+[spotanim_1384]
+model=model_31482
+seq=seq_7908
+
+// 1385
+[spotanim_1385]
+model=model_31442
+seq=seq_8149
+
+// 1386
+[spotanim_1386]
+model=model_31442
+seq=seq_8150
+
+// 1387
+[spotanim_1387]
+model=model_31442
+seq=seq_8151
+contrast=40
+ambient=40
+
+// 1388
+[spotanim_1388]
+model=model_31430
+seq=seq_8161
+
+// 1389
+[spotanim_1389]
+model=model_31508
+seq=seq_8160
+
+// 1390
+[spotanim_1390]
+model=model_31516
+seq=seq_7860
+ambient=35
+resizev=250
+
+// 1391
+[spotanim_1391]
+model=model_31399
+seq=seq_7861
+ambient=35
+
+// 1392
+[spotanim_1392]
+model=model_31399
+seq=seq_7862
+ambient=35
+
+// 1393
+[spotanim_1393]
+model=model_31424
+seq=seq_7873
+ambient=35
+
+// 1394
+[spotanim_1394]
+model=model_31424
+seq=seq_7874
+ambient=35
+
+// 1395
+[spotanim_1395]
+model=model_31424
+seq=seq_7872
+ambient=35
+
+// 1396
+[spotanim_1396]
+model=model_31385
+seq=seq_7875
+ambient=35
+
+// 1397
+[spotanim_1397]
+model=model_31505
+seq=seq_7932
+contrast=20
+ambient=20
+
+// 1398
+[spotanim_1398]
+model=model_31505
+seq=seq_7931
+contrast=20
+ambient=20
+
+// 1399
+[spotanim_1399]
+model=model_31505
+seq=seq_7933
+contrast=20
+ambient=20
+
+// 1400
+[spotanim_1400]
+model=model_31484
+seq=seq_7708
+contrast=20
+ambient=20
+
+// 1401
+[spotanim_1401]
+model=model_31484
+seq=seq_7706
+contrast=20
+ambient=20
+
+// 1402
+[spotanim_1402]
+model=model_31483
+seq=seq_7707
+contrast=20
+ambient=20
+
+// 1403
+[spotanim_1403]
+model=model_31489
+seq=seq_7709
+contrast=20
+ambient=20
+
+// 1404
+[spotanim_1404]
+model=model_31521
+seq=seq_7710
+contrast=20
+ambient=20
+
+// 1405
+[spotanim_1405]
+model=model_31498
+seq=seq_8060
+contrast=20
+ambient=20
+
+// 1406
+[spotanim_1406]
+model=model_31498
+seq=seq_8061
+contrast=20
+ambient=20
+
+// 1407
+[spotanim_1407]
+model=model_31498
+seq=seq_8062
+contrast=20
+ambient=20
+
+// 1408
+[spotanim_1408]
+model=model_31433
+seq=seq_8063
+contrast=20
+ambient=20
+
+// 1409
+[spotanim_1409]
+model=model_31455
+seq=seq_7799
+contrast=20
+ambient=20
+
+// 1410
+[spotanim_1410]
+model=model_31475
+seq=seq_7802
+contrast=20
+ambient=20
+
+// 1411
+[spotanim_1411]
+model=model_31475
+seq=seq_7801
+contrast=20
+ambient=20
+
+// 1412
+[spotanim_1412]
+model=model_31455
+seq=seq_7805
+contrast=20
+ambient=20
+
+// 1413
+[spotanim_1413]
+model=model_31475
+seq=seq_7806
+contrast=20
+ambient=20
+
+// 1414
+[spotanim_1414]
+model=model_31403
+seq=seq_8290
+contrast=20
+ambient=20
+
+// 1415
+[spotanim_1415]
+model=model_31403
+seq=seq_8289
+contrast=20
+ambient=20
+
+// 1416
+[spotanim_1416]
+model=model_31444
+seq=seq_7713
+contrast=20
+ambient=20
+
+// 1417
+[spotanim_1417]
+model=model_31444
+seq=seq_7714
+contrast=20
+ambient=20
+
+// 1418
+[spotanim_1418]
+model=model_31444
+seq=seq_7716
+contrast=20
+ambient=20
+
+// 1419
+[spotanim_1419]
+model=model_31444
+seq=seq_7716
+contrast=20
+ambient=20
+recol1s=18464
+recol1d=15128
+recol2s=19488
+recol2d=19388
+
+// 1420
+[spotanim_1420]
+model=model_31444
+seq=seq_7713
+contrast=20
+ambient=20
+recol1s=18464
+recol1d=15128
+recol2s=19488
+recol2d=19388
+
+// 1421
+[spotanim_1421]
+model=model_31444
+seq=seq_7714
+contrast=20
+ambient=20
+recol1s=18464
+recol1d=15128
+recol2s=19488
+recol2d=19388
+
+// 1422
+[spotanim_1422]
+model=model_31507
+seq=seq_7673
+contrast=20
+ambient=20
+
+// 1423
+[spotanim_1423]
+model=model_31507
+seq=seq_7674
+contrast=20
+ambient=20
+
+// 1424
+[spotanim_1424]
+model=model_31426
+seq=seq_7778
+contrast=20
+ambient=20
+
+// 1425
+[spotanim_1425]
+model=model_31426
+seq=seq_7779
+contrast=20
+ambient=20
+
+// 1426
+[spotanim_1426]
+model=model_31471
+seq=seq_7788
+contrast=20
+ambient=20
+
+// 1427
+[spotanim_1427]
+model=model_31417
+seq=seq_7790
+contrast=20
+ambient=20
+
+// 1428
+[spotanim_1428]
+model=model_31471
+seq=seq_7789
+contrast=20
+ambient=20
+
+// 1429
+[spotanim_1429]
+model=model_31449
+seq=seq_8240
+contrast=20
+ambient=20
+
+// 1430
+[spotanim_1430]
+model=model_31449
+seq=seq_8241
+contrast=20
+ambient=20
+
+// 1431
+[spotanim_1431]
+model=model_31449
+seq=seq_8242
+contrast=20
+ambient=20
+
+// 1432
+[spotanim_1432]
+model=model_31450
+seq=seq_8232
+contrast=20
+ambient=20
+
+// 1433
+[spotanim_1433]
+model=model_31450
+seq=seq_8244
+contrast=20
+ambient=20
+
+// 1434
+[spotanim_1434]
+model=model_31486
+seq=seq_7742
+contrast=20
+ambient=20
+
+// 1435
+[spotanim_1435]
+model=model_31486
+seq=seq_7743
+contrast=20
+ambient=20
+
+// 1436
+[spotanim_1436]
+model=model_31486
+seq=seq_7744
+contrast=20
+ambient=20
+
+// 1437
+[spotanim_1437]
+model=model_31455
+seq=seq_8095
+contrast=20
+ambient=20
+
+// 1438
+[spotanim_1438]
+model=model_31468
+seq=seq_8096
+contrast=20
+ambient=20
+
+// 1439
+[spotanim_1439]
+model=model_30430
+seq=seq_8039
+contrast=20
+ambient=20
+
+// 1440
+[spotanim_1440]
+model=model_30432
+seq=seq_8040
+contrast=20
+ambient=20
+
+// 1441
+[spotanim_1441]
+model=model_30432
+seq=seq_8042
+contrast=20
+ambient=20
+
+// 1442
+[spotanim_1442]
+model=model_30432
+seq=seq_8041
+contrast=20
+ambient=20
+
+// 1443
+[spotanim_1443]
+model=model_30469
+seq=seq_8190
+contrast=20
+ambient=20
+
+// 1444
+[spotanim_1444]
+model=model_31421
+seq=seq_8191
+contrast=20
+ambient=20
+
+// 1445
+[spotanim_1445]
+model=model_31421
+seq=seq_8192
+contrast=20
+ambient=20
+
+// 1446
+[spotanim_1446]
+model=model_31438
+seq=seq_8193
+contrast=20
+ambient=20
+
+// 1447
+[spotanim_1447]
+model=model_31438
+seq=seq_8193
+contrast=20
+ambient=20
+recol1s=32767
+recol1d=23878
+
+// 1448
+[spotanim_1448]
+model=model_31512
+seq=seq_8194
+contrast=20
+ambient=20
+
+// 1449
+[spotanim_1449]
+model=model_31495
+seq=seq_8195
+contrast=20
+ambient=20
+
+// 1450
+[spotanim_1450]
+model=model_31419
+seq=seq_7953
+contrast=20
+ambient=20
+
+// 1451
+[spotanim_1451]
+model=model_31476
+seq=seq_7695
+contrast=20
+ambient=20
+
+// 1452
+[spotanim_1452]
+model=model_31476
+seq=seq_7695
+contrast=20
+ambient=20
+recol1s=32767
+recol1d=23878
+
+// 1453
+[spotanim_1453]
+model=model_31476
+seq=seq_7696
+contrast=20
+ambient=20
+
+// 1454
+[spotanim_1454]
+model=model_31476
+seq=seq_7696
+contrast=20
+ambient=20
+recol1s=32767
+recol1d=23878
+
+// 1455
+[spotanim_1455]
+model=model_31512
+seq=seq_8194
+contrast=20
+ambient=20
+recol1s=32767
+recol1d=23878
+
+// 1456
+[spotanim_1456]
+model=model_31387
+seq=seq_7697
+contrast=20
+ambient=20
+
+// 1457
+[spotanim_1457]
+model=model_31519
+seq=seq_7699
+contrast=20
+ambient=20
+
+// 1458
+[spotanim_1458]
+model=model_31412
+seq=seq_7723
+
+// 1459
+[spotanim_1459]
+model=model_31412
+seq=seq_7725
+
+// 1460
+[spotanim_1460]
+model=model_31462
+seq=seq_8217
+ambient=32
+contrast=32
+
+// 1461
+[spotanim_1461]
+model=model_31463
+seq=seq_8217
+ambient=32
+contrast=32
+
+// 1462
+[spotanim_1462]
+model=model_31406
+seq=seq_8218
+ambient=32
+contrast=32
+
+// 1463
+[spotanim_1463]
+model=model_31481
+seq=seq_8083
+ambient=64
+contrast=244
+
+// 1464
+[spotanim_1464]
+model=model_28548
+seq=seq_8307
+ambient=45
+contrast=25
+
+// 1465
+[spotanim_1465]
+model=model_31395
+seq=seq_8054
+
+// 1466
+[spotanim_1466]
+model=model_31396
+seq=seq_8055
+
+// 1467
+[spotanim_1467]
+model=model_28350
+seq=seq_8511
+recol1s=26492
+recol1d=32615
+
+// 1468
+[spotanim_1468]
+model=model_28350
+seq=seq_7107
+recol1s=26492
+recol1d=32615
+
+// 1469
+[spotanim_1469]
+model=model_31473
+seq=seq_7767
+ambient=30
+contrast=30
+
+// 1470
+[spotanim_1470]
+model=model_31436
+seq=seq_7826
+
+// 1471
+[spotanim_1471]
+model=model_31436
+seq=seq_7822
+
+// 1472
+[spotanim_1472]
+model=model_31435
+seq=seq_7825
+
+// 1473
+[spotanim_1473]
+model=model_31446
+seq=seq_7827
+
+// 1474
+[spotanim_1474]
+model=model_31513
+seq=seq_7966
+
+// 1475
+[spotanim_1475]
+model=model_31513
+seq=seq_7965
+
+// 1476
+[spotanim_1476]
+model=model_31513
+seq=seq_7971
+
+// 1477
+[spotanim_1477]
+model=model_31513
+seq=seq_7973
+
+// 1478
+[spotanim_1478]
+model=model_31518
+seq=seq_7975
+
+// 1479
+[spotanim_1479]
+model=model_31518
+seq=seq_7976
+
+// 1480
+[spotanim_1480]
+model=model_31488
+seq=seq_8366
+
+// 1481
+[spotanim_1481]
+model=model_31397
+seq=seq_7748
+ambient=15
+contrast=15
+
+// 1482
+[spotanim_1482]
+model=model_31454
+seq=seq_7749
+ambient=30
+contrast=15
+
+// 1483
+[spotanim_1483]
+model=model_31485
+seq=seq_8261
+ambient=30
+contrast=30
+
+// 1484
+[spotanim_1484]
+model=model_31493
+seq=seq_8262
+ambient=30
+contrast=30
+
+// 1485
+[spotanim_1485]
+model=model_31413
+seq=seq_8263
+ambient=30
+contrast=30
+
+// 1486
+[spotanim_1486]
+model=model_31520
+seq=seq_8264
+ambient=30
+contrast=30
+
+// 1487
+[spotanim_1487]
+model=model_31457
+seq=seq_7944
+ambient=15
+
+// 1488
+[spotanim_1488]
+model=model_31470
+seq=seq_7942
+ambient=30
+
+// 1489
+[spotanim_1489]
+model=model_31405
+seq=seq_7943
+ambient=30
+
+// 1490
+[spotanim_1490]
+model=model_31422
+seq=seq_7983
+ambient=35
+contrast=6
+
+// 1491
+[spotanim_1491]
+model=model_31494
+seq=seq_7984
+ambient=35
+contrast=6
+
+// 1492
+[spotanim_1492]
+model=model_31504
+seq=seq_7989
+
+// 1493
+[spotanim_1493]
+model=model_31504
+seq=seq_7990
+
+// 1494
+[spotanim_1494]
+model=model_31504
+seq=seq_7988
+
+// 1495
+[spotanim_1495]
+model=model_31438
+seq=seq_8193
+recol1s=32767
+recol1d=32384
+
+// 1496
+[spotanim_1496]
+model=model_31503
+seq=seq_8027
+ambient=30
+contrast=15
+
+// 1497
+[spotanim_1497]
+model=model_31499
+seq=seq_8028
+ambient=30
+contrast=15
+
+// 1498
+[spotanim_1498]
+model=model_31443
+seq=seq_8030
+ambient=30
+contrast=15
+
+// 1499
+[spotanim_1499]
+model=model_31447
+seq=seq_8135
+ambient=30
+contrast=30
+
+// 1500
+[spotanim_1500]
+model=model_31447
+seq=seq_8138
+ambient=30
+contrast=30
+
+// 1501
+[spotanim_1501]
+model=model_30436
+seq=seq_8140
+ambient=30
+contrast=30
+
+// 1502
+[spotanim_1502]
+model=model_31448
+seq=seq_8138
+ambient=30
+contrast=30
+
+// 1503
+[spotanim_1503]
+model=model_31448
+seq=seq_8135
+ambient=30
+contrast=30
+
+// 1504
+[spotanim_1504]
+model=model_31460
+seq=seq_8178
+ambient=30
+contrast=30
+
+// 1505
+[spotanim_1505]
+model=model_31467
+seq=seq_8177
+ambient=30
+contrast=30
+
+// 1506
+[spotanim_1506]
+model=model_31448
+seq=seq_8140
+ambient=30
+contrast=30
+
+// 1507
+[spotanim_1507]
+model=model_31501
+seq=seq_8180
+ambient=30
+contrast=30
+
+// 1508
+[spotanim_1508]
+model=model_31409
+seq=seq_8213
+
+// 1509
+[spotanim_1509]
+model=model_31408
+seq=seq_8210
+
+// 1510
+[spotanim_1510]
+model=model_31479
+seq=seq_8215
+
+// 1511
+[spotanim_1511]
+model=model_31521
+seq=seq_7710
+contrast=20
+ambient=20
+recol1s=25918
+recol1d=7904
+
+// 1512
+[spotanim_1512]
+model=model_31439
+seq=seq_7836
+ambient=35
+contrast=35
+recol1s=23356
+recol1d=32767
+
+// 1513
+[spotanim_1513]
+model=model_31439
+seq=seq_7836
+ambient=35
+contrast=35
+recol1s=23356
+recol1d=16106
+
+// 1514
+[spotanim_1514]
+model=model_31439
+seq=seq_7836
+ambient=35
+contrast=35
+recol1s=23356
+recol1d=32390
+
+// 1515
+[spotanim_1515]
+model=model_31093
+seq=seq_8495
+ambient=64
+contrast=244
+
+// 1516
+[spotanim_1516]
+model=model_31639
+seq=seq_8503
+contrast=20
+ambient=20
+
+// 1517
+[spotanim_1517]
+model=model_31639
+seq=seq_8508
+contrast=20
+ambient=20
+
+// 1518
+[spotanim_1518]
+model=model_31646
+seq=seq_8512
+ambient=40
+contrast=40
+recol1s=32615
+recol1d=17050
+
+// 1519
+[spotanim_1519]
+model=model_31689
+seq=seq_8520
+ambient=30
+
+// 1520
+[spotanim_1520]
+model=model_31691
+seq=seq_8521
+ambient=30
+
+// 1521
+[spotanim_1521]
+model=model_31441
+seq=seq_8228
+
+// 1522
+[spotanim_1522]
+model=model_31638
+seq=seq_8587
+ambient=64
+contrast=12
+resizeh=100
+resizev=100
+
+// 1523
+[spotanim_1523]
+model=model_31464
+seq=seq_8588
+ambient=32
+
+// 1524
+[spotanim_1524]
+model=model_31455
+seq=seq_8616
+contrast=20
+ambient=20
+resizeh=110
+resizev=110
+
+// 1525
+[spotanim_1525]
+model=model_31455
+seq=seq_8617
+contrast=20
+ambient=20
+resizeh=110
+resizev=110
+
+// 1526
+[spotanim_1526]
+model=model_31745
+
+// 1527
+[spotanim_1527]
+model=model_32016
+seq=seq_8623
+
+// 1528
+[spotanim_1528]
+model=model_32016
+seq=seq_8652
+
+// 1529
+[spotanim_1529]
+model=model_32013
+seq=seq_8675
+
+// 1530
+[spotanim_1530]
+model=model_32013
+seq=seq_8676
+
+// 1531
+[spotanim_1531]
+model=model_32013
+seq=seq_8674
+
+// 1532
+[spotanim_1532]
+model=model_32013
+seq=seq_8677
+
+// 1533
+[spotanim_1533]
+model=model_32013
+seq=seq_8678
+
+// 1534
+[spotanim_1534]
+model=model_32013
+seq=seq_8679
+
+// 1535
+[spotanim_1535]
+model=model_32014
+seq=seq_8696
+ambient=25
+
+// 1536
+[spotanim_1536]
+model=model_32015
+seq=seq_8697
+ambient=25
+
+// 1537
+[spotanim_1537]
+model=model_32145
+seq=seq_2415
+contrast=40
+ambient=40
+
+// 1538
+[spotanim_1538]
+model=model_32228
+seq=seq_8700
+
+// 1539
+[spotanim_1539]
+model=model_32212
+seq=seq_2419
+
+// 1540
+[spotanim_1540]
+model=model_32212
+seq=seq_8703
+ambient=25
+contrast=25
+
+// 1541
+[spotanim_1541]
+model=model_32286
+seq=seq_8712
+contrast=20
+ambient=20
+
+// 1542
+[spotanim_1542]
+model=model_32253
+seq=seq_8715
+contrast=20
+ambient=20
+
+// 1543
+[spotanim_1543]
+model=model_32254
+seq=seq_8716
+contrast=20
+ambient=20
+
+// 1544
+[spotanim_1544]
+model=model_29175
+seq=seq_7279
+rotation=180
+
+// 1545
+[spotanim_1545]
+model=model_29175
+seq=seq_7279
+rotation=270
+
+// 1546
+[spotanim_1546]
+model=model_32343
+seq=seq_8741
+contrast=191
+ambient=30
+
+// 1547
+[spotanim_1547]
+model=model_32343
+seq=seq_8742
+contrast=191
+ambient=30
+
+// 1548
+[spotanim_1548]
+model=model_32343
+seq=seq_8743
+contrast=191
+ambient=30
+
+// 1549
+[spotanim_1549]
+model=model_32340
+seq=seq_8749
+
+// 1550
+[spotanim_1550]
+model=model_32346
+seq=seq_8750
+
+// 1551
+[spotanim_1551]
+model=model_32344
+seq=seq_8759
+ambient=192
+
+// 1552
+[spotanim_1552]
+model=model_32342
+seq=seq_8766
+ambient=192
+
+// 1553
+[spotanim_1553]
+model=model_32413
+seq=seq_8769
+ambient=30
+contrast=200
+
+// 1554
+[spotanim_1554]
+model=model_32412
+seq=seq_8801
+ambient=30
+
+// 1555
+[spotanim_1555]
+model=model_32590
+seq=seq_8810
+contrast=106
+ambient=64
+
+// 1556
+[spotanim_1556]
+model=model_32589
+seq=seq_8813
+contrast=106
+ambient=64
+
+// 1557
+[spotanim_1557]
+model=model_11227
+seq=seq_8848
+contrast=106
+ambient=64
+
+// 1558
+[spotanim_1558]
+model=model_32591
+seq=seq_8850
+ambient=25
+contrast=25
+
+// 1559
+[spotanim_1559]
+model=model_32591
+seq=seq_8851
+ambient=25
+contrast=25
+
+// 1560
+[spotanim_1560]
+model=model_32591
+seq=seq_8823
+ambient=25
+contrast=25
+
+// 1561
+[spotanim_1561]
+model=model_32587
+seq=seq_8853
+contrast=20
+ambient=20
+
+// 1562
+[spotanim_1562]
+model=model_32587
+seq=seq_8854
+contrast=20
+ambient=20
+
+// 1563
+[spotanim_1563]
+model=model_32587
+seq=seq_8855
+contrast=20
+ambient=20
+
+// 1564
+[spotanim_1564]
+model=model_32587
+seq=seq_8856
+contrast=20
+ambient=20
+
+// 1565
+[spotanim_1565]
+model=model_32586
+seq=seq_8844
+contrast=20
+ambient=20
+
+// 1566
+[spotanim_1566]
+model=model_32662
+seq=seq_8883
+recol1s=32736
+recol1d=16708
+recol2s=8386
+recol2d=24004
+recol3s=15392
+recol3d=20803
+
+// 1567
+[spotanim_1567]
+model=model_32668
+seq=seq_8882
+ambient=15
+contrast=15
+
+// 1568
+[spotanim_1568]
+model=model_32666
+seq=seq_8896
+ambient=15
+contrast=15
+
+// 1569
+[spotanim_1569]
+model=model_32610
+seq=seq_8885
+
+// 1570
+[spotanim_1570]
+model=model_32667
+seq=seq_8886
+
+// 1571
+[spotanim_1571]
+model=model_32693
+seq=seq_8912
+contrast=30
+ambient=30
+
+// 1572
+[spotanim_1572]
+model=model_32693
+seq=seq_8913
+contrast=30
+ambient=30
+
+// 1573
+[spotanim_1573]
+model=model_32696
+seq=seq_8935
+contrast=30
+ambient=30
+
+// 1574
+[spotanim_1574]
+model=model_32696
+seq=seq_8936
+contrast=30
+ambient=30
+
+// 1575
+[spotanim_1575]
+model=model_31389
+seq=seq_8938
+ambient=32
+
+// 1576
+[spotanim_1576]
+model=model_32718
+seq=seq_8940
+
+// 1577
+[spotanim_1577]
+model=model_32718
+seq=seq_8942
+
+// 1578
+[spotanim_1578]
+model=model_32779
+seq=seq_8958
+ambient=64
+contrast=244
+
+// 1579
+[spotanim_1579]
+model=model_32779
+seq=seq_8965
+ambient=64
+contrast=244
+
+// 1580
+[spotanim_1580]
+model=model_32733
+seq=seq_8960
+
+// 1581
+[spotanim_1581]
+model=model_32732
+seq=seq_8960
+
+// 1582
+[spotanim_1582]
+model=model_32730
+seq=seq_8960
+
+// 1583
+[spotanim_1583]
+model=model_33048
+seq=seq_8992
+contrast=97
+ambient=23
+
+// 1584
+[spotanim_1584]
+model=model_33045
+seq=seq_8993
+contrast=97
+ambient=23
+
+// 1585
+[spotanim_1585]
+model=model_33044
+seq=seq_8994
+contrast=20
+ambient=23
+
+// 1586
+[spotanim_1586]
+model=model_33046
+seq=seq_8995
+contrast=240
+ambient=39
+
+// 1587
+[spotanim_1587]
+model=model_32718
+seq=seq_8940
+recolhsl1s=52449
+recolhsl1d=19923
+recolhsl2s=37588
+recolhsl2d=31553
+
+// 1588
+[spotanim_1588]
+model=model_32718
+seq=seq_8942
+recolhsl1s=52449
+recolhsl1d=19923
+recolhsl2s=37588
+recolhsl2d=31553
+
+// 1589
+[spotanim_1589]
+model=model_33041
+seq=seq_9014
+ambient=40
+recolhsl1s=10826
+recolhsl1d=19923
+recolhsl2s=957
+recolhsl2d=31553
+recol3s=28261
+recol3d=14090
+
+// 1590
+[spotanim_1590]
+model=model_33041
+seq=seq_9015
+ambient=40
+recolhsl1s=10826
+recolhsl1d=19923
+recolhsl2s=957
+recolhsl2d=31553
+recol3s=28261
+recol3d=14090
+
+// 1591
+[spotanim_1591]
+model=model_33047
+seq=seq_9017
+contrast=240
+ambient=39
+
+// 1592
+[spotanim_1592]
+model=model_33047
+seq=seq_9019
+contrast=240
+ambient=39
+
+// 1593
+[spotanim_1593]
+model=model_33731
+seq=seq_9038
+
+// 1594
+[spotanim_1594]
+model=model_33491
+seq=seq_9046
+ambient=50
+contrast=56
+
+// 1595
+[spotanim_1595]
+model=model_33490
+seq=seq_9030
+
+// 1596
+[spotanim_1596]
+model=model_33490
+seq=seq_9029
+
+// 1597
+[spotanim_1597]
+model=model_4139
+seq=seq_9066
+
+// 1598
+[spotanim_1598]
+model=model_33487
+seq=seq_9067
+
+// 1599
+[spotanim_1599]
+model=model_33489
+seq=seq_9079
+ambient=30
+contrast=56
+
+// 1600
+[spotanim_1600]
+model=model_33489
+seq=seq_9080
+ambient=30
+contrast=56
+
+// 1601
+[spotanim_1601]
+model=model_33489
+seq=seq_9081
+ambient=30
+contrast=56
+
+// 1602
+[spotanim_1602]
+model=model_33489
+seq=seq_9082
+ambient=30
+contrast=56
+
+// 1603
+[spotanim_1603]
+model=model_33488
+seq=seq_9103
+ambient=30
+contrast=206
+
+// 1604
+[spotanim_1604]
+model=model_21500
+seq=seq_9120
+ambient=30
+contrast=30
+recolhsl1s=55207
+recolhsl1d=35263
+recolhsl2s=54963
+recolhsl2d=35273
+recolhsl3s=55091
+recolhsl3d=35283
+
+// 1605
+[spotanim_1605]
+model=model_33372
+seq=seq_9124
+
+// 1606
+[spotanim_1606]
+model=model_34032
+seq=seq_9200
+
+// 1607
+[spotanim_1607]
+model=model_34063
+seq=seq_9177
+
+// 1608
+[spotanim_1608]
+model=model_34064
+seq=seq_9176
+
+// 1609
+[spotanim_1609]
+model=model_34063
+seq=seq_9155
+
+// 1610
+[spotanim_1610]
+model=model_34021
+seq=seq_9200
+recol1s=7332
+recol1d=4228
+recol2s=6275
+recol2d=3171
+recol3s=13573
+recol3d=16846
+recol4s=14630
+recol4d=17903
+recol5s=32760
+recol5d=22131
+recol6s=29591
+recol6d=21074
+
+// 1611
+[spotanim_1611]
+model=model_34032
+seq=seq_9200
+recol1s=15687
+recol1d=20017
+recol2s=14630
+recol2d=18960
+recol3s=13573
+recol3d=17903
+recol4s=12516
+recol4d=16846
+recol5s=32760
+recol5d=15789
+recol6s=29591
+recol6d=14732
+
+// 1612
+[spotanim_1612]
+model=model_34009
+seq=seq_9200
+recol1s=7365
+recol1d=9412
+recol2s=8422
+recol2d=8355
+recol3s=12651
+recol3d=12614
+recol4s=11594
+recol4d=11557
+recol5s=10537
+recol5d=10500
+recol6s=32760
+recol6d=9443
+
+// 1613
+[spotanim_1613]
+model=model_34032
+seq=seq_9200
+recol1s=15687
+recol1d=2114
+recol2s=14630
+recol2d=2114
+recol3s=13573
+recol3d=3171
+recol4s=12516
+recol4d=4228
+recol5s=32760
+recol5d=5285
+recol6s=29591
+recol6d=6342
+
+// 1614
+[spotanim_1614]
+model=model_34021
+seq=seq_9200
+recol1s=7332
+recol1d=8355
+recol2s=6275
+recol2d=7298
+recol3s=14630
+recol3d=15789
+recol4s=13573
+recol4d=14732
+recol5s=32760
+recol5d=13675
+recol6s=29591
+recol6d=12618
+
+// 1615
+[spotanim_1615]
+model=model_34009
+seq=seq_9200
+recol1s=8422
+recol1d=8490
+recol2s=7365
+recol2d=7433
+recol3s=32760
+recol3d=18960
+recol4s=29591
+recol4d=17903
+
+// 1616
+[spotanim_1616]
+model=model_34126
+seq=seq_9244
+
+// 1617
+[spotanim_1617]
+model=model_34125
+seq=seq_9258
+ambient=64
+contrast=12
+
+// 1618
+[spotanim_1618]
+model=model_34268
+seq=seq_9259
+ambient=64
+contrast=12
+
+// 1619
+[spotanim_1619]
+model=model_34267
+seq=seq_9261
+ambient=64
+contrast=12
+
+// 1620
+[spotanim_1620]
+model=model_34267
+seq=seq_9262
+ambient=64
+contrast=12
+
+// 1621
+[spotanim_1621]
+model=model_34270
+seq=seq_9263
+ambient=64
+contrast=12
+
+// 1622
+[spotanim_1622]
+model=model_34130
+seq=seq_9271
+ambient=64
+contrast=12
+
+// 1623
+[spotanim_1623]
+model=model_34130
+seq=seq_9270
+ambient=64
+contrast=12
+
+// 1624
+[spotanim_1624]
+model=model_34130
+seq=seq_9272
+ambient=64
+contrast=12
+
+// 1625
+[spotanim_1625]
+model=model_34269
+seq=seq_9275
+ambient=64
+contrast=12
+
+// 1626
+[spotanim_1626]
+model=model_34128
+seq=seq_9301
+ambient=32
+
+// 1627
+[spotanim_1627]
+model=model_34128
+seq=seq_9302
+ambient=32
+
+// 1628
+[spotanim_1628]
+model=model_2321
+seq=seq_457
+recolhsl1s=61
+recolhsl1d=2584
+
+// 1629
+[spotanim_1629]
+model=model_34296
+seq=seq_9346
+
+// 1630
+[spotanim_1630]
+model=model_34382
+seq=seq_9352
+ambient=8
+contrast=248
+
+// 1631
+[spotanim_1631]
+model=model_34384
+seq=seq_9352
+
+// 1632
+[spotanim_1632]
+model=model_34383
+seq=seq_9352
+ambient=16
+contrast=240
+
+// 1633
+[spotanim_1633]
+model=model_34381
+seq=seq_9353
+ambient=30
+contrast=15
+
+// 1634
+[spotanim_1634]
+model=model_34378
+seq=seq_9354
+ambient=30
+contrast=15
+
+// 1635
+[spotanim_1635]
+model=model_34377
+seq=seq_9355
+ambient=30
+contrast=15
+
+// 1636
+[spotanim_1636]
+model=model_34379
+seq=seq_9356
+ambient=30
+contrast=15
+
+// 1637
+[spotanim_1637]
+model=model_34376
+seq=seq_9357
+ambient=30
+contrast=15
+
+// 1638
+[spotanim_1638]
+model=model_34533
+seq=seq_9373
+contrast=20
+ambient=20
+
+// 1639
+[spotanim_1639]
+model=model_34532
+seq=seq_9373
+contrast=20
+ambient=20
+
+// 1640
+[spotanim_1640]
+model=model_34531
+seq=seq_9377
+contrast=20
+ambient=20
+
+// 1641
+[spotanim_1641]
+model=model_34541
+seq=seq_9381
+contrast=20
+ambient=20
+
+// 1642
+[spotanim_1642]
+model=model_34541
+seq=seq_9380
+contrast=20
+ambient=20
+
+// 1643
+[spotanim_1643]
+model=model_34541
+seq=seq_9379
+contrast=20
+ambient=20
+
+// 1644
+[spotanim_1644]
+model=model_34540
+seq=seq_9385
+contrast=20
+ambient=20
+
+// 1645
+[spotanim_1645]
+model=model_34546
+seq=seq_9393
+ambient=25
+contrast=25
+
+// 1646
+[spotanim_1646]
+model=model_34545
+seq=seq_9396
+
+// 1647
+[spotanim_1647]
+model=model_34535
+seq=seq_9399
+
+// 1648
+[spotanim_1648]
+model=model_34535
+seq=seq_9400
+
+// 1649
+[spotanim_1649]
+model=model_34535
+seq=seq_9401
+
+// 1650
+[spotanim_1650]
+model=model_34544
+seq=seq_9403
+
+// 1651
+[spotanim_1651]
+model=model_34534
+seq=seq_9404
+
+// 1652
+[spotanim_1652]
+model=model_34389
+seq=seq_8366
+
+// 1653
+[spotanim_1653]
+model=model_34539
+seq=seq_9420
+
+// 1654
+[spotanim_1654]
+model=model_34539
+seq=seq_9421
+
+// 1655
+[spotanim_1655]
+model=model_34539
+seq=seq_9422
+
+// 1656
+[spotanim_1656]
+model=model_2945
+seq=seq_9486
+ambient=30
+
+// 1657
+[spotanim_1657]
+model=model_34600
+seq=seq_9514
+
+// 1658
+[spotanim_1658]
+model=model_34600
+seq=seq_9515
+
+// 1659
+[spotanim_1659]
+model=model_34543
+seq=seq_9517
+ambient=50
+contrast=200
+
+// 1660
+[spotanim_1660]
+model=model_34004
+ambient=25
+seq=seq_9525
+recol1s=15687
+recol1d=23185
+recolhsl2s=4521
+recolhsl2d=6341
+recol3s=12516
+recol3d=18923
+recol4s=13573
+recol4d=19980
+recolhsl5s=10345
+recolhsl5d=6366
+recolhsl6s=10353
+recolhsl6d=6378
+
+// 1661
+[spotanim_1661]
+model=model_34004
+ambient=25
+seq=seq_9528
+recol1s=15687
+recol1d=23185
+recolhsl2s=4521
+recolhsl2d=6341
+recol3s=12516
+recol3d=18923
+recol4s=13573
+recol4d=19980
+recolhsl5s=10345
+recolhsl5d=6366
+recolhsl6s=10353
+recolhsl6d=6378
+
+// 1662
+[spotanim_1662]
+model=model_34538
+seq=seq_9530
+ambient=30
+contrast=106
+
+// 1663
+[spotanim_1663]
+model=model_34536
+seq=seq_9531
+ambient=30
+contrast=106
+
+// 1664
+[spotanim_1664]
+model=model_34537
+seq=seq_9532
+ambient=30
+contrast=106
+
+// 1665
+[spotanim_1665]
+model=model_34894
+seq=seq_9556
+
+// 1666
+[spotanim_1666]
+model=model_34887
+seq=seq_9559
+contrast=20
+ambient=20
+
+// 1667
+[spotanim_1667]
+model=model_34893
+seq=seq_9567
+contrast=20
+ambient=20
+
+// 1668
+[spotanim_1668]
+model=model_34886
+seq=seq_9569
+ambient=20
+contrast=20
+
+// 1669
+[spotanim_1669]
+model=model_34704
+seq=seq_9576
+ambient=20
+contrast=20
+
+// 1670
+[spotanim_1670]
+model=model_34889
+seq=seq_9578
+ambient=20
+contrast=20
+
+// 1671
+[spotanim_1671]
+model=model_34890
+seq=seq_9580
+ambient=20
+contrast=20
+
+// 1672
+[spotanim_1672]
+model=model_34888
+seq=seq_9545
+ambient=10
+contrast=10
+
+// 1673
+[spotanim_1673]
+model=model_34892
+seq=seq_9548
+ambient=10
+contrast=10
+
+// 1674
+[spotanim_1674]
+model=model_34891
+seq=seq_9550
+ambient=10
+contrast=10
+
+// 1675
+[spotanim_1675]
+model=model_38114
+seq=seq_9628
+contrast=20
+ambient=20
+
+// 1676
+[spotanim_1676]
+model=model_38114
+seq=seq_9634
+contrast=20
+ambient=20
+
+// 1677
+[spotanim_1677]
+model=model_38116
+seq=seq_9594
+contrast=10
+ambient=35
+
+// 1678
+[spotanim_1678]
+model=model_32718
+seq=seq_8940
+recol1s=30239
+recol1d=1954
+recol2s=14044
+recol2d=32672
+
+// 1679
+[spotanim_1679]
+model=model_32718
+seq=seq_8942
+recol1s=30239
+recol1d=1954
+recol2s=14044
+recol2d=32672
+
+// 1680
+[spotanim_1680]
+model=model_38099
+seq=seq_9611
+ambient=40
+
+// 1681
+[spotanim_1681]
+model=model_38100
+seq=seq_9612
+
+// 1682
+[spotanim_1682]
+model=model_38109
+seq=seq_9613
+ambient=30
+contrast=56
+
+// 1683
+[spotanim_1683]
+model=model_38110
+seq=seq_9614
+
+// 1684
+[spotanim_1684]
+model=model_38102
+seq=seq_9615
+
+// 1685
+[spotanim_1685]
+model=model_38105
+seq=seq_9616
+
+// 1686
+[spotanim_1686]
+model=model_38111
+seq=seq_9617
+ambient=30
+
+// 1687
+[spotanim_1687]
+model=model_38106
+seq=seq_9618
+ambient=30
+
+// 1688
+[spotanim_1688]
+model=model_38098
+seq=seq_9619
+ambient=30
+
+// 1689
+[spotanim_1689]
+model=model_38113
+seq=seq_9620
+
+// 1690
+[spotanim_1690]
+model=model_38103
+seq=seq_9621
+ambient=30
+
+// 1691
+[spotanim_1691]
+model=model_38114
+seq=seq_9630
+contrast=40
+ambient=40
+
+// 1692
+[spotanim_1692]
+model=model_38114
+seq=seq_9624
+contrast=40
+ambient=40
+
+// 1693
+[spotanim_1693]
+model=model_38114
+seq=seq_9632
+contrast=40
+ambient=40
+
+// 1694
+[spotanim_1694]
+model=model_38114
+seq=seq_9636
+contrast=40
+ambient=40
+
+// 1695
+[spotanim_1695]
+model=model_38114
+seq=seq_9634
+contrast=40
+ambient=40
+
+// 1696
+[spotanim_1696]
+model=model_38114
+seq=seq_9626
+contrast=40
+ambient=40
+
+// 1697
+[spotanim_1697]
+model=model_38114
+seq=seq_9628
+contrast=40
+ambient=40
+
+// 1698
+[spotanim_1698]
+model=model_38114
+seq=seq_667
+contrast=40
+ambient=40
+recol1s=31904
+recol1d=1374
+recol2s=27872
+recol2d=5658
+recol3s=28032
+recol3d=7767
+recolhsl4s=7097
+recolhsl4d=33217
+recolhsl5s=9149
+recolhsl5d=31947
+recol6s=32481
+recol6d=10334
+
+// 1699
+[spotanim_1699]
+model=model_38114
+seq=seq_9630
+contrast=40
+ambient=40
+recol1s=31904
+recol1d=1374
+recol2s=27872
+recol2d=5658
+recol3s=28032
+recol3d=7767
+recolhsl4s=7097
+recolhsl4d=33217
+recolhsl5s=9149
+recolhsl5d=31947
+recol6s=32481
+recol6d=10334
+
+// 1700
+[spotanim_1700]
+model=model_38118
+seq=seq_9638
+ambient=100
+contrast=100
+
+// 1701
+[spotanim_1701]
+model=model_38118
+seq=seq_9639
+ambient=100
+contrast=100
+
+// 1702
+[spotanim_1702]
+model=model_40519
+seq=seq_9720
+
+// 1703
+[spotanim_1703]
+model=model_1202
+seq=seq_138
+contrast=20
+ambient=50
+
+// 1704
+[spotanim_1704]
+model=model_1202
+seq=seq_139
+contrast=20
+ambient=50
+
+// 1705
+[spotanim_1705]
+model=model_1202
+seq=seq_140
+contrast=20
+ambient=50
+
+// 1706
+[spotanim_1706]
+model=model_1202
+seq=seq_141
+contrast=20
+ambient=50
+
+// 1707
+[spotanim_1707]
+model=model_1202
+seq=seq_321
+contrast=20
+ambient=50
+
+// 1708
+[spotanim_1708]
+model=model_1202
+seq=seq_322
+contrast=20
+ambient=50
+
+// 1709
+[spotanim_1709]
+model=model_1202
+seq=seq_323
+contrast=20
+ambient=50
+
+// 1710
+[spotanim_1710]
+model=model_1202
+seq=seq_324
+contrast=20
+ambient=50
+
+// 1711
+[spotanim_1711]
+model=model_1202
+seq=seq_325
+contrast=20
+ambient=50
+
+// 1712
+[spotanim_1712]
+model=model_1202
+seq=seq_326
+contrast=20
+ambient=50
+
+// 1713
+[spotanim_1713]
+model=model_1202
+seq=seq_327
+contrast=20
+ambient=50
+
+// 1714
+[spotanim_1714]
+model=model_33372
+seq=seq_328
+
+// 1715
+[spotanim_1715]
+model=model_40610
+seq=seq_4575
+resizev=320
+recol1s=28573
+recol1d=32755
+
+// 1716
+[spotanim_1716]
+model=model_40627
+seq=seq_4854
+ambient=30
+
+// 1717
+[spotanim_1717]
+model=model_40770
+seq=seq_9967
+
+// 1718
+[spotanim_1718]
+model=model_17549
+seq=seq_2264
+ambient=64
+contrast=12
+
+// 1719
+[spotanim_1719]
+model=model_40765
+seq=seq_9969
+
+// 1720
+[spotanim_1720]
+model=model_40766
+seq=seq_9969
+
+// 1721
+[spotanim_1721]
+model=model_40767
+seq=seq_9969
+
+// 1722
+[spotanim_1722]
+model=model_40769
+seq=seq_9969
+
+// 1723
+[spotanim_1723]
+model=model_40768
+seq=seq_9969
+
+// 1724
+[spotanim_1724]
+model=model_3070
+seq=seq_9968
+ambient=40
+contrast=40
+
+// 1725
+[spotanim_1725]
+model=model_38129
+seq=seq_673
+ambient=40
+contrast=40
+
+// 1726
+[spotanim_1726]
+model=model_40572
+seq=seq_9975
+ambient=32
+
+// 1727
+[spotanim_1727]
+model=model_38114
+seq=seq_9636
+contrast=40
+ambient=40
+recol1s=31904
+recol1d=1374
+recol2s=27872
+recol2d=5658
+recol3s=28032
+recol3d=7767
+recolhsl4s=7097
+recolhsl4d=33217
+recolhsl5s=9149
+recolhsl5d=31947
+recol6s=32481
+recol6d=10334
+
+// 1728
+[spotanim_1728]
+model=model_38114
+seq=seq_9626
+contrast=40
+ambient=40
+recol1s=31904
+recol1d=1374
+recol2s=27872
+recol2d=5658
+recol3s=28032
+recol3d=7767
+recolhsl4s=7097
+recolhsl4d=33217
+recolhsl5s=9149
+recolhsl5d=31947
+recol6s=32481
+recol6d=10334
+
+// 1729
+[spotanim_1729]
+model=model_38114
+seq=seq_9634
+contrast=40
+ambient=40
+recol1s=31904
+recol1d=1374
+recol2s=27872
+recol2d=5658
+recol3s=28032
+recol3d=7767
+recolhsl4s=7097
+recolhsl4d=33217
+recolhsl5s=9149
+recolhsl5d=31947
+recol6s=32481
+recol6d=10334
+
+// 1730
+[spotanim_1730]
+model=model_38114
+seq=seq_9628
+contrast=40
+ambient=40
+recol1s=31904
+recol1d=1374
+recol2s=27872
+recol2d=5658
+recol3s=28032
+recol3d=7767
+recolhsl4s=7097
+recolhsl4d=33217
+recolhsl5s=9149
+recolhsl5d=31947
+recol6s=32481
+recol6d=10334
+
+// 1731
+[spotanim_1731]
+model=model_40852
+seq=seq_9985
+
+// 1732
+[spotanim_1732]
+model=model_40852
+seq=seq_9987
+
+// 1733
+[spotanim_1733]
+model=model_40853
+seq=seq_9989
+contrast=5
+ambient=35
+
+// 1734
+[spotanim_1734]
+model=model_40851
+seq=seq_9991
+contrast=5
+ambient=35
+
+// 1735
+[spotanim_1735]
+model=model_41117
+seq=seq_10035
+
+// 1736
+[spotanim_1736]
+model=model_41119
+seq=seq_10048
+
+// 1737
+[spotanim_1737]
+model=model_41118
+seq=seq_10054
+ambient=32
+contrast=32
+
+// 1738
+[spotanim_1738]
+model=model_40945
+seq=seq_10067
+ambient=60
+contrast=60
+
+// 1739
+[spotanim_1739]
+model=model_40945
+seq=seq_10067
+ambient=60
+contrast=60
+resizeh=200
+resizev=200
+
+// 1740
+[spotanim_1740]
+model=model_41122
+seq=seq_10060
+ambient=60
+
+// 1741
+[spotanim_1741]
+model=model_41110
+seq=seq_10061
+ambient=60
+
+// 1742
+[spotanim_1742]
+model=model_41109
+seq=seq_10068
+ambient=60
+
+// 1743
+[spotanim_1743]
+model=model_41120
+seq=seq_10062
+ambient=60
+
+// 1744
+[spotanim_1744]
+model=model_41120
+seq=seq_10063
+ambient=60
+
+// 1745
+[spotanim_1745]
+model=model_41317
+seq=seq_10086
+contrast=244
+ambient=16
+
+// 1746
+[spotanim_1746]
+model=model_41317
+seq=seq_10087
+contrast=244
+ambient=16
+
+// 1747
+[spotanim_1747]
+model=model_41317
+seq=seq_10097
+contrast=244
+ambient=16
+
+// 1748
+[spotanim_1748]
+model=model_41318
+seq=seq_10091
+contrast=20
+ambient=40
+
+// 1749
+[spotanim_1749]
+model=model_41501
+seq=seq_10185
+ambient=64
+contrast=30
+
+// 1750
+[spotanim_1750]
+model=model_41500
+seq=seq_10185
+ambient=64
+contrast=30
+
+// 1751
+[spotanim_1751]
+model=model_41501
+seq=seq_10187
+ambient=64
+contrast=30
+
+// 1752
+[spotanim_1752]
+model=model_41500
+seq=seq_10187
+ambient=64
+contrast=30
+
+// 1753
+[spotanim_1753]
+model=model_41502
+seq=seq_10130
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1754
+[spotanim_1754]
+model=model_41502
+seq=seq_10131
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1755
+[spotanim_1755]
+model=model_41502
+seq=seq_10130
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1756
+[spotanim_1756]
+model=model_41502
+seq=seq_10131
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1757
+[spotanim_1757]
+model=model_41502
+seq=seq_10133
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1758
+[spotanim_1758]
+model=model_41502
+seq=seq_10133
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1759
+[spotanim_1759]
+model=model_41504
+seq=seq_10174
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1760
+[spotanim_1760]
+model=model_41504
+seq=seq_10174
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1761
+[spotanim_1761]
+model=model_41503
+seq=seq_10174
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1762
+[spotanim_1762]
+model=model_41503
+seq=seq_10174
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1763
+[spotanim_1763]
+model=model_41502
+seq=seq_10174
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1764
+[spotanim_1764]
+model=model_41502
+seq=seq_10174
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1765
+[spotanim_1765]
+model=model_41504
+seq=seq_10175
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1766
+[spotanim_1766]
+model=model_41504
+seq=seq_10175
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1767
+[spotanim_1767]
+model=model_41503
+seq=seq_10175
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1768
+[spotanim_1768]
+model=model_41503
+seq=seq_10175
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1769
+[spotanim_1769]
+model=model_41502
+seq=seq_10175
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=21454
+
+// 1770
+[spotanim_1770]
+model=model_41502
+seq=seq_10175
+contrast=12
+ambient=64
+recolhsl1s=14896
+recolhsl1d=11193
+
+// 1771
+[spotanim_1771]
+model=model_41497
+seq=seq_10179
+contrast=28
+ambient=20
+
+// 1772
+[spotanim_1772]
+model=model_41497
+seq=seq_10181
+contrast=28
+ambient=20
+
+// 1773
+[spotanim_1773]
+model=model_41505
+seq=seq_10203
+contrast=210
+ambient=30
+
+// 1774
+[spotanim_1774]
+model=model_41496
+seq=seq_10214
+contrast=30
+ambient=30
+
+// 1775
+[spotanim_1775]
+model=model_41770
+seq=seq_10238
+
+// 1776
+[spotanim_1776]
+model=model_41770
+seq=seq_10239
+
+// 1777
+[spotanim_1777]
+model=model_41761
+seq=seq_10231
+ambient=60
+contrast=60
+
+// 1778
+[spotanim_1778]
+model=model_30495
+seq=seq_10232
+
+// 1779
+[spotanim_1779]
+model=model_41772
+seq=seq_10244
+ambient=60
+contrast=60
+
+// 1780
+[spotanim_1780]
+model=model_41776
+seq=seq_10245
+ambient=60
+contrast=60
+
+// 1781
+[spotanim_1781]
+model=model_41965
+seq=seq_10302
+
+// 1782
+[spotanim_1782]
+model=model_41965
+seq=seq_10304
+
+// 1783
+[spotanim_1783]
+model=model_41964
+seq=seq_10306
+
+// 1784
+[spotanim_1784]
+model=model_41964
+seq=seq_10309
+
+// 1785
+[spotanim_1785]
+model=model_41970
+seq=seq_10308
+ambient=32
+
+// 1786
+[spotanim_1786]
+model=model_41970
+seq=seq_10307
+ambient=32
+
+// 1787
+[spotanim_1787]
+model=model_41967
+seq=seq_10302
+
+// 1788
+[spotanim_1788]
+model=model_41967
+seq=seq_10304
+
+// 1789
+[spotanim_1789]
+model=model_41962
+seq=seq_10302
+
+// 1790
+[spotanim_1790]
+model=model_41962
+seq=seq_10304
+
+// 1791
+[spotanim_1791]
+model=model_41969
+seq=seq_10302
+
+// 1792
+[spotanim_1792]
+model=model_41969
+seq=seq_10304
+
+// 1793
+[spotanim_1793]
+model=model_41968
+seq=seq_10306
+
+// 1794
+[spotanim_1794]
+model=model_41968
+seq=seq_10309
+
+// 1795
+[spotanim_1795]
+model=model_41966
+seq=seq_10306
+
+// 1796
+[spotanim_1796]
+model=model_41966
+seq=seq_10309
+
+// 1797
+[spotanim_1797]
+model=model_41963
+seq=seq_10302
+
+// 1798
+[spotanim_1798]
+model=model_41963
+seq=seq_10304
+
+// 1799
+[spotanim_1799]
+model=model_41961
+seq=seq_10310
+
+// 1800
+[spotanim_1800]
+model=model_41961
+seq=seq_10311
+
+// 1801
+[spotanim_1801]
+model=model_3142
+seq=seq_10263
+recol1s=15789
+recol1d=8354
+recol2s=16846
+recol2d=8354
+
+// 1802
+[spotanim_1802]
+model=model_3142
+seq=seq_10264
+recol1s=15789
+recol1d=8354
+recol2s=16846
+recol2d=8354
+
+// 1803
+[spotanim_1803]
+model=model_41960
+seq=seq_10272
+
+// 1804
+[spotanim_1804]
+model=model_41121
+seq=seq_10375
+ambient=64
+contrast=12
+
+// 1805
+[spotanim_1805]
+model=model_41112
+seq=seq_10380
+ambient=32
+contrast=0
+
+// 1806
+[spotanim_1806]
+model=model_41112
+seq=seq_10380
+ambient=32
+contrast=0
+recol1s=29826
+recol1d=32767
+
+// 1807
+[spotanim_1807]
+model=model_41112
+seq=seq_10380
+ambient=32
+contrast=0
+recolhsl1s=832
+recolhsl1d=41784
+
+// 1808
+[spotanim_1808]
+model=model_41112
+seq=seq_10380
+ambient=32
+contrast=0
+recolhsl1s=832
+recolhsl1d=11064
+
+// 1809
+[spotanim_1809]
+model=model_41121
+seq=seq_7393
+ambient=64
+contrast=12
+
+// 1810
+[spotanim_1810]
+model=model_41042
+seq=seq_10381
+contrast=30
+ambient=20
+
+// 1811
+[spotanim_1811]
+model=model_41044
+seq=seq_10383
+contrast=30
+ambient=20
+
+// 1812
+[spotanim_1812]
+model=model_41037
+seq=seq_10382
+contrast=30
+ambient=20
+
+// 1813
+[spotanim_1813]
+model=model_42318
+seq=seq_10396
+contrast=30
+ambient=20
+recolhsl1s=41784
+recolhsl1d=11064
+recolhsl2s=41972
+recolhsl2d=11064
+
+// 1814
+[spotanim_1814]
+model=model_42320
+seq=seq_10396
+contrast=30
+ambient=20
+recolhsl1s=41972
+recolhsl1d=832
+recolhsl2s=41784
+recolhsl2d=832
+
+// 1815
+[spotanim_1815]
+model=model_42317
+seq=seq_10396
+contrast=30
+ambient=20
+
+// 1816
+[spotanim_1816]
+model=model_41116
+seq=seq_10397
+contrast=30
+ambient=20
+
+// 1817
+[spotanim_1817]
+model=model_41116
+seq=seq_10398
+contrast=30
+ambient=20
+recolhsl1s=41972
+recolhsl1d=832
+recolhsl2s=41784
+recolhsl2d=832
+
+// 1818
+[spotanim_1818]
+model=model_41116
+seq=seq_10399
+contrast=30
+ambient=20
+recolhsl1s=41784
+recolhsl1d=11064
+recolhsl2s=41972
+recolhsl2d=11064
+
+// 1819
+[spotanim_1819]
+model=model_41116
+seq=seq_10401
+contrast=30
+ambient=20
+recolhsl1s=41972
+recolhsl1d=11064
+
+// 1820
+[spotanim_1820]
+model=model_41116
+seq=seq_10402
+contrast=30
+ambient=20
+recolhsl1s=41972
+recolhsl1d=832
+
+// 1821
+[spotanim_1821]
+model=model_41116
+seq=seq_10403
+contrast=30
+ambient=20
+
+// 1822
+[spotanim_1822]
+model=model_41138
+seq=seq_10404
+contrast=30
+ambient=20
+recolhsl1s=7130
+recolhsl1d=7165
+recolhsl2s=7105
+recolhsl2d=11260
+
+// 1823
+[spotanim_1823]
+model=model_41115
+seq=seq_10407
+contrast=0
+ambient=192
+
+// 1824
+[spotanim_1824]
+model=model_41115
+seq=seq_10406
+contrast=0
+ambient=192
+
+// 1825
+[spotanim_1825]
+model=model_41115
+seq=seq_10408
+contrast=0
+ambient=192
+
+// 1826
+[spotanim_1826]
+model=model_42314
+seq=seq_10387
+
+// 1827
+[spotanim_1827]
+model=model_42314
+seq=seq_10390
+
+// 1828
+[spotanim_1828]
+model=model_42314
+seq=seq_10394
+
+// 1829
+[spotanim_1829]
+model=model_42321
+seq=seq_10411
+ambient=50
+
+// 1830
+[spotanim_1830]
+model=model_42322
+seq=seq_10412
+contrast=20
+ambient=20
+
+// 1831
+[spotanim_1831]
+model=model_42523
+seq=seq_10421
+
+// 1832
+[spotanim_1832]
+model=model_42524
+seq=seq_10422
+
+// 1833
+[spotanim_1833]
+model=model_42522
+seq=seq_10472
+ambient=64
+contrast=12
+
+// 1834
+[spotanim_1834]
+model=model_42557
+seq=seq_10497
+contrast=20
+ambient=20
+
+// 1835
+[spotanim_1835]
+model=model_42565
+seq=seq_10525
+
+// 1836
+[spotanim_1836]
+model=model_42565
+seq=seq_10526
+
+// 1837
+[spotanim_1837]
+model=model_42567
+seq=seq_10509
+
+// 1838
+[spotanim_1838]
+model=model_42565
+seq=seq_10527
+
+// 1839
+[spotanim_1839]
+model=model_42575
+seq=seq_10500
+
+// 1840
+[spotanim_1840]
+model=model_42565
+seq=seq_10528
+
+// 1841
+[spotanim_1841]
+model=model_42568
+seq=seq_10506
+
+// 1842
+[spotanim_1842]
+model=model_42568
+seq=seq_10507
+
+// 1843
+[spotanim_1843]
+model=model_42569
+seq=seq_10508
+
+// 1844
+[spotanim_1844]
+model=model_42564
+seq=seq_10510
+ambient=50
+
+// 1845
+[spotanim_1845]
+model=model_42570
+seq=seq_10512
+contrast=30
+ambient=20
+
+// 1846
+[spotanim_1846]
+model=model_42572
+seq=seq_10511
+contrast=30
+ambient=20
+
+// 1847
+[spotanim_1847]
+model=model_42571
+seq=seq_10514
+contrast=30
+ambient=20
+
+// 1848
+[spotanim_1848]
+model=model_42574
+seq=seq_10515
+contrast=30
+ambient=20
+
+// 1849
+[spotanim_1849]
+model=model_42574
+seq=seq_10517
+contrast=30
+ambient=20
+
+// 1850
+[spotanim_1850]
+model=model_42573
+seq=seq_10519
+contrast=20
+ambient=20
+
+// 1851
+[spotanim_1851]
+model=model_42573
+seq=seq_10521
+contrast=20
+ambient=20
+
+// 1852
+[spotanim_1852]
+model=model_42573
+seq=seq_10520
+contrast=20
+ambient=20
+
+// 1853
+[spotanim_1853]
+model=model_42566
+seq=seq_10522
+contrast=20
+ambient=20
+
+// 1854
+[spotanim_1854]
+model=model_42566
+seq=seq_10523
+contrast=20
+ambient=20
+
+// 1855
+[spotanim_1855]
+model=model_42658
+seq=seq_368
+
+// 1856
+[spotanim_1856]
+model=model_42659
+seq=seq_371
+
+// 1857
+[spotanim_1857]
+model=model_42561
+seq=seq_10529
+
+// 1858
+[spotanim_1858]
+model=model_42558
+seq=seq_10529
+
+// 1859
+[spotanim_1859]
+model=model_42559
+seq=seq_10529
+
+// 1860
+[spotanim_1860]
+model=model_42563
+seq=seq_10529
+
+// 1861
+[spotanim_1861]
+model=model_42562
+seq=seq_10529
+
+// 1862
+[spotanim_1862]
+model=model_42560
+seq=seq_10529
+
+// 1863
+[spotanim_1863]
+model=model_42768
+seq=seq_10542
+
+// 1864
+[spotanim_1864]
+model=model_42768
+seq=seq_10531
+
+// 1865
+[spotanim_1865]
+model=model_42770
+seq=seq_10536
+ambient=64
+
+// 1866
+[spotanim_1866]
+model=model_42766
+seq=seq_10533
+
+// 1867
+[spotanim_1867]
+model=model_42771
+seq=seq_10539
+
+// 1868
+[spotanim_1868]
+model=model_42771
+seq=seq_10540
+
+// 1869
+[spotanim_1869]
+model=model_43092
+seq=seq_10585
+ambient=50
+
+// 1870
+[spotanim_1870]
+model=model_43092
+seq=seq_10585
+ambient=50
+recol1s=26621
+recol1d=6645
+
+// 1871
+[spotanim_1871]
+model=model_43092
+seq=seq_10585
+ambient=50
+recol1s=26621
+recol1d=17506
+
+// 1872
+[spotanim_1872]
+model=model_43503
+seq=seq_366
+
+// 1873
+[spotanim_1873]
+model=model_43505
+seq=seq_366
+
+// 1874
+[spotanim_1874]
+model=model_43502
+seq=seq_366
+
+// 1875
+[spotanim_1875]
+model=model_43504
+seq=seq_366
+
+// 1876
+[spotanim_1876]
+model=model_43506
+seq=seq_366
+
+// 1877
+[spotanim_1877]
+model=model_43503
+
+// 1878
+[spotanim_1878]
+model=model_43505
+
+// 1879
+[spotanim_1879]
+model=model_43502
+
+// 1880
+[spotanim_1880]
+model=model_43504
+
+// 1881
+[spotanim_1881]
+model=model_43506
+
+// 1882
+[spotanim_1882]
+model=model_43093
+seq=seq_10598
+ambient=50
+
+// 1883
+[spotanim_1883]
+model=model_3082
+seq=seq_660
+ambient=60
+contrast=60
+recol1s=15392
+recol1d=31808
+recol2s=25664
+recol2d=32288
+
+// 1884
+[spotanim_1884]
+model=model_44666
+seq=seq_10926
+ambient=64
+contrast=12
+
+// 1885
+[spotanim_1885]
+model=model_44637
+seq=seq_10927
+ambient=64
+contrast=12
+
+// 1886
+[spotanim_1886]
+model=model_44629
+seq=seq_10928
+ambient=64
+contrast=12
+
+// 1887
+[spotanim_1887]
+model=model_44621
+seq=seq_10925
+
+// 1888
+[spotanim_1888]
+model=model_44621
+seq=seq_10929
+
+// 1889
+[spotanim_1889]
+model=model_44654
+seq=seq_10904
+
+// 1890
+[spotanim_1890]
+model=model_44651
+seq=seq_10714
+
+// 1891
+[spotanim_1891]
+model=model_44653
+seq=seq_10736
+ambient=64
+contrast=12
+
+// 1892
+[spotanim_1892]
+model=model_44626
+seq=seq_10748
+ambient=64
+contrast=12
+
+// 1893
+[spotanim_1893]
+model=model_44677
+seq=seq_10759
+ambient=32
+
+// 1894
+[spotanim_1894]
+model=model_44668
+seq=seq_10752
+
+// 1895
+[spotanim_1895]
+model=model_44667
+seq=seq_10752
+
+// 1896
+[spotanim_1896]
+model=model_44675
+seq=seq_10771
+
+// 1897
+[spotanim_1897]
+model=model_44675
+seq=seq_10897
+
+// 1898
+[spotanim_1898]
+model=model_44664
+seq=seq_10773
+
+// 1899
+[spotanim_1899]
+model=model_44618
+seq=seq_10774
+
+// 1900
+[spotanim_1900]
+model=model_44664
+seq=seq_10775
+
+// 1901
+[spotanim_1901]
+model=model_44673
+seq=seq_10776
+
+// 1902
+[spotanim_1902]
+model=model_44669
+seq=seq_10820
+
+// 1903
+[spotanim_1903]
+model=model_44665
+seq=seq_10757
+ambient=32
+
+// 1904
+[spotanim_1904]
+model=model_3142
+seq=seq_10942
+
+// 1905
+[spotanim_1905]
+model=model_44635
+seq=seq_10628
+contrast=206
+ambient=50
+
+// 1906
+[spotanim_1906]
+model=model_44619
+seq=seq_10629
+contrast=206
+ambient=50
+
+// 1907
+[spotanim_1907]
+model=model_44632
+seq=seq_10630
+
+// 1908
+[spotanim_1908]
+model=model_44632
+seq=seq_10631
+
+// 1909
+[spotanim_1909]
+model=model_44630
+seq=seq_10643
+ambient=50
+
+// 1910
+[spotanim_1910]
+model=model_44631
+seq=seq_10645
+ambient=50
+
+// 1911
+[spotanim_1911]
+model=model_44656
+seq=seq_10652
+
+// 1912
+[spotanim_1912]
+model=model_44657
+seq=seq_10655
+
+// 1913
+[spotanim_1913]
+model=model_44615
+seq=seq_10837
+contrast=20
+ambient=30
+
+// 1914
+[spotanim_1914]
+model=model_44615
+seq=seq_10837
+contrast=20
+ambient=30
+
+// 1915
+[spotanim_1915]
+model=model_44623
+seq=seq_10840
+contrast=20
+ambient=30
+
+// 1916
+[spotanim_1916]
+model=model_44655
+seq=seq_10861
+
+// 1917
+[spotanim_1917]
+model=model_44661
+seq=seq_10859
+
+// 1918
+[spotanim_1918]
+model=model_3142
+seq=seq_10953
+
+// 1919
+[spotanim_1919]
+model=model_44633
+seq=seq_10860
+
+// 1920
+[spotanim_1920]
+model=model_44642
+seq=seq_10832
+ambient=32
+
+// 1921
+[spotanim_1921]
+model=model_44647
+seq=seq_10832
+ambient=32
+
+// 1922
+[spotanim_1922]
+model=model_44645
+seq=seq_10832
+ambient=32
+
+// 1923
+[spotanim_1923]
+model=model_44646
+seq=seq_10832
+ambient=32
+
+// 1924
+[spotanim_1924]
+model=model_44649
+seq=seq_10832
+ambient=32
+
+// 1925
+[spotanim_1925]
+model=model_44641
+seq=seq_10832
+ambient=32
+
+// 1926
+[spotanim_1926]
+model=model_44643
+seq=seq_10832
+ambient=32
+
+// 1927
+[spotanim_1927]
+model=model_44663
+seq=seq_10833
+ambient=32
+
+// 1928
+[spotanim_1928]
+model=model_44627
+seq=seq_10835
+
+// 1929
+[spotanim_1929]
+model=model_44636
+seq=seq_10884
+
+// 1930
+[spotanim_1930]
+model=model_44652
+seq=seq_10888
+
+// 1931
+[spotanim_1931]
+model=model_44652
+seq=seq_10889
+
+// 1932
+[spotanim_1932]
+model=model_6541
+seq=seq_10937
+ambient=32
+contrast=32
+
+// 1933
+[spotanim_1933]
+model=model_6541
+seq=seq_10938
+ambient=32
+contrast=32
+
+// 1934
+[spotanim_1934]
+model=model_44639
+seq=seq_10906
+
+// 1935
+[spotanim_1935]
+model=model_44676
+seq=seq_10912
+
+// 1936
+[spotanim_1936]
+model=model_44614
+seq=seq_10682
+
+// 1937
+[spotanim_1937]
+model=model_44614
+seq=seq_10683
+
+// 1938
+[spotanim_1938]
+model=model_44614
+seq=seq_10684
+
+// 1939
+[spotanim_1939]
+model=model_44628
+seq=seq_10685
+contrast=20
+ambient=30
+
+// 1940
+[spotanim_1940]
+model=model_44628
+seq=seq_10686
+
+// 1941
+[spotanim_1941]
+model=model_44628
+seq=seq_10687
+
+// 1942
+[spotanim_1942]
+model=model_44660
+seq=seq_10696
+ambient=29
+contrast=10
+
+// 1943
+[spotanim_1943]
+model=model_44660
+seq=seq_10691
+ambient=29
+contrast=10
+
+// 1944
+[spotanim_1944]
+model=model_44660
+seq=seq_10694
+ambient=29
+contrast=10
+
+// 1945
+[spotanim_1945]
+model=model_44659
+seq=seq_10695
+ambient=29
+contrast=10
+
+// 1946
+[spotanim_1946]
+model=model_44660
+seq=seq_10699
+ambient=29
+contrast=10
+
+// 1947
+[spotanim_1947]
+model=model_44660
+seq=seq_10700
+ambient=29
+contrast=10
+
+// 1948
+[spotanim_1948]
+model=model_44670
+seq=seq_10701
+ambient=20
+contrast=20
+
+// 1949
+[spotanim_1949]
+model=model_44622
+seq=seq_10723
+ambient=20
+contrast=20
+
+// 1950
+[spotanim_1950]
+model=model_44811
+seq=seq_10965
+ambient=15
+contrast=12
+recol1s=32767
+recol1d=17409
+
+// 1951
+[spotanim_1951]
+model=model_44823
+seq=seq_10964
+
+// 1952
+[spotanim_1952]
+model=model_44624
+seq=seq_10984
+
+// 1953
+[spotanim_1953]
+model=model_44624
+seq=seq_10985
+
+// 1954
+[spotanim_1954]
+model=model_44494
+seq=seq_10750
+ambient=50
+
+// 1955
+[spotanim_1955]
+model=model_44847
+seq=seq_9594
+
+// 1956
+[spotanim_1956]
+model=model_43606
+seq=seq_10987
+
+// 1957
+[spotanim_1957]
+model=model_43607
+seq=seq_10987
+
+// 1958
+[spotanim_1958]
+model=model_44865
+seq=seq_10750
+ambient=50
+
+// 1959
+[spotanim_1959]
+model=model_44876
+seq=seq_11014
+ambient=65
+contrast=25
+
+// 1960
+[spotanim_1960]
+model=model_44876
+seq=seq_11015
+ambient=65
+contrast=25
+
+// 1961
+[spotanim_1961]
+model=model_44876
+seq=seq_11016
+ambient=65
+contrast=25
+
+// 1962
+[spotanim_1962]
+model=model_44875
+seq=seq_11014
+ambient=65
+contrast=25
+
+// 1963
+[spotanim_1963]
+model=model_44875
+seq=seq_11015
+ambient=65
+contrast=25
+
+// 1964
+[spotanim_1964]
+model=model_44875
+seq=seq_11016
+ambient=65
+contrast=25
+
+// 1965
+[spotanim_1965]
+model=model_44886
+seq=seq_11017
+ambient=40
+contrast=20
+
+// 1966
+[spotanim_1966]
+model=model_44886
+seq=seq_11018
+ambient=40
+contrast=20
+
+// 1967
+[spotanim_1967]
+model=model_45283
+seq=seq_11034
+ambient=32
+contrast=244
+
+// 1968
+[spotanim_1968]
+model=model_45182
+seq=seq_11035
+
+// 1969
+[spotanim_1969]
+model=model_45282
+seq=seq_11049
+
+// 1970
+[spotanim_1970]
+model=model_45284
+seq=seq_11050
+
+// 1971
+[spotanim_1971]
+model=model_45189
+seq=seq_11051
+rotation=180
+
+// 1972
+[spotanim_1972]
+model=model_45282
+seq=seq_11058
+
+// 1973
+[spotanim_1973]
+model=model_45281
+seq=seq_11045
+ambient=32
+
+// 1974
+[spotanim_1974]
+model=model_45320
+seq=seq_11086
+contrast=15
+ambient=25
+resizeh=64
+resizev=64
+
+// 1975
+[spotanim_1975]
+model=model_45327
+seq=seq_11098
+contrast=20
+ambient=20
+
+// 1976
+[spotanim_1976]
+model=model_45327
+seq=seq_11099
+contrast=20
+ambient=20
+
+// 1977
+[spotanim_1977]
+model=model_45327
+seq=seq_11100
+contrast=20
+ambient=20
+
+// 1978
+[spotanim_1978]
+model=model_45314
+seq=seq_11080
+contrast=20
+ambient=20
+
+// 1979
+[spotanim_1979]
+model=model_45321
+seq=seq_11101
+contrast=20
+ambient=20
+
+// 1980
+[spotanim_1980]
+model=model_45321
+seq=seq_11102
+contrast=20
+ambient=20
+
+// 1981
+[spotanim_1981]
+model=model_45321
+seq=seq_11103
+contrast=20
+ambient=20
+
+// 1982
+[spotanim_1982]
+model=model_45313
+seq=seq_11105
+contrast=20
+ambient=20
+
+// 1983
+[spotanim_1983]
+model=model_45313
+seq=seq_11106
+contrast=20
+ambient=20
+
+// 1984
+[spotanim_1984]
+model=model_45313
+seq=seq_11109
+contrast=20
+ambient=20
+
+// 1985
+[spotanim_1985]
+model=model_45326
+seq=seq_11110
+ambient=32
+
+// 1986
+[spotanim_1986]
+model=model_45319
+seq=seq_11127
+ambient=32
+
+// 1987
+[spotanim_1987]
+model=model_45325
+seq=seq_11126
+ambient=32
+
+// 1988
+[spotanim_1988]
+model=model_45318
+seq=seq_11128
+ambient=32
+
+// 1989
+[spotanim_1989]
+model=model_45324
+seq=seq_11126
+ambient=32
+
+// 1990
+[spotanim_1990]
+model=model_45322
+seq=seq_11134
+contrast=240
+ambient=30
+
+// 1991
+[spotanim_1991]
+model=model_45322
+seq=seq_11135
+contrast=240
+ambient=30
+
+// 1992
+[spotanim_1992]
+model=model_45323
+seq=seq_11137
+contrast=236
+ambient=20
+

@@ -1,0 +1,72 @@
+// 2033
+[clientscript,script2033]
+def_int $int0 = inv_total(inv_93, obj_2169);
+def_int $int1 = inv_total(inv_93, obj_2162);
+def_int $int2 = inv_total(inv_93, obj_2128);
+def_int $int3 = inv_total(inv_93, obj_2152);
+def_int $int4 = inv_total(inv_93, obj_1973);
+if ($int3 >= 2 & $int0 >= 1) {
+    if_setcolour(^green, interface_437:com_37);
+} else {
+    if_setcolour(^red, interface_437:com_37);
+}
+if ($int2 >= 2 & $int0 >= 1) {
+    if_setcolour(^green, interface_437:com_38);
+} else {
+    if_setcolour(^red, interface_437:com_38);
+}
+if ($int2 >= 1 & $int0 >= 1 & $int1 >= 2) {
+    if_setcolour(^green, interface_437:com_39);
+} else {
+    if_setcolour(^red, interface_437:com_39);
+}
+if ($int4 >= 2 & $int0 >= 1) {
+    if_setcolour(^green, interface_437:com_40);
+} else {
+    if_setcolour(^red, interface_437:com_40);
+}
+if (inv_total(inv_93, obj_2152) > 1) {
+    if_setobject(obj_2152, 100, interface_437:com_4);
+} else {
+    if_setobject(obj_9499, 100, interface_437:com_4);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_437:com_5);
+} else {
+    if_setobject(obj_9500, 90, interface_437:com_5);
+}
+if (inv_total(inv_93, obj_2128) > 1) {
+    if_setobject(obj_2128, 120, interface_437:com_12);
+} else {
+    if_setobject(obj_9494, 120, interface_437:com_12);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_437:com_11);
+} else {
+    if_setobject(obj_9500, 90, interface_437:com_11);
+}
+if (inv_total(inv_93, obj_1973) > 1) {
+    if_setobject(obj_1973, 140, interface_437:com_27);
+} else {
+    if_setobject(obj_9507, 140, interface_437:com_27);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_437:com_28);
+} else {
+    if_setobject(obj_9500, 90, interface_437:com_28);
+}
+if (inv_total(inv_93, obj_2162) > 1) {
+    if_setobject(obj_2162, 100, interface_437:com_19);
+} else {
+    if_setobject(obj_9501, 100, interface_437:com_19);
+}
+if (inv_total(inv_93, obj_2128) > 0) {
+    if_setobject(obj_2128, 120, interface_437:com_20);
+} else {
+    if_setobject(obj_9494, 120, interface_437:com_20);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_437:com_18);
+} else {
+    if_setobject(obj_9500, 90, interface_437:com_18);
+}

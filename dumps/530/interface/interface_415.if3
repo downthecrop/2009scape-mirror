@@ -1,0 +1,679 @@
+// 415:0
+[com_0]
+type=layer
+width=75
+height=150
+ymode=abs_centre
+
+// 415:1
+[com_1]
+type=model
+x=11
+y=17
+width=39
+height=37
+layer=com_0
+model=model_15694
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=515
+modelangle_y=0
+modelangle_z=0
+modelzoom=360
+unknown100=64263
+unknown101=3000
+
+// 415:2
+[com_2]
+type=model
+x=12
+y=58
+width=38
+height=28
+layer=com_0
+model=model_15695
+modelorigin_x=0
+modelorigin_y=-6
+modelangle_x=534
+modelangle_y=2047
+modelangle_z=0
+modelzoom=600
+unknown100=64077
+unknown101=3000
+
+// 415:3
+[com_3]
+type=model
+x=8
+y=97
+width=47
+height=23
+layer=com_0
+model=model_15688
+modelorigin_x=2
+modelorigin_y=-2
+modelangle_x=531
+modelangle_y=2041
+modelangle_z=0
+modelzoom=1007
+unknown100=63922
+unknown101=3000
+
+// 415:4
+[com_4]
+type=text
+x=62
+y=25
+width=9
+height=14
+layer=com_0
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1757(interface_415:com_7, interface_415:com_4)
+onvarctransmit=script1757(interface_415:com_7, interface_415:com_4)
+onvarctransmitlist=varclient_219
+
+// 415:5
+[com_5]
+type=text
+x=62
+y=60
+width=9
+height=14
+layer=com_0
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1758(interface_415:com_8, interface_415:com_5)
+onvarctransmit=script1758(interface_415:com_8, interface_415:com_5)
+onvarctransmitlist=varclient_218
+
+// 415:6
+[com_6]
+type=text
+x=62
+y=94
+width=9
+height=14
+layer=com_0
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1759(interface_415:com_9, interface_415:com_6)
+onvarctransmit=script1759(interface_415:com_9, interface_415:com_6)
+onvarctransmitlist=varclient_220
+
+// 415:7
+[com_7]
+type=model
+x=13
+y=38
+width=36
+height=15
+layer=com_0
+hide=yes
+model=model_15693
+modelorigin_x=1
+modelorigin_y=-7
+modelangle_x=327
+modelangle_y=3
+modelangle_z=0
+modelzoom=400
+unknown100=64221
+unknown101=3000
+
+// 415:8
+[com_8]
+type=model
+x=13
+y=69
+width=36
+height=15
+layer=com_0
+hide=yes
+model=model_15693
+modelorigin_x=1
+modelorigin_y=-7
+modelangle_x=327
+modelangle_y=3
+modelangle_z=0
+modelzoom=400
+unknown100=64221
+unknown101=3000
+
+// 415:9
+[com_9]
+type=model
+x=13
+y=108
+width=36
+height=15
+layer=com_0
+hide=yes
+model=model_15693
+modelorigin_x=1
+modelorigin_y=-7
+modelangle_x=327
+modelangle_y=3
+modelangle_z=0
+modelzoom=400
+unknown100=64221
+unknown101=3000
+
+// 415:10
+[com_10]
+type=model
+x=169
+y=41
+width=32
+height=26
+model=model_15666
+modelorigin_x=-1
+modelorigin_y=-1
+modelangle_x=348
+modelangle_y=15
+modelangle_z=0
+modelzoom=700
+unknown100=64035
+unknown101=3000
+
+// 415:11
+[com_11]
+type=model
+x=214
+y=44
+width=30
+height=24
+model=model_15703
+modelorigin_x=1
+modelorigin_y=-2
+modelangle_x=405
+modelangle_y=42
+modelangle_z=0
+modelzoom=700
+unknown100=64030
+unknown101=3000
+
+// 415:12
+[com_12]
+type=model
+x=268
+y=40
+width=25
+height=30
+model=model_15689
+modelorigin_x=-1
+modelorigin_y=7
+modelangle_x=444
+modelangle_y=3
+modelangle_z=0
+modelzoom=600
+unknown100=64077
+unknown101=3000
+
+// 415:13
+[com_13]
+type=model
+x=306
+y=44
+width=41
+height=24
+model=model_15699
+modelorigin_x=0
+modelorigin_y=-5
+modelangle_x=483
+modelangle_y=18
+modelangle_z=0
+modelzoom=790
+unknown100=63993
+unknown101=3000
+
+// 415:14
+[com_14]
+type=model
+x=358
+y=44
+width=35
+height=25
+model=model_15659
+modelorigin_x=-1
+modelorigin_y=0
+modelangle_x=390
+modelangle_y=30
+modelangle_z=0
+modelzoom=700
+unknown100=64031
+unknown101=3000
+
+// 415:15
+[com_15]
+type=model
+x=19
+y=38
+width=29
+height=29
+model=model_15677
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=402
+modelangle_y=0
+modelangle_z=0
+modelzoom=700
+unknown100=64032
+unknown101=3000
+
+// 415:16
+[com_16]
+type=model
+x=70
+y=38
+width=29
+height=29
+model=model_15679
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=402
+modelangle_y=0
+modelangle_z=0
+modelzoom=700
+unknown100=64032
+unknown101=3000
+
+// 415:17
+[com_17]
+type=model
+x=119
+y=38
+width=29
+height=29
+model=model_15681
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=402
+modelangle_y=0
+modelangle_z=0
+modelzoom=700
+unknown100=64032
+unknown101=3000
+
+// 415:18
+[com_18]
+type=layer
+width=184
+height=73
+xmode=abs_right
+ymode=abs_bottom
+
+// 415:19
+[com_19]
+type=layer
+x=420
+y=13
+width=69
+height=68
+
+// 415:20
+[com_20]
+type=model
+x=24
+y=14
+width=23
+height=48
+layer=com_19
+model=model_15696
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=468
+modelangle_y=0
+modelangle_z=0
+modelzoom=850
+unknown100=63986
+unknown101=3000
+
+// 415:21
+[com_21]
+type=layer
+x=420
+y=13
+width=69
+height=68
+hide=yes
+
+// 415:22
+[com_22]
+type=model
+x=24
+y=14
+width=23
+height=48
+layer=com_21
+model=model_15670
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=468
+modelangle_y=0
+modelangle_z=0
+modelzoom=850
+unknown100=63982
+unknown101=3000
+
+// 415:23
+[com_23]
+type=layer
+x=420
+y=13
+width=69
+height=68
+hide=yes
+
+// 415:24
+[com_24]
+type=model
+x=24
+y=14
+width=23
+height=48
+layer=com_23
+model=model_15723
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=468
+modelangle_y=0
+modelangle_z=0
+modelzoom=850
+modelanim=seq_4262
+unknown100=63978
+unknown101=3000
+
+// 415:25
+[com_25]
+type=layer
+x=420
+y=13
+width=69
+height=68
+hide=yes
+
+// 415:26
+[com_26]
+type=model
+x=24
+y=14
+width=23
+height=48
+layer=com_25
+model=model_15722
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=468
+modelangle_y=0
+modelangle_z=0
+modelzoom=850
+modelanim=seq_4262
+unknown100=63974
+unknown101=3000
+
+// 415:27
+[com_27]
+type=layer
+x=420
+y=13
+width=69
+height=68
+hide=yes
+
+// 415:28
+[com_28]
+type=model
+x=24
+y=14
+width=23
+height=48
+layer=com_27
+model=model_15698
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=468
+modelangle_y=0
+modelangle_z=0
+modelzoom=850
+modelanim=seq_4262
+unknown100=63970
+unknown101=3000
+
+// 415:29
+[com_29]
+type=layer
+x=420
+y=13
+width=69
+height=68
+hide=yes
+
+// 415:30
+[com_30]
+type=model
+x=21
+y=7
+width=29
+height=61
+layer=com_29
+model=model_15668
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=468
+modelangle_y=0
+modelangle_z=0
+modelzoom=656
+modelanim=seq_4262
+unknown100=64044
+unknown101=3000
+
+// 415:31
+[com_31]
+type=text
+x=29
+y=23
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1746(interface_415:com_15, interface_415:com_31)
+onvarctransmit=script1746(interface_415:com_15, interface_415:com_31)
+onvarctransmitlist=varclient_228
+
+// 415:32
+[com_32]
+type=text
+x=80
+y=23
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1747(interface_415:com_16, interface_415:com_32)
+onvarctransmit=script1747(interface_415:com_16, interface_415:com_32)
+onvarctransmitlist=varclient_229
+
+// 415:33
+[com_33]
+type=text
+x=129
+y=23
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1749(interface_415:com_17, interface_415:com_33)
+onvarctransmit=script1749(interface_415:com_17, interface_415:com_33)
+onvarctransmitlist=varclient_230
+
+// 415:34
+[com_34]
+type=text
+x=180
+y=23
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1752(interface_415:com_10, interface_415:com_34)
+onvarctransmit=script1752(interface_415:com_10, interface_415:com_34)
+onvarctransmitlist=varclient_223
+
+// 415:35
+[com_35]
+type=text
+x=225
+y=23
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1753(interface_415:com_11, interface_415:com_35)
+onvarctransmit=script1753(interface_415:com_11, interface_415:com_35)
+onvarctransmitlist=varclient_224
+
+// 415:36
+[com_36]
+type=text
+x=276
+y=23
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1754(interface_415:com_12, interface_415:com_36)
+onvarctransmit=script1754(interface_415:com_12, interface_415:com_36)
+onvarctransmitlist=varclient_226
+
+// 415:37
+[com_37]
+type=text
+x=322
+y=24
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1755(interface_415:com_13, interface_415:com_37)
+oninvtransmit=script1755(interface_415:com_13, interface_415:com_37)
+onvarctransmit=script1755(interface_415:com_13, interface_415:com_37)
+oninvtransmitlist=inv_94
+onvarctransmitlist=varclient_227
+
+// 415:38
+[com_38]
+type=text
+x=371
+y=24
+width=9
+height=14
+textfont=b12_full
+text=0
+textshadow=yes
+colour=0x910000
+onload=script1756(interface_415:com_14, interface_415:com_38)
+onvarctransmit=script1756(interface_415:com_14, interface_415:com_38)
+onvarctransmitlist=varclient_225
+
+// 415:39
+[com_39]
+type=text
+y=2
+width=120
+height=14
+xmode=abs_centre
+layer=com_18
+textfont=p12_full
+text=Current Score
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 415:40
+[com_40]
+type=model
+x=-1
+width=175
+height=45
+xmode=abs_centre
+ymode=abs_centre
+layer=com_18
+model=model_10119
+modelorigin_x=0
+modelorigin_y=-8
+modelangle_x=288
+modelangle_y=0
+modelangle_z=0
+modelzoom=912
+unknown100=63954
+unknown101=3000
+
+// 415:41
+[com_41]
+type=text
+x=-25
+y=22
+width=9
+height=14
+xmode=abs_centre
+layer=com_18
+textfont=b12_full
+text=0
+colour=0x990000
+onload=script1760(event_com)
+onvarctransmit=script1760(event_com)
+onvarctransmitlist=varclient_221
+
+// 415:42
+[com_42]
+type=text
+x=25
+y=22
+width=9
+height=14
+xmode=abs_centre
+layer=com_18
+textfont=b12_full
+text=0
+colour=0x0000cc
+onload=script1761(event_com)
+onvarctransmit=script1761(event_com)
+onvarctransmitlist=varclient_222
+
+// 415:43
+[com_43]
+type=text
+y=5
+height=14
+widthmode=minus
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_18
+textfont=p12_full
+textalignh=1
+textshadow=yes
+colour=0xff981f
+onload=script1762(event_com)
+onvarctransmit=script1762(event_com)
+onvarctransmitlist=varclient_231
+

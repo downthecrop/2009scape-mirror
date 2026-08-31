@@ -1,0 +1,12 @@
+// 783
+[clientscript,script783]
+if (%varplayerbit_4762 ! %varclient_155) {
+    %varclient_155 = %varplayerbit_4762;
+    if (%varplayerbit_4762 = 1) {
+        ~script1029(enum_1484, 9);
+    } else if (%varplayerbit_4762 = 2) {
+        ~script1032(enum_1486, 0, 7);
+    } else if (%varplayerbit_4762 = 3) {
+        ~script1030(1485);
+    }
+}

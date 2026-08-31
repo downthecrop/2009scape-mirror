@@ -1,0 +1,9 @@
+// 1510
+[proc,script1510]
+if (getwindowmode >= 2) {
+    if_setgraphic(graphic_1204, interface_768:com_5);
+    if_setalpha(true, interface_768:com_5);
+} else {
+    if_setgraphic(chat_background, interface_768:com_5);
+    if_setalpha(false, interface_768:com_5);
+}

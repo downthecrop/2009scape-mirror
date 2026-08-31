@@ -1,0 +1,950 @@
+// 435:0
+[com_0]
+type=layer
+x=-1
+y=-2
+width=512
+height=334
+op10=   
+
+// 435:1
+[com_1]
+type=rectangle
+x=104
+y=231
+width=315
+height=82
+colour=0x000000
+fill=yes
+
+// 435:2
+[com_2]
+type=rectangle
+x=103
+y=230
+width=317
+height=83
+colour=0x726451
+
+// 435:3
+[com_3]
+type=model
+x=174
+y=73
+width=45
+height=35
+model=model_2609
+modelorigin_x=-1
+modelorigin_y=13
+modelangle_x=165
+modelangle_y=1894
+modelangle_z=0
+modelzoom=528
+unknown100=65009
+unknown101=1067
+op1=Make
+onmouseover=script1955(interface_435:com_11)
+onmouseleave=script1956(interface_435:com_11)
+
+// 435:4
+[com_4]
+type=model
+x=84
+y=35
+width=34
+height=27
+layer=com_11
+model=null
+modelorigin_x=-2
+modelorigin_y=-3
+modelangle_x=336
+modelangle_y=1681
+modelangle_z=0
+modelzoom=912
+unknown100=0
+unknown101=912
+
+// 435:5
+[com_5]
+type=model
+x=148
+y=28
+width=32
+height=32
+layer=com_11
+model=null
+modelorigin_x=0
+modelorigin_y=6
+modelangle_x=187
+modelangle_y=2005
+modelangle_z=0
+modelzoom=528
+unknown100=0
+unknown101=528
+
+// 435:6
+[com_6]
+type=model
+x=217
+y=23
+width=32
+height=32
+layer=com_11
+model=null
+modelorigin_x=0
+modelorigin_y=7
+modelangle_x=285
+modelangle_y=1891
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=784
+
+// 435:7
+[com_7]
+type=text
+x=82
+y=62
+width=30
+height=14
+layer=com_11
+textfont=p12_full
+text=%1/4
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2162, 4)
+oninvtransmit=script1957(event_com, obj_2162, 4)
+oninvtransmitlist=inv_93
+
+// 435:8
+[com_8]
+type=text
+x=150
+y=62
+width=31
+height=14
+layer=com_11
+textfont=p12_full
+text=%1/2
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_1957, 2)
+oninvtransmit=script1957(event_com, obj_1957, 2)
+oninvtransmitlist=inv_93
+
+// 435:9
+[com_9]
+type=text
+x=218
+y=62
+width=29
+height=14
+layer=com_11
+textfont=p12_full
+text=%1/1
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2169, 1)
+oninvtransmit=script1957(event_com, obj_2169, 1)
+oninvtransmitlist=inv_93
+
+// 435:10
+[com_10]
+type=text
+x=6
+y=4
+width=310
+height=15
+layer=com_11
+textfont=p12_full
+text=Worm Hole
+textalignh=1
+textshadow=yes
+colour=0xd6a046
+
+// 435:11
+[com_11]
+type=layer
+x=100
+y=230
+width=320
+height=82
+hide=yes
+
+// 435:12
+[com_12]
+type=model
+x=293
+y=75
+width=42
+height=32
+model=model_2823
+modelorigin_x=0
+modelorigin_y=11
+modelangle_x=165
+modelangle_y=1894
+modelangle_z=0
+modelzoom=528
+unknown100=65008
+unknown101=1065
+op1=Make
+onmouseover=script1955(interface_435:com_20)
+onmouseleave=script1956(interface_435:com_20)
+
+// 435:13
+[com_13]
+type=model
+x=82
+y=30
+width=32
+height=32
+layer=com_20
+model=null
+modelorigin_x=0
+modelorigin_y=6
+modelangle_x=187
+modelangle_y=2005
+modelangle_z=0
+modelzoom=528
+unknown100=0
+unknown101=528
+
+// 435:14
+[com_14]
+type=model
+x=148
+y=33
+width=32
+height=32
+layer=com_20
+model=null
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=376
+modelangle_y=2047
+modelangle_z=0
+modelzoom=722
+unknown100=0
+unknown101=722
+
+// 435:15
+[com_15]
+type=model
+x=217
+y=23
+width=32
+height=32
+layer=com_20
+model=null
+modelorigin_x=0
+modelorigin_y=7
+modelangle_x=285
+modelangle_y=1891
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=784
+
+// 435:16
+[com_16]
+type=text
+x=82
+y=62
+width=31
+height=14
+layer=com_20
+textfont=p12_full
+text=%1/2
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_1957, 2)
+oninvtransmit=script1957(event_com, obj_1957, 2)
+oninvtransmitlist=inv_93
+
+// 435:17
+[com_17]
+type=text
+x=149
+y=62
+width=31
+height=14
+layer=com_20
+textfont=p12_full
+text=%1/2
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_1942, 2)
+oninvtransmit=script1957(event_com, obj_1942, 2)
+oninvtransmitlist=inv_93
+
+// 435:18
+[com_18]
+type=text
+x=218
+y=62
+width=29
+height=14
+layer=com_20
+textfont=p12_full
+text=%1/1
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2169, 1)
+oninvtransmit=script1957(event_com, obj_2169, 1)
+oninvtransmitlist=inv_93
+
+// 435:19
+[com_19]
+type=text
+x=6
+y=4
+width=310
+height=15
+layer=com_20
+textfont=p12_full
+text=Vegetable Ball
+textalignh=1
+textshadow=yes
+colour=0xd6a046
+
+// 435:20
+[com_20]
+type=layer
+x=100
+y=230
+width=320
+height=82
+hide=yes
+
+// 435:21
+[com_21]
+type=model
+x=171
+y=143
+width=49
+height=37
+model=model_2579
+modelorigin_x=1
+modelorigin_y=14
+modelangle_x=165
+modelangle_y=1894
+modelangle_z=0
+modelzoom=528
+unknown100=65009
+unknown101=1066
+op1=Make
+onmouseover=script1955(interface_435:com_33)
+onmouseleave=script1956(interface_435:com_33)
+
+// 435:22
+[com_22]
+type=model
+x=37
+y=30
+width=32
+height=32
+layer=com_33
+model=null
+modelorigin_x=-14
+modelorigin_y=-2
+modelangle_x=321
+modelangle_y=1885
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+
+// 435:23
+[com_23]
+type=model
+x=89
+y=30
+width=32
+height=32
+layer=com_33
+model=null
+modelorigin_x=0
+modelorigin_y=3
+modelangle_x=321
+modelangle_y=1885
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=784
+
+// 435:24
+[com_24]
+type=model
+x=150
+y=29
+width=32
+height=32
+layer=com_33
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=321
+modelangle_y=1885
+modelangle_z=0
+modelzoom=656
+unknown100=0
+unknown101=656
+
+// 435:25
+[com_25]
+type=model
+x=207
+y=23
+width=32
+height=32
+layer=com_33
+model=null
+modelorigin_x=0
+modelorigin_y=6
+modelangle_x=321
+modelangle_y=1885
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=784
+
+// 435:26
+[com_26]
+type=model
+x=261
+y=28
+width=32
+height=32
+layer=com_33
+model=null
+modelorigin_x=6
+modelorigin_y=3
+modelangle_x=273
+modelangle_y=1912
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=784
+
+// 435:27
+[com_27]
+type=text
+x=28
+y=62
+width=30
+height=14
+layer=com_33
+textfont=p12_full
+text=%1/4
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2152, 4)
+oninvtransmit=script1957(event_com, obj_2152, 4)
+oninvtransmitlist=inv_93
+
+// 435:28
+[com_28]
+type=text
+x=88
+y=62
+width=31
+height=14
+layer=com_33
+textfont=p12_full
+text=%1/2
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_1985, 2)
+oninvtransmit=script1957(event_com, obj_1985, 2)
+oninvtransmitlist=inv_93
+
+// 435:29
+[com_29]
+type=text
+x=148
+y=62
+width=31
+height=14
+layer=com_33
+textfont=p12_full
+text=%1/2
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2128, 2)
+oninvtransmit=script1957(event_com, obj_2128, 2)
+oninvtransmitlist=inv_93
+
+// 435:30
+[com_30]
+type=text
+x=208
+y=62
+width=29
+height=14
+layer=com_33
+textfont=p12_full
+text=%1/1
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2169, 1)
+oninvtransmit=script1957(event_com, obj_2169, 1)
+oninvtransmitlist=inv_93
+
+// 435:31
+[com_31]
+type=text
+x=268
+y=62
+width=29
+height=14
+layer=com_33
+textfont=p12_full
+text=%1/1
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2126, 1)
+oninvtransmit=script1957(event_com, obj_2126, 1)
+oninvtransmitlist=inv_93
+
+// 435:32
+[com_32]
+type=text
+x=6
+y=4
+width=310
+height=15
+layer=com_33
+textfont=p12_full
+text=Tangled Toads Legs
+textalignh=1
+textshadow=yes
+colour=0xd6a046
+
+// 435:33
+[com_33]
+type=layer
+x=100
+y=230
+width=320
+height=82
+hide=yes
+
+// 435:34
+[com_34]
+type=model
+x=293
+y=145
+width=42
+height=35
+model=model_2647
+modelorigin_x=0
+modelorigin_y=13
+modelangle_x=165
+modelangle_y=1894
+modelangle_z=0
+modelzoom=528
+unknown100=65008
+unknown101=1065
+op1=Make
+onmouseover=script1955(interface_435:com_40)
+onmouseleave=script1956(interface_435:com_40)
+
+// 435:35
+[com_35]
+type=model
+x=108
+y=29
+width=32
+height=32
+layer=com_40
+model=null
+modelorigin_x=0
+modelorigin_y=-1
+modelangle_x=273
+modelangle_y=1759
+modelangle_z=0
+modelzoom=782
+unknown100=0
+unknown101=782
+
+// 435:36
+[com_36]
+type=model
+x=183
+y=28
+width=32
+height=32
+layer=com_40
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=210
+modelangle_y=1852
+modelangle_z=0
+modelzoom=656
+unknown100=0
+unknown101=656
+
+// 435:37
+[com_37]
+type=text
+x=108
+y=62
+width=30
+height=14
+layer=com_40
+textfont=p12_full
+text=%1/4
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_1973, 4)
+oninvtransmit=script1957(event_com, obj_1973, 4)
+oninvtransmitlist=inv_93
+
+// 435:38
+[com_38]
+type=text
+x=186
+y=62
+width=29
+height=14
+layer=com_40
+textfont=p12_full
+text=%1/1
+textalignh=1
+textshadow=yes
+colour=0xff0000
+onload=script1957(event_com, obj_2128, 1)
+oninvtransmit=script1957(event_com, obj_2128, 1)
+oninvtransmitlist=inv_93
+
+// 435:39
+[com_39]
+type=text
+x=6
+y=4
+width=310
+height=15
+layer=com_40
+textfont=p12_full
+text=Chocolate Bomb
+textalignh=1
+textshadow=yes
+colour=0xd6a046
+
+// 435:40
+[com_40]
+type=layer
+x=100
+y=230
+width=320
+height=82
+hide=yes
+
+// 435:41
+[com_41]
+type=text
+x=246
+y=4
+width=70
+height=15
+layer=com_11
+textfont=p12_full
+text=level 30
+textalignh=2
+textshadow=yes
+colour=0xff0000
+onload=script1958(event_com, 30)
+
+// 435:42
+[com_42]
+type=text
+x=246
+y=4
+width=70
+height=15
+layer=com_20
+textfont=p12_full
+text=level 35
+textalignh=2
+textshadow=yes
+colour=0xff0000
+onload=script1958(event_com, 35)
+
+// 435:43
+[com_43]
+type=text
+x=246
+y=4
+width=70
+height=15
+layer=com_33
+textfont=p12_full
+text=level 40
+textalignh=2
+textshadow=yes
+colour=0xbe0000
+onload=script1958(event_com, 40)
+
+// 435:44
+[com_44]
+type=text
+x=246
+y=4
+width=70
+height=15
+layer=com_40
+textfont=p12_full
+text=level 42
+textalignh=2
+textshadow=yes
+colour=0xff0000
+onload=script1958(event_com, 42)
+
+// 435:45
+[com_45]
+type=text
+x=154
+y=117
+width=80
+height=25
+textfont=p12_full
+text=Worm hole
+textalignh=1
+textshadow=yes
+colour=0xff0000
+
+// 435:46
+[com_46]
+type=text
+x=276
+y=117
+width=80
+height=25
+textfont=p12_full
+text=Vegetable ball
+textalignh=1
+textshadow=yes
+colour=0xff0000
+
+// 435:47
+[com_47]
+type=text
+x=155
+y=188
+width=80
+height=25
+textfont=p12_full
+text=Tangled Toads Legs
+textalignh=1
+textshadow=yes
+colour=0xff0000
+
+// 435:48
+[com_48]
+type=text
+x=274
+y=189
+width=80
+height=25
+textfont=p12_full
+text=Chocolate Bomb
+textalignh=1
+textshadow=yes
+colour=0xff0000
+
+// 435:49
+[com_49]
+type=rectangle
+x=17
+y=25
+width=488
+height=305
+layer=com_0
+colour=0x000000
+fill=yes
+trans=200
+opbase=  
+op10=    
+
+// 435:50
+[com_50]
+type=graphic
+x=14
+y=25
+width=485
+height=300
+layer=com_0
+graphic=tradebacking
+tiling=yes
+op10=    
+
+// 435:51
+[com_51]
+type=graphic
+y=53
+width=32
+height=241
+layer=com_0
+graphic="v2_stone_borders,1"
+tiling=yes
+op10=    
+
+// 435:52
+[com_52]
+type=graphic
+x=13
+y=20
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,4"
+op10=    
+
+// 435:53
+[com_53]
+type=graphic
+x=480
+y=51
+width=32
+height=243
+layer=com_0
+graphic="v2_stone_borders,3"
+tiling=yes
+op10=    
+
+// 435:54
+[com_54]
+type=graphic
+x=44
+y=7
+width=424
+height=34
+layer=com_0
+graphic="v2_stone_borders,0"
+tiling=yes
+op10=    
+
+// 435:55
+[com_55]
+type=graphic
+x=45
+y=306
+width=423
+height=32
+layer=com_0
+graphic="v2_stone_borders,2"
+tiling=yes
+op10=    
+
+// 435:56
+[com_56]
+type=graphic
+x=474
+y=30
+width=16
+height=16
+layer=com_0
+graphic="v2_stone_close_button,0"
+op1=Close
+op10=    
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 435:57
+[com_57]
+type=graphic
+x=13
+y=294
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,6"
+op10=    
+
+// 435:58
+[com_58]
+type=graphic
+x=468
+y=20
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,5"
+op10=    
+
+// 435:59
+[com_59]
+type=graphic
+x=468
+y=294
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,7"
+op10=    
+
+// 435:60
+[com_60]
+type=graphic
+x=24
+y=35
+width=465
+height=32
+layer=com_0
+graphic="v2_stone_borders,8"
+tiling=yes
+op10=    
+
+// 435:61
+[com_61]
+type=graphic
+x=13
+y=37
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,9"
+op10=    
+
+// 435:62
+[com_62]
+type=graphic
+x=468
+y=37
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,10"
+op10=    
+
+// 435:63
+[com_63]
+type=text
+x=24
+y=30
+width=464
+height=17
+layer=com_0
+textfont=b12_full
+text=Gnome Bowls
+textalignh=1
+textshadow=yes
+colour=0xff9900
+onload=script1961
+oninvtransmit=script1961
+oninvtransmitlist=inv_93
+

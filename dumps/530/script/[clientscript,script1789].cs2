@@ -1,0 +1,5 @@
+// 1789
+[clientscript,script1789](component $component0, int $int1, int $int2)
+def_int $int3 = calc(clientclock - $int1);
+%varclient_265 = max(calc($int2 - $int3 / 30), 0);
+~script1790($component0);

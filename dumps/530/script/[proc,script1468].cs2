@@ -1,0 +1,22 @@
+// 1468
+[proc,script1468](int $int0)(int)
+$int0 = calc($int0 + 1);
+if ($int0 <= %varplayerbit_4885) {
+    return(2);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886)) {
+    return(3);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887)) {
+    return(4);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888)) {
+    return(5);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889)) {
+    return(6);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889 + %varplayerbit_4890)) {
+    return(7);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889 + %varplayerbit_4890 + %varplayerbit_4891)) {
+    return(8);
+} else if ($int0 <= calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889 + %varplayerbit_4890 + %varplayerbit_4891 + %varplayerbit_4892)) {
+    return(9);
+} else {
+    return(1);
+}

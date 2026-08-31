@@ -1,0 +1,5 @@
+// 1254
+[clientscript,script1254]
+if_settext(tostring(%varplayer_343), interface_328:com_1);
+if_settext(tostring(%varplayer_344), interface_328:com_3);
+if_settext(tostring(%varplayer_345), interface_328:com_5);

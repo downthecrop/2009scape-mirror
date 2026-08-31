@@ -1,0 +1,137 @@
+// 363:0
+[com_0]
+type=model
+x=3
+y=3
+width=30
+height=27
+layer=com_2
+model=model_3374
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=360
+modelangle_y=672
+modelangle_z=0
+modelzoom=1010
+unknown100=63922
+unknown101=3000
+op1=Hint
+
+// 363:1
+[com_1]
+type=model
+x=159
+y=43
+width=204
+height=203
+layer=com_9
+model=model_3437
+modelorigin_x=2
+modelorigin_y=17
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=430
+unknown100=64193
+unknown101=3000
+
+// 363:2
+[com_2]
+type=layer
+x=110
+y=249
+width=42
+height=47
+layer=com_9
+
+// 363:3
+[com_3]
+type=layer
+x=156
+y=40
+width=210
+height=210
+layer=com_9
+hide=yes
+
+// 363:4
+[com_4]
+type=model
+x=156
+y=40
+width=211
+height=210
+layer=com_9
+model=model_3438
+modelorigin_x=2
+modelorigin_y=16
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=444
+unknown100=64181
+unknown101=3000
+
+// 363:5
+[com_5]
+type=graphic
+x=473
+y=13
+width=26
+height=23
+layer=com_9
+graphic="close_buttons,4"
+op1=Close
+onmouseover=script44(interface_363:com_5, "close_buttons,5")
+onmouseleave=script44(interface_363:com_5, "close_buttons,4")
+onop=script29
+
+// 363:6
+[com_6]
+type=layer
+x=170
+y=53
+width=183
+height=183
+layer=com_9
+oninvtransmit=script80
+oninvtransmitlist=inv_140
+
+// 363:7
+[com_7]
+type=text
+x=3
+y=32
+width=41
+height=17
+layer=com_2
+textfont=p11_full
+text=Hint
+textalignv=1
+colour=0xfad782
+op1=Hint
+
+// 363:8
+[com_8]
+type=model
+x=2
+y=5
+width=204
+height=203
+layer=com_3
+model=model_3437
+modelorigin_x=2
+modelorigin_y=17
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=430
+unknown100=64193
+unknown101=3000
+
+// 363:9
+[com_9]
+type=layer
+width=512
+height=334
+

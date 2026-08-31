@@ -1,0 +1,11 @@
+// 600
+[clientscript,script600]
+if (%varplayer_1113 = 0) {
+    if (%varclient_84 <= 2147483547) {
+        %varclient_84 = calc(%varclient_84 + 100);
+    }
+} else {
+    %varclient_84 = 100;
+}
+if_settext(~script46(%varclient_84, ","), interface_105:com_150);
+~script602;

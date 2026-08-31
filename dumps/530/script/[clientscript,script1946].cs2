@@ -1,0 +1,96 @@
+// 1946
+[clientscript,script1946]
+def_int $int0 = 0;
+def_string $string0 = "";
+if_setonmouseleave("script40(interface_810:com_5)", interface_810:com_10);
+if (%varclient_589 = 99999992) {
+    if_settext("You abandon the game!", interface_810:com_81);
+    if_settext("You abandon the game.<br><br>The mystics don't seem happy and scowl at you, muttering unpleasant sentiments under their breath.<br><br>You notice that you received no score as a result.", interface_810:com_17);
+    if_settext("-100%", interface_810:com_58);
+    if_settext("", interface_810:com_32);
+    if_settext("", interface_810:com_33);
+    $string0 = "The awards tab is not available when you leave a game early.";
+    if_setonmouserepeat("script38(interface_810:com_10, interface_810:com_5, $string0, 25, 189)", interface_810:com_10);
+} else {
+    if (%varclient_588 = 1) {
+        if_settext(tostring(%varclient_597), interface_810:com_32);
+        if_settext(tostring(%varclient_598), interface_810:com_33);
+    } else {
+        if_settext(tostring(%varclient_598), interface_810:com_32);
+        if_settext(tostring(%varclient_597), interface_810:com_33);
+    }
+    if (%varclient_588 = %varclient_589) {
+        if_settext("Your valiant team takes the victory!", interface_810:com_81);
+        if ($int0 = 1) {
+            if_settext("With the heroic conquest of all resources and facilities, your team have ripped success from the feeble fingers of your unworthy foes.<br><br>The mystics stand in awe of your power, and you hear them praising you in excited whispers.<br><br>You notice that they have increased your score as a reward.", interface_810:com_17);
+        } else {
+            if_settext("The heroic, skillful and brave deeds of your team have ripped success from the feeble fingers of your unworthy foes.<br><br>The mystics stand in awe of your power, and you hear them praising you in excited whispers.<br><br>You notice that they have increased your score as a reward.", interface_810:com_17);
+        }
+        if_settext("+10%", interface_810:com_58);
+    } else if (%varclient_589 = 0) {
+        if_settext("The game was a draw!", interface_810:com_81);
+        if_settext("As if ordained by fate, the teams were equally brave and skillful, resulting in a draw.<br><br>The mystics nod knowingly, and you hear them discussing how the balance of the universe is reflected beautifully in the conflict's outcome.<br><br>", interface_810:com_17);
+        if_settext("+0%", interface_810:com_58);
+    } else {
+        if_settext("The enemy team has defeated you!", interface_810:com_81);
+        if ($int0 = 1) {
+            if_settext("Despite your best efforts, your team was beaten; the victory snatched away as the enemy took control of all resources and facilities.<br><br>The mystics frown at you, and shake their heads sadly.<br><br>You hear them arguing over whether they overestimated you, or if you were just unlucky.", interface_810:com_17);
+        }
+        if_settext("Despite your best efforts, your team was beaten; the victory snatched away by your fearsome foes.<br><br>The mystics frown at you, and shake their heads sadly.<br><br>You hear them arguing over whether they overestimated you, or if you were just unlucky.", interface_810:com_17);
+        if_settext("+0%", interface_810:com_58);
+    }
+}
+if_settext(tostring(%varclient_590), interface_810:com_59);
+if_settext(tostring(%varclient_590), interface_810:com_59);
+if_settext(tostring(%varclient_591), interface_810:com_60);
+if_settext(tostring(%varclient_592), interface_810:com_61);
+if_settext(tostring(%varclient_593), interface_810:com_62);
+if_settext(tostring(%varclient_594), interface_810:com_23);
+if_settext(tostring(%varclient_595), interface_810:com_25);
+if (%varclient_589 ! 99999992) {
+    if_settext(tostring(%varclient_596), interface_810:com_63);
+} else {
+    if_settext(tostring(0), interface_810:com_63);
+}
+if (%varclient_600 > 0 | %varclient_603 > 0) {
+    if_settext(tostring(%varclient_599), interface_810:com_136);
+    if_settext(tostring(%varclient_600), interface_810:com_135);
+    if_settext(tostring(%varclient_601), interface_810:com_139);
+    if_settext(tostring(%varclient_602), interface_810:com_140);
+    if_settext(tostring(%varclient_603), interface_810:com_138);
+    if_settext(tostring(%varclient_604), interface_810:com_137);
+    if_settext(tostring(%varclient_605), interface_810:com_141);
+    if_settext(tostring(%varclient_606), interface_810:com_142);
+    if_settext(%varclientstring_44, interface_810:com_118);
+    if_settext(%varclientstring_45, interface_810:com_117);
+    if_settext(%varclientstring_46, interface_810:com_121);
+    if_settext(%varclientstring_47, interface_810:com_122);
+    if_settext(%varclientstring_48, interface_810:com_120);
+    if_settext(%varclientstring_49, interface_810:com_119);
+    if_settext(%varclientstring_50, interface_810:com_123);
+    if_settext(%varclientstring_51, interface_810:com_124);
+    if (%varclient_607 > 0) {
+        if_settext(tostring(%varclient_607), interface_810:com_127);
+    }
+    if (%varclient_608 > 0) {
+        if_settext(tostring(%varclient_608), interface_810:com_126);
+    }
+    if (%varclient_609 > 0) {
+        if_settext(tostring(%varclient_609), interface_810:com_130);
+    }
+    if (%varclient_610 > 0) {
+        if_settext(tostring(%varclient_610), interface_810:com_131);
+    }
+    if (%varclient_611 > 0) {
+        if_settext(tostring(%varclient_611), interface_810:com_129);
+    }
+    if (%varclient_612 > 0) {
+        if_settext(tostring(%varclient_612), interface_810:com_128);
+    }
+    if (%varclient_613 > 0) {
+        if_settext(tostring(%varclient_613), interface_810:com_132);
+    }
+    if (%varclient_614 > 0) {
+        if_settext(tostring(%varclient_614), interface_810:com_133);
+    }
+}

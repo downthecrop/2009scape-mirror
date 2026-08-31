@@ -1,0 +1,80 @@
+// 90
+[proc,script90](int $int0, int $int1)(boolean)
+switch_int (chat_gethistorytype($int0)) {
+    case null :
+        return(false);
+    case ^chattype_gamemessage, ^chattype_modchat :
+        return(true);
+    case ^chattype_publicchat, ^chattype_quickchat_public :
+        if (chat_getfilter_public = ^chatfilter_on) {
+            return(true);
+        }
+        if (chat_getfilter_public = ^chatfilter_friends & friend_test(chat_gethistoryname($int0)) = true) {
+            return(true);
+        }
+        return(false);
+    case ^chattype_privatechat, ^chattype_quickchat_private_incoming :
+        if (%varplayer_287 = 1 & %varclient_41 >= 0 & $int1 = 0 & ~script506($int0) = false) {
+            return(false);
+        }
+        if (chat_getfilter_private = ^chatfilter_on) {
+            return(true);
+        }
+        if (chat_getfilter_private = ^chatfilter_friends & friend_test(chat_gethistoryname($int0)) = true) {
+            return(true);
+        }
+        return(false);
+    case ^chattype_engine, 8, 14, 15, 21 :
+        if (chat_getfilter_trade = ^chatfilter_on) {
+            return(true);
+        }
+        if (chat_getfilter_trade = ^chatfilter_friends & friend_test(chat_gethistoryname($int0)) = true) {
+            return(true);
+        }
+        return(false);
+    case ^chattype_loginlogoutnotification, ^chattype_privatechatout, ^chattype_quickchat_private_outgoing :
+        if (%varplayer_287 = 1 & %varclient_41 >= 0 & $int1 = 0 & ~script506($int0) = false) {
+            return(false);
+        }
+        if (chat_getfilter_private < 2) {
+            return(true);
+        }
+        return(false);
+    case ^chattype_modprivatechat :
+        if (%varplayer_287 = 1 & %varclient_41 >= 0 & $int1 = 0 & ~script506($int0) = false) {
+            return(false);
+        }
+        return(true);
+    case ^chattype_friendschat, 16, ^chattype_quickchat_friend_chat :
+        if (%varplayer_1054 = 0) {
+            return(true);
+        }
+        if (%varplayer_1054 = 1 & friend_test(chat_gethistoryname($int0)) = true) {
+            return(true);
+        }
+        return(false);
+    case 10 :
+        if (%varplayer_1055 = 0) {
+            return(true);
+        }
+        if (%varplayer_1055 = 1 & friend_test(chat_gethistoryname($int0)) = true) {
+            return(true);
+        }
+        return(false);
+    case ^chattype_friendschatnotification :
+        if (%varplayer_1054 < 2) {
+            return(true);
+        }
+        return(false);
+    case 12 :
+        if (chat_getfilter_trade < 2) {
+            return(true);
+        }
+        return(false);
+    case 13 :
+        if (%varplayer_1055 < 2) {
+            return(true);
+        }
+        return(false);
+}
+return(true);

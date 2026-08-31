@@ -1,0 +1,1061 @@
+// 762:0
+[com_0]
+type=rectangle
+x=17
+y=25
+width=488
+height=305
+layer=com_61
+colour=0x000000
+fill=yes
+trans=200
+opbase=  
+
+// 762:1
+[com_1]
+type=graphic
+x=14
+y=25
+width=485
+height=300
+layer=com_61
+graphic=tradebacking
+tiling=yes
+
+// 762:2
+[com_2]
+type=rectangle
+x=19
+y=79
+width=475
+height=210
+layer=com_61
+colour=0x252222
+fill=yes
+trans=160
+
+// 762:3
+[com_3]
+type=rectangle
+x=19
+y=79
+width=3
+height=210
+layer=com_61
+colour=0x000000
+fill=yes
+trans=170
+
+// 762:4
+[com_4]
+type=graphic
+y=52
+width=32
+height=242
+layer=com_61
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 762:5
+[com_5]
+type=graphic
+x=13
+y=20
+width=32
+height=32
+layer=com_61
+graphic="v2_stone_borders,35"
+
+// 762:6
+[com_6]
+type=graphic
+x=480
+y=51
+width=32
+height=243
+layer=com_61
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 762:7
+[com_7]
+type=graphic
+x=44
+y=20
+width=424
+height=32
+layer=com_61
+graphic="v2_stone_borders,36"
+tiling=yes
+
+// 762:8
+[com_8]
+type=graphic
+x=45
+y=306
+width=423
+height=32
+layer=com_61
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 762:9
+[com_9]
+type=graphic
+x=13
+y=294
+width=32
+height=32
+layer=com_61
+graphic="v2_stone_borders,6"
+
+// 762:10
+[com_10]
+type=graphic
+x=468
+y=20
+width=32
+height=32
+layer=com_61
+graphic="v2_stone_borders,37"
+
+// 762:11
+[com_11]
+type=graphic
+x=468
+y=294
+width=32
+height=32
+layer=com_61
+graphic="v2_stone_borders,7"
+
+// 762:12
+[com_12]
+type=graphic
+x=20
+y=272
+width=473
+height=32
+layer=com_61
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 762:13
+[com_13]
+type=graphic
+x=19
+y=65
+width=474
+height=32
+layer=com_61
+graphic="v2_stone_borders,23"
+tiling=yes
+
+// 762:14
+[com_14]
+type=graphic
+x=184
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new2,0"
+op1=Toggle swap/insert
+onmouseover=script1357(event_com, 100)
+onmouseleave=script1501(event_com, interface_762:com_101)
+onvartransmit=script1489
+onop=script1488
+onmouserepeat=script38(event_com, interface_762:com_101, "Toggle between swap and insert modes", 25, 150)
+onvartransmitlist=varplayer_304
+
+// 762:15
+[com_15]
+type=graphic
+x=184
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new1,2"
+
+// 762:16
+[com_16]
+type=graphic
+x=221
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new2,0"
+op1=Toggle item/note withdrawl
+onmouseover=script1357(event_com, 100)
+onmouseleave=script1501(event_com, interface_762:com_101)
+onvartransmit=script1486
+onop=script1485
+onmouserepeat=script38(event_com, interface_762:com_101, "Toggle between item and note withdrawal modes", 25, 150)
+onvartransmitlist=varplayer_115
+
+// 762:17
+[com_17]
+type=graphic
+x=221
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new1,4"
+
+// 762:18
+[com_18]
+type=graphic
+x=258
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new2,0"
+op1=Deposit beast of burden inventory
+onmouseover=script1357(event_com, 100)
+onmouseleave=script1501(event_com, interface_762:com_101)
+onvartransmit=script1486
+onop=script1722(event_com, event_comsubid, "bank_buttons_new2,2", "bank_buttons_new2,0", 10)
+onmouserepeat=script38(event_com, interface_762:com_101, "Empty your beast of burden's inventory into your bank", 25, 150)
+onvartransmitlist=varplayer_115
+
+// 762:19
+[com_19]
+type=graphic
+x=258
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new1,6"
+
+// 762:20
+[com_20]
+type=graphic
+x=295
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new2,0"
+op1=Search
+onmouseover=script1357(event_com, 100)
+onmouseleave=script1501(event_com, interface_762:com_101)
+onop=script1471
+onmouserepeat=script38(event_com, interface_762:com_101, "Click here to search your bank", 25, 150)
+
+// 762:21
+[com_21]
+type=graphic
+x=295
+y=287
+width=35
+height=35
+layer=com_61
+graphic="bank_buttons_new1,0"
+
+// 762:22
+[com_22]
+type=graphic
+x=477
+y=23
+width=16
+height=16
+layer=com_61
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script1484
+
+// 762:23
+[com_23]
+type=graphic
+x=459
+y=23
+width=16
+height=16
+layer=com_61
+graphic="v2_stone_close_button,4"
+op1=Help
+onmouseover=script44(event_com, "v2_stone_close_button,5")
+onmouseleave=script44(event_com, "v2_stone_close_button,4")
+
+// 762:24
+[com_24]
+type=text
+x=118
+y=23
+width=273
+height=15
+layer=com_61
+textfont=b12_full
+text=Bank of RuneScape
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xf2aa3e
+
+// 762:25
+[com_25]
+type=graphic
+x=405
+y=33
+width=48
+height=48
+layer=com_61
+hide=yes
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1499(event_op)
+
+// 762:26
+[com_26]
+type=graphic
+x=410
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:27
+[com_27]
+type=graphic
+x=357
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1498(event_op)
+
+// 762:28
+[com_28]
+type=graphic
+x=363
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:29
+[com_29]
+type=graphic
+x=309
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1497(event_op)
+
+// 762:30
+[com_30]
+type=graphic
+x=315
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:31
+[com_31]
+type=graphic
+x=261
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1496(event_op)
+
+// 762:32
+[com_32]
+type=graphic
+x=267
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:33
+[com_33]
+type=graphic
+x=213
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1495(event_op)
+
+// 762:34
+[com_34]
+type=graphic
+x=219
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:35
+[com_35]
+type=graphic
+x=165
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1494(event_op)
+
+// 762:36
+[com_36]
+type=graphic
+x=171
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:37
+[com_37]
+type=graphic
+x=117
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1493(event_op)
+
+// 762:38
+[com_38]
+type=graphic
+x=123
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:39
+[com_39]
+type=graphic
+x=69
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=Open
+op2=Collapse
+onop=script1492(event_op)
+
+// 762:40
+[com_40]
+type=graphic
+x=75
+y=46
+width=36
+height=32
+layer=com_61
+
+// 762:41
+[com_41]
+type=graphic
+x=21
+y=33
+width=48
+height=48
+layer=com_61
+graphic="bank_tabs,1"
+op1=View all
+onmouseleave=script40(interface_762:com_101)
+onop=script1491(event_op)
+onmouserepeat=script38(event_com, interface_762:com_101, "Click here to view the full contents of your bank", 25, 150)
+
+// 762:42
+[com_42]
+type=graphic
+x=27
+y=46
+width=36
+height=32
+layer=com_61
+graphic="bank_misc_graphics,0"
+
+// 762:43
+[com_43]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:44
+[com_44]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:45
+[com_45]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:46
+[com_46]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:47
+[com_47]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:48
+[com_48]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:49
+[com_49]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:50
+[com_50]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:51
+[com_51]
+type=layer
+x=47
+y=46
+width=32
+height=32
+layer=com_73
+hide=yes
+
+// 762:52
+[com_52]
+type=layer
+width=32
+height=32
+layer=com_73
+hide=yes
+
+// 762:53
+[com_53]
+type=layer
+x=5
+y=5
+width=32
+height=32
+layer=com_73
+
+// 762:54
+[com_54]
+type=layer
+x=10
+y=10
+width=32
+height=32
+layer=com_73
+
+// 762:55
+[com_55]
+type=layer
+x=15
+y=15
+width=32
+height=32
+layer=com_73
+
+// 762:56
+[com_56]
+type=layer
+x=20
+y=20
+width=32
+height=32
+layer=com_73
+
+// 762:57
+[com_57]
+type=layer
+x=25
+y=25
+width=32
+height=32
+layer=com_73
+
+// 762:58
+[com_58]
+type=layer
+x=30
+y=30
+width=32
+height=32
+layer=com_73
+
+// 762:59
+[com_59]
+type=layer
+x=35
+y=35
+width=32
+height=32
+layer=com_73
+
+// 762:60
+[com_60]
+type=layer
+x=41
+y=41
+width=32
+height=32
+layer=com_73
+
+// 762:61
+[com_61]
+type=layer
+width=512
+height=334
+opbase=  
+
+// 762:62
+[com_62]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:63
+[com_63]
+type=layer
+width=455
+height=20
+layer=com_73
+
+// 762:64
+[com_64]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:65
+[com_65]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:66
+[com_66]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:67
+[com_67]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:68
+[com_68]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:69
+[com_69]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:70
+[com_70]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:71
+[com_71]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:72
+[com_72]
+type=graphic
+width=36
+height=36
+layer=com_73
+hide=yes
+graphic=graphic_1454
+
+// 762:73
+[com_73]
+type=layer
+x=26
+y=83
+width=447
+height=205
+layer=com_61
+scrollwidth=336
+scrollheight=1905
+onload=script1449
+onvartransmit=script1451
+oninvtransmit=script1451
+onvartransmitlist=varplayer_1246,varplayer_1247,varplayer_1248
+oninvtransmitlist=inv_95
+
+// 762:74
+[com_74]
+type=layer
+width=32
+height=32
+layer=com_102
+
+// 762:75
+[com_75]
+type=text
+width=100
+height=32
+layer=com_50
+textfont=p11_full
+text=Tab 9
+colour=0xf2aa3e
+
+// 762:76
+[com_76]
+type=text
+width=100
+height=32
+layer=com_49
+textfont=p11_full
+text=Tab 8
+colour=0xf2aa3e
+
+// 762:77
+[com_77]
+type=text
+width=100
+height=32
+layer=com_48
+textfont=p11_full
+text=Tab 7
+colour=0xf2aa3e
+
+// 762:78
+[com_78]
+type=text
+width=100
+height=32
+layer=com_47
+textfont=p11_full
+text=Tab 6
+colour=0xf2aa3e
+
+// 762:79
+[com_79]
+type=text
+width=100
+height=32
+layer=com_46
+textfont=p11_full
+text=Tab 5
+colour=0xf2aa3e
+
+// 762:80
+[com_80]
+type=text
+width=100
+height=32
+layer=com_45
+textfont=p11_full
+text=Tab 4
+colour=0xf2aa3e
+
+// 762:81
+[com_81]
+type=text
+width=100
+height=32
+layer=com_44
+textfont=p11_full
+text=Tab 3
+colour=0xf2aa3e
+
+// 762:82
+[com_82]
+type=text
+width=100
+height=32
+layer=com_43
+textfont=p11_full
+text=Tab 2
+colour=0xf2aa3e
+
+// 762:83
+[com_83]
+type=text
+width=100
+height=32
+layer=com_63
+textfont=p11_full
+text=Tab 1
+colour=0x5b5346
+
+// 762:84
+[com_84]
+type=text
+width=100
+height=32
+layer=com_62
+textfont=p11_full
+text=Tab 1
+colour=0x5b5346
+
+// 762:85
+[com_85]
+type=graphic
+y=4
+width=450
+height=11
+layer=com_62
+graphic="v2_borders_slim,11"
+
+// 762:86
+[com_86]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_50
+graphic="v2_borders_slim,11"
+
+// 762:87
+[com_87]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_49
+graphic="v2_borders_slim,11"
+
+// 762:88
+[com_88]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_48
+graphic="v2_borders_slim,11"
+
+// 762:89
+[com_89]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_47
+graphic="v2_borders_slim,11"
+
+// 762:90
+[com_90]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_46
+graphic="v2_borders_slim,11"
+
+// 762:91
+[com_91]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_45
+graphic="v2_borders_slim,11"
+
+// 762:92
+[com_92]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_44
+graphic="v2_borders_slim,11"
+
+// 762:93
+[com_93]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_43
+graphic="v2_borders_slim,11"
+
+// 762:94
+[com_94]
+type=graphic
+y=4
+width=455
+height=11
+layer=com_63
+graphic="v2_borders_slim,11"
+
+// 762:95
+[com_95]
+type=layer
+x=477
+y=81
+width=16
+height=208
+layer=com_61
+
+// 762:96
+[com_96]
+type=graphic
+x=449
+y=43
+width=47
+height=38
+layer=com_61
+graphic=graphic_1453
+
+// 762:97
+[com_97]
+type=text
+x=458
+y=49
+width=32
+height=14
+layer=com_61
+textfont=p11_full
+text=23
+textalignh=1
+colour=0xb4965a
+onmouseleave=script40(interface_762:com_101)
+onmouserepeat=script38(event_com, interface_762:com_101, "Total number of bank slots used", 25, 150)
+
+// 762:98
+[com_98]
+type=text
+x=458
+y=64
+width=32
+height=13
+layer=com_61
+textfont=p11_full
+text=500
+textalignh=1
+colour=0xb4965a
+onmouseleave=script40(interface_762:com_101)
+onmouserepeat=script38(event_com, interface_762:com_101, "Total amount of available bank space", 25, 150)
+
+// 762:99
+[com_99]
+type=text
+width=200
+height=18
+xmode=abs_centre
+ymode=abs_centre
+layer=com_61
+hide=yes
+textfont=p12_full
+text=No matches found!
+textalignh=1
+textshadow=yes
+colour=0x999999
+
+// 762:100
+[com_100]
+type=text
+width=200
+height=18
+xmode=abs_centre
+ymode=abs_centre
+layer=com_61
+hide=yes
+textfont=p12_full
+text=No search term entered!
+textalignh=1
+textshadow=yes
+colour=0x999999
+
+// 762:101
+[com_101]
+type=layer
+x=185
+y=246
+width=151
+height=15
+layer=com_61
+opbase=  
+
+// 762:102
+[com_102]
+type=layer
+x=26
+y=83
+width=447
+height=205
+layer=com_61
+

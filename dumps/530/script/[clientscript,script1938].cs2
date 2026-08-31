@@ -1,0 +1,8 @@
+// 1938
+[clientscript,script1938]
+%varclient_556 = calc(clientclock + 2000 * 30);
+%varclient_559 = 255;
+%varclient_560 = 0;
+%varclient_561 = 0;
+%varclient_562 = 0;
+if_settextshadow(false, interface_809:com_15);

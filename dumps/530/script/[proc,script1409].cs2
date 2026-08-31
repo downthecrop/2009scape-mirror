@@ -1,0 +1,39 @@
+// 1409
+[proc,script1409]
+if_setgraphic("miscgraphics,10", interface_756:com_36);
+if_setgraphic("miscgraphics,10", interface_756:com_37);
+if_setgraphic("miscgraphics,10", interface_756:com_38);
+if_setgraphic("miscgraphics,10", interface_756:com_39);
+if_setgraphic("miscgraphics,10", interface_756:com_40);
+if_setgraphic("miscgraphics,10", interface_756:com_41);
+if_setgraphic("miscgraphics,10", interface_756:com_42);
+if_setgraphic("miscgraphics,10", interface_756:com_43);
+if_setgraphic("miscgraphics,10", interface_756:com_44);
+if_setgraphic("miscgraphics,10", interface_756:com_45);
+if_setgraphic("miscgraphics,10", interface_756:com_46);
+if_setgraphic("miscgraphics,10", interface_756:com_47);
+if (%varplayerbit_50 = 1) {
+    if_setgraphic("miscgraphics,11", interface_756:com_36);
+} else if (%varplayerbit_50 = 2) {
+    if_setgraphic("miscgraphics,11", interface_756:com_37);
+} else if (%varplayerbit_50 = 3) {
+    if_setgraphic("miscgraphics,11", interface_756:com_38);
+} else if (%varplayerbit_50 = 4) {
+    if_setgraphic("miscgraphics,11", interface_756:com_39);
+} else if (%varplayerbit_50 = 5) {
+    if_setgraphic("miscgraphics,11", interface_756:com_40);
+} else if (%varplayerbit_50 = 6) {
+    if_setgraphic("miscgraphics,11", interface_756:com_41);
+} else if (%varplayerbit_50 = 7) {
+    if_setgraphic("miscgraphics,11", interface_756:com_42);
+} else if (%varplayerbit_50 = 8) {
+    if_setgraphic("miscgraphics,11", interface_756:com_43);
+} else if (%varplayerbit_50 = 9) {
+    if_setgraphic("miscgraphics,11", interface_756:com_44);
+} else if (%varplayerbit_50 = 10) {
+    if_setgraphic("miscgraphics,11", interface_756:com_45);
+} else if (%varplayerbit_50 = 11) {
+    if_setgraphic("miscgraphics,11", interface_756:com_46);
+} else if (%varplayerbit_50 = 12) {
+    if_setgraphic("miscgraphics,11", interface_756:com_47);
+}

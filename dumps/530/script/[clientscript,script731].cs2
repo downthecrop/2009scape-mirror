@@ -1,0 +1,13 @@
+// 731
+[clientscript,script731]
+if_setmodel(null, interface_781:com_15);
+if_setmodel(null, interface_781:com_16);
+if_setmodel(null, interface_781:com_17);
+if_setmodel(null, interface_781:com_18);
+if_setmodel(null, interface_781:com_19);
+if_setmodel(null, interface_781:com_20);
+if_setmodel(null, interface_781:com_21);
+if_setmodel(null, interface_781:com_22);
+if_setmodelanim(seq_10139, interface_781:com_33);
+if_setmodelanim(seq_10139, interface_781:com_40);
+if_sethide(true, interface_781:com_1);

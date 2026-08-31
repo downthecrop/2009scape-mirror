@@ -1,0 +1,13 @@
+// 48
+[clientscript,script48]
+if (%varplayerbit_4072 = 1 | %varplayerbit_4073 = 1) {
+    if_setgraphic("loot_icon,2", interface_589:com_14);
+} else if (%varplayerbit_4071 = 1) {
+    if (%varplayerbit_4465 = 1) {
+        if_setgraphic("loot_icon,3", interface_589:com_14);
+    } else {
+        if_setgraphic("loot_icon,0", interface_589:com_14);
+    }
+} else {
+    if_setgraphic("loot_icon,1", interface_589:com_14);
+}

@@ -1,0 +1,114 @@
+// 1387
+[proc,script1387](int $int0)
+if (getwindowmode >= 2) {
+    switch_int ($int0) {
+        case 0 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_41);
+            if_sethide(false, interface_746:com_93);
+            if_sethide(false, interface_746:com_74);
+        case 1 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_42);
+            if_sethide(false, interface_746:com_94);
+            if_sethide(false, interface_746:com_74);
+        case 2 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_43);
+            if_sethide(false, interface_746:com_95);
+            if_sethide(false, interface_746:com_74);
+        case 3 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_44);
+            if_sethide(false, interface_746:com_96);
+            if_sethide(false, interface_746:com_74);
+        case 4 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_45);
+            if_sethide(false, interface_746:com_97);
+            if_sethide(false, interface_746:com_74);
+        case 5 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_46);
+            if_sethide(false, interface_746:com_98);
+            if_sethide(false, interface_746:com_74);
+        case 6 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_47);
+            if_sethide(false, interface_746:com_99);
+            if_sethide(false, interface_746:com_74);
+        case 7 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_48);
+            if_sethide(false, interface_746:com_100);
+            if_sethide(false, interface_746:com_74);
+        case 8 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_49);
+            if_sethide(false, interface_746:com_101);
+            if_sethide(false, interface_746:com_74);
+        case 9 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_50);
+            if_sethide(false, interface_746:com_102);
+            if_sethide(false, interface_746:com_74);
+        case 10 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_51);
+            if_sethide(false, interface_746:com_103);
+            if_sethide(false, interface_746:com_74);
+        case 11 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_52);
+            if_sethide(false, interface_746:com_104);
+            if_sethide(false, interface_746:com_74);
+        case 12 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_53);
+            if_sethide(false, interface_746:com_105);
+            if_sethide(false, interface_746:com_74);
+        case 13 :
+            if_setgraphic("side_stone_highlights,4", interface_746:com_54);
+            if_sethide(false, interface_746:com_106);
+            if_sethide(false, interface_746:com_74);
+        case 99 :
+            if_setgraphic("fullscreen_logout_button,2", interface_746:com_12);
+            if_sethide(false, interface_746:com_107);
+            if_sethide(false, interface_746:com_74);
+    }
+} else {
+    switch_int ($int0) {
+        case 0 :
+            if_setgraphic("side_stone_highlights,0", interface_548:com_38);
+            if_sethide(false, interface_548:com_83);
+        case 1 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_39);
+            if_sethide(false, interface_548:com_84);
+        case 2 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_40);
+            if_sethide(false, interface_548:com_85);
+        case 3 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_41);
+            if_sethide(false, interface_548:com_86);
+        case 4 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_42);
+            if_sethide(false, interface_548:com_87);
+        case 5 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_43);
+            if_sethide(false, interface_548:com_88);
+        case 6 :
+            if_setgraphic("side_stone_highlights,1", interface_548:com_44);
+            if_sethide(false, interface_548:com_89);
+        case 7 :
+            if_setgraphic("side_stone_highlights,2", interface_548:com_20);
+            if_sethide(false, interface_548:com_90);
+        case 8 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_21);
+            if_sethide(false, interface_548:com_91);
+        case 9 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_22);
+            if_sethide(false, interface_548:com_92);
+        case 10 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_23);
+            if_sethide(false, interface_548:com_93);
+        case 11 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_24);
+            if_sethide(false, interface_548:com_94);
+        case 12 :
+            if_setgraphic("side_stone_highlights,4", interface_548:com_25);
+            if_sethide(false, interface_548:com_95);
+        case 13 :
+            if_setgraphic("side_stone_highlights,3", interface_548:com_26);
+            if_sethide(false, interface_548:com_96);
+        case 99 :
+            if_setgraphic("fullscreen_logout_button,2", interface_548:com_69);
+            if_sethide(false, interface_548:com_97);
+    }
+}

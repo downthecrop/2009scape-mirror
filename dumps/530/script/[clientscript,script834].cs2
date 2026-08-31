@@ -1,0 +1,11 @@
+// 834
+[clientscript,script834]
+if (%varplayerbit_4393 = 1 | %varplayerbit_542 = 1) {
+    if_setgraphic("music_icons,1", interface_187:com_11);
+    return;
+}
+if (%varplayer_19 = 1) {
+    if_setgraphic("music_icons,1", interface_187:com_11);
+} else if (%varplayer_19 = 0) {
+    if_setgraphic("music_icons,0", interface_187:com_11);
+}

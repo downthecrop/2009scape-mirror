@@ -1,0 +1,19 @@
+// 1388
+[proc,script1388]
+%varclientstring_34 = "";
+%varclientstring_35 = "";
+%varclientstring_36 = "";
+%varclient_179 = 1;
+%varclient_180 = 0;
+%varclient_181 = 2009;
+if_settext(%varclientstring_34, interface_744:com_394);
+if_settext(%varclientstring_35, interface_744:com_421);
+if_settext(%varclientstring_36, interface_744:com_426);
+~script1346(enum_1601, 0, 31, interface_744:com_381, interface_744:com_382, interface_744:com_383, interface_744:com_384, graphic_884, "drop_down_arrow_scroll,0", "drop_down_arrow_scroll,2", graphic_1402, 0x663300, 0xffe1be, p11_full, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+~script1346(enum_1602, 0, 12, interface_744:com_377, interface_744:com_378, interface_744:com_379, interface_744:com_380, graphic_884, "drop_down_arrow_scroll,0", "drop_down_arrow_scroll,2", graphic_1402, 0x663300, 0xffe1be, p11_full, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+~script1346(enum_1603, 0, 120, interface_744:com_373, interface_744:com_374, interface_744:com_375, interface_744:com_376, graphic_884, "drop_down_arrow_scroll,0", "drop_down_arrow_scroll,2", graphic_1402, 0x663300, 0xffe1be, p11_full, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+~script1346(enum_1626, 0, 241, interface_744:com_369, interface_744:com_370, interface_744:com_371, interface_744:com_372, graphic_884, "drop_down_arrow_scroll,0", "drop_down_arrow_scroll,2", graphic_1402, 0x663300, 0xffe1be, p11_full, "scrollbar_parchment_dragger_v2,3", "scrollbar_parchment_dragger_v2,0", "scrollbar_parchment_dragger_v2,1", "scrollbar_parchment_dragger_v2,2", "scrollbar_parchment_v2,0", "scrollbar_parchment_v2,1");
+%varclient_182 = enum(int, int, enum_1669, 0);
+if_settext("Please note that your account has been locked into Quick Chat until you are of suitable age - please review our Terms & Conditions for more information.", interface_744:com_412);
+if_setcolour(0x461e00, interface_744:com_412);
+if_sethide(true, interface_744:com_430);

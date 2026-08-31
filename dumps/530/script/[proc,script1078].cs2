@@ -1,0 +1,24 @@
+// 1078
+[proc,script1078](int $int0)
+switch_int ($int0) {
+    case 0 :
+        activechatphrase_setdynamicint(0, %varclient_135);
+    case 1 :
+        activechatphrase_setdynamicint(1, %varclient_136);
+    case 2 :
+        activechatphrase_setdynamicint(2, %varclient_137);
+    case 3 :
+        activechatphrase_setdynamicint(3, %varclient_138);
+    case 4 :
+        activechatphrase_setdynamicint(4, %varclient_139);
+    case 5 :
+        activechatphrase_setdynamicint(5, %varclient_140);
+    case 6 :
+        activechatphrase_setdynamicint(6, %varclient_141);
+    case 7 :
+        activechatphrase_setdynamicint(7, %varclient_142);
+    case 8 :
+        activechatphrase_setdynamicint(8, %varclient_143);
+    case 9 :
+        activechatphrase_setdynamicint(9, %varclient_144);
+}

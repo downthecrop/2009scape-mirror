@@ -1,0 +1,38 @@
+// 750:0
+[com_0]
+type=layer
+width=57
+height=34
+noclickthrough=yes
+onload=script1315(interface_750:com_1)
+
+// 750:1
+[com_1]
+type=graphic
+width=57
+height=34
+layer=com_0
+graphic=graphic_423
+op1=Turn run mode on
+onload=script809
+onvartransmit=script809
+onstattransmit=script815
+onvartransmitlist=varplayer_1160
+onstattransmitlist=summoning
+
+// 750:2
+[com_2]
+type=text
+x=29
+y=15
+width=24
+height=14
+layer=com_0
+textfont=p11_full
+text=100
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xca9800
+onload=script772(event_com)
+

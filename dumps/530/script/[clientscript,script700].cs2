@@ -1,0 +1,42 @@
+// 700
+[clientscript,script700](component $component0)
+if ($component0 = interface_13:com_11) {
+    if_settext(tostring(%varplayerbit_997), $component0);
+    return;
+}
+if ($component0 = interface_13:com_12) {
+    if_settext(tostring(%varplayerbit_998), $component0);
+    return;
+}
+if ($component0 = interface_13:com_13) {
+    if_settext(tostring(%varplayerbit_999), $component0);
+    return;
+}
+if ($component0 = interface_13:com_14) {
+    if_settext(tostring(%varplayerbit_1000), $component0);
+    return;
+}
+if ($component0 = interface_13:com_15) {
+    if_settext(tostring(%varplayerbit_1001), $component0);
+    return;
+}
+if ($component0 = interface_13:com_16) {
+    if_settext(tostring(%varplayerbit_1002), $component0);
+    return;
+}
+if ($component0 = interface_13:com_17) {
+    if_settext(tostring(%varplayerbit_1003), $component0);
+    return;
+}
+if ($component0 = interface_13:com_18) {
+    if_settext(tostring(%varplayerbit_1004), $component0);
+    return;
+}
+if ($component0 = interface_13:com_19) {
+    if_settext(tostring(%varplayerbit_1005), $component0);
+    return;
+}
+if ($component0 = interface_13:com_20) {
+    if_settext(tostring(%varplayerbit_1006), $component0);
+    return;
+}

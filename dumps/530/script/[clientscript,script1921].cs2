@@ -1,0 +1,17 @@
+// 1921
+[clientscript,script1921]
+if (%varclient_551 > 0) {
+    if_settext(append(append_num(append(%varclientstring_40, " ("), %varclient_551), ")"), interface_812:com_5);
+} else {
+    if_settext(%varclientstring_40, interface_812:com_5);
+}
+if (%varclient_552 > 0) {
+    if_settext(append(append_num(append(%varclientstring_41, " ("), %varclient_552), ")"), interface_812:com_6);
+} else {
+    if_settext(%varclientstring_41, interface_812:com_6);
+}
+if (%varclient_553 > 0) {
+    if_settext(append(append_num(append(%varclientstring_42, " ("), %varclient_553), ")"), interface_812:com_7);
+} else {
+    if_settext(%varclientstring_42, interface_812:com_7);
+}

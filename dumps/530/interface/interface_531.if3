@@ -1,0 +1,30 @@
+// 531:0
+[com_0]
+type=model
+y=-6
+width=517
+height=352
+model=model_25726
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=465
+unknown100=65087
+unknown101=930
+
+// 531:1
+[com_1]
+type=graphic
+x=481
+y=14
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+op1=Close
+op10=   
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+

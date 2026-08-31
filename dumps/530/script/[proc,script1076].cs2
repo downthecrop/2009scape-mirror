@@ -1,0 +1,26 @@
+// 1076
+[proc,script1076](component $component0, chatphrase $chatphrase1, obj $obj2)
+switch_int (%varclient_134) {
+    case 0 :
+        %varclient_145 = $obj2;
+    case 1 :
+        %varclient_146 = $obj2;
+    case 2 :
+        %varclient_147 = $obj2;
+    case 3 :
+        %varclient_148 = $obj2;
+    case 4 :
+        %varclient_149 = $obj2;
+    case 5 :
+        %varclient_150 = $obj2;
+    case 6 :
+        %varclient_151 = $obj2;
+    case 7 :
+        %varclient_152 = $obj2;
+    case 8 :
+        %varclient_153 = $obj2;
+    case 9 :
+        %varclient_154 = $obj2;
+}
+%varclient_134 = calc(%varclient_134 + 1);
+~script1072($component0, $chatphrase1);

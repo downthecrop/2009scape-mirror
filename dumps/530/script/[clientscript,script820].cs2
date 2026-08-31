@@ -1,0 +1,17 @@
+// 820
+[clientscript,script820]
+if (%varplayerbit_4286 ! 101) {
+    if_settext("<tostring(%varplayerbit_4286)>%", interface_663:com_19);
+    if (%varplayerbit_4286 > 74) {
+        if_setcolour(^red, interface_663:com_19);
+    } else {
+        if_setcolour(^white, interface_663:com_19);
+    }
+} else {
+    if_settext("NA", interface_663:com_19);
+}
+if (%varplayerbit_4285 ! 101) {
+    if_settext("<tostring(%varplayerbit_4285)>%", interface_663:com_17);
+} else {
+    if_settext("NA", interface_663:com_17);
+}

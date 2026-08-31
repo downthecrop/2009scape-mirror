@@ -1,0 +1,21 @@
+// 1469
+[proc,script1469]()(int)
+if (%varplayerbit_4885 = 0) {
+    return(2);
+} else if (%varplayerbit_4886 = 0) {
+    return(3);
+} else if (%varplayerbit_4887 = 0) {
+    return(4);
+} else if (%varplayerbit_4888 = 0) {
+    return(5);
+} else if (%varplayerbit_4889 = 0) {
+    return(6);
+} else if (%varplayerbit_4890 = 0) {
+    return(7);
+} else if (%varplayerbit_4891 = 0) {
+    return(8);
+} else if (%varplayerbit_4892 = 0) {
+    return(9);
+} else {
+    return(-1);
+}

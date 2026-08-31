@@ -1,0 +1,11 @@
+// 1514
+[proc,script1514]
+if (%varplayer_170 = 1 & string_length(if_gettext(interface_769:com_2)) > 0) {
+    if_sethide(false, interface_769:com_2);
+    if_sethide(true, interface_769:com_1);
+    return;
+} else {
+    if_sethide(false, interface_769:com_1);
+    if_sethide(true, interface_769:com_2);
+    return;
+}

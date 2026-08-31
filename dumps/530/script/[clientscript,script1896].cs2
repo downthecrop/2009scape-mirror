@@ -1,0 +1,110 @@
+// 1896
+[clientscript,script1896](int $int0, int $int1)
+def_string $string0 = "kbase/view.ws?guid=hd_fullscreen_help";
+if ($int0 = 3) {
+    if (getwindowmode = ^windowmode_fullscreen) {
+        return;
+    }
+    if ($int1 = 3 & playermember = false) {
+        mes("Fullscreen mode is only available to members.");
+        return;
+    }
+    if (fullscreen_modecount = 0) {
+        mes("Your computer seems unable to enter the High Detail (fullscreen) mode.");
+        return;
+    }
+    if (getwindowmode < 1 & ($int1 = 1 | $int1 = 2)) {
+        ~script1886;
+    }
+    if (%varclient_178 < 0 | %varclient_178 >= fullscreen_modecount) {
+        %varclient_178 = max(fullscreen_lastmode, 0);
+    }
+    if (fullscreen_enter(fullscreen_getmode(%varclient_178)) = true) {
+        switch_int ($int1) {
+            case 1 :
+                if (%varclient_543 < 1) {
+                    ~script1887(interface_744:com_125, interface_744:com_127, interface_744:com_126, interface_744:com_128, interface_744:com_129);
+                }
+                if_setonclick("script1890(interface_744:com_226)", interface_744:com_238);
+                ~script1174(interface_744:com_237);
+            case 2 :
+                if (%varclient_543 < 1) {
+                    ~script1887(interface_744:com_125, interface_744:com_127, interface_744:com_126, interface_744:com_128, interface_744:com_129);
+                }
+                if_setonclick("script1890(interface_744:com_138)", interface_744:com_238);
+                ~script1174(interface_744:com_237);
+        }
+        %varclient_543 = 3;
+        return;
+    }
+    setwindowmode(getdefaultwindowmode);
+    ~script1887(interface_744:com_125, interface_744:com_127, interface_744:com_126, interface_744:com_128, interface_744:com_129);
+    %varclient_543 = getwindowmode;
+    switch_int ($int1) {
+        case 1, 2 :
+            if_settext("RuneScape was unable to enter High Detail (fullscreen) at the specified resolution.<br><br>Please try a different resolution or a different display mode.", interface_744:com_135);
+            if_setonclick("script1173(interface_744:com_138)", interface_744:com_137);
+            if_settext("Advanced info", interface_744:com_136);
+            if_setonclick("script702($string0, true)", interface_744:com_136);
+            ~script1174(interface_744:com_411);
+        case 3 :
+            mes("RuneScape was unable to enter the High Detail (fullscreen) mode.");
+    }
+    return;
+}
+def_int $int2 = 0;
+if (getwindowmode < 1) {
+    if ($int1 = 1 | $int1 = 2) {
+        ~script1886;
+    }
+    $int2 = 1;
+}
+setwindowmode($int0);
+if (getwindowmode ! $int0) {
+    %varclient_543 = getwindowmode;
+    switch_int ($int1) {
+        case 1 :
+            if_settext("RuneScape was unable to enter the chosen display mode.", interface_744:com_135);
+            if_setonclick("script1173(interface_744:com_226)", interface_744:com_137);
+            if_settext("Advanced info", interface_744:com_136);
+            if_setonclick("script702($string0, true)", interface_744:com_136);
+            ~script1174(interface_744:com_411);
+        case 2 :
+            if_settext("RuneScape was unable to enter the chosen display mode.", interface_744:com_135);
+            if_setonclick("script1173(interface_744:com_138)", interface_744:com_137);
+            if_settext("Advanced info", interface_744:com_136);
+            if_setonclick("script702($string0, true)", interface_744:com_136);
+            ~script1174(interface_744:com_411);
+        case 3 :
+            mes("RuneScape was unable to enter the chosen display mode.");
+    }
+    return;
+}
+if ($int2 = 1) {
+    switch_int ($int1) {
+        case 1 :
+            ~script1888;
+            if_setonclick("script1890(interface_744:com_226)", interface_744:com_238);
+            ~script1174(interface_744:com_237);
+        case 2 :
+            ~script1888;
+            if_setonclick("script1890(interface_744:com_138)", interface_744:com_238);
+            ~script1174(interface_744:com_237);
+        case 3 :
+            ~script1845;
+    }
+    %varclient_543 = getwindowmode;
+    return;
+}
+setdefaultwindowmode($int0);
+switch_int ($int1) {
+    case 1 :
+        ~script1888;
+        ~script1174(interface_744:com_226);
+    case 2 :
+        ~script1888;
+        ~script1174(interface_744:com_138);
+    case 3 :
+        ~script1845;
+}
+%varclient_543 = getwindowmode;

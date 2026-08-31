@@ -1,0 +1,18 @@
+// 819
+[clientscript,script819]
+def_seq $seq0 = null;
+if_setnpchead(%varplayer_1174, interface_663:com_3);
+def_string $string0 = oc_name(%varplayer_448);
+if (%varplayerbit_1049 = 1) {
+    if_settext(~script821, interface_663:com_25);
+} else {
+    if_settext($string0, interface_663:com_25);
+}
+if (%varplayerbit_4282 > 50) {
+    %varplayerbit_4282 = calc(%varplayerbit_4282 - 50);
+    $seq0 = enum(int, seq, enum_1275, %varplayerbit_4282);
+    if_setmodelanim($seq0, interface_663:com_3);
+} else {
+    $seq0 = enum(int, seq, enum_1276, %varplayerbit_4282);
+    if_setmodelanim($seq0, interface_663:com_3);
+}

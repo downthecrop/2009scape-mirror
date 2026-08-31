@@ -1,0 +1,56 @@
+// 38:0
+[com_0]
+type=model
+x=6
+y=5
+width=74
+height=66
+layer=com_3
+model=model_4608
+modelorigin_x=0
+modelorigin_y=25
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=512
+unknown100=64129
+unknown101=3000
+
+// 38:1
+[com_1]
+type=text
+x=7
+y=68
+width=72
+height=17
+layer=com_3
+textfont=p12_full
+text=Runelink
+textalignh=1
+textshadow=yes
+colour=0xaaaaaa
+
+// 38:2
+[com_2]
+type=text
+x=7
+y=84
+width=72
+height=13
+layer=com_3
+textfont=p11_full
+text=Rank: %1
+textalignh=1
+textshadow=yes
+colour=0xaaaaaa
+onload=script1274
+onvartransmit=script1274
+onvartransmitlist=varplayer_353
+
+// 38:3
+[com_3]
+type=layer
+width=86
+height=105
+xmode=abs_right
+

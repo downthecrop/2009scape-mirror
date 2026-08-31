@@ -1,0 +1,9 @@
+// 1820
+[proc,script1820](int $int0)(boolean)
+if (%varplayer_1149 = -1) {
+    return(false);
+}
+if ($int0 ! 1) {
+    return(false);
+}
+return(true);

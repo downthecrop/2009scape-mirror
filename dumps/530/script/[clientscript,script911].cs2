@@ -1,0 +1,9 @@
+// 911
+[clientscript,script911]
+if (%varplayerbit_4532 = 1 & %varclient_118 < 253) {
+    %varclient_118 = calc(%varclient_118 + 3);
+    if_settrans(calc(255 - %varclient_118), interface_721:com_3);
+} else if (%varplayerbit_4532 = 0 & %varclient_118 > 3) {
+    %varclient_118 = calc(%varclient_118 - 3);
+    if_settrans(calc(255 - %varclient_118), interface_721:com_3);
+}

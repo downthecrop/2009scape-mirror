@@ -1,0 +1,20 @@
+// 1929
+[proc,script1929]
+if_sethide(true, interface_811:com_110);
+if_setcolour(0xc8aa64, interface_811:com_126);
+if_setcolour(0xc8aa64, interface_811:com_127);
+if_sethide(true, interface_811:com_52);
+if_setcolour(0xc8aa64, interface_811:com_63);
+if_setcolour(0xc8aa64, interface_811:com_65);
+if_sethide(true, interface_811:com_38);
+if_setcolour(0xc8aa64, interface_811:com_48);
+if_setcolour(0xc8aa64, interface_811:com_49);
+if_sethide(true, interface_811:com_95);
+if_setcolour(0xc8aa64, interface_811:com_105);
+if_setcolour(0xc8aa64, interface_811:com_106);
+if_sethide(true, interface_811:com_81);
+if_setcolour(0xc8aa64, interface_811:com_91);
+if_setcolour(0xc8aa64, interface_811:com_92);
+if_sethide(true, interface_811:com_67);
+if_setcolour(0xc8aa64, interface_811:com_77);
+if_setcolour(0xc8aa64, interface_811:com_78);

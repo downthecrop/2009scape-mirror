@@ -1,0 +1,200 @@
+// 688:0
+[com_0]
+type=rectangle
+width=514
+height=335
+colour=0xc0b8a0
+fill=yes
+trans=32
+
+// 688:1
+[com_1]
+type=rectangle
+x=11
+y=5
+width=181
+height=179
+colour=0x8c7c6c
+fill=yes
+
+// 688:2
+[com_2]
+type=rectangle
+x=316
+y=146
+width=181
+height=179
+colour=0x8c7c6c
+fill=yes
+
+// 688:3
+[com_3]
+type=text
+x=208
+y=8
+width=286
+height=169
+textfont=q8_full
+text=While you are in the area, you will be able to see your points total in the top-right corner of your screen. Your points are saved, so you can leave if you wish and return another time to pick up from where you left off.
+colour=0x000000
+
+// 688:4
+[com_4]
+type=text
+x=14
+y=190
+width=286
+height=169
+textfont=q8_full
+text=You can trade your points in for prizes or Farming experience by speaking to Mrs. Winkin in the Winkin shop.
+colour=0x000000
+
+// 688:5
+[com_5]
+type=model
+x=26
+y=134
+width=65
+height=44
+model=model_32266
+modelorigin_x=2
+modelorigin_y=8
+modelangle_x=147
+modelangle_y=1759
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=3000
+
+// 688:6
+[com_6]
+type=model
+x=60
+y=27
+width=59
+height=123
+model=model_32286
+modelorigin_x=-14
+modelorigin_y=56
+modelangle_x=52
+modelangle_y=1839
+modelangle_z=2010
+modelzoom=1000
+unknown100=0
+unknown101=3000
+
+// 688:7
+[com_7]
+type=rectangle
+x=116
+y=7
+width=74
+height=36
+colour=0x525252
+fill=yes
+trans=100
+
+// 688:8
+[com_8]
+type=text
+x=138
+y=11
+width=46
+height=16
+textfont=p11_full
+text=Points
+textshadow=yes
+colour=0x999999
+
+// 688:9
+[com_9]
+type=text
+x=118
+y=27
+width=65
+height=17
+textfont=p11_full
+text=234,567
+textalignh=2
+textshadow=yes
+colour=0xffffff
+onload=script862
+onvartransmit=script862
+onvartransmitlist=varplayer_1195
+
+// 688:10
+[com_10]
+type=model
+x=329
+y=152
+width=67
+height=161
+model=model_32251
+modelorigin_x=-5
+modelorigin_y=72
+modelangle_x=133
+modelangle_y=1787
+modelangle_z=0
+modelzoom=550
+unknown100=0
+unknown101=3000
+
+// 688:11
+[com_11]
+type=text
+x=416
+y=158
+width=33
+height=32
+textfont=quill_oblique_large
+text=XP
+textshadow=yes
+colour=0x00cc00
+
+// 688:12
+[com_12]
+type=model
+x=413
+y=217
+width=35
+height=51
+model=model_32238
+modelorigin_x=0
+modelorigin_y=15
+modelangle_x=259
+modelangle_y=0
+modelangle_z=0
+modelzoom=300
+unknown100=0
+unknown101=3000
+
+// 688:13
+[com_13]
+type=model
+x=449
+y=259
+width=38
+height=29
+model=model_7142
+modelorigin_x=-4
+modelorigin_y=4
+modelangle_x=259
+modelangle_y=0
+modelangle_z=0
+modelzoom=1000
+unknown100=0
+unknown101=3000
+
+// 688:14
+[com_14]
+type=graphic
+x=488
+y=2
+width=26
+height=23
+graphic="close_buttons,0"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,1")
+onmouseleave=script44(event_com, "close_buttons,0")
+onop=script29
+

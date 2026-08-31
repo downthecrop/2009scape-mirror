@@ -1,0 +1,62 @@
+// 740:0
+[com_0]
+type=text
+x=73
+y=8
+width=416
+height=27
+textfont=q8_full
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 740:1
+[com_1]
+type=text
+x=73
+y=35
+width=416
+height=30
+textfont=q8_full
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 740:2
+[com_2]
+type=text
+x=73
+y=68
+width=416
+height=37
+textfont=q8_full
+text=Open your stats menu and click on the flashing icon for more information.
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 740:3
+[com_3]
+type=text
+x=73
+y=108
+width=416
+height=17
+textfont=q8_full
+text=Click here to continue
+textalignh=1
+colour=0x0000ff
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^blue)
+
+// 740:4
+[com_4]
+type=graphic
+x=17
+y=37
+width=55
+height=54
+onload=script971
+onvartransmit=script971
+onvartransmitlist=varplayer_1179
+

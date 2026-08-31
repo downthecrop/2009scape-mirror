@@ -1,0 +1,52 @@
+// 1900
+[proc,script1900](component $component0, component $component1, int $int2, int $int3)
+%varclient_159 = 0;
+%varclient_158 = 0;
+def_int $int4 = 0;
+while (cc_find($component0, $int4) = true) {
+    if ($int4 = $int2) {
+        cc_setonmouseover(null);
+        cc_setonmouseleave(null);
+        if (.cc_find($component1, $int4) = true) {
+            .cc_sethide(false);
+            .cc_setcolour(0x969777);
+        }
+    } else {
+        cc_setonmouseover("script1082(calc($int3 - 1), $component1, $int4)");
+        cc_setonmouseleave("script1083(calc($int3 - 1), $component1, $int4)");
+        if (.cc_find($component1, $int4) = true) {
+            .cc_sethide(true);
+        }
+    }
+    $int4 = calc($int4 + 1);
+}
+%varclient_128 = -1;
+%varclient_129 = 0;
+%varclientstring_30 = "";
+def_string $string0 = "Search phrases...";
+if (%varclient_126 = 1) {
+    $string0 = "To <%varclientstring_27>: <col=800000><$string0>";
+} else if (%varclient_126 = 2) {
+    $string0 = "[<col=0000ff><clan_getchatdisplayname><col=000000>]: <col=800000><$string0>";
+} else {
+    $string0 = "<col=0000ff><$string0>";
+}
+if_sethide(true, interface_137:com_50);
+if_setonkey(null, interface_137:com_51);
+if_sethide(false, interface_137:com_0);
+if_sethide(true, interface_137:com_7);
+if_sethide(true, interface_137:com_9);
+if_sethide(false, interface_137:com_13);
+if_sethide(true, interface_137:com_17);
+if_sethide(true, interface_137:com_1);
+if_sethide(false, interface_137:com_3);
+if_setcolour(^black, interface_137:com_3);
+if_settextfont(p12_full, interface_137:com_3);
+if_settextalign(^settextalign_left, ^settextalign_centre, 0, interface_137:com_3);
+if_settext($string0, interface_137:com_3);
+if_settextshadow(false, interface_137:com_3);
+cc_deleteall(interface_137:com_16);
+if_settext("Search for: *", interface_137:com_14);
+if_setonkey("script1901(event_keycode, event_keychar, interface_137:com_1, interface_137:com_14, interface_137:com_16, interface_137:com_15, 0)", interface_137:com_13);
+if_setscrollsize(0, 0, interface_137:com_16);
+~script72(interface_137:com_15, interface_137:com_16, 0);

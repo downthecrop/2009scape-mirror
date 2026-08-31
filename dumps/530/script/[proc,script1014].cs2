@@ -1,0 +1,171 @@
+// 1014
+[proc,script1014](int $int0, int $int1)(int, obj, string, string)
+switch_int ($int0) {
+    case 0 :
+        switch_int ($int1) {
+            case 0 :
+                return(1, obj_1942, "Potato", "You can now plant <col=000080>potatoes</col>.");
+            case 1 :
+                return(5, obj_1957, "Onion", "You can now plant <col=000080>onions</col>.");
+            case 2 :
+                return(7, obj_1965, "Cabbage", "You can now plant <col=000080>cabbages</col>.");
+            case 3 :
+                return(12, obj_1982, "Tomato", "You can now plant <col=000080>tomatoes</col>.");
+            case 4 :
+                return(20, obj_5986, "Sweetcorn", "You can now plant <col=000080>sweetcorn</col>.");
+            case 5 :
+                return(31, obj_5504, "Strawberry", "You can now plant <col=000080>strawberries</col>.");
+            case 6 :
+                return(47, obj_5982, "Watermelon", "You can now plant <col=000080>watermelons</col>.");
+        }
+    case 1 :
+        switch_int ($int1) {
+            case 0 :
+                return(3, obj_6006, "Barley", "You can now plant <col=000080>barley</col>.");
+            case 1 :
+                return(4, obj_5994, "Hammerstone hop", "You can now plant <col=000080>hammerstone hops</col>.");
+            case 2 :
+                return(8, obj_5996, "Asgarnian hop", "You can now plant <col=000080>Asgarnian hops</col>.");
+            case 3 :
+                return(13, obj_5931, "Jute plant", "You can now plant <col=000080>jute plants</col>.");
+            case 4 :
+                return(16, obj_5998, "Yanillian hop", "You can now plant <col=000080>Yanillian hops</col>.");
+            case 5 :
+                return(21, obj_6000, "Krandorian hop", "You can now plant <col=000080>Krandorian hops</col>.");
+            case 6 :
+                return(28, obj_6002, "Wildblood hop", "You can now plant <col=000080>wildblood hops</col>.");
+        }
+    case 2 :
+        switch_int ($int1) {
+            case 0 :
+                return(15, obj_1521, "Oak tree", "You can now plant <col=000080>oak trees</col>.");
+            case 1 :
+                return(30, obj_1519, "Willow tree", "You can now plant <col=000080>willow trees</col>.");
+            case 2 :
+                return(45, obj_1517, "Maple tree", "You can now plant <col=000080>maple trees</col>.");
+            case 3 :
+                return(60, obj_1515, "Yew tree", "You can now plant <col=000080>yew trees</col>.");
+            case 4 :
+                return(75, obj_1513, "Magic tree", "You can now plant <col=000080>magic trees</col>.");
+        }
+    case 3 :
+        switch_int ($int1) {
+            case 0 :
+                return(27, obj_1955, "Apple tree", "You can now plant <col=000080>apple trees</col>.");
+            case 1 :
+                return(33, obj_1963, "Banana tree", "You can now plant <col=000080>banana trees</col>.");
+            case 2 :
+                return(39, obj_2108, "Orange tree", "You can now plant <col=000080>orange trees</col>.");
+            case 3 :
+                return(42, obj_5970, "Curry tree", "You can now plant <col=000080>curry trees</col>.");
+            case 4 :
+                return(51, obj_2114, "Pineapple plant", "You can now plant <col=000080>pineapple plants</col>.");
+            case 5 :
+                return(57, obj_5972, "Papaya tree", "You can now plant <col=000080>papaya trees</col>.");
+            case 6 :
+                return(68, obj_5974, "Palm tree", "You can now plant <col=000080>palm trees</col>.");
+        }
+    case 4 :
+        switch_int ($int1) {
+            case 0 :
+                return(10, obj_1951, "Redberry bush", "You can now plant <col=000080>redberry bushes</col>.");
+            case 1 :
+                return(22, obj_753, "Cadavaberry bush", "You can now plant <col=000080>cadavaberry bushes</col>.");
+            case 2 :
+                return(36, obj_2126, "Dwellberry bush", "You can now plant <col=000080>dwellberry bushes</col>.");
+            case 3 :
+                return(48, obj_247, "Jangerberry bush", "You can now plant <col=000080>jangerberry bushes</col>.");
+            case 4 :
+                return(59, obj_239, "White berry bush", "You can now plant <col=000080>white berry bushes</col>.");
+            case 5 :
+                return(70, obj_6018, "Poison ivy bush", "You can now plant <col=000080>poison ivy bushes</col>.");
+        }
+    case 5 :
+        switch_int ($int1) {
+            case 0 :
+                return(2, obj_6010, "Marigold<br> Protects onions, tomatoes and potatoes from disease", "You can now <col=000080>plant marigolds</col>.");
+            case 1 :
+                return(11, obj_6014, "Rosemary<br> Protects cabbages from disease", "You can now plant <col=000080>rosemary</col>.");
+            case 2 :
+                return(24, obj_6012, "Nasturtium<br> Protects watermelons from disease", "You can now plant <col=000080>nasturtiums</col>.");
+            case 3 :
+                return(25, obj_5738, "Woad", "You can now plant <col=000080>woad</col>.");
+            case 4 :
+                return(26, obj_225, "Limpwurt", "You can now plant <col=000080>limpwurt</col>.");
+            case 5 :
+                return(52, obj_14583, "White lily<br> Protects all neighbouring fruit and vegetables from disease", "You can now plant <col=000080>white lilies</col>.");
+        }
+    case 6 :
+        switch_int ($int1) {
+            case 0 :
+                return(9, obj_249, "Guam", "You can now plant <col=000080>guam</col>.");
+            case 1 :
+                return(14, obj_251, "Marrentill", "You can now plant <col=000080>marrentill</col>.");
+            case 2 :
+                return(19, obj_253, "Tarromin", "You can now plant <col=000080>tarromin</col>.");
+            case 3 :
+                return(26, obj_255, "Harralander", "You can now plant <col=000080>harralander</col>.");
+            case 4 :
+                return(29, obj_3261, "Goutweed<br> (after Eadgar's Ruse)", "You now have the Farming level required to plant <col=000080>goutweed</col> (after Eadgar's Ruse).");
+            case 5 :
+                return(32, obj_257, "Ranarr", "You can now plant <col=000080>ranarr </col>.");
+            case 6 :
+                return(36, obj_12172, "Spirit weed", "You can now plant <col=000080>spirit weed</col>.");
+            case 7 :
+                return(38, obj_2998, "Toadflax", "You can now plant <col=000080>toadflax</col>.");
+            case 8 :
+                return(44, obj_259, "Irit", "You can now plant <col=000080>irit</col>.");
+            case 9 :
+                return(50, obj_261, "Avantoe", "You can now plant <col=000080>avantoe</col>.");
+            case 10 :
+                return(56, obj_263, "Kwuarm", "You can now plant <col=000080>kwuarm</col>.");
+            case 11 :
+                return(62, obj_3000, "Snapdragon", "You can now plant <col=000080>snapdragon</col>.");
+            case 12 :
+                return(67, obj_265, "Cadantine", "You can now plant <col=000080>cadantine</col>.");
+            case 13 :
+                return(73, obj_2481, "Lantadyme", "You can now plant <col=000080>lantadyme</col>.");
+            case 14 :
+                return(79, obj_267, "Dwarf weed", "You can now plant <col=000080>dwarf weed</col>.");
+            case 15 :
+                return(85, obj_269, "Torstol", "You can now plant <col=000080>torstol</col>.");
+        }
+    case 7 :
+        switch_int ($int1) {
+            case 0 :
+                return(42, obj_12134, "Evil turnip", "You can now plant <col=000080>evil turnips</col>.");
+            case 1 :
+                return(53, obj_6004, "Bittercap mushroom", "You can now plant <col=000080>bittercap mushrooms</col>.");
+            case 2 :
+                return(53, obj_11779, "Jade vine<br> (after Back to My Roots)", "You now have the Farming level required to plant <col=000080>jade vines</col> (after Back to my Roots).");
+            case 3 :
+                return(55, obj_6016, "Cactus", "You can now plant <col=000080>cacti</col>.");
+            case 4 :
+                return(63, obj_2398, "Belladonna", "You can now plant <col=000080>belladonna</col>.");
+            case 5 :
+                return(72, obj_5980, "Calquat tree", "You can now plant <col=000080>calquat trees</col>.");
+            case 6 :
+                return(83, obj_6063, "Spirit tree<br>(only 1 planted at a time)", "You can now plant <col=000080>spirit trees</col>.");
+        }
+    case 8 :
+        switch_int ($int1) {
+            case 0 :
+                return(23, obj_6059, "Able to make and place a scarecrow", "You now have the ability to make and place a <col=000080>scarecrow</col>.");
+            case 1 :
+                return(-1, obj_7620, "Scarecrows help to stop sweetcorn from being attacked by birds, while also helping to prevent disease.", "");
+            case 2 :
+                return(-1, obj_7620, "How to make a scarecrow:", "");
+            case 3 :
+                return(-1, obj_7620, "1. Fill an empty sack with straw from a haystack.", "");
+            case 4 :
+                return(-1, obj_7620, "2. Drive the hay sack onto a bronze spear.", "");
+            case 5 :
+                return(-1, obj_7620, "3. Place a watermelon at the very top as a head.", "");
+            case 6 :
+                return(-1, obj_7620, "4. Stand the scarecrow in an empty flower patch.", "");
+        }
+    case 9 :
+        if ($int1 = 0) {
+            return(99, obj_9810, "Skill mastery", "<col=000080>Congratulations! You are now a master of <col=800000>Farming<col=000080>. Why not visit <col=800000>Martin the Master Gardener<col=000080> in <col=800000>Draynor Village<col=000080>? He has something special that is only available to true masters of the <col=800000>Farming<col=000080> skill!");
+        }
+}

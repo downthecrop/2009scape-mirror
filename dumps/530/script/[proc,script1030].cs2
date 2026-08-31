@@ -1,0 +1,9 @@
+// 1030
+[proc,script1030](int $int0)
+if_sethide(true, interface_157:com_17);
+if_sethide(false, interface_157:com_35);
+cc_deleteall(interface_157:com_23);
+cc_deleteall(interface_157:com_25);
+if_setonclick("script1031", interface_157:com_30);
+if_settext("Safety Guide", interface_157:com_30);
+~script1033(enum(int, string, enum_1485, 0));

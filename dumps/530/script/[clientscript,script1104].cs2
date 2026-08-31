@@ -1,0 +1,136 @@
+// 1104
+[clientscript,script1104]
+if (%varplayer_261 = 1) {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(overlay_multiway);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(null);
+    }
+} else if (%varplayer_261 = 2) {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(overlay_multiway);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(null);
+    }
+} else if (%varplayer_261 = 3) {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(overlay_multiway);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(null);
+    }
+} else if (%varplayer_261 = 4) {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(overlay_multiway);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(null);
+    }
+} else if (%varplayer_261 = 5) {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(overlay_multiway);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(null);
+    }
+} else if (%varplayer_261 = 6) {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(overlay_multiway);
+    }
+} else {
+    if (if_find(interface_200:com_21) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_22) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_23) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_24) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_25) = true) {
+        cc_setgraphic(null);
+    }
+    if (if_find(interface_200:com_26) = true) {
+        cc_setgraphic(null);
+    }
+}

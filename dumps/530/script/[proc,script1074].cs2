@@ -1,0 +1,26 @@
+// 1074
+[proc,script1074](component $component0, chatphrase $chatphrase1, int $int2)
+switch_int (%varclient_134) {
+    case 0 :
+        %varclient_135 = $int2;
+    case 1 :
+        %varclient_136 = $int2;
+    case 2 :
+        %varclient_137 = $int2;
+    case 3 :
+        %varclient_138 = $int2;
+    case 4 :
+        %varclient_139 = $int2;
+    case 5 :
+        %varclient_140 = $int2;
+    case 6 :
+        %varclient_141 = $int2;
+    case 7 :
+        %varclient_142 = $int2;
+    case 8 :
+        %varclient_143 = $int2;
+    case 9 :
+        %varclient_144 = $int2;
+}
+%varclient_134 = calc(%varclient_134 + 1);
+~script1072($component0, $chatphrase1);

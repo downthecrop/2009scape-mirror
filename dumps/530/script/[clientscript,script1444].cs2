@@ -1,0 +1,6 @@
+// 1444
+[clientscript,script1444]
+~script1447(0);
+if_settext(tostring(%varclient_192), interface_767:com_27);
+if_settext(tostring(~script1466), interface_767:com_28);
+if_setonvarctransmit("script1445(interface_767:com_27){varclient_192}", interface_767:com_13);

@@ -1,0 +1,46 @@
+// 1186
+[proc,script1186]
+def_int $int0 = 0;
+if (getwindowmode >= 2) {
+    if (if_hassub(interface_752:com_12) = true) {
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_11) = true) {
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_10) = true) {
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    } else if (if_hassub(interface_752:com_9) = true) {
+        if_sethide(false, interface_752:com_1);
+        if_setalpha(true, interface_752:com_1);
+        if (%varplayerbit_542 = 0) {
+            if_setgraphic(graphic_1204, interface_752:com_1);
+            if_sethide(false, interface_752:com_2);
+        } else {
+            if_setgraphic(graphic_1205, interface_752:com_1);
+            if_sethide(true, interface_752:com_2);
+        }
+    }
+}

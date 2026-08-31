@@ -1,0 +1,22 @@
+// 749
+[clientscript,script749]
+if (%varplayer_43 = 0) {
+    if_setgraphic("combatboxes,1", interface_664:com_1);
+    if_setgraphic("combatboxes,0", interface_664:com_3);
+    if_setgraphic("combatboxes,0", interface_664:com_5);
+} else if (%varplayer_43 = 1) {
+    if_setgraphic("combatboxes,0", interface_664:com_1);
+    if_setgraphic("combatboxes,1", interface_664:com_3);
+    if_setgraphic("combatboxes,0", interface_664:com_5);
+} else if (%varplayer_43 = 2) {
+    if_setgraphic("combatboxes,0", interface_664:com_1);
+    if_setgraphic("combatboxes,0", interface_664:com_3);
+    if_setgraphic("combatboxes,1", interface_664:com_5);
+}
+if (%varplayer_172 = 0) {
+    if_setgraphic("combatboxes_very_large,1", interface_664:com_9);
+    if_settext("Auto-retaliate <br>(On)", interface_664:com_10);
+} else if (%varplayer_172 = 1) {
+    if_setgraphic("combatboxes_very_large,0", interface_664:com_9);
+    if_settext("Auto-retaliate <br>(Off)", interface_664:com_10);
+}

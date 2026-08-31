@@ -1,0 +1,309 @@
+// 190:0
+[com_0]
+type=rectangle
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+colour=0x46341d
+fill=yes
+trans=96
+op10= 
+
+// 190:1
+[com_1]
+type=model
+x=161
+y=38
+width=201
+height=201
+model=model_3679
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=390
+unknown100=800
+unknown101=845
+unknown103=yes
+
+// 190:2
+[com_2]
+type=model
+x=161
+y=38
+width=201
+height=201
+model=model_3680
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=390
+unknown100=800
+unknown101=845
+unknown103=yes
+
+// 190:3
+[com_3]
+type=model
+x=161
+y=38
+width=201
+height=201
+model=model_3678
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=390
+unknown100=800
+unknown101=845
+unknown103=yes
+
+// 190:4
+[com_4]
+type=model
+x=161
+y=38
+width=201
+height=201
+model=model_11031
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=390
+unknown100=800
+unknown101=846
+unknown103=yes
+
+// 190:5
+[com_5]
+type=model
+x=161
+y=38
+width=201
+height=201
+model=model_11032
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=390
+unknown100=800
+unknown101=844
+unknown103=yes
+
+// 190:6
+[com_6]
+type=model
+x=161
+y=38
+width=201
+height=201
+model=model_11033
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=390
+unknown100=800
+unknown101=844
+unknown103=yes
+
+// 190:7
+[com_7]
+type=text
+x=110
+y=254
+width=308
+height=17
+textfont=b12_full
+textalignh=1
+textshadow=yes
+colour=0xbbb949
+
+// 190:8
+[com_8]
+type=graphic
+x=110
+y=276
+width=72
+height=36
+graphic="combatboxes,0"
+op1=Select
+onmouseover=script44(event_com, "combatboxes,1")
+onmouseleave=script44(event_com, "combatboxes,0")
+
+// 190:9
+[com_9]
+type=graphic
+x=229
+y=277
+width=72
+height=36
+graphic="combatboxes,0"
+op1=Select
+onmouseover=script44(event_com, "combatboxes,1")
+onmouseleave=script44(event_com, "combatboxes,0")
+
+// 190:10
+[com_10]
+type=graphic
+x=344
+y=277
+width=72
+height=36
+graphic="combatboxes,0"
+op1=Select
+onmouseover=script44(event_com, "combatboxes,1")
+onmouseleave=script44(event_com, "combatboxes,0")
+
+// 190:11
+[com_11]
+type=text
+x=113
+y=279
+width=65
+height=29
+textfont=b12_full
+text=Shape1
+textalignh=1
+textalignv=1
+colour=0xbbb949
+
+// 190:12
+[com_12]
+type=text
+x=232
+y=281
+width=65
+height=29
+textfont=b12_full
+text=Shape2
+textalignh=1
+textalignv=1
+colour=0xbbb949
+
+// 190:13
+[com_13]
+type=text
+x=348
+y=281
+width=65
+height=29
+textfont=b12_full
+text=Shape3
+textalignh=1
+textalignv=1
+colour=0xbbb949
+
+// 190:14
+[com_14]
+type=graphic
+x=462
+y=15
+width=26
+height=23
+graphic="close_buttons,6"
+op1=Close
+onload=script690
+onmouseover=script44(event_com, "close_buttons,7")
+onmouseleave=script44(event_com, "close_buttons,6")
+onop=script29
+onvarctransmit=script690
+onvarctransmitlist=varclient_272,varclient_273
+
+// 190:15
+[com_15]
+type=graphic
+x=-1
+y=-1
+width=32
+height=32
+graphic="v2_stone_borders,4"
+op10= 
+
+// 190:16
+[com_16]
+type=graphic
+x=31
+y=-14
+width=450
+height=26
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+op10= 
+
+// 190:17
+[com_17]
+type=graphic
+x=481
+y=-1
+width=32
+height=32
+graphic="v2_stone_borders,5"
+op10= 
+
+// 190:18
+[com_18]
+type=graphic
+x=-14
+y=31
+width=32
+height=272
+graphic="v2_stone_borders,1"
+tiling=yes
+op10= 
+
+// 190:19
+[com_19]
+type=graphic
+x=493
+y=31
+width=23
+height=272
+graphic="v2_stone_borders,3"
+tiling=yes
+op10= 
+
+// 190:20
+[com_20]
+type=graphic
+x=-1
+y=303
+width=32
+height=32
+graphic="v2_stone_borders,6"
+op10= 
+
+// 190:21
+[com_21]
+type=graphic
+x=31
+y=315
+width=450
+height=24
+graphic="v2_stone_borders,2"
+tiling=yes
+opbase= 
+op10= 
+
+// 190:22
+[com_22]
+type=graphic
+x=481
+y=303
+width=32
+height=32
+graphic="v2_stone_borders,7"
+op10= 
+

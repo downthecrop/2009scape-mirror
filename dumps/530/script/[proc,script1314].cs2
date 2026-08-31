@@ -1,0 +1,70 @@
+// 1314
+[proc,script1314](int $int0)(boolean)
+if (getwindowmode >= 2) {
+    switch_int ($int0) {
+        case 0 :
+            return(if_gethide(interface_746:com_93));
+        case 1 :
+            return(if_gethide(interface_746:com_94));
+        case 2 :
+            return(if_gethide(interface_746:com_95));
+        case 3 :
+            return(if_gethide(interface_746:com_96));
+        case 4 :
+            return(if_gethide(interface_746:com_97));
+        case 5 :
+            return(if_gethide(interface_746:com_98));
+        case 6 :
+            return(if_gethide(interface_746:com_99));
+        case 7 :
+            return(if_gethide(interface_746:com_100));
+        case 8 :
+            return(if_gethide(interface_746:com_101));
+        case 9 :
+            return(if_gethide(interface_746:com_102));
+        case 10 :
+            return(if_gethide(interface_746:com_103));
+        case 11 :
+            return(if_gethide(interface_746:com_104));
+        case 12 :
+            return(if_gethide(interface_746:com_105));
+        case 13 :
+            return(if_gethide(interface_746:com_106));
+        case 99 :
+            return(if_gethide(interface_746:com_107));
+    }
+} else {
+    switch_int ($int0) {
+        case 0 :
+            return(if_gethide(interface_548:com_83));
+        case 1 :
+            return(if_gethide(interface_548:com_84));
+        case 2 :
+            return(if_gethide(interface_548:com_85));
+        case 3 :
+            return(if_gethide(interface_548:com_86));
+        case 4 :
+            return(if_gethide(interface_548:com_87));
+        case 5 :
+            return(if_gethide(interface_548:com_88));
+        case 6 :
+            return(if_gethide(interface_548:com_89));
+        case 7 :
+            return(if_gethide(interface_548:com_90));
+        case 8 :
+            return(if_gethide(interface_548:com_91));
+        case 9 :
+            return(if_gethide(interface_548:com_92));
+        case 10 :
+            return(if_gethide(interface_548:com_93));
+        case 11 :
+            return(if_gethide(interface_548:com_94));
+        case 12 :
+            return(if_gethide(interface_548:com_95));
+        case 13 :
+            return(if_gethide(interface_548:com_96));
+        case 99 :
+            return(if_gethide(interface_548:com_97));
+    }
+}
+return(null);

@@ -1,0 +1,5 @@
+// 955
+[clientscript,script955]
+if (%varplayerbit_4540 = 3 & inv_total(inv_94, obj_12845) = 0 & inv_total(inv_93, obj_12845) = 0 & inv_total(inv_94, obj_12846) = 0 & inv_total(inv_93, obj_12846) = 0 & inv_total(inv_94, obj_12847) = 0 & inv_total(inv_93, obj_12847) = 0 & inv_total(inv_94, obj_12848) = 0 & inv_total(inv_93, obj_12848) = 0 & inv_total(inv_94, obj_12849) = 0 & inv_total(inv_93, obj_12849) = 0) {
+    if_sethide(false, interface_730:com_23);
+}

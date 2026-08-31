@@ -1,0 +1,8 @@
+// 1473
+[proc,script1473]
+if_setgraphic("bank_buttons_new1,1", interface_762:com_21);
+if_setgraphic("bank_buttons_new2,2", interface_762:com_20);
+~script1463(0);
+~script1456;
+~script1549;
+%varclient_188 = 1;

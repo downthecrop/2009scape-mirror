@@ -1,0 +1,189 @@
+// 11:0
+[com_0]
+type=graphic
+x=88
+y=23
+width=352
+height=240
+graphic=tradebacking
+tiling=yes
+opbase=  
+
+// 11:1
+[com_1]
+type=graphic
+x=68
+y=46
+width=32
+height=193
+graphic="v2_stone_borders,1"
+tiling=yes
+opbase= 
+
+// 11:2
+[com_2]
+type=graphic
+x=81
+y=22
+width=32
+height=32
+graphic="v2_stone_borders,4"
+opbase= 
+
+// 11:3
+[com_3]
+type=graphic
+x=427
+y=46
+width=32
+height=189
+graphic="v2_stone_borders,3"
+tiling=yes
+opbase= 
+
+// 11:4
+[com_4]
+type=graphic
+x=107
+y=247
+width=314
+height=32
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 11:5
+[com_5]
+type=graphic
+x=112
+y=9
+width=308
+height=32
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+
+// 11:6
+[com_6]
+type=graphic
+x=81
+y=235
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 11:7
+[com_7]
+type=graphic
+x=415
+y=22
+width=32
+height=32
+graphic="v2_stone_borders,5"
+opbase= 
+
+// 11:8
+[com_8]
+type=graphic
+x=415
+y=235
+width=32
+height=32
+graphic="v2_stone_borders,7"
+opbase= 
+
+// 11:9
+[com_9]
+type=graphic
+x=87
+y=34
+width=353
+height=32
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 11:10
+[com_10]
+type=graphic
+x=81
+y=36
+width=32
+height=32
+graphic="v2_stone_borders,9"
+tiling=yes
+
+// 11:11
+[com_11]
+type=graphic
+x=415
+y=36
+width=32
+height=32
+graphic="v2_stone_borders,10"
+tiling=yes
+
+// 11:12
+[com_12]
+type=text
+x=93
+y=30
+width=343
+height=16
+textfont=b12_full
+text=The Bank of RuneScape - Deposit Box
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 11:13
+[com_13]
+type=graphic
+x=2
+y=1
+width=21
+height=21
+xmode=abs_right
+ymode=abs_bottom
+layer=com_16
+graphic=graphic_777
+op1=Deposit beast of burden inventory
+onmouseleave=script40(interface_11:com_17)
+onmouserepeat=script38(event_com, interface_11:com_17, "Empty your beast of burden's inventory into your bank", 25, 100)
+
+// 11:14
+[com_14]
+type=graphic
+x=422
+y=30
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+trans=20
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 11:15
+[com_15]
+type=layer
+x=102
+y=66
+width=325
+height=183
+
+// 11:16
+[com_16]
+type=layer
+x=73
+y=14
+width=367
+height=246
+
+// 11:17
+[com_17]
+type=layer
+y=-1
+width=367
+height=247
+layer=com_16
+

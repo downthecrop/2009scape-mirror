@@ -1,0 +1,25 @@
+// 706
+[proc,script706](int $int0)(int)
+if ($int0 < 1 | $int0 > 9) {
+    return(0);
+}
+switch_int ($int0) {
+    case 1 :
+        return(calc(496 - %varplayerbit_4885 - %varplayerbit_4886 - %varplayerbit_4887 - %varplayerbit_4888 - %varplayerbit_4889 - %varplayerbit_4890 - %varplayerbit_4891 - %varplayerbit_4892));
+    case 2 :
+        return(%varplayerbit_4885);
+    case 3 :
+        return(%varplayerbit_4886);
+    case 4 :
+        return(%varplayerbit_4887);
+    case 5 :
+        return(%varplayerbit_4888);
+    case 6 :
+        return(%varplayerbit_4889);
+    case 7 :
+        return(%varplayerbit_4890);
+    case 8 :
+        return(%varplayerbit_4891);
+    case 9 :
+        return(%varplayerbit_4892);
+}

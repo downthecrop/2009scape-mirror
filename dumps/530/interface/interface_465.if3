@@ -1,0 +1,100 @@
+// 465:0
+[com_0]
+type=rectangle
+y=-3
+width=538
+height=341
+colour=0x917e4e
+fill=yes
+
+// 465:1
+[com_1]
+type=model
+x=-188
+y=-138
+width=888
+height=898
+model=model_31816
+modelorigin_x=9
+modelorigin_y=6
+modelangle_x=503
+modelangle_y=0
+modelangle_z=22
+modelzoom=243
+modelanim=seq_8645
+modelorthog=yes
+unknown100=1949
+unknown101=497
+
+// 465:2
+[com_2]
+type=text
+x=29
+y=36
+width=425
+height=129
+textfont=quill_caps_large
+text=Varrock Herald
+textlineheight=39
+textalignh=1
+textalignv=1
+colour=0x212021
+onload=script826
+
+// 465:3
+[com_3]
+type=text
+x=27
+y=147
+width=220
+height=17
+textfont=q8_full
+text=Covering all of Misthalin and beyond.
+colour=0x212021
+onload=script826
+
+// 465:4
+[com_4]
+type=text
+x=368
+y=147
+width=76
+height=20
+textfont=q8_full
+text=1 gp
+textalignh=2
+colour=0x212021
+onload=script826
+
+// 465:5
+[com_5]
+type=text
+x=255
+y=182
+width=168
+height=58
+textfont=quill_oblique_large
+text=Oo'glog Ogresses Open Health Spa!
+textalignh=1
+textalignv=1
+colour=0x212020
+onload=script826
+
+// 465:6
+[com_6]
+type=model
+x=93
+y=14
+width=337
+height=354
+model=model_31815
+modelorigin_x=-65
+modelorigin_y=18
+modelangle_x=179
+modelangle_y=1852
+modelangle_z=0
+modelzoom=600
+modelanim=seq_8625
+unknown100=65019
+unknown101=1212
+

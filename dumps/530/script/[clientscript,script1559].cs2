@@ -1,0 +1,8 @@
+// 1559
+[clientscript,script1559]
+~script1361(interface_771:com_40);
+if_setonmouseleave("script40(interface_771:com_399)", interface_771:com_40);
+if_setonmouseover(null, interface_771:com_37);
+if_setonmouseleave("script1358(interface_771:com_399, event_com)", interface_771:com_37);
+if_setonmouseover("script97(event_com)", interface_771:com_37);
+~script680(interface_771:com_37);

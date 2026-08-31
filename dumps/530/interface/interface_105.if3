@@ -1,0 +1,2395 @@
+// 105:0
+[com_0]
+type=rectangle
+x=17
+y=25
+width=488
+height=305
+colour=0x000000
+fill=yes
+trans=200
+
+// 105:1
+[com_1]
+type=graphic
+x=14
+y=25
+width=485
+height=300
+graphic=tradebacking
+tiling=yes
+
+// 105:2
+[com_2]
+type=graphic
+x=13
+y=53
+width=7
+height=241
+graphic="v2_stone_borders_alt,1"
+tiling=yes
+
+// 105:3
+[com_3]
+type=graphic
+x=13
+y=20
+width=32
+height=32
+graphic="v2_stone_borders_alt,4"
+
+// 105:4
+[com_4]
+type=graphic
+x=468
+y=51
+width=32
+height=243
+graphic="v2_stone_borders_alt,3"
+tiling=yes
+
+// 105:5
+[com_5]
+type=graphic
+x=44
+y=20
+width=424
+height=7
+graphic="v2_stone_borders_alt,0"
+tiling=yes
+
+// 105:6
+[com_6]
+type=graphic
+x=45
+y=294
+width=423
+height=32
+graphic="v2_stone_borders_alt,2"
+tiling=yes
+
+// 105:7
+[com_7]
+type=graphic
+x=13
+y=294
+width=32
+height=32
+graphic="v2_stone_borders_alt,6"
+
+// 105:8
+[com_8]
+type=graphic
+x=468
+y=20
+width=32
+height=32
+graphic="v2_stone_borders_alt,5"
+
+// 105:9
+[com_9]
+type=graphic
+x=468
+y=294
+width=32
+height=32
+graphic="v2_stone_borders_alt,7"
+
+// 105:10
+[com_10]
+type=graphic
+x=24
+y=49
+width=465
+height=6
+graphic="v2_stone_borders_alt,8"
+tiling=yes
+
+// 105:11
+[com_11]
+type=graphic
+x=13
+y=37
+width=32
+height=32
+graphic="v2_stone_borders_alt,9"
+
+// 105:12
+[com_12]
+type=graphic
+x=468
+y=37
+width=32
+height=32
+graphic="v2_stone_borders_alt,10"
+
+// 105:13
+[com_13]
+type=graphic
+x=473
+y=30
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+onclick=script29
+
+// 105:14
+[com_14]
+type=text
+x=21
+y=30
+width=471
+height=16
+textfont=b12_full
+text=Grand Exchange
+textalignh=1
+textshadow=yes
+colour=0xcc9800
+onload=script585
+onvartransmit=script587
+onvartransmitlist=varplayer_1109,varplayer_1112,varplayer_1111,varplayer_1110,varplayer_1113
+
+// 105:15
+[com_15]
+type=graphic
+x=25
+y=26
+width=25
+height=25
+graphic=grand_exchange_icon_25
+
+// 105:16
+[com_16]
+type=layer
+width=512
+height=334
+
+// 105:17
+[com_17]
+type=text
+x=21
+y=60
+width=471
+height=14
+layer=com_16
+textfont=p11_full
+text=Shown below is a summary of all your current offers.
+textalignh=1
+textshadow=yes
+colour=0xcc9900
+
+// 105:18
+[com_18]
+type=layer
+x=30
+y=80
+width=140
+height=110
+layer=com_16
+op1=Make Offer
+op2=Abort Offer
+
+// 105:19
+[com_19]
+type=layer
+x=30
+y=80
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:20
+[com_20]
+type=graphic
+y=43
+width=32
+height=45
+layer=com_19
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:21
+[com_21]
+type=graphic
+x=14
+y=27
+width=47
+height=32
+layer=com_19
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:22
+[com_22]
+type=graphic
+x=47
+y=44
+width=32
+height=45
+layer=com_19
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:23
+[com_23]
+type=graphic
+x=14
+y=71
+width=47
+height=32
+layer=com_19
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:24
+[com_24]
+type=graphic
+x=63
+y=43
+width=32
+height=45
+layer=com_19
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:25
+[com_25]
+type=graphic
+x=77
+y=27
+width=47
+height=32
+layer=com_19
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:26
+[com_26]
+type=graphic
+x=110
+y=44
+width=32
+height=45
+layer=com_19
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:27
+[com_27]
+type=graphic
+x=77
+y=71
+width=47
+height=32
+layer=com_19
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:28
+[com_28]
+type=graphic
+x=83
+y=48
+width=35
+height=35
+layer=com_19
+graphic="grand_exchange_buy_sell_icon,0"
+
+// 105:29
+[com_29]
+type=graphic
+x=20
+y=48
+width=35
+height=35
+layer=com_19
+graphic="grand_exchange_buy_sell_icon,2"
+
+// 105:30
+[com_30]
+type=layer
+x=12
+y=43
+width=51
+height=46
+layer=com_19
+op1=Make Buy Offer
+onmouseover=script635(interface_105:com_29)
+onmouseleave=script637(interface_105:com_29)
+onmouserepeat=script647(event_com, interface_105:com_33, "Buy", 25, string_100)
+onclick=script40(interface_105:com_33)
+
+// 105:31
+[com_31]
+type=layer
+x=75
+y=43
+width=51
+height=46
+layer=com_19
+op1=Make Sell Offer
+onmouseover=script639(interface_105:com_28)
+onmouseleave=script641(interface_105:com_28)
+onmouserepeat=script647(event_com, interface_105:com_33, "Sell", 25, string_100)
+onclick=script40(interface_105:com_33)
+
+// 105:32
+[com_32]
+type=layer
+x=30
+y=80
+width=140
+height=110
+layer=com_16
+
+// 105:33
+[com_33]
+type=layer
+width=10
+height=10
+layer=com_32
+
+// 105:34
+[com_34]
+type=layer
+x=186
+y=80
+width=140
+height=110
+layer=com_16
+op1=Make Offer
+op2=Abort Offer
+
+// 105:35
+[com_35]
+type=layer
+x=186
+y=80
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:36
+[com_36]
+type=graphic
+y=43
+width=32
+height=45
+layer=com_35
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:37
+[com_37]
+type=graphic
+x=14
+y=27
+width=47
+height=32
+layer=com_35
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:38
+[com_38]
+type=graphic
+x=47
+y=44
+width=32
+height=45
+layer=com_35
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:39
+[com_39]
+type=graphic
+x=14
+y=71
+width=47
+height=32
+layer=com_35
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:40
+[com_40]
+type=graphic
+x=63
+y=43
+width=32
+height=45
+layer=com_35
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:41
+[com_41]
+type=graphic
+x=77
+y=27
+width=47
+height=32
+layer=com_35
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:42
+[com_42]
+type=graphic
+x=110
+y=44
+width=32
+height=45
+layer=com_35
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:43
+[com_43]
+type=graphic
+x=77
+y=71
+width=47
+height=32
+layer=com_35
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:44
+[com_44]
+type=graphic
+x=83
+y=48
+width=35
+height=35
+layer=com_35
+graphic="grand_exchange_buy_sell_icon,0"
+
+// 105:45
+[com_45]
+type=graphic
+x=20
+y=48
+width=35
+height=35
+layer=com_35
+graphic="grand_exchange_buy_sell_icon,2"
+
+// 105:46
+[com_46]
+type=layer
+x=12
+y=43
+width=51
+height=46
+layer=com_35
+op1=Make Buy Offer
+onmouseover=script635(interface_105:com_45)
+onmouseleave=script637(interface_105:com_45)
+onmouserepeat=script647(event_com, interface_105:com_49, "Buy", 25, string_100)
+onclick=script40(interface_105:com_49)
+
+// 105:47
+[com_47]
+type=layer
+x=75
+y=43
+width=51
+height=46
+layer=com_35
+op1=Make Sell Offer
+onmouseover=script639(interface_105:com_44)
+onmouseleave=script641(interface_105:com_44)
+onmouserepeat=script647(event_com, interface_105:com_49, "Sell", 25, string_100)
+onclick=script40(interface_105:com_49)
+
+// 105:48
+[com_48]
+type=layer
+x=186
+y=80
+width=140
+height=110
+layer=com_16
+
+// 105:49
+[com_49]
+type=layer
+width=10
+height=10
+layer=com_48
+
+// 105:50
+[com_50]
+type=layer
+x=342
+y=80
+width=140
+height=110
+layer=com_16
+op1=Make Offer
+op2=Abort Offer
+
+// 105:51
+[com_51]
+type=layer
+x=342
+y=80
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:52
+[com_52]
+type=graphic
+y=43
+width=32
+height=45
+layer=com_51
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:53
+[com_53]
+type=graphic
+x=14
+y=27
+width=47
+height=32
+layer=com_51
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:54
+[com_54]
+type=graphic
+x=47
+y=44
+width=32
+height=45
+layer=com_51
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:55
+[com_55]
+type=graphic
+x=14
+y=71
+width=47
+height=32
+layer=com_51
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:56
+[com_56]
+type=graphic
+x=63
+y=43
+width=32
+height=45
+layer=com_51
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:57
+[com_57]
+type=graphic
+x=77
+y=27
+width=47
+height=32
+layer=com_51
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:58
+[com_58]
+type=graphic
+x=110
+y=44
+width=32
+height=45
+layer=com_51
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:59
+[com_59]
+type=graphic
+x=77
+y=71
+width=47
+height=32
+layer=com_51
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:60
+[com_60]
+type=graphic
+x=83
+y=48
+width=35
+height=35
+layer=com_51
+graphic="grand_exchange_buy_sell_icon,0"
+
+// 105:61
+[com_61]
+type=graphic
+x=20
+y=48
+width=35
+height=35
+layer=com_51
+graphic="grand_exchange_buy_sell_icon,2"
+
+// 105:62
+[com_62]
+type=layer
+x=12
+y=43
+width=51
+height=46
+layer=com_51
+op1=Make Buy Offer
+onmouseover=script635(interface_105:com_61)
+onmouseleave=script637(interface_105:com_61)
+onmouserepeat=script647(event_com, interface_105:com_65, "Buy", 25, string_100)
+onclick=script40(interface_105:com_65)
+
+// 105:63
+[com_63]
+type=layer
+x=75
+y=43
+width=51
+height=46
+layer=com_51
+op1=Make Sell Offer
+onmouseover=script639(interface_105:com_60)
+onmouseleave=script641(interface_105:com_60)
+onmouserepeat=script647(event_com, interface_105:com_65, "Sell", 25, string_100)
+onclick=script40(interface_105:com_65)
+
+// 105:64
+[com_64]
+type=layer
+x=342
+y=80
+width=140
+height=110
+layer=com_16
+
+// 105:65
+[com_65]
+type=layer
+width=10
+height=10
+layer=com_64
+
+// 105:66
+[com_66]
+type=layer
+x=342
+y=80
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:67
+[com_67]
+type=rectangle
+width=140
+height=110
+layer=com_66
+colour=0x808080
+fill=yes
+trans=160
+
+// 105:68
+[com_68]
+type=graphic
+width=140
+height=110
+layer=com_66
+graphic=mesh
+tiling=yes
+
+// 105:69
+[com_69]
+type=layer
+x=30
+y=200
+width=140
+height=110
+layer=com_16
+op1=Make Offer
+op2=Abort Offer
+
+// 105:70
+[com_70]
+type=layer
+x=30
+y=200
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:71
+[com_71]
+type=graphic
+y=43
+width=32
+height=45
+layer=com_70
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:72
+[com_72]
+type=graphic
+x=14
+y=27
+width=47
+height=32
+layer=com_70
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:73
+[com_73]
+type=graphic
+x=47
+y=44
+width=32
+height=45
+layer=com_70
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:74
+[com_74]
+type=graphic
+x=14
+y=71
+width=47
+height=32
+layer=com_70
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:75
+[com_75]
+type=graphic
+x=63
+y=43
+width=32
+height=45
+layer=com_70
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:76
+[com_76]
+type=graphic
+x=77
+y=27
+width=47
+height=32
+layer=com_70
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:77
+[com_77]
+type=graphic
+x=110
+y=44
+width=32
+height=45
+layer=com_70
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:78
+[com_78]
+type=graphic
+x=77
+y=71
+width=47
+height=32
+layer=com_70
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:79
+[com_79]
+type=graphic
+x=83
+y=48
+width=35
+height=35
+layer=com_70
+graphic="grand_exchange_buy_sell_icon,0"
+
+// 105:80
+[com_80]
+type=graphic
+x=20
+y=48
+width=35
+height=35
+layer=com_70
+graphic="grand_exchange_buy_sell_icon,2"
+
+// 105:81
+[com_81]
+type=layer
+x=12
+y=43
+width=51
+height=46
+layer=com_70
+op1=Make Buy Offer
+onmouseover=script635(interface_105:com_80)
+onmouseleave=script637(interface_105:com_80)
+onmouserepeat=script647(event_com, interface_105:com_84, "Buy", 25, string_100)
+onclick=script40(interface_105:com_84)
+
+// 105:82
+[com_82]
+type=layer
+x=75
+y=43
+width=51
+height=46
+layer=com_70
+op1=Make Sell Offer
+onmouseover=script639(interface_105:com_79)
+onmouseleave=script641(interface_105:com_79)
+onmouserepeat=script647(event_com, interface_105:com_84, "Sell", 25, string_100)
+onclick=script40(interface_105:com_84)
+
+// 105:83
+[com_83]
+type=layer
+x=30
+y=200
+width=140
+height=110
+layer=com_16
+
+// 105:84
+[com_84]
+type=layer
+width=10
+height=10
+layer=com_83
+
+// 105:85
+[com_85]
+type=layer
+x=30
+y=200
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:86
+[com_86]
+type=rectangle
+width=140
+height=110
+layer=com_85
+colour=0x808080
+fill=yes
+trans=160
+
+// 105:87
+[com_87]
+type=graphic
+width=140
+height=110
+layer=com_85
+graphic=mesh
+tiling=yes
+
+// 105:88
+[com_88]
+type=layer
+x=186
+y=200
+width=140
+height=110
+layer=com_16
+op1=Make Offer
+op2=Abort Offer
+
+// 105:89
+[com_89]
+type=layer
+x=186
+y=200
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:90
+[com_90]
+type=graphic
+y=43
+width=32
+height=45
+layer=com_89
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:91
+[com_91]
+type=graphic
+x=14
+y=27
+width=47
+height=32
+layer=com_89
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:92
+[com_92]
+type=graphic
+x=47
+y=44
+width=32
+height=45
+layer=com_89
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:93
+[com_93]
+type=graphic
+x=14
+y=71
+width=47
+height=32
+layer=com_89
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:94
+[com_94]
+type=graphic
+x=63
+y=43
+width=32
+height=45
+layer=com_89
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:95
+[com_95]
+type=graphic
+x=77
+y=27
+width=47
+height=32
+layer=com_89
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:96
+[com_96]
+type=graphic
+x=110
+y=44
+width=32
+height=45
+layer=com_89
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:97
+[com_97]
+type=graphic
+x=77
+y=71
+width=47
+height=32
+layer=com_89
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:98
+[com_98]
+type=graphic
+x=83
+y=48
+width=35
+height=35
+layer=com_89
+graphic="grand_exchange_buy_sell_icon,0"
+
+// 105:99
+[com_99]
+type=graphic
+x=20
+y=48
+width=35
+height=35
+layer=com_89
+graphic="grand_exchange_buy_sell_icon,2"
+
+// 105:100
+[com_100]
+type=layer
+x=12
+y=43
+width=51
+height=46
+layer=com_89
+op1=Make Buy Offer
+onmouseover=script635(interface_105:com_99)
+onmouseleave=script637(interface_105:com_99)
+onmouserepeat=script647(event_com, interface_105:com_103, "Buy", 25, string_100)
+onclick=script40(interface_105:com_103)
+
+// 105:101
+[com_101]
+type=layer
+x=75
+y=43
+width=51
+height=46
+layer=com_89
+op1=Make Sell Offer
+onmouseover=script639(interface_105:com_98)
+onmouseleave=script641(interface_105:com_98)
+onmouserepeat=script647(event_com, interface_105:com_103, "Sell", 25, string_100)
+onclick=script40(interface_105:com_103)
+
+// 105:102
+[com_102]
+type=layer
+x=186
+y=200
+width=140
+height=110
+layer=com_16
+
+// 105:103
+[com_103]
+type=layer
+width=10
+height=10
+layer=com_102
+
+// 105:104
+[com_104]
+type=layer
+x=186
+y=200
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:105
+[com_105]
+type=rectangle
+width=140
+height=110
+layer=com_104
+colour=0x808080
+fill=yes
+trans=160
+
+// 105:106
+[com_106]
+type=graphic
+width=140
+height=110
+layer=com_104
+graphic=mesh
+tiling=yes
+
+// 105:107
+[com_107]
+type=layer
+x=342
+y=200
+width=140
+height=110
+layer=com_16
+op1=Make Offer
+op2=Abort Offer
+
+// 105:108
+[com_108]
+type=layer
+x=342
+y=200
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:109
+[com_109]
+type=graphic
+y=43
+width=32
+height=45
+layer=com_108
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:110
+[com_110]
+type=graphic
+x=14
+y=27
+width=47
+height=32
+layer=com_108
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:111
+[com_111]
+type=graphic
+x=47
+y=44
+width=32
+height=45
+layer=com_108
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:112
+[com_112]
+type=graphic
+x=14
+y=71
+width=47
+height=32
+layer=com_108
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:113
+[com_113]
+type=graphic
+x=63
+y=43
+width=32
+height=45
+layer=com_108
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:114
+[com_114]
+type=graphic
+x=77
+y=27
+width=47
+height=32
+layer=com_108
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:115
+[com_115]
+type=graphic
+x=110
+y=44
+width=32
+height=45
+layer=com_108
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:116
+[com_116]
+type=graphic
+x=77
+y=71
+width=47
+height=32
+layer=com_108
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:117
+[com_117]
+type=graphic
+x=83
+y=48
+width=35
+height=35
+layer=com_108
+graphic="grand_exchange_buy_sell_icon,0"
+
+// 105:118
+[com_118]
+type=graphic
+x=20
+y=48
+width=35
+height=35
+layer=com_108
+graphic="grand_exchange_buy_sell_icon,2"
+
+// 105:119
+[com_119]
+type=layer
+x=12
+y=43
+width=51
+height=46
+layer=com_108
+op1=Make Buy Offer
+onmouseover=script635(interface_105:com_118)
+onmouseleave=script637(interface_105:com_118)
+onmouserepeat=script647(event_com, interface_105:com_122, "Buy", 25, string_100)
+onclick=script40(interface_105:com_122)
+
+// 105:120
+[com_120]
+type=layer
+x=75
+y=43
+width=51
+height=46
+layer=com_108
+op1=Make Sell Offer
+onmouseover=script639(interface_105:com_117)
+onmouseleave=script641(interface_105:com_117)
+onmouserepeat=script647(event_com, interface_105:com_122, "Sell", 25, string_100)
+onclick=script40(interface_105:com_122)
+
+// 105:121
+[com_121]
+type=layer
+x=342
+y=200
+width=140
+height=110
+layer=com_16
+
+// 105:122
+[com_122]
+type=layer
+width=10
+height=10
+layer=com_121
+
+// 105:123
+[com_123]
+type=layer
+x=342
+y=200
+width=140
+height=110
+layer=com_16
+hide=yes
+
+// 105:124
+[com_124]
+type=rectangle
+width=140
+height=110
+layer=com_123
+colour=0x808080
+fill=yes
+trans=160
+
+// 105:125
+[com_125]
+type=graphic
+width=140
+height=110
+layer=com_123
+graphic=mesh
+tiling=yes
+
+// 105:126
+[com_126]
+type=layer
+width=512
+height=334
+hide=yes
+
+// 105:127
+[com_127]
+type=graphic
+x=25
+y=276
+width=35
+height=35
+layer=com_126
+graphic="bank_buttons,6"
+op1=Back
+onmouseover=script615(event_com)
+onmouseleave=script616(event_com)
+onop=script591
+onmouserepeat=script649(event_com, interface_105:com_213, "Back to offer summary", 25, 300)
+
+// 105:128
+[com_128]
+type=graphic
+x=19
+y=249
+width=474
+height=32
+layer=com_126
+graphic="v2_stone_borders,23"
+tiling=yes
+
+// 105:129
+[com_129]
+type=layer
+x=43
+y=60
+width=426
+height=90
+layer=com_126
+onload=script100(event_com)
+
+// 105:130
+[com_130]
+type=graphic
+x=187
+y=61
+width=32
+height=87
+layer=com_126
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:131
+[com_131]
+type=layer
+x=43
+y=152
+width=426
+height=84
+layer=com_126
+onload=script100(event_com)
+
+// 105:132
+[com_132]
+type=graphic
+x=244
+y=153
+width=32
+height=81
+layer=com_126
+graphic="v2_borders_slim,12"
+tiling=yes
+
+// 105:133
+[com_133]
+type=text
+x=43
+y=66
+width=159
+height=16
+layer=com_126
+textfont=b12_full
+text=Buy Offer
+textalignh=1
+textshadow=yes
+colour=0xcc9800
+
+// 105:134
+[com_134]
+type=graphic
+x=175
+y=67
+width=16
+height=14
+layer=com_126
+graphic="grand_exchange_misc_graphics,7"
+
+// 105:135
+[com_135]
+type=graphic
+x=44
+y=68
+width=157
+height=32
+layer=com_126
+graphic="v2_borders_slim,11"
+tiling=yes
+
+// 105:136
+[com_136]
+type=graphic
+x=102
+y=92
+width=40
+height=36
+layer=com_126
+graphic="bank_slot,0"
+
+// 105:137
+[com_137]
+type=graphic
+x=102
+y=92
+width=40
+height=36
+layer=com_126
+graphic="bank_slot,3"
+trans=255
+
+// 105:138
+[com_138]
+type=graphic
+x=104
+y=94
+width=36
+height=32
+layer=com_126
+graphicshadow=3158064
+
+// 105:139
+[com_139]
+type=graphic
+x=53
+y=132
+width=16
+height=14
+layer=com_126
+graphic="grand_exchange_misc_graphics,8"
+
+// 105:140
+[com_140]
+type=text
+x=59
+y=131
+width=140
+height=16
+layer=com_126
+textfont=p11_full
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0x999900
+onmouseleave=script40(interface_105:com_213)
+onmouserepeat=script38(event_com, interface_105:com_213, "Current item Market Price", 25, 300)
+
+// 105:141
+[com_141]
+type=text
+x=210
+y=66
+width=250
+height=16
+layer=com_126
+textfont=b12_full
+text=Choose an item to exchange
+textshadow=yes
+colour=0xcc9900
+
+// 105:142
+[com_142]
+type=text
+x=210
+y=94
+width=250
+height=33
+layer=com_126
+textfont=p11_full
+textshadow=yes
+colour=0xc1a875
+
+// 105:143
+[com_143]
+type=graphic
+x=211
+y=132
+width=16
+height=14
+layer=com_126
+graphic="grand_exchange_misc_graphics,0"
+
+// 105:144
+[com_144]
+type=graphic
+x=443
+y=132
+width=16
+height=14
+layer=com_126
+graphic="grand_exchange_misc_graphics,1"
+
+// 105:145
+[com_145]
+type=text
+x=210
+y=131
+width=250
+height=16
+layer=com_126
+textfont=p11_full
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xffa861
+onmouseleave=script40(interface_105:com_213)
+onmouserepeat=script38(event_com, interface_105:com_213, "Current item price range (Minimum/Maximum Price)", 25, 300)
+
+// 105:146
+[com_146]
+type=text
+x=47
+y=157
+width=208
+height=16
+layer=com_126
+textfont=b12_full
+text=Quantity:
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xcc9800
+
+// 105:147
+[com_147]
+type=graphic
+x=75
+y=178
+width=20
+height=20
+layer=com_126
+graphic=graphic_1161
+
+// 105:148
+[com_148]
+type=graphic
+x=95
+y=178
+width=113
+height=20
+layer=com_126
+graphic=graphic_1162
+tiling=yes
+
+// 105:149
+[com_149]
+type=graphic
+x=208
+y=178
+width=20
+height=20
+layer=com_126
+graphic=graphic_1163
+tiling=yes
+
+// 105:150
+[com_150]
+type=text
+x=83
+y=180
+width=136
+height=16
+layer=com_126
+textfont=b12_full
+text=1
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xffa861
+
+// 105:151
+[com_151]
+type=text
+x=262
+y=157
+width=202
+height=16
+layer=com_126
+textfont=b12_full
+text=Price per item:
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xcc9800
+
+// 105:152
+[com_152]
+type=graphic
+x=289
+y=178
+width=20
+height=20
+layer=com_126
+graphic=graphic_1161
+
+// 105:153
+[com_153]
+type=graphic
+x=309
+y=178
+width=108
+height=20
+layer=com_126
+graphic=graphic_1162
+tiling=yes
+
+// 105:154
+[com_154]
+type=graphic
+x=417
+y=178
+width=20
+height=20
+layer=com_126
+graphic=graphic_1163
+tiling=yes
+
+// 105:155
+[com_155]
+type=text
+x=295
+y=180
+width=136
+height=16
+layer=com_126
+textfont=b12_full
+text=1 gp
+textalignh=1
+textshadow=yes
+colour=0xffa861
+
+// 105:156
+[com_156]
+type=layer
+width=512
+height=334
+hide=yes
+
+// 105:157
+[com_157]
+type=layer
+x=55
+y=181
+width=13
+height=13
+layer=com_156
+op1=Decrease Quantity
+onmouseleave=script40(interface_105:com_213)
+onop=script596
+onmouserepeat=script649(event_com, interface_105:com_213, "Decrease quantity by 1", 25, 300)
+
+// 105:158
+[com_158]
+type=graphic
+x=55
+y=181
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,2"
+onmouseover=script613(event_com)
+onmouseleave=script614(event_com)
+
+// 105:159
+[com_159]
+type=layer
+x=235
+y=181
+width=13
+height=13
+layer=com_156
+opbase= 
+op1=Increase Quantity
+onmouseleave=script40(interface_105:com_213)
+onop=script597
+onmouserepeat=script649(event_com, interface_105:com_213, "Increase quantity by 1", 25, 300)
+
+// 105:160
+[com_160]
+type=graphic
+x=235
+y=181
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,3"
+onmouseover=script611(event_com)
+onmouseleave=script612(event_com)
+
+// 105:161
+[com_161]
+type=graphic
+x=52
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:162
+[com_162]
+type=text
+x=52
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+text=1
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xcc9800
+op1=Add 1
+onmouseleave=script40(interface_105:com_213)
+onop=script598
+
+// 105:163
+[com_163]
+type=graphic
+x=93
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:164
+[com_164]
+type=text
+x=93
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+text=10
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Add 10
+onmouseleave=script40(interface_105:com_213)
+onop=script599
+
+// 105:165
+[com_165]
+type=graphic
+x=134
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:166
+[com_166]
+type=text
+x=134
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+text=100
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Add 100
+onmouseleave=script40(interface_105:com_213)
+onop=script600
+
+// 105:167
+[com_167]
+type=graphic
+x=175
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:168
+[com_168]
+type=text
+x=175
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+text=1000
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Add 1000
+onmouseleave=script40(interface_105:com_213)
+onop=script865
+
+// 105:169
+[com_169]
+type=graphic
+x=216
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:170
+[com_170]
+type=text
+x=216
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+text=...
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Edit Quantity
+onmouseleave=script40(interface_105:com_213)
+onmouserepeat=script649(event_com, interface_105:com_213, "Enter custom quantity", 25, 300)
+
+// 105:171
+[com_171]
+type=layer
+x=269
+y=181
+width=13
+height=13
+layer=com_156
+op1=Decrease Price
+onmouseleave=script40(interface_105:com_213)
+onop=script604
+onmouserepeat=script649(event_com, interface_105:com_213, "Decrease price by 1", 25, 300)
+
+// 105:172
+[com_172]
+type=graphic
+x=269
+y=181
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,2"
+onmouseover=script613(event_com)
+onmouseleave=script614(event_com)
+
+// 105:173
+[com_173]
+type=layer
+x=444
+y=181
+width=13
+height=13
+layer=com_156
+op1=Increase Price
+onmouseleave=script40(interface_105:com_213)
+onop=script605
+onmouserepeat=script649(event_com, interface_105:com_213, "Increase price by 1", 25, 300)
+
+// 105:174
+[com_174]
+type=graphic
+x=444
+y=181
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,3"
+onmouseover=script611(event_com)
+onmouseleave=script612(event_com)
+
+// 105:175
+[com_175]
+type=graphic
+x=266
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:176
+[com_176]
+type=graphic
+x=276
+y=211
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,0"
+
+// 105:177
+[com_177]
+type=text
+x=266
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Offer Minimum Price
+onmouseleave=script40(interface_105:com_213)
+onop=script606
+onmouserepeat=script649(event_com, interface_105:com_213, "Set price to item's Minimum Price", 25, 300)
+
+// 105:178
+[com_178]
+type=graphic
+x=319
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:179
+[com_179]
+type=graphic
+x=328
+y=211
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,8"
+
+// 105:180
+[com_180]
+type=text
+x=319
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Offer Market Price
+onmouseleave=script40(interface_105:com_213)
+onop=script607
+onmouserepeat=script649(event_com, interface_105:com_213, "Set price to item's Market Price", 25, 300)
+
+// 105:181
+[com_181]
+type=graphic
+x=372
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:182
+[com_182]
+type=graphic
+x=382
+y=211
+width=16
+height=14
+layer=com_156
+graphic="grand_exchange_misc_graphics,1"
+
+// 105:183
+[com_183]
+type=text
+x=372
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Offer Maximum Price
+onmouseleave=script40(interface_105:com_213)
+onop=script608
+onmouserepeat=script649(event_com, interface_105:com_213, "Set price to item's Maximum Price", 25, 300)
+
+// 105:184
+[com_184]
+type=graphic
+x=425
+y=200
+width=35
+height=35
+layer=com_156
+graphic="bank_buttons,5"
+onmouseover=script643(event_com)
+onmouseleave=script645(event_com)
+
+// 105:185
+[com_185]
+type=text
+x=425
+y=205
+width=35
+height=25
+layer=com_156
+textfont=p11_full
+text=...
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9800
+op1=Edit Price
+onmouseleave=script40(interface_105:com_213)
+onmouserepeat=script649(event_com, interface_105:com_213, "Enter custom price", 25, 300)
+
+// 105:186
+[com_186]
+type=graphic
+x=186
+y=239
+width=20
+height=20
+layer=com_126
+graphic=graphic_1161
+
+// 105:187
+[com_187]
+type=graphic
+x=206
+y=239
+width=108
+height=20
+layer=com_126
+graphic=graphic_1162
+tiling=yes
+
+// 105:188
+[com_188]
+type=graphic
+x=314
+y=239
+width=20
+height=20
+layer=com_126
+graphic=graphic_1163
+tiling=yes
+
+// 105:189
+[com_189]
+type=text
+x=186
+y=239
+width=148
+height=20
+layer=com_126
+textfont=b12_full
+textlineheight=13
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xebe573
+onmouseleave=script40(interface_105:com_213)
+
+// 105:190
+[com_190]
+type=layer
+x=200
+y=270
+width=120
+height=43
+layer=com_156
+op1=Confirm Offer
+onload=script93(event_com)
+onmouseover=script97(event_com)
+onmouseleave=script653(event_com)
+onmouserepeat=script649(event_com, interface_105:com_213, "Confirm this offer and return to the summary view", 25, 300)
+
+// 105:191
+[com_191]
+type=text
+x=200
+y=270
+width=120
+height=43
+layer=com_156
+textfont=b12_full
+text=Confirm Offer
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xcc9800
+
+// 105:192
+[com_192]
+type=layer
+width=512
+height=334
+hide=yes
+
+// 105:193
+[com_193]
+type=layer
+x=102
+y=94
+width=40
+height=36
+layer=com_192
+onmouseleave=script40(interface_105:com_213)
+onmouserepeat=script649(event_com, interface_105:com_213, "Click here to search for an item to buy", 25, 300)
+
+// 105:194
+[com_194]
+type=layer
+x=102
+y=94
+width=40
+height=36
+layer=com_192
+op1=Choose Item
+onmouseover=script664(interface_105:com_136, -1)
+onmouseleave=script665(interface_105:com_136, -1)
+
+// 105:195
+[com_195]
+type=graphic
+x=105
+y=97
+width=16
+height=14
+layer=com_192
+graphic="grand_exchange_misc_graphics,4"
+
+// 105:196
+[com_196]
+type=text
+x=210
+y=94
+width=250
+height=33
+layer=com_192
+textfont=p11_full
+text=Click the icon to the left to search for items.
+textshadow=yes
+colour=0xc1a875
+
+// 105:197
+[com_197]
+type=layer
+width=512
+height=334
+hide=yes
+
+// 105:198
+[com_198]
+type=layer
+x=102
+y=94
+width=40
+height=36
+layer=com_197
+onmouseleave=script40(interface_105:com_213)
+onmouserepeat=script649(event_com, interface_105:com_213, "Use your inventory to select an item to sell here", 25, 300)
+
+// 105:199
+[com_199]
+type=text
+x=210
+y=94
+width=250
+height=33
+layer=com_197
+textfont=p11_full
+text=Select an item in your inventory to sell.
+textshadow=yes
+colour=0xc1a875
+
+// 105:200
+[com_200]
+type=layer
+width=512
+height=334
+hide=yes
+
+// 105:201
+[com_201]
+type=text
+x=90
+y=267
+width=260
+height=30
+layer=com_200
+textfont=p11_full
+textlineheight=15
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xc1a875
+
+// 105:202
+[com_202]
+type=layer
+x=70
+y=299
+width=300
+height=15
+layer=com_200
+
+// 105:203
+[com_203]
+type=graphic
+x=350
+y=272
+width=20
+height=20
+layer=com_200
+graphic="grand_exchange_cancelled_buttons,0"
+op1=Abort Offer
+onmouseover=script617(event_com)
+onmouseleave=script618(event_com)
+onmouserepeat=script649(event_com, interface_105:com_213, "Abort offer", 25, 100)
+onclick=script618(event_com)
+
+// 105:204
+[com_204]
+type=graphic
+x=380
+y=262
+width=32
+height=32
+layer=com_200
+graphic="v2_stone_borders,18"
+
+// 105:205
+[com_205]
+type=graphic
+x=412
+y=248
+width=82
+height=32
+layer=com_200
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 105:206
+[com_206]
+type=graphic
+x=366
+y=287
+width=32
+height=32
+layer=com_200
+graphic="v2_stone_borders,13"
+
+// 105:207
+[com_207]
+type=graphic
+x=386
+y=268
+width=107
+height=51
+layer=com_200
+graphic=graphic_1136
+tiling=yes
+
+// 105:208
+[com_208]
+type=graphic
+x=395
+y=276
+width=40
+height=36
+layer=com_200
+graphic="bank_slot,1"
+onmouseover=script664(event_com, -1)
+onmouseleave=script665(event_com, -1)
+
+// 105:209
+[com_209]
+type=graphic
+x=397
+y=278
+width=36
+height=32
+layer=com_200
+
+// 105:210
+[com_210]
+type=graphic
+x=444
+y=276
+width=40
+height=36
+layer=com_200
+graphic="bank_slot,1"
+onmouseover=script664(event_com, -1)
+onmouseleave=script665(event_com, -1)
+
+// 105:211
+[com_211]
+type=graphic
+x=446
+y=278
+width=36
+height=32
+layer=com_200
+
+// 105:212
+[com_212]
+type=layer
+width=512
+height=334
+
+// 105:213
+[com_213]
+type=layer
+width=10
+height=10
+layer=com_212
+

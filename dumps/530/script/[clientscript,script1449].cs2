@@ -1,0 +1,15 @@
+// 1449
+[clientscript,script1449]
+if_setonvartransmit("script1502{varplayer_1253}", interface_762:com_61);
+%varclient_188 = 0;
+~script1487;
+~script1490;
+~script1450;
+~script1464;
+~script1455;
+~script1459;
+~script1463(%varplayerbit_4893);
+if_setonvarctransmit("script1472{varclient_190}", interface_762:com_20);
+if_setonvarctransmit("script1465{varclient_192}", interface_762:com_97);
+if_setscrollpos(0, ~script704(%varplayerbit_4893), interface_762:com_73);
+~script157(interface_762:com_95, interface_762:com_73, if_getscrolly(interface_762:com_73), 1);

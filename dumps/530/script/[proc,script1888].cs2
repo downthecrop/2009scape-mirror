@@ -1,0 +1,5 @@
+// 1888
+[proc,script1888]
+if (%varclient_543 >= 1 & getwindowmode = 0 | %varclient_543 = 0 & getwindowmode >= 1) {
+    ~script1887(interface_744:com_125, interface_744:com_127, interface_744:com_126, interface_744:com_128, interface_744:com_129);
+}

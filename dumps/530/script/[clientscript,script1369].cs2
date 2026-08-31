@@ -1,0 +1,24 @@
+// 1369
+[clientscript,script1369](component $component0, component $component1, component $component2, component $component3, component $component4, component $component5)
+~script1088($component0, 0);
+~script2046;
+def_string $string0 = null;
+if (%varclient_622 ! null) {
+    $string0 = worldmap_getmap(%varclient_622);
+    if (string_length($string0) <= 0) {
+        $string0 = "main";
+    }
+}
+worldmap_setmap($string0);
+%varclientstring_52 = $string0;
+%varclient_172 = worldmap_getconfigzoom;
+~script1372;
+~script1374(0);
+~script1376(0, $component5);
+~script1378(0);
+~script1839(%varplayerbit_5367, $component1, $component2, $component3);
+if_setonkey("script1382(event_keycode, event_keychar, $component4)", $component4);
+%varclientstring_31 = "";
+if (%varclient_622 ! null & worldmap_coordinmap(%varclient_622, $string0) = true) {
+    if_setontimer("script2054(calc(clientclock + 5), $component0, %varclient_622)", $component0);
+}

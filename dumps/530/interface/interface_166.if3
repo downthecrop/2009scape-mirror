@@ -1,0 +1,36 @@
+// 166:0
+[com_0]
+type=model
+x=-31
+y=-2
+width=581
+height=338
+model=model_34822
+modelorigin_x=1
+modelorigin_y=104
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=443
+unknown100=64238
+unknown101=3000
+
+// 166:1
+[com_1]
+type=model
+x=-172
+y=-86
+width=881
+height=468
+model=model_34823
+modelorigin_x=-2
+modelorigin_y=87
+modelangle_x=12
+modelangle_y=1024
+modelangle_z=0
+modelzoom=244
+modelanim=seq_9574
+modelorthog=yes
+unknown100=256
+unknown101=3000
+

@@ -1,0 +1,117 @@
+// 567
+[clientscript,script567]
+if (%varplayerbit_4159 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_38);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_38);
+}
+if (%varplayerbit_4160 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_46);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_46);
+}
+if (%varplayerbit_4161 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_30);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_30);
+}
+if (%varplayerbit_4162 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_32);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_32);
+}
+if (%varplayerbit_4163 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_34);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_34);
+}
+if (%varplayerbit_4164 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_40);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_40);
+}
+if (%varplayerbit_4165 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_42);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_42);
+}
+if (%varplayerbit_4166 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_44);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_44);
+}
+if (%varplayerbit_4167 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_48);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_48);
+}
+if (%varplayerbit_4168 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_36);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_36);
+}
+if (%varplayerbit_4169 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_51);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_51);
+}
+if (%varplayerbit_4275 = 1) {
+    if_setgraphic("radio_buttons,1", interface_631:com_53);
+} else {
+    if_setgraphic("radio_buttons,0", interface_631:com_53);
+}
+if (%varplayerbit_4170 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_79);
+} else {
+    if_setgraphic(null, interface_631:com_79);
+}
+if (%varplayerbit_4171 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_80);
+} else {
+    if_setgraphic(null, interface_631:com_80);
+}
+if (%varplayerbit_4172 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_81);
+} else {
+    if_setgraphic(null, interface_631:com_81);
+}
+if (%varplayerbit_4173 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_83);
+} else {
+    if_setgraphic(null, interface_631:com_83);
+}
+if (%varplayerbit_4174 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_84);
+} else {
+    if_setgraphic(null, interface_631:com_84);
+}
+if (%varplayerbit_4175 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_85);
+} else {
+    if_setgraphic(null, interface_631:com_85);
+}
+if (%varplayerbit_4177 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_86);
+} else {
+    if_setgraphic(null, interface_631:com_86);
+}
+if (%varplayerbit_4179 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_89);
+} else {
+    if_setgraphic(null, interface_631:com_89);
+}
+if (%varplayerbit_4180 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_88);
+} else {
+    if_setgraphic(null, interface_631:com_88);
+}
+if (%varplayerbit_4182 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_87);
+} else {
+    if_setgraphic(null, interface_631:com_87);
+}
+if (%varplayerbit_4183 = 1) {
+    if_setgraphic(duel_misc_graphic, interface_631:com_82);
+} else {
+    if_setgraphic(null, interface_631:com_82);
+}

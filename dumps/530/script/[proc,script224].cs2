@@ -1,0 +1,16 @@
+// 224
+[proc,script224]
+if_setgraphic("miscgraphics,10", interface_595:com_74);
+if_setgraphic("miscgraphics,10", interface_595:com_77);
+if_setgraphic("miscgraphics,10", interface_595:com_80);
+if_setgraphic("miscgraphics,10", interface_595:com_83);
+if_setgraphic("miscgraphics,10", interface_595:com_86);
+if_setgraphic("miscgraphics,10", interface_595:com_89);
+if_setgraphic("miscgraphics,10", interface_595:com_92);
+if_setgraphic("miscgraphics,10", interface_595:com_95);
+if_setgraphic("miscgraphics,10", interface_595:com_98);
+if_setgraphic("miscgraphics,10", interface_595:com_101);
+if_setgraphic("miscgraphics,10", interface_595:com_104);
+if_setgraphic("miscgraphics,10", interface_595:com_107);
+if_setgraphic("miscgraphics,10", interface_595:com_110);
+if_setgraphic("miscgraphics,10", interface_595:com_113);

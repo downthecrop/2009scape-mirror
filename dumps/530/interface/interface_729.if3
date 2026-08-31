@@ -1,0 +1,50 @@
+// 729:0
+[com_0]
+type=rectangle
+width=512
+height=334
+colour=0x46341d
+fill=yes
+trans=160
+
+// 729:1
+[com_1]
+type=model
+x=48
+y=46
+width=340
+height=231
+model=model_32729
+modelorigin_x=0
+modelorigin_y=-35
+modelangle_x=1847
+modelangle_y=1936
+modelangle_z=133
+modelzoom=528
+unknown100=0
+unknown101=3000
+
+// 729:2
+[com_2]
+type=text
+x=250
+y=210
+width=262
+height=124
+textfont=quill_oblique_large
+textshadow=yes
+colour=0xcc9900
+
+// 729:3
+[com_3]
+type=graphic
+x=467
+y=7
+width=26
+height=23
+graphic="close_buttons,4"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,5")
+onmouseleave=script44(event_com, "close_buttons,4")
+onop=script29
+

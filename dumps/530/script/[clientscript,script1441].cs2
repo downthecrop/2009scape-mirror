@@ -1,0 +1,18 @@
+// 1441
+[clientscript,script1441]
+if_sethide(true, interface_299:com_32);
+if_sethide(true, interface_299:com_33);
+if_sethide(true, interface_299:com_34);
+if_sethide(true, interface_299:com_35);
+if_sethide(true, interface_299:com_36);
+if_sethide(true, interface_299:com_40);
+if_sethide(true, interface_299:com_41);
+if_sethide(true, interface_299:com_42);
+if_sethide(true, interface_299:com_43);
+if_sethide(true, interface_299:com_44);
+if_sethide(true, interface_299:com_45);
+if_sethide(true, interface_299:com_46);
+if_sethide(true, interface_299:com_55);
+if_sethide(true, interface_299:com_47);
+if_sethide(true, interface_299:com_32);
+if_sethide(true, interface_299:com_33);

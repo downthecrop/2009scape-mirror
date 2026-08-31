@@ -1,0 +1,16 @@
+// 570
+[clientscript,script570](string $string0)
+if_sethide(true, interface_752:com_7);
+if_sethide(true, interface_752:com_3);
+if_sethide(false, interface_752:com_6);
+if_setonkey("script574(event_keycode, event_keychar)", interface_389:com_9);
+if_settext($string0, interface_389:com_6);
+if_sethide(false, interface_389:com_5);
+if_setobject(null, -1, interface_389:com_15);
+~script1188;
+%varclientstring_22 = "";
+if_settext("*", interface_389:com_9);
+cc_deleteall(interface_389:com_4);
+if_setscrollsize(0, 15, interface_389:com_4);
+~script31(interface_389:com_8, interface_389:com_4, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+if_setondialogabort("script572", interface_389:com_9);

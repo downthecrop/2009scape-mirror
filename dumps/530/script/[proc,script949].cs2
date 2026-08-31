@@ -1,0 +1,91 @@
+// 949
+[proc,script949](int $int0, int $int1)
+cc_deleteall(interface_726:com_187);
+def_component $component2 = enum(int, component, enum_1443, $int0);
+if ($component2 = interface_726:com_121) {
+    if_setobject(obj_554, -1, interface_726:com_150);
+    if_setobject(obj_563, -1, interface_726:com_151);
+    if_setobject(obj_554, -1, interface_726:com_159);
+    if_setobject(obj_563, -1, interface_726:com_158);
+    return;
+}
+if ($component2 = null) {
+    if_close;
+    return;
+}
+def_obj $obj3 = obj_554;
+if (calc($int0 % 2) = 0) {
+    $obj3 = obj_563;
+}
+if_setobject($obj3, -1, $component2);
+if ($int1 = 1) {
+    cc_create(interface_726:com_187, ^iftype_model, 0);
+    cc_setsize(32, 32, ^setsize_abs, ^setsize_abs);
+    cc_setposition(if_getx($component2), if_gety($component2), ^setpos_abs_left, ^setpos_abs_top);
+    cc_setmodel(model_4611);
+    cc_setmodelangle(0, 0, 512, 0, 0, 768);
+    cc_setmodelanim(seq_1355);
+    sound_synth(synth_1122, 1, 0);
+}
+def_int $int4 = -1;
+def_int $int5 = -1;
+$int4, $int5 = ~script951($component2);
+if ($int4 = -1 | $int5 = -1) {
+    return;
+}
+if ($int5 < 7) {
+    ~script950($int4, $int5, 0, 1, $obj3);
+    if ($int4 < 7) {
+        ~script950($int4, $int5, 1, 1, $obj3);
+    }
+}
+if ($int4 < 7) {
+    ~script950($int4, $int5, 1, 0, $obj3);
+    if ($int5 > 0) {
+        ~script950($int4, $int5, 1, -1, $obj3);
+    }
+}
+if ($int5 > 0) {
+    ~script950($int4, $int5, 0, -1, $obj3);
+    if ($int4 > 0) {
+        ~script950($int4, $int5, -1, -1, $obj3);
+    }
+}
+if ($int4 > 0) {
+    ~script950($int4, $int5, -1, 0, $obj3);
+    if ($int5 < 7) {
+        ~script950($int4, $int5, -1, 1, $obj3);
+    }
+}
+def_int $int6 = 0;
+def_int $int7 = 0;
+if ($int0 = calc(61 - 1)) {
+    $int4 = 0;
+    while ($int4 < 8) {
+        $int5 = 0;
+        while ($int5 < 8) {
+            if (if_getinvobject(~script952($int4, $int5)) = obj_554) {
+                $int6 = calc($int6 + 1);
+            } else if (if_getinvobject(~script952($int4, $int5)) = obj_563) {
+                $int7 = calc($int7 + 1);
+            }
+            $int5 = calc($int5 + 1);
+        }
+        $int4 = calc($int4 + 1);
+    }
+    if ($int6 > $int7) {
+        sound_jingle(jingle_110, 6656);
+        if_settext("<"Teapotspout"> wins!", interface_726:com_121);
+    } else if ($int6 < $int7) {
+        sound_jingle(jingle_110, 6656);
+        if_settext("<"Hotwater"> wins!", interface_726:com_121);
+    } else {
+        sound_jingle(jingle_108, 6449);
+        if_settext("It's a draw.", interface_726:com_121);
+    }
+    if (calc($int6 + $int7) >= 64) {
+        if_settext("The board is full.", interface_726:com_122);
+    } else {
+        if_settext("Neither player can move.", interface_726:com_122);
+    }
+}

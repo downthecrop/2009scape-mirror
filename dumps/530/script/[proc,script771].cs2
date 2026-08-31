@@ -1,0 +1,6 @@
+// 771
+[proc,script771](obj $obj0)(int)
+if ($obj0 = obj_6287) {
+    return(calc(inv_total(inv_93, obj_6287) + inv_total(inv_93, obj_7801)));
+}
+return(~script1(inv_93, $obj0));

@@ -1,0 +1,76 @@
+// 547:0
+[com_0]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+
+// 547:1
+[com_1]
+type=model
+x=38
+width=450
+height=336
+layer=com_0
+model=model_26589
+modelorigin_x=-11
+modelorigin_y=-11
+modelangle_x=469
+modelangle_y=0
+modelangle_z=0
+modelzoom=666
+unknown100=64129
+unknown101=3000
+
+// 547:2
+[com_2]
+type=model
+x=74
+y=17
+width=306
+height=240
+layer=com_0
+model=model_26590
+modelorigin_x=25
+modelorigin_y=20
+modelangle_x=469
+modelangle_y=0
+modelangle_z=0
+modelzoom=666
+unknown100=64071
+unknown101=3000
+
+// 547:3
+[com_3]
+type=model
+x=59
+y=30
+width=408
+height=297
+layer=com_0
+model=model_26591
+modelorigin_x=-11
+modelorigin_y=-21
+modelangle_x=469
+modelangle_y=0
+modelangle_z=0
+modelzoom=666
+unknown100=64051
+unknown101=3000
+
+// 547:4
+[com_4]
+type=graphic
+x=466
+y=8
+width=26
+height=23
+layer=com_0
+graphic="close_buttons,6"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,7")
+onmouseleave=script44(event_com, "close_buttons,6")
+onop=script29
+onclick=script29
+

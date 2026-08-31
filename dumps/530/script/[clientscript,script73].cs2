@@ -1,0 +1,77 @@
+// 73
+[clientscript,script73](int $key0, char $char1)
+if ($key0 = ^key_f9) {
+    if (%varclient_132 ! null) {
+        ~script1052(%varclient_133, %varclientstring_29, %varclient_132);
+    }
+    return;
+}
+if ($key0 = ^key_f10) {
+    if (~script1036 ! null) {
+        ~script1051(0, "");
+    }
+    return;
+}
+def_int $int2 = 0;
+def_int $int3 = 0;
+if ($key0 = ^key_f11) {
+    $int2 = 150;
+    $int3 = calc(clientclock - %varclient_158);
+    if ($int3 > 1500) {
+        %varclient_159 = 0;
+    }
+    if (%varclient_159 >= 7) {
+        $int2 = 600;
+    } else if (%varclient_159 >= 5) {
+        $int2 = 450;
+    } else if (%varclient_159 >= 3) {
+        $int2 = 300;
+    }
+    if ($int3 >= $int2) {
+        %varclient_158 = clientclock;
+        %varclient_159 = calc(%varclient_159 + 1);
+        if (%varclient_130 ! null) {
+            ~script1069;
+        }
+        return;
+    }
+}
+if (staffmodlevel > 0) {
+    if ($key0 = ^key_page_up) {
+        ~script75;
+    } else if ($key0 = ^key_page_down) {
+        ~script76;
+    }
+} else if (unknown_command_3328 = true | map_quickchat = true) {
+    if ($key0 = ^key_return) {
+        ~script1050(0, "");
+        return;
+    }
+    if (char_isprintable($char1) = true & compare("/", append_char("", $char1)) = 0) {
+        ~script1050(2, "");
+        return;
+    }
+    return;
+}
+if ($key0 = ^key_return) {
+    if (string_length(%varclientstring_1) <= 0) {
+        %varclientstring_1 = "";
+        ~script1050(0, "");
+        return;
+    }
+    if (compare("/", %varclientstring_1) = 0) {
+        %varclientstring_1 = "";
+        ~script1050(2, "");
+        return;
+    }
+    chat_sendpublic(%varclientstring_1);
+    ~script77(%varclientstring_1);
+    %varclientstring_1 = "";
+} else {
+    %varclientstring_1 = ~script74(%varclientstring_1, 0, $key0, $char1);
+}
+if (getwindowmode >= 2) {
+    if_settext("<chat_playername><img=3>: <col=7fa9ff><escape(%varclientstring_1)>*", interface_137:com_51);
+} else {
+    if_settext("<chat_playername><img=3>: <col=0000ff><escape(%varclientstring_1)>*", interface_137:com_51);
+}

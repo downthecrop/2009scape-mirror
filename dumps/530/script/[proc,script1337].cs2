@@ -1,0 +1,19 @@
+// 1337
+[proc,script1337]
+if_setgraphic(graphic_1206, interface_748:com_1);
+if_setposition(1, 1, ^setpos_abs_left, ^setpos_abs_top, interface_748:com_2);
+if_setposition(1, 1, ^setpos_abs_left, ^setpos_abs_top, interface_748:com_3);
+if_setposition(31, 15, ^setpos_abs_left, ^setpos_abs_top, interface_748:com_4);
+if_setposition(7, 7, ^setpos_abs_left, ^setpos_abs_top, interface_748:com_5);
+if_setgraphic(graphic_1206, interface_747:com_1);
+if_setposition(1, 1, ^setpos_abs_left, ^setpos_abs_top, interface_747:com_2);
+if_setposition(1, 1, ^setpos_abs_left, ^setpos_abs_top, interface_747:com_3);
+if_setposition(31, 15, ^setpos_abs_left, ^setpos_abs_top, interface_747:com_4);
+if_setposition(7, 7, ^setpos_abs_left, ^setpos_abs_top, interface_747:com_5);
+if_setgraphic(graphic_1206, interface_749:com_1);
+if_setposition(1, 1, ^setpos_abs_left, ^setpos_abs_top, interface_749:com_2);
+if_setposition(1, 1, ^setpos_abs_left, ^setpos_abs_top, interface_749:com_3);
+if_setposition(31, 15, ^setpos_abs_left, ^setpos_abs_top, interface_749:com_4);
+if_setposition(7, 7, ^setpos_abs_left, ^setpos_abs_top, interface_749:com_5);
+~script1741(interface_750:com_1);
+if_setposition(29, 15, ^setpos_abs_left, ^setpos_abs_top, interface_750:com_2);

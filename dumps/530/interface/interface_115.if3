@@ -1,0 +1,23 @@
+// 115:0
+[com_0]
+type=model
+x=2
+width=16679
+height=18941
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+model=model_4055
+modelorigin_x=0
+modelorigin_y=2
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=128
+modelanim=seq_1255
+unknown100=0
+unknown101=3000
+modelobjwidth=521
+modelobjheight=386
+

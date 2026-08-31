@@ -1,0 +1,23 @@
+// 926
+[clientscript,script926]
+if (%varplayerbit_4538 >= 43) {
+    mes("The game has ended.");
+    if_close;
+    return;
+}
+if (%varclient_185 = %varplayerbit_4538) {
+    return;
+}
+if (%varclient_185 = 0) {
+    while (%varclient_185 < %varplayerbit_4538) {
+        %varclient_185 = calc(%varclient_185 + 1);
+        ~script927(%varclient_185, 0);
+    }
+    ~script928(%varplayerbit_4538, "Earlgrey", "Fairtrade", interface_725:com_26);
+    return;
+}
+%varclient_185 = %varplayerbit_4538;
+~script927(%varplayerbit_4538, 1);
+if (%varplayerbit_4538 < calc(43 - 1)) {
+    ~script928(%varplayerbit_4538, "Earlgrey", "Fairtrade", interface_725:com_26);
+}

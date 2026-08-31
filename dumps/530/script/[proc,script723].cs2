@@ -1,0 +1,11 @@
+// 723
+[proc,script723](int $int0)
+%varclient_547 = $int0;
+%varclient_174 = 2;
+if_sethide(true, interface_744:com_132);
+if_sethide(false, interface_744:com_131);
+if_sethide(true, interface_744:com_242);
+if_sethide(false, interface_744:com_241);
+if (%varclient_547 = 1) {
+    ~script1183;
+}

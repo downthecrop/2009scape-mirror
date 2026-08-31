@@ -1,0 +1,25 @@
+// 107
+[proc,script107](string $string0)
+if (%varclient_11 = 1) {
+    mes("You can't do that while you're reporting abuse.");
+    return;
+}
+if (%varplayer_281 < 1000 & %varplayerbit_4895 = 2) {
+    mes("You need to complete 'Learning the Ropes' before talking to other players using Private Chat.");
+    return;
+}
+if (getwindowmode >= 2) {
+    if_sethide(false, interface_746:com_70);
+}
+%varclientstring_23 = $string0;
+if_sethide(false, interface_752:com_3);
+if_sethide(true, interface_752:com_6);
+if_sethide(true, interface_752:com_7);
+if_settext("Enter message to send to <%varclientstring_23>", interface_752:com_4);
+if_settext("*", interface_752:com_5);
+%varclient_5 = 6;
+%varclientstring_22 = "";
+if_setonclick(null, interface_752:com_3);
+~script2026;
+if_setonkey("script112(event_keycode, event_keychar)", interface_752:com_5);
+~script1188;

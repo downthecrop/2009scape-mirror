@@ -1,0 +1,13 @@
+// 1189
+[clientscript,script1189](int $int0, component $component1)
+def_int $int2 = ~script1345($int0, $component1);
+if ($int2 = 0) {
+    detail_removeroofs_option(false);
+} else {
+    detail_removeroofs_option(true);
+}
+if (detailget_removeroofs_option = false & getwindowmode >= 1) {
+    if_settext("Roofs<br>(in-game only)", interface_744:com_68);
+} else {
+    if_settext("Remove roofs", interface_744:com_68);
+}

@@ -1,0 +1,33 @@
+// 1742
+[proc,script1742](int $int0)(component)
+switch_int ($int0) {
+    case 0 :
+        return(interface_746:com_56);
+    case 1 :
+        return(interface_746:com_57);
+    case 2 :
+        return(interface_746:com_58);
+    case 3 :
+        return(interface_746:com_59);
+    case 4 :
+        return(interface_746:com_60);
+    case 5 :
+        return(interface_746:com_61);
+    case 6 :
+        return(interface_746:com_62);
+    case 7 :
+        return(interface_746:com_63);
+    case 8 :
+        return(interface_746:com_64);
+    case 9 :
+        return(interface_746:com_65);
+    case 10 :
+        return(interface_746:com_66);
+    case 11 :
+        return(interface_746:com_67);
+    case 12 :
+        return(interface_746:com_68);
+    case 13 :
+        return(interface_746:com_69);
+}
+return(null);

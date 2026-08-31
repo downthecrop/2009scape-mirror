@@ -1,0 +1,21 @@
+// 804
+[proc,script804]
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5146), interface_575:com_3);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5147), interface_575:com_4);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5148), interface_575:com_5);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5149), interface_575:com_6);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5150), interface_575:com_7);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5151), interface_575:com_8);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5152), interface_575:com_9);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5153), interface_575:com_10);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5154), interface_575:com_11);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5155), interface_575:com_12);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5156), interface_575:com_13);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5157), interface_575:com_14);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5158), interface_575:com_15);
+if_setmodel(enum(int, model, enum_1696, %varplayerbit_5159), interface_575:com_16);
+def_int $int0 = 14;
+while ($int0 > 0) {
+    ~script1421($int0);
+    $int0 = calc($int0 - 1);
+}

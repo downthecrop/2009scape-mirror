@@ -1,0 +1,13 @@
+// 1172
+[clientscript,script1172](component $component0, component $component1, component $component2, component $component3, component $component4)
+%varclientstring_32 = "";
+%varclientstring_33 = "";
+%varclient_543 = getwindowmode;
+%varclient_547 = 0;
+if_setonkey("script1221(event_keycode, event_keychar)", interface_744:com_134);
+if_setonresize("script1176", interface_744:com_0);
+~script1174(interface_744:com_226);
+if (%varclient_178 <= 0) {
+    %varclient_178 = max(fullscreen_lastmode, 0);
+}
+~script1887($component0, $component1, $component2, $component3, $component4);

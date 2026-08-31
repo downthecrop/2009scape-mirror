@@ -1,0 +1,665 @@
+// 540:0
+[com_0]
+type=layer
+x=-1
+y=-2
+width=512
+height=334
+op10=     
+
+// 540:1
+[com_1]
+type=text
+x=-4
+y=243
+width=476
+height=19
+layer=com_51
+textfont=p12_full
+text=Make your selection and press confirm
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 540:2
+[com_2]
+type=graphic
+x=52
+y=15
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,1"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Baby impling", 50, 150)
+
+// 540:3
+[com_3]
+type=text
+x=93
+y=51
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x3
+textshadow=yes
+colour=0xff981f
+
+// 540:4
+[com_4]
+type=graphic
+x=114
+y=13
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,6"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Young impling", 50, 150)
+
+// 540:5
+[com_5]
+type=text
+x=153
+y=50
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x2
+textshadow=yes
+colour=0xff981f
+
+// 540:6
+[com_6]
+type=graphic
+x=176
+y=13
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,0"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Gourmet impling", 50, 150)
+
+// 540:7
+[com_7]
+type=text
+x=217
+y=51
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x1
+textshadow=yes
+colour=0xff981f
+
+// 540:8
+[com_8]
+type=graphic
+x=51
+y=66
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,0"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Gourmet impling", 50, 150)
+
+// 540:9
+[com_9]
+type=text
+x=92
+y=103
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x3
+textshadow=yes
+colour=0xff981f
+
+// 540:10
+[com_10]
+type=graphic
+x=113
+y=65
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,9"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Earth impling", 50, 150)
+
+// 540:11
+[com_11]
+type=text
+x=152
+y=102
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x2
+textshadow=yes
+colour=0xff981f
+
+// 540:12
+[com_12]
+type=graphic
+x=175
+y=65
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,8"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Essence impling", 50, 150)
+
+// 540:13
+[com_13]
+type=text
+x=216
+y=103
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x1
+textshadow=yes
+colour=0xff981f
+
+// 540:14
+[com_14]
+type=graphic
+x=51
+y=118
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,8"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Essence impling", 50, 150)
+
+// 540:15
+[com_15]
+type=text
+x=92
+y=155
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x3
+textshadow=yes
+colour=0xff981f
+
+// 540:16
+[com_16]
+type=graphic
+x=113
+y=117
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,4"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Eclectic impling", 50, 150)
+
+// 540:17
+[com_17]
+type=text
+x=152
+y=154
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x2
+textshadow=yes
+colour=0xff981f
+
+// 540:18
+[com_18]
+type=graphic
+x=175
+y=117
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,3"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Nature impling", 50, 150)
+
+// 540:19
+[com_19]
+type=text
+x=216
+y=155
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x1
+textshadow=yes
+colour=0xff981f
+
+// 540:20
+[com_20]
+type=graphic
+x=51
+y=170
+width=50
+height=50
+layer=com_51
+graphic="ii_impling_icons,5"
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Any impling", 50, 150)
+
+// 540:21
+[com_21]
+type=text
+x=93
+y=202
+width=224
+height=18
+layer=com_51
+textfont=p12_full
+text=x1 of any impling type
+textshadow=yes
+colour=0xff981f
+
+// 540:22
+[com_22]
+type=model
+x=345
+y=34
+width=32
+height=32
+layer=com_51
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Imp repellant", 50, 150)
+
+// 540:23
+[com_23]
+type=graphic
+x=387
+y=44
+width=15
+height=15
+layer=com_51
+graphic="miscgraphics,10"
+tiling=yes
+op1=Select
+onclick=script1422(event_com, interface_540:com_26, interface_540:com_29, interface_540:com_32)
+
+// 540:24
+[com_24]
+type=text
+x=370
+y=59
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x1
+textshadow=yes
+colour=0xff981f
+
+// 540:25
+[com_25]
+type=model
+x=341
+y=85
+width=32
+height=32
+layer=com_51
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Magic butterfly net", 50, 150)
+
+// 540:26
+[com_26]
+type=graphic
+x=387
+y=94
+width=15
+height=15
+layer=com_51
+graphic="miscgraphics,10"
+tiling=yes
+op1=Select
+onclick=script1422(event_com, interface_540:com_23, interface_540:com_29, interface_540:com_32)
+
+// 540:27
+[com_27]
+type=text
+x=369
+y=109
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x1
+textshadow=yes
+colour=0xff981f
+
+// 540:28
+[com_28]
+type=model
+x=341
+y=134
+width=32
+height=32
+layer=com_51
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Jar generator", 50, 150)
+
+// 540:29
+[com_29]
+type=graphic
+x=387
+y=144
+width=15
+height=15
+layer=com_51
+graphic="miscgraphics,10"
+tiling=yes
+op1=Select
+onclick=script1422(event_com, interface_540:com_23, interface_540:com_26, interface_540:com_32)
+
+// 540:30
+[com_30]
+type=text
+x=369
+y=159
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x1
+textshadow=yes
+colour=0xff981f
+
+// 540:31
+[com_31]
+type=model
+x=351
+y=185
+width=32
+height=32
+layer=com_51
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+onmouseleave=script40(interface_540:com_35)
+onmouserepeat=script38(event_com, interface_540:com_35, "Three impling jars", 50, 150)
+
+// 540:32
+[com_32]
+type=graphic
+x=387
+y=197
+width=15
+height=15
+layer=com_51
+graphic="miscgraphics,10"
+tiling=yes
+op1=Select
+onclick=script1422(event_com, interface_540:com_23, interface_540:com_26, interface_540:com_29)
+
+// 540:33
+[com_33]
+type=text
+x=370
+y=212
+width=20
+height=16
+layer=com_51
+textfont=p12_full
+text=x3
+textshadow=yes
+colour=0xff981f
+
+// 540:34
+[com_34]
+type=graphic
+x=438
+y=229
+width=29
+height=29
+layer=com_51
+graphic="ame_confirm_button,0"
+op1=Ok
+onmouseover=script44(event_com, "ame_confirm_button,1")
+onmouseleave=script44(event_com, "ame_confirm_button,0")
+
+// 540:35
+[com_35]
+type=layer
+width=50
+height=50
+layer=com_51
+
+// 540:36
+[com_36]
+type=rectangle
+x=17
+y=25
+width=488
+height=305
+layer=com_0
+colour=0x000000
+fill=yes
+trans=200
+opbase=  
+op10=      
+
+// 540:37
+[com_37]
+type=graphic
+x=14
+y=25
+width=485
+height=300
+layer=com_0
+graphic=tradebacking
+tiling=yes
+op10=      
+
+// 540:38
+[com_38]
+type=graphic
+y=53
+width=32
+height=241
+layer=com_0
+graphic="v2_stone_borders,1"
+tiling=yes
+op10=      
+
+// 540:39
+[com_39]
+type=graphic
+x=13
+y=20
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,4"
+op10=      
+
+// 540:40
+[com_40]
+type=graphic
+x=480
+y=51
+width=32
+height=243
+layer=com_0
+graphic="v2_stone_borders,3"
+tiling=yes
+op10=      
+
+// 540:41
+[com_41]
+type=graphic
+x=44
+y=7
+width=424
+height=34
+layer=com_0
+graphic="v2_stone_borders,0"
+tiling=yes
+op10=      
+
+// 540:42
+[com_42]
+type=graphic
+x=45
+y=306
+width=423
+height=32
+layer=com_0
+graphic="v2_stone_borders,2"
+tiling=yes
+op10=      
+
+// 540:43
+[com_43]
+type=graphic
+x=474
+y=30
+width=16
+height=16
+layer=com_0
+graphic="v2_stone_close_button,0"
+op1=Close
+op10=      
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+
+// 540:44
+[com_44]
+type=graphic
+x=13
+y=294
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,6"
+op10=      
+
+// 540:45
+[com_45]
+type=graphic
+x=468
+y=20
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,5"
+op10=      
+
+// 540:46
+[com_46]
+type=graphic
+x=468
+y=294
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,7"
+op10=      
+
+// 540:47
+[com_47]
+type=graphic
+x=24
+y=35
+width=465
+height=32
+layer=com_0
+graphic="v2_stone_borders,8"
+tiling=yes
+op10=      
+
+// 540:48
+[com_48]
+type=graphic
+x=13
+y=37
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,9"
+op10=      
+
+// 540:49
+[com_49]
+type=graphic
+x=468
+y=37
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,10"
+op10=      
+
+// 540:50
+[com_50]
+type=text
+x=102
+y=30
+width=315
+height=18
+layer=com_0
+textfont=b12_full
+text=Elnock's Exchange
+textalignh=1
+textshadow=yes
+colour=0xff981f
+
+// 540:51
+[com_51]
+type=layer
+x=21
+y=53
+width=470
+height=261
+

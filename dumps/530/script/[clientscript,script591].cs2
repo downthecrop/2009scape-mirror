@@ -1,0 +1,6 @@
+// 591
+[clientscript,script591]
+%varplayer_1112 = -1;
+%varplayer_1113 = -1;
+%varplayer_1109 = null;
+~script621;

@@ -1,0 +1,20 @@
+// 1470
+[proc,script1470](int $int0)(int)
+switch_int ($int0) {
+    case 2 :
+        return(0);
+    case 3 :
+        return(%varplayerbit_4885);
+    case 4 :
+        return(calc(%varplayerbit_4885 + %varplayerbit_4886));
+    case 5 :
+        return(calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887));
+    case 6 :
+        return(calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888));
+    case 7 :
+        return(calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889));
+    case 8 :
+        return(calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889 + %varplayerbit_4890));
+    case 9 :
+        return(calc(%varplayerbit_4885 + %varplayerbit_4886 + %varplayerbit_4887 + %varplayerbit_4888 + %varplayerbit_4889 + %varplayerbit_4890 + %varplayerbit_4891));
+}

@@ -1,0 +1,8 @@
+// 678
+[clientscript,script678]
+~script31(interface_647:com_21, interface_647:com_27, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+if_setscrollpos(0, 0, interface_647:com_21);
+~script157(interface_647:com_21, interface_647:com_27, 0, 1);
+~script31(interface_647:com_22, interface_647:com_28, "scrollbar_dragger_v2,3", "scrollbar_dragger_v2,0", "scrollbar_dragger_v2,1", "scrollbar_dragger_v2,2", "scrollbar_v2,0", "scrollbar_v2,1");
+if_setscrollpos(0, 0, interface_647:com_22);
+~script157(interface_647:com_22, interface_647:com_28, 0, 1);

@@ -1,0 +1,12 @@
+// 1913
+[clientscript,script1913]
+if_sethide(true, interface_813:com_16);
+if_sethide(true, interface_813:com_76);
+if_sethide(true, interface_813:com_17);
+if_sethide(true, interface_813:com_77);
+if_sethide(true, interface_813:com_18);
+if_sethide(true, interface_813:com_78);
+if_sethide(false, interface_813:com_19);
+if_sethide(false, interface_813:com_79);
+if_sethide(true, interface_813:com_75);
+%varclient_582 = 0;

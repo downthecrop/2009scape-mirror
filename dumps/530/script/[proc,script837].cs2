@@ -1,0 +1,44 @@
+// 837
+[proc,script837](int $int0)(int)
+if ($int0 < 32) {
+    return(testbit(%varplayer_20, calc($int0 & 31)));
+} else if ($int0 < 64) {
+    return(testbit(%varplayer_21, calc($int0 & 31)));
+} else if ($int0 < 96) {
+    return(testbit(%varplayer_22, calc($int0 & 31)));
+} else if ($int0 < 128) {
+    return(testbit(%varplayer_23, calc($int0 & 31)));
+} else if ($int0 < 160) {
+    return(testbit(%varplayer_24, calc($int0 & 31)));
+} else if ($int0 < 192) {
+    return(testbit(%varplayer_25, calc($int0 & 31)));
+} else if ($int0 < 224) {
+    return(testbit(%varplayer_298, calc($int0 & 31)));
+} else if ($int0 < 256) {
+    return(testbit(%varplayer_311, calc($int0 & 31)));
+} else if ($int0 < 288) {
+    return(testbit(%varplayer_346, calc($int0 & 31)));
+} else if ($int0 < 320) {
+    return(testbit(%varplayer_414, calc($int0 & 31)));
+} else if ($int0 < 352) {
+    return(testbit(%varplayer_464, calc($int0 & 31)));
+} else if ($int0 < 384) {
+    return(testbit(%varplayer_598, calc($int0 & 31)));
+} else if ($int0 < 416) {
+    return(testbit(%varplayer_662, calc($int0 & 31)));
+} else if ($int0 < 448) {
+    return(testbit(%varplayer_721, calc($int0 & 31)));
+} else if ($int0 < 480) {
+    return(testbit(%varplayer_906, calc($int0 & 31)));
+} else if ($int0 < 512) {
+    return(testbit(%varplayer_1009, calc($int0 & 31)));
+} else if ($int0 < 544) {
+    return(testbit(%varplayer_1104, calc($int0 & 31)));
+} else if ($int0 < 576) {
+    return(testbit(%varplayer_1136, calc($int0 & 31)));
+} else if ($int0 < 608) {
+    return(testbit(%varplayer_1180, calc($int0 & 31)));
+} else if ($int0 < 640) {
+    return(testbit(%varplayer_1202, calc($int0 & 31)));
+}
+return(null);

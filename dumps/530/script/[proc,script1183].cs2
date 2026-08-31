@@ -1,0 +1,25 @@
+// 1183
+[proc,script1183]
+if (string_length(%varclientstring_32) = 0) {
+    %varclient_174 = 1;
+    return;
+}
+if (string_length(%varclientstring_33) = 0) {
+    %varclient_174 = 2;
+    return;
+}
+if (~script1431 = 1 & %varclient_547 = 0) {
+    %varclient_174 = 7;
+    if_sethide(false, interface_744:com_132);
+    if_sethide(true, interface_744:com_131);
+    if_sethide(false, interface_744:com_242);
+    sound_jingle(jingle_349, 0);
+    if_sethide(true, interface_744:com_241);
+    return;
+}
+%varclient_200 = 0;
+%varclient_201 = 0;
+if_settext("Performing login...", interface_744:com_334);
+if_sethide(true, interface_744:com_347);
+if_sethide(true, interface_744:com_348);
+login_request(%varclientstring_32, %varclientstring_33, 0);

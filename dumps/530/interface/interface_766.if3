@@ -1,0 +1,411 @@
+// 766:0
+[com_0]
+type=layer
+width=512
+height=334
+
+// 766:1
+[com_1]
+type=text
+x=22
+y=31
+width=468
+height=17
+textfont=b12_full
+text=Oh dear, you are dead...but don't worry!
+textalignh=1
+colour=0xff981f
+
+// 766:2
+[com_2]
+type=model
+x=19
+y=56
+width=42
+height=36
+model=model_40604
+modelorigin_x=4
+modelorigin_y=8
+modelangle_x=168
+modelangle_y=1966
+modelangle_z=0
+modelzoom=688
+unknown100=0
+unknown101=3000
+
+// 766:3
+[com_3]
+type=model
+x=28
+y=119
+width=32
+height=32
+model=model_2544
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=438
+modelangle_y=1264
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=3000
+
+// 766:4
+[com_4]
+type=model
+x=28
+y=179
+width=32
+height=32
+model=model_2529
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=1750
+modelangle_y=1831
+modelangle_z=0
+modelzoom=784
+unknown100=0
+unknown101=3000
+
+// 766:5
+[com_5]
+type=model
+x=26
+y=230
+width=38
+height=40
+model=model_40772
+modelorigin_x=0
+modelorigin_y=9
+modelangle_x=201
+modelangle_y=84
+modelangle_z=0
+modelzoom=682
+unknown100=0
+unknown101=3000
+
+// 766:6
+[com_6]
+type=model
+x=265
+y=64
+width=32
+height=32
+model=model_18526
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=306
+modelangle_y=69
+modelangle_z=0
+modelzoom=985
+unknown100=0
+unknown101=3000
+
+// 766:7
+[com_7]
+type=model
+x=265
+y=119
+width=32
+height=32
+model=model_2376
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=336
+modelangle_y=1996
+modelangle_z=0
+modelzoom=656
+unknown100=0
+unknown101=3000
+
+// 766:8
+[com_8]
+type=model
+x=265
+y=176
+width=32
+height=32
+model=model_2825
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=201
+modelangle_y=69
+modelangle_z=0
+modelzoom=528
+unknown100=0
+unknown101=3000
+
+// 766:9
+[com_9]
+type=model
+x=265
+y=232
+width=32
+height=32
+model=model_18511
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=405
+modelangle_y=2041
+modelangle_z=0
+modelzoom=2192
+unknown100=0
+unknown101=3000
+
+// 766:10
+[com_10]
+type=text
+x=75
+y=61
+width=170
+height=50
+textfont=p12_full
+text=You can buy a new tinderbox from the general store.
+textshadow=yes
+colour=0xbe9664
+
+// 766:11
+[com_11]
+type=text
+x=75
+y=119
+width=170
+height=50
+textfont=p12_full
+text=Make a new axe by mining copper and tin ore, smelting them into a bronze bar, then using that bar on an anvil.
+textshadow=yes
+colour=0xbe9664
+
+// 766:12
+[com_12]
+type=text
+x=75
+y=176
+width=170
+height=50
+textfont=p12_full
+text=Monlum, the Mining Tutor in the mine across the river, will give you a new pickaxe. 
+textshadow=yes
+colour=0xbe9664
+
+// 766:13
+[com_13]
+type=text
+x=75
+y=230
+width=170
+height=50
+textfont=p12_full
+text=You can get a new crayfish cage from Finlay, the Fishing Tutor on the river bank behind Lumbridge chapel.
+textshadow=yes
+colour=0xbe9664
+
+// 766:14
+[com_14]
+type=text
+x=320
+y=61
+width=170
+height=50
+textfont=p12_full
+text=You can get new combat equipment from the combat tutors north of Lumbridge Castle.
+textshadow=yes
+colour=0xbe9664
+
+// 766:15
+[com_15]
+type=text
+x=320
+y=119
+width=170
+height=50
+textfont=p12_full
+text=You can buy a new hammer from the general store or get one for free from Sani, the Smithing Tutor.
+textshadow=yes
+colour=0xbe9664
+
+// 766:16
+[com_16]
+type=text
+x=319
+y=177
+width=170
+height=50
+textfont=p12_full
+text=If you find yourself in need of some more gold, defeated goblins often drop some.
+textshadow=yes
+colour=0xbe9664
+
+// 766:17
+[com_17]
+type=text
+x=319
+y=230
+width=170
+height=50
+textfont=p12_full
+text=Tutors can help you with skills and give you basic equipment. Look for this icon on your minimap.
+textshadow=yes
+colour=0xbe9664
+
+// 766:18
+[com_18]
+type=text
+x=36
+y=281
+width=442
+height=15
+textfont=b12_full
+text=More information is available in the manual on our website.
+textalignh=1
+textshadow=yes
+colour=0xbe9664
+
+// 766:19
+[com_19]
+type=graphic
+x=17
+y=26
+width=480
+height=293
+layer=com_0
+graphic=tradebacking
+tiling=yes
+opbase=  
+
+// 766:20
+[com_20]
+type=graphic
+y=26
+width=28
+height=290
+layer=com_0
+graphic="v2_stone_borders,1"
+tiling=yes
+opbase= 
+
+// 766:21
+[com_21]
+type=graphic
+x=479
+y=26
+width=47
+height=285
+layer=com_0
+graphic="v2_stone_borders,3"
+tiling=yes
+opbase= 
+
+// 766:22
+[com_22]
+type=graphic
+x=15
+y=302
+width=462
+height=26
+layer=com_0
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 766:23
+[com_23]
+type=graphic
+x=14
+y=10
+width=464
+height=34
+layer=com_0
+graphic="v2_stone_borders,0"
+tiling=yes
+opbase= 
+
+// 766:24
+[com_24]
+type=graphic
+x=467
+y=290
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,7"
+opbase= 
+
+// 766:25
+[com_25]
+type=graphic
+x=13
+y=290
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,6"
+
+// 766:26
+[com_26]
+type=graphic
+x=13
+y=23
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,4"
+opbase= 
+
+// 766:27
+[com_27]
+type=graphic
+x=467
+y=23
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,5"
+opbase= 
+
+// 766:28
+[com_28]
+type=graphic
+x=16
+y=38
+width=478
+height=35
+layer=com_0
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 766:29
+[com_29]
+type=graphic
+x=13
+y=40
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,9"
+tiling=yes
+
+// 766:30
+[com_30]
+type=graphic
+x=467
+y=40
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,10"
+tiling=yes
+
+// 766:31
+[com_31]
+type=graphic
+x=471
+y=32
+width=16
+height=16
+layer=com_0
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onop=script29
+

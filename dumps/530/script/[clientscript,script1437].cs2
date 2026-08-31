@@ -1,0 +1,102 @@
+// 1437
+[clientscript,script1437]
+if (%varplayer_406 > 1) {
+    if_setcolour(0x8080ff, interface_371:com_5);
+} else {
+    if_setcolour(^black, interface_371:com_5);
+}
+if (%varplayer_406 > 2) {
+    if_setcolour(0x8080ff, interface_371:com_6);
+} else {
+    if_setcolour(^black, interface_371:com_6);
+}
+if (%varplayer_406 > 3) {
+    if_setcolour(0x8080ff, interface_371:com_7);
+} else {
+    if_setcolour(^black, interface_371:com_7);
+}
+if (%varplayer_406 > 4) {
+    if_setcolour(0x8080ff, interface_371:com_8);
+} else {
+    if_setcolour(^black, interface_371:com_8);
+}
+if (%varplayer_406 > 5) {
+    if_setcolour(0x8080ff, interface_371:com_9);
+} else {
+    if_setcolour(^black, interface_371:com_9);
+}
+if (%varplayer_406 > 6) {
+    if_setcolour(0x8080ff, interface_371:com_10);
+} else {
+    if_setcolour(^black, interface_371:com_10);
+}
+if (%varplayer_406 > 7) {
+    if_setcolour(0x8080ff, interface_371:com_11);
+} else {
+    if_setcolour(^black, interface_371:com_11);
+}
+if (%varplayer_406 > 8) {
+    if_setcolour(0x8080ff, interface_371:com_12);
+} else {
+    if_setcolour(^black, interface_371:com_12);
+}
+if (%varplayer_406 > 9) {
+    if_setcolour(0x8080ff, interface_371:com_13);
+} else {
+    if_setcolour(^black, interface_371:com_13);
+}
+if (%varplayer_406 > 10) {
+    if_setcolour(0x8080ff, interface_371:com_14);
+} else {
+    if_setcolour(^black, interface_371:com_14);
+}
+if (%varplayer_406 > 11) {
+    if_setcolour(0x8080ff, interface_371:com_15);
+} else {
+    if_setcolour(^black, interface_371:com_15);
+}
+if (%varplayer_406 > 12) {
+    if_setcolour(0x8080ff, interface_371:com_16);
+} else {
+    if_setcolour(^black, interface_371:com_16);
+}
+if (%varplayer_406 > 13) {
+    if_setcolour(0x8080ff, interface_371:com_17);
+} else {
+    if_setcolour(^black, interface_371:com_17);
+}
+if (%varplayer_406 > 14) {
+    if_setcolour(0x8080ff, interface_371:com_18);
+} else {
+    if_setcolour(^black, interface_371:com_18);
+}
+if (%varplayer_406 > 15) {
+    if_setcolour(0x8080ff, interface_371:com_19);
+} else {
+    if_setcolour(^black, interface_371:com_19);
+}
+if (%varplayer_406 > 16) {
+    if_setcolour(0x8080ff, interface_371:com_20);
+} else {
+    if_setcolour(^black, interface_371:com_20);
+}
+if (%varplayer_406 > 17) {
+    if_setcolour(0x8080ff, interface_371:com_21);
+} else {
+    if_setcolour(^black, interface_371:com_21);
+}
+if (%varplayer_406 > 18) {
+    if_setcolour(0x8080ff, interface_371:com_22);
+} else {
+    if_setcolour(^black, interface_371:com_22);
+}
+if (%varplayer_406 > 19) {
+    if_setcolour(0x8080ff, interface_371:com_23);
+} else {
+    if_setcolour(^black, interface_371:com_23);
+}
+if (%varplayer_406 > 20) {
+    if_setcolour(0x8080ff, interface_371:com_24);
+} else {
+    if_setcolour(^black, interface_371:com_24);
+}

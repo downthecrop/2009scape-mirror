@@ -1,0 +1,4 @@
+// 1465
+[clientscript,script1465]
+if_settext(tostring(%varclient_192), interface_762:com_97);
+if_settext(tostring(~script1466), interface_762:com_98);

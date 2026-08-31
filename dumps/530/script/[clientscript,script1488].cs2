@@ -1,0 +1,8 @@
+// 1488
+[clientscript,script1488]
+if (%varplayer_304 = 0) {
+    %varplayer_304 = 1;
+} else {
+    %varplayer_304 = 0;
+}
+~script1490;

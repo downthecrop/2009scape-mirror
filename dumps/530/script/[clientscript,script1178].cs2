@@ -1,0 +1,4 @@
+// 1178
+[clientscript,script1178]
+%varclient_548 = max(0, calc(%varclient_548 - 1));
+if_settext(tostring(calc(%varclient_548 * 2 / 100)), interface_745:com_5);

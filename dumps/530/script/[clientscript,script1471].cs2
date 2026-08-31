@@ -1,0 +1,10 @@
+// 1471
+[clientscript,script1471]
+if_clearops(interface_762:com_20);
+if_setonop(null, interface_762:com_20);
+%varclient_190 = 0;
+if (%varclient_188 = 0) {
+    ~script1473;
+} else {
+    ~script1474;
+}

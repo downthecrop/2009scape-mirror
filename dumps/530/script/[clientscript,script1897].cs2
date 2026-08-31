@@ -1,0 +1,13 @@
+// 1897
+[clientscript,script1897](int $int0)
+%varclient_178 = ~script1345($int0, interface_744:com_285);
+if (getwindowmode = ^windowmode_fullscreen & fullscreen_lastmode ! %varclient_178) {
+    if (fullscreen_enter(fullscreen_getmode(%varclient_178)) = true) {
+        if_setonclick("script1890(interface_744:com_138)", interface_744:com_238);
+        ~script1174(interface_744:com_237);
+    } else {
+        setwindowmode(getdefaultwindowmode);
+        ~script1888;
+        %varclient_543 = getwindowmode;
+    }
+}

@@ -1,0 +1,13 @@
+// 1474
+[proc,script1474]
+if_sethide(true, interface_762:com_99);
+if_sethide(true, interface_762:com_100);
+if_setgraphic("bank_buttons_new1,0", interface_762:com_21);
+if_setgraphic("bank_buttons_new2,0", interface_762:com_20);
+if (%varplayerbit_4893 = 0) {
+    ~script1456;
+}
+~script1463(1);
+~script1548(11);
+%varclient_188 = 0;
+if_settext("Bank of RuneScape", interface_762:com_24);

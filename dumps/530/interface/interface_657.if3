@@ -1,0 +1,345 @@
+// 657:0
+[com_0]
+type=rectangle
+x=78
+y=28
+width=373
+height=243
+colour=0x000000
+fill=yes
+trans=200
+
+// 657:1
+[com_1]
+type=graphic
+x=76
+y=24
+width=361
+height=236
+graphic=tradebacking
+tiling=yes
+
+// 657:2
+[com_2]
+type=graphic
+x=57
+y=53
+width=32
+height=202
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 657:3
+[com_3]
+type=graphic
+x=70
+y=20
+width=32
+height=32
+graphic="v2_stone_borders,4"
+
+// 657:4
+[com_4]
+type=graphic
+x=424
+y=51
+width=32
+height=205
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 657:5
+[com_5]
+type=graphic
+x=83
+y=7
+width=349
+height=34
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 657:6
+[com_6]
+type=graphic
+x=86
+y=245
+width=341
+height=32
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 657:7
+[com_7]
+type=graphic
+x=70
+y=233
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 657:8
+[com_8]
+type=graphic
+x=412
+y=20
+width=32
+height=32
+graphic="v2_stone_borders,5"
+
+// 657:9
+[com_9]
+type=graphic
+x=412
+y=233
+width=32
+height=32
+graphic="v2_stone_borders,7"
+
+// 657:10
+[com_10]
+type=graphic
+x=80
+y=35
+width=358
+height=32
+graphic="v2_stone_borders,8"
+tiling=yes
+opbase= 
+
+// 657:11
+[com_11]
+type=graphic
+x=70
+y=37
+width=32
+height=32
+graphic="v2_stone_borders,9"
+
+// 657:12
+[com_12]
+type=graphic
+x=412
+y=37
+width=32
+height=32
+graphic="v2_stone_borders,10"
+
+// 657:13
+[com_13]
+type=graphic
+x=417
+y=30
+width=16
+height=16
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onclick=script29
+
+// 657:14
+[com_14]
+type=model
+x=411
+y=58
+width=22
+height=26
+model=model_24206
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=6000
+modelorthog=yes
+unknown100=0
+unknown101=3000
+
+// 657:15
+[com_15]
+type=model
+x=83
+y=60
+width=22
+height=26
+model=model_24207
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=6000
+modelorthog=yes
+unknown100=0
+unknown101=3000
+
+// 657:16
+[com_16]
+type=model
+x=83
+y=227
+width=22
+height=26
+model=model_24207
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=6000
+unknown100=0
+unknown101=3000
+
+// 657:17
+[com_17]
+type=model
+x=411
+y=228
+width=22
+height=26
+model=model_24206
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=6000
+unknown100=0
+unknown101=3000
+
+// 657:18
+[com_18]
+type=graphic
+x=144
+y=200
+width=90
+height=56
+graphic="wild_ditch_sign_button,0"
+op1=Enter
+onmouseover=script44(event_com, "wild_ditch_sign_button,1")
+onmouseleave=script44(event_com, "wild_ditch_sign_button,0")
+
+// 657:19
+[com_19]
+type=graphic
+x=275
+y=200
+width=90
+height=56
+graphic="wild_ditch_sign_button,0"
+op1=Leave
+onmouseover=script44(event_com, "wild_ditch_sign_button,1")
+onmouseleave=script44(event_com, "wild_ditch_sign_button,0")
+onclick=script29
+
+// 657:20
+[com_20]
+type=graphic
+x=196
+y=28
+width=19
+height=19
+graphic="warning_icons,0"
+
+// 657:21
+[com_21]
+type=graphic
+x=302
+y=28
+width=19
+height=19
+graphic="warning_icons,0"
+
+// 657:22
+[com_22]
+type=text
+x=186
+y=30
+width=146
+height=19
+textfont=b12_full
+text=WARNING!
+textalignh=1
+textshadow=yes
+colour=0xe19900
+
+// 657:23
+[com_23]
+type=text
+x=108
+y=55
+width=300
+height=126
+textfont=p12_full
+text=You are about to enter the Bounty Hunter minigame.<br><br>This is not a safe area - it involves player versus player combat and, if you die, you will lose all the items you are carrying!<br><br>If you kill players that are not your target, you will not be able to use the Protect Item prayer. Also you cannot deliberately drop items on the floor worth over 1000 gp.
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff7d1f
+
+// 657:24
+[com_24]
+type=text
+x=144
+y=201
+width=90
+height=55
+textfont=b12_full
+text=Enter<br>Crater
+textlineheight=16
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xc8c8c8
+
+// 657:25
+[com_25]
+type=text
+x=274
+y=200
+width=91
+height=56
+textfont=b12_full
+text=Don't go
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xc8c8c8
+
+// 657:26
+[com_26]
+type=text
+x=28
+y=3
+width=227
+height=15
+layer=com_28
+textfont=p12_full
+text=Don't ask me this again
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 657:27
+[com_27]
+type=graphic
+x=3
+y=1
+width=19
+height=19
+layer=com_28
+graphic="warning_icons,1"
+op1=Off/On
+onvartransmit=script164(interface_657:com_27, 21)
+onclick=script163(interface_657:com_27)
+onvartransmitlist=varplayer_1047
+
+// 657:28
+[com_28]
+type=layer
+x=166
+y=178
+width=255
+height=20
+hide=yes
+

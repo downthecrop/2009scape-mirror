@@ -1,0 +1,27 @@
+// 939
+[clientscript,script939]
+if (%varplayerbit_4538 >= 91) {
+    mes("The game has ended.");
+    if_close;
+    return;
+}
+if (%varclient_185 = %varplayerbit_4538) {
+    return;
+}
+if (%varclient_185 = 0) {
+    while (%varclient_185 < %varplayerbit_4538) {
+        %varclient_185 = calc(%varclient_185 + 1);
+        ~script940(%varclient_185, 1);
+    }
+    ~script928(%varplayerbit_4538, "Lapsang", "Souchong", interface_727:com_27);
+    return;
+}
+%varclient_185 = %varplayerbit_4538;
+~script940(%varplayerbit_4538, 0);
+if (%varplayerbit_4538 = calc(91 - 1)) {
+    sound_jingle(jingle_110, 6656);
+    if_settext("<"Souchong"> wins!", interface_727:com_27);
+    if_settext("Opponent has no pieces left.", interface_727:com_28);
+    return;
+}
+~script928(%varplayerbit_4538, "Lapsang", "Souchong", interface_727:com_27);

@@ -1,0 +1,16 @@
+// 827
+[clientscript,script827](int $int0)
+def_int $int1 = 0;
+if (clientclock >= calc($int0 + 32) & clientclock < calc($int0 + 140)) {
+    if_settext("Varrock Herald", interface_465:com_2);
+    if_settext("Covering all of Misthalin and beyond.", interface_465:com_3);
+    if_settext("1 gp", interface_465:com_4);
+    if_settext("Oo'glog Ogresses Open Health Spa!", interface_465:com_5);
+} else if (clientclock >= calc($int0 + 540)) {
+    if_close;
+} else {
+    if_settext(" ", interface_465:com_2);
+    if_settext(" ", interface_465:com_3);
+    if_settext(" ", interface_465:com_4);
+    if_settext(" ", interface_465:com_5);
+}

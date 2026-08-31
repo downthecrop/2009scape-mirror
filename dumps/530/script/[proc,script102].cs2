@@ -1,0 +1,19 @@
+// 102
+[proc,script102](string $string0)
+if (%varclient_5 < 2) {
+    if (getwindowmode >= 2) {
+        if_sethide(false, interface_746:com_70);
+    }
+    if_sethide(false, interface_752:com_3);
+    if_sethide(true, interface_752:com_6);
+    if_sethide(true, interface_752:com_7);
+    if_settext($string0, interface_752:com_4);
+    if_settext("Click here to continue", interface_752:com_5);
+    %varclient_5 = 1;
+    if_setonclick("script101", interface_752:com_3);
+    if_setonkey(null, interface_752:com_5);
+    if_setcolour(0x000080, interface_752:com_5);
+    if_setonmouserepeat("script45(event_com, ^white)", interface_752:com_5);
+    if_setonmouseleave("script45(event_com, 0x000080)", interface_752:com_5);
+    ~script1188;
+}

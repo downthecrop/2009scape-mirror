@@ -1,0 +1,10 @@
+// 1256
+[clientscript,script1256]
+if (%varplayerbit_305 = 1) {
+    return;
+}
+if (%varplayer_262 = 0) {
+    if_setgraphic("miscgraphics,10", interface_114:com_25);
+} else {
+    if_setgraphic("miscgraphics,11", interface_114:com_25);
+}

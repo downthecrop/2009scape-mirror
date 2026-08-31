@@ -1,0 +1,41 @@
+// 263:0
+[com_0]
+type=model
+x=1
+y=3
+width=17319
+height=18451
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+model=model_40883
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=519
+modelangle_y=0
+modelangle_z=0
+modelzoom=480
+modelanim=seq_4016
+unknown100=64154
+unknown101=3000
+unknown103=yes
+modelobjwidth=541
+modelobjheight=376
+
+// 263:1
+[com_1]
+type=text
+y=495
+width=100
+height=20
+xmode=abs_centre
+ymode=proportion_top
+textfont=b12_full
+text=Score: 0
+textalignh=1
+textshadow=yes
+colour=0xffff00
+onvartransmit=script87(event_com)
+onvartransmitlist=varplayer_727
+

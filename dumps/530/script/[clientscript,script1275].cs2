@@ -1,0 +1,3 @@
+// 1275
+[clientscript,script1275]
+if_settext(tostring(%varplayer_648), interface_42:com_2);

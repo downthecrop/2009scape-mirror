@@ -1,0 +1,609 @@
+// 469:0
+[com_0]
+type=rectangle
+x=1
+width=511
+height=335
+layer=com_26
+colour=0x2d2406
+fill=yes
+
+// 469:1
+[com_1]
+type=model
+x=-58
+y=145
+width=648
+height=195
+layer=com_26
+model=model_19486
+modelorigin_x=22
+modelorigin_y=-128
+modelangle_x=309
+modelangle_y=1996
+modelangle_z=0
+modelzoom=505
+modelanim=seq_5119
+unknown100=65469
+unknown101=987
+
+// 469:2
+[com_2]
+type=model
+x=-78
+y=-25
+width=683
+height=357
+layer=com_26
+model=model_19487
+modelorigin_x=25
+modelorigin_y=-46
+modelangle_x=309
+modelangle_y=1996
+modelangle_z=0
+modelzoom=505
+unknown100=65283
+unknown101=1086
+
+// 469:3
+[com_3]
+type=text
+x=65
+y=232
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Castle
+colour=0xd4b082
+
+// 469:4
+[com_4]
+type=text
+x=74
+y=251
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Wars
+colour=0xd4b082
+
+// 469:5
+[com_5]
+type=text
+x=53
+y=126
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Grand
+textlineheight=21
+colour=0xd4b082
+
+// 469:6
+[com_6]
+type=text
+x=66
+y=146
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Tree
+colour=0xd4b082
+
+// 469:7
+[com_7]
+type=text
+x=358
+y=27
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Varrock
+colour=0xd4b082
+
+// 469:8
+[com_8]
+type=text
+x=199
+y=119
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Entrana
+colour=0xd4b082
+
+// 469:9
+[com_9]
+type=text
+x=266
+y=54
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Taverley
+colour=0xd4b082
+
+// 469:10
+[com_10]
+type=text
+x=290
+y=132
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Crafting
+colour=0xd4b082
+
+// 469:11
+[com_11]
+type=text
+x=305
+y=151
+width=32
+height=32
+layer=com_26
+textfont=quill_oblique_large
+text=Guild
+colour=0xd4b082
+
+// 469:12
+[com_12]
+type=model
+x=223
+y=55
+width=45
+height=77
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=307
+modelangle_y=1991
+modelangle_z=0
+modelzoom=505
+unknown100=65121
+unknown101=1010
+
+// 469:13
+[com_13]
+type=graphic
+x=483
+y=4
+width=26
+height=23
+layer=com_26
+graphic="close_buttons,6"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,7")
+onmouseleave=script44(event_com, "close_buttons,6")
+onop=script29
+
+// 469:14
+[com_14]
+type=graphic
+x=58
+y=229
+width=99
+height=53
+layer=com_26
+op1=Castle Wars
+onmouseleave=script1263(interface_469:com_3, interface_469:com_4)
+onmouserepeat=script1262(interface_469:com_3, interface_469:com_4)
+
+// 469:15
+[com_15]
+type=graphic
+x=51
+y=125
+width=99
+height=53
+layer=com_26
+op1=Grand Tree
+onmouseleave=script1263(interface_469:com_5, interface_469:com_6)
+onmouserepeat=script1262(interface_469:com_5, interface_469:com_6)
+
+// 469:16
+[com_16]
+type=graphic
+x=289
+y=133
+width=116
+height=53
+layer=com_26
+op1=Crafting Guild
+onmouseleave=script1263(interface_469:com_10, interface_469:com_11)
+onmouserepeat=script1262(interface_469:com_10, interface_469:com_11)
+
+// 469:17
+[com_17]
+type=graphic
+x=199
+y=121
+width=77
+height=34
+layer=com_26
+op1=Entrana
+onmouseleave=script45(interface_469:com_8, 0xd4b082)
+onmouserepeat=script45(interface_469:com_8, 0xdbdbb7)
+
+// 469:18
+[com_18]
+type=graphic
+x=266
+y=54
+width=81
+height=35
+layer=com_26
+op1=Taverley
+onmouseleave=script45(interface_469:com_9, 0xd4b082)
+onmouserepeat=script45(interface_469:com_9, 0xdbdbb7)
+
+// 469:19
+[com_19]
+type=graphic
+x=356
+y=25
+width=83
+height=35
+layer=com_26
+op1=Varrock
+onmouseleave=script45(interface_469:com_7, 0xd4b082)
+onmouserepeat=script45(interface_469:com_7, 0xdbdbb7)
+
+// 469:20
+[com_20]
+type=model
+x=317
+y=107
+width=45
+height=79
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=301
+modelangle_y=1985
+modelangle_z=0
+modelzoom=505
+unknown100=65057
+unknown101=1009
+
+// 469:21
+[com_21]
+type=model
+x=386
+y=3
+width=45
+height=79
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=301
+modelangle_y=1985
+modelangle_z=0
+modelzoom=505
+unknown100=65057
+unknown101=1009
+
+// 469:22
+[com_22]
+type=model
+x=295
+y=16
+width=45
+height=79
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=301
+modelangle_y=1985
+modelangle_z=0
+modelzoom=505
+unknown100=65057
+unknown101=1009
+
+// 469:23
+[com_23]
+type=model
+x=69
+y=100
+width=45
+height=79
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=301
+modelangle_y=1985
+modelangle_z=0
+modelzoom=505
+unknown100=65057
+unknown101=1009
+
+// 469:24
+[com_24]
+type=model
+x=80
+y=198
+width=45
+height=79
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=301
+modelangle_y=1985
+modelangle_z=0
+modelzoom=505
+unknown100=65057
+unknown101=1009
+
+// 469:25
+[com_25]
+type=model
+x=221
+y=103
+width=45
+height=79
+layer=com_26
+hide=yes
+model=model_19485
+modelorigin_x=43
+modelorigin_y=14
+modelangle_x=301
+modelangle_y=1985
+modelangle_z=0
+modelzoom=505
+unknown100=65057
+unknown101=1009
+
+// 469:26
+[com_26]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+
+// 469:27
+[com_27]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+
+// 469:28
+[com_28]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+
+// 469:29
+[com_29]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_centre
+layer=com_28
+
+// 469:30
+[com_30]
+type=graphic
+x=-260
+width=32
+height=334
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 469:31
+[com_31]
+type=graphic
+y=-171
+width=462
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 469:32
+[com_32]
+type=graphic
+y=170
+width=512
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 469:33
+[com_33]
+type=graphic
+x=259
+width=32
+height=334
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 469:34
+[com_34]
+type=graphic
+x=-247
+y=-158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,4"
+tiling=yes
+
+// 469:35
+[com_35]
+type=graphic
+x=247
+y=-158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,5"
+tiling=yes
+
+// 469:36
+[com_36]
+type=graphic
+x=247
+y=158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,7"
+tiling=yes
+
+// 469:37
+[com_37]
+type=graphic
+x=-247
+y=158
+width=32
+height=32
+xmode=abs_centre
+ymode=abs_centre
+graphic="v2_stone_borders,6"
+tiling=yes
+
+// 469:38
+[com_38]
+type=layer
+width=8192
+height=16391
+widthmode=proportion
+heightmode=proportion
+xmode=abs_right
+ymode=abs_centre
+layer=com_29
+
+// 469:39
+[com_39]
+type=layer
+width=8188
+height=16391
+widthmode=proportion
+heightmode=proportion
+ymode=abs_centre
+layer=com_29
+
+// 469:40
+[com_40]
+type=layer
+width=16391
+height=8192
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+layer=com_29
+
+// 469:41
+[com_41]
+type=layer
+width=16391
+height=8182
+widthmode=proportion
+heightmode=proportion
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_29
+
+// 469:42
+[com_42]
+type=layer
+width=512
+height=334
+xmode=abs_centre
+ymode=abs_centre
+layer=com_29
+
+// 469:43
+[com_43]
+type=graphic
+width=256
+height=16384
+widthmode=minus
+heightmode=proportion
+ymode=abs_centre
+layer=com_39
+graphic=tradebacking
+tiling=yes
+outline=2
+
+// 469:44
+[com_44]
+type=graphic
+width=256
+height=16391
+widthmode=minus
+heightmode=proportion
+xmode=abs_right
+ymode=abs_centre
+layer=com_38
+graphic=tradebacking
+tiling=yes
+outline=2
+
+// 469:45
+[com_45]
+type=graphic
+width=16391
+height=167
+widthmode=proportion
+heightmode=minus
+xmode=abs_centre
+layer=com_40
+graphic=tradebacking
+tiling=yes
+outline=2
+
+// 469:46
+[com_46]
+type=graphic
+width=16391
+height=166
+widthmode=proportion
+heightmode=minus
+xmode=abs_centre
+ymode=abs_bottom
+layer=com_41
+graphic=tradebacking
+tiling=yes
+outline=2
+

@@ -1,0 +1,7 @@
+// 1287
+[proc,script1287]
+if_sethide(true, interface_502:com_8);
+if_sethide(true, interface_502:com_9);
+if_sethide(true, interface_502:com_10);
+if_sethide(true, interface_502:com_11);
+if_sethide(true, interface_502:com_12);

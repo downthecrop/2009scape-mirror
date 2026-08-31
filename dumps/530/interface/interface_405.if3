@@ -1,0 +1,73 @@
+// 405:0
+[com_0]
+type=text
+y=391
+width=198
+height=14
+xmode=abs_centre
+layer=com_3
+textfont=b12_full
+text=Message of the Week
+textalignh=1
+colour=0x990000
+
+// 405:1
+[com_1]
+type=model
+x=61
+y=153
+width=137
+height=302
+layer=com_3
+model=model_42371
+modelorigin_x=-15
+modelorigin_y=126
+modelangle_x=130
+modelangle_y=1297
+modelangle_z=0
+modelzoom=1642
+modelanim=seq_10481
+unknown100=0
+unknown101=3000
+op10= 
+
+// 405:2
+[com_2]
+type=model
+x=568
+y=162
+width=129
+height=294
+layer=com_3
+model=model_42372
+modelorigin_x=11
+modelorigin_y=124
+modelangle_x=119
+modelangle_y=1792
+modelangle_z=0
+modelzoom=1696
+modelanim=seq_10482
+unknown100=0
+unknown101=3000
+op10= 
+
+// 405:3
+[com_3]
+type=layer
+width=765
+height=503
+
+// 405:4
+[com_4]
+type=text
+x=212
+y=413
+width=342
+height=51
+layer=com_3
+textfont=q8_full
+textalignh=1
+textalignv=1
+colour=0x000000
+op10=  
+

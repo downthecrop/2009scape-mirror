@@ -1,0 +1,11 @@
+// 114
+[clientscript,script114]
+if_setonvarctransmit("script1302{varclient_168}", interface_548:com_78);
+if_setonvarctransmit("script1302{varclient_168}", interface_746:com_73);
+if (getwindowmode >= 2) {
+    if_setonvartransmit("script117{varplayer_1021}", interface_746:com_40);
+    ~script1309(1);
+} else {
+    if_setonvartransmit("script117{varplayer_1021}", interface_548:com_36);
+    ~script1312(1);
+}

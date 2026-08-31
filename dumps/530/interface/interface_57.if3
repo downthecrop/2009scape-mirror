@@ -1,0 +1,15 @@
+// 57:0
+[com_0]
+type=text
+y=2457
+width=480
+height=14
+xmode=proportion_centre
+ymode=proportion_top
+textfont=b12_full
+text=Waiting for players to join the other team.
+textalignh=1
+colour=0xffffff
+onvartransmit=script1366
+onvartransmitlist=varplayer_380
+

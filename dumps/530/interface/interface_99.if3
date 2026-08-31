@@ -1,0 +1,199 @@
+// 99:0
+[com_0]
+type=model
+x=23
+y=28
+width=472
+height=283
+model=model_3033
+modelorigin_x=-2
+modelorigin_y=-11
+modelangle_x=490
+modelangle_y=0
+modelangle_z=0
+modelzoom=498
+unknown100=65091
+unknown101=979
+
+// 99:1
+[com_1]
+type=model
+x=153
+y=92
+width=51
+height=62
+model=model_3712
+modelorigin_x=-3
+modelorigin_y=-23
+modelangle_x=241
+modelangle_y=1454
+modelangle_z=0
+modelzoom=1528
+unknown100=63729
+unknown101=3169
+
+// 99:2
+[com_2]
+type=model
+x=81
+y=109
+width=69
+height=80
+model=model_3712
+modelorigin_x=6
+modelorigin_y=-28
+modelangle_x=253
+modelangle_y=1666
+modelangle_z=0
+modelzoom=1229
+unknown100=64102
+unknown101=2577
+
+// 99:3
+[com_3]
+type=model
+x=311
+y=90
+width=57
+height=67
+model=model_3712
+modelorigin_x=7
+modelorigin_y=-21
+modelangle_x=253
+modelangle_y=1755
+modelangle_z=0
+modelzoom=1528
+unknown100=63722
+unknown101=3182
+
+// 99:4
+[com_4]
+type=model
+x=370
+y=107
+width=68
+height=80
+model=model_3712
+modelorigin_x=11
+modelorigin_y=-22
+modelangle_x=276
+modelangle_y=1905
+modelangle_z=0
+modelzoom=1229
+unknown100=64090
+unknown101=2593
+
+// 99:5
+[com_5]
+type=text
+x=95
+y=62
+width=102
+height=19
+textfont=q8_full
+text=Harold
+textalignh=1
+colour=0x333333
+
+// 99:6
+[com_6]
+type=text
+x=322
+y=62
+width=103
+height=23
+textfont=q8_full
+text=Player
+textalignh=1
+colour=0x333333
+
+// 99:7
+[com_7]
+type=graphic
+x=62
+y=236
+width=36
+height=32
+outline=1
+graphicshadow=2894892
+
+// 99:8
+[com_8]
+type=graphic
+x=396
+y=236
+width=36
+height=32
+outline=1
+graphicshadow=2894892
+
+// 99:9
+[com_9]
+type=layer
+x=189
+y=235
+width=131
+height=25
+hide=yes
+
+// 99:10
+[com_10]
+type=text
+x=1
+y=2
+width=127
+height=22
+layer=com_9
+textfont=q8_full
+text=Roll Dice!
+textalignh=1
+colour=0x333333
+op1=Roll
+
+// 99:11
+[com_11]
+type=layer
+x=190
+y=234
+width=128
+height=27
+hide=yes
+
+// 99:12
+[com_12]
+type=text
+x=1
+y=3
+width=126
+height=20
+layer=com_11
+textfont=q8_full
+text=Continue...
+textalignh=1
+colour=0x333333
+
+// 99:13
+[com_13]
+type=text
+x=186
+y=197
+width=143
+height=21
+textfont=q8_full
+text=You win!
+textalignh=1
+colour=0x880000
+
+// 99:14
+[com_14]
+type=graphic
+x=441
+y=47
+width=26
+height=23
+graphic="close_buttons,2"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,3")
+onmouseleave=script44(event_com, "close_buttons,2")
+onop=script29
+

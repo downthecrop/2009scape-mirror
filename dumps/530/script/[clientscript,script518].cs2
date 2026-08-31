@@ -1,0 +1,17 @@
+// 518
+[clientscript,script518]
+%varclient_53 = calc(%varclient_53 + 1);
+if (%varclient_53 > 499) {
+    %varclient_53 = 0;
+    if (%varplayerbit_4072 = 1 | %varplayerbit_4073 = 1) {
+        if_setgraphic("loot_icon,2", interface_589:com_14);
+    } else if (%varplayerbit_4071 = 1) {
+        if (%varplayerbit_4465 = 1) {
+            if_setgraphic("loot_icon,3", interface_589:com_14);
+        } else {
+            if_setgraphic("loot_icon,0", interface_589:com_14);
+        }
+    } else {
+        if_setgraphic("loot_icon,1", interface_589:com_14);
+    }
+}

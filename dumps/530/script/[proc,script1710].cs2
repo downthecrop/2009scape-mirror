@@ -1,0 +1,16 @@
+// 1710
+[proc,script1710]
+%varclient_87 = %varplayerbit_4208;
+if (gender < 1) {
+    %varclient_88 = %varplayerbit_4209;
+}
+%varclient_89 = %varplayerbit_4210;
+%varclient_90 = %varplayerbit_4211;
+%varclient_91 = %varplayerbit_4212;
+%varclient_92 = %varplayerbit_4213;
+%varclient_93 = %varplayerbit_4214;
+%varclient_94 = %varplayerbit_4215;
+%varclient_95 = %varplayerbit_4216;
+%varclient_96 = %varplayerbit_4217;
+%varclient_97 = %varplayerbit_4218;
+%varclient_98 = %varplayerbit_4219;

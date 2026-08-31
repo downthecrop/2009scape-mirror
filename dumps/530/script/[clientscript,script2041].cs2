@@ -1,0 +1,74 @@
+// 2041
+[clientscript,script2041]
+if_settext("Bronze: <tostring(%varplayerbit_941)>", interface_28:com_42);
+if (%varplayerbit_941 > 0) {
+    if_setcolour(0xff981f, interface_28:com_44);
+    if_setcolour(0xff981f, interface_28:com_42);
+} else {
+    if_setcolour(0x999999, interface_28:com_44);
+    if_setcolour(0x999999, interface_28:com_42);
+}
+if_settext("Iron: <tostring(%varplayerbit_942)>", interface_28:com_39);
+if (%varplayerbit_942 > 0) {
+    if_setcolour(0xff981f, interface_28:com_41);
+    if_setcolour(0xff981f, interface_28:com_39);
+} else {
+    if_setcolour(0x999999, interface_28:com_41);
+    if_setcolour(0x999999, interface_28:com_39);
+}
+if_settext("Steel: <tostring(%varplayerbit_943)>", interface_28:com_37);
+if (%varplayerbit_943 > 0) {
+    if_setcolour(0xff981f, interface_28:com_38);
+    if_setcolour(0xff981f, interface_28:com_37);
+} else {
+    if_setcolour(0x999999, interface_28:com_38);
+    if_setcolour(0x999999, interface_28:com_37);
+}
+if_settext("Mithril: <tostring(%varplayerbit_944)>", interface_28:com_34);
+if (%varplayerbit_944 > 0) {
+    if_setcolour(0xff981f, interface_28:com_35);
+    if_setcolour(0xff981f, interface_28:com_34);
+} else {
+    if_setcolour(0x999999, interface_28:com_35);
+    if_setcolour(0x999999, interface_28:com_34);
+}
+if_settext("Adamantite: <tostring(%varplayerbit_945)>", interface_28:com_31);
+if (%varplayerbit_945 > 0) {
+    if_setcolour(0xff981f, interface_28:com_32);
+    if_setcolour(0xff981f, interface_28:com_31);
+} else {
+    if_setcolour(0x999999, interface_28:com_32);
+    if_setcolour(0x999999, interface_28:com_31);
+}
+if_settext("Runite: <tostring(%varplayerbit_946)>", interface_28:com_28);
+if (%varplayerbit_946 > 0) {
+    if_setcolour(0xff981f, interface_28:com_29);
+    if_setcolour(0xff981f, interface_28:com_28);
+} else {
+    if_setcolour(0x999999, interface_28:com_29);
+    if_setcolour(0x999999, interface_28:com_28);
+}
+if_settext("Silver: <tostring(%varplayerbit_948)>", interface_28:com_25);
+if (%varplayerbit_948 > 0) {
+    if_setcolour(0xff981f, interface_28:com_26);
+    if_setcolour(0xff981f, interface_28:com_25);
+} else {
+    if_setcolour(0x999999, interface_28:com_26);
+    if_setcolour(0x999999, interface_28:com_25);
+}
+if_settext("Gold: <tostring(%varplayerbit_947)>", interface_28:com_22);
+if (%varplayerbit_947 > 0) {
+    if_setcolour(0xff981f, interface_28:com_23);
+    if_setcolour(0xff981f, interface_28:com_22);
+} else {
+    if_setcolour(0x999999, interface_28:com_23);
+    if_setcolour(0x999999, interface_28:com_22);
+}
+if_settext("Perfect Gold: <tostring(%varplayerbit_958)>", interface_28:com_2);
+if (%varplayerbit_958 > 0) {
+    if_setcolour(0xff981f, interface_28:com_4);
+    if_setcolour(0xff981f, interface_28:com_2);
+} else {
+    if_setcolour(0x999999, interface_28:com_4);
+    if_setcolour(0x999999, interface_28:com_2);
+}

@@ -1,0 +1,60 @@
+// 1368
+[clientscript,script1368]
+if_settext("Zamorak = <tostring(%varplayerbit_155)>", interface_59:com_0);
+if_settext("<tostring(%varplayerbit_145)> = Saradomin", interface_59:com_1);
+if_settext("<tostring(%varplayer_380)> Min", interface_59:com_8);
+if (%varplayerbit_146 = 0) {
+    if_settext("Health <tostring(%varplayerbit_146)>%", interface_59:com_7);
+    if_setcolour(^red, interface_59:com_7);
+} else {
+    if_settext("Health <tostring(%varplayerbit_146)>%", interface_59:com_7);
+    if_setcolour(^green, interface_59:com_7);
+}
+if (%varplayerbit_143 = 0) {
+    if_settext("Safe", interface_59:com_4);
+    if_setcolour(^green, interface_59:com_4);
+} else if (%varplayerbit_143 = 1) {
+    if_settext("Taken", interface_59:com_4);
+    if_setcolour(^red, interface_59:com_4);
+} else if (%varplayerbit_143 = 2) {
+    if_settext("Dropped", interface_59:com_4);
+    if_setcolour(^yellow, interface_59:com_4);
+}
+if (%varplayerbit_153 = 0) {
+    if_settext("Safe", interface_59:com_5);
+    if_setcolour(^green, interface_59:com_5);
+} else if (%varplayerbit_153 = 1) {
+    if_settext("Taken", interface_59:com_5);
+    if_setcolour(^red, interface_59:com_5);
+} else if (%varplayerbit_153 = 2) {
+    if_settext("Dropped", interface_59:com_5);
+    if_setcolour(^yellow, interface_59:com_5);
+}
+if (%varplayerbit_147 = 1) {
+    if_settext("Unlocked", interface_59:com_11);
+    if_setcolour(^red, interface_59:com_11);
+} else {
+    if_settext("Locked", interface_59:com_11);
+    if_setcolour(^green, interface_59:com_11);
+}
+if (%varplayerbit_148 = 1) {
+    if_settext("Cleared", interface_59:com_13);
+    if_setcolour(^red, interface_59:com_13);
+} else {
+    if_settext("Collapsed", interface_59:com_13);
+    if_setcolour(^green, interface_59:com_13);
+}
+if (%varplayerbit_149 = 1) {
+    if_settext("Cleared", interface_59:com_14);
+    if_setcolour(^red, interface_59:com_14);
+} else {
+    if_settext("Collapsed", interface_59:com_14);
+    if_setcolour(^green, interface_59:com_14);
+}
+if (%varplayerbit_150 = 1) {
+    if_settext("Destroyed", interface_59:com_17);
+    if_setcolour(^red, interface_59:com_17);
+} else {
+    if_settext("Operational", interface_59:com_17);
+    if_setcolour(^green, interface_59:com_17);
+}

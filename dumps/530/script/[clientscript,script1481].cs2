@@ -1,0 +1,7 @@
+// 1481
+[clientscript,script1481]
+if (%varplayerbit_4895 = 2 & %varplayer_281 < 1000 & %varplayerbit_4931 ! 5 & %varplayerbit_4931 < 30) {
+    mes("Please follow the tutorial instructions to continue.");
+} else {
+    mes("Please drag an item here to create a new tab.");
+}

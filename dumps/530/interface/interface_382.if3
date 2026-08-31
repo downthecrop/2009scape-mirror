@@ -1,0 +1,379 @@
+// 382:0
+[com_0]
+type=layer
+width=512
+height=334
+xmode=proportion_centre
+ymode=proportion_centre
+
+// 382:1
+[com_1]
+type=rectangle
+x=78
+y=28
+width=373
+height=243
+layer=com_0
+colour=0x000000
+fill=yes
+trans=200
+
+// 382:2
+[com_2]
+type=graphic
+x=76
+y=24
+width=361
+height=236
+layer=com_0
+graphic=tradebacking
+tiling=yes
+
+// 382:3
+[com_3]
+type=graphic
+x=57
+y=53
+width=32
+height=202
+layer=com_0
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 382:4
+[com_4]
+type=graphic
+x=70
+y=20
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,4"
+
+// 382:5
+[com_5]
+type=graphic
+x=424
+y=51
+width=32
+height=205
+layer=com_0
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 382:6
+[com_6]
+type=graphic
+x=86
+y=245
+width=341
+height=32
+layer=com_0
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 382:7
+[com_7]
+type=graphic
+x=70
+y=233
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,6"
+
+// 382:8
+[com_8]
+type=graphic
+x=412
+y=20
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,5"
+
+// 382:9
+[com_9]
+type=graphic
+x=412
+y=233
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,7"
+
+// 382:10
+[com_10]
+type=graphic
+x=80
+y=35
+width=358
+height=32
+layer=com_0
+graphic="v2_stone_borders,8"
+tiling=yes
+opbase= 
+
+// 382:11
+[com_11]
+type=graphic
+x=70
+y=37
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,9"
+
+// 382:12
+[com_12]
+type=graphic
+x=412
+y=37
+width=32
+height=32
+layer=com_0
+graphic="v2_stone_borders,10"
+
+// 382:13
+[com_13]
+type=graphic
+x=417
+y=30
+width=16
+height=16
+layer=com_0
+graphic="v2_stone_close_button,0"
+op1=Close
+onmouseover=script44(event_com, "v2_stone_close_button,1")
+onmouseleave=script44(event_com, "v2_stone_close_button,0")
+onclick=script29
+
+// 382:14
+[com_14]
+type=model
+x=410
+y=57
+width=24
+height=28
+layer=com_0
+model=model_24206
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=5488
+modelorthog=yes
+unknown100=59685
+unknown101=3000
+
+// 382:15
+[com_15]
+type=model
+x=82
+y=59
+width=24
+height=28
+layer=com_0
+model=model_24207
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=5488
+modelorthog=yes
+unknown100=59685
+unknown101=3000
+
+// 382:16
+[com_16]
+type=model
+x=82
+y=226
+width=24
+height=28
+layer=com_0
+model=model_24207
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=5488
+unknown100=31746
+unknown101=3000
+
+// 382:17
+[com_17]
+type=model
+x=410
+y=227
+width=24
+height=28
+layer=com_0
+model=model_24206
+modelorigin_x=0
+modelorigin_y=1
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=5488
+unknown100=31746
+unknown101=3000
+
+// 382:18
+[com_18]
+type=graphic
+x=144
+y=200
+width=90
+height=56
+layer=com_0
+graphic="wild_ditch_sign_button,0"
+op1=Ok
+onmouseover=script44(event_com, "wild_ditch_sign_button,1")
+onmouseleave=script44(event_com, "wild_ditch_sign_button,0")
+
+// 382:19
+[com_19]
+type=graphic
+x=275
+y=200
+width=90
+height=56
+layer=com_0
+graphic="wild_ditch_sign_button,0"
+op1=Close
+onmouseover=script44(event_com, "wild_ditch_sign_button,1")
+onmouseleave=script44(event_com, "wild_ditch_sign_button,0")
+onclick=script29
+
+// 382:20
+[com_20]
+type=graphic
+x=196
+y=28
+width=19
+height=19
+layer=com_0
+graphic="warning_icons,0"
+
+// 382:21
+[com_21]
+type=graphic
+x=302
+y=28
+width=19
+height=19
+layer=com_0
+graphic="warning_icons,0"
+
+// 382:22
+[com_22]
+type=text
+x=186
+y=30
+width=146
+height=19
+layer=com_0
+textfont=b12_full
+text=WARNING!
+textalignh=1
+textshadow=yes
+colour=0xe19900
+
+// 382:23
+[com_23]
+type=text
+x=107
+y=50
+width=300
+height=144
+layer=com_0
+textfont=p12_full
+text=If you go any further you will enter the Wilderness. This is a very dangerous area, haunted by ghosts! The further north you go, the more dangerous it becomes.
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff7d1f
+
+// 382:24
+[com_24]
+type=text
+x=144
+y=201
+width=90
+height=55
+layer=com_0
+textfont=b12_full
+text=Enter Wilderness
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xc8c8c8
+
+// 382:25
+[com_25]
+type=text
+x=274
+y=200
+width=91
+height=56
+layer=com_0
+textfont=b12_full
+text=Don't go
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xc8c8c8
+
+// 382:26
+[com_26]
+type=layer
+x=159
+y=175
+width=255
+height=20
+layer=com_0
+hide=yes
+
+// 382:27
+[com_27]
+type=text
+x=28
+y=3
+width=227
+height=15
+layer=com_26
+textfont=p12_full
+text=Don't ask me this again
+textalignv=1
+textshadow=yes
+colour=0xff981f
+
+// 382:28
+[com_28]
+type=graphic
+x=3
+y=1
+width=19
+height=19
+layer=com_26
+graphic="warning_icons,1"
+op1=Off/On
+onvartransmit=script164(interface_382:com_28, 7)
+onclick=script163(interface_382:com_28)
+onvartransmitlist=varplayer_1045
+
+// 382:29
+[com_29]
+type=graphic
+x=102
+y=7
+width=310
+height=32
+layer=com_0
+graphic="v2_stone_borders,0"
+tiling=yes
+

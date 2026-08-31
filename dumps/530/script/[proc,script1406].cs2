@@ -1,0 +1,7 @@
+// 1406
+[proc,script1406](component $component0)
+if_sethide(true, interface_756:com_3);
+if_sethide(true, interface_756:com_4);
+if_sethide(true, interface_756:com_6);
+if_sethide(true, interface_756:com_8);
+if_sethide(false, $component0);

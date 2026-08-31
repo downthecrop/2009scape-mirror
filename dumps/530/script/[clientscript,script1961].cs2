@@ -1,0 +1,96 @@
+// 1961
+[clientscript,script1961]
+def_int $int0 = inv_total(inv_93, obj_1985);
+def_int $int1 = inv_total(inv_93, obj_2169);
+def_int $int2 = inv_total(inv_93, obj_2162);
+def_int $int3 = inv_total(inv_93, obj_1957);
+def_int $int4 = inv_total(inv_93, obj_2126);
+def_int $int5 = inv_total(inv_93, obj_2128);
+def_int $int6 = inv_total(inv_93, obj_2152);
+def_int $int7 = inv_total(inv_93, obj_1973);
+def_int $int8 = inv_total(inv_93, obj_1942);
+if ($int2 >= 4 & $int3 >= 2 & $int1 >= 1) {
+    if_setcolour(^green, interface_435:com_45);
+} else {
+    if_setcolour(^red, interface_435:com_45);
+}
+if ($int3 >= 2 & $int1 >= 1 & $int8 >= 2) {
+    if_setcolour(^green, interface_435:com_46);
+} else {
+    if_setcolour(^red, interface_435:com_46);
+}
+if ($int6 >= 4 & $int1 >= 1 & $int0 >= 2 & $int5 >= 2 & $int4 >= 1) {
+    if_setcolour(^green, interface_435:com_47);
+} else {
+    if_setcolour(^red, interface_435:com_47);
+}
+if ($int7 >= 4 & $int5 >= 1) {
+    if_setcolour(^green, interface_435:com_48);
+} else {
+    if_setcolour(^red, interface_435:com_48);
+}
+if (inv_total(inv_93, obj_2152) > 3) {
+    if_setobject(obj_2152, 100, interface_435:com_22);
+} else {
+    if_setobject(obj_9499, 100, interface_435:com_22);
+}
+if (inv_total(inv_93, obj_2128) > 1) {
+    if_setobject(obj_2128, 120, interface_435:com_24);
+} else {
+    if_setobject(obj_9494, 120, interface_435:com_24);
+}
+if (inv_total(inv_93, obj_1985) > 1) {
+    if_setobject(obj_1985, 140, interface_435:com_23);
+} else {
+    if_setobject(obj_9502, 140, interface_435:com_23);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_435:com_25);
+} else {
+    if_setobject(obj_9500, 90, interface_435:com_25);
+}
+if (inv_total(inv_93, obj_2126) > 0) {
+    if_setobject(obj_2126, 140, interface_435:com_26);
+} else {
+    if_setobject(obj_9496, 140, interface_435:com_26);
+}
+if (inv_total(inv_93, obj_2162) > 3) {
+    if_setobject(obj_2162, 100, interface_435:com_4);
+} else {
+    if_setobject(obj_9501, 100, interface_435:com_4);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_435:com_6);
+} else {
+    if_setobject(obj_9500, 90, interface_435:com_6);
+}
+if (inv_total(inv_93, obj_1957) > 1) {
+    if_setobject(obj_1957, 140, interface_435:com_5);
+} else {
+    if_setobject(obj_9504, 140, interface_435:com_5);
+}
+if (inv_total(inv_93, obj_1942) > 1) {
+    if_setobject(obj_1942, 100, interface_435:com_14);
+} else {
+    if_setobject(obj_9506, 100, interface_435:com_14);
+}
+if (inv_total(inv_93, obj_2169) > 0) {
+    if_setobject(obj_2169, 90, interface_435:com_15);
+} else {
+    if_setobject(obj_9500, 90, interface_435:com_15);
+}
+if (inv_total(inv_93, obj_1957) > 1) {
+    if_setobject(obj_1957, 140, interface_435:com_13);
+} else {
+    if_setobject(obj_9504, 140, interface_435:com_13);
+}
+if (inv_total(inv_93, obj_1973) > 3) {
+    if_setobject(obj_1973, 140, interface_435:com_35);
+} else {
+    if_setobject(obj_9507, 140, interface_435:com_35);
+}
+if (inv_total(inv_93, obj_2128) > 0) {
+    if_setobject(obj_2128, 120, interface_435:com_36);
+} else {
+    if_setobject(obj_9494, 120, interface_435:com_36);
+}

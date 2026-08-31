@@ -1,0 +1,20 @@
+// 180:0
+[com_0]
+type=model
+width=18727
+height=31254
+widthmode=proportion
+heightmode=proportion
+model=model_11229
+modelorigin_x=0
+modelorigin_y=18
+modelangle_x=512
+modelangle_y=0
+modelangle_z=0
+modelzoom=16
+modelanim=seq_3166
+unknown100=1787
+unknown101=3000
+modelobjwidth=585
+modelobjheight=637
+

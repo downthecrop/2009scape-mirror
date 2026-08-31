@@ -1,0 +1,521 @@
+// 125:0
+[com_0]
+type=rectangle
+x=103
+y=38
+width=332
+height=253
+colour=0x000000
+fill=yes
+trans=192
+
+// 125:1
+[com_1]
+type=graphic
+x=103
+y=37
+width=327
+height=248
+graphic=tradebacking
+tiling=yes
+
+// 125:2
+[com_2]
+type=graphic
+x=86
+y=58
+width=39
+height=202
+graphic="v2_stone_borders,1"
+tiling=yes
+
+// 125:3
+[com_3]
+type=graphic
+x=414
+y=59
+width=27
+height=207
+graphic="v2_stone_borders,3"
+tiling=yes
+
+// 125:4
+[com_4]
+type=graphic
+x=99
+y=34
+width=32
+height=32
+graphic="v2_stone_borders,4"
+
+// 125:5
+[com_5]
+type=graphic
+x=120
+y=21
+width=286
+height=22
+graphic="v2_stone_borders,0"
+tiling=yes
+
+// 125:6
+[com_6]
+type=graphic
+x=123
+y=269
+width=285
+height=37
+graphic="v2_stone_borders,2"
+tiling=yes
+
+// 125:7
+[com_7]
+type=graphic
+x=99
+y=257
+width=32
+height=32
+graphic="v2_stone_borders,6"
+
+// 125:8
+[com_8]
+type=graphic
+x=402
+y=34
+width=32
+height=32
+graphic="v2_stone_borders,5"
+
+// 125:9
+[com_9]
+type=graphic
+x=402
+y=257
+width=32
+height=32
+graphic="v2_stone_borders,7"
+
+// 125:10
+[com_10]
+type=graphic
+x=109
+y=52
+width=316
+height=22
+graphic="v2_stone_borders,8"
+tiling=yes
+
+// 125:11
+[com_11]
+type=graphic
+x=99
+y=54
+width=32
+height=32
+graphic="v2_stone_borders,9"
+
+// 125:12
+[com_12]
+type=graphic
+x=402
+y=54
+width=32
+height=32
+graphic="v2_stone_borders,10"
+
+// 125:13
+[com_13]
+type=text
+x=105
+y=38
+width=320
+height=27
+textfont=b12_full
+text=Amazing Farming Equipment Store
+textalignh=1
+textalignv=1
+textshadow=yes
+colour=0xff9900
+
+// 125:14
+[com_14]
+type=text
+x=119
+y=71
+width=97
+height=34
+textfont=p12_full
+text=Farming rake
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:15
+[com_15]
+type=text
+x=119
+y=104
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:16
+[com_16]
+type=text
+x=215
+y=71
+width=97
+height=34
+textfont=p12_full
+text=Seed dibber
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:17
+[com_17]
+type=text
+x=215
+y=104
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:18
+[com_18]
+type=text
+x=311
+y=71
+width=106
+height=34
+textfont=p12_full
+text=All-purpose spade
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:19
+[com_19]
+type=text
+x=311
+y=104
+width=64
+height=17
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:20
+[com_20]
+type=text
+x=119
+y=135
+width=97
+height=34
+textfont=p12_full
+text=Secateurs
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:21
+[com_21]
+type=text
+x=119
+y=168
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:22
+[com_22]
+type=text
+x=215
+y=135
+width=97
+height=34
+textfont=p12_full
+text=Watering Can
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:23
+[com_23]
+type=text
+x=215
+y=168
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:24
+[com_24]
+type=text
+x=311
+y=135
+width=106
+height=34
+textfont=p12_full
+text=Gardening trowel
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:25
+[com_25]
+type=text
+x=311
+y=168
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x870000
+
+// 125:26
+[com_26]
+type=text
+x=119
+y=199
+width=97
+height=34
+textfont=p12_full
+text=Empty buckets
+textalignv=2
+textshadow=yes
+colour=0x870000
+
+// 125:27
+[com_27]
+type=text
+x=119
+y=232
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:28
+[com_28]
+type=text
+x=215
+y=199
+width=97
+height=34
+textfont=p12_full
+text=Normal Compost
+textalignv=2
+textshadow=yes
+colour=0x872300
+
+// 125:29
+[com_29]
+type=text
+x=215
+y=232
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x870000
+
+// 125:30
+[com_30]
+type=text
+x=311
+y=199
+width=106
+height=34
+textfont=p12_full
+text=Supercompost
+textalignv=2
+textshadow=yes
+colour=0x870000
+
+// 125:31
+[com_31]
+type=text
+x=311
+y=232
+width=64
+height=16
+textfont=p12_full
+textshadow=yes
+colour=0x872300
+
+// 125:32
+[com_32]
+type=graphic
+x=401
+y=41
+width=26
+height=23
+graphic="close_buttons,0"
+op1=Close
+onmouseover=script44(event_com, "close_buttons,1")
+onmouseleave=script44(event_com, "close_buttons,0")
+onop=script29
+
+// 125:33
+[com_33]
+type=graphic
+x=181
+y=104
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Rake
+op1=Remove
+op10=Examine
+onload=script1291(event_com, obj_5341, 1, interface_125:com_14, interface_125:com_15)
+onvartransmit=script1291(event_com, obj_5341, 1, interface_125:com_14, interface_125:com_15)
+onvartransmitlist=varplayer_615
+
+// 125:34
+[com_34]
+type=graphic
+x=277
+y=104
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Dibber
+op1=Remove
+op10=Examine
+onload=script1291(event_com, obj_5343, 1, interface_125:com_16, interface_125:com_17)
+onvartransmit=script1291(event_com, obj_5343, 1, interface_125:com_16, interface_125:com_17)
+onvartransmitlist=varplayer_615
+
+// 125:35
+[com_35]
+type=graphic
+x=373
+y=104
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Spade
+op1=Remove
+op10=Examine
+onload=script1291(event_com, obj_952, 1, interface_125:com_18, interface_125:com_19)
+onvartransmit=script1291(event_com, obj_952, 1, interface_125:com_18, interface_125:com_19)
+onvartransmitlist=varplayer_615
+
+// 125:36
+[com_36]
+type=graphic
+x=181
+y=168
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Secateurs
+op1=Remove
+op10=Examine
+onload=script1291(event_com, obj_5329, 1, interface_125:com_20, interface_125:com_21)
+onvartransmit=script1291(event_com, obj_5329, 1, interface_125:com_20, interface_125:com_21)
+onvartransmitlist=varplayer_615
+
+// 125:37
+[com_37]
+type=graphic
+x=277
+y=168
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Watering Can
+op1=Remove
+op10=Examine
+onload=script1291(event_com, obj_6797, 1, interface_125:com_22, interface_125:com_23)
+onvartransmit=script1291(event_com, obj_6797, 1, interface_125:com_22, interface_125:com_23)
+onvartransmitlist=varplayer_615
+
+// 125:38
+[com_38]
+type=graphic
+x=373
+y=168
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Trowel
+op1=Remove
+op10=Examine
+onload=script1291(event_com, obj_5325, 1, interface_125:com_24, interface_125:com_25)
+onvartransmit=script1291(event_com, obj_5325, 1, interface_125:com_24, interface_125:com_25)
+onvartransmitlist=varplayer_615
+
+// 125:39
+[com_39]
+type=graphic
+x=181
+y=232
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Buckets
+op1=Remove 1
+op2=Remove 5
+op3=Remove All
+op4=Remove X
+op10=Examine
+onload=script1291(event_com, obj_1925, 31, interface_125:com_26, interface_125:com_27)
+onvartransmit=script1291(event_com, obj_1925, 31, interface_125:com_26, interface_125:com_27)
+onvartransmitlist=varplayer_615
+
+// 125:40
+[com_40]
+type=graphic
+x=277
+y=232
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Compost
+op1=Remove 1
+op2=Remove 5
+op3=Remove All
+op4=Remove X
+op10=Examine
+onload=script1291(event_com, obj_6032, 255, interface_125:com_28, interface_125:com_29)
+onvartransmit=script1291(event_com, obj_6032, 255, interface_125:com_28, interface_125:com_29)
+onvartransmitlist=varplayer_615
+
+// 125:41
+[com_41]
+type=graphic
+x=373
+y=232
+width=34
+height=32
+outline=1
+graphicshadow=1
+opbase=<col=ff9040>Supercompost
+op1=Remove 1
+op2=Remove 5
+op3=Remove All
+op4=Remove X
+op10=Examine
+onload=script1291(event_com, obj_6034, 255, interface_125:com_30, interface_125:com_31)
+onvartransmit=script1291(event_com, obj_6034, 255, interface_125:com_30, interface_125:com_31)
+onvartransmitlist=varplayer_615
+

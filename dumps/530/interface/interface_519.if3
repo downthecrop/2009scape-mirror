@@ -1,0 +1,43 @@
+// 519:0
+[com_0]
+type=model
+x=16
+y=16
+width=64
+height=64
+model=null
+modelorigin_x=0
+modelorigin_y=0
+modelangle_x=0
+modelangle_y=0
+modelangle_z=0
+modelzoom=400
+unknown100=0
+unknown101=400
+
+// 519:1
+[com_1]
+type=text
+x=96
+y=9
+width=380
+height=69
+textfont=q8_full
+textalignh=1
+textalignv=1
+colour=0x000000
+
+// 519:2
+[com_2]
+type=text
+x=96
+y=80
+width=380
+height=17
+textfont=q8_full
+text=Click here to continue
+textalignh=1
+colour=0x0000ff
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^blue)
+

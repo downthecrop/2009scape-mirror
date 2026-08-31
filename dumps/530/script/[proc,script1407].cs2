@@ -1,0 +1,7 @@
+// 1407
+[proc,script1407]
+if (%varplayerbit_68 = 1) {
+    if_setgraphic("miscgraphics,11", interface_756:com_50);
+} else {
+    if_setgraphic("miscgraphics,10", interface_756:com_50);
+}

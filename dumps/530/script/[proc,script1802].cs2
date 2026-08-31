@@ -1,0 +1,8 @@
+// 1802
+[proc,script1802]
+if_sethide(true, interface_791:com_143);
+if_sethide(true, interface_791:com_146);
+if_sethide(false, interface_791:com_144);
+if_sethide(false, interface_791:com_147);
+if_sethide(false, interface_791:com_145);
+if_sethide(false, interface_791:com_148);
