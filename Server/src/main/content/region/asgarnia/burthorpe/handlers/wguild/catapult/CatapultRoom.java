@@ -207,10 +207,11 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 
 			@Override
 			public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
-				if (button >= 9 && button <= 12) {
-					CatapultAttack attack = CatapultAttack.values()[button - 9];
+				int index = button < 4 ? button : button - 9;
+				if (index >= 0 && index < CatapultAttack.values().length) {
+					CatapultAttack attack = CatapultAttack.values()[index];
 					player.setAttribute("catapult_def", attack);
-                                        setVarp(player, 788, (button - 8) % 4);
+					setVarp(player, 788, (index + 1) % 4);
 					return true;
 				}
 				return false;
