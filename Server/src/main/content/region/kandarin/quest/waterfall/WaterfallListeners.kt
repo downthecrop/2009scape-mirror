@@ -212,8 +212,12 @@ class WaterfallListeners : InteractionListener {
         }
 
         // Climb the stairs at the tourism center
-        on(SceneryObj.STAIRCASE_1738, IntType.SCENERY, "climb-up") { player, _ ->
-            teleport(player, locTopOfStairs)
+        on(SceneryObj.STAIRCASE_1738, IntType.SCENERY, "climb-up") { player, node ->
+            if (player.location.withinDistance(locTopOfStairs.transform(0, 0, -1), 5)) {
+                teleport(player, locTopOfStairs)
+            } else {
+                core.game.global.action.ClimbActionHandler.climbLadder(player, node as Scenery, "climb-up")
+            }
             return@on true
         }
 
