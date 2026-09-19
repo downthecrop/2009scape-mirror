@@ -143,8 +143,8 @@ enum class Storable(
     HunterCape(Items.HUNTER_CAPE_10646, intArrayOf(Items.HUNTER_CAPE_9948, Items.HUNTER_CAPET_9949, Items.HUNTER_HOOD_9950),  type = StorableFamily.CAPE_RACK_SKILL),
     QuestCape(Items.QUEST_POINT_CAPE_10662, intArrayOf(Items.QUEST_POINT_CAPE_9813, Items.QUEST_POINT_HOOD_9814), type = StorableFamily.CAPE_RACK_SKILL),
     SummoningCape(Items.SUMMONING_CAPE_12524, intArrayOf(Items.SUMMONING_CAPE_12169, Items.SUMMONING_CAPET_12170, Items.SUMMONING_HOOD_12171), type = StorableFamily.CAPE_RACK_SKILL),
-    SpottedCape(Items.SPOTTED_CAPE_10663, intArrayOf(Items.SPOTTED_CAPE_10663), type = StorableFamily.CAPE_RACK, "Spotted hunting cape"),
-    SpottierCape(Items.SPOTTIER_CAPE_10664, intArrayOf(Items.SPOTTIER_CAPE_10664), type = StorableFamily.CAPE_RACK, "Spottier hunting cape"),
+    SpottedCape(Items.SPOTTED_CAPE_10663, intArrayOf(Items.SPOTTED_CAPE_10069), type = StorableFamily.CAPE_RACK, "Spotted hunting cape"),
+    SpottierCape(Items.SPOTTIER_CAPE_10664, intArrayOf(Items.SPOTTIER_CAPE_10071), type = StorableFamily.CAPE_RACK, "Spottier hunting cape"),
 
     // Fancy Dress - https://runescape.wiki/w/Fancy_dress_box?oldid=848873
     MimeCostume(Items.MIME_MASK_10629, intArrayOf(Items.MIME_MASK_3057, Items.MIME_TOP_3058, Items.MIME_LEGS_3059, Items.MIME_GLOVES_3060, Items.MIME_BOOTS_3061), type = StorableFamily.FANCY_DRESS, "Mime Costume"),
