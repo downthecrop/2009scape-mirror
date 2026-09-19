@@ -10,6 +10,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.tools.RandomFunction
+import kotlin.math.ceil
 import kotlin.math.floor
 
 /**
@@ -76,7 +77,7 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
                 entity.properties.combatPulse.stop()
             }
         }
-        var ticks = 2 + floor(entity.location.getDistance(victim!!.location) * 0.5).toInt()
+        var ticks = 2 + ceil(entity.location.getDistance(victim!!.location) * 0.5).toInt()
         if (spell!!.type === SpellType.BLITZ) {
             ticks++
         }
