@@ -162,7 +162,11 @@ enum class Pickpockets(val ids: IntArray, val requiredLevel: Int, val low: Doubl
         WeightedItem(Items.COINS_995,80,80,1.0,true),
         WeightedItem(Items.CHAOS_RUNE_562,2,2,1.0,true)
     )),
-    GNOME(intArrayOf(66, 67, 68, 168, 169, 2249, 2250, 2251, 2371, 2649, 2650, 6002, 6004), 75, 8.0, 120.0, 198.5, 1,1,5, WeightBasedTable.create(
+    GNOME(intArrayOf(
+        NPCs.GNOME_66, NPCs.GNOME_67, NPCs.GNOME_68, NPCs.GNOME_CHILD_159, NPCs.GNOME_CHILD_160, NPCs.GNOME_CHILD_161,
+        NPCs.GNOME_WOMAN_168, NPCs.GNOME_WOMAN_169, NPCs.GNOME_2249, NPCs.GNOME_2250, NPCs.GNOME_2251, NPCs.GNOME_2371,
+        NPCs.GNOME_2649, NPCs.GNOME_2650, NPCs.GNOME_6002, NPCs.GNOME_6004),
+        75, 8.0, 120.0, 198.5, 1, 1, 5, WeightBasedTable.create(
         WeightedItem(Items.COINS_995,300,300,2.5),
         WeightedItem(Items.EARTH_RUNE_557,1,1,3.5),
         WeightedItem(Items.GOLD_ORE_445,1,1,1.0),

@@ -60489,5 +60489,19 @@
     "ids": "893",
     "description": "Clivet from Hazeel Cult",
     "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "159,160,161",
+    "description": "Gnome children",
+    "main": []
   }
 ]

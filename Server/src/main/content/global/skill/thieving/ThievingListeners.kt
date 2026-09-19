@@ -15,6 +15,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Sounds
 import content.global.activity.ttrail.TreasureTrailManager
+import core.game.node.entity.npc.NPC
 
 class ThievingListeners : InteractionListener {
 
@@ -75,7 +76,11 @@ class ThievingListeners : InteractionListener {
             val lootTable = pickpocketRoll(player, pickpocketData.low, pickpocketData.high, effectiveTable)
             if(lootTable == null){
                 node.asNpc().face(player)
-                node.asNpc().animator.animate(NPC_ANIM)
+                if ((node as NPC).id in Pickpockets.GNOME.ids) {
+                    animate(node, node.properties.attackAnimation)
+                } else {
+                    animate(node, NPC_ANIM)
+                }
 
                 playHurtAudio(player, 20)
 
