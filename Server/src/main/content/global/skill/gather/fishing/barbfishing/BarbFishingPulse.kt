@@ -38,7 +38,7 @@ class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(NPCs.FISHING
             sendDialogue(player, "You can't carry any more fish.")
             return false
         }
-        if(BAITS.none { inInventory(player, it) }){
+        if (baits.none { inInventory(player, it) }) {
             sendDialogue(player, "You don't have any bait with which to fish.")
             return false
         }
@@ -46,7 +46,7 @@ class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(NPCs.FISHING
     }
 
     companion object {
-        private val BAITS = intArrayOf(
+        private val baits = intArrayOf(
             Items.FISH_OFFCUTS_11334,
             Items.FEATHER_314,
             Items.FISHING_BAIT_313,
@@ -81,7 +81,7 @@ class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(NPCs.FISHING
         }
 
         if (caught != null) {
-            BAITS.firstOrNull { removeItem(player, Item(it, 1)) }
+            baits.firstOrNull { removeItem(player, Item(it, 1)) }
             addItem(player, caught.id, 1)
             rewardXP(player, Skills.FISHING, caught.experience)
             val strAgiXP = when (caught) {

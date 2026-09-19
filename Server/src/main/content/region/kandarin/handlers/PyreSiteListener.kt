@@ -1,6 +1,7 @@
 package content.region.kandarin.handlers
 
 import content.data.skill.SkillingTool
+import content.global.skill.firemaking.FiremakingListener
 import content.global.skill.firemaking.Log
 import content.region.fremennik.diary.FremennikAchievementDiary.Companion.HardTasks
 import content.region.kandarin.quest.barbariantraining.BarbarianTraining
@@ -35,7 +36,7 @@ import org.rs09.consts.Scenery as Objects
 class PyreSiteListener : InteractionListener {
 
     companion object {
-        internal val REWARDS = arrayOf(
+        private val rewards = arrayOf(
             // For odds, divide chanceRate by 256
             // Potions
             ChanceItem(Items.RANARR_POTIONUNF_100, 2, 2, 16.0),
@@ -65,12 +66,12 @@ class PyreSiteListener : InteractionListener {
             ChanceItem(Items.MITH_GRAPPLE_9419, 2, 2, 12.0)
         )
 
-        private val USED_LOCATIONS = ArrayList<Location>(20)
+        private val usedLocations = ArrayList<Location>(20)
     }
 
     override fun defineListeners() {
         on(Objects.PYRE_SITE_25286, IntType.SCENERY, "construct") { player, node ->
-            for (l in USED_LOCATIONS) {
+            for (l in usedLocations) {
                 if (l.withinDistance(node.location, 3)) {
                     sendDialogue(player, "This pyre site is in use currently.")
                     return@on true
@@ -84,8 +85,8 @@ class PyreSiteListener : InteractionListener {
                 sendDialogue(player, "You need chewed bones or mangled bones in order to do this.")
                 return@on true
             }
-            if (!inInventory(player, Items.TINDERBOX_590)) {
-                sendDialogue(player, "You need a tinderbox in order to do this.")
+            if (!anyInInventory(player, Items.TINDERBOX_590, *FiremakingListener.bows)) {
+                sendDialogue(player, "You need a tinderbox or bow in order to do this.") // TODO: find authentic dialogue
                 return@on true
             }
             val tool = SkillingTool.getHatchet(player) ?: run {
@@ -117,7 +118,7 @@ class PyreSiteListener : InteractionListener {
         else {
             Item(Items.MANGLED_BONES_11337)
         }
-        USED_LOCATIONS.add(obj.location)
+        usedLocations.add(obj.location)
         val spiritHolder = arrayOfNulls<PeacefulBarbarianNPC>(1)
         val shipHolder = arrayOfNulls<Scenery>(1)
         val southernPyreSite = player.location.withinDistance(Location(2503, 3498, 0), 4)
@@ -201,7 +202,7 @@ class PyreSiteListener : InteractionListener {
                     if (getLocation(obj) == obj.location && getScenery(obj.location)?.id != Objects.PYRE_SITE_25286) {
                         SceneryBuilder.add(Scenery(Objects.PYRE_SITE_25286, obj.location, obj.type, obj.rotation))
                     }
-                    USED_LOCATIONS.remove(obj.location)
+                    usedLocations.remove(obj.location)
                     return@queueScript stopExecuting(player)
                 }
             }
@@ -233,7 +234,7 @@ class PyreSiteListener : InteractionListener {
             sendNews(player.username + " has just received a Dragon Full Helm from a pyre ship.")
             return Item(Items.DRAGON_FULL_HELM_11335)
         }
-        return RandomFunction.getChanceItem(REWARDS)
+        return RandomFunction.getChanceItem(rewards)
     }
 
     private fun getAnimation(tool: SkillingTool): Animation? {

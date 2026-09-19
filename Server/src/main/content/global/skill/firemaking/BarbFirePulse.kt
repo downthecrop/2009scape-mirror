@@ -24,8 +24,8 @@ import kotlin.math.ceil
 class BarbFirePulse(player: Player, node: Item?, groundItem: GroundItem?, private val usedBow: Item? = null) : SkillPulse<Item>(player, node) {
 
     companion object {
-        private const val attributeRemoveLog = "remove-log"
-        private const val attributeLastFiremake = "last-firemake"
+        private const val ATTRIBUTE_REMOVE_LOG = "remove-log"
+        private const val ATTRIBUTE_LAST_FIREMAKE = "last-firemake"
     }
 
     private val bowsAndAnimations = mapOf(
@@ -46,12 +46,12 @@ class BarbFirePulse(player: Player, node: Item?, groundItem: GroundItem?, privat
     private val fire: Log? = Log.forId(node!!.id)
     private var ticks = 0
     private var groundItem: GroundItem = groundItem ?: run {
-        setAttribute(player, attributeRemoveLog, true)
+        setAttribute(player, ATTRIBUTE_REMOVE_LOG, true)
         GroundItem(node!!, player.location, player)
     }
     init {
         if (groundItem != null) {
-            removeAttribute(player, attributeRemoveLog)
+            removeAttribute(player, ATTRIBUTE_REMOVE_LOG)
         }
     }
 
@@ -86,8 +86,8 @@ class BarbFirePulse(player: Player, node: Item?, groundItem: GroundItem?, privat
         }
 
         // Handle log removal from inventory
-        if (getAttribute(player, attributeRemoveLog, false)) {
-            removeAttribute(player, attributeRemoveLog)
+        if (getAttribute(player, ATTRIBUTE_REMOVE_LOG, false)) {
+            removeAttribute(player, ATTRIBUTE_REMOVE_LOG)
             if (inInventory(player, node!!.id, 1)) {
                 replaceSlot(player, node!!.slot, Item(node!!.id, node!!.amount - 1), node!!, Container.INVENTORY)
                 groundItem = produceGroundItem(player, groundItem.id, groundItem.amount, groundItem.location)
@@ -176,12 +176,12 @@ class BarbFirePulse(player: Player, node: Item?, groundItem: GroundItem?, privat
 
 
     private fun getLastFire(): Int { // Time in ticks
-        return getAttribute(player, attributeLastFiremake, 0)
+        return getAttribute(player, ATTRIBUTE_LAST_FIREMAKE, 0)
     }
 
 
     private fun setLastFire() { // Time in ticks
-        setAttribute(player, attributeLastFiremake, getWorldTicks() + 2)
+        setAttribute(player, ATTRIBUTE_LAST_FIREMAKE, getWorldTicks() + 2)
     }
 
     /**
