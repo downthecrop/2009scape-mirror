@@ -44,7 +44,7 @@ public final class AutocastSelectPlugin extends ComponentPlugin {
 		player.removeAttribute("autocast_select");
 		final WeaponInterface w = player.getExtension(WeaponInterface.class);
 		if (w != null) {
-			w.selectAutoSpell(button, true);
+			w.selectAutoSpell(button, true, false);
 			player.getInterfaceManager().openTab(w);
 		}
 		return true;

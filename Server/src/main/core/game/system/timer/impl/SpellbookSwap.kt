@@ -79,7 +79,7 @@ class SpellbookSwap : PersistTimer(runInterval = minutesToTicks(2), identifier =
 		// Clear autocast
 		val weaponInterface = entity.getExtension<WeaponInterface>(WeaponInterface::class.java)
 		if (weaponInterface != null && entity.properties.autocastSpell != null) {
-			weaponInterface.selectAutoSpell(-1, true)
+			weaponInterface.selectAutoSpell(-1, true, true)
 		}
 		// Close autocast selection interface if it's still open
 		if (entity.getAttribute("autocast_select", false)) {

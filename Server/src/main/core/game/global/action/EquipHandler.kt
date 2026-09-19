@@ -82,7 +82,7 @@ class EquipHandler : InteractionListener {
                 if (itemEquipmentSlot == EquipmentContainer.SLOT_WEAPON) {
                     player.properties.autocastSpell = null
                     val wif = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
-                    wif.selectAutoSpell(-1, true)
+                    wif.selectAutoSpell(-1, true, true)
                     wif.openAutocastSelect()
                 }
             }

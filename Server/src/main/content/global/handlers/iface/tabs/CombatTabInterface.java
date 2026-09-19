@@ -82,7 +82,7 @@ public class CombatTabInterface extends ComponentPlugin {
 				if (button == 4 || button == 5) {
 					inter.openAutocastSelect();
 				} else if (p.getProperties().getAutocastSpell() != null) {
-					inter.selectAutoSpell(-1, false);
+					inter.selectAutoSpell(-1, false, true);
 				}
 				return true;
 			}

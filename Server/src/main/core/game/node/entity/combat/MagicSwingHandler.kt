@@ -52,7 +52,7 @@ open class MagicSwingHandler (vararg flags: SwingHandlerFlag)
             entity.properties.spell = null
             val inter = entity.getExtension<WeaponInterface>(WeaponInterface::class.java)
             if (inter != null) {
-                inter.selectAutoSpell(-1, true)
+                inter.selectAutoSpell(-1, true, true)
                 entity.properties.combatPulse.updateStyle()
             }
             return -1

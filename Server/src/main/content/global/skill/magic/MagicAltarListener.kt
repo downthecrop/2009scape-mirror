@@ -54,7 +54,7 @@ class MagicAltarListener : InteractionListener {
 		}
 		val weaponInterface = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
 		if (weaponInterface != null && player.properties.autocastSpell != null) {
-			weaponInterface.selectAutoSpell(-1, true)
+			weaponInterface.selectAutoSpell(-1, true, true)
 		}
 		if (SpellBook.forInterface(player.spellBookManager.spellBook) == if (altar.id == ANCIENT_ALTAR) SpellBook.ANCIENT else SpellBook.LUNAR) {
 			player.dispatch(SpellbookChangeEvent(

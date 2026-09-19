@@ -86,8 +86,6 @@ class DrillDemonListeners : InteractionListener, MapArea {
         if (entity is Player) {
             entity.asPlayer().interfaceManager.closeDefaultTabs()
             entity.locks.lockTeleport(1000000)
-            setComponentVisibility(entity.asPlayer(), 548, 69, true)
-            setComponentVisibility(entity.asPlayer(), 746, 12, true)
         }
     }
 }

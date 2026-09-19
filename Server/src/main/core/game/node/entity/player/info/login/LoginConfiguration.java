@@ -1,5 +1,7 @@
 package core.game.node.entity.player.info.login;
 
+import core.api.Container;
+import core.api.EquipmentSlot;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
@@ -11,6 +13,7 @@ import core.net.packet.out.Interface;
 import core.plugin.Plugin;
 import core.ServerConstants;
 import core.game.interaction.InteractionListeners;
+import core.game.node.entity.combat.equipment.WeaponInterface;
 import content.global.handlers.iface.RulesAndInfo;
 import core.tools.Log;
 import core.game.world.GameWorld;
@@ -103,7 +106,7 @@ public final class LoginConfiguration {
         setInterfaceText(player, "", 378, 39);
         setInterfaceText(player, "Discord Invite", 378, 14);
         setInterfaceText(player, "Discord Invite", 378, 129);
-        setInterfaceText(player, "You can gain more credits by reporting bugs and various other methods of contribution.", 378, 93);
+        setInterfaceText(player, "You can gain more credits by testing new features and other methods of contribution.", 378, 93);
         setInterfaceText(player, player.getDetails().getCredits() + "", 378, 96);
         setInterfaceText(player, "Credits", 378, 94);
         setInterfaceText(player, "", 378, 229);
@@ -139,15 +142,28 @@ public final class LoginConfiguration {
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);
         }
 
+        int savedAttackStyle = player.getSettings().getAttackStyleIndex();
         for (Item item : player.getEquipment().toArray()) {
             //Run equip hooks for all items equipped on login.
             //We should have already been doing this.
             //Frankly, I don't even want to imagine the number of bugs us *not* doing this has caused.
             if (item == null) continue;
-            player.getEquipment().remove(item);
-            if (!InteractionListeners.run(item.getId(), player, item, true) || !player.getEquipment().add(item, true, false)) {
-                player.sendMessage(colorize("%RAs you can no longer wear " + item.getName() + ", it has been unequipped."));
-                addItemOrBank(player, item.getId(), item.getAmount());
+            if (removeItem(player, item, Container.EQUIPMENT)) {
+                if (!InteractionListeners.run(item.getId(), player, item, true) || !player.getEquipment().add(item, true, false)) {
+                    player.sendMessage(colorize("%RAs you can no longer wear " + item.getName() + ", it has been unequipped."));
+                    addItemOrBank(player, item.getId(), item.getAmount());
+                    if (equipSlot(item.getId()) == EquipmentSlot.WEAPON) {
+                        // Default to accurate style if weapon frisk failed
+                        WeaponInterface inter = player.getExtension(WeaponInterface.class);
+                        inter.restoreAttackStyle(0);
+                    }
+                } else if (equipSlot(item.getId()) == EquipmentSlot.WEAPON) {
+                    WeaponInterface inter = player.getExtension(WeaponInterface.class);
+                    // Put player's weapon style back to how it was before it was re-equipped
+                    if (!inter.restoreAutocast()) {
+                        inter.restoreAttackStyle(savedAttackStyle);
+                    }
+                }
             }
         }
 

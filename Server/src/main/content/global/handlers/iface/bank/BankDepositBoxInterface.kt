@@ -1,9 +1,11 @@
 package content.global.handlers.iface.bank
 
+import core.ServerConstants
 import core.api.animate
 import core.api.dumpBeastOfBurden
 import core.api.runWorldTask
 import core.api.sendMessage
+import core.api.setInterfaceText
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import org.rs09.consts.Animations
@@ -21,6 +23,7 @@ class BankDepositBoxInterface : InterfaceListener {
         private const val BUTTON_DEPOSIT_BOB = 13
 
         private const val MENU_ELEMENT = 11
+        private const val TITLE_ELEMENT = 12
         private const val OP_AMOUNT_ONE = 155
         private const val OP_AMOUNT_FIVE = 196
         private const val OP_AMOUNT_TEN = 124
@@ -65,12 +68,14 @@ class BankDepositBoxInterface : InterfaceListener {
     }
 
     override fun defineInterfaceListeners() {
+        onOpen(Components.BANK_DEPOSIT_BOX_11) { player, _ ->
+            setInterfaceText(player, "The Bank of ${ServerConstants.SERVER_NAME} - Deposit Box", Components.BANK_DEPOSIT_BOX_11, TITLE_ELEMENT)
+            return@onOpen true
+        }
         on(Components.BANK_DEPOSIT_BOX_11, ::handleDepositBoxMenu)
-        on(
-            Components.BANK_DEPOSIT_BOX_11,
-            BUTTON_DEPOSIT_BOB
-        ) { player, _, _, _, _, _ ->
-            dumpBeastOfBurden(player); true
+        on(Components.BANK_DEPOSIT_BOX_11, BUTTON_DEPOSIT_BOB) { player, _, _, _, _, _ ->
+            dumpBeastOfBurden(player)
+            return@on true
         }
     }
 }

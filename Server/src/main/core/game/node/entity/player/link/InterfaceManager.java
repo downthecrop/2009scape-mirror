@@ -14,6 +14,7 @@ import core.net.packet.out.Interface;
 import core.net.packet.out.WindowsPane;
 import core.tools.Log;
 import org.rs09.consts.Components;
+import content.global.handlers.iface.FriendsListInterface;
 import content.region.misc.tutisland.handlers.TutorialStage;
 
 import static core.api.ContentAPIKt.log;
@@ -352,15 +353,18 @@ public final class InterfaceManager {
 					if (inter == null) {
 						player.addExtension(WeaponInterface.class, inter = new WeaponInterface(player));
 					}
-					openTab(0, inter);
+					openTab(i, inter);
 					break;
 				case 6:
-					openTab(6, new Component(player.getSpellBookManager().getSpellBook())); // Magic
+					openTab(i, new Component(player.getSpellBookManager().getSpellBook())); // Magic
 					break;
 				case 7:
 					if (player.getFamiliarManager().hasFamiliar()) {
-						openTab(7, new Component(662));
+						openTab(i, new Component(Components.LORE_STATS_SIDE_662)); // Summoning
 					}
+					break;
+				case 8:
+					openTab(i, new FriendsListInterface()); // Friends
 					break;
 				default:
 					openTab(i, new Component(DEFAULT_TABS[i]));
@@ -368,7 +372,6 @@ public final class InterfaceManager {
 			}
 			else if (tab.isHidden()) {
 				int child = (i < 7 ? 38 : 13) + i;
-//				boolean resize = isResizable(); //TODO:
 				player.getPacketDispatch().sendInterfaceConfig(getWindowPaneId(), child, false);
 				player.getPacketDispatch().sendInterfaceConfig(getWindowPaneId(), child + 7, false);
 				tabs[i].setHidden(false);
@@ -380,31 +383,34 @@ public final class InterfaceManager {
 	 * Opens the default tabs.
 	 */
 	public void openDefaultTabs() {
-		// player.getPacketDispatch().sendInterfaceConfig(548, 51, false);
 		WeaponInterface inter = player.getExtension(WeaponInterface.class);
 		if (inter == null) {
 			player.addExtension(WeaponInterface.class, inter = new WeaponInterface(player));
 		}
-		//sendTab(16, 747); // Summoning bar
-		openTab(0, inter); // Attack
-		openTab(1, new Component(Components.STATS_320)); // Skills
-		openTab(2, new Component(Components.QUESTJOURNAL_V2_274)); // Quest
-		openTab(3, new Component(Components.INVENTORY_149)); // inventory
-		openTab(4, new Component(Components.WORNITEMS_387)); // Equipment
-		openTab(5, new Component(Components.PRAYER_271)); // Prayer
-		openTab(6, new Component(player.getSpellBookManager().getSpellBook())); // Magic
-		if (player.getFamiliarManager().hasFamiliar()) {
-			openTab(7, new Component(Components.LORE_STATS_SIDE_662)); // summoning.
+		for (int i = 0; i < tabs.length; i++) {
+			switch (i) {
+				case 0:
+					openTab(i, inter);
+					break;
+				case 6:
+					openTab(i, new Component(player.getSpellBookManager().getSpellBook())); // Magic
+					break;
+				case 7:
+					if (player.getFamiliarManager().hasFamiliar()) {
+						openTab(i, new Component(Components.LORE_STATS_SIDE_662)); // Summoning
+					}
+					break;
+				case 8:
+					if (tabs[i] == null) {
+						openTab(i, new FriendsListInterface()); // Friends
+					}
+					break;
+				default:
+					openTab(i, new Component(DEFAULT_TABS[i]));
+			}
 		}
-		openTab(8, new Component(Components.FRIENDS2_550)); // Friends
-		openTab(9, new Component(Components.IGNORE2_551)); // Ignores
-		openTab(10, new Component(Components.CLANJOIN_589)); // Clan chat
-		openTab(11, new Component(Components.OPTIONS_261)); // Settings
-		openTab(12, new Component(Components.EMOTES_464)); // Emotes
-		openTab(13, new Component(Components.MUSIC_V3_187)); // Music
-		openTab(14, new Component(Components.LOGOUT_182)); // Logout
 		if (player.getProperties().getAutocastSpell() != null) {
-			inter.selectAutoSpell(inter.getAutospellId(player.getProperties().getAutocastSpell().getSpellId()), true);
+			inter.selectAutoSpell(inter.getAutospellId(player.getProperties().getAutocastSpell().getSpellId()), true, false);
 		}
 	}
 
@@ -428,25 +434,15 @@ public final class InterfaceManager {
 	 * Closes the default tabs.
 	 */
 	public void closeDefaultTabs() {
-		WeaponInterface inter = player.getExtension(WeaponInterface.class);
-		if (inter != null) {
-			close(inter); // Attack
+		for (int i = 0; i < tabs.length; i++) {
+			Component tab = tabs[i];
+			if (tab != null) {
+				if (tab.getId() != Components.LOGOUT_182) {
+					close(tab);
+					tabs[i] = null;
+				}
+			}
 		}
-		close(new Component(Components.STATS_320)); // Skills
-		close(new Component(Components.QUESTJOURNAL_V2_274)); // Quest
-		close(new Component(Components.AREA_TASK_259)); // Diary
-		close(new Component(Components.INVENTORY_149)); // inventory
-		close(new Component(Components.WORNITEMS_387)); // Equipment
-		close(new Component(Components.PRAYER_271)); // Prayer
-		close(new Component(player.getSpellBookManager().getSpellBook()));
-		close(new Component(Components.LORE_STATS_SIDE_662)); // summoning.
-		close(new Component(Components.FRIENDS2_550)); // Friends
-		close(new Component(Components.IGNORE2_551)); // Ignores
-		close(new Component(Components.CLANJOIN_589)); // Clan chat
-		close(new Component(Components.OPTIONS_261)); // Settings
-		close(new Component(Components.EMOTES_464)); // Emotes
-		close(new Component(Components.MUSIC_V3_187)); // Music
-		//close(new Component(Components.LOGOUT_182)); // Logout
 	}
 
 	/**

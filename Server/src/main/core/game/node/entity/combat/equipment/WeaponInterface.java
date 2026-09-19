@@ -126,6 +126,16 @@ public final class WeaponInterface extends Component {
 	public static final int STYLE_CAST = 8;
 
 	/**
+	 * Attribute storing the player's autocast spell for reload upon relog.
+	 */
+	public static final String ATTRIBUTE_AUTOCAST_BUTTON_ID = "/save:autocast:buttonid";
+
+	/**
+	 * Attribute storing the player's autocast combat style for reload upon relog.
+	 */
+	public static final String ATTRIBUTE_AUTOCAST_STYLE = "/save:autocast:style";
+
+	/**
 	 * The player.
 	 */
 	private final Player player;
@@ -259,7 +269,7 @@ public final class WeaponInterface extends Component {
 			player.getProperties().setAttackAnimation(attackAnimations[player.getSettings().getAttackStyleIndex()]);
 		}
 		if (current != WeaponInterfaces.STAFF) {
-			selectAutoSpell(-1, false);
+			selectAutoSpell(-1, false, false);
 			PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, id, getConfig(current.getAttackStyles().length, current.getInterfaceId()), !specialBar));
 		} else { //if staff
 			PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, id, 87, !specialBar));
@@ -268,7 +278,7 @@ public final class WeaponInterface extends Component {
 			if (current == WeaponInterfaces.STAFF && player.getAttribute("autocast_select", false)) {
 				open();
 			}
-			selectAutoSpell(-1, true);
+			selectAutoSpell(-1, true, false);
 		}
 		PacketRepository.send(StringPacket.class, new StringContext(player, name, id, 0));
 		if (player.getSettings().isSpecialToggled()) {
@@ -298,6 +308,9 @@ public final class WeaponInterface extends Component {
 				slot = 3;
 			}
 		}
+		if (current == WeaponInterfaces.STAFF && slot <= 2) {
+			removeAttributes(player, ATTRIBUTE_AUTOCAST_BUTTON_ID, ATTRIBUTE_AUTOCAST_STYLE);
+		}
 		if (slot < 0 || slot >= current.getAttackStyles().length) {
 			return false;
 		}
@@ -317,7 +330,7 @@ public final class WeaponInterface extends Component {
 	 */
 	private void checkStaffConfigs(int slot) {
 		if (current != WeaponInterfaces.STAFF) {
-			selectAutoSpell(-1, false);
+			selectAutoSpell(-1, false, false);
 			return;
 		}
 		boolean defensive = slot == 3;
@@ -354,7 +367,9 @@ public final class WeaponInterface extends Component {
 	 * @param buttonId The button id.
 	 * @param adjustAttackStyle If the attack style should be adjusted.
 	 */
-	public void selectAutoSpell(int buttonId, boolean adjustAttackStyle) {
+	public void selectAutoSpell(int buttonId, boolean adjustAttackStyle, boolean forgetAutocast) {
+		int stdAutocastBookChild = 83;
+		int defAutocastBookChild = 183;
 		boolean modern = player.getSpellBookManager().getSpellBook() == Components.MAGIC_192;
 		int[] data = modern ? MODERN_SPELL_IDS : ANCIENT_SPELL_IDS;
 		if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff")) {
@@ -376,8 +391,13 @@ public final class WeaponInterface extends Component {
 				}
 			}
 		}
+		if (forgetAutocast) {
+			removeAttributes(player, ATTRIBUTE_AUTOCAST_BUTTON_ID, ATTRIBUTE_AUTOCAST_STYLE);
+		}
 		if (buttonId < 0) {
 			player.getProperties().setAutocastSpell(null);
+			setComponentVisibility(player, Components.WEAPON_STAFF_SEL_90, defAutocastBookChild, false);
+			setComponentVisibility(player, Components.WEAPON_STAFF_SEL_90, stdAutocastBookChild, false);
 			if (adjustAttackStyle && current != null) {
 				setAttackStyle(3);
 				player.getProperties().getCombatPulse().updateStyle();
@@ -385,10 +405,12 @@ public final class WeaponInterface extends Component {
 			return;
 		}
 		boolean defensive = player.getSettings().getAttackStyleIndex() == 3;
-		player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, 183, defensive);
-		player.getPacketDispatch().sendInterfaceConfig(Components.WEAPON_STAFF_SEL_90, 83, !defensive);
+		setComponentVisibility(player, Components.WEAPON_STAFF_SEL_90, defAutocastBookChild, defensive);
+		setComponentVisibility(player, Components.WEAPON_STAFF_SEL_90, stdAutocastBookChild, !defensive);
 		current = (CombatSpell) (modern ? SpellBookManager.SpellBook.MODERN.getSpell(data[buttonId]) : SpellBookManager.SpellBook.ANCIENT.getSpell(data[buttonId]));
 		player.getProperties().setAutocastSpell(current);
+		setAttribute(player, ATTRIBUTE_AUTOCAST_BUTTON_ID, buttonId);
+		setAttribute(player, ATTRIBUTE_AUTOCAST_STYLE, player.getSettings().getAttackStyleIndex());
 		int configId = configStart + (2 * buttonId);
 		if (modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff") || modern && player.getEquipment().getNew(3).getName().equalsIgnoreCase("Void knight mace")) {
 			boolean slayer = player.getEquipment().getNew(3).getName().equalsIgnoreCase("Slayer's staff");
@@ -506,6 +528,37 @@ public final class WeaponInterface extends Component {
 		}
 		int slot = weapon.getDefinition().getConfiguration(ItemConfigParser.WEAPON_INTERFACE, 0);
 		return WeaponInterfaces.values()[slot];
+	}
+
+	/**
+	 * Restores the player's autocast settings to what they were in the prior login session.
+	 * Returns false if the player has no autocast to restore, true otherwise.
+	 */
+	public boolean restoreAutocast() {
+		int buttonID = getAttribute(player, ATTRIBUTE_AUTOCAST_BUTTON_ID, -1);
+		int style = getAttribute(player, ATTRIBUTE_AUTOCAST_STYLE, -1);
+		if (buttonID < 0 || style < 0 || !canAutocast(false)) {
+			removeAttributes(player, ATTRIBUTE_AUTOCAST_BUTTON_ID, ATTRIBUTE_AUTOCAST_STYLE);
+			return false;
+		}
+		restoreAttackStyle(style);
+		checkStaffConfigs(style);
+		selectAutoSpell(buttonID, false, false);
+		player.getProperties().getCombatPulse().updateStyle();
+		return true;
+	}
+
+	/**
+	 * Restores the player's attack style settings to what they were in the prior login session.
+	 */
+	public void restoreAttackStyle(int index) {
+		if (index < 0 || index >= current.getAttackStyles().length) return;
+		player.getSettings().toggleAttackStyleIndex(index);
+		player.getProperties().setAttackStyle(current.getAttackStyles()[index]);
+		if (index < attackAnimations.length && !player.getAppearance().isNpc()) {
+			player.getProperties().setAttackAnimation(attackAnimations[index]);
+		}
+		player.getProperties().getCombatPulse().updateStyle();
 	}
 
 	/**

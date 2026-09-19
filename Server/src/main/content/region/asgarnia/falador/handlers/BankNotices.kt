@@ -2,6 +2,7 @@ package content.region.asgarnia.falador.handlers
 
 import content.global.handlers.iface.ScrollInterface
 import content.global.handlers.iface.ScrollLine
+import core.ServerConstants
 import core.game.interaction.InteractionListener
 import org.rs09.consts.Components
 import org.rs09.consts.Scenery
@@ -23,7 +24,7 @@ class BankNotices : InteractionListener {
         )
 
         val CONTENTS_PASSWORD = arrayOf(
-                ScrollLine("The Bank of RuneScape would like to remind customers that",4),
+                ScrollLine("The Bank of ${ServerConstants.SERVER_NAME} would like to remind customers that",4),
                 ScrollLine("they should NEVER tell ANYONE their password.",5),
 
                 ScrollLine("If someone asks you to say your password, please report",7),

@@ -16,8 +16,6 @@ class SergeantDamienNPC(override var loot: WeightBasedTable? = null) : RandomEve
         face(player)
         kidnapPlayer(this, player, Location(3163, 4819, 0)) { player, _ ->
             player.interfaceManager.closeDefaultTabs()
-            setComponentVisibility(player, 548, 69, true)
-            setComponentVisibility(player, 746, 12, true)
             openDialogue(player, SeargentDamienDialogue(isCorrect = true, eventStart = true), NPCs.SERGEANT_DAMIEN_2790)
         }
     }
