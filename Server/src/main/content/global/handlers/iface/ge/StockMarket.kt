@@ -18,6 +18,7 @@ import core.game.ge.PriceIndex
 import core.game.interaction.InterfaceListener
 import core.tools.Log
 import core.tools.SystemLogger
+import org.rs09.consts.Items
 import org.rs09.consts.Sounds
 import kotlin.math.min
 
@@ -350,17 +351,29 @@ class StockMarket : InterfaceListener {
                 log(this::class.java, Log.WARN,  "Offer withdraw[$index] is null!")
                 return
             }
+            // TODO: once all inauthentic rings of wealth are purged, replace all "item2" in this function with "item" and remove this line and the following 11
+            var item2 = Item(item.id, item.amount)
+            val inauthenticRings = arrayOf(
+                Items.RING_OF_WEALTH_14638,  Items.RING_OF_WEALTH_14639,
+                Items.RING_OF_WEALTH1_14640, Items.RING_OF_WEALTH1_14641,
+                Items.RING_OF_WEALTH2_14642, Items.RING_OF_WEALTH2_14643,
+                Items.RING_OF_WEALTH3_14644, Items.RING_OF_WEALTH3_14645,
+                Items.RING_OF_WEALTH4_14646, Items.RING_OF_WEALTH4_14647,
+            )
+            if (item2.id in inauthenticRings) {
+                item2 = Item(Items.RING_OF_WEALTH_2572, item.amount)
+            }
 
             when (op) {
                 // withdraw notes
                 155 -> {
-                    val note = item.noteChange
+                    val note = item2.noteChange
                     if (note == -1) {
                         sendMessage(player, "This item cannot be noted")
                         return
                     }
-                    if (hasSpaceFor(player, Item(note, item.amount))) {
-                        addItem(player, note, item.amount)
+                    if (hasSpaceFor(player, Item(note, item2.amount))) {
+                        addItem(player, note, item2.amount)
                     } else {
                         playAudio(player, Sounds.GE_TRADE_ERROR_4039)
                         sendMessage(player, "You do not have enough room in your inventory.")
@@ -369,8 +382,8 @@ class StockMarket : InterfaceListener {
                 }
                 // withdraw items
                 196 -> {
-                    if (hasSpaceFor(player, item)) {
-                        addItem(player, item.id, item.amount)
+                    if (hasSpaceFor(player, item2)) {
+                        addItem(player, item2.id, item2.amount)
                     } else {
                         playAudio(player, Sounds.GE_TRADE_ERROR_4039)
                         sendMessage(player, "You do not have enough room in your inventory.")

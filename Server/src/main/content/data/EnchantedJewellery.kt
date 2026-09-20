@@ -179,20 +179,6 @@ enum class EnchantedJewellery(
             Items.SKILLS_NECKLACE1_11111,
             Items.SKILLS_NECKLACE_11113
     ),
-    RING_OF_WEALTH(
-            arrayOf(
-                    "Grand Exchange.",
-                    "Nowhere."
-            ),
-            arrayOf(
-                    Location.create(3163, 3464, 0)
-            ),
-            Items.RING_OF_WEALTH4_14646,
-            Items.RING_OF_WEALTH3_14644,
-            Items.RING_OF_WEALTH2_14642,
-            Items.RING_OF_WEALTH1_14640,
-            Items.RING_OF_WEALTH_14638
-    ),
     RING_OF_LIFE(arrayOf<String>(),
             arrayOf(
                 Location.create(ServerConstants.HOME_LOCATION!!)

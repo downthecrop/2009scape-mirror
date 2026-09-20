@@ -119,7 +119,8 @@ class ProfessorHenryDialogue(player : Player? = null) : DialoguePlugin(player){
         player.savedData.globalData.testStage = 3
 
         if (removeItem(player, Items.TEST_PAPER_12626)) {
-            addItem(player, Items.ANTIQUE_LAMP_4447, 2)
+            addItemOrDrop(player, Items.ANTIQUE_LAMP_12627)
+            addItemOrDrop(player, Items.ANTIQUE_LAMP_12628)
         }
         player.emoteManager.unlock(Emotes.SAFETY_FIRST)
 

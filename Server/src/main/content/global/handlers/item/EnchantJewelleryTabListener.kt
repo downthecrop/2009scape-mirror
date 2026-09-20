@@ -67,10 +67,6 @@ class EnchantJewelleryTabListener : InteractionListener {
             }
             for ((unenchanted, enchanted) in mapping) {
                 onUseWith(IntType.ITEM, tablet, unenchanted) { player, tabItem, node ->
-                    var product = enchanted
-                    if (product == Items.RING_OF_WEALTH_2572 && ServerConstants.RING_OF_WEALTH_TELEPORT) {
-                        product = Items.RING_OF_WEALTH_14638
-                    }
                     if (removeItem(player, Item(tabItem.id))) {
                         closeAllInterfaces(player)
                         playAudio(player, Sounds.POH_TABLET_BREAK_979)
@@ -79,9 +75,9 @@ class EnchantJewelleryTabListener : InteractionListener {
                         delayEntity(player, anim.duration)
                         queueScript(player, anim.duration, QueueStrength.SOFT) {
                             val item = node.asItem()
-                            val ret = replaceSlot(player, item.slot, Item(product), item)
+                            val ret = replaceSlot(player, item.slot, Item(enchanted), item)
                             if (ret != item) {
-                                PlayerMonitor.log(player, LogType.DUPE_ALERT, "Unknown slot-replacement problem when enchanting jewellery (adding $product replaced $ret rather than $item)")
+                                PlayerMonitor.log(player, LogType.DUPE_ALERT, "Unknown slot-replacement problem when enchanting jewellery (adding $enchanted replaced $ret rather than $item)")
                             }
                             return@queueScript stopExecuting(player)
                         }

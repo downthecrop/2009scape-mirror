@@ -60,9 +60,6 @@ class EnchantSpell : MagicSpell {
         if (!meetsRequirements(entity, true, true)) {
             return false
         }
-        if (enchanted.id == Items.RING_OF_WEALTH_2572 && ServerConstants.RING_OF_WEALTH_TELEPORT) {
-            enchanted = Item(Items.RING_OF_WEALTH_14638)
-        }
 
         visualize(entity, target)
         val ret = replaceSlot(entity, target.slot, enchanted)

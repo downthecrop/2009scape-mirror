@@ -344,7 +344,7 @@ fun hasGodItem(player: Player, god: God): Boolean {
  */
 fun shouldRemoveNothings(player: Player) : Boolean {
     val ring = getItemFromEquipment(player, EquipmentSlot.RING)
-    return ring != null && ring.id in Items.RING_OF_WEALTH_14638..Items.RING_OF_WEALTH4_14646
+    return ring != null && ring.id == Items.RING_OF_WEALTH_2572
 }
 
 /**

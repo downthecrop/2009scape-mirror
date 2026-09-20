@@ -68,7 +68,12 @@ public final class HeroGuildPlugin extends OptionHandler {
 		/**
 		 * The ids of rechargeable items.
 		 */
-		private static final int[] IDS = new int[] { 1710, 1708, 1706, 1704, 11107, 11109, 11111, 11113, 11120, 11122, 11124, 11126, 10354, 10356, 10358, 10360, 10362, 14644,14642,14640,14638, 2572 };
+		private static final int[] IDS = new int[] {
+			Items.AMULET_OF_GLORY3_1710, Items.AMULET_OF_GLORY2_1708, Items.AMULET_OF_GLORY1_1706, Items.AMULET_OF_GLORY_1704,
+			Items.SKILLS_NECKLACE3_11107, Items.SKILLS_NECKLACE2_11109, Items.SKILLS_NECKLACE1_11111, Items.SKILLS_NECKLACE_11113,
+			Items.COMBAT_BRACELET3_11120, Items.COMBAT_BRACELET2_11122, Items.COMBAT_BRACELET1_11124, Items.COMBAT_BRACELET_11126,
+			Items.AMULET_OF_GLORYT3_10356, Items.AMULET_OF_GLORYT2_10358, Items.AMULET_OF_GLORYT1_10360, Items.AMULET_OF_GLORYT_10362,
+		};
 
 		/**
 		 * Constructs a new JewelleryRechargePlugin object
@@ -96,11 +101,6 @@ public final class HeroGuildPlugin extends OptionHandler {
 			jewellery = EnchantedJewellery.Companion.getIdMap().get(event.getUsedItem().getId());
 			if (jewellery == null) {
 				return false; //nothing interesting happens
-			}
-			if (jewellery == EnchantedJewellery.RING_OF_WEALTH) {
-				if (!ServerConstants.RING_OF_WEALTH_TELEPORT) {
-					return false;
-				}
 			}
 			if (jewellery == EnchantedJewellery.COMBAT_BRACELET || jewellery == EnchantedJewellery.SKILLS_NECKLACE) {
 				if (!hasRequirement(player, Quests.LEGENDS_QUEST)) {

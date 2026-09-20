@@ -27,8 +27,7 @@ enum class ChargedItem(val ids: IntArray) {
     VOID_SEAL((Items.VOID_SEAL8_11666..Items.VOID_SEAL1_11673).toIntArray()),
     AMULET_OF_FARMING((Items.AMULET_OF_FARMING8_12622 downTo Items.AMULET_OF_FARMING1_12608 step 2).toIntArray()),
     IVANDIS_FLAIL((Items.IVANDIS_FLAIL_30_13117..Items.IVANDIS_FLAIL_1_13146).toIntArray()),
-    RING_OF_SLAYING((Items.RING_OF_SLAYING8_13281..Items.RING_OF_SLAYING1_13288).toIntArray()),
-    RING_OF_WEALTH((Items.RING_OF_WEALTH4_14646 downTo Items.RING_OF_WEALTH_14638 step 2).toIntArray());
+    RING_OF_SLAYING((Items.RING_OF_SLAYING8_13281..Items.RING_OF_SLAYING1_13288).toIntArray());
 
     /**
      * Get the item id for a specific [charge].

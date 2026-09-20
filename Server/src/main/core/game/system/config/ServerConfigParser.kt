@@ -170,7 +170,6 @@ object ServerConfigParser {
         ServerConstants.ENHANCED_DEEP_WILDERNESS = data.getBoolean("world.enhanced_deep_wilderness", false)
         ServerConstants.WILDERNESS_EXCLUSIVE_LOOT = data.getBoolean("world.wilderness_exclusive_loot", false)
         ServerConstants.SHOOTING_STAR_RING = data.getBoolean("world.shooting_star_ring", false)
-        ServerConstants.RING_OF_WEALTH_TELEPORT = data.getBoolean("world.ring_of_wealth_teleport", false)
         ServerConstants.SECOND_BANK = data.getBoolean("world.second_bank", false)
         ServerConstants.PLAYER_COMMANDS = data.getBoolean("world.player_commands", false)
         ServerConstants.BOOSTED_TRAWLER_REWARDS = data.getBoolean("world.boosted_trawler_rewards", false)

@@ -24445,6 +24445,7 @@
     "archery_ticket_price": "0",
     "durability": null,
     "equipment_slot": "12",
+    "ge_buy_limit": "100",
     "tradeable": "true"
   },
   {
@@ -24452,6 +24453,7 @@
     "name": "Ring of wealth",
     "archery_ticket_price": "0",
     "durability": null,
+    "ge_buy_limit": "100",
     "tradeable": "true"
   },
   {
@@ -125585,7 +125587,7 @@
     "durability": null,
     "equipment_slot": "12",
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14639",
@@ -125594,7 +125596,7 @@
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14640",
@@ -125604,7 +125606,7 @@
     "durability": null,
     "equipment_slot": "12",
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14641",
@@ -125613,7 +125615,7 @@
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14642",
@@ -125623,7 +125625,7 @@
     "durability": null,
     "equipment_slot": "12",
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14643",
@@ -125632,7 +125634,7 @@
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14644",
@@ -125642,7 +125644,7 @@
     "durability": null,
     "equipment_slot": "12",
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14645",
@@ -125651,7 +125653,7 @@
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14646",
@@ -125661,7 +125663,7 @@
     "durability": null,
     "equipment_slot": "12",
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14647",
@@ -125670,7 +125672,7 @@
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "100",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "14648",

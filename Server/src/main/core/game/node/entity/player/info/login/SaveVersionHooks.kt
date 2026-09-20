@@ -8,6 +8,7 @@ import core.ServerConstants
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.item.Item
 import core.tools.Log
 import org.rs09.consts.Items
@@ -110,6 +111,30 @@ class SaveVersionHooks : LoginListener {
                 // Delete attribute for nonexistent barb hunting training
                 if (getAttribute(player, "/save:barbtraining:hunting", false)) {
                     removeAttribute(player, "/save:barbtraining:hunting")
+                }
+            }
+
+            if (player.version < 6) {
+                // Replace inauthentic rings of wealth with their authentic counterpart
+                val inauthenticRings = arrayOf(
+                    Items.RING_OF_WEALTH_14638,  Items.RING_OF_WEALTH_14639,
+                    Items.RING_OF_WEALTH1_14640, Items.RING_OF_WEALTH1_14641,
+                    Items.RING_OF_WEALTH2_14642, Items.RING_OF_WEALTH2_14643,
+                    Items.RING_OF_WEALTH3_14644, Items.RING_OF_WEALTH3_14645,
+                    Items.RING_OF_WEALTH4_14646, Items.RING_OF_WEALTH4_14647,
+                )
+                for (ring in inauthenticRings) {
+                    if (ring.asItem().definition.isUnnoted) {
+                        replaceAllItems(player, ring, Items.RING_OF_WEALTH_2572)
+                    } else {
+                        replaceAllItems(player, ring, Items.RING_OF_WEALTH_2573)
+                    }
+                }
+                // Change stronghold lamps to correct lamp ID (it was occupying the One Small Favour lamp ID before)
+                replaceAllItems(player, Items.ANTIQUE_LAMP_4447, Items.ANTIQUE_LAMP_12627)
+                // Unlock the Explore emote for players who have completed the Lumbridge diary
+                if (player.achievementDiaryManager.isComplete(DiaryType.LUMBRIDGE)) {
+                    player.emoteManager.unlock(Emotes.EXPLORE)
                 }
             }
 

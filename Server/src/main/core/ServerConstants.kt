@@ -18,7 +18,7 @@ class ServerConstants {
         var NOAUTH_DEFAULT_ADMIN: Boolean = true
 
         @JvmField
-        var CURRENT_SAVEFILE_VERSION = 5
+        var CURRENT_SAVEFILE_VERSION = 6
 
         @JvmField
         var DAILY_ACCOUNT_LIMIT = 3
@@ -353,9 +353,6 @@ class ServerConstants {
 
         @JvmField
         var SHOOTING_STAR_RING = false
-
-        @JvmField
-        var RING_OF_WEALTH_TELEPORT = false
 
         @JvmField
         var SECOND_BANK = false
