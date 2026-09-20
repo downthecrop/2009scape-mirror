@@ -5,7 +5,6 @@ import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.dialogue.DialogueLabeller
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.interaction.QueueStrength
@@ -262,7 +261,7 @@ class WaterfallListeners : InteractionListener {
         on(SceneryObj.DOOR_1991, IntType.SCENERY, "open") { player, node ->
             if (player.location.y > node.location.y) {
                 sendMessage(player, "You open the gate and walk through.")
-                DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                handleAutowalkDoor(player, node as Scenery)
                 return@on true
             } else {
                 sendMessage(player, "The gate is locked.")
@@ -278,7 +277,7 @@ class WaterfallListeners : InteractionListener {
             lock(player, 3)
             queueScript(player, 3, QueueStrength.STRONG) {
                 sendMessage(player, "You open the gate and walk through.")
-                DoorActionHandler.handleAutowalkDoor(player, with as Scenery)
+                handleAutowalkDoor(player, with as Scenery)
                 return@queueScript stopExecuting(player)
             }
             return@onUseWith true
@@ -464,7 +463,7 @@ class WaterfallListeners : InteractionListener {
                     if (player.location != locWaterfallDoorNorth.transform(0, 1, 0)) {
                         sendMessage(player, "The door is locked.")
                     } else {
-                        DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                        handleAutowalkDoor(player, node as Scenery)
                     }
                 }
                 locWaterfallDoorChamber -> {
@@ -488,7 +487,7 @@ class WaterfallListeners : InteractionListener {
             if (isQuestComplete(player, Quests.WATERFALL_QUEST) && player.location == locWaterfallDoorNorth) {
                 teleport(player, locInChamber)
             } else {
-                DoorActionHandler.handleAutowalkDoor(player, with as Scenery)
+                handleAutowalkDoor(player, with as Scenery)
             }
             return@onUseWith true
         }

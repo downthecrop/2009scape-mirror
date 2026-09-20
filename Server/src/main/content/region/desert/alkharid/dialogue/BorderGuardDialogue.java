@@ -1,7 +1,7 @@
 package content.region.desert.alkharid.dialogue;
 
+import core.api.ContentAPIKt;
 import core.game.dialogue.DialoguePlugin;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -102,7 +102,7 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 					return true;
 				}
 				if (player.getInventory().remove(COINS)) {
-					DoorActionHandler.handleAutowalkDoor(player, door);
+					ContentAPIKt.handleAutowalkDoor(player, door);
 				} else {
 					player.getPacketDispatch().sendMessage("You need 10 gold coins to pay the toll.");
 				}
@@ -131,7 +131,7 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 			case 1:
 				end();
 				if (player.getInventory().remove(new Item(995, 10))) {
-					DoorActionHandler.handleAutowalkDoor(player, door);
+					ContentAPIKt.handleAutowalkDoor(player, door);
 				} else {
 					player.getPacketDispatch().sendMessage("You need 10 gold coins to pay the toll.");
 				}
@@ -147,7 +147,7 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 			break;
 		case 100:
 			end();
-			DoorActionHandler.handleAutowalkDoor(player, door);
+			ContentAPIKt.handleAutowalkDoor(player, door);
 			break;
 		}
 		return true;

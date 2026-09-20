@@ -4,7 +4,6 @@ import content.region.kandarin.yanille.handlers.ZavisticRarveBellSpawn
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
@@ -53,9 +52,9 @@ class ZogreFleshEatersListeners : InteractionListener {
         }
         on(Scenery.OGRE_STONE_DOOR_6871, SCENERY, "open") { player, node ->
             if (getQuestStage(player, ZogreFleshEaters.questName) >= 9) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else if (inInventory(player, Items.OGRE_GATE_KEY_4839)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
                 sendMessage(player, "You use the Ogre Tomb Key to unlock the door.")
             } else {
                 sendMessage(player, "The door is locked.")
@@ -65,9 +64,9 @@ class ZogreFleshEatersListeners : InteractionListener {
 
         on(Scenery.OGRE_STONE_DOOR_6872, SCENERY, "open") { player, node ->
             if (getQuestStage(player, ZogreFleshEaters.questName) >= 9) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else if (inInventory(player, Items.OGRE_GATE_KEY_4839)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
                 sendMessage(player, "You use the Ogre Tomb Key to unlock the door.")
             } else {
                 sendMessage(player, "The door is locked.")

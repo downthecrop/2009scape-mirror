@@ -1,6 +1,5 @@
 package content.global.activity.shootingstar
 
-import core.api.Container
 import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -12,9 +11,7 @@ import org.rs09.consts.Items
 import core.ServerStore
 import core.ServerStore.Companion.getBoolean
 import core.tools.END_DIALOGUE
-import core.tools.secondsToTicks
 import core.tools.colorize
-import java.util.concurrent.TimeUnit
 
 /**
  * Dialogue for the star sprite.

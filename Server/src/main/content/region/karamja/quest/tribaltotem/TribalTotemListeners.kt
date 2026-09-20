@@ -24,7 +24,7 @@ class TribalTotemListeners : InteractionListener {
     override fun defineListeners() {
         on(frontDoor, IntType.SCENERY, "Open"){ player, door ->
             if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) >= 35){
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
+                handleAutowalkDoor(player, door.asScenery())
             }
             else {
                 sendMessage(player,"The door is locked shut.")
@@ -57,7 +57,7 @@ class TribalTotemListeners : InteractionListener {
 
         on(lockedDoor, IntType.SCENERY, "Open"){ player, node ->
             if(player.getAttribute("TT:DoorUnlocked",false) == true){
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             }else{
                 openInterface(player,369)
             }

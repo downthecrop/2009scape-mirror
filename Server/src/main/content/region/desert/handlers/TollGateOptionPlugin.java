@@ -1,7 +1,7 @@
 package content.region.desert.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -23,12 +23,12 @@ public class TollGateOptionPlugin extends OptionHandler {
 		if (option.equals("pay-toll(10gp)")) {
 			if (player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE).getStage(player) > 50) {
 				player.getPacketDispatch().sendMessage("The guards let you through for free.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 			} else {
 				if (player.getInventory().contains(995, 10)) {
 					player.getInventory().remove(new Item(995, 10));
 					player.getPacketDispatch().sendMessage("You quickly pay the 10 gold toll and go through the gates.");
-					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+					ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 					player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ALKHARID_GATE, 10);
 					return true;
 				} else {

@@ -1,9 +1,9 @@
 package content.region.misthalin.quest.priestinperil;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.CombatStyle;
@@ -187,7 +187,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogues(player, null, "Hmmm... from the looks of things, it seems as though", "somebody has been trying to force this door open. It's", "still securely locked however.");
 				return true;
 			}
-			DoorActionHandler.handleDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			break;
 		case 30573:
 			player.getProperties().setTeleportLocation(Location.create(3440, 9887, 0));
@@ -214,7 +214,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				if (quest.getStage(player) < 15) {
 					player.getPacketDispatch().sendMessage("The door is securely locked shut.");
 				} else {
-					DoorActionHandler.handleDoor(player, (Scenery) node);
+					ContentAPIKt.handleDoor(player, (Scenery) node);
 				}
 				break;
 			case "talk-through":
@@ -230,7 +230,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 			if (quest.getStage(player) < 17) {
 				player.getPacketDispatch().sendMessage("The door is locked shut.");
 			} else {
-				DoorActionHandler.handleDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 			}
 			break;
 		case 30707:/** the door to the church. */
@@ -238,7 +238,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 			switch (option) {
 			case "open":
 				if (quest.getStage(player) > 12) {
-					DoorActionHandler.handleDoor(player, (Scenery) node);
+					ContentAPIKt.handleDoor(player, (Scenery) node);
 				} else {
 					player.getPacketDispatch().sendMessage("This door is securely locked from inside.");
 				}

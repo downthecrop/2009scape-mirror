@@ -6,7 +6,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import content.global.skill.agility.AgilityHandler
 import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
@@ -116,7 +115,7 @@ class TreeGnomeVillageListeners : InteractionListener {
         }
         on(strongholdDoor, IntType.SCENERY, "open"){ player, node ->
             if(player.location.y >= 3251){
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                handleAutowalkDoor(player, node as Scenery)
             }
             return@on true
         }

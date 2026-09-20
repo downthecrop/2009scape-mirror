@@ -1,12 +1,12 @@
 package core.game.diary
 
 import core.api.*
+import core.api.Event
 import core.game.event.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.zone.ZoneBorders
-import core.api.Event
 
 abstract class DiaryEventHookBase(private val diaryType: DiaryType) : MapArea, LoginListener {
     protected companion object {

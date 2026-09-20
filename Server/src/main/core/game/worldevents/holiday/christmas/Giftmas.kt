@@ -11,7 +11,6 @@ import org.rs09.consts.Items
 import core.ServerStore
 import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
-import core.api.Event
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.worldevents.WorldEvents

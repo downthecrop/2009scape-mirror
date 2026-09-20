@@ -1,8 +1,8 @@
 package content.region.morytania.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -43,7 +43,7 @@ public class BarrowsTunnelShortcut extends OptionHandler {
 			break;
 		case 5052:
 			player.getPacketDispatch().sendMessage("You search the wall and find a lever.");
-			DoorActionHandler.handleAutowalkDoor(player, ((Scenery) node));
+			ContentAPIKt.handleAutowalkDoor(player, ((Scenery) node));
 			break;
 		case 30261:
 		case 30262:

@@ -30,7 +30,7 @@ class AlKharidStairsPlugin : OptionHandler() {
         if(node.location == zekeDoorOpened.location || node.location == craftingDoorOpened.location){
                 sendMessage(player,"This door appears to be stuck open.")
         } else{
-            DoorActionHandler.handleDoor(player,node.asScenery())
+            DoorActionHandler.handleDoor(player, node.asScenery())
         }
         return true
     }

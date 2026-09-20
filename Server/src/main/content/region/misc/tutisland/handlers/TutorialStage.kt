@@ -10,7 +10,6 @@ import core.game.node.entity.player.link.HintIconManager
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Components
-import core.api.Event
 import core.game.world.GameWorld.Pulser
 import core.game.world.repository.Repository
 import org.rs09.consts.NPCs

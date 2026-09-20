@@ -90,7 +90,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                                 return true;
                             }
                         }
-                        DoorActionHandler.handleAutowalkDoor(player, (Scenery) node, player.getLocation().getY() >= 3438 ? Location.create(2659, 3437, 0) : Location.create(2657, 3439, 0));
+                        DoorActionHandler.handleAutowalkDoorWithLocation(player, (Scenery) node, player.getLocation().getY() >= 3438 ? Location.create(2659, 3437, 0) : Location.create(2657, 3439, 0));
                         break;
                 }
                 break;

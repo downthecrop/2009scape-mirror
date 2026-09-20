@@ -1,5 +1,6 @@
 package content.region.kandarin.seers.quest.merlinsquest;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.activity.ActivityManager;
 import core.game.activity.CutscenePlugin;
@@ -7,7 +8,6 @@ import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -120,7 +120,8 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 						break;
 				}
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
+				final Scenery object = node.asScenery();
+				ContentAPIKt.handleAutowalkDoor(player, object);
 			}
 			return true;
 		case 40026:

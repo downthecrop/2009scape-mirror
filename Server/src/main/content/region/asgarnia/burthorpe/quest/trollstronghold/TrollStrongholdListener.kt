@@ -2,7 +2,6 @@ package content.region.asgarnia.burthorpe.quest.trollstronghold
 
 import content.data.Quests
 import core.api.*
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
@@ -29,7 +28,7 @@ class TrollStrongholdListener: InteractionListener {
             // Only allow players through when they start Troll Stronghold.
             // No one is allowed to go to GWD unless they start the Troll Stronghold quest.
             if (getQuestStage(player, Quests.TROLL_STRONGHOLD) > 0) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "You need to start the Troll Stronghold quest.")
             }
@@ -41,7 +40,7 @@ class TrollStrongholdListener: InteractionListener {
             if (getQuestStage(player, Quests.TROLL_STRONGHOLD) < 5){
                 openDialogue(player, DadDialogueFile(1), findNPC(NPCs.DAD_1125)!!)
             } else {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             }
             return@on true;
         }
@@ -49,14 +48,14 @@ class TrollStrongholdListener: InteractionListener {
         // Key to unlock the prison door
         on(Scenery.PRISON_DOOR_3780, IntType.SCENERY, "unlock"){ player, node ->
             if (getQuestStage(player, Quests.TROLL_STRONGHOLD) >= 8){
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 if (inInventory(player, Items.PRISON_KEY_3135)) {
                     if (getQuestStage(player, Quests.TROLL_STRONGHOLD) == 5) {
                         setQuestStage(player, Quests.TROLL_STRONGHOLD, 8)
                     }
                     if (removeItem(player, Items.PRISON_KEY_3135)) {
-                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                        handleAutowalkDoor(player, node.asScenery())
                         sendMessage(player, "You unlock the prison door.")
                     }
                 } else {
@@ -178,8 +177,9 @@ class TrollStrongholdListener: InteractionListener {
                                     npc.setWalks(false)
                                     targetLocation = Location(2831, 10082, 0)
                                 }
-                                1 -> DoorActionHandler.handleAutowalkDoor(npc, node.asScenery()).also { targetLocation = Location(2832, 10082, 0) }
-                                // Delay 2 ticks for DoorActionHandler to finish
+                                1 -> handleAutowalkDoor(npc, node.asScenery())
+                                    .also { targetLocation = Location(2832, 10082, 0) }
+                                // Delay 2 ticks for the door to finish handling.
                                 4 -> forceWalk(npc, Location(2836, 10082, 0), "dumb").also { targetLocation = Location(2836, 10082, 0) }
                                 5 -> forceWalk(npc, Location(2836, 10061, 0), "dumb").also { targetLocation = Location(2836, 10061, 0) }
                                 6 -> forceWalk(npc, Location(2824, 10050, 0), "dumb").also { targetLocation = Location(2824, 10050, 0) }
@@ -247,7 +247,8 @@ class TrollStrongholdListener: InteractionListener {
                                     npc.setWalks(false)
                                     targetLocation = Location(2831, 10078, 0)
                                 }
-                                1 -> DoorActionHandler.handleAutowalkDoor(npc, node.asScenery()).also { targetLocation = Location(2832, 10078, 0) }
+                                1 -> handleAutowalkDoor(npc, node.asScenery())
+                                    .also { targetLocation = Location(2832, 10078, 0) }
                                 // Delay 2 ticks for DoorActionHandler to finish
                                 4 -> forceWalk(npc, Location(2836, 10078, 0), "dumb").also { targetLocation = Location(2836, 10078, 0) }
                                 5 -> forceWalk(npc, Location(2836, 10061, 0), "dumb").also { targetLocation = Location(2836, 10061, 0) }

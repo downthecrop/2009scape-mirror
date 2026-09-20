@@ -5,7 +5,6 @@ import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler
@@ -26,7 +25,7 @@ class HeroesQuestListener: InteractionListener {
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 2 &&
                     getAttribute(player, HeroesQuest.attributeGruborLetsYouIn, false) &&
                     HeroesQuest.isBlackArm(player)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, GruborDialogueFile(), NPC(NPCs.GRUBOR_789))
             }
@@ -36,7 +35,7 @@ class HeroesQuestListener: InteractionListener {
         // Kitchen entrance
         on(Scenery.DOOR_2628, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 3 && HeroesQuest.isPhoenix(player)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
             }
@@ -46,7 +45,7 @@ class HeroesQuestListener: InteractionListener {
         // Kitchen wall
         on(Scenery.WALL_2629, IntType.SCENERY, "push") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 4 && HeroesQuest.isPhoenix(player)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, CharlieTheCookDialogueFile(), NPC(NPCs.CHARLIE_THE_COOK_794))
             }
@@ -56,7 +55,7 @@ class HeroesQuestListener: InteractionListener {
         // Mansion frontdoor
         on(Scenery.DOOR_2627, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 4 && HeroesQuest.isBlackArm(player)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, GarvDialogueFile(), NPC(NPCs.GARV_788))
             }
@@ -88,7 +87,7 @@ class HeroesQuestListener: InteractionListener {
         // Mansion backdoor
         on(Scenery.DOOR_2622, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, HeroesQuest.attributeHasOpenedBackdoor, false)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
             }
@@ -96,14 +95,14 @@ class HeroesQuestListener: InteractionListener {
         }
         onUseWith(IntType.SCENERY, Items.MISCELLANEOUS_KEY_1586, Scenery.DOOR_2622) { player, used, with ->
             setAttribute(player, HeroesQuest.attributeHasOpenedBackdoor, true)
-            DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
+            handleAutowalkDoor(player, with.asScenery())
             return@onUseWith true
         }
 
         // Chest door
         on(Scenery.DOOR_2621, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, HeroesQuest.attributeHasOpenedChestDoor, false)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
             }
@@ -111,7 +110,7 @@ class HeroesQuestListener: InteractionListener {
         }
         onUseWith(IntType.SCENERY, Items.GRIPS_KEY_RING_1588, Scenery.DOOR_2621) { player, used, with ->
             setAttribute(player, HeroesQuest.attributeHasOpenedChestDoor, true)
-            DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
+            handleAutowalkDoor(player, with.asScenery())
             return@onUseWith true
         }
 

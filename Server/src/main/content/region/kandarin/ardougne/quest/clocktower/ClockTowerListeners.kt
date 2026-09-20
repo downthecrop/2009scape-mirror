@@ -2,7 +2,6 @@ package content.region.kandarin.ardougne.quest.clocktower
 
 import content.data.Quests
 import core.api.*
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItem
@@ -205,7 +204,7 @@ class ClockTowerListener : InteractionListener {
         on(Scenery.GATE_39, IntType.SCENERY, "go-through") { player, node ->
             if (getAttribute(player, ClockTower.attributeRatsPoisoned, false)) {
                 sendDialogueLines(player, "The death throws of the rats seem to have shaken the door loose of", "its hinges. You pick it up and go through.")
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendPlayerDialogue(player, "It won't open. Maybe the monk knows how to open this door?")
                 setAttribute(player, ClockTower.attributeAskKojoAboutRats, true)
@@ -215,7 +214,7 @@ class ClockTowerListener : InteractionListener {
 
         // Wall to Blue Cog
         on(Scenery.WALL_1586, IntType.SCENERY, "push") { player, node ->
-            DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            handleAutowalkDoor(player, node.asScenery())
             return@on true
         }
 

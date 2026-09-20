@@ -1,7 +1,6 @@
 package content.region.misthalin.dorgeshuun.quest.thelosttribe
 
 import content.data.Quests
-import core.api.addItemOrDrop
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition

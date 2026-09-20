@@ -1,9 +1,9 @@
 package content.region.misthalin.draynor.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import content.global.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -97,13 +97,13 @@ public final class DraynorManorPlugin extends OptionHandler {
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The doors slam shut behind you.");
-			DoorActionHandler.handleDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			return true;
 		case 131:
 			if (!player.getInventory().containsItem(KEY)) {
 				player.getPacketDispatch().sendMessage("The door is locked.");
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 			}
 			break;
 		case 152:

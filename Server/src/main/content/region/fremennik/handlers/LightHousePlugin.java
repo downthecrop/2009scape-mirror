@@ -1,5 +1,6 @@
 package content.region.fremennik.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -28,7 +29,7 @@ public class LightHousePlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		switch (node.getId()) {
 		case 4577:
-			DoorActionHandler.handleDoor(player, node.asScenery());
+			ContentAPIKt.handleDoor(player, node.asScenery());
 			return true;
 		case 4383:
 			return false;

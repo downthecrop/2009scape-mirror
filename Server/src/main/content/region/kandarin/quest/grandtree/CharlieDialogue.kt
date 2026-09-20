@@ -4,8 +4,8 @@ import content.data.Quests
 import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialogueFile
-import core.game.global.action.DoorActionHandler
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
@@ -71,8 +71,9 @@ class CharlieDialogue : DialogueFile() {
                                     }
 
                                     4 -> {
-                                        DoorActionHandler.handleAutowalkDoor(player!!,
-                                            getScenery(2465,3496,3)
+                                        handleAutowalkDoor(
+                                            player!! as Player?,
+                                            getScenery(2465, 3496, 3)
                                         )
                                         openDialogue(player!!,KingNarnodeUpstairsDialogue(), npc)
                                     }

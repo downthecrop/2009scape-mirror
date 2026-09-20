@@ -17,6 +17,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.Log
 import content.data.Quests
+import core.api.handleAutowalkDoor
 
 /**
  * Listeners for the Elemental Workshop I quest
@@ -169,7 +170,7 @@ class EWListeners : InteractionListener {
             }
             // Player is allowed to exit without key
             if (player.location == Location.create(2710, 3496, 0) || player.location == Location.create(2709, 3496, 0)) {
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, wall.asScenery())
+                handleAutowalkDoor(player, wall.asScenery())
                 return@on true
             }
             // Player does not have battered key in inventory
@@ -183,7 +184,7 @@ class EWListeners : InteractionListener {
             }
             // Allow player through the wall
             sendMessage(player, "You use the battered key to open the doors.")
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, wall.asScenery())
+            handleAutowalkDoor(player, wall.asScenery())
             return@on true
         }
 

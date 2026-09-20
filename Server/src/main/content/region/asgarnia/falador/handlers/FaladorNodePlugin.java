@@ -1,8 +1,8 @@
 package content.region.asgarnia.falador.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -71,7 +71,7 @@ public final class FaladorNodePlugin extends OptionHandler {
 		final int id = node.getId();
 		switch (id) {
 		case 11708:// estate door.
-			DoorActionHandler.handleDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			break;
 		case 2290:
 			player.getDialogueInterpreter().open(id, node);

@@ -1,6 +1,5 @@
 package content.region.morytania.quest.naturespirit
 
-import core.api.Container
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression

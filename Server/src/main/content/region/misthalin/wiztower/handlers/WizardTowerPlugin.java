@@ -113,9 +113,9 @@ public final class WizardTowerPlugin extends OptionHandler {
                 break;
             case "open":
                 if (node.getLocation().equals(new Location(3107, 3162, 0))) {
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node, player.getLocation().getX() >= 3107 ? Location.create(3106, 3161, 0) : Location.create(3108, 3163, 0));
+                    DoorActionHandler.handleAutowalkDoorWithLocation(player, (Scenery) node, player.getLocation().getX() >= 3107 ? Location.create(3106, 3161, 0) : Location.create(3108, 3163, 0));
                 } else {
-                    DoorActionHandler.handleDoor(player, (Scenery) node);
+                    handleDoor(player, (Scenery) node);
                 }
                 break;
         }

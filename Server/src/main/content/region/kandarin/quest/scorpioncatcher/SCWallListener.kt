@@ -2,12 +2,12 @@ package content.region.kandarin.quest.scorpioncatcher
 
 import core.api.getQuestStage
 import core.api.sendMessage
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import org.rs09.consts.Scenery
 import content.data.Quests
+import core.api.handleAutowalkDoor
 
 class SCWallListener : InteractionListener {
 
@@ -21,11 +21,11 @@ class SCWallListener : InteractionListener {
                 // Check what side the player is on and teleport them to the other
                 if (player.location == Location(2875, 9799, 0)){
                     sendMessage(player, "You've found a secret door")
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                 }
                 else{
                     // We're leaving the room
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                 }
             }
             else{

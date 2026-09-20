@@ -7,7 +7,6 @@ import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.dialogue.FacialExpression;
-import core.game.global.action.DoorActionHandler;
 import content.global.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -69,7 +68,7 @@ public class ShantayPassPlugin extends OptionHandler {
 				// need to remove.
 			}
 			if (!player.getAttribute("shantay-jail", false)) {
-				DoorActionHandler.handleDoor(player, (Scenery) node);
+				handleDoor(player, (Scenery) node);
 				return true;
 			} else {
 				player.getDialogueInterpreter().open(836, null, true);

@@ -6,7 +6,6 @@ import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.event.EventHook
 import core.game.event.TickEvent
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -162,7 +161,7 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
             if (ONE_WAY_WALL[scenery.location]?.contains(player.location) == true) {
                 sendDialogue(player, "I don't think that's the right way.")
             } else {
-                DoorActionHandler.handleAutowalkDoor(player, scenery)
+                handleAutowalkDoor(player, scenery)
             }
 
             return@on true

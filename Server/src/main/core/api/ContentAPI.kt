@@ -27,6 +27,7 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.SkillDialogueHandler
 import core.game.diary.DiaryLevel
 import core.game.ge.GrandExchangeRecords
+import core.game.global.action.DoorActionHandler
 import core.game.interaction.*
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -3503,6 +3504,30 @@ fun getDiaryLevelIndex(diary: DiaryType, level: DiaryLevel): Int {
     }
 
     return levelIndex
+}
+
+/**
+ * Handles a door.
+ * @param entity The entity.
+ * @param door The door scenery.
+ */
+fun handleDoor(entity: Entity, door: Scenery) {
+    if (entity !is Player) {
+        log(ContentAPI::class.java, Log.ERR, "Handledoor for non-player entities is not implemented")
+        return
+    }
+    DoorActionHandler.handleDoor(entity, door)
+}
+
+/**
+ * Handles an autowalk door. (In principle, you should not need this; use handleDoor and define your door as autowalk in
+ * door_configs.json.)
+ * @param entity The entity.
+ * @param door The door scenery.
+ */
+fun handleAutowalkDoor(entity: Entity?, door: Scenery?): Boolean {
+    val endLocation = DoorActionHandler.getEndLocation(entity, door)
+    return DoorActionHandler.handleAutowalkDoorWithLocation(entity, door, endLocation)
 }
 
 private class ContentAPI

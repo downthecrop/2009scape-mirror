@@ -7,7 +7,6 @@ import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
@@ -181,14 +180,14 @@ class ObservatoryQuestListeners : InteractionListener {
 
         on(intArrayOf(Scenery.KITCHEN_GATE_2199, Scenery.KITCHEN_GATE_2200), SCENERY, "open") { player, node ->
             if (getAttribute(player, ObservatoryQuest.attributeUnlockedGate, false)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else if (getAttribute(player, ObservatoryQuest.attributeKilledGuard, false)) {
                 if (removeItem(player, Items.GOBLIN_KITCHEN_KEY_601)) {
                     sendMessage(player, "The gate unlocks.")
                     sendMessage(player, "The key is useless now. You discard it.")
                     setAttribute(player, ObservatoryQuest.attributeUnlockedGate, true)
                     sendPlayerDialogue(player, "I had better be quick, there may be more guards about.")
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                 } else {
                     // http://youtu.be/ZkUF-0eonls
                     sendMessage(player, "The gate is locked.")

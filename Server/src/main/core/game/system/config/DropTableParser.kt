@@ -8,9 +8,7 @@ import core.ServerConstants
 import core.api.*
 import core.api.utils.*
 import core.tools.Log
-import core.tools.SystemLogger
 import java.io.FileReader
-
 
 class DropTableParser {
     val parser = JSONParser()

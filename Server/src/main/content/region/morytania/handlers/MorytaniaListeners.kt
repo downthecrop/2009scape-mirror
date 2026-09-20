@@ -41,7 +41,7 @@ class MorytaniaListeners : InteractionListener {
 
         on(SWAMP_GATES, IntType.SCENERY, "open"){ player, node ->
             if(player.location.y == 3457){
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
                 sendMessage(player, "You skip gladly out of murky Mort Myre.")
                 removeTimer<SwampDecayTimer>(player)
                 GlobalScope.launch {
@@ -111,7 +111,7 @@ class warningInterface : InterfaceListener {
                 17 -> {
                     val gate = getAttribute(player, "swampgate", null) as? core.game.node.scenery.Scenery
                     if (gate != null) {
-                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate)
+                        handleAutowalkDoor(player, gate)
                         sendMessage(player, "You walk into the gloomy atmosphere of Mort Myre.")
                     }
                     closeInterface(player)

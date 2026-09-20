@@ -5,10 +5,8 @@ import content.region.kandarin.ardougne.quest.arena.npc.OgreNPC.Companion.spawnO
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
-import core.game.world.map.Location
 
 class EscapeCutscene(player: Player) : Cutscene(player) {
     override fun setup() {
@@ -38,7 +36,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             3 -> {
-                DoorActionHandler.handleAutowalkDoor(Jeremy, getObject(57, 31, 0))
+                handleAutowalkDoor(Jeremy, getObject(57, 31, 0))
                 player.faceLocation(location(57, 28, 0))
                 timedUpdate(3)
             }
@@ -72,7 +70,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             8 -> {
-                DoorActionHandler.handleAutowalkDoor(player, getObject(46, 16))
+                handleAutowalkDoor(player, getObject(46, 16))
                 moveCamera(41, 26, 300, 4)
                 rotateCamera(45, 15, 300, 4)
                 timedUpdate(-1)

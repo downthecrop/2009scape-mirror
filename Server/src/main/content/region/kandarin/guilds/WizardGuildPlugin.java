@@ -1,11 +1,11 @@
 package content.region.kandarin.guilds;
 
 import static core.api.ContentAPIKt.*;
+
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.DialoguePlugin;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -64,7 +64,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogue("You need a Magic level of at least 66 to enter.");
 					return true;
 				}
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				break;
 			case 2155:
 			case 2154:

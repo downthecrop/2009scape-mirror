@@ -153,10 +153,10 @@ class TFTInteractionListeners : InteractionListener {
             when {
                 getAttribute(player,"LyreEnchanted",false) -> {
                     sendNPCDialogue(player,1278,"Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
-                    core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
+                    handleAutowalkDoor(player, door.asScenery())
                 }
                 getAttribute(player,"lyreConcertPlayed",false) || isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
-                    core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
+                    handleAutowalkDoor(player, door.asScenery())
                 }
                 else -> {
                     sendNPCDialogue(player,1278,"I didn't give you permission to go backstage!")

@@ -4,7 +4,6 @@ import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -174,7 +173,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 					}
 					player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 1);
 					player.getSavedData().getQuestData().setDragonSlayerAttribute("memorized", true);
-					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+					handleAutowalkDoor(player, (Scenery) node);
 				}
 				break;
 		case 25154:
@@ -306,7 +305,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.GREEN_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -316,7 +315,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.PURPLE_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -326,7 +325,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.BLUE_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -336,7 +335,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.YELLOW_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -380,7 +379,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.RED_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -390,33 +389,33 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.ORANGE_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 		case 32968:
 		case 2602:
 			if (player.getLocation().equals(new Location(2931, 9640, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (player.getLocation().equals(new Location(2927, 9649, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (player.getLocation().equals(Location.create(2924, 9654, 0)) || player.getLocation().equals(Location.create(2938, 3252, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The door is locked.");
 			break;
 		case 2595:
 			if (player.getLocation().equals(Location.create(2940, 3248, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (player.getInventory().containsItem(DragonSlayer.MAZE_KEY)) {
 				player.getPacketDispatch().sendMessage("You use the key and the door opens.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			} else {
 				player.getPacketDispatch().sendMessage("This door is securely locked.");

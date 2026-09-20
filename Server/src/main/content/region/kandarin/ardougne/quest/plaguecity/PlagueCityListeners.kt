@@ -5,7 +5,6 @@ import content.region.kandarin.ardougne.quest.plaguecity.dialogue.mourners.Mourn
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -63,7 +62,7 @@ class PlagueCityListeners : InteractionListener {
 
         on(Scenery.DOOR_2528, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.PLAGUE_CITY) >= 13) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendNPCDialogue(player, NPCs.BRAVEK_711,"Go away, I'm busy! I'm... Umm... In a meeting!")
                 // This typo is authentic
@@ -135,7 +134,7 @@ class PlagueCityListeners : InteractionListener {
 
         on(Scenery.DOOR_35991, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.PLAGUE_CITY) > 16) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             }
             else {
                 // Make sure we are standing in front of the door
@@ -279,7 +278,7 @@ class PlagueCityListeners : InteractionListener {
                     1 -> playerl(FacialExpression.NEUTRAL, "I'm a friend of Jethick's, I have come to return a book he borrowed.").also { stage++ }
                     2 -> npc(FacialExpression.FRIENDLY, "Oh... why didn't you say, come in then.").also { stage++ }
                     3 -> sendItemDialogue(player!!, Items.BOOK_1509, "You hand the book to Ted as you enter.").also {
-                        DoorActionHandler.handleAutowalkDoor(player, getScenery(2531, 3328, 0))
+                        handleAutowalkDoor(player, getScenery(2531, 3328, 0))
                         setQuestStage(player!!, Quests.PLAGUE_CITY, 9)
                         removeItem(player!!, Items.BOOK_1509)
                         stage++
@@ -291,7 +290,7 @@ class PlagueCityListeners : InteractionListener {
 
         on(Scenery.DOOR_2537, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.PLAGUE_CITY) >= 9) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, TedRehnisonDoors())
             }
@@ -341,14 +340,14 @@ class PlagueCityListeners : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.A_SMALL_KEY_1507, Scenery.DOOR_2526) { player, _, node ->
-            DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            handleAutowalkDoor(player, node.asScenery())
             sendDialogue(player, "You unlock the door.")
             return@onUseWith true
         }
 
         on(Scenery.DOOR_2526, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.PLAGUE_CITY) >= 99 || hasAnItem(player, Items.A_SMALL_KEY_1507).exists()) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 openDialogue(player, ElenaDoorDialogue())
             }
@@ -362,7 +361,7 @@ class PlagueCityListeners : InteractionListener {
 
         on(Scenery.DOOR_2054, IntType.SCENERY, "open"){ player, node ->
             if (isQuestComplete(player, Quests.PLAGUE_CITY)){
-                DoorActionHandler.handleAutowalkDoor(player, node as SceneryNode)
+                handleAutowalkDoor(player, node as SceneryNode)
             } else {
                 sendMessage(player, "This door is locked")
             }

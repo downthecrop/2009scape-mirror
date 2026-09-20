@@ -1,5 +1,6 @@
 package content.region.asgarnia.trollheim.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
@@ -8,7 +9,6 @@ import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
 import core.game.dialogue.DialoguePlugin;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -232,7 +232,7 @@ public final class TrollheimPlugin extends OptionHandler {
 			case 3786:// exit
 			case 3782:// entrance
 			case 3783:// entrance.
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			case 3672:
 				player.getPacketDispatch().sendMessage("You don't know how to open the secret door.");

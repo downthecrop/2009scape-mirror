@@ -1,9 +1,9 @@
 package content.region.asgarnia.burthorpe.handlers;
 
 import core.ServerConstants;
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import content.data.EnchantedJewellery;
-import core.game.global.action.DoorActionHandler;
 import content.global.skill.summoning.familiar.Familiar;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
@@ -50,7 +50,7 @@ public final class HeroGuildPlugin extends OptionHandler {
 			case 2625:
 				if (!hasRequirement(player, Quests.HEROES_QUEST))
 					return true;
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			}
 			return true;

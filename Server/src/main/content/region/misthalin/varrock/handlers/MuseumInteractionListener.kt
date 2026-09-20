@@ -116,9 +116,9 @@ class MuseumInteractionListener : InteractionListener {
 
             if (npc != null) {
                 animate(npc,  animation)
-                queueScript(player, animationDuration(animation)) { DoorActionHandler.handleAutowalkDoor(player, door) }
+                queueScript(player, animationDuration(animation)) { handleAutowalkDoor(player, door) }
             } else {
-                DoorActionHandler.handleAutowalkDoor(player, door)
+                handleAutowalkDoor(player, door)
             }
         }
     }

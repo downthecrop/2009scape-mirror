@@ -1,7 +1,6 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
 import content.global.handlers.iface.BookInterface
-import core.api.setQuestStage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

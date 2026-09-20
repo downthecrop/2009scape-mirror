@@ -1,6 +1,5 @@
 package content.global.handlers.item
 
-import core.api.Container
 import core.api.*
 import org.rs09.consts.Items
 import core.api.utils.WeightBasedTable

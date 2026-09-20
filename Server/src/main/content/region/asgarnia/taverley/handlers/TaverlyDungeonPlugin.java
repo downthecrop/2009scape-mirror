@@ -1,7 +1,7 @@
 package content.region.asgarnia.taverley.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -62,7 +62,7 @@ public final class TaverlyDungeonPlugin extends OptionHandler {
 				}
 			}
 			player.removeAttribute("spawned_suits");
-			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+			ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 			return true;
 		}
 		return false;

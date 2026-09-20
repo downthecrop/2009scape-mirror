@@ -1,9 +1,9 @@
 package content.region.asgarnia.trollheim.handlers.gwd;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.container.impl.EquipmentContainer;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.MovementPulse;
 import core.game.interaction.Option;
 import core.game.node.Node;
@@ -17,7 +17,6 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -371,7 +370,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 			return true;
 		}
 
-		if (DoorActionHandler.handleAutowalkDoor(player, object)) {
+		if (ContentAPIKt.handleAutowalkDoor(player, object)) {
 			log(this.getClass(), Log.FINE, player.getUsername() + " entered " + faction.name() + " gwd boss room");
 			increaseKillcount(player, faction, -required);
 		}

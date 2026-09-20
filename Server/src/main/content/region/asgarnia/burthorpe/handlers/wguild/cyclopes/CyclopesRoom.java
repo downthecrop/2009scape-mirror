@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -74,7 +74,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 						} else {
 							Scenery object = RegionManager.getObject(2847, 3541, 2);
 							if (object != null && p.getLocation().getX() == 2847 && p.getLocation().getY() == 3541) {
-								DoorActionHandler.handleAutowalkDoor(p, object);
+								ContentAPIKt.handleAutowalkDoor(p, object);
 								leave(p);
 								p.unlock();
 								p.lock(3);
@@ -166,7 +166,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 					leave(player);
 					PLAYERS.remove(player);
 				}
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor((Player) player, (Scenery) node);
 				return true;
 			}
 

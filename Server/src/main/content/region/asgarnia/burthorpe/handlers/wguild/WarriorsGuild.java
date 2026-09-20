@@ -1,10 +1,10 @@
 package content.region.asgarnia.burthorpe.handlers.wguild;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -45,12 +45,12 @@ public final class WarriorsGuild extends OptionHandler {
 		case 15653:
 		case 1530:
 			if (node.getId() == 1530 && !node.getLocation().equals(new Location(2837, 3549, 0))) {
-				DoorActionHandler.handleDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			}
 			if (canEnter(player)) {
 				player.getMusicPlayer().unlock(634);
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 			} else {
 				player.getDialogueInterpreter().sendDialogues(4285, null, "You not pass. You too weedy.");
 			}

@@ -1,7 +1,5 @@
 package core.game.worldevents.holiday.christmas.randoms
 
-
-import core.api.getPathableRandomLocalCoordinate
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.impl.Projectile

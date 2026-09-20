@@ -85,7 +85,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 		if (!name.contains("door") && !name.contains("gate") && !name.contains("fence") && !name.contains("wall") && !name.contains("exit") && !name.contains("entrance")) {
 			return false;
 		}
-		DoorActionHandler.handleDoor(player, object);
+		handleDoor(player, object);
 		return true;
 	}
 

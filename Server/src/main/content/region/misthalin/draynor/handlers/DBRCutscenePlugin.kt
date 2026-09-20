@@ -3,7 +3,6 @@ package content.region.misthalin.draynor.handlers
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.component.Component
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
@@ -207,7 +206,7 @@ class DBRCutscene(player: Player) : Cutscene(player) {
             }
             14 -> {
                 val wiseOldMan = getNPC(NPCs.WISE_OLD_MAN_2566)!!
-                DoorActionHandler.handleAutowalkDoor(wiseOldMan, getObject(16, 51))
+                handleAutowalkDoor(wiseOldMan, getObject(16, 51))
                 timedUpdate(1)
             }
             15 -> {

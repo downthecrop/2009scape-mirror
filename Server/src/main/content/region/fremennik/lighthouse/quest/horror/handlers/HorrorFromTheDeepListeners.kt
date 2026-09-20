@@ -5,18 +5,15 @@ import content.region.fremennik.lighthouse.quest.horror.HorrorFromTheDeep
 import content.region.fremennik.lighthouse.quest.horror.handlers.bookcase.BookcaseDialogue
 import core.api.*
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
-import core.game.node.entity.Entity
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.map.Location
-import core.game.world.repository.Repository.getPlayerByName
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.*
 
@@ -178,7 +175,7 @@ class HorrorFromTheDeepListeners : InteractionListener {
             when {
                 // quest complete
                 isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP) -> {
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                 }
 
                 // quest in progress, after bridge fixed and key obtained
@@ -200,7 +197,7 @@ class HorrorFromTheDeepListeners : InteractionListener {
                         when(count) {
                             0 -> {
                                 sendMessage(player, "You unlock the Lighthouse front door.")
-                                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                                handleAutowalkDoor(player, node.asScenery())
                                 return@queueScript delayScript(player, 2)
                             }
 
@@ -317,7 +314,7 @@ class HorrorFromTheDeepListeners : InteractionListener {
                         return@on false
                     }
                 }
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
                 playAudio(player, Sounds.STRANGEDOOR_OPEN_1626)
                 playAudio(player, Sounds.STRANGEDOOR_CLOSE_1625, 2)
 

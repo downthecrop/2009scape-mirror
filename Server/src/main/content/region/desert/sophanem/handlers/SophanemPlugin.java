@@ -1,8 +1,8 @@
 package content.region.desert.sophanem.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -52,7 +52,7 @@ public class SophanemPlugin extends OptionHandler {
 			if (!hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER)) {
 				break;
 			}
-			DoorActionHandler.handleDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			break;
 		case 20341:
 			break;

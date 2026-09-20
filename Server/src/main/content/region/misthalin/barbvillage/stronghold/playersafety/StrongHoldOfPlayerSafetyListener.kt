@@ -3,7 +3,6 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
  import core.api.*
  import core.game.activity.Cutscene
  import core.game.component.Component
- import core.game.global.action.DoorActionHandler
  import core.game.interaction.IntType
  import core.game.interaction.InteractionListener
  import core.game.interaction.InterfaceListener
@@ -15,7 +14,6 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
  import org.rs09.consts.Items
  import org.rs09.consts.NPCs
  import org.rs09.consts.Scenery as SceneryConst
-
 
 @Suppress("unused")
  class StrongHoldOfPlayerSafetyListener : InteractionListener{
@@ -77,7 +75,7 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
          on(SceneryConst.DOOR_29732, IntType.SCENERY, "open") { player, node ->
              if (player.globalData.testStage > 0){
                  // The player has talked to the prof
-                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                 handleAutowalkDoor(player, node.asScenery())
              }
              else{
                  sendMessage(player, "The door is locked")

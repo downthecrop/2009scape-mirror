@@ -1,13 +1,10 @@
 package content.region.asgarnia.burthorpe.quest.deathplateau
 
 import content.data.Quests
-import content.global.handlers.iface.ScrollInterface
 import core.api.*
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItemManager
-import org.rs09.consts.Components
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 
@@ -36,7 +33,7 @@ class DeathPlateauInteractionListener : InteractionListener {
             // Harold's door
             when (player.location) {
                 location(2906, 3543, 1), location(2905, 3543, 1), location(2907, 3543, 1) -> openDialogue(player, DeathPlateauDoorDialogueFile(1))
-                else -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                else -> handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
         }
@@ -44,7 +41,7 @@ class DeathPlateauInteractionListener : InteractionListener {
             when (node.location) {
                 location(2823, 3555, 0) -> openDialogue(player, DeathPlateauDoorDialogueFile(2)) //1st door to Tenzing
                 location(2820, 3558, 0) -> openDialogue(player, DeathPlateauDoorDialogueFile(3)) //2nd door to chicken pen
-                else -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                else -> handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
         }
@@ -92,7 +89,7 @@ class DeathPlateauInteractionListener : InteractionListener {
 
         on(Scenery.LARGE_DOOR_3743, SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.DEATH_PLATEAU) > 16) {
-                DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
+                handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             } else {
                 sendMessage(player, "The door is locked.")
             }

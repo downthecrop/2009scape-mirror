@@ -1,8 +1,8 @@
 package content.region.misthalin.quest.priestinperil;
 
+import core.api.ContentAPIKt;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
@@ -132,7 +132,7 @@ public final class DoorPerilDialogue extends DialoguePlugin {
 			break;
 		case 20:
 			end();
-			DoorActionHandler.handleDoor(player, door);
+			ContentAPIKt.handleDoor(player, door);
 			break;
 		}
 		return true;

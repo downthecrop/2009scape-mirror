@@ -32,7 +32,7 @@ class WildernessCourse
         when (`object`.id) {
             2309 -> handleEntrance(player, `object`)
             2307, 2308 -> {
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, `object`)
+                handleAutowalkDoor(player, `object`)
                 handleEntranceObstacle(player, `object`)
             }
             2288 -> handlePipe(player, `object`)
@@ -51,7 +51,7 @@ class WildernessCourse
      */
     private fun handleEntrance(player: Player, `object`: Scenery) {
         if (player.location.y > 3916 || player.skills.getLevel(Skills.AGILITY) >= 52) {
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, `object`)
+            handleAutowalkDoor(player, `object`)
             if (player.location.y <= 3916) {
                 handleEntranceObstacle(player, `object`)
             }
@@ -86,7 +86,7 @@ class WildernessCourse
                     15 -> player.lock(3)
                     16 -> {
                         val doorLoc = if (`object`.id < 2309) Location(2998, 3917, 0) else Location(2998, 3931, 0)
-                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, RegionManager.getObject(doorLoc))
+                        handleAutowalkDoor(player, RegionManager.getObject(doorLoc))
                         return true
                     }
                 }

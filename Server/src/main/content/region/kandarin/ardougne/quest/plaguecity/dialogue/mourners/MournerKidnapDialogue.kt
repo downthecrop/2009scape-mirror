@@ -6,7 +6,6 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -114,7 +113,7 @@ class MournerKidnapDialogueFile : DialogueFile(){
                             6 -> {
                                 // only walk the player if they have not walked themselves through
                                 if (player!!.location.y > 3272)
-                                    DoorActionHandler.handleAutowalkDoor(player, getScenery (if (east) eDoor else wDoor))
+                                    handleAutowalkDoor(player, getScenery(if (east) eDoor else wDoor))
                                 sendDialogue(player!!, "You wait until the mourner's back is turned and sneak into the building.").also { stage = END_DIALOGUE}
                                 resetFace(closeMourner!!)
                                 resetFace(farMourner!!)

@@ -1,9 +1,9 @@
 package content.region.asgarnia.falador.handlers;
 
 import static core.api.ContentAPIKt.*;
+
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -57,7 +57,7 @@ public final class MiningGuildPlugin extends OptionHandler {
 				player.getDialogueInterpreter().open(382, NPC.create(382, Location.create(0, 0, 0)), 1);
 				return true;
 			}
-			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+			handleAutowalkDoor(player, (Scenery) node);
 		}
 		if (option.equals("climb-up")) {
 			if (player.getLocation().withinDistance(new Location(3019, 9739, 0))) {

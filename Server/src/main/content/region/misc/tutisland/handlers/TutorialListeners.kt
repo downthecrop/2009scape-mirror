@@ -6,7 +6,6 @@ import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
-import core.game.world.map.Location
 import org.rs09.consts.NPCs
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
@@ -52,7 +51,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 4)
             TutorialStage.load(player, 4)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery, Location.create(3098, 3107, 0))
+            handleAutowalkDoor(player, door as Scenery)
             return@on true
         }
 
@@ -62,7 +61,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 17)
             TutorialStage.load(player, 17)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
+            handleAutowalkDoor(player, gate as Scenery)
             return@on true
         }
 
@@ -72,7 +71,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 18)
             TutorialStage.load(player, 18)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            handleAutowalkDoor(player, door as Scenery)
             return@on true
         }
 
@@ -112,7 +111,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 23)
             TutorialStage.load(player, 23)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            handleAutowalkDoor(player, door as Scenery)
             return@on true
         }
 
@@ -122,7 +121,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 27)
             TutorialStage.load(player, 27)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            handleAutowalkDoor(player, door as Scenery)
             return@on true
         }
 
@@ -176,7 +175,7 @@ class TutorialListeners : InteractionListener {
                 setAttribute(player, "tutorial:stage", 44)
                 TutorialStage.load(player, 44)
             }
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
+            handleAutowalkDoor(player, gate as Scenery)
         }
 
         on(RAT_GATES, IntType.SCENERY, "open") { player, gate ->
@@ -189,7 +188,7 @@ class TutorialListeners : InteractionListener {
                 setAttribute(player, "tutorial:stage", 51)
                 TutorialStage.load(player, 51)
             }
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, gate as Scenery)
+            handleAutowalkDoor(player, gate as Scenery)
             return@on true
         }
 
@@ -211,7 +210,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 58)
             TutorialStage.load(player, 58)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            handleAutowalkDoor(player, door as Scenery)
         }
 
         on(FINANCE_EXIT, IntType.SCENERY, "open") { player, door ->
@@ -220,7 +219,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 60)
             TutorialStage.load(player, 60)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            handleAutowalkDoor(player, door as Scenery)
         }
 
         on(CHURCH_EXIT, IntType.SCENERY, "open") { player, door ->
@@ -229,7 +228,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 67)
             TutorialStage.load(player, 67)
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door as Scenery)
+            handleAutowalkDoor(player, door as Scenery)
         }
 
         fun smeltBronzeBar(player: Player): Boolean {

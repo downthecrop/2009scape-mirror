@@ -3,7 +3,6 @@ package content.region.morytania.quest.creatureoffenkenstrain
 import content.data.Quests
 import core.api.*
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.global.action.PickupHandler
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItem
@@ -154,7 +153,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 2: Opening Cavern Entrance
         on(Scenery.ENTRANCE_5170, SCENERY, "open") { player, node ->
             if (inInventory(player, Items.CAVERN_KEY_4184) && removeItem(player, Items.CAVERN_KEY_4184)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
             }
@@ -163,7 +162,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 2: Using Cavern Key on the Cavern Entrance
         onUseWith(SCENERY, Items.CAVERN_KEY_4184, Scenery.ENTRANCE_5170) { player, used, with ->
             if (removeItem(player, used)) {
-                DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
+                handleAutowalkDoor(player, with.asScenery())
             }
             return@onUseWith true
         }
@@ -257,10 +256,10 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         on(Scenery.DOOR_5174, SCENERY, "open") { player, node ->
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
                 getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 5) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else if (inInventory(player, Items.SHED_KEY_4186)) {
                 if (removeItem(player, Items.SHED_KEY_4186)) {
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                     setAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, true)
                 }
             } else {
@@ -273,9 +272,9 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         onUseWith(SCENERY, Items.SHED_KEY_4186, Scenery.DOOR_5174) { player, used, with ->
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
                 getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 5) {
-                DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
+                handleAutowalkDoor(player, with.asScenery())
             } else if (removeItem(player, used)) {
-                DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
+                handleAutowalkDoor(player, with.asScenery())
                 setAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, true)
             }
             return@onUseWith true
@@ -363,7 +362,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
                     player,
                     Quests.CREATURE_OF_FENKENSTRAIN
                 ) > 7) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
             }
@@ -372,7 +371,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 2: Using Cavern Key on the Cavern Entrance
         onUseWith(SCENERY, Items.TOWER_KEY_4185, Scenery.DOOR_5172) { player, used, with ->
             if (inInventory(player, Items.TOWER_KEY_4185)) {
-                DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
+                handleAutowalkDoor(player, with.asScenery())
             }
             return@onUseWith true
         }

@@ -22,7 +22,7 @@ class CraftingGuildListeners : InteractionListener {
                 if (hasLevelStat(player, Skills.CRAFTING, 40)) {
                     if (anyInEquipment(player, Items.BROWN_APRON_1757, Items.CRAFTING_CAPE_9780, Items.CRAFTING_CAPET_9781)) {
                         openDialogue(player, TheDoorDialogues(0))
-                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door.asScenery())
+                        handleAutowalkDoor(player, door.asScenery())
                         return@on true
                     } else {
                         openDialogue(player, TheDoorDialogues(1))
@@ -33,7 +33,7 @@ class CraftingGuildListeners : InteractionListener {
                     return@on false
                 }
             } else {
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, door.asScenery())
+                handleAutowalkDoor(player, door.asScenery())
                 return@on true
             }
         }

@@ -1,8 +1,8 @@
 package content.region.asgarnia.taverley.quest.witchshouse;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -107,14 +107,14 @@ public class WitchsHousePlugin extends OptionHandler {
                     break;
                 }
                 if (player.getInventory().containsItem(DOOR_KEY) || player.getLocation().getX() >= 2901) {
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+                    ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
                 } else {
                     player.sendMessage("The door is locked.");
                 }
                 break;
             case 2862:
                 if (magnetAttached || player.getLocation().getY() < 3466) {
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+                    ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
                     player.removeAttribute("attached_magnet");
                 } else {
                     player.getDialogueInterpreter().sendDialogue("Strange... I can't see any kind of lock or handle to open this door.");
@@ -123,7 +123,7 @@ public class WitchsHousePlugin extends OptionHandler {
             case 2865:
             case 2866:
                 if (player.getEquipment().containsItem(LEATHER_GLOVES)) {
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+                    ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
                 } else {
                     player.getImpactHandler().manualHit(player, RandomFunction.random(2, 3), ImpactHandler.HitsplatType.NORMAL);
                     player.getDialogueInterpreter().sendDialogue("As your bare hands touch the gate you feel a shock.");
@@ -134,11 +134,11 @@ public class WitchsHousePlugin extends OptionHandler {
                 break;
             case 2863:
                 if (player.getLocation().getX() >= 2934) {
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+                    ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
                     return true;
                 }
                 if (player.getInventory().containsItem(KEY)) {
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+                    ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
                 } else {
                     player.sendMessage("The door is locked.");
                 }

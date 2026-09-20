@@ -4,7 +4,6 @@ import content.data.Quests
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -83,7 +82,7 @@ class RecruitmentDriveListeners : InteractionListener {
             if (getAttribute(player, RecruitmentDrive.attributeStagePassFailState, 0) == 1) {
                 removeAttribute(player, RecruitmentDrive.attributeStagePassFailState)
                 setAttribute(player, RecruitmentDrive.attributeCurrentStage, getAttribute(player, RecruitmentDrive.attributeCurrentStage, 0) + 1)
-                DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
+                handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
                 val currentLevel = getAttribute(player, RecruitmentDrive.attributeCurrentStage, 0)
                 if (currentLevel >= 5) {
                     CompleteTestCutscene(player).start()

@@ -2,12 +2,13 @@ package content.region.asgarnia.falador.quest.blackknightsfortress;
 
 import java.util.List;
 
+import core.api.ContentAPIKt;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
 
@@ -200,7 +201,8 @@ public class FortressGuardDialogue extends DialoguePlugin {
 			break;
 		case 54:
 			end();
-			DoorActionHandler.handleAutowalkDoor(player, RegionManager.getObject(3020, 3515, 0));
+			final Scenery object = RegionManager.getObject(3020, 3515, 0);
+			ContentAPIKt.handleAutowalkDoor(player, object);
 			List<NPC> npcs = RegionManager.getLocalNPCs(player.getLocation());
 			for (NPC npc : npcs) {
 				if (npc.getId() == 179) {

@@ -6,7 +6,6 @@ import core.game.event.TickEvent
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import org.rs09.consts.Items
-import core.api.Event
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.secondsToTicks

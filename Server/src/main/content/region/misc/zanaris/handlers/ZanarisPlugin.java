@@ -1,10 +1,10 @@
 package content.region.misc.zanaris.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
-import core.game.global.action.DoorActionHandler;
 import content.global.skill.crafting.gem.Gems;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -42,7 +42,7 @@ public final class ZanarisPlugin extends OptionHandler {
 		case 12045:
 		case 12047:
 			if ((node.getId() == 12045 && node.getLocation().equals(new Location(2469, 4438, 0)) && player.getLocation().getX() >= 2470) || player.getLocation().getY() < 4434 && (node.getId() == 12045 || node.getId() == 12047 && node.getLocation().equals(new Location(2465, 4434, 0))) || node.getId() == 12047 && player.getLocation().getX() >= 2470) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getDialogueInterpreter().open(MagicDoorDialogue.NAME, node);
@@ -138,7 +138,7 @@ public final class ZanarisPlugin extends OptionHandler {
 				} else {
 					end();
 					if (player.getInventory().remove(Gems.DIAMOND.getGem())) {
-						DoorActionHandler.handleAutowalkDoor(player, door);
+						ContentAPIKt.handleAutowalkDoor(player, door);
 						player.getPacketDispatch().sendMessage("You give the doorman a diamond.");
 					}
 				}

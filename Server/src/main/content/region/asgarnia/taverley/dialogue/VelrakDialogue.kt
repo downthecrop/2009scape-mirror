@@ -1,6 +1,5 @@
 package content.region.asgarnia.taverley.dialogue
 
-import core.api.Container
 import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression

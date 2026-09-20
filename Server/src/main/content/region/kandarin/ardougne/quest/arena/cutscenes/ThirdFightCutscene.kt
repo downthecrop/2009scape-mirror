@@ -1,8 +1,8 @@
 package content.region.kandarin.ardougne.quest.arena.cutscenes
 
 import content.region.kandarin.ardougne.quest.arena.npc.BouncerNPC.Companion.spawnBouncer
+import core.api.handleAutowalkDoor
 import core.game.activity.Cutscene
-import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 
@@ -33,7 +33,7 @@ class ThirdFightCutscene(player: Player) : Cutscene(player) {
             }
 
             2 -> {
-                DoorActionHandler.handleAutowalkDoor(getNPC(BOUNCER)!!, getObject(46, 26))
+                handleAutowalkDoor(getNPC(BOUNCER)!!, getObject(46, 26))
                 timedUpdate(2)
             }
 

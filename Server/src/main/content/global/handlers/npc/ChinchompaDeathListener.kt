@@ -1,8 +1,6 @@
 package content.global.handlers.npc
 
 import core.api.*
-import core.api.playGlobalAudio
-import core.api.sendGraphics
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPCBehavior
 import org.rs09.consts.NPCs

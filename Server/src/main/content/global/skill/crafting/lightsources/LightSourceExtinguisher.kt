@@ -1,7 +1,6 @@
 package content.global.skill.crafting.lightsources
 
 import content.data.LightSource
-import core.api.log
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.Container
@@ -9,12 +8,9 @@ import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.world.map.Location
-import core.tools.SystemLogger
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.Log
-
 
 /**
  * Extinguishes light sources

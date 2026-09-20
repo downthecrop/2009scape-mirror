@@ -3,7 +3,6 @@ package content.minigame.barrows;
 import core.game.component.Component;
 import core.game.activity.ActivityPlugin;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -264,7 +263,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			switch (object.getId()) {
 			case 6714:
 			case 6733:
-				DoorActionHandler.handleAutowalkDoor(e, (Scenery) target);
+				handleAutowalkDoor((Player) e, (Scenery) target);
 				if (RandomFunction.random(15) == 0) {
 					// spawn a brother, if any haven't yet been killed
 					boolean[] brothers = player.getSavedData().getActivityData().getBarrowBrothers();

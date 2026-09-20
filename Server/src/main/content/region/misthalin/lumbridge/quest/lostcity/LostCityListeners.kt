@@ -27,7 +27,7 @@ class LostCityListeners : InteractionListener {
 
         // the shed teleport, to allow players to access zanaris if they enter the shed while wielding the dramen staff
         on(Sceneries.DOOR_2406, IntType.SCENERY,"open"){ player, node ->
-            core.game.global.action.DoorActionHandler.handleAutowalkDoor(player,node as Scenery)
+            handleAutowalkDoor(player, node as Scenery)
             val isOutsideShed = player.location.x < node.location.x
             val canDramenTeleport = inEquipment(player,Items.DRAMEN_STAFF_772) && getQuestStage(player, Quests.LOST_CITY) > 20 && isOutsideShed
             if (canDramenTeleport) {

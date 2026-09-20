@@ -1,7 +1,6 @@
 package content.global.skill.hunter.falconry
 
 import core.api.*
-import core.api.MapArea
 import core.game.activity.ActivityManager
 import core.game.node.entity.Entity
 import core.game.world.map.zone.ZoneBorders

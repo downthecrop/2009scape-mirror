@@ -4,7 +4,6 @@ import content.data.Quests
 import core.api.*
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.Location
@@ -12,7 +11,6 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import org.rs09.consts.NPCs
@@ -114,10 +112,10 @@ class SeersHouseListeners : InteractionListener {
             else if(player.getAttribute("riddlesolved",false)) {
                 val insideHouse = (player.location == Location.create(2631, 3666, 0))
                 if(insideHouse) {
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                     player.inventory.clear()
                 } else if(player.inventory.isEmpty && player.equipment.isEmpty) {
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    handleAutowalkDoor(player, node.asScenery())
                 } else {
                     openDialogue(player, NPCs.PEER_THE_SEER_1288, findNPC(NPCs.PEER_THE_SEER_1288)!!)
                 }
@@ -934,7 +932,7 @@ class SeersHouseListeners : InteractionListener {
             if(player.inventory.contains(SEERSKEY,1)){
                 player.setAttribute("/save:housepuzzlesolved",true)
                 player.inventory.clear()
-                DoorActionHandler.handleAutowalkDoor(player,node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
                 player.setAttribute("/save:fremtrials:peer-vote",true)
                 player.setAttribute("/save:fremtrials:votes",player.getAttribute("fremtrials:votes",0) + 1)
                 sendNPCDialogue(player,1288,"Incredible! To have solved my puzzle so quickly! I have no choice but to vote in your favour!")

@@ -2,7 +2,6 @@ package content.region.kandarin.quest.observatoryquest
 
 import content.data.Quests
 import core.api.*
-import core.api.setVarp
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills

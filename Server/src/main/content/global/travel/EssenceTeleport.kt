@@ -3,9 +3,6 @@ package content.global.travel
 import content.global.skill.magic.TeleportMethod
 import core.game.event.TeleportEvent
 import core.api.*
-import core.api.lock
-import core.api.teleport
-import core.api.unlock
 import core.game.node.Node
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC

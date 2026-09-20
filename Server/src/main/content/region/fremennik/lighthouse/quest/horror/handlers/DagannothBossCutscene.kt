@@ -1,8 +1,6 @@
 package content.region.fremennik.lighthouse.quest.horror.handlers
 
-import core.api.clearHintIcon
 import core.api.*
-import core.api.registerHintIcon
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction

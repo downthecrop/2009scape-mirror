@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.shieldofarrav;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
@@ -162,7 +163,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogue("This is the door to the weapon stash you were looking for. Maybe if", "you can find another adventurer who happens to be a member of the", "Phoenix Gang, they could help you.");
 				return true;
 			} else if (quest.getStage(player) == 60 && player.getInventory().containsItem(ShieldofArrav.KEY)) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (quest.getStage(player) == 70 && player.getInventory().containsItem(ShieldofArrav.KEY)) {
@@ -170,7 +171,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 					player.getPacketDispatch().sendMessage("You should get a replacement key from Straven to enter here.");
 					return true;
 				} else {
-					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+					ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 					return true;
 				}
 			}
@@ -180,13 +181,13 @@ public final class ShieldArravPlugin extends OptionHandler {
 			if (!ShieldofArrav.isBlackArm(player)) {
 				player.getPacketDispatch().sendMessage("This door seems to be locked from the inside.");
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 			}
 			break;
 		case 2397:
 			if (ShieldofArrav.isPhoenix(player)) {
 				player.getPacketDispatch().sendMessage("The door automatically opens for you.");
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The door is securely locked.");

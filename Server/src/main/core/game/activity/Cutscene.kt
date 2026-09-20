@@ -21,7 +21,6 @@ import core.net.packet.context.MinimapStateContext
 import core.net.packet.out.MinimapState
 import org.rs09.consts.Components
 import core.ServerConstants
-import core.api.Event
 import core.api.utils.CameraShakeType
 import core.api.utils.PlayerCamera
 import core.game.system.timer.impl.AntiMacro

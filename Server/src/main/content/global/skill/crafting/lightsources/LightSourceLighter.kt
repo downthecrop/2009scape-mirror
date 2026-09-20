@@ -1,12 +1,10 @@
 package content.global.skill.crafting.lightsources
 
 import core.api.*
-import core.api.teleport
 import core.game.container.Container
 import core.game.event.LitLightSourceEvent
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
-import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item

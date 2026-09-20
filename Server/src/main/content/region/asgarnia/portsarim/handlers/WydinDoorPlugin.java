@@ -1,5 +1,6 @@
 package content.region.asgarnia.portsarim.handlers;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -32,7 +33,7 @@ public final class WydinDoorPlugin extends OptionHandler {
 			return true;
 		} else {
 			final Scenery object = (Scenery) node;
-			DoorActionHandler.handleAutowalkDoor(player, object);
+			ContentAPIKt.handleAutowalkDoor(player, object);
 		}
 		return true;
 	}

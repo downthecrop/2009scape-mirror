@@ -3,7 +3,6 @@ package content.region.morytania.quest.hauntedmine
 import content.data.Quests
 import core.api.*
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -150,7 +149,7 @@ class HauntedMineListeners : InteractionListener {
         // These are the doors from the shortcut to level 2, and also the ones on level 6 that go to the crystals. Both require the crystal mine key.
         on(intArrayOf(Scenery.LARGE_DOOR_4963, Scenery.LARGE_DOOR_4964), IntType.SCENERY, "Open") { player, node ->
             if (inInventory(player, Items.CRYSTAL_MINE_KEY_4077)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else sendMessage(player, "This door is locked.")
             return@on true
         }

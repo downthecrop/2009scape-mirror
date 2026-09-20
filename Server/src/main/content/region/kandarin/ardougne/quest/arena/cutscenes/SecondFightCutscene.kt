@@ -2,10 +2,10 @@ package content.region.kandarin.ardougne.quest.arena.cutscenes
 
 import content.region.kandarin.ardougne.quest.arena.npc.ScorpionNPC.Companion.spawnScorpion
 import core.api.animate
+import core.api.handleAutowalkDoor
 import core.api.location
 import core.api.sendChat
 import core.game.activity.Cutscene
-import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 
@@ -40,7 +40,7 @@ class SecondFightCutscene(player: Player) : Cutscene(player) {
             }
 
             3 -> {
-                DoorActionHandler.handleAutowalkDoor(player, getObject(40, 5))
+                handleAutowalkDoor(player, getObject(40, 5))
                 timedUpdate(2)
             }
 
@@ -77,7 +77,7 @@ class SecondFightCutscene(player: Player) : Cutscene(player) {
 
             10 -> {
                 sendChat(getNPC(GUARD)!!, "Get out! there.")
-                DoorActionHandler.handleAutowalkDoor(player, getObject(46, 16))
+                handleAutowalkDoor(player, getObject(46, 16))
                 move(getNPC(GUARD)!!, 47, 15)
                 timedUpdate(1)
             }
@@ -111,8 +111,8 @@ class SecondFightCutscene(player: Player) : Cutscene(player) {
             }
 
             16 -> {
-                DoorActionHandler.handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 24))
-                DoorActionHandler.handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 23))
+                handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 24))
+                handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 23))
                 timedUpdate(1)
             }
 

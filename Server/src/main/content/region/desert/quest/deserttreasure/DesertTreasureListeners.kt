@@ -2,7 +2,6 @@ package content.region.desert.quest.deserttreasure
 
 import core.api.*
 import core.game.activity.Cutscene
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -149,7 +148,7 @@ class DesertTreasureListeners : InteractionListener {
         // THE DOOR
         on(intArrayOf(Scenery.PYRAMID_ENTRANCE_6545, Scenery.PYRAMID_ENTRANCE_6547), SCENERY, "open") { player, node ->
             if (allDiamondsInserted(player)) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "A mystical power has sealed this door...")
             }

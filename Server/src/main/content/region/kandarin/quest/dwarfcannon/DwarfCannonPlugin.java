@@ -90,13 +90,15 @@ public class DwarfCannonPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case 3:
 			if (!node.getLocation().equals(new Location(3015, 3453, 0))) {
-				return DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
+				final Scenery object = node.asScenery();
+				return handleAutowalkDoor(player, object);
 			}
 			if (quest.getStage(player) < 70) {
 				player.sendMessage("The door is locked.");
 				break;
 			}
-			return DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
+			final Scenery object = node.asScenery();
+			return handleAutowalkDoor(player, object);
 		case 5:
 			if (quest.getStage(player) == 50) {
 				player.getDialogueInterpreter().sendDialogues(player, null, "I guess I'd better fix it with the toolkit I was given.");

@@ -1,6 +1,5 @@
 package content.global.skill.crafting.leather
 
-import core.api.Container
 import core.api.*
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler

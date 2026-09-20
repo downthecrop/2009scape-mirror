@@ -1,7 +1,6 @@
 package content.minigame.fishingtrawler
 
 import core.api.MapArea
-import core.api.getRegionBorders
 import core.api.*
 import core.game.component.Component
 import core.game.node.entity.Entity
@@ -28,7 +27,6 @@ import core.tools.ticksToSeconds
 import java.util.concurrent.TimeUnit
 import kotlin.math.ceil
 import kotlin.random.Random
-
 
 /**
  * Handles a fishing trawler session

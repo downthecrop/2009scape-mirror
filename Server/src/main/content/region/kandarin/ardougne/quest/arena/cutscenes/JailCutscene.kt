@@ -3,7 +3,6 @@ package content.region.kandarin.ardougne.quest.arena.cutscenes
 import content.region.kandarin.ardougne.quest.arena.dialogue.HengradDialogue
 import core.api.*
 import core.game.activity.Cutscene
-import core.game.global.action.DoorActionHandler
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 
@@ -44,7 +43,7 @@ class JailCutscene(player: Player) : Cutscene(player) {
 
             4 -> {
                 animate(getNPC(KHAZARD_GUARD)!!, 2098)
-                DoorActionHandler.handleAutowalkDoor(player, getObject(40, 5))
+                handleAutowalkDoor(player, getObject(40, 5))
                 timedUpdate(5)
             }
 

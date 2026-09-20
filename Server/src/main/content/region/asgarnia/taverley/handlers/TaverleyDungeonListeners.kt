@@ -17,7 +17,7 @@ class TaverleyDungeonListeners : InteractionListener {
             if(!inInventory(player, Items.DUSTY_KEY_1590)){
                 sendMessage(player, "This gate seems to be locked.")
             } else {
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
         }
@@ -25,12 +25,12 @@ class TaverleyDungeonListeners : InteractionListener {
 
         on(JAIL_DOOR, IntType.SCENERY, "open"){ player, node ->
             when(player.location.y){
-                9689 -> core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery()) //inside the cell going out
+                9689 -> handleAutowalkDoor(player, node.asScenery()) //inside the cell going out
                 9690 -> {                                                              //outside the cell going in
                     if(!inInventory(player, Items.JAIL_KEY_1591)){
                         sendMessage(player, "This door is locked.")
                     } else {
-                        core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                        handleAutowalkDoor(player, node.asScenery())
                     }
                 }
             }

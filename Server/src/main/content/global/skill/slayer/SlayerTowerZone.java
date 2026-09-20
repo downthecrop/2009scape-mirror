@@ -1,6 +1,6 @@
 package content.global.skill.slayer;
 
-import core.game.global.action.DoorActionHandler;
+import core.api.ContentAPIKt;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.Option;
 import core.game.node.Node;
@@ -44,7 +44,7 @@ public final class SlayerTowerZone extends MapZone implements Plugin<Object> {
 				return true;
 			}
 			if (target.getId() == 10527 || target.getId() == 10528) {
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) target);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) target);
 				return true;
 			}
 		}

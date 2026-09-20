@@ -1,10 +1,10 @@
 package content.region.kandarin.guilds;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.dialogue.DialoguePlugin;
 import core.game.global.Skillcape;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -38,7 +38,7 @@ public final class FishingGuild extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogues(308, null, "Hello, I'm afraid only the top fishers are allowed to use", "our premier fishing facilities.");
 					return true;
 				}
-				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			}
 			break;

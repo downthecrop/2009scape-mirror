@@ -1,7 +1,6 @@
 package core.game.system.command.rottenpotato
 
 import core.api.*
-import core.api.InputType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.world.ImmerseWorld

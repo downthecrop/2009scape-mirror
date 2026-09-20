@@ -5,7 +5,6 @@ import content.region.kandarin.ardougne.quest.arena.npc.GeneralNPC
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
@@ -133,7 +132,7 @@ class FightArenaListeners : InteractionListener {
 
         on(MAIN_DOOR, IntType.SCENERY, "open") { player, maingate ->
             when (player.location.y) {
-                3171 -> DoorActionHandler.handleAutowalkDoor(player, maingate.asScenery())
+                3171 -> handleAutowalkDoor(player, maingate.asScenery())
                 3172 -> {
                     if (allInEquipment(player, HELMET, ARMOR)) {
                         openDialogue(player, EastDoorSupportDialogue())
@@ -144,7 +143,7 @@ class FightArenaListeners : InteractionListener {
                 }
             }
             when (player.location.x) {
-                2585 -> DoorActionHandler.handleAutowalkDoor(player, maingate.asScenery())
+                2585 -> handleAutowalkDoor(player, maingate.asScenery())
                 2584 -> {
                     if (allInEquipment(player, HELMET, ARMOR)) {
                         openDialogue(player, WestDoorSupportDialogue())
@@ -183,7 +182,7 @@ class FightArenaListeners : InteractionListener {
 
         on(CENTER_DOOR, IntType.SCENERY, "open") { player, node ->
             if (player.questRepository.getStage(Quests.FIGHT_ARENA) >= 91) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, node.asScenery())
             } else if (player.questRepository.getStage(Quests.FIGHT_ARENA) < 91) {
                 sendNPCDialogue(player, NPCs.KHAZARD_GUARD_255, "And where do you think you're going? Only General Khazard decides who fights in the arena. Get out of here.", FacialExpression.ANNOYED)
             } else {
@@ -256,7 +255,7 @@ class FightArenaListeners : InteractionListener {
                     end()
                     lock(player!!, 2)
                     setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
-                    DoorActionHandler.handleAutowalkDoor(player, getScenery(2617, 3172, 0))
+                    handleAutowalkDoor(player, getScenery(2617, 3172, 0))
                 }
             }
         }
@@ -278,7 +277,7 @@ class FightArenaListeners : InteractionListener {
                     end()
                     lock(player!!, 2)
                     setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
-                    DoorActionHandler.handleAutowalkDoor(player, getScenery(2584, 3141, 0))
+                    handleAutowalkDoor(player, getScenery(2584, 3141, 0))
                 }
             }
         }

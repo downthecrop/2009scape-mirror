@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.handlers
 
+import core.api.handleAutowalkDoor
 import core.plugin.Initializable
 import org.rs09.consts.Scenery
 import core.game.interaction.IntType
@@ -23,7 +24,7 @@ class ChampionsGuildDoor : InteractionListener {
                 if (player.location.x == 3191 && player.location.y == 3363) {
                     player.dialogueInterpreter.sendDialogues(198, null, "Greetings bold adventurer. Welcome to the guild of", "Champions.")
                 }
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
+                handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             }
             return@on true
         }

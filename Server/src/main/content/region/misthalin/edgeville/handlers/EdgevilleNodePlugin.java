@@ -1,10 +1,9 @@
 package content.region.misthalin.edgeville.handlers;
 
 import static core.api.ContentAPIKt.*;
+
 import core.cache.def.impl.SceneryDefinition;
-import core.game.component.Component;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -85,7 +84,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
                     player.setAttribute("wildy_gate", node);
                 }
                 else{ // Leaving the wilderness
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
+                    handleAutowalkDoor(player, (Scenery) node);
                 }
         }
         return true;

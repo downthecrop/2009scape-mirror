@@ -2,10 +2,8 @@ package content.region.misthalin.varrock.handlers
 
 import content.region.misthalin.varrock.dialogue.KnockAtBankDoor
 import core.api.*
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.world.map.Location
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
@@ -64,7 +62,7 @@ class VarrockInteractionListener : InteractionListener {
                 // Brass Key Door to Edgeville Dungeon
                 Scenery.DOOR_1804 -> {
                     if (inInventory(player, Items.BRASS_KEY_983)) {
-                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                        handleAutowalkDoor(player, node.asScenery())
                     } else {
                         sendMessage(player, "This door is locked.")
                     }

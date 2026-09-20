@@ -41,7 +41,7 @@ class BarbarianOutpostCourse
             2115, 2116 -> if (!BarcrawlManager.getInstance(player).isFinished || BarcrawlManager.getInstance(player).isStarted) {
                 player.dialogueInterpreter.open(384)
             } else {
-                core.game.global.action.DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                handleAutowalkDoor(player, node as Scenery)
             }
             2282 -> handleRopeSwing(player, node as Scenery)
             2294 -> handleLogBalance(player, node as Scenery)

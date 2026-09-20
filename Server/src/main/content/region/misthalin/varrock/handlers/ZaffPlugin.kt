@@ -1,8 +1,6 @@
 package content.region.misthalin.varrock.handlers
 
-import core.api.Container
 import core.api.*
-import core.api.InputType
 import core.cache.def.impl.NPCDefinition
 import core.plugin.Initializable
 import core.game.interaction.OptionHandler

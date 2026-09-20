@@ -1,6 +1,5 @@
 package content.region.morytania.quest.naturespirit
 
-import core.api.Container
 import core.api.*
 import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.player.Player
