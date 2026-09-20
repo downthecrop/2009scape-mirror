@@ -1859,6 +1859,36 @@ fun sendString(
     player.packetDispatch.sendString(string, iface, child)
 }
 
+enum class GAMETAB(vararg val indices: Int) {
+    COMBAT(0), STATS(1), QUESTS(2), INVENTORY(3), EQUIPMENT(4), PRAYER(5), MAGIC(6),
+    FOLLOWER(7), FRIENDS(8), IGNORE(9), CLAN(10), SETTINGS(11), EMOTES(12), MUSIC(13),
+    LOGOUT(14),
+    AME_DEFAULT(0, 1, 2, 3, 4, 5, 6, 7, 11, 12)
+}
+
+/**
+ * Closes specific tabs for the player.
+ *
+ * You can pass individual tabs (e.g. COMBAT, INVENTORY)
+ * or grouped tabs like AME_DEFAULT.
+ *
+ * Examples:
+ * removeTabs(player, GAMETAB.COMBAT)
+ * removeTabs(player, GAMETAB.AME_DEFAULT)
+ * removeTabs(player, GAMETAB.MUSIC,GAMETAB.QUESTS)
+ */
+fun removeTabs(player: Player, vararg tabs: GAMETAB) {
+    player.interfaceManager.removeTabs(*tabs.flatMap { it.indices.toList() }.toIntArray())
+}
+
+/**
+ * Restores all tabs for the player to their default state.
+ * @param player the player to restore tabs for
+ */
+fun restoreTabs(player: Player){
+    player.interfaceManager.restoreTabs()
+}
+
 /**
  * Closes any open (non-chat) interfaces for the player
  * @param player the player to close the interface for
