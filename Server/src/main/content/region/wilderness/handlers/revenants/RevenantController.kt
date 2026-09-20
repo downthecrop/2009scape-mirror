@@ -13,6 +13,7 @@ import core.game.node.entity.combat.InteractionType
 import core.game.system.command.Privilege
 import core.game.world.GameWorld
 import core.game.world.map.path.Pathfinder
+import core.game.world.map.zone.ZoneBorders
 import core.game.world.repository.Repository
 import core.tools.Log
 import java.lang.Integer.min
@@ -113,7 +114,7 @@ class RevenantController : TickListener, Commands {
         )
 
         // Routes that Dark Beasts are too fat for
-        private val largeNpcIncompatibleRoutes = setOf(4)
+        private val largeNpcIncompatibleRoutes = setOf(0, 4)
 
         val spawnLocations = listOf(
             3075 to 3553, 3077 to 3563, 3077 to 3578, 3093 to 3581, 3103 to 3570,
@@ -124,8 +125,8 @@ class RevenantController : TickListener, Commands {
 
         /**
          * Revenant stuck detector
-         * Makes sure Revenants are either moving, intentionally waiting to act, or are in legitimate combat
-         * If they aren't, they're passed to the stuck handler
+         * Makes sure Revenants are either moving, intentionally waiting to act, or are in legitimate combat.
+         * If they aren't, they're passed to the stuck handler.
          */
         private fun checkIfStuck(revenantNPC: RevenantNPC): Boolean {
             val lastTick = movementStartTick[revenantNPC] ?: 0
@@ -175,9 +176,9 @@ class RevenantController : TickListener, Commands {
 
         /**
          * Revenant stuck handler
-         * Tries to help the Revenant escape after giving it a demerit
-         * If the Revenant gets too many demerits, it will be timed out instead
-         * NOTE: times out Revenants in unloaded regions as they have no land to path to and thus cannot move
+         * Tries to help the Revenant escape after giving it a demerit.
+         * If the Revenant gets too many demerits, it will be timed out instead.
+         * NOTE: times out Revenants in unloaded regions as they have no land to path to and thus cannot move.
          */
         private fun handleStuckRevenant(revenantNPC: RevenantNPC) {
             val attempts = failedAttempts[revenantNPC] ?: 0
@@ -199,30 +200,56 @@ class RevenantController : TickListener, Commands {
         }
 
         /**
-         * Finds a random location to try to move to that is within the Wilderness
+         * Location data to keep revenants from thinking they can hop the fence.
          */
-        fun getNextLocation(revenantNPC: RevenantNPC): Location {
-            val rawNextX = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
-            val nextX = maxOf(rawNextX, 2951)
-            val rawNextY = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
-            val nextY = maxOf(rawNextY, 3523)
-            return revenantNPC.location.transform(nextX, nextY, 0)
+        private val rectangleSouthOfFenceWest = ZoneBorders(2931, 3523, 3310, 3903)
+        private val rectangleSouthOfFenceEast = ZoneBorders(3376, 3523, 3311, 3897)
+        private val southOfFence = arrayOf(rectangleSouthOfFenceWest, rectangleSouthOfFenceEast)
+
+        /**
+         * Finds a random location to try to move to that is within the Wilderness.
+         */
+        private fun proposeNextLocation(revenantNPC: RevenantNPC): Location {
+            val revLoc = revenantNPC.location
+            val radius = revenantNPC.walkRadius
+            var nextX = revLoc.x + RandomFunction.random(-radius, radius+1)
+            var nextY = revLoc.y + RandomFunction.random(-radius, radius+1)
+            nextX = maxOf(nextX, 2931)
+            nextY = maxOf(nextY, 3523)
+            return Location(nextX, nextY)
         }
 
         /**
-         * Determines how far Revenants can deviate from their path
+         * Generates and checks a proposed destination for legality.
+         */
+        private fun getNextLocation(revenantNPC: RevenantNPC): Location {
+            var tempLoc = proposeNextLocation(revenantNPC)
+            val revIsSouth = southOfFence.any { it.insideBorder(revenantNPC.location) }
+            if (revIsSouth != southOfFence.any { it.insideBorder(tempLoc) } || RevenantNPC.SAFE_ZONES.any { it.insideBorder(tempLoc) }) {
+                for (l in 0..10) {
+                    tempLoc = proposeNextLocation(revenantNPC)
+                    if (revIsSouth == southOfFence.any { it.insideBorder(tempLoc) } && !RevenantNPC.SAFE_ZONES.any { it.insideBorder(tempLoc) }) {
+                        break
+                    }
+                }
+            }
+            return tempLoc
+        }
+
+        /**
+         * Determines how far Revenants can deviate from their path.
          */
         private fun getPathVariance(revenantNPC: RevenantNPC, isGroup: Boolean): Int {
             return when {
-                isGroup -> 4
                 revenantNPC.size() >= 3 -> 2  // Dark Beasts are fat, so keep them close to their safe routes
+                isGroup -> 4
                 else -> 10
             }
         }
 
         /**
-         * Gets a random route for patrols
-         * Will not assign Dark Beasts to routes they are too fat for
+         * Gets a random route for patrols.
+         * Will not assign Dark Beasts to routes they are too fat for.
          */
         private fun getSuitableRoute(revenantNPC: RevenantNPC): Array<Location> {
             val availableRoutes = if (revenantNPC.size() >= 3) {
@@ -387,11 +414,26 @@ class RevenantController : TickListener, Commands {
                         return
                     }
                     val pathVariance = getPathVariance(revenantNPC, isGroup)
-                    val nextLoc = route[routeIdx].transform(
-                        RandomFunction.random(-pathVariance, pathVariance),
-                        RandomFunction.random(-pathVariance, pathVariance),
+                    var nextLoc = route[routeIdx].transform(
+                        RandomFunction.random(-pathVariance, pathVariance+1),
+                        RandomFunction.random(-pathVariance, pathVariance+1),
                         0
                     )
+                    nextLoc = Location(maxOf(nextLoc.x, 2931), maxOf(nextLoc.y, 3523))
+                    val revIsSouth = southOfFence.any { it.insideBorder(revenantNPC.location) }
+                    if (revIsSouth != southOfFence.any { it.insideBorder(nextLoc) } || RevenantNPC.SAFE_ZONES.any { it.insideBorder(nextLoc) }) {
+                        for (l in 0..10) {
+                            nextLoc = route[routeIdx].transform(
+                                RandomFunction.random(-pathVariance, pathVariance+1),
+                                RandomFunction.random(-pathVariance, pathVariance+1),
+                                0
+                            )
+                            nextLoc = Location(maxOf(nextLoc.x, 2931), maxOf(nextLoc.y, 3523))
+                            if (revIsSouth == southOfFence.any { it.insideBorder(nextLoc) } && !RevenantNPC.SAFE_ZONES.any { it.insideBorder(nextLoc) }) {
+                                break
+                            }
+                        }
+                    }
                     revenantNPC.pulseManager.run(object : MovementPulse(revenantNPC, nextLoc, Pathfinder.SMART) {
                         override fun pulse(): Boolean {
                             return true

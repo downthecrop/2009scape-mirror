@@ -28,9 +28,11 @@ public final class ClanWarsChallengeRoom extends MapZone implements Plugin<Objec
 		super("clan wars cr", true, ZoneRestriction.RANDOM_EVENTS);
 	}
 
+	public static ZoneBorders clanWarsChallengeRoomBorders = new ZoneBorders(3264, 3672, 3279, 3695);
+
 	@Override
 	public void configure() {
-		register(new ZoneBorders(3264, 3672, 3279, 3695));
+		register(clanWarsChallengeRoomBorders);
 	}
 
 	@Override

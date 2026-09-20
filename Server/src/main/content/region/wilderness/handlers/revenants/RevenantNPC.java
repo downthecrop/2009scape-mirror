@@ -1,5 +1,7 @@
 package content.region.wilderness.handlers.revenants;
 
+import content.minigame.clanwars.ClanWarsChallengeRoom;
+import content.minigame.magearena.MageArenaZone;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -21,6 +23,8 @@ import core.game.system.config.NPCConfigParser;
 import core.game.world.GameWorld;
 import org.rs09.consts.Sounds;
 
+import java.util.Arrays;
+
 import static core.api.ContentAPIKt.playAudio;
 import static core.api.ContentAPIKt.playGlobalAudio;
 
@@ -32,9 +36,28 @@ import static core.api.ContentAPIKt.playGlobalAudio;
 public class RevenantNPC extends AbstractNPC {
 
 	/**
-	 * The safe zone borders.
+	 * Areas which revenants cannot enter or attack players who are inside.
 	 */
-	private static final ZoneBorders[] SAFE_ZONES = new ZoneBorders[] { new ZoneBorders(3074, 3651, 3193, 3774), new ZoneBorders(3264, 3672, 3279, 3695), new ZoneBorders(3081, 3909, 3129, 3954), new ZoneBorders(3350, 3869, 3391, 3900) };
+	public static final ZoneBorders[] SAFE_ZONES = new ZoneBorders[] {
+			// Volcano
+			new ZoneBorders(3194, 3669, 3083, 3762),
+			new ZoneBorders(3171, 3667, 3083, 3762),
+			new ZoneBorders(3167, 3662, 3083, 3762),
+			new ZoneBorders(3161, 3659, 3083, 3762),
+			new ZoneBorders(3157, 3657, 3083, 3762),
+			new ZoneBorders(3153, 3654, 3083, 3762),
+			new ZoneBorders(3146, 3650, 3083, 3762),
+			// Stealing Creation
+			new ZoneBorders(3120, 3640, 3148, 3613),
+			// Clan Wars lobby
+			ClanWarsChallengeRoom.clanWarsChallengeRoomBorders,
+			// Mage Arena
+			MageArenaZone.revenantInaccessibleArea[0],
+			MageArenaZone.revenantInaccessibleArea[1],
+			MageArenaZone.revenantInaccessibleArea[2],
+			MageArenaZone.revenantInaccessibleArea[3],
+			MageArenaZone.revenantInaccessibleArea[4]
+	};
 
 	/**
 	 * The possible PVP item drops.
@@ -197,7 +220,13 @@ public class RevenantNPC extends AbstractNPC {
 
 	@Override
 	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
-		return target instanceof Player ? hasAcceptableCombatLevel(target.asPlayer()) : true;
+		if (Arrays.stream(SAFE_ZONES).anyMatch(zone -> zone.insideBorder(target.getLocation()))) {
+			return false;
+		}
+		if (!(target instanceof Player)) {
+			return true;
+		}
+		return hasAcceptableCombatLevel(target.asPlayer());
 	}
 
 	@Override
@@ -262,6 +291,9 @@ public class RevenantNPC extends AbstractNPC {
 	 * @return {@code True} if so.
 	 */
 	private boolean hasAcceptableCombatLevel(Player player) {
+		if (!player.getSkullManager().isWilderness()) {
+			return false;
+		}
 		int level = WildernessZone.getWilderness(this);
 		if (player.getSkullManager().getLevel() < level) {
 			level = player.getSkullManager().getLevel();

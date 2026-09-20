@@ -134,4 +134,12 @@ public final class MageArenaZone extends MapZone implements Plugin<Object> {
 		register(new ZoneBorders(3115, 3928, 3120, 3942));
 	}
 
+	public static ZoneBorders[] revenantInaccessibleArea = new ZoneBorders[] {
+		new ZoneBorders(3082, 3921, 3128, 3943),
+		new ZoneBorders(3085, 3918, 3126, 3945),
+		new ZoneBorders(3087, 3916, 3123, 3948),
+		new ZoneBorders(3089, 3914, 3119, 3952),
+		new ZoneBorders(3092, 3912, 3116, 3954)
+	};
+
 }
