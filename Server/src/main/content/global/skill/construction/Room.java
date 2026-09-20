@@ -137,9 +137,14 @@ public final class Room {
 				Scenery object = chunk.getObjects()[x][y][index];
 				if (object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
 					if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
-						id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
 						if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
-							id += house.getCrest().ordinal();
+							id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getCrestAdjustedId(house.getStyle(), house.getCrest());
+							if (id == -1) {
+								spot.setDecorationIndex(-1);
+								continue;
+							}
+						} else {
+							id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
 						}
 						SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
 					} else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {

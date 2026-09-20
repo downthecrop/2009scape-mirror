@@ -258,7 +258,7 @@ public enum Decoration {
 	 * Wall-mounted decorations
 	 */
 	OAK_DECORATION   (13606, 8102, 16, 120,  new Item[] { new Item(Items.OAK_PLANK_8778, 2) }),
-	TEAK_DECORATION  (13606, 8103, 36, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
+	TEAK_DECORATION  (13608, 8103, 36, 180,  new Item[] { new Item(Items.TEAK_PLANK_8780, 2) }),
 	GILDED_DECORATION(13607, 8104, 56, 1020, new Item[] { new Item(Items.MAHOGANY_PLANK_8782, 3), new Item(Items.GOLD_LEAF_8784, 2) }),
 
 	/**
@@ -919,7 +919,13 @@ public enum Decoration {
 			if (h.getCurrentX() == l.getChunkOffsetX() && h.getCurrentY() == l.getChunkOffsetY()) {
 				if (h.getDecorationIndex() != -1) {
 					Decoration deco = h.getHotspot().getDecorations()[h.getDecorationIndex()];
-					if (deco.getObjectId(player.getHouseManager().getStyle()) == object.getId()) {
+					int id;
+					if (h.getHotspot().getType() == BuildHotspotType.CREST) {
+						id = deco.getCrestAdjustedId(player.getHouseManager().getStyle(), player.getHouseManager().getCrest());
+					} else {
+						id = deco.getObjectId(player.getHouseManager().getStyle());
+					}
+					if (id == object.getId()) {
 						return deco;
 					}
 				}
@@ -991,6 +997,23 @@ public enum Decoration {
 	 */
 	public int getObjectId() {
 		return objectId;
+	}
+
+	/**
+	 * Returns the object ID adjusted for the player's crest.
+	 * For CrestType.NULL, maps _DECO decorations to their blank _DECORATION counterparts.
+	 * Returns -1 for shield decorations with NULL crest (no blank variant exists).
+	 */
+	public int getCrestAdjustedId(HousingStyle style, CrestType crest) {
+		if (crest == CrestType.NULL) {
+			switch (this) {
+				case OAK_DECO:    return OAK_DECORATION.getObjectId(style);
+				case TEAK_DECO:   return TEAK_DECORATION.getObjectId(style);
+				case GILDED_DECO: return GILDED_DECORATION.getObjectId(style);
+				default:          return -1;
+			}
+		}
+		return getObjectId(style) + crest.ordinal();
 	}
 
 	/**

@@ -197,6 +197,7 @@ class PlayerSaver (val player: Player){
         val houseData = JSONObject()
         houseData.put("location",manager.location.ordinal.toString())
         houseData.put("style",manager.style.ordinal.toString())
+        houseData.put("crest",manager.crest.ordinal.toString())
         if(manager.hasServant()){
             val servant = JSONObject()
             servant.put("type",manager.servant.type.ordinal.toString())

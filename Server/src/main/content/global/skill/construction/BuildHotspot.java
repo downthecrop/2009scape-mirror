@@ -59,7 +59,7 @@ public enum BuildHotspot {
 	DINING_BENCH_1(15300, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.BENCH_WOODEN, Decoration.BENCH_OAK, Decoration.BENCH_CARVED_OAK, Decoration.BENCH_TEAK, Decoration.BENCH_CARVED_TEAK, Decoration.BENCH_MAHOGANY, Decoration.BENCH_GILDED),
 	DINING_BENCH_2(15299, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.BENCH_WOODEN, Decoration.BENCH_OAK, Decoration.BENCH_CARVED_OAK, Decoration.BENCH_TEAK, Decoration.BENCH_CARVED_TEAK, Decoration.BENCH_MAHOGANY,Decoration.BENCH_GILDED),
 	ROPE_BELL_PULL(15304, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.ROPE_PULL, Decoration.BELL_PULL, Decoration.FANCY_BELL_PULL),
-	WALL_DECORATION(15303, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECORATION, Decoration.TEAK_DECORATION, Decoration.GILDED_DECORATION),
+	WALL_DECORATION(15303, BuildHotspotType.CREST, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECO, Decoration.TEAK_DECO, Decoration.GILDED_DECO),
 	
 	/**
 	 * Low-level Work shop hotspots.
@@ -193,7 +193,7 @@ public enum BuildHotspot {
 	/**
 	 * Combat room hotspots.
 	 */
-	WALL_DECORATION2(15297, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECORATION, Decoration.TEAK_DECORATION, Decoration.GILDED_DECORATION),
+	WALL_DECORATION2(15297, BuildHotspotType.CREST, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECO, Decoration.TEAK_DECO, Decoration.GILDED_DECO),
 	STORAGE_SPACE(15296, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.GLOVE_RACK, Decoration.WEAPONS_RACK, Decoration.EXTRA_WEAPONS_RACK),
 	CR_RING(15277, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.BOXING_RING, Decoration.FENCING_RING, Decoration.COMBAT_RING, Decoration.NOTHING, Decoration.NOTHING2),
 	CR_CORNER(15278, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.BOXING_RING, Decoration.FENCING_RING, Decoration.COMBAT_RING, Decoration.NOTHING, Decoration.NOTHING2),

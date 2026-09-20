@@ -278,14 +278,11 @@ public final class BuildingUtils {
 					}
 				}
 				break;
-			case CREST:
-				SceneryBuilder.replace(object, object.transform(deco.getObjectId(style) + player.getHouseManager().getCrest().ordinal()));
-				hotspot.setDecorationIndex(decIndex);
-				break;
 			case INDIVIDUAL:
 				SceneryBuilder.replace(object, object.transform(deco.getObjectId(style)));
 				hotspot.setDecorationIndex(decIndex);
 				break;
+			case CREST:
 			case RECURSIVE:
 				RegionChunk chunk = region.getChunks()[l.getChunkX()][l.getChunkY()][l.getZ()];
 				for (int x = 0; x < 8; x++) {
@@ -298,7 +295,12 @@ public final class BuildingUtils {
 							if (index != -1) {
 								Scenery o = chunk.getObjects()[x][y][index];
 								if (objectId == o.getId()) {
-									SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
+									if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
+										SceneryBuilder.replace(o, o.transform(deco.getCrestAdjustedId(style, player.getHouseManager().getCrest())));
+									}
+									else {
+										SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
+									}
 								}
 							}
 						}
@@ -350,14 +352,18 @@ public final class BuildingUtils {
 		HousingStyle style = player.getHouseManager().getStyle();
 		for (int i = 0; i < room.getHotspots().length; i++) {
 			Hotspot hotspot = room.getHotspots()[i];
-			int objectId = hotspot.getDecorationIndex() < 0 ? -1 : hotspot.getHotspot().getDecorations()[hotspot.getDecorationIndex()].getObjectId(style);
-			if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
-				objectId += player.getHouseManager().getCrest().ordinal();
+			int objectId;
+			if (hotspot.getDecorationIndex() < 0) {
+				objectId = -1;
+			} else if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
+				objectId = hotspot.getHotspot().getDecorations()[hotspot.getDecorationIndex()].getCrestAdjustedId(style, player.getHouseManager().getCrest());
+			} else {
+				objectId = hotspot.getHotspot().getDecorations()[hotspot.getDecorationIndex()].getObjectId(style);
 			}
 			if (objectId == object.getId() && hotspot.getCurrentX() == l.getChunkOffsetX() && hotspot.getCurrentY() == l.getChunkOffsetY()) {
+				Decoration decoration = hotspot.getHotspot().getDecorations()[hotspot.getDecorationIndex()];
 				player.animate(REMOVE_ANIMATION);
 				removeDecoration(player, region, room, hotspot, object, style);
-				Decoration decoration = Decoration.forObjectId(object.getId());
 				for (Item item : decoration.getRefundItems()) {
 					addItemOrDrop(player, item.getId(), item.getAmount());
 				}
@@ -421,17 +427,22 @@ public final class BuildingUtils {
 				}
 				break;
 			case INDIVIDUAL:
-			case CREST:
 				SceneryBuilder.replace(object, object.transform(hotspot.getHotspot().getObjectId(style)));
 				hotspot.setDecorationIndex(-1);
 				break;
+			case CREST:
 			case RECURSIVE:
 				RegionChunk chunk = region.getChunks()[l.getChunkX()][l.getChunkY()][l.getZ()];
 				for (int x = 0; x < 8; x++) {
 					for (int y = 0; y < 8; y++) {
 						Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
-						if (h != null) {
-							int objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getObjectId(style);
+						if (h != null && h.getDecorationIndex() >= 0) {
+							int objectId;
+							if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
+								objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getCrestAdjustedId(style, player.getHouseManager().getCrest());
+							} else {
+								objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getObjectId(style);
+							}
 							int index = chunk.getIndex(x, y, objectId, -1);
 							h.setDecorationIndex(-1);
 							if (index == -1) {
@@ -486,6 +497,14 @@ public final class BuildingUtils {
 			case TENTACLE_FL:
 				if (!room.isBuilt(BuildHotspot.PRISON)) {
 					player.getPacketDispatch().sendMessage("You can't build a tentacle pool without a cage.");
+					return false;
+				}
+				return true;
+			case ROUND_SHIELD:
+			case SQUARE_SHIELD:
+			case KITE_SHIELD:
+				if (player.getHouseManager().getCrest() == CrestType.NULL) {
+					sendDialogueLines(player, "You must speak to the chief herald of Falador before you can build", "heraldic shields."); // TODO: verify authenticity of this dialogue
 					return false;
 				}
 				return true;

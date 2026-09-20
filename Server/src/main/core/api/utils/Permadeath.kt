@@ -1,5 +1,6 @@
 package core.api.utils
 
+import content.global.skill.construction.CrestType
 import content.global.skill.construction.HouseLocation
 import content.minigame.blastfurnace.BFPlayerState
 import content.minigame.blastfurnace.BlastFurnace
@@ -81,6 +82,7 @@ fun permadeath(target: Player) {
 
     // House data
     target.houseManager.createNewHouseAt(HouseLocation.NOWHERE)
+    target.houseManager.crest = CrestType.NULL
     target.getPOHStorageState().clear()
 
     // Achievements

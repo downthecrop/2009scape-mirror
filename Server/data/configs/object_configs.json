@@ -5820,11 +5820,15 @@
     "ids": "13603,13604,13605"
   },
   {
-    "examine": "???",
-    "ids": "13606,13607"
+    "examine": "An oak decoration to make the wall less bare.",
+    "ids": "13606"
   },
   {
     "examine": "Your house logo in mahogany.",
+    "ids": "13607"
+  },
+  {
+    "examine": "A teak decoration to make the room more grand.",
     "ids": "13608"
   },
   {

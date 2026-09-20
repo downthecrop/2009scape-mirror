@@ -87,7 +87,7 @@ public final class HouseManager {
 	/**
 	 * The player's crest.
 	 */
-	private CrestType crest = CrestType.ASGARNIA;
+	private CrestType crest = CrestType.NULL;
 
 	/**
 	 * Constructs a new {@code HouseManager} {@code Object}.
@@ -101,6 +101,12 @@ public final class HouseManager {
 	public void parse(JSONObject data){
 		location = HouseLocation.values()[Integer.parseInt( data.get("location").toString())];
 		style = HousingStyle.values()[Integer.parseInt( data.get("style").toString())];
+		Object crestRaw = data.get("crest");
+		if (crestRaw != null) {
+			crest = CrestType.values()[Integer.parseInt(crestRaw.toString())];
+		} else {
+			crest = CrestType.ASGARNIA;
+		}
 		Object servRaw = data.get("servant");
 		if(servRaw != null){
 			servant = Servant.parse((JSONObject) servRaw);
