@@ -582,6 +582,46 @@ public class TeleportManager {
 					}
 				};
 			}
+		},
+		RC_GUILD(new TeleportSettings(10180, 10182, 1771, 1772)) {
+			@Override
+			public Pulse getPulse(final Entity entity, final Location location) {
+				return new TeleportPulse(entity) {
+					int delay = 0;
+
+					@Override
+					public boolean pulse() {
+						switch (delay) {
+							case 0:
+								playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_ALL_200);
+								entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
+								entity.graphics(new Graphics(getSettings().getStartGfx()));
+								break;
+
+							case 4:
+								entity.getProperties().setTeleportLocation(Location.create(location));
+								fireRandom(entity, location);
+								break;
+
+							case 5:
+								playGlobalAudio(entity.getLocation(), Sounds.TELEPORT_REVERSE_201);
+								entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
+								entity.graphics(new Graphics(getSettings().getEndGfx()));
+								return true;
+						}
+
+						delay++;
+						return false;
+					}
+
+					@Override
+					public void stop() {
+						super.stop();
+						entity.unlock();
+						entity.lock(5);
+					}
+				};
+			}
 		};
 
 		/**

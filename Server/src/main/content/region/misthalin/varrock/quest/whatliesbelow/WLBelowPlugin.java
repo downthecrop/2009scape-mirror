@@ -1,13 +1,13 @@
 package content.region.misthalin.varrock.quest.whatliesbelow;
 
 import content.data.Quests;
+import content.global.skill.runecrafting.Altar;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.activity.ActivityManager;
 import core.game.node.entity.skill.Skills;
 import content.data.skill.SkillingTool;
-import content.global.skill.runecrafting.Altar;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -182,7 +182,7 @@ public class WLBelowPlugin extends OptionHandler {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			addHandler(Altar.CHAOS.getObject(), OBJECT_TYPE, this);
+			addHandler(Altar.CHAOS.getObjectId(), OBJECT_TYPE, this);
 			return this;
 		}
 

@@ -4,6 +4,7 @@ import content.data.Quests
 import content.global.skill.farming.PatchType
 import content.global.skill.farming.Plantable
 import content.global.skill.runecrafting.Altar
+import content.global.skill.runecrafting.MysteriousRuinListener
 import core.ServerStore
 import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
@@ -290,21 +291,19 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
 
         fun sendAltar(player: Player,altar: Altar) {
             end()
-            if (altar == Altar.DEATH && !hasRequirement(player, Quests.MOURNINGS_END_PART_II)) return
-            if (altar == Altar.ASTRAL && !hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return
-            if (altar == Altar.BLOOD && !hasRequirement(player, Quests.LEGACY_OF_SEERGAZE)) return
-            if (altar == Altar.LAW && !ItemDefinition.canEnterEntrana(player)) {
-                sendMessage(player, "The power of Saradomin prevents you from taking armour or weaponry to Entrana.");
-                return
+            if (MysteriousRuinListener.checkReq(player, altar)) {
+                // astral altar has no ruin
+                val endLoc = if (altar == Altar.ASTRAL) {
+                    Location.create(2151, 3864, 0)
+                } else {
+                    altar.ruin?.end ?: return
+                }
+                val store = ServerStore.getArchive("daily-abyss-warp")
+                val used = store.getInt(player.name,0)
+                store[player.name] = used + 1
+                player.teleporter.send(endLoc, TeleportManager.TeleportType.TELE_OTHER)
+                player.incrementAttribute("/save:cape_perks:abyssal_warp",-1)
             }
-
-            var endLoc = if (altar == Altar.ASTRAL) Location.create(2151, 3864, 0) else altar.ruin.end
-
-            val store = ServerStore.getArchive("daily-abyss-warp")
-            val used = store.getInt(player.name,0)
-            store[player.name] = used + 1
-            player.teleporter.send(endLoc, TeleportManager.TeleportType.TELE_OTHER)
-            player.incrementAttribute("/save:cape_perks:abyssal_warp",-1)
         }
 
         override fun getIds(): IntArray {

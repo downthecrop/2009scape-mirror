@@ -36,9 +36,7 @@ public class RunecraftingPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addNodes();
-		ClassScanner.definePlugin(new TiaraPlugin());
 		ClassScanner.definePlugin(new RunePouchPlugin());
-		ClassScanner.definePlugin(new EnchantTiaraPlugin());
 		ClassScanner.definePlugin(new CombinationRunePlugin());
 		SceneryDefinition.forId(2492).getHandlers().put("option:use", this);
 		NPCDefinition.forId(553).getHandlers().put("option:teleport", this);
@@ -89,23 +87,29 @@ public class RunecraftingPlugin extends OptionHandler {
 		switch (option) {
 		case "use":
 			final Altar altar = Altar.forObject(((Scenery) node));
-			player.getProperties().setTeleportLocation(altar.getRuin().getBase());
+			if (altar != null && altar.getRuin() != null) {
+				player.getProperties().setTeleportLocation(altar.getRuin().getBase());
+			}
 			break;
 		case "craft-rune":
 			if(node.getLocation().equals(new Location(3151, 3484))){
 				player.sendMessage("You can only craft Astral runes on Lunar Isle.");
 				return true;
 			}
-                        Altar a = Altar.forObject(((Scenery) node));
-                        if (a == Altar.ASTRAL) {
-                            if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
-                                return true;
-                        }
-			player.getPulseManager().run(new RuneCraftPulse(player, null, a, false, null));
+			Altar a = Altar.forObject(((Scenery) node));
+			if (a != null) {
+				if (a == Altar.ASTRAL) {
+					if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY))
+						return true;
+				}
+				player.getPulseManager().run(new RuneCraftPulse(player, null, a, false, null));
+			}
 			break;
 		case "locate":
 			final Talisman talisman = Talisman.forItem(((Item) node));
-			talisman.locate(player);
+			if (talisman != null) {
+				talisman.locate(player);
+			}
 			break;
 		case "climb":
 			int id = (node).getId();
@@ -127,11 +131,16 @@ public class RunecraftingPlugin extends OptionHandler {
 	 */
 	private void addNodes() {
 		for (Altar altar : Altar.values()) {
-			SceneryDefinition.forId(altar.getObject()).getHandlers().put("option:craft-rune", this);
-			SceneryDefinition.forId(altar.getPortal()).getHandlers().put("option:use", this);
+			if (altar.getObjectId() > 0) {
+				SceneryDefinition.forId(altar.getObjectId()).getHandlers().put("option:craft-rune", this);
+			}
+			if (altar.getPortal() > 0) {
+				SceneryDefinition.forId(altar.getPortal()).getHandlers().put("option:use", this);
+			}
 		}
 		for (Talisman talisman : Talisman.values()) {
-			ItemDefinition.forId(talisman.getTalisman().getId()).getHandlers().put("option:locate", this);
+			talisman.getItem();
+			ItemDefinition.forId(talisman.getItem().getId()).getHandlers().put("option:locate", this);
 		}
 	}
 

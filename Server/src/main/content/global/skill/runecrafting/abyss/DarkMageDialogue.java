@@ -3,10 +3,6 @@ package content.global.skill.runecrafting.abyss;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.item.Item;
-import org.rs09.consts.Items;
-
-import static core.api.ContentAPIKt.replaceAllItems;
 
 /**
  * Handles the dark mages dialogue.
@@ -40,7 +36,7 @@ public final class DarkMageDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		if (args.length >= 2) {
-			if (repair()) {
+			if (player.pouchManager.repair()) {
 				npc("There, I have repaired your pouches.", "Now leave me alone. I'm concentrating.");
 				stage = 30;
 				return true;
@@ -129,35 +125,11 @@ public final class DarkMageDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 51:
-			repair();
+			player.pouchManager.repair();
 			npc("There, I've repaired them all.","Now get out of my sight!");
 			stage = 30;
 			break;
 		}
-		return true;
-	}
-
-	/**
-	 * Repairs pouches.
-	 */
-	private boolean repair() {
-		player.pouchManager.getPouches().forEach((id, pouch) -> {
-			pouch.setCurrentCap(pouch.getCapacity());
-			pouch.setCharges(pouch.getMaxCharges());
-			Item essItem = null;
-			if (!pouch.getContainer().isEmpty()) {
-				int essence = pouch.getContainer().get(0).getId();
-				int amount = pouch.getContainer().getAmount(essence);
-				essItem = new Item(essence, amount);
-			}
-			pouch.remakeContainer();
-			if (essItem != null) {
-				pouch.getContainer().add(essItem);
-			}
-			if (id != Items.SMALL_POUCH_5509) {
-				replaceAllItems(player, id + 1, id);
-			}
-		});
 		return true;
 	}
 

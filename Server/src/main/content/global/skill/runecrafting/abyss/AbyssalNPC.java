@@ -1,12 +1,15 @@
 package content.global.skill.runecrafting.abyss;
 
 import content.global.skill.runecrafting.RunePouch;
+import core.api.ContentAPIKt;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
+
+import static content.region.misthalin.wiztower.handlers.rcguild.WizardKorvakDialogue.medPouchObtainedAttr;
 
 /**
  * Handles an abyssal npc.
@@ -71,6 +74,10 @@ public final class AbyssalNPC extends AbstractNPC {
 			return RunePouch.SMALL.getPouch();
 		}
 		if (!player.hasItem(RunePouch.MEDIUM.getPouch()) && !player.hasItem(RunePouch.MEDIUM.getDecayedPouch())) {
+			// this attribute is set so Korvak in the runecrafting guild knows if he can return a lost med pouch to the player for free.
+			if (!ContentAPIKt.getAttribute(player, medPouchObtainedAttr, false)) {
+				ContentAPIKt.setAttribute(player, medPouchObtainedAttr, true);
+			}
 			return RunePouch.MEDIUM.getPouch();
 		}
 		if (!player.hasItem(RunePouch.LARGE.getPouch()) && !player.hasItem(RunePouch.LARGE.getDecayedPouch())) {

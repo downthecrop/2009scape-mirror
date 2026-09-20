@@ -50,6 +50,9 @@ class GeneralBotCreator {
         var lastBotLocation: Location = botScript.bot.location.transform(0,0,0)
         var lastBotMoveTicks = getWorldTicks()
         override fun pulse(): Boolean {
+            // if the bot is a priority bot that shouldn't be delayed
+            val isPriority = (botScript.bot as? AIPlayer)?.isHighPriority == true
+
             if(randomDelay > 0){
                 randomDelay -= 1
                 return false
@@ -98,14 +101,19 @@ class GeneralBotCreator {
                 }*/
                 if(!botScript.running) return true //has to be separated this way or it double-submits the respawn pulse.
 
-                if (botPulsesTriggeredThisTick++ >= 75)
-                    return false
-
-                val idleRoll = RandomFunction.random(10)
-                if(idleRoll == 2 && botScript !is Idler){
-                    randomDelay += RandomFunction.random(20,50)
+                // only 75 bots are allowed to trigger each tick.
+                if (botPulsesTriggeredThisTick++ >= 75) {
                     return false
                 }
+
+                // if the bot is flagged as priority, skip idle roll
+                if (!isPriority) {
+                    if (RandomFunction.roll(10) && botScript !is Idler) {
+                        randomDelay += RandomFunction.random(20, 50)
+                        return false
+                    }
+                }
+
                 botScript.tick()
             }
             return false

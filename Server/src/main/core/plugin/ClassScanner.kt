@@ -7,7 +7,9 @@ import core.game.activity.ActivityPlugin
 import core.game.bots.PlayerScripts
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.node.Node
 import core.game.node.entity.Entity
+import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.NPCBehavior
 import core.game.node.entity.player.info.login.LoginConfiguration
 import core.game.node.entity.player.info.login.PlayerSaveParser
@@ -127,6 +129,26 @@ object ClassScanner {
                         override fun move(e: Entity?, from: Location?, to: Location?): Boolean {
                             if(e != null && from != null && to != null) clazz.entityStep(e, to, from)
                             return super.move(e, from, to)
+                        }
+
+                        // Additional hook for continueAttack for PVP area controls
+                        override fun continuePvp(e: Entity, target: Node?, style: CombatStyle?, message: Boolean): Boolean {
+                            val clazzAttack = clazz.isPvpAllowed(e, target, style, message)
+                            if (clazzAttack == null) { // If clazz returns null, continue the usual check.
+                                return super.continuePvp(e, target, style, message)
+                            } else {
+                                return clazzAttack // Otherwise return whatever function.
+                            }
+                        }
+
+                        // Additional hook for startDeath for PVP area controls
+                        override fun startDeath(e: Entity, killer: Entity): Boolean {
+                            val clazzAttack = clazz.canStartDeath(e, killer)
+                            if (clazzAttack == null) { // If clazz returns null, continue the usual check.
+                                return super.startDeath(e, killer)
+                            } else {
+                                return clazzAttack // Otherwise return whatever function.
+                            }
                         }
                     }
                     for(border in clazz.defineAreaBorders()) zone.register(border)

@@ -130,6 +130,20 @@ public abstract class MapZone implements Zone {
 	}
 
 	/**
+	 * Checks if the entity is able to continue attacking another player within this zone.
+	 * This is added like continueAttack for player vs player fighting.
+	 *
+	 * @param e the attacking entity
+	 * @param target the target node being attacked
+	 * @param style the combat style being used
+	 * @param message whether to send a message to the player explaining why the attack cannot continue
+	 * @return {@code true} if the zone allows the attack to continue
+	 */
+	public boolean continuePvp(Entity e, Node target, CombatStyle style, boolean message) {
+		return false;
+	}
+
+	/**
 	 * Checks if the entity is able to continue attacking the target within this zone.
 	 *
 	 * <p>This method is called during attack validation to determine if zone-specific rules

@@ -16,13 +16,13 @@ public final class CombinationRunePlugin extends UseWithHandler {
 	 * Constructs a new {@code CombinationRunePlugin} {@code Object}.
 	 */
 	public CombinationRunePlugin() {
-		super(Talisman.AIR.getTalisman().getId(), Talisman.WATER.getTalisman().getId(), Talisman.EARTH.getTalisman().getId(), Talisman.FIRE.getTalisman().getId(), Rune.WATER.getRune().getId(), Rune.EARTH.getRune().getId(), Rune.AIR.getRune().getId(), Rune.FIRE.getRune().getId());
+		super(Talisman.AIR.getItem().getId(), Talisman.WATER.getItem().getId(), Talisman.EARTH.getItem().getId(), Talisman.FIRE.getItem().getId(), Rune.WATER.getRune().getId(), Rune.EARTH.getRune().getId(), Rune.AIR.getRune().getId(), Rune.FIRE.getRune().getId());
 	}
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (Altar altar : Altar.values()) {
-			addHandler(altar.getObject(), OBJECT_TYPE, this);
+			addHandler(altar.getObjectId(), OBJECT_TYPE, this);
 		}
 		return this;
 	}

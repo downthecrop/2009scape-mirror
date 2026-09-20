@@ -1,19 +1,16 @@
-package core.game.node.entity.skill.runecrafting.abyss
+package content.global.skill.runecrafting.abyss
 
 import core.api.*
 import core.game.node.Node
 import core.plugin.ClassScanner.definePlugin
 import core.tools.colorize
 import core.game.node.scenery.Scenery
-import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import content.data.skill.SkillingTool
 import content.global.skill.runecrafting.Altar
-import content.global.skill.runecrafting.abyss.AbyssalNPC
-import content.global.skill.runecrafting.abyss.DarkMageDialogue
-import content.global.skill.runecrafting.abyss.ZamorakMageDialogue
+import content.global.skill.runecrafting.MysteriousRuinListener
 import core.game.system.task.Pulse
 import core.game.system.timer.impl.Skulled
 import core.game.world.map.Location
@@ -27,8 +24,10 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery as Sceneries
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.interaction.QueueStrength
 import core.game.world.GameWorld
 import core.tools.Log
+import org.rs09.consts.Animations
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -55,7 +54,14 @@ class AbyssPlugin : InteractionListener {
         }
         on(IntType.SCENERY, "exit-through"){ player, node ->
             val altar = Altar.forObject(node as Scenery)
-            altar?.enterRift(player)
+            // chaos altar has a special end location that shortcuts the maze
+            if (altar == Altar.CHAOS) {
+                if (MysteriousRuinListener.checkReq(player, altar)) {
+                    teleport(player, Location(2269, 4840, 0))
+                }
+            } else {
+                altar?.enterRift(player)
+            }
             return@on true
         }
         on(Sceneries.PASSAGE_7154, IntType.SCENERY, "go-through",){ player, node ->
@@ -111,8 +117,7 @@ class AbyssPlugin : InteractionListener {
                 player,
                 Skills.FIREMAKING,
                 BURN_PROGRESS,
-//                Animation(Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733),
-                Animation(733),
+                Animation(Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733),
                 arrayOf(
                     "You attempt to burn your way through...",
                     "...and manage to burn it down and get past.",
@@ -122,18 +127,36 @@ class AbyssPlugin : InteractionListener {
         }
         on(Sceneries.EYES_7168, IntType.SCENERY, "distract"){ player, node ->
             val distractEmote = Animation(distractEmotes[RandomFunction.random(0,distractEmotes.size)])
-            return@on handleObstacle(
-                node,
-                player,
-                Skills.THIEVING,
-                DISTRACT_PROGRESS,
-                distractEmote,
-                arrayOf(
-                    "You use your thieving skills to misdirect the eyes...",
-                    "...and sneak past while they're not looking.",
-                    "...but fail to distract the eyes."
+            // wielding a talisman staff will always succeed the distract check
+            val weapon = getItemFromEquipment(player, EquipmentSlot.WEAPON)
+            if (weapon != null && AbyssLoc.talismanStaff.contains(weapon.id)) {
+                return@on handleObstacle(
+                    node,
+                    player,
+                    Skills.THIEVING,
+                    DISTRACT_PROGRESS,
+                    Animation(10184),
+                    arrayOf(
+                        DISTRACT_STAFF,
+                        DISTRACT_SNEAK,
+                        DISTRACT_FAIL
+                    ),
+                    Graphics(1773, 0, 0)
                 )
-            )
+            } else {
+                return@on handleObstacle(
+                    node,
+                    player,
+                    Skills.THIEVING,
+                    DISTRACT_PROGRESS,
+                    distractEmote,
+                    arrayOf(
+                        DISTRACT_THIEF,
+                        DISTRACT_SNEAK,
+                        DISTRACT_FAIL
+                    )
+                )
+            }
         }
         on(Sceneries.GAP_7164, IntType.SCENERY, "squeeze-through"){ player, node ->
             return@on handleObstacle(
@@ -141,8 +164,7 @@ class AbyssPlugin : InteractionListener {
                 player,
                 Skills.AGILITY,
                 null,
-//                Animation(Animations.HUMAN_SQUEEZE_INTO_GAP_1331),
-                Animation(1331),
+                Animation(Animations.HUMAN_SQUEEZE_INTO_GAP_1331),
                 arrayOf(
                     "You attempt to squeeze through the narrow gap...",
                     "...and you manage to crawl through.",
@@ -256,43 +278,50 @@ class AbyssPlugin : InteractionListener {
         const val CHOP_PROGRESS = 14
         const val BURN_PROGRESS = 16
         const val DISTRACT_PROGRESS = 18
-        fun handleObstacle(obstacle: Node, player: Player, skill: Int, varbitVal: Int?, animation: Animation, messages: Array<String>): Boolean {
+        fun handleObstacle(obstacle: Node, player: Player, skill: Int, varbitVal: Int?, animation: Animation, messages: Array<String>, graphics: Graphics = Graphics(-1)): Boolean {
             log(this::class.java, Log.FINE, "handled abyss ${obstacle.name}")
-            player.lock()
-            player.animate(animation)
-            GameWorld.Pulser.submit(object : Pulse(1, player) {
-                var count = 0
-                override fun pulse(): Boolean {
-                    when (count++) {
-                        1 -> sendMessage(player, messages[0])
-                        3 -> return if (RandomFunction.random(100) < getStatLevel(player,skill)+1) {
+            lock(player, 8)
+            visualize(player, animation, graphics)
+            queueScript(player, 1, QueueStrength.SOFT) { counter ->
+                when (counter) {
+                    1 -> sendMessage(player, messages[0])
+                    3 -> {
+                        // wielding a runecrafting staff will pass the distract check, otherwise roll against the stat
+                        if (messages[0] == DISTRACT_STAFF ||
+                            RandomFunction.random(100) < getStatLevel(player, skill) + 1) {
+                            // succeed check
                             sendMessage(player, colorize("%G${messages[1]}"))
-                            if(varbitVal != null) { setVarbit(player, 625, varbitVal) }
-                            false
+                            if (varbitVal != null) { setVarbit(player, 625, varbitVal) }
                         } else {
+                            // fail check
                             sendMessage(player, colorize("%R${messages[2]}"))
-                            player.unlock()
-                            true
-                        }
-                        5 -> {
-                            if(varbitVal != null) { setVarbit(player, 625, varbitVal or 1) }
-                        }
-                        7 -> {
-                            player.unlock()
-                            player.properties.teleportLocation = innerRing(obstacle)
-                            return true
+                            unlock(player)
+                            animate(player, -1)
+                            return@queueScript stopExecuting(player)
                         }
                     }
-                    return false
+                    5 -> {
+                        if (varbitVal != null) { setVarbit(player, 625, varbitVal or 1) }
+                    }
+                    7 -> {
+                        unlock(player)
+                        player.properties.teleportLocation = innerRing(obstacle)
+                        animate(player, -1)
+                        return@queueScript stopExecuting(player)
+                    }
                 }
-
-                override fun stop() {
-                    super.stop()
-                    player.animate(Animation(-1, Animator.Priority.HIGH))
-                }
-            })
+                false
+            }
             return true
         }
+
+        /**
+         * Strings for the eyes obstacle
+         */
+        private const val DISTRACT_THIEF = "You use your thieving skills to misdirect the eyes..."
+        private const val DISTRACT_STAFF = "You use your runecrafting staff to misdirect the eyes..."
+        private const val DISTRACT_SNEAK = "...and sneak past while they're not looking."
+        private const val DISTRACT_FAIL = "...but fail to distract the eyes."
     }
 }
 
@@ -365,5 +394,24 @@ class AbyssLoc(val radius: Double, val angle: Double) {
             val angle = Random.nextDouble() * 2 * Math.PI
             return AbyssLoc(outerRadius,angle)
         }
+
+        /**
+         * Talisman staves
+         */
+        val talismanStaff = intArrayOf(
+            Items.AIR_TALISMAN_STAFF_13630,
+            Items.MIND_TALISMAN_STAFF_13631,
+            Items.WATER_TALISMAN_STAFF_13632,
+            Items.EARTH_TALISMAN_STAFF_13633,
+            Items.FIRE_TALISMAN_STAFF_13634,
+            Items.BODY_TALISMAN_STAFF_13635,
+            Items.COSMIC_TALISMAN_STAFF_13636,
+            Items.CHAOS_TALISMAN_STAFF_13637,
+            Items.NATURE_TALISMAN_STAFF_13638,
+            Items.LAW_TALISMAN_STAFF_13639,
+            Items.DEATH_TALISMAN_STAFF_13640,
+            Items.BLOOD_TALISMAN_STAFF_13641,
+            Items.OMNI_TALISMAN_STAFF_13642
+        )
     }
 }

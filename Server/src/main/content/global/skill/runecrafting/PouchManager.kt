@@ -202,6 +202,58 @@ class PouchManager(val player: Player) {
     }
 
     /**
+     * Repairs one or all pouches.
+     * @param targetPouchId the specific pouch to repair (degraded ID), or null to repair all
+     * @return true if any pouches were repaired
+     */
+    @JvmOverloads
+    fun repair(targetPouchId: Int? = null): Boolean {
+        var repairedAny = false
+
+        // determine which pouches to check
+        val pouchesToRepair = if (targetPouchId != null) {
+            val baseId = if (isDecayedPouch(targetPouchId)) targetPouchId - 1 else targetPouchId
+            mapOf(baseId to pouches[baseId])
+        } else {
+            pouches
+        }
+
+        // repair
+        pouchesToRepair.forEach { (id, pouch) ->
+            if (pouch == null) return@forEach
+
+            if (pouch.currentCap == pouch.capacity && pouch.charges == pouch.maxCharges) {
+                return@forEach
+            }
+
+            pouch.currentCap = pouch.capacity
+            pouch.charges = pouch.maxCharges
+
+            var essItem: Item? = null
+            if (!pouch.container.isEmpty()) {
+                val essence = pouch.container.get(0).id
+                val amount = pouch.container.getAmount(essence)
+                essItem = Item(essence, amount)
+            }
+
+            pouch.remakeContainer()
+
+            if (essItem != null) {
+                pouch.container.add(essItem)
+            }
+
+            // small pouch does not degrade
+            if (id != Items.SMALL_POUCH_5509) {
+                replaceAllItems(player, id + 1, id)
+            }
+
+            repairedAny = true
+        }
+
+        return repairedAny
+    }
+
+    /**
      * A class that represents a runecrafting pouch.
      * @author Ceikry
      */

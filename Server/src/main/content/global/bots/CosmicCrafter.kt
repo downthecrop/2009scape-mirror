@@ -1,14 +1,10 @@
 package content.global.bots
 
-import content.global.skill.runecrafting.MysteriousRuin
-import core.cache.def.impl.SceneryDefinition
 import core.game.bots.*
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
-import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
-import core.net.packet.PacketProcessor
 import org.rs09.consts.Items
 
 

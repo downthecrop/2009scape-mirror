@@ -780,7 +780,9 @@ public class Player extends Entity {
 				if (skullManager.hasWildernessProtection())
 					return false;
 				return super.isAttackable(entity, style, message);
-			} else return false;
+			} else {
+				return getZoneMonitor().isPvPable(entity,this, style, message);
+			}
 		}
 		return super.isAttackable(entity, style, message);
 	}
@@ -807,7 +809,7 @@ public class Player extends Entity {
 				}
                 return !skullManager.hasWildernessProtection();
             } else {
-				return false;
+				return getZoneMonitor().isPvPable(target, this, style, message);
 			}
 		}
 		return true;

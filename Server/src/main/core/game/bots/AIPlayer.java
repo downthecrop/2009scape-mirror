@@ -69,6 +69,11 @@ public class AIPlayer extends Player {
     private String username;
 
     /**
+     * The bot high-priority processing flag.
+     */
+    private boolean highPriority = false;
+
+    /**
      * The player controlling this AIP.
      */
     private Player controler;
@@ -534,6 +539,19 @@ public class AIPlayer extends Player {
     public String getUsername() {
         return username;
     }
+
+    /**
+     * Gets the AIP priority, if it is allowed to skip delays and execution caps.
+     * @return the priority (true or false, default false)
+     */
+    public boolean isHighPriority() { return highPriority; }
+
+    /**
+     * Sets the AIP priority. Default false. True skips delays and execution caps.
+     * @param highPriority the Priority
+     * @note The performance impacts of this should be investigated. For now, use sparingly.
+     */
+    public void setHighPriority(boolean highPriority) { this.highPriority = highPriority; }
 
     /**
      * Gets the AIP for the given UID.

@@ -86003,7 +86003,8 @@
   },
   {
     "id": "8019",
-    "name": "Portal"
+    "name": "Portal",
+    "examine": "Look at you, examining things when there's Runecrafting to do!"
   },
   {
     "id": "8020",
@@ -86035,51 +86036,63 @@
   },
   {
     "id": "8029",
-    "name": "Wizard Korvak"
+    "name": "Wizard Korvak",
+    "examine": "A Runecrafting wizard."
   },
   {
     "id": "8030",
-    "name": "Wizard Vief"
+    "name": "Wizard Vief",
+    "examine": "A Runecrafting wizard."
   },
   {
     "id": "8031",
-    "name": "Wizard Acantha"
+    "name": "Wizard Acantha",
+    "examine": "A Runecrafting wizard."
   },
   {
     "id": "8032",
-    "name": "Wizard Elriss"
+    "name": "Wizard Elriss",
+    "examine": "She is in charge of the Runecrafting Guild."
   },
   {
     "id": "8033",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "He's doing arcane research."
   },
   {
     "id": "8034",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "He's doing arcane research."
   },
   {
     "id": "8035",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "He's doing arcane research."
   },
   {
     "id": "8036",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "He's doing arcane research."
   },
   {
     "id": "8037",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "She's doing arcane research."
   },
   {
     "id": "8038",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "She's doing arcane research."
   },
   {
     "id": "8039",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "She's doing arcane research."
   },
   {
     "id": "8040",
-    "name": "Wizard"
+    "name": "Wizard",
+    "examine": "She's doing arcane research."
   },
   {
     "id": "8041",

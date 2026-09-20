@@ -1,10 +1,7 @@
 package content.global.bots
 
-import content.global.skill.runecrafting.MysteriousRuin
 import core.api.teleport
 import core.game.bots.*
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListeners
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery

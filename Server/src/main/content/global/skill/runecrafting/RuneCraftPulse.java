@@ -1,6 +1,8 @@
 package content.global.skill.runecrafting;
 
 import content.global.handlers.item.equipment.fistofguthixgloves.FOGGlovesManager;
+import content.minigame.greatorbproject.OrbProjUtils;
+import content.minigame.greatorbproject.Team;
 import core.ServerConstants;
 import core.api.Container;
 import core.game.container.impl.EquipmentContainer;
@@ -14,6 +16,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
+import static content.region.asgarnia.falador.diary.FaladorAchievementDiary.Companion.HardTasks.CRAFT_196_AIR_RUNES_AT_ONCE;
+import static content.region.karamja.diary.KaramjaAchievementDiary.Companion.HardTasks.CRAFT_NATURE_RUNES;
+import static content.region.misthalin.lumbridge.diary.LumbridgeAchivementDiary.Companion.EasyTasks.SWAMP_WATER_ALTAR_CRAFT_RUNE;
 import static core.api.ContentAPIKt.*;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_BASE;
 import static core.game.system.command.sets.StatAttributeKeysKt.STATS_RC;
@@ -142,7 +147,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             if (node.getName().contains("rune") && !hasSpellImbue()) {
                 final Rune r = Rune.forItem(node);
                 final Talisman t = Talisman.forName(r.name());
-                if (amountInInventory(player, t.getTalisman().getId()) == 0) {
+                if (amountInInventory(player, t.getItem().getId()) == 0) {
                     sendMessage(player, "You don't have the correct talisman to combine this rune.");
                     return false;
                 }
@@ -227,27 +232,39 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
                 addItemOrDrop(player, rune.getRune().getId(), total);
                 player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
 
-                // Fist of guthix gloves
-                double xp = rune.getExperience() * amount;
+                // Base xp
+                double baseXp = rune.getExperience();
+                double xp = baseXp * amount;
+
+                // Fist of Guthix gloves bonus xp
                 if ((altar == Altar.AIR && inEquipment(player, Items.AIR_RUNECRAFTING_GLOVES_12863, 1))
                         || (altar == Altar.WATER && inEquipment(player, Items.WATER_RUNECRAFTING_GLOVES_12864, 1))
                         || (altar == Altar.EARTH && inEquipment(player, Items.EARTH_RUNECRAFTING_GLOVES_12865, 1))) {
                     xp += xp * FOGGlovesManager.updateCharges(player, amount) / amount;
                 }
+                // Great Orb Project bonus xp
+                Team team = getAttribute(player, OrbProjUtils.ATTR_GOP_TEAM, Team.NONE);
+                if (team != Team.NONE) {
+                    if (java.util.Arrays.asList(OrbProjUtils.orbProjAltars).contains(altar)) {
+                        xp += baseXp * amount;
+                    }
+                }
+
+                // Final xp
                 rewardXP(player, Skills.RUNECRAFTING, xp);
 
                 // Achievement Diary handling
                 // Craft some nature runes
                 if (altar == Altar.NATURE) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 2, 3);
+                    player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 2, CRAFT_NATURE_RUNES);
                 }
                 // Craft 196 or more air runes simultaneously
                 if (altar == Altar.AIR && total >= 196) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 2, 2);
+                    player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 2, CRAFT_196_AIR_RUNES_AT_ONCE);
                 }
                 // Craft a water rune at the Water Altar
                 if (altar == Altar.WATER && rune == Rune.WATER) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 11);
+                    player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, SWAMP_WATER_ALTAR_CRAFT_RUNE);
                 }
 
             }
@@ -258,7 +275,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
      * Method used to combine runes.
      */
     private void combine() {
-        final Item remove = node.getName().contains("talisman") ? node : talisman != null ? talisman.getTalisman() : Talisman.forName(Rune.forItem(node).name()).getTalisman();
+        final Item remove = node.getName().contains("talisman") ? node : talisman != null ? talisman.getItem() : Talisman.forName(Rune.forItem(node).name()).getItem();
         boolean imbued = hasSpellImbue();
         if (!imbued ? removeItem(player, remove, Container.INVENTORY) : imbued) {
             int amount = 0;

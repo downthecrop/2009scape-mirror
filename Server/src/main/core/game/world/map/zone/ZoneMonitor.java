@@ -142,6 +142,23 @@ public final class ZoneMonitor {
 	}
 
 	/**
+	 * Checks if the entity is able to continue attacking another player.
+	 * Trash function because the continueAttack function is a convoluted back and forth with
+	 * ZoneMonitor, Player and Entity.
+	 * Default is false to prevent killing.
+	 * @param target The target.
+	 * @param style The combat style used.
+	 * @return {@code True} if so.
+	 */
+	public boolean isPvPable(Entity player, Node target, CombatStyle style, boolean message) {
+		for (RegionZone z : zones) {
+			if (z.getZone().continuePvp(player, target, style, message)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
 	 * Checks if the entity is able to continue attacking the target.
 	 * @param target The target.
 	 * @param style The combat style used.

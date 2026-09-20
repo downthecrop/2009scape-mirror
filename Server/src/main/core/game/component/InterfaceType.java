@@ -51,7 +51,8 @@ public enum InterfaceType {
 	CHATBOX(Components.CHATTOP_752, Components.CHATTOP_752, 8, 8),
 
     /**
-     * Wilderness overlay
+     * Walkable interface that doesn't extend over the whole top level interface.
+     * Example usage is in for Wilderness Skull and Great Orb Project overlays.
      */
     OVERLAY_B(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 11, 3);
 
