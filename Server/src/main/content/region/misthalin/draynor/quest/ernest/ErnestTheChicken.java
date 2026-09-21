@@ -10,6 +10,8 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 import content.data.Quests;
 
+import static core.api.ContentAPIKt.setVarbit;
+
 /**
  * Represents the ernest the chicken quest.
  * @author 'Vexia
@@ -36,6 +38,11 @@ public final class ErnestTheChicken extends Quest {
 	 * Represents the coins item.
 	 */
 	private static final Item COINS = new Item(995, 300);
+
+	/**
+	 * This varbit controls the portal to the Killerwatt Plane
+	 */
+	private static final int KILLERWATT_VARBIT = 1766;
 
 	/**
 	 * Constructs a new {@code ErnestTheChicken} {@code Object}.
@@ -92,6 +99,12 @@ public final class ErnestTheChicken extends Quest {
 		if (!player.getInventory().add(COINS)) {
 			GroundItemManager.create(COINS, player.getLocation(), player);
 		}
+		setVarbit(player, KILLERWATT_VARBIT, 1, true);
+	}
+
+	@Override
+	public void updateVarps(Player player) {
+		setVarbit(player, KILLERWATT_VARBIT, isCompleted(player) ? 1 : 0, true);
 	}
 	
 	/**

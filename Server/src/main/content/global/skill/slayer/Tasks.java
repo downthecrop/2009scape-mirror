@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player;
 
 import static core.api.ContentAPIKt.hasRequirement;
 import content.data.Quests;
+import org.rs09.consts.NPCs;
 
 /**
  * A non-garbage way of representing tasks
@@ -73,8 +74,7 @@ public enum Tasks {
     JELLIES(57, new int[] { 1637, 1638, 1639, 1640, 1641, 1642 }, new String[] { "Jellies are nasty cube-like gelatinous creatures which", "absorb everything they come across into themselves." }, 52, false, false),
     JUNGLE_HORRORS(65, new int[] { 4348, 4349, 4350, 4351, 4352 }, new String[] { "Jungle Horrors can be found all over Mos Le'Harmless.", "They are strong and aggressive, so watch out!" }, 1, Quests.CABIN_FEVER),
     KALPHITES(15, new int[] { 1153, 1154, 1155, 1156, 1157, 1159, 1160, 1161 }, new String[] { "Kalphites are large insects which live in great hives", "under the desert sands." }, 1, false, false),
-    // Waiting for the killer watt plane to be implemented before adding to assignments
-    KILLERWATTS(1, new int[] { 3201 }, new String[] { "Killerwatts store huge amounts of energy in their", "bodies, which is released if they are touched. You'll", "need to wear heavily insulated boots to counter this", "shocking effect." }, 37, Quests.ERNEST_THE_CHICKEN),
+    KILLERWATTS(1, new int[] { NPCs.KILLERWATT_3201, NPCs.KILLERWATT_3202 }, new String[] { "Killerwatts store huge amounts of energy in their", "bodies, which is released if they are touched. You'll", "need to wear heavily insulated boots to counter this", "shocking effect." }, 37, Quests.ERNEST_THE_CHICKEN),
     KURASKS(65, new int[] { 1608, 1609, 4229, 7805, 7797 }, new String[] { "Kurasks are large brutal creatures with very thick", "hides. You'll need a Leaf-Tipped Spear Sword or", "Battle-axe, Broad Arrows, or a Magic Dart to harm them." }, 70, false, false),
     LESSER_DEMONS(60, new int[] { 82, 6203, 3064, 4694, 4695, 6206, 3064, 4696, 4697, 6101 }, new String[] { "Lesser Demons are magic creatures so they are weak to", "magical attacks. Though they're relatively weak they", "are still dangerous." }, 1, false, false),
     MINOTAURS(7, new int[] { 4404, 4405, 4406 }, new String[] { "Minotaurs are large manlike creatures but you'll", "want to be careful of their horns." }, 1, false, false),

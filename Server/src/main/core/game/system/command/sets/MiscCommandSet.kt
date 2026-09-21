@@ -40,6 +40,8 @@ import org.rs09.consts.Items
 import java.awt.HeadlessException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 private const val INFINITE_SPECIAL_ATTRIBUTE = "infinite-special"
 private const val ALLOW_ADMIN_AGGRESSION_ATTRIBUTE = "/save:allow_admin_aggression"
@@ -155,17 +157,43 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             notify(player, "max hit: ${hit} (${(swingHandler as Object).getClass().getName()})")
         }
 
-        define("calcdefence", Privilege.STANDARD, "::calcdefence <lt>NPC ID<gt>", "Calculates and prints your current raw defence values for Melee, Ranged and Magic against a given NPC.") { player, args ->
-            val meleeHandler = core.game.node.entity.combat.MeleeSwingHandler()
-            val rangeHandler = core.game.node.entity.combat.RangeSwingHandler()
-            val magicHandler = core.game.node.entity.combat.MagicSwingHandler()
+        /**
+         * Prints player's and given NPC's raw defence and attack values, and the chance for the player to be hit using a given swing handler.
+         */
+        define("calcdefence", Privilege.STANDARD, "::calcdefence <lt>NPC ID<gt> <lt>opt: swing handler<gt>",
+            "Calculates and prints your current raw defence values for Melee, Ranged and Magic against a given NPC. Supply a swing handler to specify what calculation is done.") { player, args ->
+            val swingHandlers = mapOf(
+                "melee"     to core.game.node.entity.combat.MeleeSwingHandler(),
+                "ranged"    to core.game.node.entity.combat.RangeSwingHandler(),
+                "magic"     to core.game.node.entity.combat.MagicSwingHandler(),
+                "ma_melee"  to core.game.node.entity.combat.MagicalMeleeSwingHandler,
+                "ma_ranged" to core.game.node.entity.combat.MagicalRangedSwingHandler,
+                "ra_melee"  to core.game.node.entity.combat.RangedMeleeSwingHandler,
+            )
+            fun hitChance(accuracy: Int, defence: Int): Double {
+                return if (accuracy > defence) {
+                    1.0 - ((defence + 2.0) / (2.0 * (accuracy + 1.0)))
+                } else {
+                    accuracy / (2.0 * (defence + 1.0))
+                }
+            }
+            fun round(initialValue: Double): Double {
+                return BigDecimal(initialValue.toString()).setScale(4, RoundingMode.UP).toDouble() * 100
+            }
+            if (args.size > 1 && args[1].toIntOrNull() == null) {
+                reject(player, "Syntax error: ::calcdefence <lt>NPC ID<gt> <lt>opt: swing handler<gt>")
+                return@define
+            }
+            if (args.size > 2 && args[2].lowercase() !in swingHandlers.keys) {
+                reject(player, "Valid handlers: ${swingHandlers.keys.joinToString(", ")}")
+                return@define
+            }
             var attacker: core.game.node.entity.Entity = player
             if (args.size > 1) {
                 val npcId = args[1].toInt()
                 val npc = NPC(npcId)
                 npc.initConfig()
                 attacker = npc
-                notify(player, "Calculating defence against NPC: ${npc.name} (ID=$npcId)")
                 val bonuses = npc.properties.bonuses
                 var maxBonus = Int.MIN_VALUE
                 var maxIndex = 0
@@ -182,29 +210,26 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                     maxBonus = 0
                     maxIndex = 0
                 }
-                npc.properties.attackStyle = WeaponInterface.AttackStyle(WeaponInterface.STYLE_CONTROLLED,maxIndex)
+                npc.properties.attackStyle = WeaponInterface.AttackStyle(WeaponInterface.STYLE_CONTROLLED, maxIndex)
+                notify(player, "Calculating defence against NPC: ${npc.name} (ID $npcId)")
             } else {
                 notify(player, "Calculating defence against yourself (no NPC specified).")
             }
-            fun hitChance(accuracy: Int, defence: Int): Double {
-                return if (accuracy > defence) {
-                    1.0 - ((defence + 2.0) / (2.0 * (accuracy + 1.0)))
-                } else {
-                    accuracy / (2.0 * (defence + 1.0))
+            if (args.size < 3) {
+                for ((n, h) in swingHandlers.entries.take(3)) {
+                    val accuracy = h.calculateAccuracy(attacker)
+                    val defence = h.calculateDefence(player, attacker)
+                    val hitChance = round(hitChance(accuracy, defence))
+                    notify(player, "Your $n defence: $defence; Attacker acc.: $accuracy; Hit chance: $hitChance%")
                 }
+            } else {
+                val n = args[2]
+                val h = swingHandlers[n]!!
+                val accuracy = h.calculateAccuracy(attacker)
+                val defence = h.calculateDefence(player, attacker)
+                val hitChance = round(hitChance(accuracy, defence))
+                notify(player, "Your $n defence: $defence; Attacker acc.: $accuracy; Hit chance: $hitChance%")
             }
-            val meleeAccuracy = meleeHandler.calculateAccuracy(attacker)
-            val meleeDefence = meleeHandler.calculateDefence(player, attacker)
-            val meleeChance = hitChance(meleeAccuracy, meleeDefence)
-            notify(player, "Your melee defence: $meleeDefence; Attacker accuracy: $meleeAccuracy; Chance to be hit: $meleeChance")
-            val rangeAccuracy = rangeHandler.calculateAccuracy(attacker)
-            val rangeDefence = rangeHandler.calculateDefence(player, attacker)
-            val rangeChance = hitChance(rangeAccuracy, rangeDefence)
-            notify(player, "Your range defence: $rangeDefence; Attacker accuracy: $rangeAccuracy; Chance to be hit: $rangeChance")
-            val magicAccuracy = magicHandler.calculateAccuracy(attacker)
-            val magicDefence = magicHandler.calculateDefence(player, attacker)
-            val magicChance = hitChance(magicAccuracy, magicDefence)
-            notify(player, "Your magic defence: $magicDefence; Attacker accuracy: $magicAccuracy; Chance to be hit: $magicChance")
         }
 
         /**
