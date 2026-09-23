@@ -74,8 +74,7 @@ class EquipHandler : InteractionListener {
 
             player.dialogueInterpreter.close()
 
-            /* TODO: Send different equip sound based on what is being equip.*/
-            playAudio(player, item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244))
+            playAudio(player, item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, Sounds.EQUIP_FUN_2238))
 
             if (player.properties.autocastSpell != null) {
 
@@ -133,8 +132,7 @@ class EquipHandler : InteractionListener {
                 return
             }
             if (player.equipment.remove(item)) {
-                /* TODO: Send different unequip sound based on what is being unequipped.*/
-                playAudio(player, Sounds.EQUIP_FUN_2238)
+                playAudio(player, item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, Sounds.EQUIP_FUN_2238))
                 player.dialogueInterpreter.close()
                 player.inventory.add(item)
 
