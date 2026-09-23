@@ -273,14 +273,9 @@ class CombatPulse(
         }
         if (victim is NPC) {
             if (entity is Player && victim !== this.victim && victim !== lastVictim) {
-                // Loar Shade Transformation Animation
-                val shade = Animation(1288, 0, Animator.Priority.VERY_HIGH)
                 val player = entity
                 val mask = player.equipment[EquipmentContainer.SLOT_HAT]
-                if (victim.getId() == 1240) {
-                    victim.animate(shade)
-                    victim.transform(1241)
-                }
+
                 if (mask != null && mask.id >= 8901 && mask.id < 8920 && RandomFunction.random(50) == 0) {
                     player.packetDispatch.sendMessage("Your black mask startles your enemy, you have " +
                             (if (mask.id == 8919) "no" else ((8920 - mask.id) / 2).toString()) + " charges left.")
