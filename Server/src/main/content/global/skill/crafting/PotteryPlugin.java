@@ -44,12 +44,9 @@ public final class PotteryPlugin extends UseWithHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		new FireOvenPlugin().newInstance(arg);
 		addHandler(2642, OBJECT_TYPE, this);
-		addHandler(2643, OBJECT_TYPE, this);
-		addHandler(4308, OBJECT_TYPE, this);
 		addHandler(4310, OBJECT_TYPE, this);
 		addHandler(20375, OBJECT_TYPE, this);
 		addHandler(34801, OBJECT_TYPE, this);
-		addHandler(34802, OBJECT_TYPE, this);
 		return this;
 	}
 
