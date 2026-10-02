@@ -31,7 +31,7 @@ object NPCRenderer {
         val it: Iterator<NPC> = localNPCs.iterator()
         while (it.hasNext()) {
             val npc = it.next()
-            val withinDistance = player.location.withinDistance(npc.location, MapDistance.RENDERING.distance)
+            val withinDistance = player.location.withinMaxnormDistance(npc.location, MapDistance.RENDERING.distance)
             if (npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
                 buffer.putBits(1, 1).putBits(2, 3)
                 toRemove.add(npc)
