@@ -149,7 +149,6 @@ class MockPlayer(name: String, val isBot: Boolean) : Player(PlayerDetails(name))
     override fun setLocation(location: Location) {
         super.setLocation(location)
         location.chunk.addPlayer(this)
-        location.region.incrementViewAmount()
         location.region.flagActive()
         this.playerFlags.lastSceneGraph = location
         zoneMonitor.updateLocation(walkingQueue.footPrint)

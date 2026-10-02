@@ -108,9 +108,9 @@ public class Region {
 	private boolean loaded;
 
 	/**
-	 * The amount of players viewing this region.
+	 * The players viewing this region.
 	 */
-	private int viewAmount;
+	private final List<String> viewingPlayers = new ArrayList<>();
 
 	/**
 	 * If the region can be edited.
@@ -403,32 +403,42 @@ public class Region {
 	 */
 	public boolean isViewed() {
 		synchronized (this) {
-			return viewAmount > 0;
+			return !viewingPlayers.isEmpty();
 		}
 	}
 
 	/**
 	 * Increments the view amount.
+	 * @param playerName The name of the player viewing the region.
 	 * @return The view amount after incrementing.
 	 */
-	public int incrementViewAmount() {
+	public int incrementViewAmount(String playerName) {
 		synchronized (this) {
-			return ++viewAmount;
+			if (!viewingPlayers.contains(playerName)) {
+				viewingPlayers.add(playerName);
+			}
+			return viewingPlayers.size();
 		}
 	}
 
 	/**
 	 * Decrements the amount of viewers.
+	 * @param playerName The name of the player not viewing the region.
 	 * @return The view amount after decrementing.
 	 */
-	public int decrementViewAmount() {
+	public int decrementViewAmount(String playerName) {
 		synchronized (this) {
-			if (viewAmount < 1) {
-				//log(this.getClass(), Log.ERR,  "View amount is " + (viewAmount - 1));
-				viewAmount++;
-			}
-			return --viewAmount;
+			viewingPlayers.remove(playerName);
+			return viewingPlayers.size();
 		}
+	}
+
+	/**
+	 * Gets the list of players currently viewing this region.
+	 * @return The list of player names.
+	 */
+	public List<String> getViewingPlayers() {
+		return viewingPlayers;
 	}
 
 	/**

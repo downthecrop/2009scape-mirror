@@ -2,6 +2,7 @@ package core.game.world.update
 
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import core.game.world.map.Region
 import core.game.world.map.RegionChunk
 import core.net.packet.PacketRepository
 import core.net.packet.context.ClearChunkContext
@@ -33,12 +34,14 @@ object MapChunkRenderer {
                 center.transform(dcx * RegionChunk.SIZE, dcy * RegionChunk.SIZE, 0).chunk
             }
         }
-
+        val previousRegions = mutableSetOf<Region>()
+        val currentRegions = mutableSetOf<Region>()
         var sizeX = last.size
         for (x in 0 until sizeX) {
             val sizeY: Int = last[x].size
             for (y in 0 until sizeY) {
                 val previous = last[x][y] ?: continue
+                previousRegions.add(previous.currentBase.region)
                 if (containsChunk(current, previous)) {
                     updated.add(previous)
                 } else {
@@ -46,18 +49,34 @@ object MapChunkRenderer {
                 }
             }
         }
-
         sizeX = current.size
         for (x in 0 until sizeX) {
             val sizeY: Int = current[x].size
             for (y in 0 until sizeY) {
                 val chunk = current[x][y]
+                currentRegions.add(chunk.currentBase.region)
                 if (updated.contains(chunk)) {
                     chunk.update(player)
                 } else {
                     chunk.synchronize(player)
                 }
                 last[x][y] = chunk
+            }
+        }
+        for (region in previousRegions) {
+            if (!currentRegions.contains(region)) {
+                region.decrementViewAmount(player.name)
+                if (region.isActive) {
+                    region.checkInactive()
+                }
+            }
+        }
+        for (region in currentRegions) {
+            if (!previousRegions.contains(region)) {
+                region.incrementViewAmount(player.name)
+            }
+            if (!region.isActive) {
+                region.flagActive()
             }
         }
     }

@@ -242,7 +242,6 @@ public abstract class Entity extends Node {
 			if (this instanceof Player) {
 				location.getChunk().removePlayer(asPlayer());
 				location.getRegion().getTolerances().remove(asPlayer().getName());
-				location.getRegion().decrementViewAmount();
 			}
 			if (this instanceof NPC) {
 				location.getChunk().remove(asNpc());

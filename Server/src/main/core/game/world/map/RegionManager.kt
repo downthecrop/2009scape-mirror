@@ -370,11 +370,9 @@ object RegionManager {
                         if (src != null) {
                             src.chunk.removePlayer(player)
                             src.region.tolerances.remove(player.name)
-                            src.region.decrementViewAmount()
                         }
                         dst.chunk.addPlayer(entity)
                         dst.region.tolerances[entity.asPlayer().name] = System.currentTimeMillis()
-                        dst.region.incrementViewAmount()
                     }
                 }
                 is NPC -> {
