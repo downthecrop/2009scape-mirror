@@ -14,14 +14,14 @@ import kotlin.math.min
 @Suppress("unused") // Reflectively loaded
 class DartListeners : InteractionListener {
     override fun defineListeners() {
-        onUseWith(IntType.ITEM, Feathers.STANDARD, *DartCraftInfo.tipIDs) { player, feather, dartTip ->
+        onUseWith(IntType.ITEM, Feathers.all, *DartCraftInfo.tipIDs) { player, feather, dartTip ->
             val dartCraftInfo = DartCraftInfo.fromTipID(dartTip.id) ?: return@onUseWith false
             val handler: SkillDialogueHandler =
                 object :
                     SkillDialogueHandler(player, SkillDialogue.MAKE_SET_ONE_OPTION, Item(dartCraftInfo.dartItemId)) {
                     override fun create(amount: Int, index: Int) {
                         if (!playerMeetsInitialRequirements()) return
-                        DartCraftScript(player, dartCraftInfo, amount).invoke()
+                        DartCraftScript(player, dartCraftInfo, feather.id, amount).invoke()
                     }
 
                     private fun playerMeetsInitialRequirements(): Boolean {

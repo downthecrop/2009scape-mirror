@@ -13,11 +13,13 @@ import kotlin.math.min
  * @author ceikry
  * @param player the player.
  * @param dartCraftInfo contains info about the dart we're crafting.
+ * @param idOfFeatherUsed the feather to attach to the dart tip.
  * @param sets count of sets to make
  */
 class DartCraftScript(
     private val player: Player,
     private val dartCraftInfo: DartCraftInfo,
+    private val idOfFeatherUsed: Int,
     private var sets: Int
 ) {
 
@@ -44,14 +46,14 @@ class DartCraftScript(
             }
 
             val dartTipsInInventory = amountInInventory(player, dartCraftInfo.tipItemId)
-            val feathersInInventory = amountInInventory(player, Feathers.STANDARD)
+            val feathersInInventory = amountInInventory(player, idOfFeatherUsed)
 
             val amountToCraft = getAmountToCraftForThisStage(feathersInInventory, dartTipsInInventory)
 
             if (
                 removeItemsIfPlayerHasEnough(
                     player,
-                    Item(Feathers.STANDARD, amountToCraft),
+                    Item(idOfFeatherUsed, amountToCraft),
                     Item(dartCraftInfo.tipItemId, amountToCraft)
                 )
             ) {
