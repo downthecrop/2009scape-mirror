@@ -114,17 +114,19 @@ public final class GroundItemManager {
 	 */
 	public static GroundItem get(int itemId, Location location, Player player) {
 		RegionChunk chunk = RegionManager.getRegionChunk(location);
+		GroundItem publicItem = null;
 		for (GroundItem item : chunk.getItems()) {
 			if (item.getId() == itemId && location.equals(item.getLocation()) && !item.isRemoved()) {
-				if (!item.isPrivate()) {
-					return item;
-				}
-				if (player != null && item.droppedBy(player)) {
-					return item;
+				if (item.isPrivate()) {
+					if (player != null && item.droppedBy(player)) {
+						return item;
+					}
+				} else if (publicItem == null) {
+					publicItem = item;
 				}
 			}
 		}
-		return null;
+		return publicItem;
 	}
 
 	/**
