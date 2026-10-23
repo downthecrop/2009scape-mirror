@@ -19,7 +19,8 @@ private val BANK_DEPOSIT_BOXES = intArrayOf(
     Scenery.BANK_DEPOSIT_BOX_26969,
     Scenery.BANK_DEPOSIT_BOX_34755,
     Scenery.BANK_DEPOSIT_BOX_36788,
-    Scenery.BANK_DEPOSIT_BOX_39830
+    Scenery.BANK_DEPOSIT_BOX_39830,
+    Scenery.DEPOSIT_BOX_30044
 )
 
 /**
