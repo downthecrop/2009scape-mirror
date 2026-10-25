@@ -47,7 +47,7 @@ class EnchantedJewelleryListener : InteractionListener {
             }
             sendMessage(player, "You rub the ${jewellery.getJewelleryType(item)}...")
             if (jewellery.options.isEmpty()) {
-                jewellery.use(player, item, 0, isEquipped)
+                jewellery.use(player, item, 0, isEquipped, true)
                 return
             }
             openDialogue(player,EnchantedJewelleryDialogueFile(jewellery, item, true, isEquipped))
@@ -61,7 +61,7 @@ class EnchantedJewelleryListener : InteractionListener {
                     interpreter!!.sendOptions("Where would you like to teleport to?", *jewellery.options)
                     stage++
                 }
-                1 -> end().also { jewellery.use(player!!, item, buttonID - 1, isEquipped) }
+                1 -> end().also { jewellery.use(player!!, item, buttonID - 1, isEquipped, replace) }
             }
         }
     }

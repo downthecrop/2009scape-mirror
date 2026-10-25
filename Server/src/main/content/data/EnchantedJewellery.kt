@@ -204,14 +204,14 @@ enum class EnchantedJewellery(
      * @param buttonID the button id.
      * @param isEquipped If the player is operating.
      */
-    fun use(player: Player, item: Item, buttonID: Int, isEquipped: Boolean) {
+    fun use(player: Player, item: Item, buttonID: Int, isEquipped: Boolean, isReplaced: Boolean) {
         if (buttonID > locations.size - 1) {
             if (isSlayerRing(item)) {
                 slayerProgressDialogue(player)
             }
             return
         }
-        attemptTeleport(player, item, buttonID, true, isEquipped)
+        attemptTeleport(player, item, buttonID, isReplaced, isEquipped)
     }
 
     /**
