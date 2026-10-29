@@ -18,7 +18,7 @@ class PenguinManager{
         val spawner = PenguinSpawner()
         var tagMapping: MutableMap<Int,JSONArray> = HashMap()
 
-        fun registerTag(player: Player, location: Location){
+        fun registerTag(player: Player, location: Location) {
             val ordinal = Penguin.forLocation(location)?.ordinal ?: -1
             val list = tagMapping[ordinal] ?: JSONArray()
             list.add(player.username.toLowerCase())
@@ -26,11 +26,11 @@ class PenguinManager{
             updateStoreFile()
         }
 
-        fun hasTagged(player: Player, location: Location): Boolean{
+        fun hasTagged(player: Player, location: Location): Boolean {
             return tagMapping[Penguin.forLocation(location)?.ordinal]?.contains(player.username.toLowerCase()) ?: false
         }
 
-        fun updateStoreFile(){
+        fun updateStoreFile() {
             val jsonTags = JSONArray()
             tagMapping.filter { it.value.isNotEmpty() }.forEach { (ordinal,taggers) ->
                 log(this::class.java, Log.FINE, "$ordinal - ${taggers.first()}")
@@ -46,7 +46,7 @@ class PenguinManager{
 
     fun rebuildVars() {
         if(!PenguinHNSEvent.getStoreFile().containsKey("spawned-penguins")) {
-            penguins = spawner.spawnPenguins(10)
+            penguins = spawner.spawnPenguins()
             PenguinHNSEvent.getStoreFile()["spawned-penguins"] = penguins.toJSONArray()
             tagMapping.clear()
             for (p in penguins) {

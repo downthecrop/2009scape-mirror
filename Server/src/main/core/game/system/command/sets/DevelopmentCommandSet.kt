@@ -46,6 +46,7 @@ import content.global.activity.penguinhns.PenguinManager.Companion.tagMapping
 import content.global.activity.penguinhns.PenguinManager.Companion.updateStoreFile
 import core.ServerStore.Companion.toJSONArray
 import core.game.world.map.RegionManager.getLocalEntities
+import core.game.world.map.RegionManager.getLocalNPCs
 import org.rs09.consts.NPCs
 
 @Initializable
@@ -501,6 +502,37 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             if (xp == null || xp <= 0) reject(player, "Xp must be a positive number.")
 
             target.skills.addExperience(skill, xp!!)
+        }
+
+        define("renewpenguins", Privilege.ADMIN, "::renewpenguins <lt>week_offset<gt>", "Generates a fresh set of weekly penguins based on the week offset provided") { player, args ->
+            var weekOffset: Int? = 0
+            if (args.size > 1) {
+                weekOffset = args[1].toIntOrNull()
+            }
+            if (weekOffset == null) reject(player,"week_offset must be an integer.")
+            val spawnedOrdinals = (PenguinHNSEvent.getStoreFile()["spawned-penguins"] as JSONArray).map { it.toString().toInt() }
+            val penguinNPCs = arrayListOf(NPCs.BARREL_8104, NPCs.BUSH_8105,NPCs.CACTUS_8107,NPCs.CRATE_8108,NPCs.ROCK_8109,NPCs.TOADSTOOL_8110,NPCs.PUMPKIN_8077)
+
+            spawnedOrdinals.forEach {
+                val peng = Penguin.values()[it]
+                val nearNPCs = getLocalNPCs(peng.location,200)
+                nearNPCs.forEach { npc ->
+                    if (npc.id in penguinNPCs) {
+                        poofClear(npc)
+                    }
+                }
+            }
+            penguins = spawner.spawnPenguins(weekOffset!!)
+            PenguinHNSEvent.getStoreFile()["spawned-penguins"] = penguins.toJSONArray()
+            tagMapping.clear()
+            for (p in penguins) {
+                tagMapping.put(p, JSONArray())
+                val pengCoord = Penguin.values()[p].location
+                val pengName = Penguin.values()[p].name
+                sendMessage(player, "$pengName penguin spawned at:$pengCoord")
+            }
+            updateStoreFile()
+            sendMessage(player, "Penguin positions have been renewed")
         }
 
         define("spawnpenguin",Privilege.ADMIN,"::spawnPenguin <lt>Ordinal<gt>","Adds a new Penguin spawn to this weeks list based on the ordinal provided 0-64"){player,args->
