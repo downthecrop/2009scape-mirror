@@ -36,7 +36,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             "Ardougne mining site" to Location.create(2600, 3232, 0), // Ardougne mining site (Monastery)
             "Ardougne eastern mine" to Location.create(2706, 3334, 0), // Ardougne mining site (Legends Guild)
             "Kandarin Coal trucks" to Location.create(2589, 3485, 0), // Kandarin Coal trucks
-            "Yanille Bank" to Location.create(2603, 3087, 0), // Yanille Bank (Wizards' Guild)
+            "Yanille Bank" to Location.create(2602, 3086, 0), // Yanille Bank (Wizards' Guild)
             "Port Khazard mine" to Location.create(2626, 3140, 0), // Mining spot north-east of Yanille / Port Khazard mine
             "Al Kharid bank" to Location.create(3276, 3176, 0), // Al Kharid bank
             "Al Kharid mining site" to Location.create(3296, 3297, 0), // Al Kharid mine (Scorpion mine)
