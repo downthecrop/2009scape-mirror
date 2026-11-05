@@ -4,12 +4,12 @@ import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 	/**
 	 * The wilderness cape ids.
 	 */
-	protected static final int[] WILDY_CAPES = new int[] { 4315, 4316, 4317, 4318, 4319, 4320, 4321, 4322, 4323, 4324, 4325, 4326, 4327, 4328, 4329, 4330, 4331, 4332, 4333, 4334, 4335, 4336, 4337, 4338, 4339, 4340, 4341, 4342, 4343, 4344, 4345, 4346, 4347, 4348, 4349, 4350, 4351, 4352, 4353, 4354, 4355, 4356, 4357, 4358, 4359, 4360, 4361, 4362, 4363, 4364, 4365, 4366, 4367, 4368, 4369, 4370, 4371, 4372, 4373, 4374, 4375, 4376, 4377, 4378, 4379, 4380, 4381, 4382, 4383, 4384, 4385, 4386, 4387, 4388, 4389, 4390, 4391, 4392, 4393, 4394, 4395, 4396, 4397, 4398, 4399, 4400, 4401, 4402, 4403, 4404, 4405, 4406, 4407, 4408, 4409, 4410, 4411, 4412, 4413, 4414, 10638 };
+	protected static final int[] WILDY_CAPES = new int[] { Items.TEAM_1_CAPE_4315, Items.TEAM_2_CAPE_4317, Items.TEAM_3_CAPE_4319, Items.TEAM_4_CAPE_4321, Items.TEAM_5_CAPE_4323, Items.TEAM_6_CAPE_4325, Items.TEAM_7_CAPE_4327, Items.TEAM_8_CAPE_4329, Items.TEAM_9_CAPE_4331, Items.TEAM_10_CAPE_4333, Items.TEAM_11_CAPE_4335, Items.TEAM_12_CAPE_4337, Items.TEAM_13_CAPE_4339, Items.TEAM_14_CAPE_4341, Items.TEAM_15_CAPE_4343, Items.TEAM_16_CAPE_4345, Items.TEAM_17_CAPE_4347, Items.TEAM_18_CAPE_4349, Items.TEAM_19_CAPE_4351, Items.TEAM_20_CAPE_4353, Items.TEAM_21_CAPE_4355, Items.TEAM_22_CAPE_4357, Items.TEAM_23_CAPE_4359, Items.TEAM_24_CAPE_4361, Items.TEAM_25_CAPE_4363, Items.TEAM_26_CAPE_4365, Items.TEAM_27_CAPE_4367, Items.TEAM_28_CAPE_4369, Items.TEAM_29_CAPE_4371, Items.TEAM_30_CAPE_4373, Items.TEAM_31_CAPE_4375, Items.TEAM_32_CAPE_4377, Items.TEAM_33_CAPE_4379, Items.TEAM_34_CAPE_4381, Items.TEAM_35_CAPE_4383, Items.TEAM_36_CAPE_4385, Items.TEAM_37_CAPE_4387, Items.TEAM_38_CAPE_4389, Items.TEAM_39_CAPE_4391, Items.TEAM_40_CAPE_4393, Items.TEAM_41_CAPE_4395, Items.TEAM_42_CAPE_4397, Items.TEAM_43_CAPE_4399, Items.TEAM_44_CAPE_4401, Items.TEAM_45_CAPE_4403, Items.TEAM_46_CAPE_4405, Items.TEAM_47_CAPE_4407, Items.TEAM_48_CAPE_4409, Items.TEAM_49_CAPE_4411, Items.TEAM_50_CAPE_4413 };
 
 	/**
 	 * The mapping of clue scrolls.

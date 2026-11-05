@@ -1,5 +1,6 @@
 package content.global.activity.ttrail;
 
+import core.api.EquipmentSlot;
 import core.game.dialogue.DialoguePlugin;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
@@ -11,6 +12,8 @@ import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 import core.tools.RandomFunction;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the uri npc.
@@ -243,9 +246,23 @@ public final class UriNPC extends AbstractNPC {
 		 */
 		public boolean canSpeak() {
 			EmoteClueScroll scroll = (EmoteClueScroll) asUri().getClueScroll();
+
+			// check for second emote
 			if (asUri().getPlayer() != player || !player.getAttribute("commence-emote", !scroll.hasCommencEmote())) {
 				return false;
 			}
+
+			// check for empty slots
+			if (scroll.getEmptySlots() != null) {
+				for (int slot : scroll.getEmptySlots()) {
+					EquipmentSlot equipmentSlot = EquipmentSlot.values()[slot];
+					if (getItemFromEquipment(player, equipmentSlot) != null) {
+						return false;
+					}
+				}
+			}
+
+			// check for equipment
 			return scroll.hasEquipment(player, scroll.getEquipment());
 		}
 
