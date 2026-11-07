@@ -1195,6 +1195,25 @@ fun <T> setAttribute(entity: Entity, attribute: String, value: T) {
     entity.setAttribute(attribute, value)
 }
 
+/**
+ * Increments an attribute in an Entity's attribute store.
+ * @param entity the entity to increment the attribute for
+ * @param attribute the attribute key to increment
+ * @param value the amount to increment the attribute by (defaults to 1)
+ * @return true if successful, false if the increment would overflow an Int
+ */
+fun incrementAttribute(entity: Entity, attribute: String, value: Int = 1): Boolean {
+    val current = getAttribute(entity, attribute, 0)
+    val result = current.toLong() + value
+
+    if (result > Int.MAX_VALUE || result < Int.MIN_VALUE) {
+        return false
+    }
+
+    entity.incrementAttribute(attribute, value)
+    return true
+}
+
 fun removeAttribute(entity: Entity, attribute: String) {
     entity.removeAttribute(attribute.replace("/save:",""))
 }

@@ -82,11 +82,11 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
     override fun defineListeners() {
         populateSeeds()
         on(Sceneries.PORTAL_29534, IntType.SCENERY, "enter") { player, _ ->
-            val x = player.getAttribute("vinesweeper:return-tele:x", 3052)
-            val y = player.getAttribute("vinesweeper:return-tele:y", 3304)
+            val x = getAttribute(player, "vinesweeper:return-tele:x", 3052)
+            val y = getAttribute(player, "vinesweeper:return-tele:y", 3304)
             val loc = Location(x, y)
             if (ZoneBorders.forRegion(11060).insideBorder(loc) && !ItemDefinition.canEnterEntrana(player)) {
-                sendMessage(player, "The power of Saradomin prevents you from taking armour or weaponry to Entrana.");
+                sendMessage(player, "The power of Saradomin prevents you from taking armour or weaponry to Entrana.")
                 return@on true
             }
             teleport(player, loc)
@@ -99,7 +99,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         on(HOLES, IntType.SCENERY, "dig") { player, node ->
             if (!player.inventory.contains(Items.SPADE_952, 1)) {
                 // TODO (crash): authenticity
-                player.sendMessage("You need a spade to dig here.")
+                sendMessage(player, "You need a spade to dig here.")
             } else {
                 player.visualize(Animation(Animations.HUMAN_VINESWEEPER_DIG_8709), Graphics(Gfx.VINESWEEPER_DIRT_DIG_1543))
                 dig(player, node.location)
@@ -141,8 +141,8 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             return@onUseWith true
         }
         on(HOLES, IntType.SCENERY, "inspect") { player, node ->
-            player.animate(Animation(Animations.HUMAN_INSPECT_HOLE_8710))
-            player.lock(5)
+            animate(player,Animation(Animations.HUMAN_INSPECT_HOLE_8710))
+            lock(player, 5)
             GameWorld.Pulser.submit(object : Pulse(5) {
                 override fun pulse(): Boolean {
                     val msg = when(RandomFunction.random(0, 7)) {
@@ -167,7 +167,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             return@on true
         }
         on(NPCs.MRS_WINKIN_7132, IntType.NPC, "trade") { player, _ ->
-            player.interfaceManager.open(Component(686))
+            openInterface(player, IFACE)
             return@on true
         }
         on(NPCs.MRS_WINKIN_7132, IntType.NPC, "buy flags") { player, npc ->
@@ -211,26 +211,26 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 Opcode.VALUE.value -> {
                     when(buttonID) {
                         TRADE_FOR_XP_BUTTON -> {
-                            player.packetDispatch.sendInterfaceConfig(686, 60, false)
+                            player.packetDispatch.sendInterfaceConfig(IFACE, 60, false)
                         }
                         XP_CONFIRM -> {
-                            player.packetDispatch.sendInterfaceConfig(686, 60, true)
+                            player.packetDispatch.sendInterfaceConfig(IFACE, 60, true)
                             val level = player.skills.getStaticLevel(Skills.FARMING)
                             // TODO: more precise formula
                             val points_per_xp = if (level < 40) { max(1.0, 2.0*(40.0 - level.toDouble())/10.0) } else { 1.0 }
-                            val points = player.getAttribute("vinesweeper:points", 0)
+                            val points = player.getAttribute(VINESWEEPER_POINTS, 0)
                             val xp = points / points_per_xp
                             player.skills.addExperience(Skills.FARMING, xp)
-                            player.setAttribute("/save:vinesweeper:points", 0)
+                            setAttribute(player, SAVE_VINESWEEPER_POINTS, 0)
                             sendUpdatedPoints(player)
 
                         }
                         XP_DENY -> {
-                            player.packetDispatch.sendInterfaceConfig(686, 60, true)
+                            player.packetDispatch.sendInterfaceConfig(IFACE, 60, true)
                         }
                         else -> {
                             val reward = REWARDS[buttonID] ?: return@on true
-                            player.sendMessage("${Item(reward.itemID).name}: ${reward.points} vinesweeper points")
+                            sendMessage(player, "${Item(reward.itemID).name}: ${reward.points} vinesweeper points")
                         }
                     }
                 }
@@ -247,7 +247,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                     return@on true
                 }
                 Opcode.BUYX.value -> {
-                    player.setAttribute("runscript") { amount: Int ->
+                    setAttribute(player, "runscript") { amount: Int ->
                         buy(player, buttonID, amount)
                     }
                     player.dialogueInterpreter.sendInput(false, "Enter the amount:")
@@ -274,6 +274,9 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
     }
 
     companion object {
+        val VINESWEEPER_POINTS= "vinesweeper:points"
+        val SAVE_VINESWEEPER_POINTS = "/save:$VINESWEEPER_POINTS"
+
         val AVACH_NIMPORTO_LOC = Location.create(1637, 4709)
         val SIGNS = intArrayOf(Sceneries.INSTRUCTION_SIGN_29461, Sceneries.INSTRUCTION_SIGN_29462, Sceneries.INSTRUCTION_SIGN_29463, Sceneries.INSTRUCTION_SIGN_29464)
         val HOLES = intArrayOf(Sceneries.HOLE_29476, Sceneries.HOLE_29477, Sceneries.HOLE_29478)
@@ -330,18 +333,18 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
 
         fun buy(player: Player, buttonID: Int, amount: Int) {
             val reward = REWARDS[buttonID] ?: return
-            val cost = amount * reward.points
-            val points = player.getAttribute("vinesweeper:points", 0)
-            if (cost in 1 until points) {
+            val cost = amount.toLong() * reward.points.toLong()
+            val points = getAttribute(player,VINESWEEPER_POINTS, 0)
+            if (amount > 0 && cost > 0L && cost <= points.toLong()) {
                 val item = Item(reward.itemID, amount)
                 if (!player.inventory.add(item)) {
                     GroundItemManager.create(item, player)
                 }
-                player.incrementAttribute("/save:vinesweeper:points", -cost)
+                incrementAttribute(player, SAVE_VINESWEEPER_POINTS, -cost.toInt())
                 sendUpdatedPoints(player)
             } else {
                 // TODO (crash): authenticity
-                player.sendMessage("You don't have enough points for that.")
+                sendMessage(player, "You don't have enough points for that.")
             }
         }
 
@@ -363,7 +366,7 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         var SEED_LOCS: HashSet<Location> = HashSet()
 
         fun sendUpdatedPoints(player: Player) {
-            val points = player.getAttribute("vinesweeper:points", 0)
+            val points = getAttribute(player, VINESWEEPER_POINTS, 0)
             setVarbit(player, 4449, points)
         }
 
@@ -442,18 +445,18 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
             if (player.inventory.remove(Item(Items.FLAG_12625, 1))) {
                 player.lock()
                 player.visualize(Animation(Animations.HUMAN_PLANT_FLAG_8711),Graphics(Gfx.VINESWEEPER_PLANT_FLAG_1541))
-                player.sendMessage("You add a flag to the patch.")
+                sendMessage(player, "You add a flag to the patch.")
                 GameWorld.Pulser.submit(object : Pulse(2, player) {
                     override fun pulse(): Boolean {
                         SceneryBuilder.replace(hole, hole.transform(Sceneries.FLAG_29457))
                         scheduleNPCs(player, hole.location, true, true)
-                        player.unlock()
+                        unlock(player)
                         return true
                     }
                 })
             } else {
                 // TODO (crash): authenticity
-                player.sendMessage("You do not have a flag to place in the patch.")
+                sendMessage(player, "You do not have a flag to place in the patch.")
             }
         }
 
@@ -476,23 +479,23 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                 })
             } else {
                 // TODO (crash): authenticity
-                player.sendMessage("You don't have any ogleroots to feed the rabbit.")
+                sendMessage(player, "You don't have any ogleroots to feed the rabbit.")
             }
         }
 
         fun dig(player: Player, loc: Location) {
             if (isSeed(loc)) {
-                val oldPoints = player.getAttribute("vinesweeper:points", 0)
-                player.setAttribute("/save:vinesweeper:points", Math.max(oldPoints-10, 0))
+                val oldPoints = getAttribute(player, VINESWEEPER_POINTS, 0)
+                setAttribute(player, SAVE_VINESWEEPER_POINTS, Math.max(oldPoints-10, 0))
                 sendUpdatedPoints(player)
-                player.sendMessage("Oh dear! It looks like you dug up a potato seed by mistake.")
+                sendMessage(player, "Oh dear! It looks like you dug up a potato seed by mistake.")
                 scheduleNPCs(player, loc, false, false)
                 val scenery = getScenery(loc)
                 if (scenery != null) {
                     SceneryBuilder.replace(scenery, scenery.transform(Sceneries.DEAD_PLANT_29456))
                 }
             } else {
-                player.incrementAttribute("/save:vinesweeper:points", 1)
+                incrementAttribute(player, SAVE_VINESWEEPER_POINTS)
                 sendUpdatedPoints(player)
                 var count = 0
                 for (dx in -1..1) {
@@ -521,12 +524,12 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         fun sendPoints(npc: NPC, dest: SeedDestination) {
             val level = dest.player.skills.getStaticLevel(Skills.FARMING)
             val points = RandomFunction.random(level, 4 * level)
-            dest.player.incrementAttribute("/save:vinesweeper:points", points)
+            incrementAttribute(dest.player,SAVE_VINESWEEPER_POINTS, points)
             dest.player.inventory.add(Item(Items.FLAG_12625, 1))
             sendUpdatedPoints(dest.player)
             for (player in RegionManager.getLocalPlayers(npc.location)) {
                 if (player.name != dest.player.name) {
-                    player.incrementAttribute("/save:vinesweeper:points", points / 2)
+                    incrementAttribute(player,SAVE_VINESWEEPER_POINTS, points / 2)
                     sendUpdatedPoints(player)
                 }
             }
@@ -567,13 +570,13 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
                         when (counter++) {
                             2 -> {
                                 player.savedData.globalData.essenceTeleporter = npc.id
-                                player.setAttribute("/save:vinesweeper:return-tele:x", npc.location.x)
-                                player.setAttribute("/save:vinesweeper:return-tele:y", npc.location.y)
+                                setAttribute(player, "/save:vinesweeper:return-tele:x", npc.location.x)
+                                setAttribute(player, "/save:vinesweeper:return-tele:y", npc.location.y)
                                 player.properties.teleportLocation = AVACH_NIMPORTO_LOC
                             }
                             3 -> {
                                 player.graphics(Graphics(110))
-                                player.unlock()
+                                unlock(player)
                                 return true
                             }
                         }

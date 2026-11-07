@@ -44,14 +44,13 @@ class TokenExchangeInterface : InterfaceListener {
 
             } else if (opcode == 196 && buttonID != 163) {
                 val item = getItem(buttonID)
-                setAttribute(player, SELECTED_ITEM, item.id)
 
                 sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to buy:") { value ->
                     val amt = value as Int
-                    val price = item.price * amt
                     if (amt > 0) {
+                        setAttribute(player, SELECTED_ITEM, item.id)
                         setAttribute(player, SELECTED_QTY, amt)
-                        setAttribute(player, PURCH_PRICE, price)
+                        setAttribute(player, PURCH_PRICE, item.price)
                         setInterfaceText(player, "Tokens: ${amountInInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650)}", RC_EXCHANGE, TOKENS_INV)
                         setInterfaceText(player, "${item.name} ($amt)", RC_EXCHANGE, ITEM_BUY)
                     }
@@ -129,12 +128,16 @@ class TokenExchangeInterface : InterfaceListener {
         }
     }
 
-    fun attemptPurchase(player: Player, item: Int, price: Int, qty: Int) {
-        if (amountInInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650) < price) {
+    fun attemptPurchase(player: Player, item: Int, unitPrice: Int, qty: Int) {
+        if (qty <= 0 || unitPrice <= 0) return
+
+        val total = unitPrice.toLong() * qty.toLong()
+        if (total > amountInInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650).toLong()) {
             sendDialogue(player, "You don't have enough tokens for that.")
             return
         }
 
+        val price = total.toInt()
         if (player.inventory.add(Item(item, qty))) {
             removeItem(player, Item(Items.RUNECRAFTING_GUILD_TOKEN_13650, price), Container.INVENTORY, )
             setInterfaceText(player, "Tokens: ${amountInInventory(player, Items.RUNECRAFTING_GUILD_TOKEN_13650)}", RC_EXCHANGE, TOKENS_INV)
