@@ -3,6 +3,7 @@ package content.global.skill.gather.woodcutting
 import content.data.Quests
 import content.data.skill.SkillingTool
 import content.data.tables.BirdNest
+import content.data.tables.BirdNest.Companion.drop
 import content.global.skill.farming.FarmingPatch.Companion.forObject
 import content.global.skill.farming.timers.StumpGrowth
 import content.global.skill.firemaking.Log
@@ -141,7 +142,7 @@ class WoodcuttingListener : InteractionListener {
 
                 //calculate bonus bird nest for mining
                 val chance = 282
-                if (RandomFunction.random(chance) == chance / 2) {
+                if (RandomFunction.random(chance) == chance / 2 || hasNestHack(player)) {
                     if (isActive(SkillcapePerks.NEST_HUNTER, player)) {
                         if (!player.inventory.add(BirdNest.getRandomNest(false).nest)) {
                             BirdNest.drop(player)
@@ -288,5 +289,13 @@ class WoodcuttingListener : InteractionListener {
             experience *= 1.10
         }
         return experience * amount
+    }
+
+    companion object {
+        // Guarantees a nest drop. For testing purposes only.
+        private const val NEST_HACK = "bird-nest-hack"
+        private fun hasNestHack(player: Player): Boolean {
+            return getAttribute(player, NEST_HACK, false)
+        }
     }
 }

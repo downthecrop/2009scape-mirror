@@ -578,12 +578,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
                 }
             }
         }
-        if (attacker is Player) {
-            val player = attacker.asPlayer()
-            if (player.equipment[3] != null && player.equipment[3].id == 14726 && state.style == CombatStyle.MAGIC) {
-                hit += (hit.toDouble() * 0.15).toInt()
-            }
-        }
         if (attacker is Familiar && victim is Player) {
             if (victim.prayer[PrayerType.PROTECT_FROM_SUMMONING]) {
                 hit = 0

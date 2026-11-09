@@ -1,8 +1,8 @@
 package content.global.skill.hunter;
 
 import content.global.skill.hunter.bnet.BNetNode;
+import content.global.skill.hunter.bnet.BNetPulse;
 import content.global.skill.hunter.bnet.BNetTypes;
-import content.global.skill.hunter.bnet.ImplingNode;
 import core.cache.def.Definition;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
@@ -25,6 +25,8 @@ import core.plugin.ClassScanner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static core.api.ContentAPIKt.submitIndividualPulse;
 
 /**
  * Handles the hunter skill.
@@ -191,24 +193,16 @@ public final class HunterPlugin extends OptionHandler {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			ItemDefinition.setOptionHandler("release", this);
-			for (int i = BNetTypes.BABY_IMPLING.ordinal() - 1; i < BNetTypes.values().length; i++) {
-				BNetTypes.values()[i].getNode().getReward().getDefinition().getHandlers().put("option:loot", this);
-			}
 			return this;
 		}
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
-			switch (option) {
-			case "release":
+			if (option.equals("release")) {
 				ReleaseType type = ReleaseType.forId(node.getId());
 				if (type != null) {
 					type.release(player, (Item) node);
 				}
-				break;
-			case "loot":
-				((ImplingNode) BNetTypes.forItem((Item) node)).loot(player, (Item) node);
-				break;
 			}
 			return true;
 		}
@@ -226,7 +220,7 @@ public final class HunterPlugin extends OptionHandler {
 			TRAPS(10033, 10034, 10092, 10146, 10147, 10148, 10149), BUTTERFLY(10020, 10018, 10016, 10014) {
 				@Override
 				public void release(final Player player, final Item item) {
-					BNetNode node = BNetTypes.forItem(item);
+					BNetNode node = BNetTypes.getBNetByItem(item);
 					if (player.getInventory().remove(item)) {
 						player.animate(Animation.create(5213));
 						player.getInventory().add(new Item(10012));
@@ -294,7 +288,7 @@ public final class HunterPlugin extends OptionHandler {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			for (BNetTypes type : BNetTypes.values()) {
-				for (int id : type.getNode().getNpcs()) {
+				for (int id : type.node.getNpcs()) {
 					NPCDefinition.forId(id).getHandlers().put("option:catch", this);
 				}
 			}
@@ -303,13 +297,13 @@ public final class HunterPlugin extends OptionHandler {
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
-                        BNetTypes type = BNetTypes.forNpc((NPC) node);
+                        BNetTypes type = BNetTypes.getBNetByNPC((NPC) node);
                         if (type == null) {
                             player.sendMessage("There seems to be something wrong with this catch option.");
                             player.sendMessage("Please submit a detailed bug report on gitlab.");
                             return true;
                         }
-			type.handle(player, (NPC) node);
+			submitIndividualPulse(player, new BNetPulse(player, (NPC) node, type.node));
 			return true;
 		}
 

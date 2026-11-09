@@ -15,6 +15,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.game.node.entity.combat.RangeSwingHandler;
+import org.rs09.consts.Items;
 import org.rs09.consts.Sounds;
 
 import static core.api.ContentAPIKt.playGlobalAudio;
@@ -69,7 +70,7 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		if (CombatStyle.RANGE.getSwingHandler().register(11235, this) && CombatStyle.RANGE.getSwingHandler().register(13405, this) && CombatStyle.RANGE.getSwingHandler().register(14803, this) && CombatStyle.RANGE.getSwingHandler().register(14804, this) && CombatStyle.RANGE.getSwingHandler().register(14805, this) && CombatStyle.RANGE.getSwingHandler().register(14806, this))
+		if (CombatStyle.RANGE.getSwingHandler().register(Items.DARK_BOW_11235, this) && CombatStyle.RANGE.getSwingHandler().register(Items.DARK_BOW_13405, this))
 			;
 		return this;
 	}

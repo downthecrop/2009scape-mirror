@@ -214,12 +214,6 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 		}
 		if (caster instanceof Player) {
 			Player p = (Player) caster;
-			if(p.getEquipment().get(3) != null && p.getEquipment().get(3).getId() == 14726){
-				if(RandomFunction.getRandom(100) < 13){
-					p.sendMessage("Your staff negates the rune requirement of the spell.");
-					return true;
-				}
-			}
 			if (runes == null) {
 				return true;
 			}

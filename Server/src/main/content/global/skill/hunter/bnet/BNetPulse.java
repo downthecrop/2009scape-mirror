@@ -116,7 +116,7 @@ public final class BNetPulse extends SkillPulse<NPC> {
 			node.finalizeDeath(player);
 			type.reward(player, node);
 			node.setAttribute("dead", GameWorld.getTicks() + 10);
-			if (type == BNetTypes.ECLECTIC_IMPLING.getNode() || type == BNetTypes.ESSENCE_IMPLING.getNode() ) {
+			if (type == BNetTypes.ECLECTIC_IMPLING.node || type == BNetTypes.ESSENCE_IMPLING.node) {
 				updateLumbridgeImplingTask(player);
 			}
 		} else {

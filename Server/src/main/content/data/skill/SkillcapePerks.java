@@ -31,7 +31,6 @@ public enum SkillcapePerks {
 	FARMING(9810, 9811),	
 	HUNTING(9948, 9949),
 	SUMMONING(12169,12170),
-	MAX_CAPE(14831, 14833, 14835, 14839, 14840)	
 	;
 	
 	/**

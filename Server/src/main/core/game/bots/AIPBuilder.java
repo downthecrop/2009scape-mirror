@@ -1627,14 +1627,6 @@ public final class AIPBuilder {
 
             new Item(14604), //Santa costume legs
 
-            new Item(14605), //Santa costume boots
-
-            new Item(14812), //Black partyhat
-
-            new Item(14819), //Rainbow partyhat
-
-            new Item(14873), //Black santa hat
-
-            new Item(14874)//Inverted santa hat
+            new Item(14605) //Santa costume boots
             ));
 }

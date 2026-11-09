@@ -35,6 +35,7 @@ import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.node.entity.skill.Skills;
+import org.rs09.consts.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,12 +55,30 @@ public class BorkNPC extends AbstractNPC {
 	/**
 	 * The chance items.
 	 */
-	private static final ChanceItem[] DROPS = new ChanceItem[] { new ChanceItem(532, 1, 1, 0.0), new ChanceItem(12163, 5, 5, 0.0), new ChanceItem(12160, 7, 7, 0.0), new ChanceItem(12159, 2, 2, 0.0), new ChanceItem(995, 2000, 10000, 0.0), new ChanceItem(1619, 1, 0.0), new ChanceItem(1621, 1, 1, 0.0), new ChanceItem(1623, 1, 1, 0.0) };
+	private static final ChanceItem[] DROPS = new ChanceItem[] {
+		new ChanceItem(Items.BIG_BONES_532,       1,    1,     0.0),
+		new ChanceItem(Items.BLUE_CHARM_12163,    5,    5,     0.0),
+		new ChanceItem(Items.CRIMSON_CHARM_12160, 7,    7,     0.0),
+		new ChanceItem(Items.GREEN_CHARM_12159,   2,    2,     0.0),
+		new ChanceItem(Items.COINS_995,           2000, 10000, 0.0),
+		new ChanceItem(Items.UNCUT_RUBY_1619,     1,    1,     0.0),
+		new ChanceItem(Items.UNCUT_EMERALD_1621,  1,    1,     0.0),
+		new ChanceItem(Items.UNCUT_SAPPHIRE_1623, 1,    1,     0.0)
+	};
 
 	/**
 	 * The ring drops.
 	 */
-	private static final ChanceItem[] RING_DROPS = new ChanceItem[] { new ChanceItem(532, 1, 1, 0.0), new ChanceItem(12163, 5, 5, 0.0), new ChanceItem(12160, 10, 10, 0.0), new ChanceItem(12159, 3, 3, 0.0), new ChanceItem(1601, 1, 1, 0.0), new ChanceItem(995, 2000, 10000, 0.0), new ChanceItem(1619, 2, 2, 0.0), new ChanceItem(1621, 3, 3, 0.0) };
+	private static final ChanceItem[] RING_DROPS = new ChanceItem[] {
+		new ChanceItem(Items.BIG_BONES_532,       1,    1,     0.0),
+		new ChanceItem(Items.BLUE_CHARM_12163,    5,    5,     0.0),
+		new ChanceItem(Items.CRIMSON_CHARM_12160, 10,   10,    0.0),
+		new ChanceItem(Items.GREEN_CHARM_12159,   3,    3,     0.0),
+		new ChanceItem(Items.DIAMOND_1601,        1,    1,     0.0),
+		new ChanceItem(Items.COINS_995,           2000, 10000, 0.0),
+		new ChanceItem(Items.UNCUT_RUBY_1619,     2,    2,     0.0),
+		new ChanceItem(Items.UNCUT_EMERALD_1621,  3,    3,     0.0)
+	};
 
 	/**
 	 * The list of the legion npc.
@@ -163,8 +182,7 @@ public class BorkNPC extends AbstractNPC {
 		}
 		ChanceItem[] drops = new Item(player.getEquipment().getId(12)).getName().toLowerCase().contains("ring of wealth") ? RING_DROPS : DROPS;
 		for (int i = 0; i < drops.length; i++) {
-			Item item = new Item(drops[i].getId(), RandomFunction.random(drops[i].getMinimumAmount(), drops[i].getMaximumAmount()));
-			GroundItemManager.create(item, getLocation(), player);
+			GroundItemManager.create(drops[i].rollWithQuantity(), getLocation(), player);
 		}
 		if (RandomFunction.random(5) == 1) {
 			super.handleDrops(p, killer);

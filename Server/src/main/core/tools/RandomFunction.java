@@ -1,6 +1,5 @@
 package core.tools;
 
-import core.game.node.entity.npc.drop.DropFrequency;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
@@ -182,7 +181,7 @@ public class RandomFunction {
 	public static final ChanceItem getChanceItem(final ChanceItem[] items) {
 		double total = 0;
 		for (ChanceItem i : items) {
-			total += i.getChanceRate();
+			total += i.chanceRate;
 		}
 		final int random = random((int) total);
 		double subTotal = 0;
@@ -192,69 +191,12 @@ public class RandomFunction {
 		}
 		Collections.shuffle(choices);
 		for (ChanceItem i : choices) {
-			subTotal += i.getChanceRate();
+			subTotal += i.chanceRate;
 			if (random < subTotal) {
 				return i;
 			}
 		}
 		return null;
-	}
-
-	public static List<Item> rollChanceTable(boolean atLeastOne,List<ChanceItem> table){
-		final List<Item> rewards = new ArrayList<>(20);
-		final List<Item> always_rewards = new ArrayList<>(20);
-		final List<ChanceItem> chanceTable = new ArrayList<ChanceItem>(table);
-		boolean isAllAlways = false;
-		if(table.stream().filter(item -> item.getChanceRate() == 1).count() == table.size()){
-			isAllAlways = true;
-		}
-		if(table.size() == 1){
-			atLeastOne = false;
-		}
-		if(!isAllAlways) {
-			if (atLeastOne) {
-				while (rewards.isEmpty()) {
-					Collections.shuffle(chanceTable);
-					for (ChanceItem item : chanceTable) {
-						if (item.getChanceRate() == 0.0) {
-							item.setChanceRate(DropFrequency.rate(item.getDropFrequency()));
-						}
-						boolean roll = RandomFunction.random(1, (int) item.getChanceRate()) == 1;
-						if (item.getChanceRate() != 1) {
-							if (roll) {
-								rewards.add(item.getRandomItem());
-								break;
-							}
-						}
-					}
-				}
-			} else {
-				Collections.shuffle(chanceTable);
-				for (ChanceItem item : chanceTable) {
-					if (item.getChanceRate() == 0.0) {
-						item.setChanceRate(DropFrequency.rate(item.getDropFrequency()));
-					}
-					boolean roll = RandomFunction.random(1, (int) item.getChanceRate()) == 1;
-					if (item.getChanceRate() != 1) {
-						if (roll) {
-							rewards.add(item.getRandomItem());
-							break;
-						}
-					}
-				}
-			}
-		}
-		table.stream().filter(item -> item.getChanceRate() == 1).forEach(item -> {
-			if(item.getChanceRate() == 0.0){
-				item.setChanceRate(DropFrequency.rate(item.getDropFrequency()));
-			}
-			always_rewards.add(item.getRandomItem());
-		});
-		return Stream.concat(rewards.stream(),always_rewards.stream()).collect(Collectors.toList());
-	}
-
-	public static List<Item> rollChanceTable(boolean atLeastOne,ChanceItem... table){
-		return rollChanceTable(atLeastOne, Arrays.asList(table));
 	}
 
 	public static Item rollWeightedChanceTable(WeightedChanceItem... table){

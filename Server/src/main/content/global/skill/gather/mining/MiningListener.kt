@@ -9,7 +9,6 @@ import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
-import core.game.node.entity.npc.drop.DropFrequency
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -33,7 +32,13 @@ class MiningListener : InteractionListener {
             handler = ::handleMining
         )
     }
-    private val GEM_REWARDS = arrayOf(ChanceItem(1623, 1, DropFrequency.COMMON), ChanceItem(1621, 1, DropFrequency.COMMON), ChanceItem(1619, 1, DropFrequency.UNCOMMON), ChanceItem(1617, 1, DropFrequency.RARE))
+
+    private val gemRewards = arrayOf(
+        ChanceItem(Items.UNCUT_SAPPHIRE_1623, 1, 1, 16.0),
+        ChanceItem(Items.UNCUT_EMERALD_1621,  1, 1, 8.0),
+        ChanceItem(Items.UNCUT_RUBY_1619,     1, 1, 4.0),
+        ChanceItem(Items.UNCUT_DIAMOND_1617,  1, 1, 1.0)
+    )
 
     private fun handleMining(player: Player, node: Node, state: Int) : Boolean {
         val resource = MiningNode.forId(node.id)
@@ -132,8 +137,8 @@ class MiningListener : InteractionListener {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
-                if (RandomFunction.roll(chance)) {
-                    val gem = GEM_REWARDS.random()
+                if (RandomFunction.roll(chance) || hasGemHack(player)) {
+                    val gem = RandomFunction.getChanceItem(gemRewards)
                     sendMessage(player,"You just found ${prependArticle(gem.name.replace("Uncut ", "").lowercase())}!")
                     if (freeSlots(player) == 0) {
                         sendMessage(player,"You do not have enough space in your inventory, so you drop the gem on the floor.")
@@ -264,5 +269,13 @@ class MiningListener : InteractionListener {
             return false
         }
         return node.isActive
+    }
+
+    companion object {
+        // Guarantees a gem drop. For testing purposes only.
+        private const val GEM_HACK = "rock-gem-hack"
+        private fun hasGemHack(player: Player): Boolean {
+            return getAttribute(player, GEM_HACK, false)
+        }
     }
 }

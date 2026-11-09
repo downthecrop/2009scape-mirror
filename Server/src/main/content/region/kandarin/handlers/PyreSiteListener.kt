@@ -39,31 +39,31 @@ class PyreSiteListener : InteractionListener {
         private val rewards = arrayOf(
             // For odds, divide chanceRate by 256
             // Potions
-            ChanceItem(Items.RANARR_POTIONUNF_100, 2, 2, 16.0),
-            ChanceItem(Items.ANTIFIRE_MIX1_11507, 1, 1, 8.0),
-            ChanceItem(Items.ANTIFIRE_MIX2_11505, 1, 1, 8.0),
-            ChanceItem(Items.FISHING_MIX2_11477, 1, 1, 8.0),
-            ChanceItem(Items.PRAYER_MIX1_11467, 1, 1, 8.0),
-            ChanceItem(Items.PRAYER_MIX2_11465, 1, 1, 8.0),
-            ChanceItem(Items.ANTI_P_SUPERMIX2_11473, 1, 1, 8.0),
-            ChanceItem(Items.SUPERATTACK_MIX1_11471, 1, 1, 8.0),
-            ChanceItem(Items.SUPERATTACK_MIX2_11469, 1, 1, 8.0),
-            ChanceItem(Items.SUP_DEF_MIX1_11499, 1, 1, 8.0),
-            ChanceItem(Items.SUP_DEF_MIX2_11497, 1, 1, 8.0),
-            ChanceItem(Items.SUP_STR_MIX1_11487, 1, 1, 8.0),
-            ChanceItem(Items.SUP_STR_MIX2_11485, 1, 1, 8.0),
+            ChanceItem(Items.RANARR_POTIONUNF_100,   2,  2,  16.0),
+            ChanceItem(Items.ANTIFIRE_MIX1_11507,    1,  1,  8.0),
+            ChanceItem(Items.ANTIFIRE_MIX2_11505,    1,  1,  8.0),
+            ChanceItem(Items.FISHING_MIX2_11477,     1,  1,  8.0),
+            ChanceItem(Items.PRAYER_MIX1_11467,      1,  1,  8.0),
+            ChanceItem(Items.PRAYER_MIX2_11465,      1,  1,  8.0),
+            ChanceItem(Items.ANTI_P_SUPERMIX2_11473, 1,  1,  8.0),
+            ChanceItem(Items.SUPERATTACK_MIX1_11471, 1,  1,  8.0),
+            ChanceItem(Items.SUPERATTACK_MIX2_11469, 1,  1,  8.0),
+            ChanceItem(Items.SUP_DEF_MIX1_11499,     1,  1,  8.0),
+            ChanceItem(Items.SUP_DEF_MIX2_11497,     1,  1,  8.0),
+            ChanceItem(Items.SUP_STR_MIX1_11487,     1,  1,  8.0),
+            ChanceItem(Items.SUP_STR_MIX2_11485,     1,  1,  8.0),
             // Runes
-            ChanceItem(Items.DEATH_RUNE_560, 8, 15, 36.0),
-            ChanceItem(Items.BLOOD_RUNE_565, 4, 7, 20.0),
+            ChanceItem(Items.DEATH_RUNE_560,         8,  15, 36.0),
+            ChanceItem(Items.BLOOD_RUNE_565,         4,  7,  20.0),
             // Ammo
-            ChanceItem(Items.SILVER_BOLTS_9145, 5, 5, 12.0),
-            ChanceItem(Items.ADAMANT_KNIFE_867, 20, 20, 12.0),
-            ChanceItem(Items.ADAMANT_DARTP_816, 20, 20, 12.0),
-            ChanceItem(Items.RUNE_BOLTS_9144, 10, 10, 12.0),
-            ChanceItem(Items.RUNE_ARROW_892, 10, 10, 12.0),
+            ChanceItem(Items.SILVER_BOLTS_9145,      5,  5,  12.0),
+            ChanceItem(Items.ADAMANT_KNIFE_867,      20, 20, 12.0),
+            ChanceItem(Items.ADAMANT_DARTP_816,      20, 20, 12.0),
+            ChanceItem(Items.RUNE_BOLTS_9144,        10, 10, 12.0),
+            ChanceItem(Items.RUNE_ARROW_892,         10, 10, 12.0),
             // Misc.
-            ChanceItem(Items.DIAMOND_1602, 2, 2, 16.0),
-            ChanceItem(Items.MITH_GRAPPLE_9419, 2, 2, 12.0)
+            ChanceItem(Items.DIAMOND_1602,           2,  2,  16.0),
+            ChanceItem(Items.MITH_GRAPPLE_9419,      2,  2,  12.0)
         )
 
         private val usedLocations = ArrayList<Location>(20)
@@ -234,7 +234,7 @@ class PyreSiteListener : InteractionListener {
             sendNews(player.username + " has just received a Dragon Full Helm from a pyre ship.")
             return Item(Items.DRAGON_FULL_HELM_11335)
         }
-        return RandomFunction.getChanceItem(rewards)
+        return RandomFunction.getChanceItem(rewards).rollWithQuantity()
     }
 
     private fun getAnimation(tool: SkillingTool): Animation? {

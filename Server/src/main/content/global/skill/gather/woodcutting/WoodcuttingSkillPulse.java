@@ -166,7 +166,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             int chance = 282;
             if (RandomFunction.random(chance) == chance / 2) {
                 if(SkillcapePerks.isActive(SkillcapePerks.NEST_HUNTER,player)){
-                    if(!player.getInventory().add(BirdNest.getRandomNest(false).getNest())){
+                    if(!player.getInventory().add(BirdNest.getRandomNest(false).nest)){
                         BirdNest.drop(player);
                     }
                 } else {

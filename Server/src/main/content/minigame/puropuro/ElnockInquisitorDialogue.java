@@ -270,7 +270,7 @@ public final class ElnockInquisitorDialogue extends DialoguePlugin {
 
 				@Override
 				public boolean hasItems(Player player) {
-					for (ImplingNode node : BNetTypes.getImplings()) {
+					for (ImplingNode node : BNetTypes.implings) {
 						if (player.getInventory().containsItem(node.getReward())) {
 							return true;
 						}
@@ -326,7 +326,7 @@ public final class ElnockInquisitorDialogue extends DialoguePlugin {
 			 * @return the item.
 			 */
 			public static Item getItem(Player player) {
-				for (ImplingNode node : BNetTypes.getImplings()) {
+				for (ImplingNode node : BNetTypes.implings) {
 					if (player.getInventory().containsItem(node.getReward())) {
 						return node.getReward();
 					}

@@ -1,5 +1,6 @@
 package content.global.handlers.scenery;
 
+import core.api.Container;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -17,10 +18,9 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.game.world.GameWorld;
+import org.rs09.consts.Items;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import static core.api.ContentAPIKt.addItem;
 
 /**
  * Represents the thieving guide plugin.
@@ -33,12 +33,20 @@ public class ThievingGuidePlugin extends OptionHandler {
 	/**
 	 * The coin looots.
 	 */
-	private static final ChanceItem[] COINS = new ChanceItem[] { new ChanceItem(995, 20, 20, 90), new ChanceItem(995, 40, 40, 80) };
+	private static final ChanceItem[] COINS = new ChanceItem[] {
+		new ChanceItem(Items.COINS_995, 20, 20, 90.0),
+		new ChanceItem(Items.COINS_995, 40, 40, 80.0)
+	};
 
 	/**
 	 * The gem items.
 	 */
-	private static final ChanceItem[] GEMS = new ChanceItem[] { new ChanceItem(1623, 1, 1, 80), new ChanceItem(1621, 1, 1, 60), new ChanceItem(1619, 1, 1, 8), new ChanceItem(1617, 1, 1, 7) };
+	private static final ChanceItem[] GEMS = new ChanceItem[] {
+		new ChanceItem(Items.UNCUT_SAPPHIRE_1623, 1, 1, 80.0),
+		new ChanceItem(Items.UNCUT_EMERALD_1621,  1, 1, 60.0),
+		new ChanceItem(Items.UNCUT_RUBY_1619,     1, 1, 8.0),
+		new ChanceItem(Items.UNCUT_DIAMOND_1617,  1, 1, 7.0)
+	};
 
 	/**
 	 * Represents the stethoscope item.
@@ -134,40 +142,17 @@ public class ThievingGuidePlugin extends OptionHandler {
 		SceneryBuilder.replace(object, object.transform(CRACKED_SAFE), 1);
 		player.getPacketDispatch().sendMessage("You get some loot.");
 		player.getSkills().addExperience(Skills.THIEVING, experience, true);
-		addItem(player);
+		addReward(player);
 	}
 
 	/**
 	 * Adds an item.
 	 * @param player the player.
 	 */
-	private void addItem(Player player) {
-		ChanceItem[] l = RandomFunction.random(2) == 1 ? GEMS : COINS;
-		List<ChanceItem> chances = new ArrayList<>(20);
-		for (ChanceItem c : l) {
-			chances.add(c);
-		}
-		Collections.shuffle(chances);
-		int rand = RandomFunction.random(100);
-		Item item = null;
-		int tries = 0;
-		while (item == null) {
-			ChanceItem i = chances.get(0);
-			if (rand <= i.getChanceRate()) {
-				item = i;
-				break;
-			}
-			if (tries > chances.size()) {
-				if (i.getId() == 1617) {
-					item = COINS[0];
-					break;
-				}
-				item = i;
-				break;
-			}
-			tries++;
-		}
-	    player.getInventory().add(item);
+	private void addReward(Player player) {
+		ChanceItem[] rolledTable = RandomFunction.nextBool() ? GEMS : COINS;
+		ChanceItem reward = RandomFunction.getChanceItem(rolledTable);
+		addItem(player, reward.getId(), reward.getAmount(), Container.INVENTORY);
 	}
 
 	/**
