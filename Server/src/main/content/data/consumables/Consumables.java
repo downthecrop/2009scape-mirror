@@ -361,6 +361,12 @@ public enum Consumables {
 	SUPER_ENERGY(new Potion(new int[] {3016, 3018, 3020, 3022}, new EnergyEffect(20))),
 	BLAMISH_OIL(new FakeConsumable(1582, new String[] {"You know... I'd really rather not."})),
 
+	/** Non-consumable potions (They can still be decanted) **/
+	SERUM_207(new Potion(new int[] {Items.SERUM_207_4_3408, Items.SERUM_207_3_3410, Items.SERUM_207_2_3412, Items.SERUM_207_1_3414}, null)),
+	SERUM_208(new Potion(new int[] {Items.SERUM_208_4_3416, Items.SERUM_208_3_3417, Items.SERUM_208_2_3418, Items.SERUM_208_1_3419}, null)),
+	OLIVE_OIL(new Potion(new int[] {Items.OLIVE_OIL4_3422, Items.OLIVE_OIL3_3424, Items.OLIVE_OIL2_3426, Items.OLIVE_OIL1_3428}, null)),
+	SACRED_OIL(new Potion(new int[] {Items.SACRED_OIL4_3430, Items.SACRED_OIL3_3432, Items.SACRED_OIL2_3434, Items.SACRED_OIL1_3436}, null)),
+
 	/** Barbarian Mixes */
 	PRAYERMIX(new BarbarianMix(new int[] {11465, 11467}, new MultiEffect(new PrayerEffect(7, 0.25), new HealingEffect(6)))),
 	ZAMMY_MIX(new BarbarianMix(new int[]{11521, 11523}, new MultiEffect(new ZamorakMixEffect(), new SkillEffect(Skills.ATTACK, 2, 0.20), new SkillEffect(Skills.STRENGTH, 2, 0.12), new SkillEffect(Skills.DEFENCE, -2, -0.10)))),

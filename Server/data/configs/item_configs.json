@@ -31555,140 +31555,140 @@
   {
     "id": "3450",
     "name": "Bronze key red",
-    "examine": "A bronze key with a blood-red painted eyelet. (Shades of Mort'ton)",
+    "examine": "A bronze key with a blood-red painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3451",
     "name": "Bronze key brown",
-    "examine": "A bronze key with a brown painted eyelet. (Shades of Mort'ton)",
+    "examine": "A bronze key with a brown painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3452",
     "name": "Bronze key crimson",
-    "examine": "A bronze key with a crimson painted eyelet. (Shades of Mort'ton)",
+    "examine": "A bronze key with a crimson painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3453",
     "name": "Bronze key black",
-    "examine": "A bronze key with a black painted eyelet. (Shades of Mort'ton)",
+    "examine": "A bronze key with a black painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3454",
     "name": "Bronze key purple",
-    "examine": "A bronze key with a purple painted eyelet. (Shades of Mort'ton)",
+    "examine": "A bronze key with a purple painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3455",
     "name": "Steel key red",
-    "examine": "A steel key with a blood-red painted eyelet. (Shades of Mort'ton)",
+    "examine": "A steel key with a blood-red painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3456",
     "name": "Steel key brown",
-    "examine": "A steel key with a brown painted eyelet. (Shades of Mort'ton)",
+    "examine": "A steel key with a brown painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3457",
     "name": "Steel key crimson",
-    "examine": "A steel key with a crimson painted eyelet. (Shades of Mort'ton)",
+    "examine": "A steel key with a crimson painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3458",
     "name": "Steel key black",
-    "examine": "A steel key with a black painted eyelet. (Shades of Mort'ton)",
+    "examine": "A steel key with a black painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3459",
     "name": "Steel key purple",
-    "examine": "A steel key with a purple painted eyelet. (Shades of Mort'ton)",
+    "examine": "A steel key with a purple painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3460",
     "name": "Black key red",
-    "examine": "A black key with a blood-red painted eyelet. (Shades of Mort'ton)",
+    "examine": "A black key with a blood-red painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3461",
     "name": "Black key brown",
-    "examine": "A black key with a brown painted eyelet. (Shades of Mort'ton)",
+    "examine": "A black key with a brown painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3462",
     "name": "Black key crimson",
-    "examine": "A black key with a crimson painted eyelet. (Shades of Mort'ton)",
+    "examine": "A black key with a crimson painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3463",
     "name": "Black key black",
-    "examine": "A black key with a black painted eyelet. (Shades of Mort'ton)",
+    "examine": "A black key with a black painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3464",
     "name": "Black key purple",
-    "examine": "A black key with a purple painted eyelet. (Shades of Mort'ton)",
+    "examine": "A black key with a purple painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3465",
     "name": "Silver key red",
-    "examine": "A silver key with a blood-red painted eyelet. (Shades of Mort'ton)",
+    "examine": "A silver key with a blood-red painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3466",
     "name": "Silver key brown",
-    "examine": "A silver key with a brown painted eyelet. (Shades of Mort'ton)",
+    "examine": "A silver key with a brown painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3467",
     "name": "Silver key crimson",
-    "examine": "A silver key with a crimson painted eyelet. (Shades of Mort'ton)",
+    "examine": "A silver key with a crimson painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3468",
     "name": "Silver key black",
-    "examine": "A silver key with a black painted eyelet. (Shades of Mort'ton)",
+    "examine": "A silver key with a black painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
   {
     "id": "3469",
     "name": "Silver key purple",
-    "examine": "A silver key with a purple painted eyelet. (Shades of Mort'ton)",
+    "examine": "A silver key with a purple painted eyelet.",
     "archery_ticket_price": "0",
     "durability": null
   },
@@ -88474,7 +88474,7 @@
   {
     "id": "10808",
     "name": "Arctic pyre logs",
-    "examine": "Arctic Pine logs prepared with sacred oil for a funeral pyre",
+    "examine": "Arctic Pine logs prepared with sacred oil for a funeral pyre.",
     "archery_ticket_price": "0",
     "durability": null,
     "ge_buy_limit": "1000",

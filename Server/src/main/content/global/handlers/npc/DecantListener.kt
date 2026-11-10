@@ -8,19 +8,40 @@ import core.game.consumable.Potion
 import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import org.rs09.consts.Items
+import org.rs09.consts.Sounds
 
 class DecantListener : InteractionListener {
 
     companion object {
         val potions = Consumables.potions.toIntArray()
         val decantables = potions + CalquatDecant.allKegIds
+
+        // Reduce the dose of a potion
+        fun reduceDose(player: Player, item: Item, reduceBy: Int = 1): Boolean {
+
+            val potion = Consumables.getConsumableById(item.id)?.consumable as? Potion ?: return false
+            val currentDose = potion.getDose(item)
+            val newDose = currentDose - reduceBy
+
+            if (newDose < 0) return false
+
+            if (newDose == 0) {
+                replaceSlot(player, item.slot, Item(Items.VIAL_229), item)
+            } else {
+                val newPotion = potion.ids[potion.ids.size - newDose]
+                replaceSlot(player, item.slot, newPotion.asItem(), item)
+            }
+
+            return true
+        }
     }
 
     override fun defineListeners() {
-        on(IntType.NPC,"decant"){ player, node ->
+        on(IntType.NPC, "decant") { player, node ->
             // Decant potions
             val (potionRemove, potionAdd) = decantContainer(player.inventory)
             for (item in potionRemove)
@@ -39,6 +60,7 @@ class DecantListener : InteractionListener {
             return@on true
         }
 
+        // Regular decanting: use a 1, 2, or 3-dose potion on another to combine their doses.
         onUseWith(IntType.ITEM, decantables, *decantables) { player, used, with ->
             if (used !is Item) return@onUseWith false
             if (with !is Item) return@onUseWith false
@@ -97,7 +119,7 @@ class DecantListener : InteractionListener {
             }
 
             sendMessage(player, "You have combined the liquid into $amountString doses.")
-            playAudio(player, 2401)
+            playAudio(player, Sounds.VIAL_POUR_2613)
 
             return@onUseWith true
         }
@@ -148,7 +170,8 @@ class DecantListener : InteractionListener {
             replaceSlot(player, with.slot, Item(twoDoseId))
             replaceSlot(player, used.slot, Item(twoDoseId))
 
-            playAudio(player, 2401)
+            playAudio(player, Sounds.VIAL_POUR_2613)
+            sendMessage(player, "You split the potion between the two vials.")
 
             return@onUseWith true
         }

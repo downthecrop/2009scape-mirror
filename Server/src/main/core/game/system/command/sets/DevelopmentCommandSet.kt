@@ -28,6 +28,12 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.util.Arrays
+import content.minigame.shadesofmortton.ChestTier
+import content.minigame.shadesofmortton.KeyLoop
+import content.minigame.shadesofmortton.MorttonPyreListeners
+import content.minigame.shadesofmortton.PyreLog
+import content.minigame.shadesofmortton.ShadeChestRewards
+import content.global.handlers.item.EmptyOptionListener
 import core.net.packet.PacketWriteQueue
 import core.tools.Log
 import core.game.node.entity.player.info.Rights
@@ -94,6 +100,146 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             sendMessage(player, "Added potion items to bank. Use ::bank to withdraw them.")
             openBankAccount(player)
         }
+
+        define("shadekit", Privilege.ADMIN, "", "Adds 1000x of each item used during Shades of Mort'ton, for testing."){player,_ ->
+            val items = mutableSetOf<Int>()
+
+            // serum 207/208, olive oil/sacred oil
+            for (item in MorttonPyreListeners.serum207Doses) items.add(item)
+            for (item in MorttonPyreListeners.serum208Doses) items.add(item)
+            for (item in MorttonPyreListeners.oliveOilDoses) items.add(item)
+            for (item in MorttonPyreListeners.sacredOilDoses) items.add(item)
+
+            // shade keys
+            for (item in MorttonPyreListeners.shadeKeysBronze) items.add(item)
+            for (item in MorttonPyreListeners.shadeKeysSteel) items.add(item)
+            for (item in MorttonPyreListeners.shadeKeysBlack) items.add(item)
+            for (item in MorttonPyreListeners.shadeKeysSilver) items.add(item)
+
+            // logs/pyre logs
+            val allLogs = PyreLog.values().map { it.logId }.toIntArray()
+            val allPyreLogs = PyreLog.values().map { it.pyreLogId }.toIntArray()
+            for (item in allLogs) items.add(item)
+            for (item in allPyreLogs) items.add(item)
+
+            // shade remains
+            for (item in MorttonPyreListeners.shadeRemains) items.add(item)
+
+            // tools and temple materials
+            val tools = intArrayOf(Items.TINDERBOX_590, Items.HAMMER_2347, Items.FLAMTAER_HAMMER_3678, Items.TIMBER_BEAM_8837, Items.LIMESTONE_BRICK_3420, Items.SWAMP_PASTE_1941, Items.PLANK_960)
+            for (item in tools) items.add(item)
+
+            // add to bank
+            for (id in items) {
+                addItem(player, id, 1000, Container.BANK)
+            }
+            sendMessage(player, "Added items to bank. Use ::bank to withdraw them.")
+            openBankAccount(player)
+        }
+
+        define("emptyoption", Privilege.ADMIN, "", "Adds 10x of each emptyable item to your bank, so you can test emptying."){player,_ ->
+            val items = mutableSetOf<Int>()
+
+            for (item in EmptyOptionListener.EmptyItem.emptyItemList) items.add(item)
+
+            // add to bank
+            for (id in items) {
+                addItem(player, id, 10, Container.BANK)
+            }
+            sendMessage(player, "Added items to bank. Use ::bank to withdraw them.")
+            openBankAccount(player)
+        }
+
+        define(
+            "shaderoll",
+            Privilege.ADMIN,
+            "::shaderoll <lt>key_tier<gt> <lt>AMOUNT<gt>",
+            "Rolls shade chest rewards AMOUNT times using key names like bronze_red. Keys are bronze, steel, black, silver. Tiers are red, brown, crimson, black, purple."
+        ) { player: Player, args: Array<String> ->
+            if (args.size < 3) {
+                reject(player, "Usage: ::shaderoll key_tier AMOUNT (e.g. bronze_red 100)")
+            }
+
+            val keyName = args[1].lowercase()
+            val amount = args[2].toIntOrNull()
+
+            if (amount == null || amount <= 0) {
+                reject(player, "Amount must be a positive integer.")
+            }
+
+            val keyId = when (keyName) {
+                "bronze_red" -> Items.BRONZE_KEY_RED_3450
+                "bronze_brown" -> Items.BRONZE_KEY_BROWN_3451
+                "bronze_crimson" -> Items.BRONZE_KEY_CRIMSON_3452
+                "bronze_black" -> Items.BRONZE_KEY_BLACK_3453
+                "bronze_purple" -> Items.BRONZE_KEY_PURPLE_3454
+
+                "steel_red" -> Items.STEEL_KEY_RED_3455
+                "steel_brown" -> Items.STEEL_KEY_BROWN_3456
+                "steel_crimson" -> Items.STEEL_KEY_CRIMSON_3457
+                "steel_black" -> Items.STEEL_KEY_BLACK_3458
+                "steel_purple" -> Items.STEEL_KEY_PURPLE_3459
+
+                "black_red" -> Items.BLACK_KEY_RED_3460
+                "black_brown" -> Items.BLACK_KEY_BROWN_3461
+                "black_crimson" -> Items.BLACK_KEY_CRIMSON_3462
+                "black_black" -> Items.BLACK_KEY_BLACK_3463
+                "black_purple" -> Items.BLACK_KEY_PURPLE_3464
+
+                "silver_red" -> Items.SILVER_KEY_RED_3465
+                "silver_brown" -> Items.SILVER_KEY_BROWN_3466
+                "silver_crimson" -> Items.SILVER_KEY_CRIMSON_3467
+                "silver_black" -> Items.SILVER_KEY_BLACK_3468
+                "silver_purple" -> Items.SILVER_KEY_PURPLE_3469
+
+                else -> null
+            }
+
+            if (keyId == null) {
+                reject(player, "Invalid key format. Use <key>_<tier> (e.g. bronze_red).")
+            }
+
+            val container = player.dropLog
+            container.clear()
+
+            for (i in 0 until amount!!) {
+                val (tier, loop) = when (keyId) {
+                    Items.BRONZE_KEY_RED_3450 -> Pair(ChestTier.BRONZE, KeyLoop.RED)
+                    Items.BRONZE_KEY_BROWN_3451 -> Pair(ChestTier.BRONZE, KeyLoop.BROWN)
+                    Items.BRONZE_KEY_CRIMSON_3452 -> Pair(ChestTier.BRONZE, KeyLoop.CRIMSON)
+                    Items.BRONZE_KEY_BLACK_3453 -> Pair(ChestTier.BRONZE, KeyLoop.BLACK)
+                    Items.BRONZE_KEY_PURPLE_3454 -> Pair(ChestTier.BRONZE, KeyLoop.PURPLE)
+
+                    Items.STEEL_KEY_RED_3455 -> Pair(ChestTier.STEEL, KeyLoop.RED)
+                    Items.STEEL_KEY_BROWN_3456 -> Pair(ChestTier.STEEL, KeyLoop.BROWN)
+                    Items.STEEL_KEY_CRIMSON_3457 -> Pair(ChestTier.STEEL, KeyLoop.CRIMSON)
+                    Items.STEEL_KEY_BLACK_3458 -> Pair(ChestTier.STEEL, KeyLoop.BLACK)
+                    Items.STEEL_KEY_PURPLE_3459 -> Pair(ChestTier.STEEL, KeyLoop.PURPLE)
+
+                    Items.BLACK_KEY_RED_3460 -> Pair(ChestTier.BLACK, KeyLoop.RED)
+                    Items.BLACK_KEY_BROWN_3461 -> Pair(ChestTier.BLACK, KeyLoop.BROWN)
+                    Items.BLACK_KEY_CRIMSON_3462 -> Pair(ChestTier.BLACK, KeyLoop.CRIMSON)
+                    Items.BLACK_KEY_BLACK_3463 -> Pair(ChestTier.BLACK, KeyLoop.BLACK)
+                    Items.BLACK_KEY_PURPLE_3464 -> Pair(ChestTier.BLACK, KeyLoop.PURPLE)
+
+                    Items.SILVER_KEY_RED_3465 -> Pair(ChestTier.SILVER, KeyLoop.RED)
+                    Items.SILVER_KEY_BROWN_3466 -> Pair(ChestTier.SILVER, KeyLoop.BROWN)
+                    Items.SILVER_KEY_CRIMSON_3467 -> Pair(ChestTier.SILVER, KeyLoop.CRIMSON)
+                    Items.SILVER_KEY_BLACK_3468 -> Pair(ChestTier.SILVER, KeyLoop.BLACK)
+                    Items.SILVER_KEY_PURPLE_3469 -> Pair(ChestTier.SILVER, KeyLoop.PURPLE)
+
+                    else -> continue
+                }
+
+                val drops = ShadeChestRewards.generateLoot(tier, loop)
+                for (drop in drops) {
+                    container.add(drop, false)
+                }
+            }
+
+            container.open(player)
+        }
+
 
         /**
          * Adds a subset of POH storable item takeIds to the player's bank, filtered by StorableFamily type. These are stored in the costume room or bookcase.

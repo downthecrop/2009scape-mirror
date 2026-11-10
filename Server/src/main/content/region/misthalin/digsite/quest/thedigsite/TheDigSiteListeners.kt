@@ -816,15 +816,6 @@ class TheDigSiteListeners : InteractionListener {
             return@on true
         }
 
-        // Dropping Liquids
-        on(Items.UNIDENTIFIED_LIQUID_702, ITEM, "empty") { player, node ->
-            if(removeItem(player, node)) {
-                addItemOrDrop(player, Items.VIAL_229)
-            }
-            sendChat(player, "You very carefully empty out the liquid.")
-            return@on true
-        }
-
         on(Items.UNIDENTIFIED_LIQUID_702, ITEM, "drop") { player, node ->
             if (removeItem(player, node)) {
                 impact(player, 25)
