@@ -26,6 +26,9 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 	 */
 	private boolean varrockMage;
 
+	public static final int INTO_THE_ABYSS_VARP = 492;
+	public static final int INTO_THE_ABYSS_COMPLETE_STAGE = 4;
+
 	/**
 	 * Constructs a new {@code ZamorakMageDialogue} {@code Object}.
 	 */
@@ -463,7 +466,7 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 	 * @param stage the stage.
 	 */
 	public void setStage(int stage) {
-                setVarp(player, 492, stage, true);
+                setVarp(player, INTO_THE_ABYSS_VARP, stage, true);
 	}
 
 	/**
@@ -471,6 +474,6 @@ public final class ZamorakMageDialogue extends DialoguePlugin {
 	 * @return the stage.
 	 */
 	public int getStage() {
-		return getVarp(player, 492);
+		return getVarp(player, INTO_THE_ABYSS_VARP);
 	}
 }
