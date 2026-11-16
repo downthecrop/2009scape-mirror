@@ -1,6 +1,7 @@
 package content.region.kandarin.seers.quest.elementalworkshop
 
 import content.global.handlers.iface.BookInterface
+import core.api.storeBookInHouse
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -25,6 +26,7 @@ class SlashedBookHandler : InteractionListener {
     override fun defineListeners() {
         on(Items.SLASHED_BOOK_9715, IntType.ITEM, "read") { player, _ ->
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+            storeBookInHouse(player, Items.BATTERED_BOOK_2886)
             return@on true
         }
     }

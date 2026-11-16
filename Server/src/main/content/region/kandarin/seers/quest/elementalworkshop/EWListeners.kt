@@ -17,8 +17,15 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.tools.Log
 import content.data.Quests
+import core.game.dialogue.DialogueLabeller
+import core.game.dialogue.DialogueOption
+import core.game.interaction.QueueStrength
+import core.game.node.Node
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import core.api.handleDoor
 import core.game.global.action.DoorHelper
+import core.tools.prependArticle
 
 /**
  * Listeners for the Elemental Workshop I quest
@@ -110,22 +117,45 @@ class EWListeners : InteractionListener {
             }
 
             // --- AFTER QUEST START ---
-            if (player.inventory.containsItem(slashedBook)) {
-                sendItemDialogue(player, Item(Items.SLASHED_BOOK_9715),
-                    "There is a book here titled 'The Elemental Shield'. " +
-                            "It can stay here, as you have a copy in your backpack."
-                )
-                if (player.inventory.addIfDoesntHave(batteredKey)) {
-                    sendItemDialogue(player, Item(Items.BATTERED_KEY_2887),"You also find a key.")
-                }
+
+            // if player doesn't have book and doesn't have key
+            if (!inInventory(player, slashedBook.id) && !inInventory(player, batteredKey.id)) {
+                addItemOrDrop(player, batteredKey.id)
+                addItemOrDrop(player, slashedBook.id)
+                openDialogue(player, object : DialogueLabeller() {
+                    override fun addConversation() {
+                        item(slashedBook, "You find a book titled 'The Elemental Shield'.")
+                        item(batteredKey,"You also find a key.")
+                    }
+                })
                 return@on true
             }
 
-            sendItemDialogue(player, Item(Items.SLASHED_BOOK_9715), "You find a book titled 'The Elemental Shield'.")
-            addItemOrDrop(player, slashedBook.id)
-            if (player.inventory.addIfDoesntHave(batteredKey)) {
-                sendItemDialogue(player, Item(Items.BATTERED_KEY_2887),"You also find a key.")
+            // if player doesn't have book and does have key
+            if (!inInventory(player, slashedBook.id) && inInventory(player, batteredKey.id)) {
+                addItemOrDrop(player, slashedBook.id)
+                sendItemDialogue(player, slashedBook, "You find a book titled 'The Elemental Shield'.")
+                return@on true
             }
+
+            // if player does have book but doesn't have key
+            if (inInventory(player, slashedBook.id) && !inInventory(player, batteredKey.id)) {
+                addItemOrDrop(player, batteredKey.id)
+                openDialogue(player, object : DialogueLabeller() {
+                    override fun addConversation() {
+                        item(slashedBook, "There is a book here titled 'The Elemental Shield'. " + "It can stay here, as you have a copy in your backpack.")
+                        item(batteredKey,"You also find a key.")
+                    }
+                })
+                return@on true
+            }
+
+            // if player does have book and does have key
+            if (inInventory(player, slashedBook.id) && inInventory(player, batteredKey.id)) {
+                sendItemDialogue(player, slashedBook, "There is a book here titled 'The Elemental Shield'. " + "It can stay here, as you have a copy in your backpack.")
+                return@on true
+            }
+
             return@on true
         }
 
@@ -220,13 +250,6 @@ class EWListeners : InteractionListener {
         /* * * * * * * * * * * * * * * *
          *  Workshop Area listeners   *
          * * * * * * * * * * * * * * */
-        // Center hatch, inaccessible
-        // NOTE: REMOVE ME/ADD CORRECT CHECKS FOR ELEMENTAL WORKSHOP II
-        on(Scenery.HATCH_18595, IntType.SCENERY, "open") { player, _ ->
-            sendDialogue(player, "You're unable to open the locked hatch.")
-            return@on true
-        }
-
         // Stone bowl box, player can get more at any time
         on(Scenery.BOXES_3397, IntType.SCENERY, "search") { player, _ ->
             // If the player doesn't have a stone bowl in their inventory
@@ -262,45 +285,77 @@ class EWListeners : InteractionListener {
             return@on true
         }
 
-        // Workbenches/Anvil
-        onUseWith(IntType.SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, workbench ->
-            // Warn player their smithing level is too low to make the shield
-            if (player.skills.getLevel(Skills.SMITHING) < 20) {
-                sendMessage(player, "You need a smithing level of 20 to create an elemental shield.")
-                return@onUseWith true
-            }
-            // Warn player they don't have the required book in their inventory
-            if (!player.inventory.containsAtLeastOneItem(intArrayOf(Items.SLASHED_BOOK_9715, Items.BATTERED_BOOK_2886))) {
-                sendDialogue(player, "This workbench is too complicated. You need instructions to follow.")
-                return@onUseWith true
-            }
-            // Warn player they don't have a hammer in their inventory
-            if (!inInventory(player, Items.HAMMER_2347)) {
-                sendDialogue(player, "You don't have a tool available to shape the metal.")
-                return@onUseWith true
-            }
-            // Sanity error check (Should never get thrown)
-            if (!player.inventory.containsAll(*elementalShieldReqItems)) {
-                log(this::class.java, Log.ERR,  "${player.username} tried to forge an elemental shield without all the required items.")
-                return@onUseWith false
-            }
-            // Successfully smith the elemental shield
-            lock(player, (animationDuration(smithElementalShield) + 2))
-            runTask(player) {
-                face(player, workbench)
-                animate(player, smithElementalShield)
-                playAudio(player, smithElementalShieldSFX)
-                replaceSlot(player, used.asItem().slot, elementalShield)
-                rewardXP(player, Skills.SMITHING, 20.0)
-                sendMessage(player, "Following the instructions in the book you make an elemental shield.")
-            }
-            // Check to see if the quest is completed, if not, complete the quest
-            if (!player.questRepository.getQuest(Quests.ELEMENTAL_WORKSHOP_I).isCompleted(player)) {
-                player.questRepository.getQuest(Quests.ELEMENTAL_WORKSHOP_I).finish(player)
+        // before completing EW1 you can only make an elemental shield from an elemental bar. Smithing the shield will complete EW1
+        // during EW2 you have the option to make an elemental shield, claw, or helm from an elemental bar
+        onUseWith(IntType.SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, with ->
+            // if EW1 is not complete, smith the shield and finish the quest. After EW2 is started, the player has a choice
+            if (getQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II) < 5) {
+                smithElementalItem(player, used, with, Items.ELEMENTAL_SHIELD_2890, intArrayOf(Items.SLASHED_BOOK_9715, Items.BATTERED_BOOK_2886))
+            } else {
+                openDialogue(player, object : DialogueLabeller() {
+                    override fun addConversation() {
+                        options(
+                            DialogueOption("shield", "An elemental shield.", skipPlayer = true),
+                            DialogueOption("claw", "An elemental claw.", skipPlayer = true),
+                            DialogueOption("helm", "An elemental helm.", skipPlayer = true,
+                                optionIf = { player, _ -> isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_II)}
+                            ),
+                            title = "What would you like to make..."
+                        )
+
+                        label("shield")
+                        exec { player, _ ->
+                            end()
+                            smithElementalItem(player, used, with, Items.ELEMENTAL_SHIELD_2890, intArrayOf(Items.SLASHED_BOOK_9715, Items.BATTERED_BOOK_2886))
+                        }
+
+                        label("claw")
+                        exec { player, _ ->
+                            end()
+                            smithElementalItem(player, used, with, Items.CRANE_CLAW_9720, intArrayOf(Items.CRANE_SCHEMATIC_9718))
+                        }
+
+                        label("helm")
+                        exec { player, _ ->
+                            end()
+                            smithElementalItem(player, used, with, Items.ELEMENTAL_HELMET_9729, intArrayOf(Items.BEATEN_BOOK_9717))
+                        }
+                    }
+                }, NPC(NPCs.JIG_CART_4913)) // pass an NPC because otherwise the exec function freaks out
             }
             return@onUseWith true
         }
 
+        // smithing an elemental mind helm from an elemental mind bar will complete EW2
+        onUseWith(IntType.SCENERY, Items.ELEMENTAL_MIND_BAR_9728, Scenery.WORKBENCH_3402) { player, used, with ->
+            // if EW2 is not complete, smith the helmet and finish the quest. After the quest, the player has a choice
+            if (!isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_II)) {
+                smithElementalItem(player, used, with, Items.MIND_HELMET_9733, intArrayOf(Items.BEATEN_BOOK_9717))
+            } else {
+                openDialogue(player, object : DialogueLabeller() {
+                    override fun addConversation() {
+                        options(
+                            DialogueOption("shield", "An elemental mind shield.", skipPlayer = true),
+                            DialogueOption("helm", "An elemental mind helm.", skipPlayer = true,),
+                            title = "What would you like to make..."
+                        )
+
+                        label("shield")
+                        exec { player, _ ->
+                            end()
+                            smithElementalItem(player, used, with, Items.MIND_SHIELD_9731, intArrayOf(Items.SLASHED_BOOK_9715, Items.BATTERED_BOOK_2886))
+                        }
+
+                        label("helm")
+                        exec { player, _ ->
+                            end()
+                            smithElementalItem(player, used, with, Items.MIND_HELMET_9733, intArrayOf(Items.BEATEN_BOOK_9717))
+                        }
+                    }
+                }, NPC(NPCs.JIG_CART_4913)) // pass an NPC because otherwise the exec function freaks out
+            }
+            return@onUseWith true
+        }
 
         /* * * * * * * * * * * * * *
          *  Fire room listeners   *
@@ -587,6 +642,62 @@ class EWListeners : InteractionListener {
             return@on true
         }
     }
+
+    // smiths an elemental item
+    fun smithElementalItem(player: Player, used: Node, with: Node, item: Int, book: IntArray) {
+        val smithLvl = if (item == Items.MIND_HELMET_9733 || item == Items.MIND_SHIELD_9731) 30 else 20
+        val smithXp = if (item == Items.MIND_HELMET_9733 || item == Items.MIND_SHIELD_9731) 30.0 else 20.0
+
+        // check hammer
+        if (inInventory(player, Items.HAMMER_2347)) {
+            // check level
+            if (getDynLevel(player, Skills.SMITHING) >= smithLvl) {
+                // check book
+                if (anyInInventory(player, *book)) {
+                    // authentically the bar does get removed, then the item is added after the anim is played
+                    if (removeItem(player, used)) {
+                        lock(player, 4)
+                        queueScript(player, 0, QueueStrength.SOFT) { stage ->
+                            when (stage) {
+                                // smith
+                                0 -> {
+                                    face(player, with)
+                                    animate(player, smithElementalShield)
+                                    playAudio(player, smithElementalShieldSFX)
+                                    return@queueScript delayScript(player, Animation(smithElementalShieldSFX).duration)
+                                }
+
+                                // reward
+                                1 -> {
+                                    addItemOrDrop(player, item)
+                                    rewardXP(player, Skills.SMITHING, smithXp)
+                                    when (item) {
+                                        Items.ELEMENTAL_SHIELD_2890 -> sendMessage(player, "Following the instructions in the book you make an elemental shield.")
+                                        Items.ELEMENTAL_HELMET_9729 -> sendMessage(player, "Following the instructions in the book you make an elemental helm.")
+                                        Items.MIND_SHIELD_9731 -> sendMessage(player, "Following the instructions in the book you make an elemental mind shield.")
+                                        Items.MIND_HELMET_9733 -> sendMessage(player, "Following the instructions in the book you make an elemental mind helm.")
+                                        Items.CRANE_CLAW_9720 -> sendMessage(player, "Following the instructions from the schematic you make an elemental claw.")
+                                    }
+                                    return@queueScript delayScript(player, 1)
+                                }
+
+                                // finish quest when needed
+                                2 -> {
+                                    when (item) {
+                                        Items.ELEMENTAL_SHIELD_2890 -> if (!isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_I)) finishQuest(player, Quests.ELEMENTAL_WORKSHOP_I)
+                                        Items.MIND_HELMET_9733 -> if (!isQuestComplete(player, Quests.ELEMENTAL_WORKSHOP_II)) finishQuest(player, Quests.ELEMENTAL_WORKSHOP_II)
+                                    }
+                                    return@queueScript stopExecuting(player)
+                                }
+                            }
+                            return@queueScript stopExecuting(player)
+                        }
+                    }
+                } else sendDialogue(player, "This workbench is too complicated. You need instructions to follow.")
+            } else sendMessage(player, "You need a Smithing level of $smithLvl to create ${prependArticle(item.asItem().name.lowercase())}.")
+        } else sendDialogue(player, "You don't have a tool available to shape the metal.")
+    }
+
     override fun defineDestinationOverrides() {
         setDest(IntType.SCENERY, intArrayOf(Scenery.FURNACE_18525, Scenery.FURNACE_18526), "use") { _, _ ->
             return@setDest Location.create(2724,9875)

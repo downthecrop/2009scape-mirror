@@ -65,7 +65,10 @@ public final class Appearance {
 	private boolean ridingMinecart;
 
 	/**
-	 * If the player's shield should be hidden (like when equipping elemental shields).
+	 * If the player's shield should be hidden.
+	 * The driving use of this was for the equipping of elemental shields. When equipped, an elemental shield plays a
+	 * graphic where it "grows" out of the player's hand. This boolean is used to temporarily hide the shield visually
+	 * while the graphic plays. After the graphic finishes, the equip listener visually unhides the player's shield.
 	 */
 	private boolean hideShield;
 
