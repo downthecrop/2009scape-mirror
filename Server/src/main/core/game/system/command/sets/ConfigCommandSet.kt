@@ -7,13 +7,12 @@ import core.api.*
 import core.game.interaction.QueueStrength
 
 @Initializable
-class ConfigCommandSet : CommandSet(Privilege.ADMIN){
+class ConfigCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
-
         /**
          * Sets a range of configs to a maximum value
          */
-        define("sconfigrange", usage = "::sconfigrange <lt>start-id<gt> <lt>end-id<gt>", description = "Sets each varp from <lt>start-id<gt> (inclusive) up to <lt>end-id<gt> (exclusive) to Integer.MAX_VALUE."){player, args ->
+        define("sconfigrange", Privilege.ADMIN, "::sconfigrange <lt>start-id<gt> <lt>end-id<gt>", "Sets each varp from <lt>start-id<gt> (inclusive) up to <lt>end-id<gt> (exclusive) to Integer.MAX_VALUE.") { player, args ->
             if (args.size < 3) {
                 reject(player, "usage: sconfigrange idlo idhi")
             }
@@ -28,7 +27,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Sets a range of configs to 0
          */
-        define("sconfigrange0", usage = "::sconfigrange0 <lt>start-id<gt> <lt>end-id<gt>", description = "Sets each varp from <lt>start-id<gt> (inclusive) up to <lt>end-id<gt> (exclusive) to 0."){player, args ->
+        define("sconfigrange0", Privilege.ADMIN, "::sconfigrange0 <lt>start-id<gt> <lt>end-id<gt>", "Sets each varp from <lt>start-id<gt> (inclusive) up to <lt>end-id<gt> (exclusive) to 0.") { player, args ->
             if (args.size < 3) {
                 reject(player, "usage: sconfigrange0 idlo idhi")
             }
@@ -43,7 +42,7 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Opens an interface component
          */
-        define("iface", Privilege.ADMIN, "::iface <lt>Interface ID<gt>", "Opens the interface with the given ID."){player, args ->
+        define("iface", Privilege.ADMIN, "::iface <lt>Interface ID<gt>", "Opens the interface with the given ID.") { player, args ->
             if (args.size < 2) {
                 reject(player, "usage: ::iface <id>")
                 return@define
@@ -52,10 +51,9 @@ class ConfigCommandSet : CommandSet(Privilege.ADMIN){
             player.interfaceManager.openComponent(id as Int)
         }
 
-        define("ifaces", Privilege.ADMIN, "::ifaces <From Interface ID> <To Interface ID> <(opt) Duration Per Interface>", "Opens interfaces from the From ID to the To ID, with a delay of 3 between each, unless specified otherwise"){ player, args ->
-
+        define("ifaces", Privilege.ADMIN, "::ifaces <lt>from<gt> <lt>to<gt> [duration]", "Opens interfaces from ID 'from' to ID 'to', with a delay of 'duration' ticks (optional, default 3).") { player, args ->
             if (args.size < 3) {
-                reject(player, "Syntax error: ::anims <From Interface ID> <To Interface ID> <(opt) Duration Per Interface>")
+                reject(player, "Syntax error: ::ifaces <lt>from<gt> <lt>to<gt> [duration]")
             }
             val ifaceFrom = args[1].toInt()
             val ifaceTo = args[2].toInt()

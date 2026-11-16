@@ -1,5 +1,6 @@
 package content.global.handlers.iface
 
+import content.global.handlers.iface.RulesAndInfo.CONFIRMED_RULES_ATTRIBUTE
 import core.api.*
 import core.game.node.entity.player.Player
 import core.tools.RandomFunction
@@ -21,16 +22,32 @@ object RulesAndInfo {
         "   -Exception: 1-to-1 inputs, such as mousekeys.",
         "   -Includes training methods that bypass AFK limits."
     )
+    val ADMIN_RULES = arrayOf(
+        "<col=ffffff>Tips and Tricks</col>",
+        "   -ctrl+shift+click to admin teleport",
+        "   -this also works on the minimap and world map",
+        "   -::commands to see commands",
+        "   -::commandsearch <query> to find commands",
+        "<col=ffffff>Things not to do on the test server</col>",
+        "   -Do not use ::shutdown or ::update",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    )
     val SEPARATOR = "<str>                                             </str>"
     val INFO = arrayOf(
         "<col=6bcdfa>Join the forums! forum.2009scape.org </col>"
     )
+    val CONFIRMED_RULES_ATTRIBUTE = "/save:rules:confirmed"
 
     @JvmStatic
-    fun openFor(player: Player)
-    {
-        if(getAttribute(player, "rules:confirmed", false) || !getAttribute(player, "tutorial:complete", false))
+    fun openFor(player: Player) {
+        if (getAttribute(player, "rules:confirmed", false) || !getAttribute(player, "tutorial:complete", false)) {
             return
+        }
         val pin = getAttribute(player, "rules:pin", RandomFunction.random(1000,9999))
         setAttribute(player, "/save:rules:pin", pin)
 
@@ -46,20 +63,20 @@ object RulesAndInfo {
     @JvmStatic
     fun setBaseRulesAndInfo(player: Player): Int {
         var ln = 1
-        for(line in INFO) setInterfaceText(player, INFO[ln - 1], 384, ln++)
+        val rules = if (player.isAdmin) ADMIN_RULES else RULES
+        for (line in INFO) setInterfaceText(player, INFO[ln - 1], 384, ln++)
         setInterfaceText(player, SEPARATOR, 384, ln++)
         val newIndex = ln
-        for(line in RULES) setInterfaceText(player, RULES[ln - newIndex], 384, ln++)
+        for (line in rules) setInterfaceText(player, rules[ln - newIndex], 384, ln++)
         setInterfaceText(player, "", 384, ln)
         return ln
     }
 }
 
-class RulesListener : InterfaceListener
-{
+class RulesListener : InterfaceListener {
     override fun defineInterfaceListeners() {
         onClose(384){player, _ ->
-            if(!getAttribute(player, "rules:confirmed", false))
+            if (!getAttribute(player, CONFIRMED_RULES_ATTRIBUTE, false))
                 runTask(player, 1) { RulesAndInfo.openFor(player); sendDialogue(player, "Please read the rules.") }
             return@onClose true
         }

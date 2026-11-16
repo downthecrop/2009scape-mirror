@@ -12,13 +12,13 @@ import core.net.packet.out.MusicPacket
 import core.plugin.Initializable
 
 @Initializable
-class MusicCommandSet : CommandSet(Privilege.STANDARD){
+class MusicCommandSet : CommandSet(Privilege.STANDARD) {
     override fun defineCommands() {
 
         /**
          * Command that lets you play a specific song
          */
-        define("playsong", usage = "::playsong <lt>song-id<gt>", description = "Plays the music track <lt>song-id<gt>."){player,args ->
+        define("playsong", Privilege.STANDARD, "::playsong <lt>song-id<gt>", "Plays the music track <lt>song-id<gt>.") { player, args ->
             if(args.size < 2){
                 reject(player,"Usage: ::playsong <song-id>")
             }
@@ -32,7 +32,7 @@ class MusicCommandSet : CommandSet(Privilege.STANDARD){
         /**
          * Command that lets you play a specific jingle
          */
-        define("playjingle", usage = "::playjingle <lt>jingle-id<gt>", description = "Plays the sound effect with ID <lt>jingle-id<gt>."){player,args ->
+        define("playjingle", Privilege.STANDARD, "::playjingle <lt>jingle-id<gt>", "Plays the sound effect with ID <lt>jingle-id<gt>.") { player, args ->
             if(args.size < 2){
                 reject(player,"Usage: ::playjingle <jingle-id>")
             }
@@ -49,7 +49,7 @@ class MusicCommandSet : CommandSet(Privilege.STANDARD){
          * this is mostly useful for custom tracks that aren't in the ingame
          * music player yet.
          */
-        define("playid", usage = "::playid <lt>song-id<gt>", description = "Plays a music track by musicId instead of numeric music track ID."){player,arg ->
+        define("playid", Privilege.STANDARD, "::playid <lt>song-id<gt>", "Plays a music track by musicId instead of numeric music track ID.") { player, arg ->
             if (arg.size < 2)
                 reject(player, "Needs more args.")
             val id = arg[1].toIntOrNull()
@@ -63,7 +63,7 @@ class MusicCommandSet : CommandSet(Privilege.STANDARD){
          * Command that unlocks all music tracks for the player
          * Restricted to ADMIN access only.
          */
-        define("allmusic", Privilege.ADMIN, description = "Unlocks every music track for you."){ player, _ ->
+        define("allmusic", Privilege.ADMIN, "::allmusic", "Unlocks every music track for you.") { player, _ ->
             for (me in MusicEntry.getSongs().values) {
                 player.musicPlayer.unlock(me.id)
             }
@@ -71,7 +71,7 @@ class MusicCommandSet : CommandSet(Privilege.STANDARD){
         /**
          * Command that lets you play an audio id
          */
-        define("audio", Privilege.ADMIN, "::audio <lt>id<gt> loops[optional]", "Plays audio by ID. Loopable with optional integer argument.") { player, args ->
+        define("audio", Privilege.ADMIN, "::audio <lt>id<gt> [loops]", "Plays audio by ID. Loopable with optional 'loops' integer argument.") { player, args ->
             if (args.size < 2 || args.size > 3)
                 reject(player, "Usage: ::audio <id> loops[optional]")
             val id = args[1].toInt()

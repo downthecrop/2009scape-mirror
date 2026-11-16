@@ -89,8 +89,7 @@ class CameraViewerCommandSet  : CommandSet(Privilege.ADMIN), InterfaceListener {
         }
     }
     override fun defineCommands() {
-        define("camview", description = "Opens the in-game camera viewer."){ player, args ->
-
+        define("camview", Privilege.ADMIN, "::camview", "Opens the in-game camera viewer.") { player, args ->
             // Bad number of args
             if(args.size > 2){
                 reject(player,"Usage: ::camview")
@@ -126,12 +125,12 @@ class CameraViewerCommandSet  : CommandSet(Privilege.ADMIN), InterfaceListener {
     }
 
     override fun defineInterfaceListeners() {
-        /*
-        If and when the time comes that you implement the Catapult Construction Quest,
-        you can override this or coexist with the command.
-        Do whatever you want since god knows how long it took you to get to this point lmao.
-        */
-        on(CATAPULT_INTERFACE){ player, _, _, buttonID, _, _ ->
+        /**
+         * If and when the time comes that you implement the Catapult Construction Quest,
+         * you can override this or coexist with the command.
+         * * Do whatever you want since god knows how long it took you to get to this point lmao.
+         */
+        on(CATAPULT_INTERFACE) { player, _, _, buttonID, _, _ ->
             val playerCamera = getAttribute(player, ATTRIBUTE_PLAYERCAMERA, PlayerCamera(player))
             val isOrigin = getAttribute(player, ATTRIBUTE_MODE_ORIGIN, true)
 

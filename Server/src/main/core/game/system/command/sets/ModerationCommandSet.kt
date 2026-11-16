@@ -28,16 +28,14 @@ import kotlin.math.abs
  * Moderation commands
  * @author Ceikry
  */
-class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
+class ModerationCommandSet : CommandSet(Privilege.MODERATOR) {
     override fun defineCommands() {
-        val MAX_JAIL_TIME = 1800 //Max jail time (in seconds)
-
+        val MAX_JAIL_TIME = 1800 // Max jail time (in seconds)
 
         /**
          * Kick a player
-         * =============================================================================================================
          */
-        define("kick", Privilege.MODERATOR, "::kick <player>", "Disconnects the specified player from the game."){ player, args ->
+        define("kick", Privilege.MODERATOR, "::kick <player>", "Disconnects the specified player from the game.") { player, args ->
             val playerToKick: Player? = Repository.getPlayerByName(args[1])
             if (playerToKick != null) {
                 playerToKick.clear()
@@ -46,15 +44,11 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
                 reject(player, "ERROR REMOVING PLAYER.")
             }
         }
-        /**
-         * =============================================================================================================
-         */
 
         /**
          * Ban a player
-         * =============================================================================================================
          */
-        define("ban", Privilege.ADMIN, "::ban <lt>USERNAME<gt> <lt>TIME<gt>", "Bans the user. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days."){ player, args ->
+        define("ban", Privilege.ADMIN, "::ban <lt>USERNAME<gt> <lt>TIME<gt>", "Bans the user. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days.") { player, args ->
             val name = args[1]
             if(!GameWorld.accountStorage.checkUsernameTaken(name)) {
                 reject(player, "Invalid username: $name")
@@ -93,15 +87,11 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
 
             notify(player, "Banned user $name for $intToken ${durationUnit.name.toLowerCase()}.")
         }
-        /**
-         * =============================================================================================================
-         */
 
         /**
          * Ban all players on a given IP
-         * =============================================================================================================
          */
-        define("ipban", Privilege.ADMIN, "::ipban <lt>IP<gt> <lt>TIME<gt>", "Bans all players on the given ip. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days."){ player, args ->
+        define("ipban", Privilege.ADMIN, "::ipban <lt>IP<gt> <lt>TIME<gt>", "Bans all players on the given ip. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days.") { player, args ->
             val ip = args[1]
             val durationString = args[2]
             val durationTokens = durationString.toCharArray()
@@ -146,15 +136,11 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
 
             notify(player, "Banned all accounts on $ip for $intToken ${durationUnit.name.toLowerCase()}.")
         }
-        /**
-         * =============================================================================================================
-         */
 
         /**
          * Mute a player
-         * =============================================================================================================
          */
-        define("mute", Privilege.MODERATOR, "::mute <lt>USERNAME<gt> <lt>TIME<gt>", "Mutes the user. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days."){ player, args ->
+        define("mute", Privilege.MODERATOR, "::mute <lt>USERNAME<gt> <lt>TIME<gt>", "Mutes the user. Time format: <lt>INT<gt>d/s/m/h ex: 30d for 30 days.") { player, args ->
             val name = args[1]
             if(!GameWorld.accountStorage.checkUsernameTaken(name)) {
                 reject(player, "Invalid username: $name")
@@ -194,15 +180,11 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
 
             notify(player, "Muted user $name for $intToken ${durationUnit.name.toLowerCase()}.")
         }
-        /**
-         * =============================================================================================================
-         */
 
         /**
          * Jail a player
-         * =============================================================================================================
          */
-        define("jail", Privilege.MODERATOR, "::jail <lt>SECONDS<gt> <lt>USERNAME<gt>", "Sends the player to the jail cells in Varrock."){player,args ->
+        define("jail", Privilege.MODERATOR, "::jail <lt>SECONDS<gt> <lt>USERNAME<gt>", "Sends the player to the jail cells in Varrock.") { player, args ->
             if(args.size < 3) {
                 reject(player,"Usage: ::jail <seconds> <player>")
             }
@@ -241,11 +223,11 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
                 }
             })
         }
-        /**
-         * =============================================================================================================
-         */
 
-        define("modcr", Privilege.MODERATOR, "::modcr <lt>user_name<gt> <lt>amount<gt>", "Modifies user_name's credits by the given amount.") {player, args ->
+        /**
+         * Mod a player's credit score
+         */
+        define("modcr", Privilege.MODERATOR, "::modcr <lt>user_name<gt> <lt>amount<gt>", "Modifies user_name's credits by the given amount.") { player, args ->
             val username = (args.getOrNull(1) ?: "").lowercase()
             val amount = args.getOrNull(2)?.toIntOrNull() ?: Integer.MIN_VALUE
 
@@ -279,7 +261,10 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
             notify(player, "Updated $username's credits to ${info.credits} by ${if (amount > 0) "adding" else "removing"} ${abs(amount)}.")
         }
 
-        define("csvmodcr", Privilege.ADMIN, "::csvmodcr filename", "Awards credits based on a csv list from a file. Relative to data dir.") {player, args ->
+        /**
+         * Mod a player's credit score in batch
+         */
+        define("csvmodcr", Privilege.ADMIN, "::csvmodcr filename", "Awards credits based on a csv list from a file. Relative to data dir.") { player, args ->
             val filename = args.getOrNull(1) ?: ""
 
             if (filename.isEmpty()) {
@@ -308,26 +293,6 @@ class ModerationCommandSet : CommandSet(Privilege.MODERATOR){
                     CommandMapping.get("modcr")?.handle?.invoke(player, arrayOf("", username, amount))
                 }
             }
-        }
-
-        define("getattribute", Privilege.ADMIN, "::getattribute <lt>username<gt> <lt>attribute<gt>", "Gets the value of an attribute for a player.") {player, args ->
-            val username = args.getOrNull(1) ?: ""
-            val attribute = args.getOrNull(2) ?: ""
-            if (username.isEmpty() || attribute.isEmpty()) {
-                reject(player, "Usage: ::getattribute username attribute")
-                return@define
-            }
-            val p = Repository.getPlayerByName(username)
-            if (p == null) {
-                reject(player, "Unable to find player $username.")
-                return@define
-            }
-            val value = p.getAttribute<Any>(attribute)
-            if (value == null) {
-                reject(player, "Unable to find attribute $attribute for player $username.")
-                return@define
-            }
-            notify(player, "Attribute $attribute for player $username is $value.")
         }
     }
 }

@@ -18,7 +18,7 @@ import core.plugin.Initializable
 class CameraCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
-        define("poscam", Privilege.ADMIN, "::poscam <lt>Region X<gt> <lt>Region Y<gt> [<lt>Height<gt>]", "Positions the camera to the given region-local coordinates.") { player, args ->
+        define("poscam", Privilege.ADMIN, "::poscam <lt>Region X<gt> <lt>Region Y<gt> [Height]", "Positions the camera to the given region-local coordinates (height is optional).") { player, args ->
             val regionX = args[1].toIntOrNull() ?: return@define
             val regionY = args[2].toIntOrNull() ?: return@define
             var height = 300
@@ -35,7 +35,7 @@ class CameraCommandSet : CommandSet(Privilege.ADMIN) {
             PlayerCamera(player).setPosition(globalLoc.x, globalLoc.y, height)
         }
 
-        define("movcam", Privilege.ADMIN, "::movcam <lt>Region X<gt> <lt>Region Y<gt> [<lt>Height<gt> <lt>Speed<gt>]", "Moves the camera to the given region-local coordinates.") { player, args ->
+        define("movcam", Privilege.ADMIN, "::movcam <lt>Region X<gt> <lt>Region Y<gt> [Height] [Speed]", "Moves the camera to the given region-local coordinates (height and speed are both optional).") { player, args ->
             val regionX = args[1].toIntOrNull() ?: return@define
             val regionY = args[2].toIntOrNull() ?: return@define
             var height = 300
@@ -55,7 +55,7 @@ class CameraCommandSet : CommandSet(Privilege.ADMIN) {
             PlayerCamera(player).panTo(globalLoc.x, globalLoc.y, height, speed)
         }
 
-        define("rotcam", Privilege.ADMIN, "::rotcam <lt>Region X<gt> <lt>Region Y<gt> [<lt>Height<gt> <lt>Speed<gt>]", "Rotates the camera to face the given region-local coordinates.") { player, args ->
+        define("rotcam", Privilege.ADMIN, "::rotcam <lt>Region X<gt> <lt>Region Y<gt> [Height] [Speed]", "Rotates the camera to face the given region-local coordinates (height and speed are both optional).") { player, args ->
             val regionX = args[1].toIntOrNull() ?: return@define
             val regionY = args[2].toIntOrNull() ?: return@define
             var height = 300
@@ -77,8 +77,7 @@ class CameraCommandSet : CommandSet(Privilege.ADMIN) {
             PlayerCamera(player).rotateTo(globalLoc.x, globalLoc.y, height, speed)
         }
 
-        define("shakecam", Privilege.ADMIN, "::shakecam <lt>Camera Movement Type (0-4)<gt> [<lt>Jitter<gt> <lt>Amplitude<gt> <lt>Frequency<gt> <lt>Speed<gt>]",
-            "Type (0-4) Jitter, Amplitude, Frequency (0-255)") {player, args ->
+        define("shakecam", Privilege.ADMIN, "::shakecam <lt>Camera Movement Type (0-4)<gt> [Jitter] [Amplitude] [Frequency] [Speed]", "Shakes the camera with type (0-4) jitter. Amplitude and frequency are optional (0-255).") { player, args ->
             val cameraMovementType = args[1].toIntOrNull() ?: return@define
             if (cameraMovementType < 0 || cameraMovementType > 4) {
                 return@define
@@ -109,7 +108,7 @@ class CameraCommandSet : CommandSet(Privilege.ADMIN) {
             PlayerCamera(player).shake(cameraMovementType, jitter, amplitude, frequency, speed)
         }
 
-        define("resetcam", Privilege.ADMIN, "::resetcam", "Resets the current camera position.") {player, args ->
+        define("resetcam", Privilege.ADMIN, "::resetcam", "Resets the current camera position.") {player, _ ->
             sendMessage(player, "<col=8e7cc3><shad=000000>CAMERA RESET</shad></col>")
             PlayerCamera(player).reset()
         }

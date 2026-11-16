@@ -3,6 +3,7 @@ package core.game.system.command
 import core.game.node.entity.player.Player
 import core.ServerConstants
 import core.api.sendChat
+import core.api.splitLines
 import core.game.node.entity.player.info.Rights
 import core.game.world.GameWorld
 import kotlin.collections.ArrayList
@@ -18,7 +19,7 @@ class Command(val name: String, val privilege: Privilege, val usage: String = "U
         val isDev = GameWorld.settings?.isDevMode == true
         val isCheater = ServerConstants.I_AM_A_CHEATER
         if (hasRights || isDev || isCheater) {
-            handle(player,args)
+            handle(player, args)
         } else if (ServerConstants.PLAYER_COMMANDS || args[0] == "bank") {
             // Authentically, if you attempt to use a command you shouldn't have access to, the game is supposed to say the below line.
             // We do this for all our custom commands if they are enabled (in which case this will only trigger for commands above your privilege level),
@@ -48,22 +49,19 @@ object CommandMapping {
     }
 
     fun getPageIndices(rights: Int): IntArray {
-        val list = ArrayList<Int>()
-        list.add(0)
-
+        val commands = getCommands().filter { it.privilege.ordinal <= rights }
+        val list = mutableListOf(0)
         var lineCounter = 0
-        for ((index, command) in getCommands().filter { it.privilege.ordinal <= rights }.withIndex()) {
-
+        for ((index, command) in commands.withIndex()) {
             lineCounter += 2
-            if (command.usage.isNotEmpty()) lineCounter++
-            if (command.description.isNotEmpty()) lineCounter++
-
-            if (lineCounter > 306) {
+            val usage = splitLines(command.usage, 70)
+            val description = splitLines(command.description, 70)
+            lineCounter += usage.size + description.size
+            if (lineCounter > 306 || index == commands.size - 1) {
                 list.add(index)
                 lineCounter = 0
             }
         }
-
         return list.toIntArray()
     }
 }

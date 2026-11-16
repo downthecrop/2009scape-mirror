@@ -8,7 +8,7 @@ import core.game.system.command.Privilege
 
 class IfCommandSet : Commands {
     override fun defineCommands() {
-        define ("iftriggers", Privilege.ADMIN, "::iftriggers <lt>id<gt>", "Lists all known triggers for the given interface.") {player, args ->
+        define ("iftriggers", Privilege.ADMIN, "::iftriggers <lt>id<gt>", "Lists all known triggers for the given interface.") { player, args ->
             val id = args.getOrNull(1)?.toIntOrNull() ?: -1
             if (id == -1) reject(player, "Must supply a valid interface ID!")
 
@@ -32,7 +32,7 @@ class IfCommandSet : Commands {
             }
         }
 
-        define ("listiftext", Privilege.ADMIN, "::listiftext <lt>id<gt>", "Prints all text values and their child index on an interface.") {player, args ->
+        define ("listiftext", Privilege.ADMIN, "::listiftext <lt>id<gt>", "Prints all text values and their child index on an interface.") { player, args ->
             val id = args.getOrNull(1)?.toIntOrNull() ?: -1
             if (id == -1) reject(player, "Must supply a valid interface ID!")
 
@@ -45,7 +45,7 @@ class IfCommandSet : Commands {
             }
         }
 
-        define ("listifmodels", Privilege.ADMIN, "::listifmodels <lt>id<gt>", "Prints all default model values and their child index.") {player, args ->
+        define ("listifmodels", Privilege.ADMIN, "::listifmodels <lt>id<gt>", "Prints all default model values and their child index.") { player, args ->
             val id = args.getOrNull(1)?.toIntOrNull() ?: -1
             if (id == -1) reject(player, "Must supply a valid interface ID!")
 

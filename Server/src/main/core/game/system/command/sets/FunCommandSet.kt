@@ -94,7 +94,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          * Force animation + messages on all NPCs in a radius of 10 from the player.
          * Add an optional 3rd argument if cycling through a range of animation ids.
          */
-        define("npcanim", Privilege.ADMIN, "::npcanim <lt>animation-id<gt> [end-animation-id]", "Makes nearby NPCs play <lt>animation-id<gt>, or loop that id up to <lt>end-animation-id<gt>.") { player, args ->
+        define("npcanim", Privilege.ADMIN, "::npcanim <lt>animation-id<gt> [end-animation-id]", "Makes nearby NPCs play <lt>animation-id<gt>, or loop that id up to <lt>end-animation-id<gt> if provided.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::npcanim <Animation ID>")
             }
@@ -121,7 +121,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Transform a player's appearance into that of an NPC.
          */
-        define("pnpc", Privilege.MODERATOR, "::pnpc <lt>NPC ID<gt>", "Transforms the player into the given NPC."){ player, args ->
+        define("pnpc", Privilege.MODERATOR, "::pnpc <lt>NPC ID<gt>", "Transforms the player into the given NPC.") { player, args ->
             if(args.size < 2){
                 reject(player, "Usage: ::pnpc <npcid>")
                 return@define
@@ -140,14 +140,14 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Open bank
          */
-        define("bank", Privilege.ADMIN, "", "Opens your bank."){ player, _ ->
+        define("bank", Privilege.ADMIN, "::bank", "Opens your bank.") { player, _ ->
             player.getBank().open()
         }
 
         /**
          * Toggle invisibility
          */
-        define("invis", Privilege.ADMIN, "", "Makes you invisible to others."){ player, _ ->
+        define("invis", Privilege.ADMIN, "::invis", "Makes you invisible to others.") { player, _ ->
             player.isInvisible = !player.isInvisible
             notify(player,"You are now ${if (player.isInvisible) "invisible" else "visible"} to others.")
         }
@@ -156,7 +156,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Toggle 1-hit kills
          */
-        define("1hit", Privilege.ADMIN, "", "Makes you kill things in 1 hit."){ player, _ ->
+        define("1hit", Privilege.ADMIN, "::1hit", "Makes you kill things in 1 hit.") { player, _ ->
             player.setAttribute("1hko", !player.getAttribute("1hko", false))
             notify(player,"1-hit KO mode " + if (player.getAttribute("1hko", false)) "on." else "off.")
         }
@@ -165,7 +165,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Toggle god mode
          */
-        define("god", Privilege.ADMIN, "", "Makes you invulnerable to damage."){ player, _ ->
+        define("god", Privilege.ADMIN, "::god", "Makes you almost invulnerable to damage.") { player, _ ->
             player.setAttribute("godMode", !player.getAttribute("godMode", false))
             notify(player,"God mode ${if (player.getAttribute("godMode", false)) "enabled." else "disabled."}")
         }
@@ -174,7 +174,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Go on Mr Bones' Wild Ride
          */
-        define("mrboneswildride"){ player, args ->
+        define("mrboneswildride", Privilege.ADMIN, "::mrboneswildride", "Look, I have no idea, man.") { player, args ->
             val p : Player = if(args.size > 2){
                 reject(player, "Usage: ::mrboneswildride <username>")
                 return@define
@@ -206,14 +206,14 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Opens up the makeover interface
          */
-        define("makeover", Privilege.MODERATOR, description = "Opens the makeover interface for your character."){ player, _ ->
+        define("makeover", Privilege.MODERATOR, "::makeover", "Opens the makeover interface for your character.") { player, _ ->
             CharacterDesign.open(player)
         }
 
         /**
          * Copies your current appearance and equipment as JSON to the clipboard
          */
-        define("dumpappearance", Privilege.MODERATOR, description = "Copies your appearance and equipment as JSON to the clipboard."){ player, _ ->
+        define("dumpappearance", Privilege.MODERATOR, "::dumpappearance", "Copies your appearance and equipment as JSON to the clipboard.") { player, _ ->
             val json = JSONObject()
             PlayerSaver(player).saveAppearance(json)
             val equipJson = PlayerSaver(player).saveContainer(player.equipment)
@@ -231,7 +231,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Bury inventory at current location
          */
-        define("bury", description = "Buries your entire inventory at your current location for treasure hunters. Required true/false to hide players name and an optional custom message."){player, args ->
+        define("bury", Privilege.ADMIN, "::bury <lt>true|false<gt> [custom news message]", "Buries your entire inventory at your current location for treasure hunters. Required true/false to hide players name and an optional custom message.") { player, args ->
             if(player.inventory.isEmpty){
                 reject(player, "You have no items to bury.")
             }
@@ -274,7 +274,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Bury a secret message at current location for a player to find.
          */
-        define("burymessage", description = "Buries a secret message at your current location."){ player, args ->
+        define("burymessage", Privilege.ADMIN, "::burymessage <lt>message<gt>", "Buries a secret message at your current location.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Usage: ::burymessage [message]")
                 return@define
@@ -300,7 +300,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Bury a specific item at current location
          */
-        define("buryitem", description = "Buries a specific item at your current location."){ player, args ->
+        define("buryitem", Privilege.ADMIN, "::buryitem <lt>item id<gt> <lt>true | false<gt> [custom message]", "Buries a specific item at your current location.") { player, args ->
             if (args.size < 3) {
                 reject(player, "Usage: ::buryitem <lt>item id<gt> <lt>true | false<gt> [custom message]")
                 return@define
@@ -343,7 +343,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
 
         }
 
-        define("appearance", Privilege.ADMIN, "", "Allows you to change your appearance."){ player, _ ->
+        define("appearance", Privilege.ADMIN, "::appearance", "Allows you to change your appearance.") { player, _ ->
             CharacterDesign.reopen(player)
         }
 
@@ -375,7 +375,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
          * 1 = Normal hunger/growth mode (1x speed)
          * 2 = Dev hunger/growth mode (100x speed)
          */
-        define("petrate", Privilege.ADMIN, "::petrate <lt>0-2<gt>", "Sets pet hunger and growth to off, normal, or dev."){ player, args ->
+        define("petrate", Privilege.ADMIN, "::petrate <lt>0-2<gt>", "Sets pet hunger and growth to off, normal, or dev.") { player, args ->
             if(args.size < 2) {
                 notify(player, "Pet mode is currently ${player.getAttribute("petrate", 1)}")
                 return@define
@@ -393,7 +393,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Toggle instant woodcutting.
          */
-        define("instachop", Privilege.ADMIN, "", "Fells trees after a single log is gathered."){ player, _ ->
+        define("instachop", Privilege.ADMIN, "", "Fells trees after a single log is gathered.") { player, _ ->
             player.setAttribute("instachop", !player.getAttribute("instachop", false))
             notify(player,"Instachop mode " + if (player.getAttribute("instachop", false)) "on." else "off.")
         }
@@ -401,7 +401,6 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
     }
 
     fun bury(player: Player, hideName: Boolean = false, customMessage: String? = null){
-
         val loc = Location.create(player.location)
         if(SpadeDigListener.listeners.containsKey(loc)){
             notify(player, "There is already something buried here.")
@@ -441,7 +440,6 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
     }
     
     private fun registerTreasureListener(t: BuriedTreasure) {
-
         SpadeDigListener.registerListener(t.location) { p ->
             log(FunCommandSet::class.java, Log.DEBUG, "SpadeDigListener triggered for ${p.username} at ${t.location}")
             
@@ -464,7 +462,6 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
     }
 
     private fun saveTreasures() {
-
         val array = JSONArray()
 
         for (t in treasures) {
@@ -504,5 +501,4 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
     )
 
     private enum class TreasureType { ITEM, MESSAGE }
-
 }

@@ -20,7 +20,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Start an update countdown
          */
-        define("update", usage = "::update [seconds]", description = "Flags the world for an update, optionally using [seconds] as the countdown.") { player, args ->
+        define("update", Privilege.ADMIN, "::update [seconds]", "Flags the world for an update, optionally using [seconds] as the countdown.") { _, args ->
             if (args.size > 1) {
                 SystemManager.updater.setCountdown(args[1].toInt())
             }
@@ -30,22 +30,22 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Cancel an update countdown
          */
-        define("cancelupdate", description = "Cancels any active update countdown.") { _, _ ->
+        define("cancelupdate", Privilege.ADMIN, "::cancelupdate", "Cancels any active update countdown.") { _, _ ->
             SystemManager.updater.cancel()
         }
 
         /**
          * Runs the daily restart
          */
-        define("dailyrestart", description = "Runs the daily restart.") { _, _ ->
+        define("dailyrestart", Privilege.ADMIN, "::dailyrestart", "Runs the daily restart.") { _, _ ->
             SystemManager.dailyRestart()
         }
 
         /**
          * Allows a player to reset their password
          */
-        define("resetpassword", Privilege.STANDARD, "", "WARNING: Case insensitive due to dialogue limitations.") { player, args ->
-            sendInputDialogue(player, InputType.STRING_SHORT, "Enter Current Password:"){value ->
+        define("resetpassword", Privilege.STANDARD, "::resetpassword", "WARNING: Case insensitive due to dialogue limitations.") { player, _ ->
+            sendInputDialogue(player, InputType.STRING_SHORT, "Enter Current Password:") { value ->
                 val pass = value.toString()
                 runTask(player) {
                     if (GameWorld.authenticator.checkPassword(player, pass)) {
@@ -232,11 +232,11 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        define("potato", Privilege.ADMIN, "", "Gives you a rotten potato.") { player, _ ->
+        define("potato", Privilege.ADMIN, "::potato", "Gives you a rotten potato.") { player, _ ->
             player.inventory.add(Item(Items.ROTTEN_POTATO_5733))
         }
 
-        define("shutdown", Privilege.ADMIN, description = "Immediately terminates the server process. Do NOT test on a remote server you don't own.") { player, _ ->
+        define("shutdown", Privilege.ADMIN, "::shutdown", "Immediately terminates the server process. Do NOT test on a remote server you don't own.") { _, _ ->
             exitProcess(0)
         }
 

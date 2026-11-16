@@ -16,7 +16,6 @@ import kotlin.system.exitProcess
 
 /**
  * Class for parsing the server config, I.E default.toml
- * @param path the path to the TOML file to parse.
  * @author Ceikry
  */
 object ServerConfigParser {
@@ -177,6 +176,7 @@ object ServerConfigParser {
         ServerConstants.WEBSOCKET_TLS_ENABLED = data.getBoolean("server.websocket_tls_enabled", false)
         ServerConstants.WEBSOCKET_TLS_KEYSTORE_PATH = data.getString("server.websocket_tls_keystore_path", "")
         ServerConstants.WEBSOCKET_TLS_KEYSTORE_PASSWORD = data.getString("server.websocket_tls_keystore_password", "")
+        ServerConstants.I_KNOW_WHAT_I_AM_DOING = data.getString("world.I_know_what_I_am_doing", "")
 
         val logLevel = data.getString("server.log_level", "VERBOSE").uppercase()
         ServerConstants.LOG_LEVEL = parseEnumEntry<LogLevel>(logLevel) ?: LogLevel.VERBOSE

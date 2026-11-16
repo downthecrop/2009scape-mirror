@@ -18,12 +18,12 @@ import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
 @Initializable
-class SpawnCommandSet : CommandSet(Privilege.ADMIN){
+class SpawnCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
         /**
          * Spawns an npc with the given ID
          */
-        define("npc", usage = "::npc <lt>npc-id<gt> [amount] [iswalks]", description = "Spawns one or more NPCs at your location, optionally letting them walk."){player,args ->
+        define("npc", Privilege.ADMIN, "::npc <lt>npc-id<gt> [amount] [iswalks]", "Spawns one or more NPCs at your location, optionally letting them walk.") { player, args ->
             if (args.size < 2) {
                 reject(player, "syntax: id (required) amount (optional) isWalks (optional)")
                 return@define
@@ -64,7 +64,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Spawns an item with the given ID
          */
-        define("item", usage = "::item <lt>item-id<gt> [amount]", description = "Spawns the specified item stack into your inventory."){player,args ->
+        define("item", Privilege.ADMIN, "::item <lt>item-id<gt> [amount]", "Spawns the specified item stack (default: one item) into your inventory.") { player, args ->
             if (args.size < 2) {
                 reject(player,"You must specify an item ID")
                 return@define
@@ -88,7 +88,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Spawns multiple items with the given ID
          */
-        define("items", usage = "::items <lt>start-id<gt> <lt>end-id<gt> [amount]", description = "Loops through item ids from 'start-id' to 'end-id' and spawns 'amount' of them in your inventory."){player,args ->
+        define("items", Privilege.ADMIN, "::items <lt>start-id<gt> <lt>end-id<gt> [amount]", "Loops through item ids from 'start-id' to 'end-id' and spawns 'amount' (default: one) of them in your inventory.") { player, args ->
             if (args.size < 3) {
                 reject(player,"You must specify start and end item ids.")
                 return@define
@@ -114,7 +114,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Spawn object with given ID at the player's location
          */
-        define("object", usage = "::object <lt>object-id<gt> [type] [rotation]", description = "Spawns an object at your tile with optional type and rotation."){player,args ->
+        define("object", Privilege.ADMIN, "::object <lt>object-id<gt> [type] [rotation]", "Spawns an object at your tile with optional type and rotation.") { player, args ->
             if (args!!.size < 2) {
                 reject(player,"syntax error: id (optional) type rotation or rotation")
                 return@define
@@ -124,7 +124,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
             log(this::class.java, Log.FINE,  "object = $`object`")
         }
 
-        define("objectgrid", usage = "::objectgrid <lt>start-id<gt> <lt>end-id<gt> <lt>type<gt> <lt>rotation<gt>", description = "Spawns a 10-wide grid cycling through the given object id range.") { player, args ->
+        define("objectgrid", Privilege.ADMIN, "::objectgrid <lt>start-id<gt> <lt>end-id<gt> <lt>type<gt> <lt>rotation<gt>", "Spawns a 10-wide grid cycling through the given object id range.") { player, args ->
             if(args!!.size != 5) {
                 reject(player, "Usage: objectgrid beginId endId type rotation")
                 return@define

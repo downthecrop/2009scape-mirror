@@ -5,6 +5,7 @@ import core.game.system.command.Command
 import core.game.system.command.CommandMapping
 import core.plugin.Plugin
 import core.game.system.command.Privilege
+import core.game.world.repository.Repository
 import core.tools.colorize
 
 /**
@@ -47,7 +48,25 @@ abstract class CommandSet(val defaultPrivilege: Privilege) : Plugin<Any?> {
     }
 
     /**
-     * Used to define commands. define("name",(optional) privilege override){ handle }
+     * Turns a player name given as a command argument into an actual player object. Note: this function joins arguments
+     * following 'startindex' by underscores, i.e. it accepts both "player_name" and "player name". This means that the
+     * 'args' array you passed must be sliced in such a way that anything after 'startindex' can only be part of the
+     * player name! This works out naturally if you make the player name the _last_ argument your command takes.
+     */
+    fun getPlayerFromArgs(player: Player, args: Array<String>, startindex: Int = 1): Player? {
+        val n = args.slice(startindex until args.size).joinToString("_")
+        if (n == "") { // no argument given -> return self player
+            return player
+        }
+        val target = Repository.getPlayerByName(n)
+        if (target == null) {
+            reject(player, "Could not find a player named '$n'")
+        }
+        return target
+    }
+
+    /**
+     * Used to define commands. define("name",(optional) privilege override) { handle }
      * @param name the name of the command. Example: ::example would be just "example"
      * @param privilege (optional) privilege override from the set default.
      */

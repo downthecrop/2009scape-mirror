@@ -4,7 +4,6 @@ import core.game.system.SystemShutdownHook
 import core.game.world.map.Location
 import core.tools.LogLevel
 import core.tools.mysql.Database
-import core.tools.secondsToTicks
 import rs09.game.content.activity.castlewars.CastleWars
 import java.math.BigInteger
 import java.util.*
@@ -31,9 +30,6 @@ class ServerConstants {
 
         @JvmField
         var SHUTDOWN_HOOK: Thread = Thread(SystemShutdownHook())
-
-        @JvmField
-        var ALLOW_GUI: Boolean = false
 
         @JvmField
         var DATA_PATH: String? = null
@@ -64,12 +60,6 @@ class ServerConstants {
 
         @JvmField
         var OBJECT_PARSER_PATH: String? = null
-
-        @JvmField
-        var SCRIPTS_PATH: String? = null
-
-        @JvmField
-        var DIALOGUE_SCRIPTS_PATH: String? = null
 
         @JvmField
         var LOGS_PATH: String? = null
@@ -147,9 +137,6 @@ class ServerConstants {
 
         @JvmField
         var BANK_BOOTH_NOTE_UIM: Boolean = true
-
-        @JvmField
-        var GE_AUTOSAVE_FREQUENCY = secondsToTicks(3600) //1 hour
 
         @JvmField
         var GE_AUTOSTOCK_ENABLED = false
@@ -246,10 +233,6 @@ class ServerConstants {
 
         @JvmField
         var DATABASE: Database? = null
-
-        //if SQL is enabled
-        @JvmField
-        var MYSQL = true
 
         //the server name
         @JvmField
@@ -364,7 +347,7 @@ class ServerConstants {
         var BOOSTED_TRAWLER_REWARDS = false
 
         @JvmField
-        var STARTUP_MOMENT = Calendar.getInstance()
+        var STARTUP_MOMENT: Calendar = Calendar.getInstance()
 
         @JvmField
         var CONNECTIVITY_CHECK_URL = "https://google.com,https://2009scape.org"
@@ -386,5 +369,8 @@ class ServerConstants {
 
         @JvmField
         var WEBSOCKET_TLS_KEYSTORE_PASSWORD = ""
+
+        @JvmField
+        var I_KNOW_WHAT_I_AM_DOING = ""
     }
 }

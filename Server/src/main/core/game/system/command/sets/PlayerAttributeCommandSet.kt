@@ -14,11 +14,10 @@ import core.plugin.Initializable
 @Initializable
 class PlayerAttributeCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
-
         /**
          * Gets the value of an attribute on a player.
          */
-        define("getattribute", usage = "::getattribute [player] <lt>attribute<gt>", description = "Prints the value of the chosen attribute on you or another player. Omit [player] to use on self.") { player, args ->
+        define("getattribute", Privilege.ADMIN, "::getattribute [player] <lt>attribute<gt>", "Prints the value of the chosen attribute on you or another player. Omit [player] to use on self.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Usage ::getattribute [playername] attributename")
             }
@@ -48,7 +47,7 @@ class PlayerAttributeCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Sets the value of an attribute on a player.
          */
-        define("setattribute", usage = "::setattribute [player] <lt>attribute<gt> <lt>value<gt>", description = "Sets a simple attribute on you or another player.") { player, args ->
+        define("setattribute", Privilege.ADMIN, usage = "::setattribute [player] <lt>attribute<gt> <lt>value<gt>", "Sets a simple attribute on you or another player. Omit [player] to use on self.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Usage ::setattribute [playername] attributename value")
             }

@@ -43,7 +43,7 @@ class BottingCommandSet : CommandSet(Privilege.STANDARD) {
             }
             player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
-        define("script"){player,args ->
+        define("script") { player, args ->
             if(GameWorld.settings?.enabled_botting != true){
                 player.sendChat("I just tried to do something very silly!")
                 return@define
@@ -67,7 +67,7 @@ class BottingCommandSet : CommandSet(Privilege.STANDARD) {
             player.sendMessage(colorize("%RTo stop the script, do ::stopscript or log out."))
 
         }
-        define("stopscript"){player,args ->
+        define("stopscript") { player, _ ->
             val pulse: GeneralBotCreator.BotScriptPulse? = player.getAttribute("botting:script",null)
             pulse?.stop()
             player.interfaceManager.closeOverlay()

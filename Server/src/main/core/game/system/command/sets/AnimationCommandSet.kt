@@ -20,15 +20,13 @@ import java.util.*
 
 @Initializable
 class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
-
     private var npcs: List<NPC> = ArrayList()
 
     override fun defineCommands() {
-
         /**
          * Force the player to play animation <Animation ID>
          */
-        define("anim", Privilege.ADMIN, "::anim <lt>Animation ID<gt>", "Plays the animation with the given ID."){ player, args ->
+        define("anim", Privilege.ADMIN, "::anim <lt>Animation ID<gt>", "Plays the animation with the given ID.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::anim <lt>Animation ID<gt>")
                 return@define
@@ -37,9 +35,9 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
             player.animate(animation)
         }
 
-        define("anims", Privilege.ADMIN, "::anims <lt>From Animation ID<gt> <lt>To Animation ID<gt> <lt>(opt) Duration Per Animation<gt>", "Plays animations from the From ID to the To ID, with a delay of 3 between animations, unless specified otherwise"){ player, args ->
+        define("anims", Privilege.ADMIN, "::anims <lt>from<gt> <lt>to<gt> [duration]", "Plays animations from the id 'from' to id 'to', with 'duration' ticks in between (default 3).") { player, args ->
             if (args.size < 3) {
-                reject(player, "Syntax error: ::anims <lt>From Animation ID<gt> <lt>To Animation ID<gt> <lt>(opt) Duration Per Animation<gt>")
+                reject(player, "Syntax error: ::anims <lt>from<gt> <lt>to<gt> [duration]")
                 return@define
             }
             val animationFrom = args[1].toInt()
@@ -62,7 +60,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Force the player to loop animation <Animation ID>
          */
-        define("loopanim", Privilege.ADMIN, "::loopanim <lt>Animation ID<gt> <lt>Times<gt>", "Plays the animation with the given ID the given number of times"){ player, args ->
+        define("loopanim", Privilege.ADMIN, "::loopanim <lt>Animation ID<gt> <lt>Times<gt>", "Plays the animation with the given ID the given number of times") { player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::loopanim <lt>Animation ID<gt> <lt>Loop Amount<gt>")
                 return@define
@@ -85,7 +83,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Change the player's render animation to <Render Animation ID>
          */
-        define("ranim", Privilege.ADMIN, "::ranim <lt>Render Anim ID<gt>", "Sets the player's render (walk/idle) animation."){ player, args ->
+        define("ranim", Privilege.ADMIN, "::ranim <lt>Render Anim ID<gt>", "Sets the player's render (walk/idle) animation.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::ranim <lt>Render Animation ID<gt>")
                 return@define
@@ -113,7 +111,7 @@ class AnimationCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Reset the player's render animation to default
          */
-        define("ranimreset", Privilege.ADMIN, "", "Resets the player's render (walk/idle) animation to default."){ player, _ ->
+        define("ranimreset", Privilege.ADMIN, "::ranimreset", "Resets the player's render (walk/idle) animation to default.") { player, _ ->
             player.appearance.prepareBodyData(player)
             player.appearance.setDefaultAnimations()
             player.appearance.setAnimations()

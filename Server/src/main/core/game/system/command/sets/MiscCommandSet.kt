@@ -1,6 +1,7 @@
 package core.game.system.command.sets
 
 import content.global.handlers.iface.*
+import content.global.handlers.iface.RulesAndInfo.CONFIRMED_RULES_ATTRIBUTE
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.cooking.fermenting.BrewGrowth
 import content.global.skill.farming.timers.*
@@ -65,17 +66,17 @@ private fun setBooleanAttribute(player: Player, attribute: String, enabled: Bool
 }
 
 @Initializable
-class MiscCommandSet : CommandSet(Privilege.ADMIN){
+class MiscCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
 
         /**
          * Toggles debug mode
          */
-        define("debug", Privilege.STANDARD, "", "Toggles debug mode."){ player, _ ->
+        define("debug", Privilege.STANDARD, "::debug", "Toggles debug mode.") { player, _ ->
             player.toggleDebug()
         }
 
-        define("calcaccuracy", Privilege.STANDARD, "::calcaccuracy <lt>NPC ID<gt>", "Calculates and prints your current chance to hit a given NPC."){ player, args ->
+        define("calcaccuracy", Privilege.STANDARD, "::calcaccuracy <lt>NPC ID<gt>", "Calculates and prints your current chance to hit a given NPC.") { player, args ->
             val handler = player.getSwingHandler(false)
             player.sendMessage("handler type: ${handler.type}")
             val accuracy = handler.calculateAccuracy(player)
@@ -98,7 +99,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
         }
 
-        define("anmacs", Privilege.ADMIN, description = "Starts the AnmaCutscene sequence for testing.") { player, _ ->
+        define("anmacs", Privilege.ADMIN, "::anmacs", "Starts the AnmaCutscene sequence for testing.") { player, _ ->
             AnmaCutscene(player).start()
         }
 
@@ -115,7 +116,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Prints player's current location
          */
-        define("loc", Privilege.STANDARD, "", "Prints quite a lot of information about your current location."){ player, _->
+        define("loc", Privilege.STANDARD, "::loc", "Prints quite a lot of information about your current location.") { player, _->
             val l = player.location
             val r = l.region
             var obj: Scenery? = null
@@ -140,18 +141,18 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Tells the player to use loc
          */
-        define("pos", Privilege.STANDARD){ player, _->
+        define("pos", Privilege.STANDARD) { player, _->
             notify(player, "Do you mean ::loc?")
         }
 
         /**
          * Tells the player to use loc
          */
-        define("coords", Privilege.STANDARD){ player, _->
+        define("coords", Privilege.STANDARD) { player, _->
             notify(player, "Do you mean ::loc?")
         }
 
-        define("calcmaxhit", Privilege.STANDARD, description = "Calculates and prints your current maximum hit.") { player, _ ->
+        define("calcmaxhit", Privilege.STANDARD, "::calcmaxhit", "Calculates and prints your current maximum hit.") { player, _ ->
             val swingHandler = player.getSwingHandler(false)
             val hit = swingHandler.calculateHit(player, player, 1.0)
             notify(player, "max hit: ${hit} (${(swingHandler as Object).getClass().getName()})")
@@ -160,8 +161,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Prints player's and given NPC's raw defence and attack values, and the chance for the player to be hit using a given swing handler.
          */
-        define("calcdefence", Privilege.STANDARD, "::calcdefence <lt>NPC ID<gt> <lt>opt: swing handler<gt>",
-            "Calculates and prints your current raw defence values for Melee, Ranged and Magic against a given NPC. Supply a swing handler to specify what calculation is done.") { player, args ->
+        define("calcdefence", Privilege.STANDARD, "::calcdefence <lt>NPC ID<gt> <lt>opt: swing handler<gt>", "Calculates and prints your current raw defence values for Melee, Ranged and Magic against a given NPC. Supply a swing handler to specify what calculation is done.") { player, args ->
             val swingHandlers = mapOf(
                 "melee"     to core.game.node.entity.combat.MeleeSwingHandler(),
                 "ranged"    to core.game.node.entity.combat.RangeSwingHandler(),
@@ -236,7 +236,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
          * Empty a player's inventory
          * ADMIN only (for obvious reasons)
          */
-        define("empty", Privilege.ADMIN, "", "Empties/clears your inventory."){player,_->
+        define("empty", Privilege.ADMIN, "", "Empties/clears your inventory.") { player,_->
             player.inventory.clear()
             player.inventory.refresh()
         }
@@ -244,7 +244,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Announces a message in chat (NEWS)
          */
-        define("announce", Privilege.ADMIN, "::announce <lt>String<gt>", "Sends the given string as a News message."){_,args ->
+        define("announce", Privilege.ADMIN, "::announce <lt>String<gt>", "Sends the given string as a News message.") { _ ,args ->
             val message = args.slice(1 until args.size).joinToString(" ")
             Repository.sendNews(message)
         }
@@ -252,7 +252,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Lists the players currently online
          */
-        define("players", Privilege.MODERATOR, "", "Lists the online players."){ player, _ ->
+        define("players", Privilege.MODERATOR, "::players", "Lists the online players.") { player, _ ->
             val rights = player.rights.ordinal
             if (player!!.interfaceManager.isOpened && player.interfaceManager.opened.id != Components.QUESTJOURNAL_SCROLL_275 || player.locks.isMovementLocked || player.locks.isTeleportLocked) {
                 reject(player, "Please finish what you're doing first.")
@@ -275,7 +275,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Lists information about a bot
          */
-        define("botinfo", Privilege.STANDARD, "::botinfo <lt>botname<gt>", "Prints debug information about a bot"){ player, args ->
+        define("botinfo", Privilege.STANDARD, "::botinfo <lt>botname<gt>", "Prints debug information about a bot") { player, args ->
             val scriptInstances = AIRepository.PulseRepository
 
             // Find the bot with the given name (non-case sensitive, concat args by space)
@@ -293,7 +293,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Opens the credit/voting shop
          */
-        define("shop", Privilege.STANDARD, "", "Opens the credit shop."){ player, _ ->
+        define("shop", Privilege.STANDARD, "::shop", "Opens the credit shop.") { player, _ ->
             if (player.locks.isInteractionLocked || player.locks.isMovementLocked) {
                 sendMessage(player, "You can't open the shop right now.")
             } else player.interfaceManager.open(Component(Components.CREDIT_SHOP))
@@ -302,12 +302,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Shows the player a list of currently active GE sell offers or toggles muting sell offer News announcements.
          */
-        define(
-            "ge",
-            Privilege.STANDARD,
-            "::ge <lt>MODE<gt> (Modes: buying, selling, search, bots, botsearch, mute)",
-            "Various commands for viewing GE offers."
-        ) { player, args ->
+        define("ge", Privilege.STANDARD, "::ge <lt>MODE<gt> (Modes: buying, selling, search, bots, botsearch, mute)", "Various commands for viewing GE offers.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search, bots, botsearch, mute")
             }
@@ -334,34 +329,26 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 )
             }
         }
-        /**
-         * ==================================================================================
-         */
-
 
         /**
          * List all commands
          */
-        define("commands", Privilege.STANDARD, "::commands <lt>page<gt>", "Lists all the commands (you are here.)"){player, args ->
+        define("commands", Privilege.STANDARD, "::commands <lt>page<gt>", "Lists all the commands (you are here.)") { player, args ->
             val page = if (args.size > 1) (args[1].toIntOrNull() ?: 1) - 1 else 0
             val pages = CommandMapping.getPageIndices(player.rights.ordinal)
             val end = if (page < (pages.size - 1)) pages[page + 1] else CommandMapping.getCommands().size
-
             if (page < 0) {
                 reject(player, "Usage: ::commands <lt>page<gt>")
             }
-
             if (page > pages.size) {
                 reject(player, "That page number is too high, you don't have access to that many.")
             }
 
             val title = "Commands" + if (pages.size > 1) " (${page + 1}/${pages.size})" else ""
             var lineId = setupScrollInterface(player, title)
-
-            for(i in pages[page] until end) {
+            for (i in pages[page] until end) {
                 val command = CommandMapping.getCommands()[i]
                 lineId = displayCommandInScroll(player, command, player.rights.ordinal, lineId)
-
                 if (lineId > 306) {
                     player.packetDispatch.sendString("To view the next page, use ::commands ${page + 2}", Components.QUESTJOURNAL_SCROLL_275, lineId)
                     break
@@ -373,7 +360,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /*
          * Search for commands
          */
-        define("commandsearch", Privilege.STANDARD, "::commandsearch <lt>search term<gt> [--chat]", "Searches for commands containing the given term."){player, args ->
+        define("commandsearch", Privilege.STANDARD, "::commandsearch <lt>search term<gt> [--chat]", "Searches for commands containing the given term.") { player, args ->
             if (args.size < 2) {
                 reject(player, "Usage: ::commandsearch <search term> [--chat]")
                 return@define
@@ -462,31 +449,31 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Reply to PMs (also enables tab-to-reply)
          */
-        define("reply", Privilege.STANDARD, "", "Opens a reply prompt to your last DM. Same as pressing tab."){ player, _ ->
+        define("reply", Privilege.STANDARD, "::reply", "Opens a reply prompt to your last DM. Same as pressing tab.") { player, _ ->
             if(player.interfaceManager.isOpened){
                 reject(player, "<col=e74c3c>Please finish what you're doing first.")
             }
             if (player.attributes.containsKey("replyTo")) {
                 player.setAttribute("keepDialogueAlive", true)
                 val replyTo = player.getAttribute("replyTo", "").replace("_".toRegex(), " ")
-                sendInputDialogue(player, InputType.MESSAGE ,StringUtils.formatDisplayName(replyTo)){ value ->
+                sendInputDialogue(player, InputType.MESSAGE ,StringUtils.formatDisplayName(replyTo)) { value ->
                     CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), value as String)
                     player.removeAttribute("keepDialogueAlive")
                 }
             } else {
-                reject(player, "<col=3498db>You have not recieved any recent messages to which you can reply.")
+                reject(player, "<col=3498db>You have not received any recent messages to which you can reply.")
             }
         }
 
         /**
          * Enables client to safety close the currently opened interface or dialogue (esc-to-close plugin)
          */
-        define("xface", Privilege.STANDARD, "", "Closes the currently opened interface/dialogue."){player, _ ->
+        define("xface", Privilege.STANDARD, "::xface", "Closes the currently opened interface/dialogue.") { player, _ ->
             player.interfaceManager.close()
             player.dialogueInterpreter.close()
         }
 
-        define("completediaries", Privilege.ADMIN, "", "Completes all diaries."){player,_ ->
+        define("completediaries", Privilege.ADMIN, "::completediaries", "Completes all diaries.") { player, _ ->
             player.achievementDiaryManager.diarys.forEach {
                 for(level in it.taskCompleted.indices){
                     for(task in it.taskCompleted[level].indices){
@@ -499,7 +486,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Permadeaths a player, resetting their save
          */
-        define("permadeath", Privilege.ADMIN, "::permadeath <lt>PLAYER<gt>", "Permadeaths PLAYER (self if omitted), completely wiping their save."){player,args ->
+        define("permadeath", Privilege.ADMIN, "::permadeath [player]", "Permadeaths [player] (self if omitted), completely wiping their save.") { player, args ->
             var target = player
             if (args.size > 1) {
                 val n = args.slice(1 until args.size).joinToString("_")
@@ -512,7 +499,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             permadeath(target)
         }
 
-        define("log", Privilege.ADMIN, description = "Adds your current coordinates to the location log buffer."){player,_ ->
+        define("log", Privilege.ADMIN, "::log", "Adds your current coordinates to the location log buffer.") { player, _ ->
             var log: ArrayList<String>? = player.getAttribute("loc-log")
             log = log ?: ArrayList<String>()
             val locString = "{${player.location.x},${player.location.y},${player.location.z},1,0}"
@@ -520,7 +507,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             player.setAttribute("loc-log",log)
         }
 
-        define("logdone", description = "Copies the queued location log to your clipboard and clears it."){player,_ ->
+        define("logdone", Privilege.ADMIN, "::logdone", "Copies the queued location log to your clipboard and clears it.") { player, _ ->
             val log: ArrayList<String>? = player.getAttribute("loc-log")
             log ?: return@define
 
@@ -540,7 +527,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             player.setAttribute("loc-log",log)
         }
 
-        define("rolltrawlerloot", Privilege.ADMIN, "::rolltrawlerloot <lt>ROLL COUNT<gt>", "Rolls some trawler loot."){player,args ->
+        define("rolltrawlerloot", Privilege.ADMIN, "::rolltrawlerloot <lt>ROLL COUNT<gt>", "Rolls some trawler loot.") { player, args ->
             val rolls = if(args.size < 2){
                 100
             } else {
@@ -549,18 +536,18 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             TrawlerLoot.addLootAndMessage(player, player.skills.getLevel(Skills.FISHING), rolls, false)
         }
 
-        define("fillbank", Privilege.ADMIN, description = "Fills your bank with sequential item IDs."){player,_ ->
+        define("fillbank", Privilege.ADMIN, "::fillbank", "Fills your bank with sequential item IDs.") { player, _ ->
             for(i in 0 until ServerConstants.BANK_SIZE){
                 player.bank.add(Item(i))
             }
         }
 
-        define("emptybank", Privilege.ADMIN, description = "Clears your bank contents."){player,_ ->
+        define("emptybank", Privilege.ADMIN, "::emptybank", "Clears your bank contents.") { player, _ ->
             player.bank.clear()
             player.bank.update()
         }
 
-        define("setconfig", Privilege.ADMIN, "::setconfig <lt>config-id<gt> <lt>value<gt>", "DEPRECATED: use ::setvarp or ::setvarbit. Sets the raw varp <lt>config-id<gt> to <lt>value<gt>."){player,args ->
+        define("setconfig", Privilege.ADMIN, "::setconfig <lt>config-id<gt> <lt>value<gt>", "DEPRECATED: use ::setvarp or ::setvarbit. Sets the raw varp <lt>config-id<gt> to <lt>value<gt>.") { player, args ->
             if(args.size < 3){
                 reject(player,"Syntax: ::setconfig configID value")
             }
@@ -569,7 +556,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             setVarp(player, configID, configValue)
         }
 
-        define("getobjectvarp", usage = "::getobjectvarp <lt>object-id<gt>", description = "Looks up which varp controls the state of <lt>object-id<gt>."){player,args ->
+        define("getobjectvarp", Privilege.ADMIN, "::getobjectvarp <lt>object-id<gt>", "Looks up which varp controls the state of <lt>object-id<gt>.") { player, args ->
             if(args.size < 2){
                 reject(player,"Syntax: ::getobjectvarp objectid")
             }
@@ -577,7 +564,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).varpId}")
         }
 
-        define("define_varbit", Privilege.ADMIN, "::define_varbit <varbit-id>", "Prints detailed information about <varbit-id>."){ player, args ->
+        define("define_varbit", Privilege.ADMIN, "::define_varbit <varbit-id>", "Prints detailed information about <varbit-id>.") { player, args ->
             if(args.size < 2) {
                 reject(player, "Syntax: ::define_varbit varbitId")
             }
@@ -586,74 +573,69 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
 
-        define("setvarbit", Privilege.ADMIN, "::setvarbit <lt>varbit-id<gt> <lt>value<gt>", "Sets <lt>varbit-id<gt> to <lt>value<gt> for your player."){
-            player,args ->
-            if(args.size != 3){
-                reject(player,"Usage: ::setvarbit <varbit-id> <value>")
+        define("setvarbit", Privilege.ADMIN, "::setvarbit <lt>varbit-id<gt> <lt>value<gt> [player]", "Sets <lt>varbit-id<gt> to <lt>value<gt> for [player] (self if omitted).") { player, args ->
+            if (args.size < 3) {
+                reject(player,"Usage: ::setvarbit <varbit-id> <value> [player]")
             }
             val index = args[1].toIntOrNull()
             val value = args[2].toIntOrNull()
-
-            if(index == null || value == null){
-                reject(player,"Usage ::setvarbit <varbit-id> <value>")
+            if (index == null || value == null) {
+                reject(player,"Usage ::setvarbit <varbit-id> <value> [player]")
             }
-
-            setVarbit(player, index!!, value!!)
+            val target = getPlayerFromArgs(player, args, 3) ?: return@define
+            setVarbit(target, index!!, value!!)
         }
 
-        define("setvarbits", Privilege.ADMIN, "::setvarbits <lt>FROM VARBIT ID<gt> <lt>TO VARBIT ID<gt> <lt>VALUE<gt>", ""){
-            player,args ->
-            if(args.size != 4){
-                reject(player,"Usage: ::setvarbits <fromvarbit> <tovarbit> <value>")
+        define("setvarbits", Privilege.ADMIN, "::setvarbits <lt>FROM VARBIT ID<gt> <lt>TO VARBIT ID<gt> <lt>VALUE<gt> [player]", "Sets varbits in a range to <lt>VALUE<gt> for [player] (self if omitted).") { player, args ->
+            if (args.size < 4) {
+                reject(player,"Usage: ::setvarbits <fromvarbit> <tovarbit> <value> [player]")
             }
             val fromIndex = args[1].toIntOrNull()!!
             val toIndex = args[2].toIntOrNull()!!
             val value = args[3].toIntOrNull()!!
-
+            val target = getPlayerFromArgs(player, args, 4) ?: return@define
             for (index in fromIndex..toIndex) {
-                setVarbit(player, index, value)
+                setVarbit(target, index, value)
             }
         }
 
-        define("getvarbit", Privilege.ADMIN, "::getvarbit <lt>VARBIT ID<gt>", "Prints the current value of <lt>VARBIT ID<gt>.") {
-            player, args ->
-            if (args.size != 2)
-                reject(player, "Usage: ::getvarbit <id>")
+        define("getvarbit", Privilege.ADMIN, "::getvarbit <lt>VARBIT ID<gt> [player]", "Prints the current value of <lt>VARBIT ID<gt> for [player] (self if omitted).") { player, args ->
+            if (args.size < 2) {
+                reject(player, "Usage: ::getvarbit <id> [player]")
+            }
             val index = args[1].toIntOrNull() ?: return@define
-            notify(player, "Varbit $index: Currently ${getVarbit(player, index)}")
+            val target = getPlayerFromArgs(player, args, 2) ?: return@define
+            notify(player, "Varbit $index: Currently ${getVarbit(target, index)}")
         }
 
-        define("setvarp", Privilege.ADMIN, "::setvarp <lt>VARP ID<gt> <lt>BIT OFFSET<gt> <lt>VALUE<gt>", "Sets the value starting at the BIT OFFSET of the varp."){
-                player,args ->
-            if(args.size < 4){
-                reject(player,"Usage: ::setvarp index offset value")
+        define("setvarp", Privilege.ADMIN, "::setvarp <lt>VARP ID<gt> <lt>BIT OFFSET<gt> <lt>VALUE<gt> [player]", "Sets the value starting at the BIT OFFSET of the varp for player [player] (self if omitted).") { player, args ->
+            if (args.size < 4) {
+                reject(player,"Usage: ::setvarp index offset value [player]")
             }
             val index = args[1].toIntOrNull()
             val offset = args[2].toIntOrNull()
             val value = args[3].toIntOrNull()
-
-            if(index == null || offset == null || value == null){
-                reject(player,"Usage ::setvarp index offset value")
+            val target = getPlayerFromArgs(player, args, 4) ?: return@define
+            if (index == null || offset == null || value == null){
+                reject(player,"Usage ::setvarp index offset value [player]")
             }
-
-            setVarp(player, index!!, value!! shl offset!!)
+            setVarp(target, index!!, value!! shl offset!!)
         }
 
-        define("setvarc", Privilege.ADMIN, "::setvarc <lt>VARC ID<gt> <lt>VALUE<gt>") { player, args ->
+        define("setvarc", Privilege.ADMIN, "::setvarc <lt>VARC ID<gt> <lt>VALUE<gt> [player]", "Sets the specified varc to the specified value for player [player] (self if omitted).") { player, args ->
             if(args.size < 3){
-                reject(player,"Usage: ::setvarc index value")
+                reject(player,"Usage: ::setvarc index value [player]")
             }
             val index = args[1].toShortOrNull()
             val value = args[2].toIntOrNull()
-
-            if(index == null || value == null) {
-                reject(player,"Usage ::setvarc index value")
+            val target = getPlayerFromArgs(player, args, 3) ?: return@define
+            if (index == null || value == null) {
+                reject(player,"Usage ::setvarc index value [player]")
             }
-
-            player.packetDispatch.sendVarcUpdate(index!!, value!!)
+            target.packetDispatch.sendVarcUpdate(index!!, value!!)
         }
 
-        define("grow", Privilege.ADMIN, "", "Grows all planted crops by 1 stage."){ player, _ ->
+        define("grow", Privilege.ADMIN, "", "Grows all planted crops by 1 stage.") { player, _ ->
             val state = getOrStartTimer <CropGrowth> (player)!!
 
             for(patch in state.getPatches()){
@@ -663,19 +645,19 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             state.run (player)
         }
 
-        define("finishbins", Privilege.ADMIN, "", "Finishes any in-progress compost bins."){ player, _ ->
+        define("finishbins", Privilege.ADMIN, "", "Finishes any in-progress compost bins.") { player, _ ->
             val bins = getOrStartTimer<Compost>(player).getBins()
             for (bin in bins) {
                 if (!bin.isFinished && bin.isClosed) bin.finish()
             }
         }
 
-        define("resetbins", Privilege.ADMIN, "", "Resets the player's compost bins to their initial states."){ player, _ ->
+        define("resetbins", Privilege.ADMIN, "", "Resets the player's compost bins to their initial states.") { player, _ ->
             val bins = getOrStartTimer<Compost>(player).getBins()
             for (bin in bins) bin.reset()
         }
 
-        define("diseasecrops", Privilege.ADMIN, "", "Disease all crops"){ player, _ ->
+        define("diseasecrops", Privilege.ADMIN, "", "Disease all crops") { player, _ ->
             val state = getOrStartTimer<CropGrowth>(player)
             for (patch in state.getPatches()){
                 patch.diseaseMod = -128
@@ -684,11 +666,11 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             state.run(player)
         }
 
-        define("addcredits", Privilege.ADMIN, description = "Adds 100 ::shop credits to your account."){ player, _ ->
+        define("addcredits", Privilege.ADMIN, "::addcredits", "Adds 100 ::shop credits to your account.") { player, _ ->
             player.details.credits += 100
         }
 
-        define("getnpcparent", usage = "::getnpcparent <lt>npc-id<gt>", description = "Finds the parent NPC whose child list includes <lt>npc-id<gt>."){player,args ->
+        define("getnpcparent", Privilege.ADMIN,"::getnpcparent <lt>npc-id<gt>",  "Finds the parent NPC whose child list includes <lt>npc-id<gt>.") { player, args ->
             if(args.size < 2){
                 reject(player,"Usage: ::getnpcparent npcid")
             }
@@ -709,12 +691,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 notify(player,"No parent NPC found.")
             }
         }
-        define(
-            "infinitespecial",
-            Privilege.ADMIN,
-            "::infinitespecial [true|false]",
-            "Toggles infinite special attack energy for your player (special-attack flag)."
-        ) { player, args ->
+        define("infinitespecial", Privilege.ADMIN, "::infinitespecial <lt>true|false<gt>", "Toggles infinite special attack energy for your player (special-attack flag).") { player, args ->
             val enabled = resolveBooleanToggle(player, args, INFINITE_SPECIAL_ATTRIBUTE)
             if (enabled == null) {
                 reject(player, "Usage: ::infinitespecial [true|false]")
@@ -722,30 +699,15 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
             setBooleanAttribute(player, INFINITE_SPECIAL_ATTRIBUTE, enabled, "Infinite special attack")
         }
-        define(
-            "infinitespecialmove",
-            Privilege.ADMIN,
-            "::infinitespecialmove [true|false]",
-            "Toggles infinite Summoning familiar special move points for your player."
-        ) { player, args ->
+        define("infinitespecialmove", Privilege.ADMIN, "::infinitespecialmove <lt>true|false<gt>", "Toggles infinite Summoning familiar special move points for your player.") { player, args ->
             val enabled = resolveBooleanToggle(player, args, Familiar.INFINITE_SPECIAL_MOVE_ATTRIBUTE)
             if (enabled == null) {
                 reject(player, "Usage: ::infinitespecialmove [true|false]")
                 return@define
             }
-            setBooleanAttribute(
-                player,
-                Familiar.INFINITE_SPECIAL_MOVE_ATTRIBUTE,
-                enabled,
-                "Infinite familiar special move energy"
-            )
+            setBooleanAttribute(player, Familiar.INFINITE_SPECIAL_MOVE_ATTRIBUTE, enabled, "Infinite familiar special move energy")
         }
-        define(
-            "allowaggro",
-            Privilege.ADMIN,
-            "::allowaggro [true|false]",
-            "Toggles NPCs aggroing on you as an admin."
-        ) { player, args ->
+        define("allowaggro", Privilege.ADMIN, "::allowaggro <gt>true|false<lt>", "Toggles NPCs aggroing on you as an admin.") { player, args ->
             val enabled = resolveBooleanToggle(player, args, ALLOW_ADMIN_AGGRESSION_ATTRIBUTE)
             if (enabled == null) {
                 reject(player, "Usage: ::allowaggro [true|false]")
@@ -754,35 +716,35 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             setBooleanAttribute(player, ALLOW_ADMIN_AGGRESSION_ATTRIBUTE, enabled, "Admin NPC aggression")
         }
 
-        define("rules", Privilege.STANDARD, "", "Shows the rules."){ player, _ ->
+        define("rules", Privilege.STANDARD, "::rules", "Shows the rules.") { player, _ ->
             RulesAndInfo.setBaseRulesAndInfo(player)
             player.packetDispatch.sendInterfaceConfig(384, 17, true)
             openInterface(player, 384)
         }
 
-        define("confirmrules", Privilege.STANDARD) { player, args ->
-            if(getAttribute(player,"rules:confirmed", false))
+        define("confirmrules", Privilege.STANDARD, "::confirmrules", "Confirms the rules.") { player, args ->
+            if (getAttribute(player, CONFIRMED_RULES_ATTRIBUTE, false)) {
                 reject(player, "You have already confirmed the rules.")
-            if(args.size < 2)
-                reject(player, "Usage: ::confirmrules PIN")
-            val pin = args[1].toIntOrNull() ?: (-1).also{ reject(player, "Please enter a valid number.") }
-            if(pin == getAttribute(player, "rules:pin", -1))
-            {
-                player.setAttribute("/save:rules:confirmed", true)
-                player.interfaceManager.close()
-                sendDialogue(player, "Thank you!")
-                player.unlock()
-                player.removeAttribute("rules:pin")
-                if(ServerConstants.NEW_PLAYER_ANNOUNCEMENT) sendNews("A new player has joined. Welcome ${player.username}!")
             }
-            else
-            {
-                sendDialogue(player, "Wrong pin. Try again.")
+            if (args.size < 2) {
+                reject(player, "Usage: ::confirmrules PIN")
+            }
+            val pin = args[1].toIntOrNull() ?: (-1).also { reject(player, "Please enter a valid number.") }
+            if (pin == getAttribute(player, "rules:pin", -1)) {
+                setAttribute(player, CONFIRMED_RULES_ATTRIBUTE, true)
+                closeInterface(player)
+                sendDialogue(player, "Thank you!")
+                unlock(player)
+                removeAttribute(player, "rules:pin")
+                if (ServerConstants.NEW_PLAYER_ANNOUNCEMENT) {
+                    sendNews("A new player has joined. Welcome ${player.username}!")
+                }
+            } else {
+                sendDialogue(player, "Wrong PIN. Try again.")
             }
         }
 
-        define("setplayerstrong", Privilege.ADMIN, "setplayerstrong <lt>0-4<gt>",
-            "Set the player progress through the Stronghold of Player Safety test."){player, args ->
+        define("setplayerstrong", Privilege.ADMIN, "setplayerstrong <lt>0-4<gt>", "Set the player progress through the Stronghold of Player Safety test.") { player, args ->
             /*
              * 0 = Not started
              * 1 = Received test
@@ -820,8 +782,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             }
         }
 
-        define("setplaqueread", Privilege.ADMIN, "setplaqueread <lt>true/false<gt>",
-            "Set the plaques in the player safety stronghold to read or not read."){player, args ->
+        define("setplaqueread", Privilege.ADMIN, "setplaqueread <lt>true/false<gt>", "Set the plaques in the player safety stronghold to read or not read.") { player, args ->
             if (args.size == 1) {
                 notify(
                     player,
@@ -839,7 +800,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         }
         define("brewkit", Privilege.ADMIN, "brewkit <lt>0-10<gt>",
-            "Give yourself everything you need to brew ales."){ player, args ->
+            "Give yourself everything you need to brew ales.") { player, args ->
             if (args.size == 1) {
                 sendMessage(player, "Kit numbers: 0 - Dwarven Stout, 1 - Asgarnian Ale, 2 - Greenman's Ale,")
                 sendMessage(player, "Kit numbers: 3 - Wizard's Mind Bomb, 4 - Dragon Bitter, 5 - Moonlight Mead,")
@@ -872,8 +833,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
             return@define
         }
 
-        define("brew", Privilege.ADMIN, "brew <lt>mode<gt>",
-            "0: force natural step, 1: force good step without maturity, 2: force good step with maturity, 3: force bad step"){ player, args ->
+        define("brew", Privilege.ADMIN, "brew <lt>mode<gt>", "0: force natural step, 1: force good step without maturity, 2: force good step with maturity, 3: force bad step") { player, args ->
             var forceStep = false
             var forceGood = false
             var forceMature = false
@@ -934,7 +894,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         return currentLineId
     }
 
-    fun chunkText(text: String, maxLength: Int = 70): List<String> {
+    fun chunkText(text: String, maxLength: Int = 70): List<String> { // TODO: why does this exist? splitLines does this already
         if (text.length <= maxLength) return listOf(text)
         val chunks = mutableListOf<String>()
         var remaining = text

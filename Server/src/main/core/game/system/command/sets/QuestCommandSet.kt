@@ -10,12 +10,12 @@ import core.game.world.repository.Repository
 import core.tools.Log
 
 @Initializable
-class QuestCommandSet : CommandSet(Privilege.ADMIN){
+class QuestCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
         /**
          * Completes all quests
          */
-        define("allquest", description = "Instantly completes every quest for your account."){player,_->
+        define("allquest", Privilege.ADMIN, "::allquest", "Instantly completes every quest for your account.") { player,_->
             for (quest in QuestRepository.getQuests().values) {
                 try {
                     quest.finish(player)
@@ -29,10 +29,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Displays the currently implemented quests with debug information
          */
-        define("quest",
-            usage = "::quest [-p username] [quest-filter]",
-            description = "Shows quest stages for you, or for [username] if -p is used. Add optional text to filter by quest name."
-        ) { player, args ->
+        define("quest", Privilege.ADMIN, "::quest [-p username] [quest-filter]", "Shows quest stages for you, or for [username] if -p is used. Add optional text to filter by quest name.") { player, args ->
 
             var target = player
             var filter: String? = null
@@ -66,30 +63,30 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN){
         /**
          * Sets stage of quest
          */
-        define("setqueststage", usage = "::setqueststage <lt>quest-index<gt> <lt>stage<gt>", description = "Sets quest <lt>quest-index<gt> to stage <lt>stage<gt>; use ::quest to find indices."){player,args ->
+        define("setqueststage", Privilege.ADMIN, "::setqueststage <lt>quest-index<gt> <lt>stage<gt> [player]", "Sets quest <lt>quest-index<gt> to stage <lt>stage<gt> for [player] (self if omitted); use ::quest to find indices.") { player, args ->
             if (args.size < 3) {
                 reject(player,"You must specify the index# of a quest, and a stage number")
             }
             val quest = args[1].toIntOrNull() ?: reject(player,"INVALID QUEST")
             val stage = args[2].toIntOrNull() ?: reject(player,"INVALID STAGE")
+            val target = getPlayerFromArgs(player, args, 3) ?: return@define
             val questObject = player.questRepository.forIndex(quest as Int)
-            if (questObject == null){
+            if (questObject == null) {
                 reject(player, "$quest did not match anything in the quest repository")
-            }
-            else{
-                player.questRepository.setStageNonmonotonic(questObject, stage as Int)
+            } else {
+                target.questRepository.setStageNonmonotonic(questObject, stage as Int)
                 if (stage == 0) {
                     questObject.reset(player)
                 }
                 questObject.updateVarps(player)
-                notify(player, "<col=209dff>Setting " + questObject.quest + " to stage $stage</col>")
+                notify(player, "<col=209dff>Setting ${questObject.quest} to stage $stage for ${target.username}</col>")
             }
         }
 
         /**
          * Displays the currently implemented quests
          */
-        define("quests", Privilege.STANDARD, description = "Opens the quests interface listing current implementations."){ player, _ ->
+        define("quests", Privilege.STANDARD, "Opens the quests interface listing current implementations.") { player , _ ->
             sendQuests(player)
         }
     }
