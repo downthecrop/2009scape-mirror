@@ -5,6 +5,8 @@ import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
+import core.game.global.action.DoorHelper;
+import core.game.node.entity.Entity;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -50,7 +52,7 @@ public final class WarriorsGuild extends OptionHandler {
 			}
 			if (canEnter(player)) {
 				player.getMusicPlayer().unlock(634);
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 			} else {
 				player.getDialogueInterpreter().sendDialogues(4285, null, "You not pass. You too weedy.");
 			}
@@ -68,6 +70,16 @@ public final class WarriorsGuild extends OptionHandler {
 			break;
 		}
 		return true;
+	}
+
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 1530:
+			case 15653:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
 	}
 
 	/**

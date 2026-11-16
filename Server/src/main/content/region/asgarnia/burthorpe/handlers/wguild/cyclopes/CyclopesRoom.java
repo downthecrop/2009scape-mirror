@@ -7,6 +7,7 @@ import java.util.List;
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
+import core.game.global.action.DoorHelper;
 import core.plugin.Initializable;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
@@ -168,6 +169,16 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 				}
 				ContentAPIKt.handleAutowalkDoor((Player) player, (Scenery) node);
 				return true;
+			}
+
+			@Override
+			public Location getDestination(Node node, Node n) {
+				switch (n.getId()) {
+					case 15641:
+					case 15644:
+						return DoorHelper.getDestination((Entity) node, (Scenery) n);
+				}
+				return null;
 			}
 
 		});

@@ -1,15 +1,12 @@
-package content.global.activity.cchallange.npc
+package content.global.activity.cchallenge.npc
 
 import core.api.*
-import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
-import core.game.system.config.ItemConfigParser
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
@@ -18,19 +15,20 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 /**
- * Represents the Ghoul champion NPC for Champions challenge.
+ * Represents the Hobgoblin champion NPC for Champions challenge.
  */
 
 @Initializable
-class GhoulChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+class HobgoblinChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     var clearTime = 0
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return GhoulChampionNPC(id, location)
+        return HobgoblinChampionNPC(id, location)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOUL_CHAMPION_3059)
+        return intArrayOf(NPCs.HOBGOBLIN_CHAMPION_3061)
     }
+
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -38,8 +36,8 @@ class GhoulChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
     }
 
     companion object {
-        fun spawnGhoulChampion(player: Player) {
-            val champion = GhoulChampionNPC(NPCs.GHOUL_CHAMPION_3059)
+        fun spawnHobgoblinChampion(player: Player) {
+            val champion = HobgoblinChampionNPC(NPCs.HOBGOBLIN_CHAMPION_3061)
             champion.location = location(3170, 9758, 0)
             champion.isWalks = true
             champion.isAggressive = true
@@ -64,13 +62,13 @@ class GhoulChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
         super.checkImpact(state)
         val player = state.attacker
         if (player is Player) {
-            val i: Item = player.equipment[EquipmentContainer.SLOT_WEAPON].id.asItem()
-            if (i.definition.getConfiguration(ItemConfigParser.TWO_HANDED, false) == true && state.style == CombatStyle.MELEE) {
+            if (state.style == CombatStyle.MAGIC || state.style == CombatStyle.RANGE) {
                 state.neutralizeHits()
                 state.estimatedHit = state.maximumHit
             }
-            if (state.style == CombatStyle.MAGIC) {
-                sendMessage(player, "You can use only weapons in this challenge.")
+
+            if (state.style == CombatStyle.MELEE) {
+                sendMessage(player, "You cannot use melee in this challenge.")
                 if (state.estimatedHit > -1) {
                     state.estimatedHit = 0
                     return
@@ -88,14 +86,14 @@ class GhoulChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
             lock(killer, 2)
             runTask(killer, 1) {
                 openInterface(killer, 63)
-                setInterfaceText(killer, "Well done, you defeated the Ghoul Champion!", 63, 2)
-                killer.packetDispatch.sendItemZoomOnInterface(Items.CHAMPION_SCROLL_6799, 260, 63, 3)
-                setInterfaceText(killer, "400 Slayer Xp", 63, 6)
-                setInterfaceText(killer, "400 Hitpoint Xp", 63, 7)
+                setInterfaceText(killer, "Well done, you defeated the Hobgoblin Champion!", 63, 2)
+                killer.packetDispatch.sendItemZoomOnInterface(Items.CHAMPION_SCROLL_6802, 260, 63, 3)
+                setInterfaceText(killer, "232 Slayer Xp", 63, 6)
+                setInterfaceText(killer, "232 Hitpoint Xp", 63, 7)
             }
-            setVarbit(killer, 1453, 1, true)
-            rewardXP(killer, Skills.HITPOINTS, 400.0)
-            rewardXP(killer, Skills.SLAYER, 400.0)
+            setVarbit(killer, 1456, 1, true)
+            rewardXP(killer, Skills.HITPOINTS, 232.0)
+            rewardXP(killer, Skills.SLAYER, 232.0)
             removeAttribute("championsarena:start")
             clearHintIcon(killer)
         }

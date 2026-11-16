@@ -3,11 +3,9 @@ package content.region.misthalin.wiztower.handlers;
 import static core.api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.component.Component;
 import core.game.dialogue.DialoguePlugin;
 import core.game.global.Skillcape;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.spell.CombatSpell;
@@ -48,7 +46,6 @@ import content.data.Quests;
  */
 @Initializable
 public final class WizardTowerPlugin extends OptionHandler {
-
     /**
      * Represents the location of the wizard tower.
      */
@@ -66,7 +63,6 @@ public final class WizardTowerPlugin extends OptionHandler {
 		SceneryDefinition.forId(2147).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(32015).getHandlers().put("option:climb-up", this);
 		NPCDefinition.forId(300).getHandlers().put("option:teleport", this);
-		SceneryDefinition.forId(11993).getHandlers().put("option:open", this);
 		ClassScanner.definePlugin(new WizardtowerWizardNPC());
 		ClassScanner.definePlugin(new WizardTowerDialogue());
 		ClassScanner.definePlugin(new WizardMizgogDialogue());
@@ -111,25 +107,10 @@ public final class WizardTowerPlugin extends OptionHandler {
                 player.getDialogueInterpreter().open(458543948);
                 break;
             case "open":
-                if (node.getLocation().equals(new Location(3107, 3162, 0))) {
-                    DoorActionHandler.handleAutowalkDoorWithLocation(player, (Scenery) node, player.getLocation().getX() >= 3107 ? Location.create(3106, 3161, 0) : Location.create(3108, 3163, 0));
-                } else {
-                    handleDoor(player, (Scenery) node);
-                }
+                handleDoor(player, (Scenery) node);
                 break;
         }
         return true;
-    }
-
-    @Override
-    public Location getDestination(Node node, Node n) {
-        if (n instanceof Scenery) {
-            final Scenery object = (Scenery) n;
-            if (object.getId() == 11993 && object.getLocation().equals(new Location(3107, 3162, 0))) {
-                return node.getLocation().getX() >= 3107 ? Location.create(3108, 3163, 0) : Location.create(3106, 3161, 0);
-            }
-        }
-        return null;
     }
 
     /**

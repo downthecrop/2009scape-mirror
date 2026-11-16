@@ -249,9 +249,13 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				return true;
 			}
 			switch (object.getWrapper().getId()) {
+			case 6720:
+			case 6739:
+			case 6725:
+			case 6744:
 			case 6727:
-			case 6724:
 			case 6746:
+			case 6724:
 			case 6743:
 				if (player.getAttribute("barrow:solvedpuzzle", false)) {
 					break;
@@ -261,22 +265,6 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				return true;
 			}
 			switch (object.getId()) {
-			case 6714:
-			case 6733:
-				handleAutowalkDoor((Player) e, (Scenery) target);
-				if (RandomFunction.random(15) == 0) {
-					// spawn a brother, if any haven't yet been killed
-					boolean[] brothers = player.getSavedData().getActivityData().getBarrowBrothers();
-					int[] alive = IntStream.range(0, 6).filter(i -> !brothers[i]).toArray();
-					if (alive.length > 0) {
-						int index = 0;
-						if (alive.length > 1) {
-							index = RandomFunction.random(0, alive.length);
-						}
-						BarrowsCrypt.getCrypt(alive[index]).spawnBrother(player, RegionManager.getTeleportLocation(target.getLocation(), 1));
-					}
-				}
-				return true;
 			case 6821:
 				BarrowsCrypt.getCrypt(BarrowsCrypt.AHRIM).openSarcophagus((Player) e, object);
 				return true;

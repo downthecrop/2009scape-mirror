@@ -16,6 +16,7 @@ import org.rs09.consts.NPCs
 import core.game.dialogue.DialogueFile
 import content.region.kandarin.quest.tree.TreeGnomeVillage.Companion.mazeEntrance
 import content.region.kandarin.quest.tree.TreeGnomeVillage.Companion.mazeVillage
+import core.game.global.action.DoorHelper
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import core.game.world.GameWorld
@@ -115,9 +116,12 @@ class TreeGnomeVillageListeners : InteractionListener {
         }
         on(strongholdDoor, IntType.SCENERY, "open"){ player, node ->
             if(player.location.y >= 3251){
-                handleAutowalkDoor(player, node as Scenery)
+                handleDoor(player, node as Scenery)
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(strongholdDoor), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
         on(NPCs.LIEUTENANT_SCHEPBUR_3817, IntType.NPC, "talk-to"){ player, node ->
             openDialogue(player, LieutenantSchepburDialogue(),node)

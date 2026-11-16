@@ -66,9 +66,6 @@ object MapChunkRenderer {
         for (region in previousRegions) {
             if (!currentRegions.contains(region)) {
                 region.decrementViewAmount(player.name)
-                if (region.isActive) {
-                    region.checkInactive()
-                }
             }
         }
         for (region in currentRegions) {

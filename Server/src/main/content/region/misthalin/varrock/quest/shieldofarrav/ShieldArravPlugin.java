@@ -5,7 +5,7 @@ import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -163,7 +163,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogue("This is the door to the weapon stash you were looking for. Maybe if", "you can find another adventurer who happens to be a member of the", "Phoenix Gang, they could help you.");
 				return true;
 			} else if (quest.getStage(player) == 60 && player.getInventory().containsItem(ShieldofArrav.KEY)) {
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			}
 			if (quest.getStage(player) == 70 && player.getInventory().containsItem(ShieldofArrav.KEY)) {
@@ -171,7 +171,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 					player.getPacketDispatch().sendMessage("You should get a replacement key from Straven to enter here.");
 					return true;
 				} else {
-					ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+					ContentAPIKt.handleDoor(player, (Scenery) node);
 					return true;
 				}
 			}
@@ -181,13 +181,13 @@ public final class ShieldArravPlugin extends OptionHandler {
 			if (!ShieldofArrav.isBlackArm(player)) {
 				player.getPacketDispatch().sendMessage("This door seems to be locked from the inside.");
 			} else {
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 			}
 			break;
 		case 2397:
 			if (ShieldofArrav.isPhoenix(player)) {
 				player.getPacketDispatch().sendMessage("The door automatically opens for you.");
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The door is securely locked.");
@@ -224,7 +224,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 	public Location getDestination(Node n, Node node) {
 		if (node instanceof Scenery) {
 			if (node.getName().toLowerCase().contains("door")) {
-				return DoorActionHandler.getDestination((Player) n, (Scenery) node);
+				return DoorHelper.getDestination((Player) n, (Scenery) node);
 			}
 		}
 		return null;

@@ -2,14 +2,13 @@ package content.region.asgarnia.burthorpe.quest.trollstronghold
 
 import content.data.Quests
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
-import core.tools.RandomFunction
 import org.rs09.consts.NPCs
 
 @Initializable
@@ -29,8 +28,14 @@ class DadNpc(id: Int = 0, location: Location? = null) : AbstractNPC(id, location
         // Attack Dad. If quest is done, you cannot attack Dad.
         when (getQuestStage(player, Quests.TROLL_STRONGHOLD)) {
             3 -> openDialogue(player, DadDialogueFile(2), this.asNpc()).also { return false }
-            4 -> { return attackable }
-            in 5 .. 100 -> sendMessage(player, "You don't need to fight him again.").also { return false }
+            4 -> return attackable
+            in 5 .. 100 -> {
+                if (getAttribute<Boolean>("ruthless ${player.name}") == true) {
+                    return attackable
+                }
+                sendMessage(player, "You don't need to fight him again.")
+                return false
+            }
         }
         return attackable
     }
@@ -41,36 +46,20 @@ class DadNpc(id: Int = 0, location: Location? = null) : AbstractNPC(id, location
         val opponent = state.victim
         // If dad is below 30/120 lifepoints, give player option
         // Dad can be killed if you oneshot him past 30.
-        if (opponent.skills.lifepoints < 30) {
+        if (opponent.skills.lifepoints < 30 && getAttribute<Boolean>("ruthless ${player.name}") != true) {
             player.properties.combatPulse.stop()
             opponent.properties.combatPulse.stop()
-            if (getQuestStage(player!!.asPlayer(), Quests.TROLL_STRONGHOLD) == 4){
-                setQuestStage(player!!.asPlayer(), Quests.TROLL_STRONGHOLD, 5)
+            queueScript(player, 2, QueueStrength.SOFT, false) { _ ->
+                openDialogue(player.asPlayer(), DadDialogueFile(3), opponent.asNpc())
+                return@queueScript stopExecuting(player)
             }
-            submitWorldPulse(object : Pulse(){
-                var counter = 0
-                override fun pulse(): Boolean {
-                    when(counter++){
-                        1 -> {
-                            openDialogue(player.asPlayer(), DadDialogueFile(3), opponent.asNpc())
-                            return true;
-                        }
-                    }
-                    return false
-                }
-            })
         }
     }
     override fun finalizeDeath(killer: Entity?) {
         // In case Dad gets one shotted to death.
         super.finalizeDeath(killer)
-        if (getQuestStage(killer!!.asPlayer(), Quests.TROLL_STRONGHOLD) == 4){
-            setQuestStage(killer!!.asPlayer(), Quests.TROLL_STRONGHOLD, 5)
-        }
-    }
-    override fun handleTickActions() {
-        super.handleTickActions()
-        if(RandomFunction.roll(35)){
+        if (getQuestStage(killer!!.asPlayer(), Quests.TROLL_STRONGHOLD) == 4) {
+            setQuestStage(killer.asPlayer(), Quests.TROLL_STRONGHOLD, 5)
         }
     }
 }

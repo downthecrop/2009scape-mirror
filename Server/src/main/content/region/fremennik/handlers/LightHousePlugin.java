@@ -2,7 +2,7 @@ package content.region.fremennik.handlers;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -12,7 +12,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Handles the light house plugin.
+ * Handles the lighthouse plugin.
  * @author Vexia
  */
 @Initializable
@@ -40,7 +40,7 @@ public class LightHousePlugin extends OptionHandler {
 	@Override
 	public Location getDestination(Node node, Node n) {
 		if (n.getName().equals("Door")) {
-			return DoorActionHandler.getDestination((Entity) node, n.asScenery());
+			return DoorHelper.getDestination((Entity) node, n.asScenery());
 		}
 		return null;
 	}

@@ -7,6 +7,7 @@ import core.game.interaction.*
 import core.game.node.entity.player.Player
 import core.game.node.Node
 import core.game.dialogue.*
+import core.game.global.action.DoorHelper
 import core.tools.*
 
 class WildernessGateHandler : InteractionListener {
@@ -14,6 +15,10 @@ class WildernessGateHandler : InteractionListener {
 
     override fun defineListeners() {
         on (gates, IntType.SCENERY, "open", handler = ::handleGate)
+
+        setDest(IntType.SCENERY, gates, "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
     }
 
     private fun handleGate(player: Player, node: Node) : Boolean {
@@ -21,7 +26,7 @@ class WildernessGateHandler : InteractionListener {
             val isEntering = !player.skullManager.isDeepWilderness
             if (isEntering) {
                 fun enter(player: Player) {
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                     player.skullManager.isDeepWilderness = true
                 }
                 enterDeepWilderness(player, ::enter, "Beyond this gate you enter the deep wilderness!")
@@ -29,11 +34,11 @@ class WildernessGateHandler : InteractionListener {
                 if (player.properties.combatPulse.isInCombat) {
                     sendMessage(player, "You cannot leave while you are under attack.")
                 } else {
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                     player.skullManager.isDeepWilderness = false
                 }
             }
-        } else handleAutowalkDoor(player, node.asScenery())
+        } else handleDoor(player, node.asScenery())
 
         return true
     }

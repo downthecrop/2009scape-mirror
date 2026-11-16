@@ -8,7 +8,6 @@ import org.rs09.consts.Animations
 
 import core.plugin.Initializable
 import core.tools.RandomFunction
-import core.game.system.task.Pulse
 
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -23,6 +22,7 @@ import core.game.world.map.path.Pathfinder
 import core.game.interaction.MovementPulse
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.interaction.QueueStrength
 import core.game.world.update.flag.context.Animation
 
 @Initializable
@@ -83,17 +83,14 @@ class ChompyBirdNPC : AbstractNPC, InteractionListener {
       impactHandler.disabledTicks = 10
       locks.lockInteractions(10)
       sendChat("Squawk!")
-      submitWorldPulse(object : Pulse(2) {
-        var counter = 0
-        override fun pulse() : Boolean {
-          when (counter++) {
-            1 -> animate(Animation(Animations.CHOMPY_FLY_AWAY_6767))
-            2 -> clear()
-            3 -> return true
-          }
-          return false
+      queueScript(this, 2, QueueStrength.SOFT, false) { stage ->
+        when (stage) {
+          1 -> animate(Animation(Animations.CHOMPY_FLY_AWAY_6767))
+          2 -> clear()
+          3 -> return@queueScript stopExecuting(this)
         }
-      })
+        return@queueScript delayScript(this, 1)
+      }
     } else {
       sendChat("Screech!")
     }

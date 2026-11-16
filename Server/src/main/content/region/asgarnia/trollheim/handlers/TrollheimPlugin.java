@@ -232,7 +232,7 @@ public final class TrollheimPlugin extends OptionHandler {
 			case 3786:// exit
 			case 3782:// entrance
 			case 3783:// entrance.
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			case 3672:
 				player.getPacketDispatch().sendMessage("You don't know how to open the secret door.");

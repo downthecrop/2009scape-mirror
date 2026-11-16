@@ -2,6 +2,7 @@ package content.region.asgarnia.burthorpe.quest.deathplateau
 
 import content.data.Quests
 import core.api.*
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItemManager
@@ -33,7 +34,7 @@ class DeathPlateauInteractionListener : InteractionListener {
             // Harold's door
             when (player.location) {
                 location(2906, 3543, 1), location(2905, 3543, 1), location(2907, 3543, 1) -> openDialogue(player, DeathPlateauDoorDialogueFile(1))
-                else -> handleAutowalkDoor(player, node.asScenery())
+                else -> handleDoor(player, node.asScenery())
             }
             return@on true
         }
@@ -41,7 +42,7 @@ class DeathPlateauInteractionListener : InteractionListener {
             when (node.location) {
                 location(2823, 3555, 0) -> openDialogue(player, DeathPlateauDoorDialogueFile(2)) //1st door to Tenzing
                 location(2820, 3558, 0) -> openDialogue(player, DeathPlateauDoorDialogueFile(3)) //2nd door to chicken pen
-                else -> handleAutowalkDoor(player, node.asScenery())
+                else -> handleDoor(player, node.asScenery())
             }
             return@on true
         }
@@ -89,11 +90,15 @@ class DeathPlateauInteractionListener : InteractionListener {
 
         on(Scenery.LARGE_DOOR_3743, SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.DEATH_PLATEAU) > 16) {
-                handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
+                handleDoor(player, node as core.game.node.scenery.Scenery)
             } else {
                 sendMessage(player, "The door is locked.")
             }
             return@on true
+        }
+
+        setDest(IntType.SCENERY, intArrayOf(Scenery.DOOR_3747, Scenery.DOOR_3745, Scenery.LARGE_DOOR_3743), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
     }
 }

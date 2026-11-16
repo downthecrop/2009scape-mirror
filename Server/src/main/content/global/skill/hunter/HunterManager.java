@@ -109,7 +109,8 @@ public final class HunterManager implements LoginListener, LogoutListener, Event
 	 * @return {@code True} if they're the owner.
 	 */
 	public boolean isOwner(Scenery object) {
-		return getUid(object) == getUid();
+		TrapWrapper wrapper = getWrapper(object);
+		return wrapper != null && wrapper.getPlayer() == player;
 	}
 
 	/**
@@ -152,15 +153,6 @@ public final class HunterManager implements LoginListener, LogoutListener, Event
 	public int getMaximumTraps() {
 		final int level = getStaticLevel();
 		return level >= 80 ? 5 : level >= 60 ? 4 : level >= 40 ? 3 : level >= 20 ? 2 : 1;
-	}
-
-	/**
-	 * Gets the uid of a trap.
-	 * @param object the object.
-	 * @return the uid.
-	 */
-	public int getUid(Scenery object) {
-		return object.getAttributes().getAttribute("trap-uid", 0);
 	}
 
 	/**

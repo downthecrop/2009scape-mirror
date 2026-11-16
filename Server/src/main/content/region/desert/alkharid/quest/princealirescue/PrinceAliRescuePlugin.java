@@ -3,8 +3,10 @@ package content.region.desert.alkharid.quest.princealirescue;
 import core.api.ContentAPIKt;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -45,13 +47,13 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 		case 2881:
 			switch (quest.getStage(player)) {
 			case 60:
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				break;
 			case 50:
 				if (player.getAttribute("keli-gone", 0) > GameWorld.getTicks()) {
 					if (player.getInventory().contains(2418, 1)) {
 						player.getPacketDispatch().sendMessage("You unlock the door.");
-						ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+						ContentAPIKt.handleDoor(player, (Scenery) node);
 					} else {
 						player.getPacketDispatch().sendMessage("The door is locked.");
 					}
@@ -83,6 +85,9 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 			} else if (npc.getLocation().equals(new Location(3267, 3226, 0))) {
 				return locs[3];
 			}
+		}
+		if (n instanceof Scenery && n.getId() == 2881) {
+			return DoorHelper.getDestination((Entity) node, (Scenery) n);
 		}
 		return null;
 	}

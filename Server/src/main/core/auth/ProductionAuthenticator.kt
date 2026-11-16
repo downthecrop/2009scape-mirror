@@ -3,7 +3,6 @@ package core.auth
 import core.game.node.entity.player.Player
 import core.game.system.SystemManager
 import core.ServerConstants
-import core.game.world.repository.Repository
 import core.storage.AccountStorageProvider
 import core.storage.SQLStorageProvider
 import java.sql.SQLDataException
@@ -19,7 +18,7 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
 
     override fun createAccountWith(info: UserAccountInfo): Boolean {
         try {
-            info.password = SystemManager.getEncryption().hashPassword(info.password)
+            info.password = SystemManager.encryption.hashPassword(info.password)
             info.joinDate = Timestamp(System.currentTimeMillis())
             storageProvider.store(info)
         } catch (e: SQLDataException) {
@@ -38,7 +37,7 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
                 return Pair(AuthResponse.InvalidCredentials, null)
             }
             info = storageProvider.getAccountInfo(username.toLowerCase())
-            val passCorrect = SystemManager.getEncryption().checkPassword(password, info.password)
+            val passCorrect = SystemManager.encryption.checkPassword(password, info.password)
             if(!passCorrect || info.password.isEmpty())
                 return Pair(AuthResponse.InvalidCredentials, null)
             if(info.banEndTime > System.currentTimeMillis())
@@ -53,12 +52,12 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
     }
 
     override fun checkPassword(player: Player, password: String): Boolean {
-        return SystemManager.getEncryption().checkPassword(password, player.details.password)
+        return SystemManager.encryption.checkPassword(password, player.details.password)
     }
 
     override fun updatePassword(username: String, newPassword: String) {
         val info = storageProvider.getAccountInfo(username)
-        info.password = SystemManager.getEncryption().hashPassword(newPassword)
+        info.password = SystemManager.encryption.hashPassword(newPassword)
         storageProvider.update(info)
     }
 }

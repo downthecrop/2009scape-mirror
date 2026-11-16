@@ -8,10 +8,12 @@ import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -121,7 +123,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				}
 			} else {
 				final Scenery object = node.asScenery();
-				ContentAPIKt.handleAutowalkDoor(player, object);
+				ContentAPIKt.handleDoor(player, object);
 			}
 			return true;
 		case 40026:
@@ -142,6 +144,9 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
+        if (n.getId() == 72) {
+            return DoorHelper.getDestination((Entity) node, (Scenery) n);
+        }
 		return null;
 	}
 

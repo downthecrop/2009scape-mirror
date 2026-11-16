@@ -5,6 +5,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.scenery.Layer
 import core.game.node.scenery.Scenery
 import core.game.world.map.zone.ZoneBorders
 import core.tools.Log
@@ -312,7 +313,7 @@ object RegionManager {
      */
     @JvmStatic
     fun getObject(x: Int, y: Int, z: Int): Scenery? {
-        return getObject(x, y, z, -1, -1)
+        return getObject(x, y, z, -1, null)
     }
 
     /**
@@ -321,24 +322,29 @@ object RegionManager {
      * @param y The y-coordinate.
      * @param z The height.
      * @param objectId The object id. May be -1, which means 'any'.
-     * @param type The scenery type. May be -1, which means 'any'.
+     * @param layer The layer. May be null, which means 'any'.
      * @return The scenery, or `null` if no object was found.
      */
     @JvmStatic
-    fun getObject(x: Int, y: Int, z: Int, objectId: Int = -1, type: Int = -1): Scenery? {
+    fun getObject(x: Int, y: Int, z: Int, objectId: Int = -1, layer: Layer?): Scenery? {
         val loc = Location(x, y, z)
         val region = forId(loc.regionId)
         Region.load(region)
         val chunk = region.chunks[loc.chunkX][loc.chunkY][loc.z]
-        val index = chunk.getIndex(loc.chunkOffsetX, loc.chunkOffsetY, objectId, type)
-        if (index == -1) {
-            return null
+        for (i in 0 until RegionChunk.ARRAY_SIZE) {
+            val obj = chunk.objects[loc.chunkOffsetX][loc.chunkOffsetY][i] ?: continue
+            if (objectId != -1 && obj.id != objectId) {
+                continue
+            }
+            if (layer != null && Layer.getLayer(obj.type) != layer) {
+                continue
+            }
+            if (!obj.isRenderable) {
+                continue
+            }
+            return obj
         }
-        val obj = chunk.objects[loc.chunkOffsetX][loc.chunkOffsetY][index]
-        if (obj != null && !obj.isRenderable) {
-            return null
-        }
-        return obj
+        return null
     }
 
     /**

@@ -2,11 +2,14 @@ package content.minigame.sorceress;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
+import core.game.node.entity.Entity;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.Location;
 import core.plugin.Plugin;
 
 /**
@@ -23,7 +26,7 @@ public class SorceressGardenObject extends OptionHandler {
 				player.getDialogueInterpreter().sendItemMessage(10692, "You need Thieving level of " + def.getLevel() + " to pick the lock of this gate.");
 				return true;
 			}
-			ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 		}
 		return true;
 	}
@@ -37,4 +40,15 @@ public class SorceressGardenObject extends OptionHandler {
 		return this;
 	}
 
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 21709:
+			case 21753:
+			case 21731:
+			case 21687:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
+	}
 }

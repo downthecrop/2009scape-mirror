@@ -2,6 +2,8 @@ package content.region.misc.zanaris.handlers;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
+import core.game.node.entity.Entity;
 import core.plugin.Initializable;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
@@ -42,13 +44,23 @@ public final class ZanarisPlugin extends OptionHandler {
 		case 12045:
 		case 12047:
 			if ((node.getId() == 12045 && node.getLocation().equals(new Location(2469, 4438, 0)) && player.getLocation().getX() >= 2470) || player.getLocation().getY() < 4434 && (node.getId() == 12045 || node.getId() == 12047 && node.getLocation().equals(new Location(2465, 4434, 0))) || node.getId() == 12047 && player.getLocation().getX() >= 2470) {
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getDialogueInterpreter().open(MagicDoorDialogue.NAME, node);
 			break;
 		}
 		return true;
+	}
+
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 12045:
+			case 12047:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
 	}
 
 	/**

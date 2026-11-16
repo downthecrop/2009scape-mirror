@@ -5,6 +5,7 @@ import content.region.kandarin.ardougne.quest.hazeelcult.HazeelCult.Companion.ca
 import content.region.kandarin.ardougne.quest.hazeelcult.HazeelCult.Companion.mahjarratArc
 import core.api.*
 import core.game.dialogue.FacialExpression
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
@@ -153,15 +154,18 @@ class HazeelCultListeners : InteractionListener {
         // secret wall on the way up to retrieve the hazeel scroll
         on(SECRET_PASSAGE, IntType.SCENERY, "Knock-at") { player, node ->
             if (inInventory(player, CHEST_KEY) && player.location.y == 3274) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
                 sendMessage(player, "There is something odd about the wall here.")
                 sendMessage(player, "You find a secret passageway")
             } else if (player.location.y == 3275) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "Nothing interesting happens.")
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(SECRET_PASSAGE), "Knock-at") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         // chest with hazeel scroll. unlocks with key, opens, and contains the scroll.

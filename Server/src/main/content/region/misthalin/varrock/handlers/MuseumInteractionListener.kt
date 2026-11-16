@@ -1,9 +1,9 @@
 package content.region.misthalin.varrock.handlers
 
 import core.api.*
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -111,9 +111,30 @@ class MuseumInteractionListener : InteractionListener {
         )
 
         fun handleMuseumDoor(player: Player, door: core.game.node.scenery.Scenery?) {
-            val npc = if (door?.id == Scenery.GATE_24536) findLocalNPC(player, NPCs.MUSEUM_GUARD_5941) else findLocalNPC(player, NPCs.MUSEUM_GUARD_5943)
-            val animation = if (DoorActionHandler.getEndLocation(player, door).y > player.location.y) Animation(6391) else Animation(6392)
+            fun getEndLocation(entity: Entity, `object`: core.game.node.scenery.Scenery): Location { // Apologies for this dirty port, but this place was the only consumer of this old logic
+                var l = `object`.location
+                when (`object`.rotation) {
+                    0 -> if (entity.getLocation().x >= l.x) {
+                        l = l.transform(-1, 0, 0)
+                    }
 
+                    1 -> if (entity.getLocation().y <= l.y) {
+                        l = l.transform(0, 1, 0)
+                    }
+
+                    2 -> if (entity.getLocation().x <= l.x) {
+                        l = l.transform(1, 0, 0)
+                    }
+
+                    else -> if (entity.getLocation().y >= l.y) {
+                        l = l.transform(0, -1, 0)
+                    }
+                }
+                return l
+            }
+
+            val npc = if (door?.id == Scenery.GATE_24536) findLocalNPC(player, NPCs.MUSEUM_GUARD_5941) else findLocalNPC(player, NPCs.MUSEUM_GUARD_5943)
+            val animation = if (getEndLocation(player, door!!).y > player.location.y) Animation(6391) else Animation(6392)
             if (npc != null) {
                 animate(npc,  animation)
                 queueScript(player, animationDuration(animation)) { handleAutowalkDoor(player, door) }

@@ -11,13 +11,13 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
+import core.game.global.action.DoorHelper
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import org.rs09.consts.NPCs
 import org.rs09.consts.Sounds
 
 class SeersHouseListeners : InteractionListener {
-
     val WESTDOOR = 4165
     val EASTDOOR = 4166
     val WESTLADDER = 4163
@@ -96,7 +96,6 @@ class SeersHouseListeners : InteractionListener {
     val WESTZONE = ZoneBorders(2630, 3662, 2632, 3664, 2)
 
     override fun defineListeners() {
-
         on(WESTDOOR, IntType.SCENERY, "open"){ player, node ->
             if(!player.getAttribute("PeerStarted",false)){
                 sendDialogue(player,"You should probably talk to the owner of this home.")
@@ -112,10 +111,10 @@ class SeersHouseListeners : InteractionListener {
             else if(player.getAttribute("riddlesolved",false)) {
                 val insideHouse = (player.location == Location.create(2631, 3666, 0))
                 if(insideHouse) {
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                     player.inventory.clear()
                 } else if(player.inventory.isEmpty && player.equipment.isEmpty) {
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                 } else {
                     openDialogue(player, NPCs.PEER_THE_SEER_1288, findNPC(NPCs.PEER_THE_SEER_1288)!!)
                 }
@@ -932,7 +931,7 @@ class SeersHouseListeners : InteractionListener {
             if(player.inventory.contains(SEERSKEY,1)){
                 player.setAttribute("/save:housepuzzlesolved",true)
                 player.inventory.clear()
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
                 player.setAttribute("/save:fremtrials:peer-vote",true)
                 player.setAttribute("/save:fremtrials:votes",player.getAttribute("fremtrials:votes",0) + 1)
                 sendNPCDialogue(player,1288,"Incredible! To have solved my puzzle so quickly! I have no choice but to vote in your favour!")
@@ -941,6 +940,9 @@ class SeersHouseListeners : InteractionListener {
             return@on true
         }
 
+        setDest(IntType.SCENERY, intArrayOf(WESTDOOR, EASTDOOR), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
     }
 }
 

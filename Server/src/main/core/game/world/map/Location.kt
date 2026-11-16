@@ -187,13 +187,17 @@ class Location(var hash: LocationHash) : Node(null, null) {
         return locations
     }
 
-    /** @returns ArrayList of the 4 cardinal direction tiles. Order is important and follows [Direction] indexing */
+    /** @returns ArrayList of the 4 cardinal direction tiles. Order is important and follows [Direction] indexing. */
     val cardinalTiles: ArrayList<Location> get() {
+        return getCardinalTiles(1, 1)
+    }
+    /** @returns ArrayList of the 4 cardinal direction tiles, adjusting for object size. Order is important and follows [Direction] indexing. */
+    fun getCardinalTiles(sizeX: Int, sizeY: Int): ArrayList<Location> {
         val locations = ArrayList<Location>()
-        locations.add(transform(-1, 0, 0))
-        locations.add(transform(0, -1, 0))
-        locations.add(transform(1, 0, 0))
-        locations.add(transform(0, 1, 0))
+        locations.add(transform(-sizeX, 0, 0))
+        locations.add(transform(0, -sizeY, 0))
+        locations.add(transform(sizeX, 0, 0))
+        locations.add(transform(0, sizeY, 0))
         return locations
     }
 

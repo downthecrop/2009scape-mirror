@@ -2,8 +2,8 @@ package content.region.asgarnia.burthorpe.quest.deathplateau
 
 import core.api.*
 import core.game.interaction.InterfaceListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import org.rs09.consts.Components
 
 /**
@@ -52,13 +52,13 @@ class DiceGameInterfaceListener : InterfaceListener {
             preRoll(player)
             setInterfaceText(player, player.username, Components.DEATH_DICE_99,6)
             (1..4).forEach { sendAnimationOnInterface(player, 1149, Components.DEATH_DICE_99, it) }
-            submitRollPulse(player, true)
+            roll(player, true)
             return@onOpen true
         }
 
         on(Components.DEATH_DICE_99){ player, _, _, buttonID, _, _ ->
             when(buttonID) {
-                10 -> submitRollPulse(player, false)
+                10 -> roll(player, false)
                 12 -> {
                     closeInterface(player)
                     val callback: (() -> Unit)? =
@@ -96,7 +96,7 @@ class DiceGameInterfaceListener : InterfaceListener {
         }
     }
 
-    private fun submitRollPulse(player: Player, isNPCTurn: Boolean) {
+    private fun roll(player: Player, isNPCTurn: Boolean) {
         val roll1: Int
         val roll2: Int
 
@@ -111,21 +111,10 @@ class DiceGameInterfaceListener : InterfaceListener {
         val component1 = if (isNPCTurn) 2 else 3
         val component2 = if (isNPCTurn) 1 else 4
 
-        submitWorldPulse(
-            InterfaceUpdatePulse(
-                player, isNPCTurn,
-                component1, component2,
-                roll1, roll2
-            )
-        )
-    }
-
-    private class InterfaceUpdatePulse(val player: Player, val isNPCTurn: Boolean, val component1: Int, val component2: Int, val roll1: Int, val roll2: Int) : Pulse() {
         val DICEANIM = intArrayOf(42069, 1150, 1151, 1152, 1153, 1154, 1155)
-        var counter = 0
-        override fun pulse(): Boolean {
-            when (counter++) {
-                1 -> {
+        queueScript(player, 0, QueueStrength.NORMAL) { stage ->
+            when (stage) {
+                0 -> {
                     setComponentVisibility(player, Components.DEATH_DICE_99, 9, true)
                     if (isNPCTurn) {
                         setInterfaceText(player, "Harold rolls...", Components.DEATH_DICE_99, 13)
@@ -133,24 +122,25 @@ class DiceGameInterfaceListener : InterfaceListener {
                         setInterfaceText(player, "Your roll...", Components.DEATH_DICE_99, 13)
                     }
                     sendAnimationOnInterface(player, DICEANIM[roll1], Components.DEATH_DICE_99, component1)
+                    return@queueScript delayScript(player, 3)
                 }
-                4 -> sendAnimationOnInterface(player, DICEANIM[roll2], Components.DEATH_DICE_99, component2)
-                7 -> {
-                    if (isNPCTurn) {
-                        setComponentVisibility(player, Components.DEATH_DICE_99, 9, false)
-                    } else {
-                        if (player.getAttribute<Boolean>("deathplateau:winstate")) {
-                            setInterfaceText(player,"You win!", Components.DEATH_DICE_99, 13)
-                        } else {
-                            setInterfaceText(player,"You lose!", Components.DEATH_DICE_99, 13)
-                        }
-                        setComponentVisibility(player, Components.DEATH_DICE_99, 11, false)
-                        setComponentVisibility(player, Components.DEATH_DICE_99, 9, true)
-                    }
-                    return true
+                1 -> {
+                    sendAnimationOnInterface(player, DICEANIM[roll2], Components.DEATH_DICE_99, component2)
+                    return@queueScript delayScript(player, 3)
                 }
             }
-            return false
+            if (isNPCTurn) {
+                setComponentVisibility(player, Components.DEATH_DICE_99, 9, false)
+            } else {
+                if (getAttribute(player, ATTRIBUTE_WIN_STATE, false)) {
+                    setInterfaceText(player, "You win!", Components.DEATH_DICE_99, 13)
+                } else {
+                    setInterfaceText(player, "You lose!", Components.DEATH_DICE_99, 13)
+                }
+                setComponentVisibility(player, Components.DEATH_DICE_99, 11, false)
+                setComponentVisibility(player, Components.DEATH_DICE_99, 9, true)
+            }
+            return@queueScript stopExecuting(player)
         }
     }
 }

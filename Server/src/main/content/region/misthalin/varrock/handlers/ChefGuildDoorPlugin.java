@@ -2,8 +2,8 @@ package content.region.misthalin.varrock.handlers;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
 import org.rs09.consts.Items;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.item.Item;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -73,6 +73,6 @@ public final class ChefGuildDoorPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		return DoorActionHandler.getDestination(((Player) node), ((Scenery) n));
+		return DoorHelper.getDestination(((Player) node), ((Scenery) n));
 	}
 }

@@ -24,6 +24,8 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.ClassScanner;
 
+import static core.api.ContentAPIKt.checkFreeTileForFire;
+
 /**
  * Represents the Pyrelord familiar.
  * @author Aero
@@ -113,8 +115,7 @@ public class PyreLordNPC extends Familiar {
 			if (!player.getFamiliarManager().isOwner(familiar)) {
 				return true;
 			}
-			if (RegionManager.getObject(familiar.getLocation()) != null || familiar.getZoneMonitor().isInZone("bank")) {
-				player.getPacketDispatch().sendMessage("You can't light a fire here.");
+			if (!checkFreeTileForFire(familiar)) {
 				return false;
 			}
 			familiar.lock(ticks);

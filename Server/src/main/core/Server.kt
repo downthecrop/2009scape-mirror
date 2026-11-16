@@ -135,7 +135,7 @@ object Server {
                             }
                         }
 
-                        if (!SystemManager.isTerminated())
+                        if (!SystemManager.isTerminated)
                             exitProcess(0)
                     }
                     val timeNow = System.currentTimeMillis()

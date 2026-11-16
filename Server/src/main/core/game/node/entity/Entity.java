@@ -16,6 +16,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
 import core.game.system.task.Pulse;
+import core.game.system.timer.EntityTimerManager;
 import core.game.world.map.zone.ZoneRestriction;
 import org.jetbrains.annotations.NotNull;
 import core.game.world.GameWorld;
@@ -98,7 +99,7 @@ public abstract class Entity extends Node {
 	 * The reward locks.
 	 */
 	private final ActionLocks locks = new ActionLocks();
-	public ScriptProcessor scripts = new ScriptProcessor(this);
+	public EntityScriptProcessor scripts = new EntityScriptProcessor(this);
 	public final int[] clocks = new int[10];
 
 	public MovementPulse currentMovement;
@@ -108,14 +109,16 @@ public abstract class Entity extends Node {
 	 * The mapping of event types to event hooks
 	 */
 	private HashMap<Class<?>, ArrayList<EventHook>> hooks = new HashMap<>();
-		public TimerManager timers = new TimerManager(this);
+
+	/**
+	 * The timers running on this entity
+	 */
+	public TimerManager timers = new EntityTimerManager(this);
 
 	/**
 	 * If the entity is invisible.
 	 */
 	private boolean invisible;
-
-
 
 	/**
 	 * Constructs a new {@code Entity} {@code Object}.
@@ -212,7 +215,7 @@ public abstract class Entity extends Node {
 		Location old = location != null ? location.transform(0, 0, 0) : Location.create(0,0,0);
 		walkingQueue.update();
 		scripts.postMovement(!Objects.equals(location, old));
-				timers.processTimers();
+		timers.processTimers();
 		updateMasks.prepare(this);
 	}
 

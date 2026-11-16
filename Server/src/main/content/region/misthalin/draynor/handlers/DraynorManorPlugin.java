@@ -5,8 +5,10 @@ import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
 import content.global.skill.agility.AgilityHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
@@ -103,7 +105,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 			if (!player.getInventory().containsItem(KEY)) {
 				player.getPacketDispatch().sendMessage("The door is locked.");
 			} else {
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 			}
 			break;
 		case 152:
@@ -235,8 +237,10 @@ public final class DraynorManorPlugin extends OptionHandler {
 	@Override
 	public Location getDestination(Node node, Node n) {
 		if (n instanceof Scenery) {
-			final int id = ((Scenery) n).getId();
+			final int id = n.getId();
 			switch (id) {
+			case 131:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
 			case 155:
 				return Location.create(3098, 3359, 0);
 			case 156:

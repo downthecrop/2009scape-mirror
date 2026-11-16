@@ -5,6 +5,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.communication.CommunicationInfo;
@@ -346,7 +347,8 @@ public class Region {
 			for (Scenery object : r.removeSceneries) {
 				// Get the actual object, not the instance that's kept in the removeScenery array
 				Location loc = object.getLocation();
-				Scenery realObject = RegionManager.getObject(loc.getX(), loc.getY(), loc.getZ(), object.getId(), object.getType());
+				Layer layer = Layer.getLayer(object.getType());
+				Scenery realObject = RegionManager.getObject(loc.getX(), loc.getY(), loc.getZ(), object.getId(), layer);
 				if (realObject != null) {
 					SceneryBuilder.remove(realObject);
 				}
@@ -410,26 +412,25 @@ public class Region {
 	/**
 	 * Increments the view amount.
 	 * @param playerName The name of the player viewing the region.
-	 * @return The view amount after incrementing.
 	 */
-	public int incrementViewAmount(String playerName) {
+	public void incrementViewAmount(String playerName) {
 		synchronized (this) {
 			if (!viewingPlayers.contains(playerName)) {
 				viewingPlayers.add(playerName);
 			}
-			return viewingPlayers.size();
 		}
 	}
 
 	/**
 	 * Decrements the amount of viewers.
 	 * @param playerName The name of the player not viewing the region.
-	 * @return The view amount after decrementing.
 	 */
-	public int decrementViewAmount(String playerName) {
+	public void decrementViewAmount(String playerName) {
 		synchronized (this) {
 			viewingPlayers.remove(playerName);
-			return viewingPlayers.size();
+			if (active) {
+				checkInactive();
+			}
 		}
 	}
 

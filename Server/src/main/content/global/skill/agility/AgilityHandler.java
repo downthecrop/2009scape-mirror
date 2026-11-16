@@ -2,6 +2,7 @@ package content.global.skill.agility;
 
 import static core.api.ContentAPIKt.*;
 
+import core.game.interaction.QueueStrength;
 import core.game.node.entity.impl.PulseType;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
@@ -94,39 +95,30 @@ public final class AgilityHandler {
 	/**
 	 * Handles failing an obstacle.
 	 * @param player The player.
-	 * @param delay The amount of ticks before teleporting to the destination
-	 * and hitting.
 	 * @param dest The destination.
 	 * @param anim The animation.
 	 * @param hit The amount of damage to hit.
 	 * @param message The message to send.
 	 */
-	public static void fail(final Player player, int delay, final Location dest, Animation anim, final int hit, final String message) {
+	public static void fail(final Player player, final Location dest, Animation anim, final int hit, final String message) {
+		int duration = 0;
 		if (anim != null) {
 			animate(player, anim, true);
-			submitWorldPulse(new Pulse(animationDuration(anim), player) {
-				boolean dmg = false;
-
-				@Override
-				public boolean pulse() {
-					teleport(player, dest, TeleportManager.TeleportType.INSTANT);
-					animate(player, Animation.RESET, true);
-					if (!dmg) {
-						if (hit > 0) {
-							player.getImpactHandler().setDisabledTicks(0);
-							impact(player, hit, HitsplatType.NORMAL);
-						}
-						if (message != null) {
-							sendMessage(player, message);
-						}
-						dmg = true;
-					}
-					setDelay(0);
-					return player.getLocation().equals(dest);
-				}
-			});
+			duration = anim.getDuration();
 		}
-	}
+        queueScript(player, duration, QueueStrength.SOFT, false, (stage) -> {
+            teleport(player, dest, TeleportManager.TeleportType.INSTANT);
+            animate(player, Animation.RESET, true);
+            if (hit > 0) {
+                player.getImpactHandler().setDisabledTicks(0);
+                impact(player, hit, HitsplatType.NORMAL);
+            }
+            if (message != null) {
+                sendMessage(player, message);
+            }
+            return stopExecuting(player);
+        });
+    }
 
 	/**
 	 * Walks across an obstacle using the force movement update mask.

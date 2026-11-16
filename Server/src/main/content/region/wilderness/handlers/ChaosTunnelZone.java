@@ -300,16 +300,16 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param object the object.
 	 */
 	private void setStainedTime(Scenery object) {
-		object.getAttributes().setAttribute("stained", (int) GameWorld.getTicks() + RandomFunction.random(50, 150));
+		object.setCharge(1000 + GameWorld.getTicks() + RandomFunction.random(50, 150));
 	}
 
 	/**
-	 * Gets the stained tiem.
+	 * Gets the stained time.
 	 * @param object the object.
 	 * @return the time.
 	 */
 	private int getStainedTime(Scenery object) {
-		return object.getAttributes().getAttribute("stained", 0);
+		return object.getCharge() - 1000;
 	}
 
 	/**

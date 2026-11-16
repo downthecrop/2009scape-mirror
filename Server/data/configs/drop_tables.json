@@ -60509,5 +60509,85 @@
     "ids": "1249,1250",
     "description": "Fiyr Shadow/Shade",
     "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3137",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1129",
+    "description": "Berry (awake)",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3136",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1128",
+    "description": "Twig (awake)",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3137",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1127",
+    "description": "Berry (sleeping)",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "3136",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "1126",
+    "description": "Twig (sleeping)",
+    "main": []
   }
 ]

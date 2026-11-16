@@ -2,7 +2,6 @@ package content.region.desert.alkharid.handlers
 
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -30,7 +29,7 @@ class AlKharidStairsPlugin : OptionHandler() {
         if(node.location == zekeDoorOpened.location || node.location == craftingDoorOpened.location){
                 sendMessage(player,"This door appears to be stuck open.")
         } else{
-            DoorActionHandler.handleDoor(player, node.asScenery())
+            handleDoor(player, node.asScenery())
         }
         return true
     }

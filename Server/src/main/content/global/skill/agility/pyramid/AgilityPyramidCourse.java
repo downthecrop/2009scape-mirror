@@ -277,7 +277,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 					default:
 						break;
 					}
-					AgilityHandler.fail(player, 1, transformLevel(dest.transform(x, y, 0)), Animation.create(761 - diff), 10, null);
+					AgilityHandler.fail(player, transformLevel(dest.transform(x, y, 0)), Animation.create(761 - diff), 10, null);
 					return true;
 				}
 			});
@@ -334,7 +334,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 			playAudio(player, Sounds.JUMP_NO_LAND_2467, 30);
 			playAudio(player, Sounds.FALL_LAND_2455, 200);
 			AgilityHandler.forceWalk(player, -1, player.getLocation(), end, Animation.create(3068), 10, 0.0, "... and miss your footing.");
-			AgilityHandler.fail(player, 8, dest, Animation.create(3068), 8, null);
+			AgilityHandler.fail(player, dest, Animation.create(3068), 8, null);
 			return;
 		}
 		playAudio(player, Sounds.JUMP2_2462, 30);
@@ -364,7 +364,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 			GameWorld.getPulser().submit(new Pulse(3, player) {
 				@Override
 				public boolean pulse() {
-					AgilityHandler.fail(player, 3, transformLevel(finalDest), Animation.create(3056 - mod), 8, null);
+					AgilityHandler.fail(player, transformLevel(finalDest), Animation.create(3056 - mod), 8, null);
 					player.getAppearance().setDefaultAnimations();
 					player.getAppearance().sync();
 					return true;

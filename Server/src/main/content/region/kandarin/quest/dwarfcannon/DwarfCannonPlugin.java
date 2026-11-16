@@ -7,7 +7,7 @@ import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.dialogue.DialogueAction;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -91,14 +91,16 @@ public class DwarfCannonPlugin extends OptionHandler {
 		case 3:
 			if (!node.getLocation().equals(new Location(3015, 3453, 0))) {
 				final Scenery object = node.asScenery();
-				return handleAutowalkDoor(player, object);
+				handleDoor(player, object);
+				return true;
 			}
 			if (quest.getStage(player) < 70) {
 				player.sendMessage("The door is locked.");
 				break;
 			}
 			final Scenery object = node.asScenery();
-			return handleAutowalkDoor(player, object);
+			handleDoor(player, object);
+			return true;
 		case 5:
 			if (quest.getStage(player) == 50) {
 				player.getDialogueInterpreter().sendDialogues(player, null, "I guess I'd better fix it with the toolkit I was given.");
@@ -261,7 +263,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 	@Override
 	public Location getDestination(Node node, Node n) {
 		if (n.getId() == 3) {
-			return DoorActionHandler.getDestination(node.asPlayer(), n.asScenery());
+			return DoorHelper.getDestination(node.asPlayer(), n.asScenery());
 		} else if (n.getId() == 15601) {
 			if (n.getLocation().equals(new Location(2565, 3456, 0))) {
 				return new Location(2566, 3456, 0);

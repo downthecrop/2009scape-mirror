@@ -2,6 +2,7 @@ package content.region.kandarin.ardougne.quest.clocktower
 
 import content.data.Quests
 import core.api.*
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItem
@@ -204,18 +205,24 @@ class ClockTowerListener : InteractionListener {
         on(Scenery.GATE_39, IntType.SCENERY, "go-through") { player, node ->
             if (getAttribute(player, ClockTower.attributeRatsPoisoned, false)) {
                 sendDialogueLines(player, "The death throws of the rats seem to have shaken the door loose of", "its hinges. You pick it up and go through.")
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendPlayerDialogue(player, "It won't open. Maybe the monk knows how to open this door?")
                 setAttribute(player, ClockTower.attributeAskKojoAboutRats, true)
             }
             return@on true
         }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.GATE_39), "go-through") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
 
         // Wall to Blue Cog
         on(Scenery.WALL_1586, IntType.SCENERY, "push") { player, node ->
-            handleAutowalkDoor(player, node.asScenery())
+            handleDoor(player, node.asScenery())
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.WALL_1586), "push") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         on(Items.WHITE_COG_20, IntType.GROUNDITEM, "take") { player, groundItem ->

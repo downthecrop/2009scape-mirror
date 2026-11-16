@@ -36,7 +36,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             3 -> {
-                handleAutowalkDoor(Jeremy, getObject(57, 31, 0))
+                handleAutowalkDoor(Jeremy, getObject(57, 31, 0)!!)
                 player.faceLocation(location(57, 28, 0))
                 timedUpdate(3)
             }
@@ -70,7 +70,7 @@ class EscapeCutscene(player: Player) : Cutscene(player) {
             }
 
             8 -> {
-                handleAutowalkDoor(player, getObject(46, 16))
+                handleAutowalkDoor(player, getObject(46, 16)!!)
                 moveCamera(41, 26, 300, 4)
                 rotateCamera(45, 15, 300, 4)
                 timedUpdate(-1)

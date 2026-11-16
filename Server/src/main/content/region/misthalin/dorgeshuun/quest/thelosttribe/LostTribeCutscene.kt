@@ -3,12 +3,12 @@ package content.region.misthalin.dorgeshuun.quest.thelosttribe
 import content.data.Quests
 import core.api.animate
 import core.api.face
+import core.api.handleDoor
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.world.map.Direction
 import core.game.world.map.Location
-import core.game.global.action.DoorActionHandler
 import core.game.dialogue.FacialExpression
 
 class LostTribeCutscene(player: Player) : Cutscene(player) {
@@ -42,7 +42,7 @@ class LostTribeCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(6)
             }
             3 -> {
-                DoorActionHandler.handleDoor(player, getObject(7, 17))
+                handleDoor(player, getObject(7, 17)!!)
                 timedUpdate(3)
             }
             4 -> {

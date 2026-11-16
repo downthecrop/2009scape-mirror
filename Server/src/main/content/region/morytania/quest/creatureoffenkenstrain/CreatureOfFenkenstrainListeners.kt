@@ -3,7 +3,9 @@ package content.region.morytania.quest.creatureoffenkenstrain
 import content.data.Quests
 import core.api.*
 import core.game.dialogue.FacialExpression
+import core.game.global.action.DoorHelper
 import core.game.global.action.PickupHandler
+import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.GroundItem
 import core.game.system.task.Pulse
@@ -153,7 +155,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 2: Opening Cavern Entrance
         on(Scenery.ENTRANCE_5170, SCENERY, "open") { player, node ->
             if (inInventory(player, Items.CAVERN_KEY_4184) && removeItem(player, Items.CAVERN_KEY_4184)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
             }
@@ -162,11 +164,10 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 2: Using Cavern Key on the Cavern Entrance
         onUseWith(SCENERY, Items.CAVERN_KEY_4184, Scenery.ENTRANCE_5170) { player, used, with ->
             if (removeItem(player, used)) {
-                handleAutowalkDoor(player, with.asScenery())
+                handleDoor(player, with.asScenery())
             }
             return@onUseWith true
         }
-
 
         // 2: Searching for Cavern Key out of the Chest
         on(Scenery.CHEST_5163, SCENERY, "search") { player, node ->
@@ -256,10 +257,10 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         on(Scenery.DOOR_5174, SCENERY, "open") { player, node ->
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
                 getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 5) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else if (inInventory(player, Items.SHED_KEY_4186)) {
                 if (removeItem(player, Items.SHED_KEY_4186)) {
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                     setAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, true)
                 }
             } else {
@@ -272,9 +273,9 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         onUseWith(SCENERY, Items.SHED_KEY_4186, Scenery.DOOR_5174) { player, used, with ->
             if (getAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, false) ||
                 getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) >= 5) {
-                handleAutowalkDoor(player, with.asScenery())
+                handleDoor(player, with.asScenery())
             } else if (removeItem(player, used)) {
-                handleAutowalkDoor(player, with.asScenery())
+                handleDoor(player, with.asScenery())
                 setAttribute(player, CreatureOfFenkenstrain.attributeUnlockedShed, true)
             }
             return@onUseWith true
@@ -362,7 +363,7 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
                     player,
                     Quests.CREATURE_OF_FENKENSTRAIN
                 ) > 7) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
             }
@@ -371,11 +372,14 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
         // 2: Using Cavern Key on the Cavern Entrance
         onUseWith(SCENERY, Items.TOWER_KEY_4185, Scenery.DOOR_5172) { player, used, with ->
             if (inInventory(player, Items.TOWER_KEY_4185)) {
-                handleAutowalkDoor(player, with.asScenery())
+                handleDoor(player, with.asScenery())
             }
             return@onUseWith true
         }
 
+        setDest(IntType.SCENERY, intArrayOf(Scenery.ENTRANCE_5170, Scenery.DOOR_5174, Scenery.DOOR_5172), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
 
         // 7: Pickpocket Ring of Charos from Fenkenstrain
         on(NPCs.DR_FENKENSTRAIN_1670, NPC, "pickpocket") { player, node ->

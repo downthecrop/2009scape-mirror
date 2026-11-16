@@ -20,7 +20,7 @@ class DeathPlateauDoorDialogueFile(val door: Int) : DialogueFile() {
                 1 -> npcl(FacialExpression.FRIENDLY, "Come on in!").also { stage++ }
                 2 -> {
                     end()
-                    handleAutowalkDoor(player, getScenery(2906, 3543, 1))
+                    handleAutowalkDoor(player!!, getScenery(2906, 3543, 1)!!)
                 }
             }
         }
@@ -42,13 +42,13 @@ class DeathPlateauDoorDialogueFile(val door: Int) : DialogueFile() {
                         3 -> npcl(FacialExpression.FRIENDLY, "Oh...OK. You'd better come in then.").also { stage++ }
                         4 -> {
                             end()
-                            handleAutowalkDoor(player, getScenery(2823, 3555, 0))
+                            handleAutowalkDoor(player!!, getScenery(2823, 3555, 0)!!)
                         }
                     }
                 }
                 in 21 .. 100 -> {
                     end()
-                    handleAutowalkDoor(player, getScenery(2823, 3555, 0))
+                    handleAutowalkDoor(player!!, getScenery(2823, 3555, 0)!!)
                 }
             }
         }
@@ -62,10 +62,9 @@ class DeathPlateauDoorDialogueFile(val door: Int) : DialogueFile() {
                 }
                 in 25..100 -> {
                     end()
-                    handleAutowalkDoor(player, getScenery(2820, 3558, 0))
+                    handleAutowalkDoor(player!!, getScenery(2820, 3558, 0)!!)
                 }
             }
         }
-
     }
 }

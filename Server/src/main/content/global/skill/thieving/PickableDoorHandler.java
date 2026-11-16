@@ -2,7 +2,7 @@ package content.global.skill.thieving;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -88,7 +88,7 @@ public class PickableDoorHandler extends OptionHandler {
 		if (n instanceof Scenery) {
 			Scenery object = (Scenery) n;
 			if (object.getDefinition().hasAction("pick-lock")) {
-				return DoorActionHandler.getDestination((Entity) node, object);
+				return DoorHelper.getDestination((Entity) node, object);
 			}
 		}
 		return null;

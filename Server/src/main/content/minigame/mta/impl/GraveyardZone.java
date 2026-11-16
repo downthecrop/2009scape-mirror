@@ -234,17 +234,17 @@ public class GraveyardZone extends MTAZone {
 				player.sendMessage("You have no free space!");
 				return;
 			}
-			int life = object.getAttributes().getAttribute("life", 4);
+			int life = object.getCharge();
 			player.lock(1);
 			player.getInventory().add(item);
 			player.animate(Animation.create(827));
-			life -= 1;
-			if (life < 1) {
-				life = 4;
+			life -= 250;
+			if (life <= 0) {
+				life = 1000;
 				BoneType type = ordinal() + 1 > BoneType.values().length - 1 ? BoneType.FIRST : BoneType.values()[ordinal() + 1];
 				SceneryBuilder.replace(object, object.transform(type.getObjectId()));
 			}
-			object.getAttributes().setAttribute("life", life);
+			object.setCharge(life);
 		}
 
 		/**

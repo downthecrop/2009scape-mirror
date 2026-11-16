@@ -1,6 +1,7 @@
 package content.region.desert.quest.deserttreasure
 
 import core.api.*
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
@@ -61,7 +62,7 @@ class DiamondOfSmokeListeners : InteractionListener {
                 if (getAttribute(player, DesertTreasure.attributeUnlockedGate, false)) {
                     if (DesertTreasure.getSubStage(player, DesertTreasure.attributeSmokeStage) == 1 &&
                             getAttribute<NPC?>(player, DesertTreasure.attributeFareedInstance, null) == null) {
-                        handleAutowalkDoor(player, node.asScenery())
+                        handleDoor(player, node.asScenery())
                         val npc = core.game.node.entity.npc.NPC.create(NPCs.FAREED_1977, Location(3315, 9376, 0))
                         setAttribute(player, DesertTreasure.attributeFareedInstance, npc)
                         setAttribute(npc, "target", player)
@@ -70,7 +71,7 @@ class DiamondOfSmokeListeners : InteractionListener {
                         npc.attack(player)
                         sendChat(npc, "You dare trespass in my realm?")
                     } else if (DesertTreasure.getSubStage(player, DesertTreasure.attributeSmokeStage) >= 100) {
-                        handleAutowalkDoor(player, node.asScenery())
+                        handleDoor(player, node.asScenery())
                         if (!inInventory(player, Items.SMOKE_DIAMOND_4672) && !inBank(player, Items.SMOKE_DIAMOND_4672)) {
                             sendMessage(player, "The Diamond of Smoke seems to have mystically found its way back here...")
                             GroundItemManager.create(Item(Items.SMOKE_DIAMOND_4672), Location(3315, 9376, 0), player)
@@ -81,13 +82,15 @@ class DiamondOfSmokeListeners : InteractionListener {
                 }
 
             } else if (getQuestStage(player, DesertTreasure.questName) in 9..100) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The gate is locked.")
             }
             return@on true
         }
-
+        setDest(IntType.SCENERY, intArrayOf(Scenery.GATE_6451, Scenery.GATE_6452), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
 
         on(Scenery.A_DARK_HOLE_31367, SCENERY, "enter") { player, node ->
             // You have to come from the Pollnivneach Slayer Dungeon, then this will tele you back.

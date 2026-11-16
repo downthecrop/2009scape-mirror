@@ -2,11 +2,14 @@ package content.region.desert.handlers;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.Location;
 import core.game.world.repository.Repository;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -52,4 +55,14 @@ public class TollGateOptionPlugin extends OptionHandler {
 		return this;
 	}
 
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 2882:
+			case 35549:
+			case 35551:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
+	}
 }

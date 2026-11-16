@@ -72,8 +72,8 @@ class CharlieDialogue : DialogueFile() {
 
                                     4 -> {
                                         handleAutowalkDoor(
-                                            player!! as Player?,
-                                            getScenery(2465, 3496, 3)
+                                            player!!,
+                                            getScenery(2465, 3496, 3)!!
                                         )
                                         openDialogue(player!!,KingNarnodeUpstairsDialogue(), npc)
                                     }

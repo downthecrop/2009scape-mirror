@@ -1,13 +1,14 @@
 package content.region.kandarin.ardougne.westardougne.handlers
 
 import content.data.Quests
-import core.api.handleAutowalkDoor
+import core.api.handleDoor
 // import core.api.hasAnItem
 import core.api.isQuestComplete
 import core.api.openDialogue
 import core.api.teleport
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
@@ -42,12 +43,15 @@ class MournerHQDoors : InteractionListener {
         on(Scenery.DOOR_2036, IntType.SCENERY, "open"){ player, node->
             //todo after Mourning's End I is implemented make this check for wearing mourner gear
             if(isQuestComplete(player, Quests.PLAGUE_CITY)){
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             }
             else{
                 openDialogue(player, MournerHQDialogue())
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.DOOR_2036), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         on(Scenery.TRAPDOOR_8783, IntType.SCENERY, "open"){ player, _->

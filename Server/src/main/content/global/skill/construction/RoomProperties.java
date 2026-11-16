@@ -1,6 +1,7 @@
 package content.global.skill.construction;
 
 
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
@@ -931,12 +932,9 @@ public enum RoomProperties {
 	 * @return {@code True} if so.
 	 */
 	private boolean isExit(RegionChunk chunk, int x, int y) {
-		for (Scenery object : chunk.getObjects(x, y)) {
-			if (object != null && (object.getId() == 15313 || object.getId() == 15314 || object.getId() == 15317)) {
-				return true;
-			}
-		}
-		return false;
+		int index = Layer.WALL.ordinal();
+		Scenery object = chunk.getObjects()[x][y][index];
+		return object != null && (object.getId() == 15313 || object.getId() == 15314 || object.getId() == 15317);
 	}
 
 	/**

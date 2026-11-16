@@ -3,8 +3,10 @@ package content.region.morytania.handlers;
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
@@ -43,7 +45,7 @@ public class BarrowsTunnelShortcut extends OptionHandler {
 			break;
 		case 5052:
 			player.getPacketDispatch().sendMessage("You search the wall and find a lever.");
-			ContentAPIKt.handleAutowalkDoor(player, ((Scenery) node));
+			ContentAPIKt.handleDoor(player, ((Scenery) node));
 			break;
 		case 30261:
 		case 30262:
@@ -53,7 +55,6 @@ public class BarrowsTunnelShortcut extends OptionHandler {
 			player.teleport(new Location(3500, 9812), 1);
 			break;
 		case 5002:
-
 			break;
 		case 5005:// First tree
 			if (node.getLocation().equals(new Location(3502, 3431))) {
@@ -80,4 +81,11 @@ public class BarrowsTunnelShortcut extends OptionHandler {
 		return true;
 	}
 
+	@Override
+	public Location getDestination(Node node, Node n) {
+        if (n.getId() == 5052) {
+            return DoorHelper.getDestination((Entity) node, (Scenery) n);
+        }
+		return null;
+	}
 }

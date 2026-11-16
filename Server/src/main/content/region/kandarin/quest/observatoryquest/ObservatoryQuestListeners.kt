@@ -7,6 +7,8 @@ import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
+import core.game.global.action.DoorHelper
+import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
@@ -180,14 +182,14 @@ class ObservatoryQuestListeners : InteractionListener {
 
         on(intArrayOf(Scenery.KITCHEN_GATE_2199, Scenery.KITCHEN_GATE_2200), SCENERY, "open") { player, node ->
             if (getAttribute(player, ObservatoryQuest.attributeUnlockedGate, false)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else if (getAttribute(player, ObservatoryQuest.attributeKilledGuard, false)) {
                 if (removeItem(player, Items.GOBLIN_KITCHEN_KEY_601)) {
                     sendMessage(player, "The gate unlocks.")
                     sendMessage(player, "The key is useless now. You discard it.")
                     setAttribute(player, ObservatoryQuest.attributeUnlockedGate, true)
                     sendPlayerDialogue(player, "I had better be quick, there may be more guards about.")
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                 } else {
                     // http://youtu.be/ZkUF-0eonls
                     sendMessage(player, "The gate is locked.")
@@ -196,6 +198,9 @@ class ObservatoryQuestListeners : InteractionListener {
                 sendMessage(player, "If you open the gate, the guard will hear you. You need to get rid of him.")
             } else sendMessage(player, "The gate is locked.")
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.KITCHEN_GATE_2199), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         on(NPCs.SLEEPING_GUARD_6122, NPC, "prod") { player, node ->

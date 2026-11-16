@@ -1,34 +1,35 @@
 package core.game.world
 
+import core.ServerConstants
+import core.ServerStore
 import core.api.*
+import core.auth.Auth
+import core.auth.AuthProvider
 import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
+import core.game.interaction.ScriptProcessor
 import core.game.node.entity.player.Player
 import core.game.system.SystemManager
 import core.game.system.SystemState
+import core.game.system.config.ConfigParser
 import core.game.system.task.Pulse
 import core.game.system.task.TaskExecutor
+import core.game.system.timer.WorldTimerManager
 import core.game.world.map.Location
 import core.game.world.map.Region
-import core.game.world.map.RegionManager
-import core.plugin.CorePluginTypes.StartupPlugin
-import core.tools.RandomFunction
-import core.ServerConstants
-import core.ServerStore
-import core.auth.AuthProvider
-import core.auth.Auth
-import core.game.system.config.ConfigParser
 import core.game.world.map.RegionChunk
+import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.ChunkUpdateTracker
 import core.plugin.ClassScanner
+import core.plugin.CorePluginTypes.StartupPlugin
 import core.storage.AccountStorageProvider
 import core.tools.Log
+import core.tools.RandomFunction
 import core.worker.MajorUpdateWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
-import kotlin.collections.ArrayList
 
 /**
  * Represents the game world.
@@ -94,25 +95,35 @@ object GameWorld {
     @JvmStatic
     val accountStorage: AccountStorageProvider
         get() = Auth.storageProvider
+
     /**
      * The current amount of (600ms) cycles elapsed.
      */
     @JvmStatic
     var ticks = 0
 
+    /**
+     * The world script object.
+     */
     @JvmStatic
-    var Pulser = PulseRunner()
+    val scripts = ScriptProcessor()
 
     /**
-     * Submits a pulse.
-     *
-     * @param pulse the pulse.
+     * The world timer registry.
      */
+    @JvmStatic
+    var timers = WorldTimerManager()
+
+    /**
+     * The deprecated pulses system.
+     */
+    @Deprecated("", ReplaceWith("scripts", "core.game.world.GameWorld"))
+    @JvmStatic
+    var Pulser = PulseRunner()
     @Deprecated("", ReplaceWith("Pulser.submit(pulse!!)", "core.game.world.GameWorld.Pulser"))
     fun submit(pulse: Pulse?) {
         Pulser.submit(pulse!!)
     }
-
     fun pulse() {
         ticks++
         if (ticks % 50 == 0) {
@@ -133,7 +144,7 @@ object GameWorld {
     }
 
     /**
-     * Prompts the [GameWorld] to begin it's initialization.
+     * Prompts the [GameWorld] to begin its initialization.
      *
      * @param directory the directory to the properties.
      * @throws Throwable when the exception occurs.

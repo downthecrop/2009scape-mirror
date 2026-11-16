@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.path.Pathfinder
+import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 
@@ -57,43 +58,34 @@ class PlayerPeltables : InteractionListener {
         val hitDelay = (projectileSpeed * PROJECTILE_TIME_CONST).toInt()
 
         if (removeItem(player, peltable, Container.INVENTORY) || removeItem(player, peltable, Container.EQUIPMENT)) {
-            lock(player, hitDelay)
-            submitWorldPulse(PeltingPulse(player, other, gfx, hitDelay, peltable.id))
-        }
-
-        return true
-    }
-
-    class PeltingPulse(val player: Player, val other: Player, val gfx: IntArray, val hitDelay: Int, val peltable: Int) : Pulse() {
-        private val throwAnimation = getPeltableAnim(peltable)
-        private var ticks = 0
-        override fun pulse(): Boolean {
-            when (ticks++) {
-                0 -> {
-                    player.face(other)
-                    visualize(player, throwAnimation, gfx[0])
-                }
-                1 -> {
-                    Projectile.create(player, other, gfx[1], 30, 10).send()
-                    face(player, player) //reset face flag lel
-                    unlock(player)
-                }
-                hitDelay -> {
-                    if (gfx[2] != -1) other.graphics(Graphics(gfx[2]))
-                    sendMessage(other, "${player.username} has hit you with a ${getItemName(peltable).toLowerCase()}.")
-                    return true
-                }
-            }
-            return false
-        }
-
-        private fun getPeltableAnim(id: Int) : Int {
-            return when (id) {
+            val throwAnimation = when (peltable.id) {
                 Items.SNOWBALL_11951 -> 7530
                 Items.ROTTEN_TOMATO_2518 -> 385
                 else -> -1
             }
+            lock(player, Animation(throwAnimation).duration + 1)
+            queueScript(player, 0, QueueStrength.NORMAL) { stage ->
+                when (stage) {
+                    0 -> {
+                        face(player, other)
+                        visualize(player, throwAnimation, gfx[0])
+                        return@queueScript keepRunning(player)
+                    }
+                    1 -> {
+                        Projectile.create(player, other, gfx[1], 30, 10).send()
+                        resetFace(player)
+                        return@queueScript delayScript(player, hitDelay)
+                    }
+                    2 -> {
+                        if (gfx[2] != -1) other.graphics(Graphics(gfx[2]))
+                        sendMessage(other, "${player.username} has hit you with a ${peltable.name.toLowerCase()}.")
+                    }
+                }
+                return@queueScript stopExecuting(player)
+            }
         }
+
+        return true
     }
 
     private fun getPeltableGfx(id: Int): IntArray {

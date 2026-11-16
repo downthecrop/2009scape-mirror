@@ -33,7 +33,7 @@ public final class SystemUpdate extends Pulse {
 	/**
 	 * Constructs a new {@code SystemUpdate} {@code Object}.
 	 */
-	protected SystemUpdate() {
+	SystemUpdate() {
 		super(DEFAULT_COUNTDOWN);
 	}
 
@@ -57,11 +57,9 @@ public final class SystemUpdate extends Pulse {
 	 */
 	public void notifyPlayers() {
 		try {
-
 			int time = getDelay() + (createBackup ? BACKUP_TICK : 0);
-			for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
-				Player p = it.next();
-				if (p != null) { // Should never be null.
+			for (Player p : Repository.getPlayers()) {
+				if (!p.isArtificial()) {
 					p.getPacketDispatch().sendSystemUpdate(time);
 				}
 			}
@@ -117,6 +115,11 @@ public final class SystemUpdate extends Pulse {
 	 */
 	public void cancel() {
 		super.stop();
+		for (Player p : Repository.getPlayers()) {
+			if (!p.isArtificial()) {
+				p.getPacketDispatch().sendSystemUpdate(0);
+			}
+		}
 		SystemManager.flag(SystemState.ACTIVE);
 	}
 

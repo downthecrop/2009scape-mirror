@@ -7,7 +7,8 @@ import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import org.rs09.consts.Scenery
 import content.data.Quests
-import core.api.handleAutowalkDoor
+import core.api.handleDoor
+import core.game.global.action.DoorHelper
 
 class SCWallListener : InteractionListener {
 
@@ -21,17 +22,20 @@ class SCWallListener : InteractionListener {
                 // Check what side the player is on and teleport them to the other
                 if (player.location == Location(2875, 9799, 0)){
                     sendMessage(player, "You've found a secret door")
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                 }
                 else{
                     // We're leaving the room
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                 }
             }
             else{
                 sendMessage(player, "You search the wall but find nothing.")
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.OLD_WALL_2117), "search") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
     }
 }

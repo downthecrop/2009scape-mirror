@@ -13,7 +13,7 @@ import java.util.Arrays;
 public enum HousingStyle {
 	// open door ids are doorId + 1
 	BASIC_WOOD          (1, 5000, 7503, 0, 13100, 13101, 13098, Decoration.BASIC_WOOD_WINDOW),
-	BASIC_STONE         (10, 5000, 7503, 1, 13094, 13096, 1902, 13090, Decoration.BASIC_STONE_WINDOW),
+	BASIC_STONE         (10, 5000, 7503, 1, 13094, 13096, 1902, Decoration.BASIC_STONE_WINDOW),
 	WHITEWASHED_STONE   (20, 7500, 7503, 2, 13006, 13007, 1415, Decoration.WHITEWASHED_STONE_WINDOW),
 	FREMENNIK_STYLE_WOOD(30, 10000, 7503, 3, 13109, 13107, 13111, Decoration.FREMENNIK_WINDOW),
 	TROPICAL_WOOD       (40, 15000, 7759, 0, 13016, 13015, 13011, Decoration.TROPICAL_WOOD_WINDOW),
@@ -77,12 +77,6 @@ public enum HousingStyle {
 	private final int wallId;
 
 	/**
-	 * A second wall id, used for walls behind fireplaces in some house styles.
-	 * Only used for the basic stone house style, who knows why. Same as wallId for other house styles.
-	 */
-	private final int secondWallId;
-	
-	/**
 	 * The window style
 	 */
 	private final Decoration window;
@@ -105,30 +99,6 @@ public enum HousingStyle {
 	 * @param doorId The door object id used in this style.
 	 * @param secondDoorId The second-door object id used in this style.
 	 * @param wallId The wall object id used in this style.
-	 * @param secondWallId The second-wall object id used in this style.
-	 * @param window The window decoration used in this style.
-	 */
-	HousingStyle(int level, int cost, int regionId, int plane, int doorId, int secondDoorId, int wallId, int secondWallId, Decoration window) {
-		this.levelRequirement = level;
-		this.cost = cost;
-		this.regionId = regionId;
-		this.plane = plane;
-		this.doorId = doorId;
-		this.secondDoorId = secondDoorId;
-		this.wallId = wallId;
-		this.secondWallId = secondWallId;
-		this.window = window;
-	}
-
-	/**
-	 * Constructs a new {@code HousingStyle} {@code Object} for housing styles that do not have a second wall id
-	 * @param level The level required.
-	 * @param cost The cost of the style.
-	 * @param regionId The region id for this style.
-	 * @param plane The plane for this style.
-	 * @param doorId The door object id used in this style.
-	 * @param secondDoorId The second-door object id used in this style.
-	 * @param wallId The wall object id used in this style.
 	 * @param window The window decoration used in this style.
 	 */
 	HousingStyle(int level, int cost, int regionId, int plane, int doorId, int secondDoorId, int wallId, Decoration window) {
@@ -139,7 +109,6 @@ public enum HousingStyle {
 		this.doorId = doorId;
 		this.secondDoorId = secondDoorId;
 		this.wallId = wallId;
-		this.secondWallId = wallId;
 		this.window = window;
 	}
 
@@ -189,14 +158,6 @@ public enum HousingStyle {
 	 */
 	public int getWallId() {
 		return wallId;
-	}
-
-	/**
-	 * Gets the second wall used in this style.
-	 * @return The wall object id.
-	 */
-	public int getSecondWallId() {
-		return secondWallId;
 	}
 
 	/**

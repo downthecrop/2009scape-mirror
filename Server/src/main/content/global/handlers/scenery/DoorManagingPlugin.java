@@ -1,7 +1,7 @@
 package content.global.handlers.scenery;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -93,7 +93,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 	public Location getDestination(Node n, Node node) {
 		Scenery o = (Scenery) node;
 		if (o.getType() < 4 || o.getType() == 9) {
-			return DoorActionHandler.getDestination((Player) n, o);
+			return DoorHelper.getDestination((Player) n, o);
 		}
 		return null;
 	}

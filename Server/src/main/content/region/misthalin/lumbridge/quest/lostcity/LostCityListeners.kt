@@ -14,6 +14,7 @@ import org.rs09.consts.Scenery as Sceneries
 import core.game.interaction.InteractionListener
 import core.game.world.GameWorld
 import content.data.Quests
+import core.game.global.action.DoorHelper
 
 /**
  * This class covers some listeners for the Lost City quest
@@ -27,7 +28,7 @@ class LostCityListeners : InteractionListener {
 
         // the shed teleport, to allow players to access zanaris if they enter the shed while wielding the dramen staff
         on(Sceneries.DOOR_2406, IntType.SCENERY,"open"){ player, node ->
-            handleAutowalkDoor(player, node as Scenery)
+            handleDoor(player, node as Scenery)
             val isOutsideShed = player.location.x < node.location.x
             val canDramenTeleport = inEquipment(player,Items.DRAMEN_STAFF_772) && getQuestStage(player, Quests.LOST_CITY) > 20 && isOutsideShed
             if (canDramenTeleport) {
@@ -56,6 +57,10 @@ class LostCityListeners : InteractionListener {
             }
             return@on true
         }
+        setDest(IntType.SCENERY, intArrayOf(Sceneries.DOOR_2406), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
+
         // creating the dramen staff via using knife on dramen branch
         onUseWith(IntType.ITEM,Items.KNIFE_946,Items.DRAMEN_BRANCH_771){ player, _, _ ->
             if(!player.skills.hasLevel(Skills.CRAFTING,31)) {

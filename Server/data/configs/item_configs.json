@@ -27103,7 +27103,7 @@
   {
     "id": "2888",
     "name": "A stone bowl",
-    "examine": "This is an empty stone bowl. / This is a stone bowl full of lava.",
+    "examine": "This is an empty stone bowl.",
     "archery_ticket_price": "0",
     "durability": null,
     "equipment_slot": "3"
@@ -27111,7 +27111,7 @@
   {
     "id": "2889",
     "name": "A stone bowl",
-    "examine": "This is an empty stone bowl. / This is a stone bowl full of lava.",
+    "examine": "This is a stone bowl full of lava.",
     "archery_ticket_price": "0",
     "durability": null,
     "equipment_slot": "3"
@@ -78186,7 +78186,7 @@
   {
     "id": "9723",
     "name": "Pipe",
-    "examine": "A pipe that belongs in a cannon stand.",
+    "examine": "A spare section of pipe.",
     "archery_ticket_price": "0",
     "destroy": "true",
     "durability": null,

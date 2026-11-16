@@ -105,6 +105,6 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 		// Cleanup
 		player.removeAttribute("wildy_gate");
 		// Move player through gate/door
-		ContentAPIKt.handleAutowalkDoor(player, gate);
+		ContentAPIKt.handleDoor(player, gate);
 	}
 }

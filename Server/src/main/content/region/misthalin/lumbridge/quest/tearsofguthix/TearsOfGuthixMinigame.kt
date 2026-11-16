@@ -11,6 +11,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.node.scenery.Layer
 import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -367,7 +368,7 @@ class TearsOfGuthixGlobalTick : TickListener {
          */
         wallStates.forEachIndexed { index, state ->
             val wallLocation = allWalls[index + 1]
-            val currentWaterfall = RegionManager.getObject(wallLocation.x, wallLocation.y, wallLocation.z, -1, 4) ?: return@forEachIndexed // this is impossible, but it may not be if the region gets unloaded?
+            val currentWaterfall = RegionManager.getObject(wallLocation.x, wallLocation.y, wallLocation.z, -1, Layer.WALL_DECOR) ?: return@forEachIndexed // this is impossible, but it may not be if the region gets unloaded?
             val newWaterfallId = when (state) {
                 2 -> {
                     if (index + 1 <= 5) Scenery.GREEN_TEARS_6662 else Scenery.GREEN_TEARS_6666

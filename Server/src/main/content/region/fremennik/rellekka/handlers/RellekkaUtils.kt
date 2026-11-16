@@ -1,8 +1,8 @@
 package content.region.fremennik.rellekka.handlers
 
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Components
 
@@ -15,15 +15,13 @@ object RellekkaUtils {
         animateInterface(player, Components.MISC_SHIPJOURNEY_224, 7, destination.shipAnim)
 
         val animDuration = animationDuration(getAnimation(destination.shipAnim))
-        submitWorldPulse(object : Pulse(animDuration){
-            override fun pulse(): Boolean {
-                teleport(player, destination.destLoc)
-                closeInterface(player)
-                closeOverlay(player)
-                unlock(player)
-                return true
-            }
-        })
+        queueScript(player, animDuration, QueueStrength.SOFT, false) {
+            teleport(player, destination.destLoc)
+            closeInterface(player)
+            closeOverlay(player)
+            unlock(player)
+            return@queueScript stopExecuting(player)
+        }
     }
 }
 

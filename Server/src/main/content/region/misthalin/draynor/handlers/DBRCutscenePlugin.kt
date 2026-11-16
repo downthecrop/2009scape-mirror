@@ -206,7 +206,7 @@ class DBRCutscene(player: Player) : Cutscene(player) {
             }
             14 -> {
                 val wiseOldMan = getNPC(NPCs.WISE_OLD_MAN_2566)!!
-                handleAutowalkDoor(wiseOldMan, getObject(16, 51))
+                handleAutowalkDoor(wiseOldMan, getObject(16, 51)!!)
                 timedUpdate(1)
             }
             15 -> {

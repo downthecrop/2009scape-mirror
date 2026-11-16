@@ -14,6 +14,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import kotlin.random.Random
 import content.data.Quests
+import core.game.global.action.DoorHelper
 import core.game.interaction.InterfaceListener
 import org.rs09.consts.Components
 
@@ -38,10 +39,9 @@ class MorytaniaListeners : InteractionListener {
     private val splashGFX = Graphics(68)
 
     override fun defineListeners() {
-
         on(SWAMP_GATES, IntType.SCENERY, "open"){ player, node ->
             if(player.location.y == 3457){
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
                 sendMessage(player, "You skip gladly out of murky Mort Myre.")
                 removeTimer<SwampDecayTimer>(player)
                 GlobalScope.launch {
@@ -60,6 +60,9 @@ class MorytaniaListeners : InteractionListener {
                 }
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(*SWAMP_GATES), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         on(GROTTO_EXIT, IntType.SCENERY, "exit"){ player, node ->
@@ -90,7 +93,7 @@ class MorytaniaListeners : InteractionListener {
                         visualize(player,failAnim,splashGFX)
                         teleport(player,failWater)
                         // Deal 1-6 damage but wait until the player is back on land
-                        AgilityHandler.fail(player,0,failLand,swimAnim,Random.nextInt(1,7),failMessage)
+                        AgilityHandler.fail(player, failLand, swimAnim, Random.nextInt(1, 7), failMessage)
                         return true
                     }
                 })

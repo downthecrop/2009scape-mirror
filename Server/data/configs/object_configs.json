@@ -7348,12 +7348,48 @@
     "ids": "1852,1853,1854,1855,1856,1857,1858,1859,1860,1861,1862,1863"
   },
   {
+    "examine": "An empty claw.",
+    "ids": "18623,18624,18625,18626"
+  },
+  {
+    "examine": "A heavy claw.",
+    "ids": "18627,18628,18629,18630,18631,18632,18633,18634"
+  },
+  {
+    "examine": "A broken claw.",
+    "ids": "18635,18636,18637,18638"
+  },
+  {
     "examine": "These obviously mean keep out!",
     "ids": "1864,1865,1866,1867,1868,1869,1870,1871,1872,1873,1874,1875"
   },
   {
+    "examine": "The inner workings for the press are in here.",
+    "ids": "18641"
+  },
+  {
+    "examine": "A valve to start and stop the flow of water.",
+    "ids": "18646,18647"
+  },
+  {
+    "examine": "I wonder what it does.",
+    "ids": "18663"
+  },
+  {
     "examine": "Fly Gnome Air.",
     "ids": "187"
+  },
+  {
+    "examine": "Seems to connect this level to the one above!",
+    "ids": "18705,18598"
+  },
+  {
+    "examine": "Is that a shopping trolley?",
+    "ids": "18746"
+  },
+  {
+    "examine": "A magical wind tunnel.",
+    "ids": "18758,18759"
   },
   {
     "examine": "I shudder to think what has taken place here.",
@@ -10709,7 +10745,7 @@
   },
   {
     "examine": "This lever can be operated.",
-    "ids": "3417,3418,3419,3420,3421,3422,3423,3424,3425,3426,3427,3428"
+    "ids": "3417,3418,3419,3420,3421,3423,3424,3425,3426,3427,3428"
   },
   {
     "examine": "Water powered machinery.",

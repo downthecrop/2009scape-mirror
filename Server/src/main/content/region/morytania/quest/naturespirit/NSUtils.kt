@@ -3,13 +3,13 @@ package content.region.morytania.quest.naturespirit
 import core.api.*
 import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.RegionManager
 import core.game.world.map.RegionManager.forId
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import content.region.morytania.handlers.MortMyreGhastNPC
+import core.game.interaction.QueueStrength
 import org.rs09.consts.Sounds
 
 object NSUtils {
@@ -60,16 +60,16 @@ object NSUtils {
                 addItemOrDrop(player, Items.DRUID_POUCH_2957)
             }
             spawnProjectile(player, attacker, 268)
-            submitWorldPulse(object : Pulse(){
-                var ticks = 0
-                override fun pulse(): Boolean {
-                    when(ticks++){
-                        2 -> visualize(attacker, -1, Graphics(269, 125))
-                        3 -> attacker.transform(attacker.id + 1).also { attacker.attack(player); attacker.setAttribute("woke", getWorldTicks()); return true }
-                    }
-                    return false
+            queueScript(attacker, 2, QueueStrength.NORMAL) { stage ->
+                if (stage == 0) {
+                    visualize(attacker, -1, Graphics(269, 125))
+                    return@queueScript keepRunning(attacker)
                 }
-            })
+                attacker.transform(attacker.id + 1)
+                attacker.attack(player)
+                attacker.setAttribute("woke", getWorldTicks())
+                return@queueScript stopExecuting(attacker)
+            }
             return true
         }
         return false

@@ -4,14 +4,11 @@ import java.awt.Point;
 import java.util.Arrays;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.global.action.DoorActionHandler;
-import content.global.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
-import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -69,7 +66,7 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 			extension.inspect(lever);
 			break;
 		case "open":
-			extension.walk(object);
+			handleDoor(player, object);
 			return true;
 		}
 		return true;
@@ -150,35 +147,6 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 		 */
 		public final void inspect(final Lever lever) {
 			player.getPacketDispatch().sendMessage("The lever is " + (isUp(lever) ? "up" : "down") + ".");
-		}
-
-		/**
-		 * Method used to walk through a door.
-		 * @param object the object.
-		 */
-		public final void walk(final Scenery object) {
-			player.lock(4);
-			GameWorld.getPulser().submit(new Pulse(1, player, object) {
-				@Override
-				public boolean pulse() {
-					Point p = (Point) getWalkData()[0];
-					int[] rotation = (int[]) getWalkData()[1];
-					Location destination = (Location) getWalkData()[2];
-					final Scenery opened = object.transform(object.getId(), rotation[0]);
-					opened.setCharge(88);
-					opened.setLocation(object.getLocation().transform((int) p.getX(), (int) p.getY(), 0));
-					final Scenery second = DoorActionHandler.getSecondDoor(object, player);
-					SceneryBuilder.replace(object, opened, 2);
-					if (second != null) {
-						final Scenery secondOpened = second.transform(second.getId(), rotation[1]);
-						secondOpened.setCharge(88);
-						secondOpened.setLocation(second.getLocation().transform((int) p.getX(), (int) p.getY(), 0));
-						SceneryBuilder.replace(second, secondOpened, 2);
-					}
-					AgilityHandler.walk(player, 0, player.getLocation(), destination, null, 0, null);
-					return true;
-				}
-			});
 		}
 
 		/**

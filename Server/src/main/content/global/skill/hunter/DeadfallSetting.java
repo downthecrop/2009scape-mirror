@@ -96,7 +96,7 @@ public final class DeadfallSetting extends TrapSetting {
 			}
 		}
 		npc.faceLocation(wrapper.getObject().getLocation());
-		wrapper.getObject().getAttributes().setAttribute("kebbit-dir", dir);
+		wrapper.setKebbitDir(dir);
 		return true;
 	}
 
@@ -107,9 +107,8 @@ public final class DeadfallSetting extends TrapSetting {
 
 	@Override
 	public int getTransformId(TrapWrapper wrapper, TrapNode node) {
-		int dir = wrapper.getObject().getAttributes().getAttribute("kebbit-dir", 0);
-		int id = dir == 0 ? node.getObjectIds()[0] : node.getObjectIds()[1];
-		return id;
+		int dir = wrapper.getKebbitDir();
+        return dir == 0 ? node.getObjectIds()[0] : node.getObjectIds()[1];
 	}
 
 	@Override

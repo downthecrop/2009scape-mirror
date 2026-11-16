@@ -40,7 +40,7 @@ class SecondFightCutscene(player: Player) : Cutscene(player) {
             }
 
             3 -> {
-                handleAutowalkDoor(player, getObject(40, 5))
+                handleAutowalkDoor(player, getObject(40, 5)!!)
                 timedUpdate(2)
             }
 
@@ -77,7 +77,7 @@ class SecondFightCutscene(player: Player) : Cutscene(player) {
 
             10 -> {
                 sendChat(getNPC(GUARD)!!, "Get out! there.")
-                handleAutowalkDoor(player, getObject(46, 16))
+                handleAutowalkDoor(player, getObject(46, 16)!!)
                 move(getNPC(GUARD)!!, 47, 15)
                 timedUpdate(1)
             }
@@ -111,8 +111,8 @@ class SecondFightCutscene(player: Player) : Cutscene(player) {
             }
 
             16 -> {
-                handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 24))
-                handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 23))
+                handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 24)!!)
+                handleAutowalkDoor(getNPC(SCORPION)!!, getObject(46, 23)!!)
                 timedUpdate(1)
             }
 

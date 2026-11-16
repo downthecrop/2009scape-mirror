@@ -3,7 +3,6 @@ package core.game.world.update
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
-import core.game.world.map.RegionManager
 import core.game.world.repository.InitializingNodeList
 import core.net.packet.PacketRepository
 import core.net.packet.context.PlayerContext
@@ -32,13 +31,13 @@ class UpdateSequence
         lobbyList = Repository.lobbyPlayers
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
-        lobbyList!!.map{ PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
+        lobbyList!!.forEach { PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
 
-        var npcTickStart = System.currentTimeMillis()
+        val npcTickStart = System.currentTimeMillis()
         npcList!!.forEach(NPC::tick)
         Grafana.npcTickTime = (System.currentTimeMillis() - npcTickStart).toInt()
 
-        var playerTickStart = System.currentTimeMillis()
+        val playerTickStart = System.currentTimeMillis()
         renderablePlayers.forEach(Player::tick)
         Grafana.playerTickTime = (System.currentTimeMillis() - playerTickStart).toInt()
     }
@@ -53,7 +52,7 @@ class UpdateSequence
     }
 
     /**
-     * Ends the sequence, calls the [Entity.reset] method..
+     * Ends the sequence, calls the [Entity.reset] method.
      */
     fun end() {
         playersList!!.forEach(Player::reset)

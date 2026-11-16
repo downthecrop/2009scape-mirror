@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
-import core.game.node.scenery.Constructed;
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.build.ChunkFlags;
@@ -160,12 +160,7 @@ public class RegionChunk {
 					if (o == null) {
 						continue;
 					}
-					Scenery copy = o.transform(o.getId());
-					if (o instanceof Constructed) {
-						dest[x][y][i] = copy.asConstructed();
-					} else {
-						dest[x][y][i] = copy;
-					}
+					dest[x][y][i] = o.transform(o.getId());
 					dest[x][y][i].setActive(o.isActive());
 					dest[x][y][i].setRenderable(o.isRenderable());
 				}
@@ -190,48 +185,22 @@ public class RegionChunk {
 	 * @param object The object to add.
 	 */
 	public void addStatDyn(Scenery object, int chunkOffsetX, int chunkOffsetY) {
-		for (int i = 0; i < ARRAY_SIZE; i++) {
-			Scenery current = statObjects[chunkOffsetX][chunkOffsetY][i];
-			if (current == null) {
-				statObjects[chunkOffsetX][chunkOffsetY][i] = object;
-				objects[chunkOffsetX][chunkOffsetY][i] = object.transform(object.getId()); // deep copy so that active/renderable flags don't synchronize across multiple copies of e.g. a POH
-				return;
-			}
-			if (current.getId() == object.getId()) {
-				// It's possible that we already have this object. One instance of this was found at 1906, 5082, 0,
-				// where our cache has more than one copy of the same [Scenery 15349, [1906, 5082, 0], type=22, rot=1]
-				// object. Since authentically, the engine can only support one of the same type of object per tile,
-				// if the ID matches we can be confident that this is a duplicate.
-				return;
-			}
-		}
-		throw new IllegalStateException("RC addStatDyn insufficient array length for storing object " + object);
+		int index = Layer.getIndex(object.getType());
+		statObjects[chunkOffsetX][chunkOffsetY][index] = object;
+		objects[chunkOffsetX][chunkOffsetY][index] = object.transform(object.getId()); // deep copy so that active/renderable flags don't synchronize across multiple copies of e.g. a POH
 	}
 
 	/**
 	 * Adds the scenery to the dynamic object list.
 	 * @param object The object to add.
-	 * @return The slot it was added into.
 	 */
-	public int add(Scenery object) {
+	public void add(Scenery object) {
 		int chunkOffsetX = object.getLocation().getChunkOffsetX();
 		int chunkOffsetY = object.getLocation().getChunkOffsetY();
-		for (int i = 0; i < ARRAY_SIZE; i++) {
-			Scenery current = objects[chunkOffsetX][chunkOffsetY][i];
-			if (current == null) {
-				objects[chunkOffsetX][chunkOffsetY][i] = object.asConstructed();
-				object.setRenderable(true);
-				object.setActive(true);
-				return i;
-			}
-			if (current.equals(object)) {
-				// Just reactivate the old instance
-				current.setRenderable(true);
-				current.setActive(true);
-				return i;
-			}
-		}
-		throw new IllegalStateException("RC add insufficient array length for storing object " + object);
+		int index = Layer.getIndex(object.getType());
+		objects[chunkOffsetX][chunkOffsetY][index] = object;
+		object.setRenderable(true);
+		object.setActive(true);
 	}
 
 	/**
@@ -304,11 +273,11 @@ public class RegionChunk {
 	/**
 	 * Rotation consts. Greg loves these :)
 	 */
-	private final static int NORTH_ROTATION = 0;
-	private final static int EAST_ROTATION = 1;
-	private final static int SOUTH_ROTATION = 2;
-	private final static int WEST_ROTATION = 3;
-	private final static int NUMBER_OF_CARDINAL_ROTATIONS = 4;
+	public final static int NORTH_ROTATION = 0;
+	public final static int EAST_ROTATION = 1;
+	public final static int SOUTH_ROTATION = 2;
+	public final static int WEST_ROTATION = 3;
+	public final static int NUMBER_OF_CARDINAL_ROTATIONS = 4;
 
 	/**
 	 * Rotates the chunk.
@@ -352,13 +321,9 @@ public class RegionChunk {
 						int[] pos = getRotatedPosition(x, y, stat.getDefinition().getSizeX(), stat.getDefinition().getSizeY(), stat.getRotation(), rotation);
 						int newX = pos[0];
 						int newY = pos[1];
+						int index = Layer.getIndex(stat.getType());
 						Scenery obj = stat.transform(stat.getId(), (stat.getRotation() + rotation) % NUMBER_OF_CARDINAL_ROTATIONS, stat.getLocation().transform(newX - x, newY - y, 0));
-						for (int j = 0; j < ARRAY_SIZE; j++) {
-							if (statObjects[newX][newY][j] == null) {
-								statObjects[newX][newY][j] = obj;
-								break;
-							}
-						}
+						statObjects[newX][newY][index] = obj;
 					}
 					Scenery dyn = oldDyn[x][y][i];
 					if (dyn != null) {
@@ -476,21 +441,7 @@ public class RegionChunk {
 						if (stat.equals(dyn)) {
 							continue;
 						}
-						boolean hasReplacement = false;
-						for (int j = 0; j < ARRAY_SIZE; j++) {
-							if (j == i) {
-								continue;
-							}
-							Scenery other = objects[x][y][j];
-							if (other == null) {
-								continue;
-							}
-							if (other.getLayer() == stat.getLayer()) {
-								hasReplacement = true;
-								break;
-							}
-						}
-						if (!hasReplacement) {
+						if (dyn == null) {
 							ClearScenery.write(buffer, stat);
 							updated = true;
 						}
@@ -640,32 +591,6 @@ public class RegionChunk {
 	 */
 	public Scenery[][][] getObjects() {
 		return objects;
-	}
-
-	/**
-	 * Gets the objects index for the given object id and/or scenery type.
-	 * @param x The x-coordinate on the region chunk.
-	 * @param y The y-coordinate on the region chunk.
-	 * @param objectId The object id. -1 if any.
-	 * @param type The scenery type. Ignored if objectId is set to >= -1.
-	 */
-	public int getIndex(int x, int y, int objectId, int type) {
-		for (int i = 0; i < ARRAY_SIZE; i++) {
-			Scenery o = objects[x][y][i];
-			if (o != null) {
-				if (objectId < 0) {
-					if (type >= 0 && o.getType() != type) {
-						continue;
-					}
-					return i;
-				} else {
-					if (o.getId() == objectId) {
-						return i;
-					}
-				}
-			}
-		}
-		return -1;
 	}
 
 	/**

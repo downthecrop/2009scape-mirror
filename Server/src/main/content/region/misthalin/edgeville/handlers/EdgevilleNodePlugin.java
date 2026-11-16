@@ -4,8 +4,10 @@ import static core.api.ContentAPIKt.*;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
@@ -84,10 +86,19 @@ public final class EdgevilleNodePlugin extends OptionHandler {
                     player.setAttribute("wildy_gate", node);
                 }
                 else{ // Leaving the wilderness
-                    handleAutowalkDoor(player, (Scenery) node);
+                    handleDoor(player, (Scenery) node);
                 }
         }
         return true;
     }
 
+    @Override
+    public Location getDestination(Node node, Node n) {
+        switch (n.getId()) {
+            case 29319:
+            case 29320:
+                return DoorHelper.getDestination((Entity) node, (Scenery) n);
+        }
+        return null;
+    }
 }

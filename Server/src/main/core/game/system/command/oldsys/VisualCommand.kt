@@ -10,7 +10,6 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.game.system.command.CommandSet
 import core.game.system.task.Pulse
@@ -18,9 +17,6 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.net.packet.PacketRepository
-import core.net.packet.context.VarbitContext
-import core.net.packet.out.Varbit
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.game.system.command.CommandPlugin
@@ -232,48 +228,6 @@ class VisualCommand : CommandPlugin() {
                 val hidden = if (args.size > 3) java.lang.Boolean.parseBoolean(args[3]) else true
                 player!!.packetDispatch.sendInterfaceConfig(toInteger(args[1]!!), toInteger(args[2]!!), hidden)
                 player.packetDispatch.sendMessage("Interface child (id=" + args[1] + ", child=" + args[2] + ") is " + if (hidden) "hidden." else "visible.")
-                return true
-            }
-            "loop_varposition" -> {
-                val value = (args!![1]!!.toString().toInt()) ?: 0
-                val cfg_index = (args.getOrNull(2)?.toString()?.toInt() ?: -1)
-                if(cfg_index == -1){
-                    submitWorldPulse(object : Pulse(3, player){
-                        var pos = 32
-                        var shift = 0
-                        override fun pulse(): Boolean {
-                            for(i in 0..1999){
-                                setVarp(player!!, i, pos shl shift)
-                            }
-                            player?.sendMessage("$pos shl $shift")
-                            if(pos++ >= 63){
-                                shift += 4
-                                pos = 0
-                            }
-                            return shift >= 32
-                        }
-                    })
-                } else {
-                    submitWorldPulse(object : Pulse(3, player) {
-                        var pos = 0
-                        override fun pulse(): Boolean {
-                            setVarp(player!!, cfg_index, value shl pos)
-                            player?.sendMessage("$pos")
-                            return pos++ >= 32
-                        }
-                    })
-                }
-                return true
-            }
-            "loop_anim_on_i" -> {
-                var anim = toInteger(args!![1]!!)
-                submitWorldPulse(object : Pulse(3){
-                    override fun pulse(): Boolean {
-                        player!!.packetDispatch.sendAnimationInterface(anim++, 224, 7)
-                        sendMessage(player, "${anim - 1}")
-                        return false
-                    }
-                })
                 return true
             }
             "send_i_anim" -> {

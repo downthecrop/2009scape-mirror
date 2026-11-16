@@ -5,7 +5,6 @@ import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength

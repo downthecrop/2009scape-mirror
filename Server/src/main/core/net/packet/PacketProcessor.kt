@@ -579,7 +579,7 @@ object PacketProcessor {
         }
         else if (pkt is Packet.UseWithScenery) {
             item = pkt.player.inventory[pkt.slot] ?: return sendClearMinimap(pkt.player)
-            node = RegionManager.getObject(pkt.x, pkt.y, pkt.player.location.z, pkt.sceneryId, -1) ?: return sendClearMinimap(pkt.player)
+            node = RegionManager.getObject(pkt.x, pkt.y, pkt.player.location.z, pkt.sceneryId, null) ?: return sendClearMinimap(pkt.player)
             childNode = node.asScenery().getChild(pkt.player)
             itemId = pkt.itemId
             nodeId = node.id
@@ -680,7 +680,7 @@ object PacketProcessor {
 
     private fun processSceneryAction(pkt: Packet.SceneryAction) {
         val player = pkt.player
-        var scenery = RegionManager.getObject(pkt.x, pkt.y, player.location.z, pkt.id, -1)
+        var scenery = RegionManager.getObject(pkt.x, pkt.y, player.location.z, pkt.id, null)
         var objId = pkt.id
 
         //what follows is a series of hardcoded crimes against humanity

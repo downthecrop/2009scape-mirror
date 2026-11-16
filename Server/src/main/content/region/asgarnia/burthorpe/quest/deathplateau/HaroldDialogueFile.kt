@@ -142,13 +142,14 @@ class HaroldDialogueFile : DialogueFile() {
                     31 -> {
                         sendInputDialogue(player!!, true, "Enter amount:") { value ->
                             val wagerAmount = value as Int
-                            // Check wager amount.
-                            if (wagerAmount <= 0) {
-                                sendMessage(player!!, "You have to offer some money.").also { stage = END_DIALOGUE }
+                            if (wagerAmount <= 0) { // TODO: is never hit because if you enter 0, the client will close the input dialog and the callback will not be run
+                                sendMessage(player!!, "You have to offer some money.")
+                                end()
                             } else if (wagerAmount > 1000) {
                                 npcl(FacialExpression.FRIENDLY, "Woah! Do you think I'm made of money? Max bet is 1000 gold.").also { stage = END_DIALOGUE }
                             } else if (!inInventory(player!!, Items.COINS_995) || amountInInventory(player!!, Items.COINS_995) < value) {
-                                sendMessage(player!!, "You do not have that much money!").also { stage = END_DIALOGUE }
+                                sendMessage(player!!, "You do not have that much money!")
+                                end()
                             } else if (removeItem(player!!, Item(Items.COINS_995, value))) {
                                 player!!.setAttribute("deathplateau:wager", wagerAmount)
                                 npc(FacialExpression.FRIENDLY, "OK. I'll roll first!").also { stage++ }
@@ -170,7 +171,7 @@ class HaroldDialogueFile : DialogueFile() {
                         }
                         setAttribute(player!!, "deathplateau:dicegameclose", advanceStage)
                         openInterface(player!!, 99)
-                        setInterfaceText(player!!, player!!.name, 99, 6)
+                        setInterfaceText(player!!, player!!.username, 99, 6)
                     }
                     34 -> {
                         val wager = getAttribute(player!!, "deathplateau:wager", 0)
@@ -183,7 +184,7 @@ class HaroldDialogueFile : DialogueFile() {
                                 addItemOrDrop(player!!, Items.COINS_995, wager * 2)
                                 sendMessage(player!!, "Harold has given you your winnings!")
                                 setAttribute(player!!, ATTRIBUTE_HAROLD_MONEY,haroldAmount - wager)
-                                sendItemDialogue(player!!, Items.COINS_995, "Harold has given you your winnings!").also { stage = END_DIALOGUE }
+                                sendItemDialogue(player!!, Item(Items.COINS_995, wager * 2), "Harold has given you your winnings!").also { stage = END_DIALOGUE }
                             }
                         } else {
                             // Lose
@@ -233,11 +234,11 @@ class HaroldDialogueFile : DialogueFile() {
                             val wagerAmount = value as Int
                             // Check wager amount.
                             if (wagerAmount <= 0) {
-                                sendMessage(player!!, "You have to offer some money.").also { stage = END_DIALOGUE }
+                                sendMessage(player!!, "You have to offer some money.").also { end() }
                             } else if (wagerAmount > 1000) {
                                 npcl(FacialExpression.DRUNK, "Eashy tiger! Max bet ish 1000 coinsh.").also { stage = END_DIALOGUE }
                             } else if (!inInventory(player!!, Items.COINS_995) || amountInInventory(player!!, Items.COINS_995) < value) {
-                                sendMessage(player!!, "You do not have that much money!").also { stage = END_DIALOGUE }
+                                sendMessage(player!!, "You do not have that much money!").also { end() }
                             } else if (removeItem(player!!, Item(Items.COINS_995, value))) {
                                 player!!.setAttribute("deathplateau:wager", wagerAmount)
                                 npc(FacialExpression.DRUNK, "Right...er...here goes...").also { stage++ }
@@ -255,7 +256,7 @@ class HaroldDialogueFile : DialogueFile() {
                         }
                         setAttribute(player!!, "deathplateau:dicegameclose", advanceStage)
                         openInterface(player!!, 99)
-                        setInterfaceText(player!!, player!!.name, 99, 6)
+                        setInterfaceText(player!!, player!!.username, 99, 6)
                     }
                     25 -> npc(FacialExpression.DRUNK, "Shixteen! How am I shupposhed to beat that!").also { stage = 30 }
                     26 -> npc(FacialExpression.DRUNK, "I didn't know you could ushe four dishe. Oh well.").also { stage = 30 }
@@ -309,7 +310,7 @@ class HaroldDialogueFile : DialogueFile() {
                     2 -> npcl(FacialExpression.FRIENDLY, "I'll write you another.").also { stage++ }
                     3 -> {
                         addItemOrDrop(player!!, Items.IOU_3103)
-                        sendItemDialogue(player!!, Items.IOU_3103, "Harold has given you an IOU scribbled on some paper.").also {stage = END_DIALOGUE}
+                        sendItemDialogue(player!!, Items.IOU_3103, "Harold has given you an IOU scribbled on some paper.").also { stage = END_DIALOGUE }
                     }
 
                     5 -> npc(FacialExpression.FRIENDLY, "Hi.").also { stage++ }
@@ -360,7 +361,7 @@ class HaroldDialogueFile : DialogueFile() {
                     2 -> npcl(FacialExpression.FRIENDLY, "I'll write you another.").also { stage++ }
                     3 -> {
                         addItemOrDrop(player!!, Items.COMBINATION_3102)
-                        sendItemDialogue(player!!, Items.COMBINATION_3102, "Harold has given you the IOU, which you know is the combination.").also {stage = END_DIALOGUE}
+                        sendItemDialogue(player!!, Items.COMBINATION_3102, "Harold has given you the IOU, which you know is the combination.").also { stage = END_DIALOGUE }
                     }
 
                     5 -> npc(FacialExpression.FRIENDLY, "Hi.").also { stage++ }

@@ -16,7 +16,7 @@ import core.game.node.entity.player.info.login.PlayerSaveParser
 import core.game.node.entity.player.info.login.PlayerSaver
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.link.quest.QuestRepository
-import core.game.system.timer.RSTimer
+import core.game.system.timer.Timer
 import core.game.system.timer.TimerRegistry
 import core.game.world.GameWorld
 import core.game.world.map.Location
@@ -80,10 +80,10 @@ object ClassScanner {
     }
 
     fun loadTimers () {
-        scanResults.getSubclasses ("core.game.system.timer.RSTimer").filter { !it.isAbstract }.forEach {
+        scanResults.getSubclasses ("core.game.system.timer.Timer").filter { !it.isAbstract }.forEach {
             try {
-                val clazz = it.loadClass().newInstance() as RSTimer
-                TimerRegistry.registerTimer (clazz)
+                val clazz = it.loadClass().newInstance() as Timer
+                TimerRegistry.registerTimer(clazz)
             } catch (e: Exception) {
                 log(this::class.java, Log.ERR, "Error registering timer instance: ${it.simpleName}")
                 e.printStackTrace()

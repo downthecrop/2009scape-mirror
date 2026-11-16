@@ -95,7 +95,7 @@ public class MonkeyBarShortcut extends AgilityShortcut {
 					if (failed) {
 						player.getAppearance().setAnimations();
 						player.getAppearance().sync();
-						AgilityHandler.fail(player, 2, new Location(2599, 9564, 0), Animation.create(768), RandomFunction.random(1, 3), null);
+						AgilityHandler.fail(player, new Location(2599, 9564, 0), Animation.create(768), RandomFunction.random(1, 3), null);
 						player.logoutListeners.remove("monkey-bar");
 						return true;
 					}

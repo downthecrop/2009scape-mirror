@@ -1,6 +1,6 @@
 package core.game.interaction;
 
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.scenery.Scenery;
@@ -13,7 +13,6 @@ import core.game.world.map.RegionManager;
  * @author Emperor
  */
 public class DestinationFlag {
-
 	/**
 	 * The Location destination flag.
 	 */
@@ -93,12 +92,11 @@ public class DestinationFlag {
 	 * The object destination flag.
 	 */
 	public static final DestinationFlag OBJECT = new DestinationFlag() {
-
 		@Override
 		public Location getDestination(Entity mover, Node n) {
 			Scenery object = (Scenery) n;
 			if (object.getType() < 4 || object.getType() == 9) {
-				return DoorActionHandler.getDestination(mover, object);
+				return DoorHelper.getDestination(mover, object);
 			}
 			if (object.getType() == 4 || object.getType() == 5) { // Wall
 				// decoration
@@ -247,13 +245,7 @@ public class DestinationFlag {
 				}
 			}
 			moveDir = Direction.get((moveDir.toInteger() + 1) % 4);
-			int offsetX = Math.abs(moveDir.getStepY() * (node.size() >> 1)); // Not
-			// a
-			// mixup
-			// between
-			// x
-			// &
-			// y!
+			int offsetX = Math.abs(moveDir.getStepY() * (node.size() >> 1)); // Not a mixup between x & y!
 			int offsetY = Math.abs(moveDir.getStepX() * (node.size() >> 1));
 			if (moveDir.toInteger() < 2) {
 				suggestion = node.getLocation().transform(-moveDir.getStepX() + offsetX, -moveDir.getStepY() + offsetY, 0);

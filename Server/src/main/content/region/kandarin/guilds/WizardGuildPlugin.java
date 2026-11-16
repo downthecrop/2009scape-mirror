@@ -6,8 +6,10 @@ import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.DialoguePlugin;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
@@ -64,7 +66,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogue("You need a Magic level of at least 66 to enter.");
 					return true;
 				}
-				handleAutowalkDoor(player, (Scenery) node);
+				handleDoor(player, (Scenery) node);
 				break;
 			case 2155:
 			case 2154:
@@ -81,6 +83,16 @@ public final class WizardGuildPlugin extends OptionHandler {
 			return true;
 		}
 		return true;
+	}
+
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 1600:
+			case 1601:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
 	}
 
 	/**

@@ -362,18 +362,37 @@ public class Player extends Entity {
 		details.save();
 	}
 
+	void decrementViewcountsInViewport() {
+		RegionChunk[][] viewport = playerFlags.getLastViewport();
+		if (viewport != null) {
+			HashSet<Region> currentRegions = new HashSet<>();
+			for (int i = 0; i < MapChunkRenderer.BUILD_AREA_SIZE; i++) {
+				for (int j = 0; j < MapChunkRenderer.BUILD_AREA_SIZE; j++) {
+					if (viewport[i][j] != null) {
+						currentRegions.add(viewport[i][j].getRegion());
+					}
+				}
+			}
+			for (Region region : currentRegions) {
+				region.decrementViewAmount(name);
+			}
+		}
+	}
+
 	/**
 	 * Clears the player from the game.
 	 * You should NEVER call this manually. This can only be called by the DisconnectionQueue doing its job.
 	 * If you think you need to call this manually, you're wrong. Stop. Turn around. Go back. Here be monsters.
 	 */
 	public void finishClear() {
-		if (!isArtificial())
+		if (!isArtificial()) {
 			GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
+		}
 		setPlaying(false);
 		getWalkingQueue().reset();
-		if(!logoutListeners.isEmpty()){
-			logoutListeners.forEach((key,method) -> method.invoke(this));
+		if (!logoutListeners.isEmpty()) {
+			new ArrayList<>(logoutListeners.values()).forEach(method -> method.invoke(this)); // avoids CME
+			logoutListeners.clear();
 		}
 		if (familiarManager.hasFamiliar()) {
 			familiarManager.getFamiliar().clear();
@@ -383,6 +402,7 @@ public class Player extends Entity {
 		super.clear();
 		getZoneMonitor().clear();
 		HouseManager.leave(this);
+		decrementViewcountsInViewport();
 		UpdateSequence.getRenderablePlayers().remove(this);
 		sendLogoutEvents();
 		checkForWealthUpdate(true);
@@ -849,6 +869,7 @@ public class Player extends Entity {
 		getZoneMonitor().getZones().clear();
 		playerFlags.setLastSceneGraph(null);
 		playerFlags.setUpdateSceneGraph(false);
+		decrementViewcountsInViewport();
 		playerFlags.setLastViewport(new RegionChunk[MapChunkRenderer.BUILD_AREA_SIZE][MapChunkRenderer.BUILD_AREA_SIZE]);
 		renderInfo.getLocalNPCs().clear();
 		renderInfo.getLocalPlayers().clear();

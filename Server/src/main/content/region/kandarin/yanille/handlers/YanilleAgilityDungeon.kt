@@ -108,7 +108,8 @@ public class YanilleAgilityDungeonListeners : InteractionListener {
 			player.lock(3)
 			GameWorld.Pulser.submit(object : Pulse(2, player) {
 				override public fun pulse(): Boolean {
-					AgilityHandler.fail(player, 1, Location(2572, 9570, 0), Animation.create(761 - diff), RandomFunction.random(1, 3), "You lost your balance!")
+					AgilityHandler.fail(player,
+                        Location(2572, 9570, 0), Animation.create(761 - diff), RandomFunction.random(1, 3), "You lost your balance!")
 					return true
 				}
 			})

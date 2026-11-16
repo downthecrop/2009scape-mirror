@@ -1,4 +1,4 @@
-package content.global.activity.cchallange.npc
+package content.global.activity.cchallenge.npc
 
 import core.api.*
 import core.game.node.entity.Entity

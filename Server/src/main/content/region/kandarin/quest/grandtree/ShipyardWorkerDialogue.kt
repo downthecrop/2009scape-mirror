@@ -3,11 +3,10 @@ package content.region.kandarin.quest.grandtree
 import content.data.Quests
 import core.api.getAttribute
 import core.api.getQuestStage
+import core.api.getScenery
+import core.api.handleDoor
 import core.api.setAttribute
 import core.game.dialogue.DialogueFile
-import core.game.global.action.DoorActionHandler
-import core.game.node.scenery.Scenery
-import core.game.world.map.Location
 import core.tools.END_DIALOGUE
 
 class ShipyardWorkerDialogue : DialogueFile(){
@@ -93,7 +92,7 @@ class ShipyardWorkerDialogue : DialogueFile(){
                     && getAttribute(player!!, "/save:grandtree:opt2", false)
                     && getAttribute(player!!, "/save:grandtree:opt3", false)
                 ) {
-                    DoorActionHandler.autowalkFence(player!!, Scenery(2438, Location(2945, 3041, 0)), 3727, 3728)
+                    handleDoor(player!!, getScenery(2945, 3041, 0)!!)
                     npcl("Sorry to have kept you.").also { stage = END_DIALOGUE }
                 } else {
                     npcl("You have no idea!").also { stage = END_DIALOGUE }

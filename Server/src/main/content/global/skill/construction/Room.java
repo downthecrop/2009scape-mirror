@@ -1,6 +1,7 @@
 package content.global.skill.construction;
 
 import core.game.node.entity.player.Player;
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.*;
@@ -131,20 +132,17 @@ public final class Room {
 		for (Hotspot spot : hotspots) {
 			int x = spot.getChunkX();
 			int y = spot.getChunkY();
-			int id = spot.getHotspot().getObjectId(house.getStyle());
-			int index = chunk.getIndex(x, y, id, -1);
-			if (index != -1) {
-				Scenery object = chunk.getObjects()[x][y][index];
-				if (object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
+			for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
+				Scenery object = chunk.getObjects()[x][y][i];
+				if (object != null && object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
 					if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
+						int id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
 						if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
 							id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getCrestAdjustedId(house.getStyle(), house.getCrest());
 							if (id == -1) {
 								spot.setDecorationIndex(-1);
 								continue;
 							}
-						} else {
-							id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
 						}
 						SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
 					} else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
@@ -203,39 +201,38 @@ public final class Room {
 		Room[][][] rooms = house.getRooms();
 		int rx = chunk.getCurrentBase().getChunkX();
 		int ry = chunk.getCurrentBase().getChunkY();
-		for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					Scenery object = chunk.getObjects()[x][y][i];
-					if (object != null && BuildingUtils.isDoorHotspot(object)) {
-						boolean edge = false;
-						Room otherRoom = null;
-						switch (object.getRotation()) {
-							case 0: //east
-								edge = rx == 0;
-								otherRoom = edge ? null : rooms[housePlane][rx - 1][ry];
-								break;
-							case 1: //south
-								edge = ry == 7;
-								otherRoom = edge ? null : rooms[housePlane][rx][ry + 1];
-								break;
-							case 2: //west
-								edge = rx == 7;
-								otherRoom = edge ? null : rooms[housePlane][rx + 1][ry];
-								break;
-							case 3: //north
-								edge = ry == 0;
-								otherRoom = edge ? null : rooms[housePlane][rx][ry - 1];
-								break;
-							default:
-								log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
-						}
-						int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, object);
-						if (replaceId == -1) {
-							continue;
-						}
-						SceneryBuilder.replace(object, object.transform(replaceId));
+		int layer = Layer.WALL.ordinal();
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				Scenery object = chunk.getObjects()[x][y][layer];
+				if (object != null && BuildingUtils.isDoorHotspot(object)) {
+					boolean edge = false;
+					Room otherRoom = null;
+					switch (object.getRotation()) {
+						case 0: //east
+							edge = rx == 0;
+							otherRoom = edge ? null : rooms[housePlane][rx - 1][ry];
+							break;
+						case 1: //south
+							edge = ry == 7;
+							otherRoom = edge ? null : rooms[housePlane][rx][ry + 1];
+							break;
+						case 2: //west
+							edge = rx == 7;
+							otherRoom = edge ? null : rooms[housePlane][rx + 1][ry];
+							break;
+						case 3: //north
+							edge = ry == 0;
+							otherRoom = edge ? null : rooms[housePlane][rx][ry - 1];
+							break;
+						default:
+							log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
 					}
+					int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, object);
+					if (replaceId == -1) {
+						continue;
+					}
+					SceneryBuilder.replace(object, object.transform(replaceId));
 				}
 			}
 		}
@@ -276,7 +273,7 @@ public final class Room {
 				return object.getId() % 2 != 0 ? house.getStyle().getDoorId() : house.getStyle().getSecondDoorId();
 			}
 		}
-		return room.getProperties().isDungeon() ? 13065 : house.getStyle().getWallId(); //otherWallId is only used behind fireplaces
+		return room.getProperties().isDungeon() ? 13065 : house.getStyle().getWallId();
 	}
 
 	/**

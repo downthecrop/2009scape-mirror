@@ -22,12 +22,9 @@ class ObjectOverrideParser {
             for (entry in overridelist) {
                 val e = entry as JSONObject
 
-                // Mandatory fields
                 val mode = e["mode"].toString()
                 val id = e["id"].toString().toInt()
                 val loc = Location.fromString(e["location"].toString())
-
-                // Optional fields
                 val type = e["type"]?.toString()?.toInt() ?: 10
                 val direction = e["direction"]?.toString() ?: "n"
 
@@ -45,7 +42,7 @@ class ObjectOverrideParser {
                 val obj = Scenery(id, loc, type, rotation)
                 val region = RegionManager.forId(loc.regionId)
                 when (mode) {
-                    "remove" -> if (obj !in region.removeSceneries) region.removeSceneries.add(obj) // type and rotation are currently ignored, but this can be changed in Region.java if needed
+                    "remove" -> if (obj !in region.removeSceneries) region.removeSceneries.add(obj)
                     "add" -> if (obj !in region.addSceneries) region.addSceneries.add(obj)
                     else -> log(this::class.java, Log.ERR, "Ignored unknown ObjectOverride mode $mode!")
                 }

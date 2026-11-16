@@ -11,6 +11,8 @@ import core.game.activity.CutscenePlugin;
 import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
+import core.game.node.entity.Entity;
 import core.game.node.entity.skill.SkillPulse;
 import content.global.skill.smithing.smelting.Bar;
 import content.global.skill.agility.AgilityHandler;
@@ -183,7 +185,7 @@ public final class TouristTrapPlugin extends OptionHandler {
 							player.getPacketDispatch().sendMessage("This gate looks like it needs a key to open it.");
 							break;
 						}
-						handleAutowalkDoor(player, (Scenery) node);
+						handleDoor(player, (Scenery) node);
 						break;
 					case 2686:
 					case 2685:
@@ -265,18 +267,18 @@ public final class TouristTrapPlugin extends OptionHandler {
 								player.getPacketDispatch().sendMessage("The gate needs a key in order to be opened.");
 								return true;
 							}
-							handleAutowalkDoor(player, (Scenery) node);
+							handleDoor(player, (Scenery) node);
 							player.getPacketDispatch().sendMessage("The guards search you thoroughly as you go through the gates.");
 							return true;
 						}
-						handleAutowalkDoor(player, (Scenery) node);
+						handleDoor(player, (Scenery) node);
 						break;
 					case 2689:
 						if (!player.getInventory().containsItem(TouristTrap.CELL_DOOR_KEY)) {
 							player.getPacketDispatch().sendMessage("The door seems to be pretty locked.");
 							break;
 						}
-						handleAutowalkDoor(player, (Scenery) node);
+						handleDoor(player, (Scenery) node);
 						break;
 					case 1528:
 						SceneryBuilder.replace((Scenery) node, ((Scenery) node).transform(1529));
@@ -504,8 +506,15 @@ public final class TouristTrapPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n.getId() == 18923) {
-			return new Location(3279, 3037, 0);
+		switch (n.getId()) {
+			case 2687:
+			case 2688:
+			case 2689:
+			case 2673:
+			case 2674:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+			case 18923:
+				return new Location(3279, 3037, 0);
 		}
 		return null;
 	}

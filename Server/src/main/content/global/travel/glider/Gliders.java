@@ -13,7 +13,7 @@ import static core.api.ContentAPIKt.setVarp;
 public enum Gliders {
 	TA_QUIR_PRIW(16, Location.create(2465, 3501, 3), 9, 3809),
 	SINDARPOS(17, Location.create(2848, 3497, 0), 1, 3810),
-	LEMANTO_ADRA(18, Location.create(3321, 3427, 0), 3, -1),
+	LEMANTO_ANDRA(18, Location.create(3321, 3427, 0), 3, -1),
 	AR_HEWO(19, Location.create(3278, 3212, 0), 4, 3812),
 	LEMANTOLLY_UNDRI(20, Location.create(2544, 2970, 0), 10, 3813),
 	GANDIUS(15, Location.create(2972, 2969, 0), 8, 3811);

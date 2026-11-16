@@ -4,6 +4,8 @@ import static core.api.ContentAPIKt.*;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
+import core.game.node.entity.Entity;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -57,7 +59,7 @@ public final class MiningGuildPlugin extends OptionHandler {
 				player.getDialogueInterpreter().open(382, NPC.create(382, Location.create(0, 0, 0)), 1);
 				return true;
 			}
-			handleAutowalkDoor(player, (Scenery) node);
+			handleDoor(player, (Scenery) node);
 		}
 		if (option.equals("climb-up")) {
 			if (player.getLocation().withinDistance(new Location(3019, 9739, 0))) {
@@ -69,4 +71,11 @@ public final class MiningGuildPlugin extends OptionHandler {
 		return true;
 	}
 
+	@Override
+	public Location getDestination(Node node, Node n) {
+        if (n.getId() == 2112) {
+            return DoorHelper.getDestination((Entity) node, (Scenery) n);
+        }
+		return null;
+	}
 }

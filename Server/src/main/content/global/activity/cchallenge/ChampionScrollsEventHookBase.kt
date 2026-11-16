@@ -1,4 +1,4 @@
-package content.global.activity.cchallange
+package content.global.activity.cchallenge
 
 import core.api.LoginListener
 import core.game.event.Event

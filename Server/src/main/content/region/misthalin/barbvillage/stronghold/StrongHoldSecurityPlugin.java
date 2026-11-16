@@ -7,16 +7,15 @@ import core.game.dialogue.DialogueInterpreter;
 import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.Option;
 import core.game.interaction.OptionHandler;
+import core.game.interaction.QueueStrength;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.music.MusicPlayer;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
-import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -32,7 +31,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import org.rs09.consts.Sounds;
 
-import static core.api.ContentAPIKt.playAudio;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles the strong hold of security.
@@ -240,24 +239,16 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 		player.lock(3);
 		player.animate(Animation.create(4282));
 		playAudio(player, Sounds.SOS_THROUGH_DOOR_2858);
-		GameWorld.getPulser().submit(new Pulse(1, player) {
-			int counter;
-
-			@Override
-			public boolean pulse() {
-				switch (++counter) {
-				case 1:
-					final java.awt.Point p = DoorActionHandler.getRotationPoint(object.getRotation());
-					Location destination = !player.getLocation().equals(object.getLocation()) ? object.getLocation() : object.getLocation().transform((int) p.getX(), (int) p.getY(), 0);
-					player.getProperties().setTeleportLocation(destination);
-					break;
-				case 2:
-					player.animate(new Animation(4283));
-					flagDoor(player, !isFlagged(player));
-					return true;
-				}
-				return false;
+		queueScript(player, 0, QueueStrength.SOFT, false, (Integer stage) -> {
+			if (stage == 0) {
+				Location p = DoorHelper.getRotationPoint(object.getRotation());
+				Location destination = !player.getLocation().equals(object.getLocation()) ? object.getLocation() : object.getLocation().transform(p.getX(), p.getY(), 0);
+				player.getProperties().setTeleportLocation(destination);
+				return keepRunning(player);
 			}
+			player.animate(new Animation(4283));
+			flagDoor(player, !isFlagged(player));
+			return stopExecuting(player);
 		});
 	}
 
@@ -462,12 +453,14 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 				stage = 901;
 				break;
 			case 901:
+				end();
 				openDoor(player, door);
-				interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "Oh my! I just got sucked through that door... what a", "weird feeling! Still, I guess I should expect it as these", "evidently aren't your average kind of doors.... they talk", "and look creepy!");
-				stage = 902;
+				queueScript(player, 2, QueueStrength.SOFT, false, (Integer stage) -> {
+							interpreter.sendDialogues(player, FacialExpression.OLD_NORMAL, "Oh my! I just got sucked through that door... what a", "weird feeling! Still, I guess I should expect it as these", "evidently aren't your average kind of doors.... they talk", "and look creepy!");
+							return stopExecuting(player);
+						});
 				break;
 			case 902:
-				end();
 				break;
 			case 100:
 				interpreter.sendOptions("Select an Option", "Tell them whatever they want to know.", "Politely tell them no.", "Politely tell them no and then use the 'Report Abuse' button.");

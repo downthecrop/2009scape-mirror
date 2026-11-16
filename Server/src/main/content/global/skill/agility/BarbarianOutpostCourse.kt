@@ -5,7 +5,9 @@ import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import content.region.kandarin.barcrawl.BarcrawlManager
+import core.game.global.action.DoorHelper
 import core.game.node.Node
+import core.game.node.entity.Entity
 import core.game.node.scenery.Scenery
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
@@ -41,7 +43,7 @@ class BarbarianOutpostCourse
             2115, 2116 -> if (!BarcrawlManager.getInstance(player).isFinished || BarcrawlManager.getInstance(player).isStarted) {
                 player.dialogueInterpreter.open(384)
             } else {
-                handleAutowalkDoor(player, node as Scenery)
+                handleDoor(player, node as Scenery)
             }
             2282 -> handleRopeSwing(player, node as Scenery)
             2294 -> handleLogBalance(player, node as Scenery)
@@ -93,7 +95,7 @@ class BarbarianOutpostCourse
             return
         }
         if (AgilityHandler.hasFailed(player, 1, 0.1)) {
-            AgilityHandler.fail(player, 0, Location.create(2549, 9951, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
+            AgilityHandler.fail(player, Location.create(2549, 9951, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
         ropeDelay = GameWorld.ticks + 2
@@ -159,7 +161,7 @@ class BarbarianOutpostCourse
         AgilityHandler.walk(player, if (failed) -1 else 3, Location.create(2536, 3547, 1), end, Animation.create(157), if (failed) 0.0 else 22.0, if (failed) null else "You skillfully edge across the gap.")
 		sendMessage(player, "You put your foot on the ledge and try to edge across..")
         if (failed) {
-            AgilityHandler.fail(player, 3, Location.create(2534, 3545, 0), Animation(760), getHitAmount(player), "You slip and fall to the pit below.")
+            AgilityHandler.fail(player, Location.create(2534, 3545, 0), Animation(760), getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
     }
@@ -181,8 +183,9 @@ class BarbarianOutpostCourse
 
     override fun getDestination(node: Node, n: Node): Location? {
         if (n is Scenery) {
-            when (n.getId()) {
+            when (n.id) {
                 2282 -> return Location.create(2551, 3554, 0)
+                2115, 2116 -> return DoorHelper.getDestination(node as Entity, n)
             }
         }
         return null

@@ -28,7 +28,6 @@ import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
-import org.rs09.consts.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +54,8 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
         @Override
         public boolean pulse() {
             for (WheatSet set : WHEAT) {
-                if (set.canWhilt()) {
-                    set.whilt();
+                if (set.canWilt()) {
+                    set.wilt();
                 }
             }
             return false;
@@ -375,7 +374,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
         /**
          * The time until the next whilt.
          */
-        private int nextWhilt;
+        private int nextWilt;
 
         /**
          * The busy ticks.
@@ -408,52 +407,39 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
                 objects[index] = object;
                 index++;
             }
-            setNextWhilt();
+            setNextWilt();
         }
 
         /**
-         * Whilts the wheat.
+         * Wilts the wheat.
          */
-        public void whilt() {
+        public void wilt() {
+            int GROW_ANIM = 6596;
+            int WILT_ANIM = 6599;
             busyTicks = GameWorld.getTicks() + 5;
             for (Scenery object : objects) {
                 if (object == null) {
                     continue;
                 }
                 if (removed) {
-                    submitWorldPulse(new Pulse() {
-                        int counter = 0;
-
-                        @Override
-                        public boolean pulse() {
-                            if (counter++ == 0) {
-                                animateScenery(object, 6596);
-                                setDelay(animationDuration(new Animation(6596)));
-                                return false;
-                            }
-                            return true;
-                        }
-                    });
                     SceneryBuilder.add(object);
+                    queueWorldScript(0, (stage) -> {
+                        animateScenery(object, GROW_ANIM);
+                        return stopExecutingWorldScript();
+                    });
                     continue;
                 }
-                submitWorldPulse(new Pulse() {
-                    int counter = 0;
-
-                    @Override
-                    public boolean pulse() {
-                        if (counter++ == 0) {
-                            animateScenery(object, 6599);
-                            setDelay(animationDuration(new Animation(6599)));
-                            return false;
-                        }
-                        SceneryBuilder.remove(object);
-                        return true;
+                queueWorldScript(0, (stage) -> {
+                    if (stage == 0) {
+                        animateScenery(object, WILT_ANIM);
+                        return delayWorldScript(animationDuration(new Animation(WILT_ANIM)));
                     }
+                    SceneryBuilder.remove(object);
+                    return stopExecutingWorldScript();
                 });
             }
             removed = !removed;
-            setNextWhilt();
+            setNextWilt();
         }
 
         /**
@@ -466,19 +452,19 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
         }
 
         /**
-         * Sets the next whilt.
+         * Sets the next wilt.
          */
-        public void setNextWhilt() {
-            this.nextWhilt = GameWorld.getTicks() + RandomFunction.random(40, 300);
+        public void setNextWilt() {
+            this.nextWilt = GameWorld.getTicks() + RandomFunction.random(40, 300);
         }
 
         /**
-         * Checks if the wheat can whilt.
+         * Checks if the wheat can wilt.
          *
          * @return {@code True} if so.
          */
-        public boolean canWhilt() {
-            return GameWorld.getTicks() > nextWhilt && GameWorld.getTicks() > busyTicks;
+        public boolean canWilt() {
+            return GameWorld.getTicks() > nextWilt && GameWorld.getTicks() > busyTicks;
         }
 
         /**
@@ -486,8 +472,8 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
          *
          * @return The nextWhilt.
          */
-        public int getNextWhilt() {
-            return nextWhilt;
+        public int getNextWilt() {
+            return nextWilt;
         }
 
         /**
@@ -495,8 +481,8 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
          *
          * @param nextWhilt The nextWhilt to set.
          */
-        public void setNextWhilt(int nextWhilt) {
-            this.nextWhilt = nextWhilt;
+        public void setNextWilt(int nextWhilt) {
+            this.nextWilt = nextWhilt;
         }
 
         /**

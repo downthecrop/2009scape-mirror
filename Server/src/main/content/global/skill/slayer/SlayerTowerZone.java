@@ -44,7 +44,7 @@ public final class SlayerTowerZone extends MapZone implements Plugin<Object> {
 				return true;
 			}
 			if (target.getId() == 10527 || target.getId() == 10528) {
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) target);
+				ContentAPIKt.handleDoor(player, (Scenery) target);
 				return true;
 			}
 		}

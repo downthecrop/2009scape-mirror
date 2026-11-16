@@ -43,7 +43,7 @@ class JailCutscene(player: Player) : Cutscene(player) {
 
             4 -> {
                 animate(getNPC(KHAZARD_GUARD)!!, 2098)
-                handleAutowalkDoor(player, getObject(40, 5))
+                handleAutowalkDoor(player, getObject(40, 5)!!)
                 timedUpdate(5)
             }
 

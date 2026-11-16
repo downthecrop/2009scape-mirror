@@ -3,6 +3,7 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
  import core.api.*
  import core.game.activity.Cutscene
  import core.game.component.Component
+ import core.game.global.action.DoorHelper
  import core.game.interaction.IntType
  import core.game.interaction.InteractionListener
  import core.game.interaction.InterfaceListener
@@ -71,16 +72,20 @@ package content.region.misthalin.barbvillage.stronghold.playersafety
 
              return@on true
          }
+
          // Exam room
          on(SceneryConst.DOOR_29732, IntType.SCENERY, "open") { player, node ->
              if (player.globalData.testStage > 0){
                  // The player has talked to the prof
-                 handleAutowalkDoor(player, node.asScenery())
+                 handleDoor(player, node.asScenery())
              }
              else{
                  sendMessage(player, "The door is locked")
              }
              return@on true
+         }
+         setDest(IntType.SCENERY, intArrayOf(SceneryConst.DOOR_29732), "open") { entity, node ->
+             DoorHelper.getDestination(entity, node.asScenery())
          }
          on(SceneryConst.STAIRS_29592, IntType.SCENERY, "climb-down") { player, _ ->
              teleport(player, Location.create(3086, 4247, 0))

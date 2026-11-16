@@ -188,12 +188,20 @@ class GrandTreeListeners: InteractionListener {
             return@on true
         }
         // Gate Karamja
-        on(2439, IntType.SCENERY, "open"){ player, _ ->
-            openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
+        on(org.rs09.consts.Scenery.GATE_2439, IntType.SCENERY, "open") { player, node ->
+            if (player.location.x < node.location.x ) {
+                openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
+            } else {
+                handleDoor(player, node.asScenery())
+            }
             return@on true
         }
-        on(2438, IntType.SCENERY, "open"){ player, _ ->
-            openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
+        on(org.rs09.consts.Scenery.GATE_2438, IntType.SCENERY, "open") { player, node ->
+            if (player.location.x < node.location.x ) {
+                openDialogue(player, ShipyardWorkerDialogue(), NPC(NPCs.SHIPYARD_WORKER_675))
+            } else {
+                handleDoor(player, node.asScenery())
+            }
             return@on true
         }
         on(2451, IntType.SCENERY, "push"){ player, roots ->

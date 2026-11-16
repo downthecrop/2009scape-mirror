@@ -2,8 +2,10 @@ package content.global.skill.slayer;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
@@ -51,11 +53,23 @@ public final class SlayerTowerPlugin extends OptionHandler {
 		case 4487:
 		case 10527:
 		case 10529:
-			ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			switchStatue();
 			return true;
 		}
 		return true;
+	}
+
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 4490:
+			case 4487:
+			case 10527:
+			case 10529:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
 	}
 
 	/**

@@ -5,24 +5,26 @@ import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import content.data.EnchantedJewellery;
 import content.global.skill.summoning.familiar.Familiar;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 
-import static core.api.ContentAPIKt.hasRequirement;
-import static core.api.ContentAPIKt.sendMessage;
-
 import content.data.Quests;
 import org.rs09.consts.Items;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the hero guild.
@@ -42,20 +44,29 @@ public final class HeroGuildPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = ((Scenery) node).getId();
-		switch (option) {
-		case "open":
-			switch (id) {
+		final int id = node.getId();
+        if (option.equals("open")) {
+            switch (id) {
+                case 2624:
+                case 2625:
+                    if (!isQuestComplete(player, Quests.HEROES_QUEST))
+                        return true;
+                    ContentAPIKt.handleDoor(player, (Scenery) node);
+                    break;
+            }
+            return true;
+        }
+		return true;
+	}
+
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
 			case 2624:
 			case 2625:
-				if (!hasRequirement(player, Quests.HEROES_QUEST))
-					return true;
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
-				break;
-			}
-			return true;
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
 		}
-		return true;
+		return null;
 	}
 
 	/**

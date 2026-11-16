@@ -5,13 +5,13 @@ import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import core.tools.END_DIALOGUE
 import content.data.Quests
+import core.game.interaction.QueueStrength
 
 @Initializable
 class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
@@ -75,7 +75,38 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
             /**
              * Here we go uoooh
              */
-            112 -> end().also { lock(player, 10); submitWorldPulse(SickleBlessPulse(player, npc)) }
+            112 -> {
+                end()
+                lock(player, 10)
+                /**
+                 * Needs to spawn 4ish of those green projectiles and the player needs to lift up the sickle
+                 * then needs to open the dialogue back up with the quest stage at 70
+                 */
+                val locs: MutableList<Location> = player.location.surroundingTiles
+                queueScript(player, 0, QueueStrength.SOFT) { stage ->
+                    if (stage == 0) {
+                        animate(npc, 812)
+                        return@queueScript keepRunning(player)
+                    }
+                    if (stage == 1) {
+                        repeat(4) {
+                            val loc = locs.random()
+                            locs.remove(loc)
+                            spawnProjectile(loc, player.location, 268, 0, 400, 0, 125, 180)
+                            animate(player, 9021)
+                        }
+                        return@queueScript delayScript(player, 3);
+                    }
+                    if (removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)) {
+                        addItem(player, Items.SILVER_SICKLEB_2963)
+                        unlock(player)
+                        player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 70)
+                        openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
+                        sendMessage(player, "Your sickle has been blessed! You can bless a new sickle by dipping it into the grotto waters.")
+                    }
+                    return@queueScript stopExecuting(player)
+                }
+            }
 
             //go kill some ghasts bro
             200 -> npcl(FacialExpression.NEUTRAL, "Go forth into Mort Myre and slay three Ghasts. You'll be releasing their souls from Mort Myre.").also { stage++ }
@@ -122,39 +153,6 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun getIds(): IntArray {
         return intArrayOf(NPCs.NATURE_SPIRIT_1051)
-    }
-
-    /**
-     * Needs to spawn 4ish of those green projectiles and the player needs to lift up the sickle
-     * then needs to open the dialogue back up with the quest stage at 70
-     */
-    internal class SickleBlessPulse(val player: Player, val spirit: NPC) : Pulse() {
-        var ticks = 0
-        val locs: MutableList<Location> = player.location.surroundingTiles
-
-        override fun pulse(): Boolean {
-            when(ticks++){
-                0 -> animate(spirit, 812)
-                1 -> repeat(4) {
-                    val loc = locs.random()
-                    locs.remove(loc)
-
-                    spawnProjectile(loc, player.location, 268, 0, 400, 0, 125, 180)
-                    animate(player, 9021)
-                }
-                4 -> {
-                    if(removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)){
-                        addItem(player, Items.SILVER_SICKLEB_2963)
-                        unlock(player)
-                        player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 70)
-                        openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
-                        sendMessage(player, "Your sickle has been blessed! You can bless a new sickle by dipping it into the grotto waters.")
-                    }
-                }
-                6 -> return true
-            }
-            return false
-        }
     }
 
     fun setQuest(stage: Int){

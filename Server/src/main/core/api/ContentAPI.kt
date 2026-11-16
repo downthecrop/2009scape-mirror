@@ -12,6 +12,7 @@ import content.global.skill.slayer.SlayerFlags
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import content.global.skill.summoning.familiar.BurdenBeast
+import content.global.skill.summoning.familiar.Familiar
 import core.ServerConstants
 import core.api.utils.PlayerStatsCounter
 import core.api.utils.Vector
@@ -27,7 +28,7 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.SkillDialogueHandler
 import core.game.diary.DiaryLevel
 import core.game.ge.GrandExchangeRecords
-import core.game.global.action.DoorActionHandler
+import core.game.global.action.DoorHelper
 import core.game.interaction.*
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -53,6 +54,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.node.scenery.Layer
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.requirement.*
@@ -90,6 +92,23 @@ import java.util.regex.*
 import kotlin.math.*
 
 /**
+ * Checks whether a tile is "free" (see checkFreeTile) AND whether you're not inside a bank, and fires an informative
+ * message if not.
+ * @param entity The firemaker.
+ */
+fun checkFreeTileForFire(entity: Entity): Boolean {
+    if (entity.zoneMonitor.isInZone("bank") || !isFreeTile(entity.location)) {
+        when {
+            (entity is Player) -> entity
+            (entity is Familiar) -> entity.owner
+            else -> null
+        }?.let { sendMessage(it, "You can't light a fire here.") }
+        return false
+    }
+    return true
+}
+
+/**
  * Gets a skilling tool which the player has the level to use and is in their inventory.
  * @param player the player to get the tool for
  * @param pickaxe whether or not we are trying to get a pickaxe.
@@ -119,6 +138,29 @@ fun hasLevelDyn(player: Player, skill: Int, level: Int): Boolean {
  */
 fun hasLevelStat(player: Player, skill: Int, level: Int): Boolean {
     return player.skills.getStaticLevel(skill) >= level
+}
+
+/**
+ * Checks whether a tile is "free". This is actually a little complicated, because we define "free" as:
+ * - there is no GROUND-layer object on it; and
+ * - if there is a WALL-layer object on it, it isn't a door (or something else that has options other than "examine");
+ *   and
+ * - it has no original object meeting the above criteria
+ * This determines, for example, whether you are able to plant mithril flowers on it.
+ * @param loc The tile's location.
+ */
+fun isFreeTile(loc: Location): Boolean {
+    for (objList in arrayOf(loc.chunk.statObjects, loc.chunk.objects)) {
+        val ground = objList[loc.chunkOffsetX][loc.chunkOffsetY][Layer.GROUND.ordinal]
+        if (ground != null) {
+            return false
+        }
+        val wall = objList[loc.chunkOffsetX][loc.chunkOffsetY][Layer.WALL.ordinal]
+        if (wall?.definition?.hasOptions(false) == true) {
+            return false
+        }
+    }
+    return true
 }
 
 /**
@@ -542,21 +584,17 @@ fun addItemOrBank(player: Player, id: Int, amount: Int = 1) {
  * @param npc the NPC object to initialize
  */
 fun poofClear(npc: NPC) {
-    submitWorldPulse(object : Pulse() {
-        var counter = 0
-        override fun pulse(): Boolean {
-            when (counter++) {
-                2 -> {
-                    npc.isInvisible = true;
-                    if (npc.location.region.isActive) {
-                        Graphics.send(Graphics(86), npc.location)
-                    }
-                }
-                3 -> npc.clear().also { return true }
+    queueScript(npc, 2, QueueStrength.SOFT) { stage ->
+        if (stage == 0) {
+            npc.isInvisible = true
+            if (npc.location.region.isActive) {
+                Graphics.send(Graphics(86), npc.location)
             }
-            return false
+            return@queueScript keepRunning(npc)
         }
-    })
+        npc.clear()
+        return@queueScript stopExecuting(npc)
+    }
 }
 
 /**
@@ -692,13 +730,14 @@ fun removeScenery(scenery: Scenery) {
  * @param forTicks the number of ticks the object should be replaced for. Use -1 for permanent.
  * @Param rotation the Direction of the rotation it should use. Direction.NORTH, Direction.SOUTH, etc
  * @param loc the location to move the new object to if necessary. Defaults to null.
+ * @param clip whether to replace only client-side; defaults no, which means the door will clip. Ignored for permanent replacements.
+ * @return The replaced object, or null if the replacement failed.
+ * TODO: rotation is wrong: rotation in SceneryBuilder uses an Int 4 cardinals 0,1,2,3, and not Direction 8 cardinals.
  */
-fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, rotation: Direction, loc: Location? = null) {
-    val newLoc = when (loc) {
-        null -> toReplace.location
-        else -> loc
-    }
+fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, rotation: Direction, loc: Location? = null, clip: Boolean = true): Scenery? {
+    val newLoc = loc ?: toReplace.location
     val rot = when (rotation) {
+        // TODO: MAPPING IS COMPLETELY WRONG BUT SHIT DEPENDS ON IT
         Direction.NORTH_WEST -> 0
         Direction.NORTH -> 1
         Direction.NORTH_EAST -> 2
@@ -708,12 +747,30 @@ fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, rotation: Direc
         Direction.SOUTH_WEST -> 5
         Direction.WEST -> 3
     }
-    if (forTicks == -1) {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc))
+    val replacement = toReplace.transform(with, rot, newLoc)
+    val success = if (forTicks == -1) {
+        SceneryBuilder.replace(toReplace, replacement)
     } else {
-        SceneryBuilder.replace(toReplace, toReplace.transform(with, rot, newLoc), forTicks)
+        SceneryBuilder.replace(toReplace, replacement, forTicks, clip)
     }
-    toReplace.isActive = false
+    return if (success) replacement else null
+}
+
+/**
+ * Replace an object with the given revert timer
+ * @param toReplace the Scenery instance we are replacing
+ * @param with the ID of the Scenery we wish to replace toReplace with
+ * @param forTicks the number of ticks the object should be replaced for. Use -1 for permanent.
+ * @param loc the location to move the new object to if necessary. Defaults to null.
+ * @param clip Whether the replacement should clip. Defaults to yes. Ignored for permanent replacements.
+ */
+fun replaceScenery(toReplace: Scenery, with: Int, forTicks: Int, loc: Location? = null, clip: Boolean = true) {
+    val newLoc = loc ?: toReplace.location
+    if (forTicks == -1) {
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc))
+    } else {
+        SceneryBuilder.replace(toReplace, toReplace.transform(with, toReplace.rotation, newLoc), forTicks, clip)
+    }
 }
 
 /**
@@ -1227,9 +1284,18 @@ fun removeAttributes(entity: Entity, vararg attributes: String) {
  * @param entity the entity whose timers are being added to
  * @param timer the timer being added
 **/
-fun registerTimer (entity: Entity, timer: RSTimer?) {
+fun registerTimer(entity: Entity, timer: Timer?) {
     if (timer == null) return
-    entity.timers.registerTimer (timer)
+    entity.timers.registerTimer(timer)
+}
+
+/**
+ * Adds the given timer to the world-timer registry.
+ * @param timer the timer being added
+ **/
+fun registerWorldTimer(timer: Timer?) {
+    if (timer == null) return
+    GameWorld.timers.registerTimer(timer)
 }
 
 /**
@@ -1239,11 +1305,30 @@ fun registerTimer (entity: Entity, timer: RSTimer?) {
  * @param args various args to pass to the initialization of the timer, if applicable.
  * @return Either the existing active timer, or a new timer initialized with the passed args if none exists yet.
 **/
-fun getOrStartTimer (entity: Entity, identifier: String, vararg args: Any) : RSTimer? {
-    val existing = getTimer (entity, identifier)
-    if (existing != null)
+fun getOrStartTimer(entity: Entity, identifier: String, vararg args: Any) : RSTimer {
+    val existing = getTimer(entity, identifier)
+    if (existing != null) {
         return existing
-    return spawnTimer (identifier, *args).also { registerTimer (entity, it) }
+    }
+    val timer = spawnTimer(identifier, *args) as RSTimer
+    registerTimer(entity, timer)
+    return timer
+}
+
+/**
+ * Used to fetch the existing, active, non-abstract and non-anonymous world timer with the given identifier, or start a new timer if none exists and return that.
+ * @param identifier the identifier of the timer, refer to the individual timer class for this token.
+ * @param args various args to pass to the initialization of the timer, if applicable.
+ * @return Either the existing active timer, or a new timer initialized with the passed args if none exists yet.
+ **/
+fun getOrStartWorldTimer(identifier: String, vararg args: Any) : WorldTimer {
+    val existing = getWorldTimer(identifier)
+    if (existing != null) {
+        return existing
+    }
+    val timer = spawnTimer(identifier, *args) as WorldTimer
+    registerWorldTimer(timer)
+    return timer
 }
 
 /**
@@ -1253,11 +1338,11 @@ fun getOrStartTimer (entity: Entity, identifier: String, vararg args: Any) : RST
  * @param args the various args to pass to the initialization of the timer, if applicable.
  * @return Either the existing, active timer or a new timer initialized with the passed args if none exists yet.
 **/
-inline fun <reified T: RSTimer> getOrStartTimer (entity: Entity, vararg args: Any) : T {
-    val existing = getTimer <T> (entity)
+inline fun<reified T: RSTimer> getOrStartTimer(entity: Entity, vararg args: Any) : T {
+    val existing = getTimer<T>(entity)
     if (existing != null)
         return existing
-    return spawnTimer <T> (*args).also { registerTimer (entity, it) }
+    return spawnTimer<T>(*args).also { registerTimer(entity, it) }
 }
 
 /**
@@ -1266,8 +1351,8 @@ inline fun <reified T: RSTimer> getOrStartTimer (entity: Entity, vararg args: An
  * @param args various arbitrary arguments to be passed to the timer's constructor. Refer to the timer in question for what the args are expected to be.
  * @return a timer instance configured with your given args, or null if no timer with the given key exists in the registry.
 **/
-fun spawnTimer (identifier: String, vararg args: Any) : RSTimer? {
-    return TimerRegistry.getTimerInstance (identifier, *args)
+fun spawnTimer(identifier: String, vararg args: Any) : Timer? {
+    return TimerRegistry.getTimerInstance(identifier, *args)
 }
 
 /**
@@ -1276,8 +1361,8 @@ fun spawnTimer (identifier: String, vararg args: Any) : RSTimer? {
  * @param args various arbitrary arguments to be passed to the timer's constructor. Refer to the timer in question for what the args are expected to be.
  * @return a timer instance configured with your given args, or null if the timer is not listed in the registry (if this happens, your timer is either abstract or anonymous.)
 **/
-inline fun <reified T: RSTimer> spawnTimer (vararg args: Any) : T {
-    return TimerRegistry.getTimerInstance <T> (*args)!!
+inline fun<reified T: RSTimer> spawnTimer(vararg args: Any) : T {
+    return TimerRegistry.getTimerInstance <T>(*args)!!
 }
 
 /**
@@ -1286,7 +1371,7 @@ inline fun <reified T: RSTimer> spawnTimer (vararg args: Any) : T {
  * @param entity the entity whose timers are being checked
  * @return true if there is a timer registered and active with the given type.
 **/
-inline fun <reified T: RSTimer> hasTimerActive (entity: Entity) : Boolean {
+inline fun<reified T: RSTimer> hasTimerActive(entity: Entity) : Boolean {
     return getTimer<T>(entity) != null
 }
 
@@ -1296,7 +1381,7 @@ inline fun <reified T: RSTimer> hasTimerActive (entity: Entity) : Boolean {
  * @param entity the entity whose timers we are checking
  * @return the active instance of the given type in the entity's timers, or null.
 */
-inline fun <reified T: RSTimer> getTimer (entity: Entity) : T? {
+inline fun<reified T: RSTimer> getTimer(entity: Entity) : T? {
     return entity.timers.getTimer<T>()
 }
 
@@ -1305,7 +1390,7 @@ inline fun <reified T: RSTimer> getTimer (entity: Entity) : T? {
  * @param T the type of timer
  * @param entity the entity whose timers are being checked
 **/
-inline fun <reified T: RSTimer> removeTimer (entity: Entity) {
+inline fun<reified T: RSTimer> removeTimer(entity: Entity) {
     entity.timers.removeTimer<T>()
 }
 
@@ -1325,8 +1410,19 @@ fun hasTimerActive (entity: Entity, identifier: String) : Boolean {
  * @param entity the entity whose timers are being checked
  * @return the instance of the active timer if found, null otherwise.
 **/
-fun getTimer (entity: Entity, identifier: String) : RSTimer? {
-    return entity.timers.getTimer(identifier)
+fun getTimer(entity: Entity, identifier: String) : RSTimer? {
+    val timer = entity.timers.getTimer(identifier)
+    return timer as RSTimer?
+}
+
+/**
+ * Used to get the active instance of a timer with the given identifier from the entity's timers.
+ * @param identifier the string identifier of the timer we are looking for. You'll have to refer to the actual timer class for this string.
+ * @return the instance of the active timer if found, null otherwise.
+ **/
+fun getWorldTimer(identifier: String) : WorldTimer? {
+    val timer = GameWorld.timers.getTimer(identifier)
+    return timer as WorldTimer?
 }
 
 /**
@@ -1393,16 +1489,18 @@ fun transformNpc(npc: NPC, transformTo: Int, restoreTicks: Int) {
  * Transforms an NPC for the given number of ticks with hp carryover
  * @param npc the NPC object to transform
  * @param transformTo the ID of the NPC to turn into
- * @param restoreTicks the number of ticks until the NPC returns to normal
+ * @param restoreTicks the number of ticks until the NPC returns to normal. -1 for never.
  */
 fun transformNpcWithHpCarryover(npc: NPC, transformTo: Int, restoreTicks: Int) {
     npc.transformWithHpCarryover(transformTo)
-    queueScript(npc, 0, QueueStrength.SOFT) { stage: Int ->
-        when (stage) {
-            0 -> return@queueScript delayScript(npc, restoreTicks)
-            else -> {
-                npc.reTransform()
-                return@queueScript stopExecuting(npc)
+    if (restoreTicks >= 0) {
+        queueScript(npc, 0, QueueStrength.SOFT) { stage: Int ->
+            when (stage) {
+                0 -> return@queueScript delayScript(npc, restoreTicks)
+                else -> {
+                    npc.reTransform()
+                    return@queueScript stopExecuting(npc)
+                }
             }
         }
     }
@@ -1604,10 +1702,18 @@ fun stopWalk(entity: Entity) {
 }
 
 /**
+ * Add a destination to an entity's walking queue
+ * @param entity the entity to interrupt
+ */
+fun queueWalk(entity: Entity, destination: Location) {
+    entity.walkingQueue.addPath(destination.x, destination.y)
+}
+
+/**
  * Returns a list of all valid children IDs for a given scenery ID
  */
-fun getChildren(scenery: Int): IntArray {
-    return SceneryDefinition.forId(scenery).getChildrenIds().filter { it != -1 }.toIntArray()
+fun getChildren(scenery: Int): IntArray? {
+    return SceneryDefinition.forId(scenery)?.getChildrenIds()?.filter { it != -1 }?.toIntArray()
 }
 
 /**
@@ -1680,31 +1786,6 @@ fun <A, G> visualize(entity: Entity, anim: A, gfx: G) {
     }
 
     entity.visualize(animation, graphics)
-}
-
-/**
- * Used to submit a pulse to the GameWorld's Pulser.
- * @param pulse the Pulse object to submit
- */
-fun submitWorldPulse(pulse: Pulse) {
-    Pulser.submit(pulse)
-}
-
-/**
- * Used to submit a pulse to the GameWorld's Pulser, albeit with a cleaner syntax.
- * @param task an anonymous function that will be run in the Pulse
- * @return the newly submitted Pulse
- */
-fun runWorldTask(task: () -> Unit): Pulse {
-    val pulse = object : Pulse() {
-        override fun pulse(): Boolean {
-            task.invoke()
-            return true
-        }
-    }
-
-    submitWorldPulse(pulse)
-    return pulse
 }
 
 /**
@@ -2120,18 +2201,12 @@ fun flee(entity: Entity, from: Entity) {
     forceWalk(entity, entity.location.transform(diffX, diffY, 0), "DUMB")
 }
 
-/**
- * Submits an individual or "weak" pulse to a specific entity's pulse manager. Pulses submitted this way can be overridden by other pulses.
- * @param entity the entity to submit the pulse to
- * @param pulse the pulse to submit
- */
+@Deprecated("Use queueScript or queueWorldScript instead")
 fun submitIndividualPulse(entity: Entity, pulse: Pulse) {
     entity.pulseManager.run(pulse)
 }
 
-/**
- * Similar to submitIndividualPulse, but for non-repeating tasks, with a cleaner syntax.
- */
+@Deprecated("Use queueScript or queueWorldScript instead")
 fun runTask(entity: Entity, delay: Int = 0, repeatTimes: Int = 1, task: () -> Unit) {
     var cycles = repeatTimes
     entity.pulseManager.run(object : Pulse(delay) {
@@ -3204,15 +3279,6 @@ fun finishedMoving(entity: Entity) : Boolean {
     return entity.clocks[Clocks.MOVEMENT] < GameWorld.ticks
 }
 
-
-/**
- * Delay the execution of the currently running script
- */
-fun delayScript(entity: Entity, ticks: Int): Boolean {
-    entity.scripts.getActiveScript()?.let { it.nextExecution = GameWorld.ticks + ticks }
-    return false
-}
-
 /**
  * Set the global delay for the entity, pausing execution of all queues/scripts until passed.
  */
@@ -3234,32 +3300,57 @@ fun animationFinished(entity: Entity) : Boolean {
     return entity.clocks[Clocks.ANIMATION_END] < GameWorld.ticks
 }
 
-fun clearScripts(entity: Entity) : Boolean {
-    entity.scripts.reset()
-    return true
-}
-
-fun restartScript(entity: Entity) : Boolean {
-    if (entity.scripts.getActiveScript()?.persist != true) {
-        log(entity.scripts.getActiveScript()!!::class.java, Log.ERR, "Tried to call restartScript on a non-persistent script! Either use stopExecuting() or make the script persistent.")
-        return clearScripts(entity)
-    }
-    return true
-}
-
-fun keepRunning(entity: Entity) : Boolean {
-    entity.scripts.getActiveScript()?.nextExecution = getWorldTicks() + 1
-    return false
-}
-
-fun stopExecuting(entity: Entity) : Boolean {
-    if (entity.scripts.getActiveScript()?.persist == true) {
-        log(entity.scripts.getActiveScript()!!::class.java, Log.ERR, "Tried to call stopExecuting() on a persistent script! To halt execution of a persistent script, you MUST call clearScripts()!")
-        return clearScripts(entity)
-    }
-    return true
-}
-
+/**
+ * Queues a script. This is the natural way to perform any kind of task that interfaces with the game world.
+ * This replaces the deprecated runTask and any pulse-related functions.
+ *
+ * Every Entity, i.e. player or NPC, has a script queue, which is processed at every tick. (If you need your task to run
+ * immediately, do not use a queuescript but code it in your function directly. If you need your task to run in lockstep
+ * with the world ticks, use a queuescript.) For example, dropping an item is something that does not happen the second
+ * the player interaction is received by the networking code, but rather is something that happens on the next tick.
+ * This is achieved by using a queuescript with a delay of 1 tick (or, equivalently, 0 ticks).
+ *
+ * There are four queue strengths, which have different behaviors when it comes to their interaction with other scripts,
+ * whether they guarantee completion, and whether and when they stall the player or they themselves stall:
+ * - WEAK - Cleared if the player interacts with anything else or moves anywhere else. Also cleared when STRONG scripts
+ *   are added to the queue.
+ * - NORMAL - Same as weak but persists in the queue with STRONG scripts. Pauses execution if an interface is open.
+ * - STRONG - Clears any weak scripts in the queue for as long as it is present. Closes any open interfaces prior to
+ *   executing. Cannot be cleared by any means other than finishing.
+ * ---------All strengths above this line pause if the entity is affected by delayEntity-----------
+ * - SOFT - Does not clear any script. Does not close interfaces. Cannot be cleared by any means other than finishing.
+ *   Be cautious with these: if queued on players, they will prevent the player from logging out (and therefore the game
+ *   server from performing its daily restart) until the script finishes.
+ * If neither of these behaviors fit your bill, reconsider what you're trying to do. If still nothing seems like a good
+ * fit for your problem, queueWorldScript may be what you need.
+ *
+ * A queuescript can be executed _continuously_, i.e. restart after finishing. The `persist` argument enables this.
+ * Example: fishing: you caught one fish, if your inventory is not full, the catch script restarts to try catching
+ * another one.
+ *
+ * If your scripted action really cannot be associated with a game Entity, you may use queueWorldScript below to queue a
+ * script against the game world itself. This is inherently a bit more limited; world scripts for example only support a
+ * single queue strength (NORMAL) and don't have persistence support (this could be trivially added just by adding the
+ * argument, but I have not found any need for it thus far).
+ *
+ * The `script` argument to this function takes your script as a one-argument lambda. The argument is used by the engine
+ * to indicate your script's _stage_. This is a counter that starts at 0 and increments by 1 for every iteration of your
+ * script that is executed; it is thus your means of bookkeeping where you are in the script. Your lambda must return
+ * one of `delayScript(entity, how many ticks)`, `keepRunning(entity)`, `restartScript(entity)`, or
+ * `stopExecuting(entity)`. The last of these options actually removes the script from the queue.
+ *
+ * Note that as long as an entity has scripts in the queue, it cannot be cleared. So consider the case of a player
+ * trying to log out: if they have weak or normal scripts running, no problem --- the logout button will kill those
+ * scripts and all will be well. But if they have strong or soft scripts running, the logout action will be delayed
+ * until those scripts hit their `stopExecuting(entity)`s!
+ *
+ * @param entity The entity to queue the script on
+ * @param delay The delay with which to run the script
+ * @param strength The strength, as defined above
+ * @param persist Whether this is a persistent script
+ * @param script The script. It takes one argument, the stage. This is a counter that starts at 0 and increments by 1
+ *               every time the script is executed; it is thus your means of bookkeeping where you are in the script.
+ */
 fun queueScript(entity: Entity, delay: Int = 1, strength: QueueStrength = QueueStrength.WEAK, persist: Boolean = false, script: (stage: Int) -> Boolean) {
     val s = QueuedScript(script, strength, persist)
     s.nextExecution = getWorldTicks() + delay
@@ -3267,7 +3358,96 @@ fun queueScript(entity: Entity, delay: Int = 1, strength: QueueStrength = QueueS
 }
 
 /**
- * Sets the clock to the value of WORLD_TICKS + ticks.
+ * Clears WEAK and NORMAL scripts from the entity
+ * @param entity The entity
+ */
+fun clearScripts(entity: Entity): Boolean {
+    entity.scripts.reset()
+    return true
+}
+
+/**
+ * Delays the execution of the currently running script
+ */
+fun delayScript(entity: Entity, ticks: Int): Boolean {
+    entity.scripts.getActiveScript()?.let { it.nextExecution = GameWorld.ticks + ticks }
+    return false
+}
+
+/**
+ * Makes the script continue with an incremented stage number at the next tick
+ * @param entity The entity
+ */
+fun keepRunning(entity: Entity): Boolean {
+    entity.scripts.getActiveScript()?.nextExecution = getWorldTicks() + 1
+    return false
+}
+
+/**
+ * Restarts a script. Only works on persistent scripts.
+ * @param entity The entity
+ */
+fun restartScript(entity: Entity): Boolean {
+    if (entity.scripts.getActiveScript()?.persist != true) {
+        log(entity.scripts.getActiveScript()!!::class.java, Log.ERR, "Tried to call restartScript on a non-persistent script! Either use stopExecuting() or make the script persistent.")
+        return clearScripts(entity)
+    }
+    return true
+}
+
+/**
+ * Ends the script and removes it from the script queue. Not possible for persistent scripts, use `clearScripts` instead.
+ * @param entity The entity
+ */
+fun stopExecuting(entity: Entity): Boolean {
+    if (entity.scripts.getActiveScript()?.persist == true) {
+        log(entity.scripts.getActiveScript()!!::class.java, Log.ERR, "Tried to call stopExecuting() on a persistent script! To halt execution of a persistent script, you MUST call clearScripts()!")
+        return clearScripts(entity)
+    }
+    return true
+}
+
+/**
+ * Queues a world script. This is not attached to a specific Entity.
+ * @param delay as for `queueScript`
+ * @param script as for `queueScript`
+ * (Oh, you were looking for more, like the `strength` or `persist` parameters? Tough luck. Adding those is a really bad
+ * idea [well, _maybe_ not for persist, but it would need a bit of hooking up and I haven't found a need for it yet].)
+ */
+fun queueWorldScript(delay: Int = 1, script: (stage: Int) -> Boolean) {
+    val s = QueuedScript(script, QueueStrength.NORMAL, false)
+    s.nextExecution = getWorldTicks() + delay
+    GameWorld.scripts.addToQueue(s, QueueStrength.NORMAL)
+}
+
+/**
+ * Delays the world script by the specified number of ticks
+ * @param ticks the number of ticks
+ */
+fun delayWorldScript(ticks: Int): Boolean {
+    GameWorld.scripts.getActiveScript()?.let { it.nextExecution = GameWorld.ticks + ticks }
+    return false
+}
+
+/**
+ * Makes the world script continue with an incremented stage number at the next tick
+ */
+fun keepRunningWorldScript(): Boolean {
+    GameWorld.scripts.getActiveScript()?.nextExecution = getWorldTicks() + 1
+    return false
+}
+/** fun restartWorldScript(): Boolean --- deliberately not implemented */
+
+/**
+ * Ends the world script and removes it from the script queue.
+ */
+fun stopExecutingWorldScript(): Boolean {
+    // World scripts deliberately don't have implemented persistence support so this simplifies to just `return true`
+    return true
+}
+
+/**
+ * Sets the clock to the value of WORLD_TICKS + ticks
  * @param entity the entity whose clock we are updating
  * @param clock the clock we are updating. Please use [core.game.interaction.Clocks] for this argument. 
  * @param ticks the number of ticks to delay by
@@ -3531,22 +3711,18 @@ fun getDiaryLevelIndex(diary: DiaryType, level: DiaryLevel): Int {
  * @param door The door scenery.
  */
 fun handleDoor(entity: Entity, door: Scenery) {
-    if (entity !is Player) {
-        log(ContentAPI::class.java, Log.ERR, "Handledoor for non-player entities is not implemented")
-        return
-    }
-    DoorActionHandler.handleDoor(entity, door)
+    DoorHelper.handleDoor(entity, door)
 }
 
 /**
- * Handles an autowalk door. (In principle, you should not need this; use handleDoor and define your door as autowalk in
- * door_configs.json.)
+ * Handles an autowalk door. Only use this if you need to script an entity taking a door. If you are trying to implement
+ * a regular autowalk interaction initiated by the player, use handleDoor instead and define the door as autowalk in
+ * door_configs.json.
  * @param entity The entity.
  * @param door The door scenery.
  */
-fun handleAutowalkDoor(entity: Entity?, door: Scenery?): Boolean {
-    val endLocation = DoorActionHandler.getEndLocation(entity, door)
-    return DoorActionHandler.handleAutowalkDoorWithLocation(entity, door, endLocation)
+fun handleAutowalkDoor(entity: Entity, door: Scenery): Boolean {
+    return DoorHelper.handleAutowalkDoor(entity, door)
 }
 
 private class ContentAPI

@@ -1,10 +1,12 @@
 import content.global.skill.farming.timers.CropGrowth
 import core.ServerConstants
+import core.api.getAttribute
 import core.api.log
+import core.api.setAttribute
 import core.cache.Cache
 import core.cache.crypto.ISAACCipher
 import core.cache.crypto.ISAACPair
-import core.game.interaction.ScriptProcessor
+import core.game.interaction.EntityScriptProcessor
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.NPC
@@ -20,6 +22,7 @@ import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItem
 import core.game.node.item.Item
+import core.game.node.scenery.SceneryRestoreTimer
 import core.game.shops.Shop
 import core.game.shops.ShopItem
 import core.game.system.config.ConfigParser
@@ -30,7 +33,6 @@ import core.game.system.timer.impl.Disease
 import core.game.system.timer.impl.Poison
 import core.game.world.GameWorld
 import core.game.world.map.Location
-import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
 import core.net.IoSession
@@ -90,6 +92,7 @@ object TestUtils {
         TimerRegistry.registerTimer(Disease())
         TimerRegistry.registerTimer(CropGrowth())
         TimerRegistry.registerTimer(AntiMacro())
+        TimerRegistry.registerTimer(SceneryRestoreTimer())
     }
 
     fun loadFile(path: String) : URI? {
@@ -141,16 +144,24 @@ class MockPlayer(name: String, val isBot: Boolean) : Player(PlayerDetails(name))
     }
 
     override fun close() {
+        if (location != null) {
+            location.chunk.removePlayer(this)
+            location.region.checkInactive()
+        }
         Repository.removePlayer(this)
         UpdateSequence.renderablePlayers.remove(this)
         finishClear()
     }
 
-    override fun setLocation(location: Location) {
-        super.setLocation(location)
-        location.chunk.addPlayer(this)
-        location.region.flagActive()
-        this.playerFlags.lastSceneGraph = location
+    override fun setLocation(loc: Location) {
+        if (location != null) {
+            location.chunk.removePlayer(this)
+            location.region.checkInactive()
+        }
+        super.setLocation(loc)
+        loc.chunk.addPlayer(this)
+        loc.region.flagActive()
+        playerFlags.lastSceneGraph = loc
         zoneMonitor.updateLocation(walkingQueue.footPrint)
     }
 
@@ -170,7 +181,7 @@ class MockPlayer(name: String, val isBot: Boolean) : Player(PlayerDetails(name))
         varpManager = VarpManager(this)
         varpMap.clear()
         saveVarp.clear()
-        scripts = ScriptProcessor(this)
+        scripts = EntityScriptProcessor(this)
         clearAttributes()
         hasInit = false
 
@@ -181,8 +192,14 @@ class MockPlayer(name: String, val isBot: Boolean) : Player(PlayerDetails(name))
         init()
     }
 
+    private val DEBUG_LOGGING = "debug"
     override fun debug(string: String?) {
-        log (this::class.java, Log.DEBUG, "[$name] -> Received Debug: $string")
+        if (getAttribute(this, DEBUG_LOGGING, true)) {
+            log(this::class.java, Log.DEBUG, "[$name] -> Received Debug: $string")
+        }
+    }
+    fun disableDebugLogging() {
+        setAttribute(this, DEBUG_LOGGING, false)
     }
 }
 

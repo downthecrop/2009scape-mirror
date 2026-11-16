@@ -25,6 +25,8 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
+import static core.api.ContentAPIKt.checkFreeTileForFire;
+
 /**
  * Represents the Forge Regent familiar.
  * @author Aero
@@ -134,8 +136,7 @@ public class ForgeRegentNPC extends Familiar {
 			if (!player.getFamiliarManager().isOwner(familiar)) {
 				return true;
 			}
-			if (RegionManager.getObject(familiar.getLocation()) != null || familiar.getZoneMonitor().isInZone("bank")) {
-				player.getPacketDispatch().sendMessage("You can't light a fire here.");
+			if (!checkFreeTileForFire(familiar)) {
 				return false;
 			}
 			familiar.lock(ticks);

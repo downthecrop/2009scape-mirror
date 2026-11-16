@@ -82,7 +82,7 @@ class RecruitmentDriveListeners : InteractionListener {
             if (getAttribute(player, RecruitmentDrive.attributeStagePassFailState, 0) == 1) {
                 removeAttribute(player, RecruitmentDrive.attributeStagePassFailState)
                 setAttribute(player, RecruitmentDrive.attributeCurrentStage, getAttribute(player, RecruitmentDrive.attributeCurrentStage, 0) + 1)
-                handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
+                handleDoor(player, node as core.game.node.scenery.Scenery)
                 val currentLevel = getAttribute(player, RecruitmentDrive.attributeCurrentStage, 0)
                 if (currentLevel >= 5) {
                     CompleteTestCutscene(player).start()

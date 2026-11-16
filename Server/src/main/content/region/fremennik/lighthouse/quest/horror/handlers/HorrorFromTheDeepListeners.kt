@@ -5,6 +5,7 @@ import content.region.fremennik.lighthouse.quest.horror.HorrorFromTheDeep
 import content.region.fremennik.lighthouse.quest.horror.handlers.bookcase.BookcaseDialogue
 import core.api.*
 import core.game.dialogue.FacialExpression
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -175,7 +176,7 @@ class HorrorFromTheDeepListeners : InteractionListener {
             when {
                 // quest complete
                 isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP) -> {
-                    handleAutowalkDoor(player, node.asScenery())
+                    handleDoor(player, node.asScenery())
                 }
 
                 // quest in progress, after bridge fixed and key obtained
@@ -197,7 +198,7 @@ class HorrorFromTheDeepListeners : InteractionListener {
                         when(count) {
                             0 -> {
                                 sendMessage(player, "You unlock the Lighthouse front door.")
-                                handleAutowalkDoor(player, node.asScenery())
+                                handleDoor(player, node.asScenery())
                                 return@queueScript delayScript(player, 2)
                             }
 
@@ -314,7 +315,7 @@ class HorrorFromTheDeepListeners : InteractionListener {
                         return@on false
                     }
                 }
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
                 playAudio(player, Sounds.STRANGEDOOR_OPEN_1626)
                 playAudio(player, Sounds.STRANGEDOOR_CLOSE_1625, 2)
 
@@ -325,6 +326,9 @@ class HorrorFromTheDeepListeners : InteractionListener {
                 4627, 10003 -> sendMessage(player, "You cannot see anything unusual about the wall from this side.")
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.DOORWAY_4577, *strangeDoors), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         // fix the bridge with planks

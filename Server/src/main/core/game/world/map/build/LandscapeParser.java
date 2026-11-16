@@ -2,6 +2,7 @@ package core.game.world.map.build;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.cache.misc.buffer.ByteBufferUtils;
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.*;
 
@@ -157,12 +158,14 @@ public final class LandscapeParser {
 		Region region = RegionManager.forId(loc.getRegionId());
 		Region.load(region);
 		RegionChunk chunk = region.getChunks()[loc.getChunkX()][loc.getChunkY()][loc.getZ()];
-		int index = chunk.getIndex(loc.getChunkOffsetX(), loc.getChunkOffsetY(), object.getId(), object.getType());
+		int index = Layer.getIndex(object.getType());
 		if (index == -1) {
 			return null;
 		}
 		Scenery current = chunk.getObjects()[loc.getChunkOffsetX()][loc.getChunkOffsetY()][index];
-		current.setActive(false);
+		if (current != null) {
+			current.setActive(false);
+		}
 		object.setActive(false);
 		chunk.getObjects()[loc.getChunkOffsetX()][loc.getChunkOffsetY()][index] = null;
 		SceneryDefinition def = object.getDefinition();

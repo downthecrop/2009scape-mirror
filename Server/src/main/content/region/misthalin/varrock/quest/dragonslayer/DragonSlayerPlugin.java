@@ -4,6 +4,7 @@ import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -173,7 +174,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 					}
 					player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 1);
 					player.getSavedData().getQuestData().setDragonSlayerAttribute("memorized", true);
-					handleAutowalkDoor(player, (Scenery) node);
+					handleDoor(player, (Scenery) node);
 				}
 				break;
 		case 25154:
@@ -429,16 +430,27 @@ public final class DragonSlayerPlugin extends OptionHandler {
 	public Location getDestination(Node node, Node n) {
 		if (n instanceof Scenery) {
 			Scenery obj = (Scenery) n;
-			if (obj.getId() == 25115) {
-				if (node.getLocation().getX() <= 3049) {
-					return Location.create(3049, 9840, 0);
-				} else {
-					return Location.create(3051, 9840, 0);
-				}
-			} else if (obj.getId() == 2587) {
-				return Location.create(3056, 9841, 0);
+			switch (obj.getId()) {
+				case 25115:
+					if (node.getLocation().getX() <= 3049) {
+						return Location.create(3049, 9840, 0);
+					} else {
+						return Location.create(3051, 9840, 0);
+					}
+				case 2587:
+					return Location.create(3056, 9841, 0);
+				case 2596:
+				case 2597:
+				case 2598:
+				case 2599:
+				case 2600:
+				case 2601:
+				case 2602:
+				case 2695:
+					return DoorHelper.getDestination((Entity) node, (Scenery) n);
 			}
-		} else if (n instanceof NPC) {
+		}
+		if (n instanceof NPC) {
 			NPC npc = ((NPC) n);
 			if (npc.getId() == 745) {
 				return Location.create(3012, 3188, 0);

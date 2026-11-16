@@ -22,7 +22,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
          */
         define("update", usage = "::update [seconds]", description = "Flags the world for an update, optionally using [seconds] as the countdown.") { player, args ->
             if (args.size > 1) {
-                SystemManager.getUpdater().setCountdown(args[1].toInt())
+                SystemManager.updater.setCountdown(args[1].toInt())
             }
             SystemManager.flag(SystemState.UPDATING)
         }
@@ -30,10 +30,16 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         /**
          * Cancel an update countdown
          */
-        define("cancelupdate", description = "Cancels any active update countdown.") { player, _ ->
-            SystemManager.getUpdater().cancel()
+        define("cancelupdate", description = "Cancels any active update countdown.") { _, _ ->
+            SystemManager.updater.cancel()
         }
 
+        /**
+         * Runs the daily restart
+         */
+        define("dailyrestart", description = "Runs the daily restart.") { _, _ ->
+            SystemManager.dailyRestart()
+        }
 
         /**
          * Allows a player to reset their password

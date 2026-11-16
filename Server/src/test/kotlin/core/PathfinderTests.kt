@@ -15,6 +15,7 @@ import core.game.node.Node
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.scenery.Layer
 import core.game.world.GameWorld
 import core.plugin.Plugin
 import core.tools.Log
@@ -45,7 +46,7 @@ class PathfinderTests {
 
     @Test fun movementPulseShouldStopEarlyIfNextToATileOccupiedByTargetObject() {
         val start = Location.create(2731, 3481)
-        val dest = RegionManager.getObject(2720, 3475, 0, 1307, -1)
+        val dest = RegionManager.getObject(2720, 3475, 0, 1307, Layer.GROUND)
         val p = TestUtils.getMockPlayer("treefindtest")
         p.location = start
         p.init()

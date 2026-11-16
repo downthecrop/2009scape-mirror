@@ -89,6 +89,13 @@ public final class TrapWrapper {
 	 */
 	private int ticks;
 
+	/**
+	 * The kebbit direction. Look, I didn't invent this shit, I'm just trying to port the Arios garbage that was already
+	 * here to a saner system. I don't even give a shit about hunter, I just wanted to reduce the Scenery footprint and
+	 * here I am.
+	 */
+	private int kebbitDir;
+
 	private HunterManager instance;
 
 	/**
@@ -104,7 +111,6 @@ public final class TrapWrapper {
 		this.originalId = object.getId();
 		this.ticks = GameWorld.getTicks() + (100);
 		this.instance = HunterManager.getInstance(player);
-		this.object.getAttributes().setAttribute("trap-uid", instance.getUid());
 	}
 
 	/**
@@ -129,7 +135,6 @@ public final class TrapWrapper {
 		Scenery newObject = object.transform(id);
 		SceneryBuilder.remove(object);
 		this.object = SceneryBuilder.add(newObject);
-		this.object.getAttributes().setAttribute("trap-uid", instance.getUid());
 	}
 
 	/**
@@ -306,6 +311,22 @@ public final class TrapWrapper {
 	}
 
 	/**
+	 * Gets the kebbit direction.
+	 * @return The kebbit direction.
+	 */
+	public int getKebbitDir() {
+		return kebbitDir;
+	}
+
+	/**
+	 * Sets the kebbit direction.
+	 * @param kebbitDir The kebbit direction to set.
+	 */
+	public void setKebbitDir(int kebbitDir) {
+		this.kebbitDir = kebbitDir;
+	}
+
+	/**
 	 * Checks if the trap has been caught.
 	 * @return {@code True} if so.
 	 */
@@ -376,7 +397,6 @@ public final class TrapWrapper {
 	 */
 	public void setSecondary(Scenery secondary) {
 		this.secondary = secondary;
-		this.secondary.getAttributes().setAttribute("trap-uid", player.getName().hashCode());
 	}
 
 	/**

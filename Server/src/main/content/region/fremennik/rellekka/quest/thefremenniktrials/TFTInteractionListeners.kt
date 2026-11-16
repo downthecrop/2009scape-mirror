@@ -20,6 +20,7 @@ import core.game.interaction.IntType
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld.Pulser
 import content.data.Quests
+import core.game.global.action.DoorHelper
 import core.game.interaction.QueueStrength
 import core.game.node.Node
 import org.rs09.consts.Scenery
@@ -153,16 +154,19 @@ class TFTInteractionListeners : InteractionListener {
             when {
                 getAttribute(player,"LyreEnchanted",false) -> {
                     sendNPCDialogue(player,1278,"Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
-                    handleAutowalkDoor(player, door.asScenery())
+                    handleDoor(player, door.asScenery())
                 }
                 getAttribute(player,"lyreConcertPlayed",false) || isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
-                    handleAutowalkDoor(player, door.asScenery())
+                    handleDoor(player, door.asScenery())
                 }
                 else -> {
                     sendNPCDialogue(player,1278,"I didn't give you permission to go backstage!")
                 }
             }
             return@on true
+        }
+        setDest(IntType.SCENERY, intArrayOf(LONGHALL_BACKDOOR), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         on(LYRE_IDs, IntType.ITEM, "play"){ player, lyre ->
@@ -284,7 +288,7 @@ class TFTInteractionListeners : InteractionListener {
         val objects = player.location.region.assembleObjectList(player.location.z)
         objects.shuffle()
         for (o in objects) {
-            if (o.id == Scenery.PORTAL_5138) {
+            if (o.id == Scenery.PORTAL_5138 && o.location != portal.location) {
                 return o.location
             }
         }

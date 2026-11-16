@@ -6,6 +6,7 @@ import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.event.EventHook
 import core.game.event.TickEvent
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -145,26 +146,24 @@ class MazeInterface : InteractionListener, EventHook<TickEvent>, MapArea {
             return@on true
         }
 
-        on(
-            intArrayOf(
-                Scenery.WALL_3628,
-                Scenery.WALL_3629,
-                Scenery.WALL_3630,
-                Scenery.WALL_3631,
-                Scenery.WALL_3632,
-            ),
-            IntType.SCENERY,
-            "open"
-        ) { player, node ->
+        val doorIds = intArrayOf(
+            Scenery.WALL_3628,
+            Scenery.WALL_3629,
+            Scenery.WALL_3630,
+            Scenery.WALL_3631,
+            Scenery.WALL_3632,
+        )
+        on(doorIds, IntType.SCENERY, "open") { player, node ->
             val scenery = node as core.game.node.scenery.Scenery
-
             if (ONE_WAY_WALL[scenery.location]?.contains(player.location) == true) {
                 sendDialogue(player, "I don't think that's the right way.")
             } else {
-                handleAutowalkDoor(player, scenery)
+                handleDoor(player, scenery)
             }
-
             return@on true
+        }
+        setDest(IntType.SCENERY, doorIds, "open") { e, n ->
+            DoorHelper.getDestination(e, n.asScenery())
         }
 
         on(Scenery.STRANGE_SHRINE_3634, IntType.SCENERY, "touch") { player, node ->

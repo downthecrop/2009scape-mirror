@@ -65,6 +65,11 @@ public final class Appearance {
 	private boolean ridingMinecart;
 
 	/**
+	 * If the player's shield should be hidden (like when equipping elemental shields).
+	 */
+	private boolean hideShield;
+
+	/**
 	 * Constructs a new {@code Appearance} {@code Object}.
 	 * @param player the player of this appearance.
 	 */
@@ -279,7 +284,7 @@ public final class Appearance {
 			} else {
 				clearBodyPart(3);
 			}
-			if (shield != null) {
+			if (shield != null && !hideShield) {
 				drawItem(5, shield);
 			} else {
 				clearBodyPart(5);
@@ -680,6 +685,22 @@ public final class Appearance {
 	 */
 	public void setRidingMinecart(boolean ridingMinecart) {
 		this.ridingMinecart = ridingMinecart;
+	}
+
+	/**
+	 * Gets the hideShield
+	 * @return the hideShield
+	 */
+	public boolean isHideShield() {
+		return hideShield;
+	}
+
+	/**
+	 * Sets the hideShield
+	 * @param hideShield the hideShield to set.
+	 */
+	public void setHideShield(boolean hideShield) {
+		this.hideShield = hideShield;
 	}
 
 	/**

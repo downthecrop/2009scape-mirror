@@ -2,6 +2,7 @@ package content.global.skill.construction;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Direction;
@@ -246,9 +247,9 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 		for (int x = 0; x < RegionChunk.SIZE; x++) {
 			for (int y = 0; y < RegionChunk.SIZE; y++) {
 				for (int i = 0; i < RegionChunk.ARRAY_SIZE; i++) {
-					Scenery object = room.getChunk().getObjects(x, y)[i];
+					Scenery object = room.getChunk().getObjects()[x][y][i];
 					if (object != null && object.getDefinition().hasAction("build")) {
-						if (object.getLayer() == Scenery.Layer.WALL && !BuildingUtils.isDoorHotspot(object)) {
+						if (Layer.getLayer(object.getType()) == Layer.WALL && !BuildingUtils.isDoorHotspot(object)) {
 							continue;
 						}
 						int[] pos = getRotatedPosition(x, y, object.getDefinition().getSizeX(), object.getDefinition().getSizeY(), object.getRotation(), rotation);

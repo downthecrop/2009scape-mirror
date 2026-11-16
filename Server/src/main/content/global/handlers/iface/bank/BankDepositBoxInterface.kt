@@ -3,14 +3,16 @@ package content.global.handlers.iface.bank
 import core.ServerConstants
 import core.api.animate
 import core.api.dumpBeastOfBurden
-import core.api.runWorldTask
+import core.api.queueScript
 import core.api.sendMessage
 import core.api.setInterfaceText
+import core.api.stopExecuting
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import org.rs09.consts.Animations
 import org.rs09.consts.Components
 import core.game.interaction.InterfaceListener
+import core.game.interaction.QueueStrength
 
 /**
  * Allows the user to interact with the
@@ -41,7 +43,7 @@ class BankDepositBoxInterface : InterfaceListener {
             return true
         }
 
-        runWorldTask {
+        queueScript(player, 0, QueueStrength.SOFT, false) { _ ->
             when (opcode) {
                 OP_AMOUNT_ONE -> player.bank.addItem(slot, 1)
                 OP_AMOUNT_FIVE -> player.bank.addItem(slot, 5)
@@ -59,9 +61,9 @@ class BankDepositBoxInterface : InterfaceListener {
                 )
                 else -> player.debug("Unknown deposit box menu opcode $opcode")
             }
-
             player.bank.refreshDepositBoxInterface()
             animate(player, Animations.HUMAN_BANK_DEPOSIT_BOX_834)
+            return@queueScript stopExecuting(player)
         }
 
         return true

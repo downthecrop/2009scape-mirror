@@ -1,7 +1,6 @@
-package content.global.activity.cchallange
+package content.global.activity.cchallenge
 
 import core.api.sendMessage
-import core.api.sendNews
 import core.game.event.NPCKillEvent
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

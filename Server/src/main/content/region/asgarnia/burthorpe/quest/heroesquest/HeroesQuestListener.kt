@@ -5,6 +5,7 @@ import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
+import core.game.global.action.DoorHelper
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler
@@ -25,7 +26,7 @@ class HeroesQuestListener: InteractionListener {
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 2 &&
                     getAttribute(player, HeroesQuest.attributeGruborLetsYouIn, false) &&
                     HeroesQuest.isBlackArm(player)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 openDialogue(player, GruborDialogueFile(), NPC(NPCs.GRUBOR_789))
             }
@@ -35,7 +36,7 @@ class HeroesQuestListener: InteractionListener {
         // Kitchen entrance
         on(Scenery.DOOR_2628, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 3 && HeroesQuest.isPhoenix(player)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
             }
@@ -45,17 +46,20 @@ class HeroesQuestListener: InteractionListener {
         // Kitchen wall
         on(Scenery.WALL_2629, IntType.SCENERY, "push") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 4 && HeroesQuest.isPhoenix(player)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 openDialogue(player, CharlieTheCookDialogueFile(), NPC(NPCs.CHARLIE_THE_COOK_794))
             }
             return@on true
         }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.WALL_2629), "push") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
 
         // Mansion frontdoor
         on(Scenery.DOOR_2627, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 4 && HeroesQuest.isBlackArm(player)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 openDialogue(player, GarvDialogueFile(), NPC(NPCs.GARV_788))
             }
@@ -63,7 +67,6 @@ class HeroesQuestListener: InteractionListener {
         }
 
         // Cupboard
-
         on(Scenery.CUPBOARD_2636, IntType.SCENERY, "search") { player, node ->
             openDialogue(player, object : DialogueFile() {
                 override fun handle(componentID: Int, buttonID: Int) {
@@ -87,7 +90,7 @@ class HeroesQuestListener: InteractionListener {
         // Mansion backdoor
         on(Scenery.DOOR_2622, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, HeroesQuest.attributeHasOpenedBackdoor, false)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
             }
@@ -95,14 +98,14 @@ class HeroesQuestListener: InteractionListener {
         }
         onUseWith(IntType.SCENERY, Items.MISCELLANEOUS_KEY_1586, Scenery.DOOR_2622) { player, used, with ->
             setAttribute(player, HeroesQuest.attributeHasOpenedBackdoor, true)
-            handleAutowalkDoor(player, with.asScenery())
+            handleDoor(player, with.asScenery())
             return@onUseWith true
         }
 
         // Chest door
         on(Scenery.DOOR_2621, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, HeroesQuest.attributeHasOpenedChestDoor, false)) {
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "This door is locked.")
             }
@@ -110,7 +113,7 @@ class HeroesQuestListener: InteractionListener {
         }
         onUseWith(IntType.SCENERY, Items.GRIPS_KEY_RING_1588, Scenery.DOOR_2621) { player, used, with ->
             setAttribute(player, HeroesQuest.attributeHasOpenedChestDoor, true)
-            handleAutowalkDoor(player, with.asScenery())
+            handleDoor(player, with.asScenery())
             return@onUseWith true
         }
 
@@ -136,7 +139,6 @@ class HeroesQuestListener: InteractionListener {
             return@on true
         }
 
-        //
         on(Items.FIRE_FEATHER_1583, IntType.GROUNDITEM, "take") { player, groundItem ->
             if (inEquipment(player, Items.ICE_GLOVES_1580)) {
                 addItem(player, Items.FIRE_FEATHER_1583)
@@ -149,6 +151,8 @@ class HeroesQuestListener: InteractionListener {
             return@on true
         }
 
-        // OilFishingRodListener.kt + DrinkBlamishOilListener.kt + FinishedPotion.java
+        setDest(IntType.SCENERY, intArrayOf(Scenery.DOOR_2626, Scenery.DOOR_2628, Scenery.DOOR_2627, Scenery.DOOR_2622, Scenery.DOOR_2621), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
     }
 }

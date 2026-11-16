@@ -1,22 +1,21 @@
-package content.global.activity.cchallange
+package content.global.activity.cchallenge
 
-import content.global.activity.cchallange.npc.EarthWarriorChampionNPC.Companion.spawnEarthWarriorChampion
-import content.global.activity.cchallange.npc.GhoulChampionNPC.Companion.spawnGhoulChampion
-import content.global.activity.cchallange.npc.GiantChampionNPC.Companion.spawnGiantChampion
-import content.global.activity.cchallange.npc.GoblinChampionNPC.Companion.spawnGoblinChampion
-import content.global.activity.cchallange.npc.HobgoblinChampionNPC.Companion.spawnHobgoblinChampion
-import content.global.activity.cchallange.npc.ImpChampionNPC.Companion.spawnImpChampion
-import content.global.activity.cchallange.npc.JogreChampionNPC.Companion.spawnJogreChampion
-import content.global.activity.cchallange.npc.LesserDemonChampionNPC.Companion.spawnLesserDemonChampion
-import content.global.activity.cchallange.npc.SkeletonChampionNPC.Companion.spawnSkeletonChampion
-import content.global.activity.cchallange.npc.ZombieChampionNPC.Companion.spawnZombieChampion
+import content.global.activity.cchallenge.npc.EarthWarriorChampionNPC.Companion.spawnEarthWarriorChampion
+import content.global.activity.cchallenge.npc.GhoulChampionNPC.Companion.spawnGhoulChampion
+import content.global.activity.cchallenge.npc.GiantChampionNPC.Companion.spawnGiantChampion
+import content.global.activity.cchallenge.npc.GoblinChampionNPC.Companion.spawnGoblinChampion
+import content.global.activity.cchallenge.npc.HobgoblinChampionNPC.Companion.spawnHobgoblinChampion
+import content.global.activity.cchallenge.npc.ImpChampionNPC.Companion.spawnImpChampion
+import content.global.activity.cchallenge.npc.JogreChampionNPC.Companion.spawnJogreChampion
+import content.global.activity.cchallenge.npc.LesserDemonChampionNPC.Companion.spawnLesserDemonChampion
+import content.global.activity.cchallenge.npc.SkeletonChampionNPC.Companion.spawnSkeletonChampion
+import content.global.activity.cchallenge.npc.ZombieChampionNPC.Companion.spawnZombieChampion
 import core.api.*
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
@@ -29,7 +28,6 @@ import org.rs09.consts.Scenery
  */
 
 class ChampionChallengeListener : InteractionListener, MapArea {
-
     val EARTH_WARRIOR_SCROLL = Items.CHAMPION_SCROLL_6798
     val GHOUL_SCROLL = Items.CHAMPION_SCROLL_6799
     val GIANT_SCROLL = Items.CHAMPION_SCROLL_6800
@@ -164,35 +162,34 @@ class ChampionChallengeListener : InteractionListener, MapArea {
         on(PORTCULLIS, IntType.SCENERY, "open") { player, node ->
             if (player.getAttribute("championsarena:start", false) == false) {
                 sendNPCDialogue(player, NPCs.LARXUS_3050, "You need to arrange a challenge with me before you enter the arena.")
-            } else {
-                lock(player, 3)
-                submitWorldPulse(object : Pulse() {
-                    var counter = 0
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            1 -> {
-                                player.familiarManager.dismiss()
-                            }
-                            2 -> DoorActionHandler.handleDoor(player, node.asScenery())
-                            3 -> when{
-                                removeItem(player, IMP_SCROLL) -> spawnImpChampion(player)
-                                removeItem(player, GOBLIN_SCROLL) -> spawnGoblinChampion(player)
-                                removeItem(player, SKELETON_SCROLL) -> spawnSkeletonChampion(player)
-                                removeItem(player, ZOMBIE_SCROLL) -> spawnZombieChampion(player)
-                                removeItem(player, GIANT_SCROLL) -> spawnGiantChampion(player)
-                                removeItem(player, HOBGOBLIN_SCROLL) -> spawnHobgoblinChampion(player)
-                                removeItem(player, GHOUL_SCROLL) -> spawnGhoulChampion(player)
-                                removeItem(player, EARTH_WARRIOR_SCROLL) -> {
-                                    spawnEarthWarriorChampion(player)
-                                    player.prayer.reset()
-                                }
-                                removeItem(player, JOGRE_SCROLL) -> spawnJogreChampion(player)
-                                removeItem(player, LESSER_DEMON_SCROLL) -> spawnLesserDemonChampion(player)
-                            }
-                        }
-                        return false
+                return@on true
+            }
+            if (player.familiarManager.hasFamiliar() || player.familiarManager.hasPet()) {
+                sendNPCDialogue(player, NPCs.LARXUS_3050, "Sorry, but I'm not going to let you down there with that follower.")
+                return@on true
+            }
+            lock(player, 3)
+            queueScript(player, 0, QueueStrength.SOFT, false) { stage ->
+                if (stage == 0) {
+                    handleDoor(player, node.asScenery())
+                    return@queueScript keepRunning(player)
+                }
+                when {
+                    removeItem(player, IMP_SCROLL) -> spawnImpChampion(player)
+                    removeItem(player, GOBLIN_SCROLL) -> spawnGoblinChampion(player)
+                    removeItem(player, SKELETON_SCROLL) -> spawnSkeletonChampion(player)
+                    removeItem(player, ZOMBIE_SCROLL) -> spawnZombieChampion(player)
+                    removeItem(player, GIANT_SCROLL) -> spawnGiantChampion(player)
+                    removeItem(player, HOBGOBLIN_SCROLL) -> spawnHobgoblinChampion(player)
+                    removeItem(player, GHOUL_SCROLL) -> spawnGhoulChampion(player)
+                    removeItem(player, EARTH_WARRIOR_SCROLL) -> {
+                        spawnEarthWarriorChampion(player)
+                        player.prayer.reset()
                     }
-                })
+                    removeItem(player, JOGRE_SCROLL) -> spawnJogreChampion(player)
+                    removeItem(player, LESSER_DEMON_SCROLL) -> spawnLesserDemonChampion(player)
+                }
+                return@queueScript stopExecuting(player)
             }
             return@on true
         }

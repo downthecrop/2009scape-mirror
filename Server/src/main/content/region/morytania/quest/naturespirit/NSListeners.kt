@@ -19,6 +19,8 @@ import content.region.morytania.handlers.MortMyreGhastNPC
 import core.tools.END_DIALOGUE
 import core.tools.Log
 import content.data.Quests
+import core.game.interaction.QueueStrength
+import kotlin.collections.get
 
 class NSListeners : InteractionListener {
 
@@ -232,29 +234,28 @@ class NSJournalDialogue : DialogueFile() {
 
 class FillimanCompletionDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
-        when(stage){
+        when (stage) {
             0 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL, "Well, hello there again. I was just enjoying the grotto. Many thanks for your help, I couldn't have become a Spirit of nature without you.").also { stage++ }
             1 -> npcl(core.game.dialogue.FacialExpression.NEUTRAL, "I must complete the transformation now. Just stand there and watch the show, apparently it's quite good!").also { stage++ }
             2 -> {
                 end()
                 lock(player!!, 10)
-                submitWorldPulse(CompleteSpellPulse(player!!))
+                val locations = arrayOf(Location.create(3444, 9740, 0), Location.create(3439, 9740, 0), Location.create(3439, 9737, 0), Location.create(3444, 9737, 0), Location.create(3444, 9735, 0), Location.create(3438, 9735, 0))
+                val dest = Location.create(3441, 9738, 0)
+                queueScript(player!!, 0, QueueStrength.SOFT) { stage ->
+                    when (stage) {
+                        0 -> repeat(6) { spawnProjectile(locations[it], dest, 268, 0, 1000, 0, 40, 20) }
+                        1 -> player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 60)
+                        2 -> player!!.teleport(player!!.location.transform(0,0,1))
+                        3 -> {
+                            openDialogue(player!!, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player!!, NPCs.NATURE_SPIRIT_1051) as NPC)
+                            unlock(player!!)
+                            return@queueScript stopExecuting(player!!)
+                        }
+                    }
+                    return@queueScript delayScript(player!!, 1)
+                }
             }
         }
-    }
-}
-
-class CompleteSpellPulse(val player: Player) : Pulse(2){
-    var counter = 0
-    val locations = arrayOf(Location.create(3444, 9740, 0), Location.create(3439, 9740, 0), Location.create(3439, 9737, 0), Location.create(3444, 9737, 0), Location.create(3444, 9735, 0), Location.create(3438, 9735, 0))
-    val dest = Location.create(3441, 9738, 0)
-    override fun pulse(): Boolean {
-        when(counter++){
-            0 -> repeat(6) { spawnProjectile(locations[it], dest, 268, 0, 1000, 0, 40, 20) }
-            1 -> player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, 60)
-            2 -> player.teleport(player.location.transform(0,0,1))
-            3 -> openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC).also { unlock(player); return true }
-        }
-        return false
     }
 }

@@ -26,6 +26,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.node.scenery.Layer
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
@@ -396,16 +397,15 @@ class Vinesweeper : InteractionListener, InterfaceListener, MapArea {
         }
 
         private fun countFieldState(chunk: RegionChunk, emptyHoleList: ArrayList<Scenery>, seedHoleList: ArrayList<Scenery>) {
+            val index = Layer.GROUND.ordinal
             for (x in 0 until RegionChunk.SIZE) {
                 for (y in 0 until RegionChunk.SIZE) {
-                    for (i in 0 until RegionChunk.ARRAY_SIZE) {
-                        val obj = chunk.objects[x][y][i] ?: continue
-                        if (obj.id in HOLES) {
-                            if (obj.location in SEED_LOCS) {
-                                seedHoleList.add(obj)
-                            } else {
-                                emptyHoleList.add(obj)
-                            }
+                    val obj = chunk.objects[x][y][index] ?: continue
+                    if (obj.id in HOLES) {
+                        if (obj.location in SEED_LOCS) {
+                            seedHoleList.add(obj)
+                        } else {
+                            emptyHoleList.add(obj)
                         }
                     }
                 }

@@ -5,6 +5,7 @@ import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
+import core.game.node.scenery.Layer;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
@@ -15,7 +16,6 @@ import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
-import core.tools.SystemLogger;
 import org.rs09.consts.Items;
 
 import java.util.ArrayList;
@@ -234,9 +234,10 @@ public final class BuildingUtils {
 	 */
 	private static void setDecoration(Player player, Region region, Room room, Hotspot hotspot, Scenery object, Decoration deco) {
 		Location l = object.getLocation();
+		RegionChunk chunk = region.getChunks()[l.getChunkX()][l.getChunkY()][l.getZ()];
 		HousingStyle style = player.getHouseManager().getStyle();
 		int decIndex = hotspot.getHotspot().getDecorationIndex(deco);
-		switch(hotspot.getHotspot().getType()) {
+		switch (hotspot.getHotspot().getType()) {
 			case STAIRCASE:
 				int z = l.getZ();
 				if (region == player.getHouseManager().getDungeonRegion()) {
@@ -249,12 +250,12 @@ public final class BuildingUtils {
 						Hotspot h = r.getStairs();
 						if (h != null) {
 							h.setDecorationIndex(decIndex);
-							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
-							if (reg == null) {
+							Region regionForPlane = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getHouseRegion();
+							if (regionForPlane == null) {
 								continue;
 							}
-							RegionChunk chunk = reg.getChunks()[l.getChunkX()][l.getChunkY()][plane % 3];
-							Scenery[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
+							RegionChunk chunkForPlane = regionForPlane.getChunks()[l.getChunkX()][l.getChunkY()][plane % 3];
+							Scenery[] objects = chunkForPlane.getObjects()[h.getCurrentX()][h.getCurrentY()];
 							for (Scenery o : objects) {
 								if (o != null && o.getType() == object.getType()) {
 									SceneryBuilder.replace(o, o.transform(h.getHotspot().getDecorations()[decIndex].getObjectId(style)));
@@ -284,23 +285,20 @@ public final class BuildingUtils {
 				break;
 			case CREST:
 			case RECURSIVE:
-				RegionChunk chunk = region.getChunks()[l.getChunkX()][l.getChunkY()][l.getZ()];
 				for (int x = 0; x < 8; x++) {
 					for (int y = 0; y < 8; y++) {
 						Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
 						if (h != null) {
 							h.setDecorationIndex(decIndex);
 							int objectId = hotspot.getHotspot().getObjectId(style);
-							int index = chunk.getIndex(x, y, objectId, -1);
-							if (index != -1) {
-								Scenery o = chunk.getObjects()[x][y][index];
-								if (objectId == o.getId()) {
-									if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
-										SceneryBuilder.replace(o, o.transform(deco.getCrestAdjustedId(style, player.getHouseManager().getCrest())));
-									}
-									else {
-										SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
-									}
+							int index = Layer.getIndex(object.getType());
+							Scenery o = chunk.getObjects()[x][y][index];
+							if (objectId == o.getId()) {
+								if (hotspot.getHotspot().getType() == BuildHotspotType.CREST) {
+									SceneryBuilder.replace(o, o.transform(deco.getCrestAdjustedId(style, player.getHouseManager().getCrest())));
+								}
+								else {
+									SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
 								}
 							}
 						}
@@ -309,7 +307,6 @@ public final class BuildingUtils {
 				break;
 			case LINKED:
 				BuildHotspot[] linkedHotspots = BuildHotspot.getLinkedHotspots(hotspot.getHotspot());
-				chunk = region.getChunks()[l.getChunkX()][l.getChunkY()][l.getZ()];
 				for (int x = 0; x < 8; x++) {
 					for (int y = 0; y < 8; y++) {
 						for (BuildHotspot bh : linkedHotspots) {
@@ -317,12 +314,10 @@ public final class BuildingUtils {
 							if (h != null) {
 								h.setDecorationIndex(decIndex);
 								int objectId = bh.getObjectId(style);
-								int index = chunk.getIndex(x, y, objectId, -1);
-								if (index != -1) {
-									Scenery o = chunk.getObjects()[x][y][index];
-									if (objectId == o.getId()) {
-										SceneryBuilder.replace(o, o.transform(bh.getDecorations()[decIndex].getObjectId(style)));
-									}
+								int index = Layer.getIndex(object.getType());
+								Scenery o = chunk.getObjects()[x][y][index];
+								if (objectId == o.getId()) {
+									SceneryBuilder.replace(o, o.transform(bh.getDecorations()[decIndex].getObjectId(style)));
 								}
 							}
 						}
@@ -401,7 +396,7 @@ public final class BuildingUtils {
 								continue;
 							}
 							RegionChunk chunk = reg.getChunks()[l.getChunkX()][l.getChunkY()][plane % 3];
-							Scenery[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
+							Scenery[] objects = chunk.getObjects()[h.getCurrentX()][h.getCurrentY()];
 							for (Scenery o : objects) {
 								if (o != null && o.getType() == object.getType()) {
 									SceneryBuilder.replace(o, o.transform(h.getHotspot().getObjectId(style)));
@@ -443,7 +438,7 @@ public final class BuildingUtils {
 							} else {
 								objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getObjectId(style);
 							}
-							int index = chunk.getIndex(x, y, objectId, -1);
+							int index = Layer.getIndex(object.getType());
 							h.setDecorationIndex(-1);
 							if (index == -1) {
 								continue;
@@ -465,11 +460,8 @@ public final class BuildingUtils {
 							Hotspot h = room.getHotspot(bh, x, y);
 							if (h != null && h.getDecorationIndex() >= 0) {
 								int objectId = bh.getDecorations()[h.getDecorationIndex()].getObjectId(style);
+								int index = Layer.getIndex(object.getType());
 								h.setDecorationIndex(-1);
-								int index = chunk.getIndex(x, y, objectId, -1);
-								if (index == -1) {
-									continue;
-								}
 								Scenery o = chunk.getObjects()[x][y][index];
 								if (o != null && objectId == o.getId()) {
 									SceneryBuilder.replace(o, o.transform(bh.getObjectId(style)));

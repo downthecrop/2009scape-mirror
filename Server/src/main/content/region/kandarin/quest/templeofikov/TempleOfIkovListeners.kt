@@ -5,6 +5,7 @@ import content.data.Quests
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.skillcapeperks.SkillcapePerks
 import core.api.*
+import core.game.global.action.DoorHelper
 import core.game.global.action.PickupHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -47,14 +48,14 @@ class TempleOfIkovListeners : InteractionListener {
         // Shiny key to back of McGrubor's Wood. THIS MUST BE LOCKED UP
         on(Scenery.DOOR_99, SCENERY, "open") { player, node ->
             if (inInventory(player, Items.SHINY_KEY_85)){
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door is locked.")
             }
             return@on true
         }
         onUseWith(SCENERY, Items.SHINY_KEY_85, Scenery.DOOR_99) { player, used, with ->
-            handleAutowalkDoor(player, with.asScenery())
+            handleDoor(player, with.asScenery())
             return@onUseWith true
         }
 
@@ -64,7 +65,7 @@ class TempleOfIkovListeners : InteractionListener {
                 if(getQuestStage(player, Quests.TEMPLE_OF_IKOV) == 1) {
                     setQuestStage(player, Quests.TEMPLE_OF_IKOV, 2)
                 }
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "As you reach to open the door a great terror overcomes you!")
             }
@@ -89,7 +90,7 @@ class TempleOfIkovListeners : InteractionListener {
                     setQuestStage(player, Quests.TEMPLE_OF_IKOV, 3)
                 }
             } else {
-                AgilityHandler.fail(player, 2, Location.create(2682, 9855, 0), Animation(770), 20, "You slip and fall to the pit below.")
+                AgilityHandler.fail(player, Location.create(2682, 9855, 0), Animation(770), 20, "You slip and fall to the pit below.")
             }
             return@on true
         }
@@ -167,7 +168,7 @@ class TempleOfIkovListeners : InteractionListener {
                 // To be nice, you can "reset" the chest location by opening the gate.
                 // This is a failsafe if the attribute gets "stuck", although I doubt it will happen.
                 setAttribute(player, TempleOfIkov.attributeRandomChest, chestLocations.random())
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendDialogue(player, "The door won't open!")
             }
@@ -211,7 +212,7 @@ class TempleOfIkovListeners : InteractionListener {
         on(Scenery.DOOR_92, SCENERY, "open") { player, node ->
             removeAttribute(player, TempleOfIkov.attributeWarriorInstance)
             if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 3){
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 sendMessage(player, "The door won't open.")
             }
@@ -222,7 +223,7 @@ class TempleOfIkovListeners : InteractionListener {
         // 3 - 4: Calls for the Fire Warrior, allows passing when Fire Warrior is defeated.
         on(Scenery.DOOR_93, SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 4){
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             } else {
                 if (getAttribute(player, TempleOfIkov.attributeWarriorInstance, null) == null) {
                     val npc = FireWarriorOfLesarkusNPC(NPCs.FIRE_WARRIOR_OF_LESARKUS_277, player, Location(2646, 9866, 0))
@@ -259,6 +260,10 @@ class TempleOfIkovListeners : InteractionListener {
             }
             return@on true
         }
+        setDest(IntType.SCENERY, intArrayOf(Scenery.DOOR_99, Scenery.GATE_94, Scenery.GATE_95, Scenery.GATE_89, Scenery.DOOR_92, Scenery.DOOR_93), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
+        }
+
 
         on(Items.STAFF_OF_ARMADYL_84, IntType.GROUNDITEM,"take") { player, node ->
             if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 6 && getAttribute(player, TempleOfIkov.attributeChosenEnding, 0) == 1){

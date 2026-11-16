@@ -1,4 +1,4 @@
-package content.global.activity.cchallange.npc
+package content.global.activity.cchallenge.npc
 
 import core.api.*
 import core.game.node.entity.Entity
@@ -14,18 +14,18 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 
 /**
- * Represents the Imp champion NPC for Champions challenge.
+ * Represents the Lesser demon champion NPC for Champions challenge.
  */
 
 @Initializable
-class ImpChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+class LesserDemonChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     var clearTime = 0
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return ImpChampionNPC(id, location)
+        return LesserDemonChampionNPC(id, location)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IMP_CHAMPION_3062)
+        return intArrayOf(NPCs.LESSER_DEMON_CHAMPION_3064)
     }
 
     override fun handleTickActions() {
@@ -34,8 +34,8 @@ class ImpChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
     }
 
     companion object {
-        fun spawnImpChampion(player: Player) {
-            val champion = ImpChampionNPC(NPCs.IMP_CHAMPION_3062)
+        fun spawnLesserDemonChampion(player: Player) {
+            val champion = LesserDemonChampionNPC(NPCs.LESSER_DEMON_CHAMPION_3064)
             champion.location = location(3170, 9758, 0)
             champion.isWalks = true
             champion.isAggressive = true
@@ -44,7 +44,6 @@ class ImpChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
             if (champion.asNpc() != null && champion.isActive) {
                 champion.properties.teleportLocation = champion.properties.spawnLocation
             }
-
             champion.isActive = true
             GameWorld.Pulser.submit(object : Pulse(0, champion) {
                 override fun pulse(): Boolean {
@@ -61,11 +60,19 @@ class ImpChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
         super.checkImpact(state)
         val player = state.attacker
         if (player is Player) {
-
-            //somehow the maximumHit is determined to be zero by this point if you're using a melee special attack.
-            if (state.maximumHit == 0) {
+            if (player.equipment.isEmpty) {
                 state.neutralizeHits()
-                sendMessage(player, "Larxus said you couldn't use special attacks in this duel.")
+                state.estimatedHit = state.maximumHit
+            } else {
+                sendMessage(player, "You cannot wear any equipment in this challenge.")
+                if (state.estimatedHit > -1) {
+                    state.estimatedHit = 0
+                    return
+                }
+                if (state.secondaryHit > -1) {
+                    state.secondaryHit = 0
+                    return
+                }
             }
         }
     }
@@ -75,14 +82,14 @@ class ImpChampionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
             lock(killer, 2)
             runTask(killer, 1) {
                 openInterface(killer, 63)
-                setInterfaceText(killer, "Well done, you defeated the Imp Champion!", 63, 2)
-                killer.packetDispatch.sendItemZoomOnInterface(Items.CHAMPION_SCROLL_6803, 260, 63, 3)
-                setInterfaceText(killer, "160 Slayer Xp", 63, 6)
-                setInterfaceText(killer, "160 Hitpoint Xp", 63, 7)
+                setInterfaceText(killer, "Well done, you defeated the Lesser Demon Champion!", 63, 2)
+                killer.packetDispatch.sendItemZoomOnInterface(Items.CHAMPION_SCROLL_6805, 260, 63, 3)
+                setInterfaceText(killer, "592 Slayer Xp", 63, 6)
+                setInterfaceText(killer, "592 Hitpoint Xp", 63, 7)
             }
-            setVarbit(killer, 1457, 1, true)
-            rewardXP(killer, Skills.HITPOINTS, 160.0)
-            rewardXP(killer, Skills.SLAYER, 160.0)
+            setVarbit(killer, 1459, 1, true)
+            rewardXP(killer, Skills.HITPOINTS, 592.0)
+            rewardXP(killer, Skills.SLAYER, 592.0)
             removeAttribute("championsarena:start")
             clearHintIcon(killer)
         }

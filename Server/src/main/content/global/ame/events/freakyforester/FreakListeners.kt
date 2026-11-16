@@ -5,8 +5,8 @@ import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
-import core.game.system.task.Pulse
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import org.rs09.consts.Items
@@ -41,14 +41,12 @@ class FreakListeners : InteractionListener, MapArea {
         on(exitPortal,IntType.SCENERY,"enter") { player, _ ->
             if (getAttribute(player,FreakUtils.freakComplete,false)) {
                 FreakUtils.cleanup(player)
-                submitWorldPulse(object : Pulse(2) {
-                    override fun pulse(): Boolean {
-                        FreakUtils.reward(player)
-                        return true
-                    }
-                })
+                queueScript(player, 2, QueueStrength.SOFT) { _ ->
+                    FreakUtils.reward(player)
+                    return@queueScript stopExecuting(player)
+                }
                 return@on true
-            } else sendMessage(player,"A supernatural force prevents you from leaving.")
+            } else sendMessage(player, "A supernatural force prevents you from leaving.")
             return@on true
         }
     }

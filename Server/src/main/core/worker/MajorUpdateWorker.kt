@@ -1,11 +1,9 @@
 package core.worker
 
 import core.Server
-import core.ServerConstants
 import core.ServerStore
 import core.api.log
-import core.api.submitWorldPulse
-import core.game.system.task.Pulse
+import core.game.system.SystemManager
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
@@ -15,11 +13,9 @@ import core.net.packet.PacketWriteQueue
 import core.plugin.CorePluginTypes.Managers
 import core.tools.Log
 import core.tools.NetworkReachability
-import core.tools.colorize
 import java.lang.Long.max
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.system.exitProcess
 
 /**
  * Handles the running of pulses and writing of masks, etc
@@ -59,33 +55,11 @@ class MajorUpdateWorker {
 
             //Handle daily restart if enabled
             if (sdf.format(Date()).toInt() == 0) {
-
                 if (GameWorld.checkDay() == 1) {//monday
                     ServerStore.clearWeeklyEntries()
                 }
-
                 ServerStore.clearDailyEntries()
-                if (ServerConstants.DAILY_RESTART) {
-                    for (player in Repository.players.filter { !it.isArtificial }) {
-                        player.packetDispatch.sendSystemUpdate(500)
-                    }
-                    Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
-                    ServerConstants.DAILY_RESTART = false
-                    submitWorldPulse(object : Pulse(100) {
-                        var counter = 0
-                        override fun pulse(): Boolean {
-                            counter++
-                            for (player in Repository.players.filter { !it.isArtificial }) {
-                                player.packetDispatch.sendSystemUpdate((5 - counter) * 100)
-                            }
-                            if (counter == 5) {
-                                exitProcess(0)
-                            }
-                            Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN ${5 - counter} MINUTE${if (counter < 4) "S" else ""}!"))
-                            return false
-                        }
-                    })
-                }
+                SystemManager.dailyRestart()
             }
 
             val end = System.currentTimeMillis()
@@ -107,7 +81,7 @@ class MajorUpdateWorker {
 
     fun handleTickActions(skipPulseUpdate: Boolean = false) {
         try {
-            var packetStart = System.currentTimeMillis()
+            val packetStart = System.currentTimeMillis()
             PacketProcessor.processQueue()
             Grafana.packetProcessTime = (System.currentTimeMillis() - packetStart).toInt()
 
@@ -117,6 +91,8 @@ class MajorUpdateWorker {
             if (!skipPulseUpdate) {
                 GameWorld.Pulser.updateAll()
             }
+            GameWorld.scripts.processQueue()
+            GameWorld.timers.processTimers()
             GameWorld.tickListeners.forEach { it.tick() }
 
             sequence.start()
@@ -139,7 +115,7 @@ class MajorUpdateWorker {
     }
 
     fun start() {
-        if (!started) {
+        if (!worker.isAlive) {
             running = true
             worker.start()
         }

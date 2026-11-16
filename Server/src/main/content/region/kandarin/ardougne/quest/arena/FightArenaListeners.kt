@@ -13,6 +13,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import content.data.Quests
+import core.game.global.action.DoorHelper
 
 class FightArenaListeners : InteractionListener {
     companion object {
@@ -132,7 +133,7 @@ class FightArenaListeners : InteractionListener {
 
         on(MAIN_DOOR, IntType.SCENERY, "open") { player, maingate ->
             when (player.location.y) {
-                3171 -> handleAutowalkDoor(player, maingate.asScenery())
+                3171 -> handleDoor(player, maingate.asScenery())
                 3172 -> {
                     if (allInEquipment(player, HELMET, ARMOR)) {
                         openDialogue(player, EastDoorSupportDialogue())
@@ -143,7 +144,7 @@ class FightArenaListeners : InteractionListener {
                 }
             }
             when (player.location.x) {
-                2585 -> handleAutowalkDoor(player, maingate.asScenery())
+                2585 -> handleDoor(player, maingate.asScenery())
                 2584 -> {
                     if (allInEquipment(player, HELMET, ARMOR)) {
                         openDialogue(player, WestDoorSupportDialogue())
@@ -189,6 +190,10 @@ class FightArenaListeners : InteractionListener {
                 sendMessage(player, "The gate is locked.")
             }
             return@on true
+        }
+
+        setDest(IntType.SCENERY, intArrayOf(MAIN_DOOR, CENTER_DOOR), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
     }
 
@@ -255,7 +260,7 @@ class FightArenaListeners : InteractionListener {
                     end()
                     lock(player!!, 2)
                     setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
-                    handleAutowalkDoor(player, getScenery(2617, 3172, 0))
+                    handleAutowalkDoor(player!!, getScenery(2617, 3172, 0)!!)
                 }
             }
         }
@@ -277,7 +282,7 @@ class FightArenaListeners : InteractionListener {
                     end()
                     lock(player!!, 2)
                     setQuestStage(player!!, Quests.FIGHT_ARENA, 20)
-                    handleAutowalkDoor(player, getScenery(2584, 3141, 0))
+                    handleAutowalkDoor(player!!, getScenery(2584, 3141, 0)!!)
                 }
             }
         }

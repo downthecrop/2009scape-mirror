@@ -85,7 +85,7 @@ class LoginParser(val details: PlayerDetails) {
         if (!details.session.isActive) {
             return false
         }
-        if (SystemManager.isUpdating()) {
+        if (SystemManager.isUpdating) {
             return flag(AuthResponse.Updating)
         }
         return if (details.isBanned) {

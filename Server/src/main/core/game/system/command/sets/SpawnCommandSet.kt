@@ -1,11 +1,11 @@
 package core.game.system.command.sets
 
+import core.api.getChildren
 import core.api.log
 import core.api.sendMessage
 import core.cache.Cache
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
-import core.game.node.scenery.Constructed
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.system.command.CommandPlugin
@@ -157,39 +157,54 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN){
             SceneryBuilder.remove(obj)
         }
 
-        define("objects", Privilege.STANDARD, "::objects", "Prints a list of all ten sceneries at your current coordinates") { player, args ->
+        define("objects", Privilege.STANDARD, "::objects", "Prints a list of all four sceneries at your current coordinates") { player, args ->
             if (args.size != 1) reject(player, "::objects doesn't support arguments")
             val chunk = getRegionChunk(player.location)
             fun dump(label: String, objects: List<Scenery?>) {
+                fun string(o: Scenery): String {
+                    val r = if (o.isRenderable) "R" else ""
+                    val a = if (o.isActive) "A" else ""
+                    val props = r + a
+                    if (props.isNotEmpty()) {
+                        return "$o *$props"
+                    }
+                    return "$o"
+                }
                 sendMessage(player, "--- $label ---")
-                val nulls = ArrayList<Int>(10)
+                val nulls = ArrayList<Int>(4)
                 for ((i, o) in objects.withIndex()) {
                     if (o == null) {
                         nulls.add(i)
                     } else {
-                        val c = if (o is Constructed) "C" else ""
-                        val r = if (o.isRenderable) "R" else ""
-                        val a = if (o.isActive) "A" else ""
-                        var props = c + r + a
-                        if (props.isNotEmpty()) {
-                            props = " *$props"
+                        sendMessage(player, "    $i: ${string(o)}")
+                        if (o.wrapper != o) {
+                            sendMessage(player, "    $i is a wrapper for ${string(o.wrapper)}")
                         }
-                        sendMessage(player, "    $i: $o$props")
+                        val children = getChildren(o.id)
+                        if (children?.isNotEmpty() == true) {
+                            sendMessage(player, "    $i has children. All children: ${children.joinToString()}")
+                            sendMessage(player, "    The one child for this player: ${string(o.getChild(player))}")
+                        }
                     }
                 }
                 if (nulls.isNotEmpty()) {
                     sendMessage(player, "    ${nulls.joinToString()}: null")
                 }
             }
-            val stat = ArrayList<Scenery>(10)
+            val stat = ArrayList<Scenery>(4)
+            val dyn = ArrayList<Scenery>(4)
             for (i in 0 until 4) {
-                val obj = chunk.statObjects[player.location.chunkOffsetX][player.location.chunkOffsetY][i]
-                if (obj != null) {
-                    stat.add(obj)
+                val sObj = chunk.statObjects[player.location.chunkOffsetX][player.location.chunkOffsetY][i]
+                if (sObj != null) {
+                    stat.add(sObj)
+                }
+                val dObj = chunk.objects[player.location.chunkOffsetX][player.location.chunkOffsetY][i]
+                if (dObj != null) {
+                    dyn.add(dObj)
                 }
             }
             dump("Chunk static objects", stat)
-            dump("Chunk dynamic objects", chunk.getObjects(player.location.chunkOffsetX, player.location.chunkOffsetY).asList())
+            dump("Chunk dynamic objects", dyn)
             dump("RegionManager", listOf(getObject(player.location))) // getObject can only get one
             sendMessage(player, "--- That's all, folks! ---")
         }

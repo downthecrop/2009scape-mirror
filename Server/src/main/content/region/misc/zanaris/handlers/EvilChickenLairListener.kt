@@ -4,33 +4,32 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
 import content.data.Quests
+import core.game.interaction.QueueStrength
 
 class EvilChickenLairListener: InteractionListener {
     override fun defineListeners() {
+        val PUT_CHICKEN_ANIM = 10100
+        val TELEPORT_ANIM = 9013
 
         addClimbDest(Location.create(2441, 4381, 0), Location.create(2457, 4380, 0))
         addClimbDest(Location.create(2455, 4380, 0), Location.create(2441, 4381, 0))
 
         onUseWith(IntType.SCENERY, Items.RAW_CHICKEN_2138, Scenery.CHICKEN_SHRINE_12093) { player, _, _ ->
-            if (!hasRequirement(player, Quests.LEGENDS_QUEST))
+            if (!hasRequirement(player, Quests.LEGENDS_QUEST)) {
                 return@onUseWith false
-
-            if(removeItem(player,(Item(Items.RAW_CHICKEN_2138)))){
-                animate(player, Animation(10100))
-
-                submitWorldPulse(object : Pulse(1, player) {
-                    override fun pulse(): Boolean {
-                        teleport(player, Location.create(2461, 4356, 0))
-                        animate(player, Animation(9013))
-                        return true
-                    }
-                })
+            }
+            if (removeItem(player,(Item(Items.RAW_CHICKEN_2138)))) {
+                animate(player, Animation(PUT_CHICKEN_ANIM))
+                queueScript(player, 1, QueueStrength.SOFT, false) { _ ->
+                    teleport(player, Location.create(2461, 4356, 0))
+                    animate(player, Animation(TELEPORT_ANIM))
+                    return@queueScript stopExecuting(player)
+                }
             }
             return@onUseWith true
         }

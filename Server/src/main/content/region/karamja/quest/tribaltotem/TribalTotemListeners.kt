@@ -9,6 +9,8 @@ import org.rs09.consts.Items
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
 import content.data.Quests
+import core.game.global.action.DoorHelper
+import org.rs09.consts.Scenery
 
 class TribalTotemListeners : InteractionListener {
 
@@ -24,7 +26,7 @@ class TribalTotemListeners : InteractionListener {
     override fun defineListeners() {
         on(frontDoor, IntType.SCENERY, "Open"){ player, door ->
             if(player.questRepository.getStage(Quests.TRIBAL_TOTEM) >= 35){
-                handleAutowalkDoor(player, door.asScenery())
+                handleDoor(player, door.asScenery())
             }
             else {
                 sendMessage(player,"The door is locked shut.")
@@ -57,11 +59,15 @@ class TribalTotemListeners : InteractionListener {
 
         on(lockedDoor, IntType.SCENERY, "Open"){ player, node ->
             if(player.getAttribute("TT:DoorUnlocked",false) == true){
-                handleAutowalkDoor(player, node.asScenery())
+                handleDoor(player, node.asScenery())
             }else{
                 openInterface(player,369)
             }
             return@on true
+        }
+
+        setDest(IntType.SCENERY, intArrayOf(frontDoor, lockedDoor), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         on(stairs, IntType.SCENERY, "Climb-up"){ player, node ->

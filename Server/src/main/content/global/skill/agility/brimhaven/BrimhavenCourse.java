@@ -138,7 +138,7 @@ public final class BrimhavenCourse extends OptionHandler {
 					if (AgilityHandler.hasFailed(player, 1, 0.15)) {
 						player.getAppearance().setAnimations();
 						player.getAppearance().sync();
-						AgilityHandler.fail(player, 2, last.transform(0, 0, -3), Animation.create(1119 + m), getHitAmount(player), "You missed a hand hold!");
+						AgilityHandler.fail(player, last.transform(0, 0, -3), Animation.create(1119 + m), getHitAmount(player), "You missed a hand hold!");
 						player.logoutListeners.remove("brimcourse");
 						return true;
 					}
@@ -171,7 +171,7 @@ public final class BrimhavenCourse extends OptionHandler {
 				@Override
 				public boolean pulse() {
 					Direction d = Direction.get((dir.toInteger() + 3) % 4);
-					AgilityHandler.fail(player, 2, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
+					AgilityHandler.fail(player, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
 					return true;
 				}
 			});
@@ -213,7 +213,7 @@ public final class BrimhavenCourse extends OptionHandler {
 					if (failed) {
 						player.getAppearance().setAnimations();
 						player.getAppearance().sync();
-						AgilityHandler.fail(player, 2, player.getLocation().transform(0, 0, -3), Animation.create(768), getHitAmount(player), "You missed a hand hold!");
+						AgilityHandler.fail(player, player.getLocation().transform(0, 0, -3), Animation.create(768), getHitAmount(player), "You missed a hand hold!");
 						player.logoutListeners.remove("brimcourse");
 						return true;
 					}
@@ -243,7 +243,7 @@ public final class BrimhavenCourse extends OptionHandler {
 				@Override
 				public boolean pulse() {
 					Direction d = Direction.get((dir.toInteger() + 1) % 4);
-					AgilityHandler.fail(player, 1, player.getLocation().transform(d.getStepX(), d.getStepY(), -3), Animation.create(761 - diff), getHitAmount(player), "You lost your balance!");
+					AgilityHandler.fail(player, player.getLocation().transform(d.getStepX(), d.getStepY(), -3), Animation.create(761 - diff), getHitAmount(player), "You lost your balance!");
 					return true;
 				}
 			});
@@ -274,7 +274,7 @@ public final class BrimhavenCourse extends OptionHandler {
 				public boolean pulse() {
 					if (!finish) {
 						setDelay(2);
-						AgilityHandler.fail(player, 1, player.getLocation().transform(0, 0, -3), Animation.create(768), getHitAmount(player), "You stepped on a broken piece of plank!");
+						AgilityHandler.fail(player, player.getLocation().transform(0, 0, -3), Animation.create(768), getHitAmount(player), "You stepped on a broken piece of plank!");
 						finish = true;
 						return false;
 					}
@@ -310,7 +310,7 @@ public final class BrimhavenCourse extends OptionHandler {
 					Direction d = Direction.get((dir.toInteger() + 3) % 4);
 					player.unlock();
 					player.lock(2);
-					AgilityHandler.fail(player, 2, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
+					AgilityHandler.fail(player, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
 					player.logoutListeners.remove("brimcourse");
 					return true;
 				}
@@ -336,7 +336,7 @@ public final class BrimhavenCourse extends OptionHandler {
 				@Override
 				public boolean pulse() {
 					Direction d = Direction.get((dir.toInteger() + 3) % 4);
-					AgilityHandler.fail(player, 2, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
+					AgilityHandler.fail(player, player.getLocation().transform(d.getStepX() << 1, d.getStepY() << 1, -3), Animation.create(764), getHitAmount(player), "You lost your balance!");
 					return true;
 				}
 			});

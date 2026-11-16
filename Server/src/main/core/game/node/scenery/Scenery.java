@@ -5,12 +5,9 @@ import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.InteractPlugin;
 import core.game.node.Node;
-import core.game.node.entity.impl.GameAttributes;
 import core.game.node.entity.player.Player;
-import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
-import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -41,68 +38,21 @@ public class Scenery extends Node {
 	 * The object's definition.
 	 */
 	private final SceneryDefinition definition;
-	
-	/**
-	 * The restore pulse.
-	 */
-	private Pulse restorePulse;
-	
-	/**
-	 * The destruction pulse.
-	 */
-	private Pulse destructionPulse;
-	
+
 	/**
 	 * The charge of this object.
 	 */
 	private int charge = 1000;
 	
 	/**
-	 * The entity's attributes.
-	 */
-	private final GameAttributes attributes = new GameAttributes();
-	
-	/**
 	 * The child objects.
 	 */
-	private final Scenery[] childs;
+	private final Scenery[] children;
 	
 	/**
 	 * The scenery wrapper (used for object configurations).
 	 */
 	private Scenery wrapper;
-
-	public enum Layer {
-		WALL,
-		WALL_DECOR,
-		GROUND,
-		GROUND_DECOR
-	}
-	/**
-	 * @return the authentic client scenery layer
-	 */
-	public Layer getLayer() {
-		if (type <= 3 || type == 9) { // walls
-			return Layer.WALL;
-		}
-		if (type <= 8) { // wall decors
-			return Layer.WALL_DECOR;
-		}
-		if (type <= 11) { // scenery
-			return Layer.GROUND;
-		}
-		if (type <= 17) { // roofs, same layer as scenery
-			return Layer.GROUND;
-		}
-		if (type <= 21) { // roof edges, same layer as scenery
-			return Layer.GROUND;
-		}
-		if (type == 22) { // ground decors
-			return Layer.GROUND_DECOR;
-		}
-		log(this.getClass(), Log.ERR, "Invalid scenery type " + type);
-		return null;
-	}
 
 	/**
 	 * Constructs a new scenery.
@@ -134,10 +84,6 @@ public class Scenery extends Node {
 		this(id, location, 10, rotation);
 	}
 	
-	public Scenery(int id, Location location, int rotation, Direction direction) {
-		this(id, location, 10, rotation);
-	}
-
 	/**
 	 * Constructs a new {@code GameObject} {@code Object}.
 	 * @param id The object id.
@@ -186,25 +132,16 @@ public class Scenery extends Node {
 		this.definition = SceneryDefinition.forId(id);
 		super.size = definition.sizeX;
 		if (definition.childrenIds != null && definition.childrenIds.length > 0) {
-			this.childs = new Scenery[definition.childrenIds.length];
-			for (int i = 0; i < childs.length; i++) {
-				childs[i] = transform(definition.childrenIds[i]);
-				childs[i].wrapper = this;
+			this.children = new Scenery[definition.childrenIds.length];
+			for (int i = 0; i < children.length; i++) {
+				children[i] = transform(definition.childrenIds[i]);
+				children[i].wrapper = this;
 			}
 		} else {
-			childs = null;
+			children = null;
 		}
 	}
 
-    public Scenery(Scenery other) {
-        this(other.getId(), other.getLocation(), other.getType(), other.getRotation());
-    }
-	
-	/**
-	 * Called when an object is removed.
-	 */
-	public void remove() {};
-	
 	/**
 	 * Gets the current x-size.
 	 * @return The current size.
@@ -227,23 +164,15 @@ public class Scenery extends Node {
 		return definition.sizeY;
 	}
 	
-	@Override
-	public void setActive(boolean active) {
-		if (super.active && !active && destructionPulse != null) {
-			destructionPulse.pulse();
-		}
-		super.setActive(active);
-	}
-
 	/**
 	 * Gets the child object shown for the current player.
 	 * @param player The player.
 	 * @return The child object.
 	 */
 	public Scenery getChild(Player player) {
-		if (childs != null) {
+		if (children != null) {
 			SceneryDefinition def = definition.getChildObject(player);
-			for (Scenery child : childs) {
+			for (Scenery child : children) {
 				if (child.getId() == def.getId()) {
 					return child;
 				}
@@ -259,16 +188,16 @@ public class Scenery extends Node {
 	 */
 	public void setChildIndex(Player player, int index) {
 		SceneryDefinition def = getDefinition();
-		if (childs == null && wrapper != null) {
+		if (children == null && wrapper != null) {
 			def = wrapper.getDefinition();
 		}
 		if (def.getVarbitID() > -1) {
 			VarbitDefinition config = def.getConfigFile();
 			if (config != null) {
-                                setVarbit(player, def.getVarbitID(), index);
+				setVarbit(player, def.getVarbitID(), index);
 			}
 		} else if (def.getConfigId() > -1) {
-                        setVarp(player, def.getConfigId(), index);
+			setVarp(player, def.getConfigId(), index);
 		}
 	}
 
@@ -278,16 +207,6 @@ public class Scenery extends Node {
 	 * @return The constructed scenery.
 	 */
 	public Scenery transform(int id) {
-		return new Scenery(id, location, type, rotation);
-	}
-
-	/**
-	 * Gets a transformed object of this object.
-	 * @param id The new object id.
-	 * @param rotation The new rotation.
-	 * @return The constructed scenery.
-	 */
-	public Scenery transform(int id, int rotation) {
 		return new Scenery(id, location, type, rotation);
 	}
 
@@ -311,22 +230,6 @@ public class Scenery extends Node {
 	 */
 	public Scenery transform(int id, int rotation, int type) {
 		return new Scenery(id, location, type, rotation);
-	}
-	
-	/**
-	 * If the object is permanent.
-	 * @return {@code True} if so.
-	 */
-	public boolean isPermanent() {
-		return true;
-	}
-
-	/**
-	 * Gets this scenery as Constructed object.
-	 * @return The {@link Constructed} object.
-	 */
-	public Constructed asConstructed() {
-		return new Constructed(id, location, type, rotation);
 	}
 	
 	/**
@@ -377,7 +280,7 @@ public class Scenery extends Node {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof Scenery)) {
+		if (!(obj instanceof Scenery)) {
 			return false;
 		}
 		Scenery other = (Scenery) obj;
@@ -387,22 +290,6 @@ public class Scenery extends Node {
 	@Override
 	public String toString() {
 		return "[Scenery " + id + ", " + location + ", type=" + type + ", rot=" + rotation + "]";
-	}
-
-	/**
-	 * Gets the restorePulse.
-	 * @return The restorePulse.
-	 */
-	public Pulse getRestorePulse() {
-		return restorePulse;
-	}
-
-	/**
-	 * Sets the restorePulse.
-	 * @param restorePulse The restorePulse to set.
-	 */
-	public void setRestorePulse(Pulse restorePulse) {
-		this.restorePulse = restorePulse;
 	}
 
 	/**
@@ -419,37 +306,6 @@ public class Scenery extends Node {
 	 */
 	public void setCharge(int charge) {
 		this.charge = charge;
-	}
-
-	/**
-	 * Gets the destructionPulse.
-	 * @return The destructionPulse.
-	 */
-	public Pulse getDestructionPulse() {
-		return destructionPulse;
-	}
-
-	/**
-	 * Sets the destructionPulse.
-	 * @param destructionPulse The destructionPulse to set.
-	 */
-	public void setDestructionPulse(Pulse destructionPulse) {
-		this.destructionPulse = destructionPulse;
-	}
-
-	/**
-	 * @return the attributes.
-	 */
-	public GameAttributes getAttributes() {
-		return attributes;
-	}
-
-	/**
-	 * Gets the childs.
-	 * @return The childs.
-	 */
-	public Scenery[] getChilds() {
-		return childs;
 	}
 
 	/**

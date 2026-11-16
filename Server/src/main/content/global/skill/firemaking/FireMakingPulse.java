@@ -16,8 +16,7 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Items;
 
-import static core.api.ContentAPIKt.inInventory;
-import static core.api.ContentAPIKt.replaceSlot;
+import static core.api.ContentAPIKt.*;
 
 /**
  * Represents the pulse used to light a log.
@@ -74,8 +73,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		if (fire == null) {
 			return false;
 		}
-		if (RegionManager.getObject(player.getLocation()) != null || player.getZoneMonitor().isInZone("bank")) {
-			player.getPacketDispatch().sendMessage("You can't light a fire here.");
+		if (!checkFreeTileForFire(player)) {
 			return false;
 		}
 		if (!player.getInventory().containsItem(TINDERBOX)) {

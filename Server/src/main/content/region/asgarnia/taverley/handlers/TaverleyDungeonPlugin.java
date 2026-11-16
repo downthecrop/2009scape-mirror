@@ -2,8 +2,10 @@ package content.region.asgarnia.taverley.handlers;
 
 import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
@@ -14,13 +16,12 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Represents the plugin used for taverly dungeon.
+ * Represents the plugin used for Taverley dungeon.
  * @author 'Vexia
  * @version 1.0
  */
 @Initializable
-public final class TaverlyDungeonPlugin extends OptionHandler {
-
+public final class TaverleyDungeonPlugin extends OptionHandler {
 	/**
 	 * The suits of armour.
 	 */
@@ -62,10 +63,19 @@ public final class TaverlyDungeonPlugin extends OptionHandler {
 				}
 			}
 			player.removeAttribute("spawned_suits");
-			ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			return true;
 		}
 		return false;
 	}
 
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 2143:
+			case 2144:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
+	}
 }

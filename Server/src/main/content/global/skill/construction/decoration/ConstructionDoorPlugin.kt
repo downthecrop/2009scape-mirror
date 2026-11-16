@@ -2,8 +2,8 @@ package content.global.skill.construction.decoration
 
 import content.global.skill.construction.BuildHotspot
 import content.global.skill.construction.HousingStyle
+import core.api.handleDoor
 import core.cache.def.impl.SceneryDefinition
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -41,9 +41,7 @@ class ConstructionDoorPlugin : OptionHandler() {
         when (option) {
             "pick-lock", "force" -> return false //TODO
         }
-        val `object` = node as Scenery
-        val second = DoorActionHandler.getSecondDoor(`object`, player)
-        DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
+        handleDoor(player, node.asScenery())
         return true
     }
 

@@ -2,11 +2,13 @@ package content.region.kandarin.seers.handlers;
 
 import java.util.List;
 
+import core.api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.container.impl.EquipmentContainer;
+import core.game.global.action.DoorHelper;
 import core.plugin.Initializable;
 import org.rs09.consts.Items;
 import core.game.node.entity.npc.AbstractNPC;
@@ -17,7 +19,6 @@ import core.game.dialogue.DialoguePlugin;
 import core.game.dialogue.FacialExpression;
 import core.game.global.Skillcape;
 import core.game.global.action.ClimbActionHandler;
-import core.game.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
 import content.global.skill.crafting.TanningProduct;
 import core.game.interaction.OptionHandler;
@@ -90,7 +91,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                                 return true;
                             }
                         }
-                        DoorActionHandler.handleAutowalkDoorWithLocation(player, (Scenery) node, player.getLocation().getY() >= 3438 ? Location.create(2659, 3437, 0) : Location.create(2657, 3439, 0));
+                        ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
                         break;
                 }
                 break;
@@ -124,7 +125,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                         return Location.create(2659, 3437, 0);
                     }
                 }
-                return DoorActionHandler.getDestination((Player) node, (Scenery) n);
+                return DoorHelper.getDestination((Player) node, (Scenery) n);
             }
             if (((Scenery) n).getId() == 2513)
                 return Location.create(2673, 3420, 0);

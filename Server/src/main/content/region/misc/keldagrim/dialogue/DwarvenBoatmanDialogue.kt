@@ -4,8 +4,8 @@ import core.api.*
 import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.Topic
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -42,8 +42,9 @@ class DwarvenBoatmanForthDialogue(player: Player? = null) : DialoguePlugin(playe
                     2 -> playerl(FacialExpression.FRIENDLY, "No, I don't have time right now, I'll be back later.").also { stage = 14 }
                 }
                 12 -> npcl(FacialExpression.OLD_HAPPY, "Well, let's not waste any more time then!").also { stage++ }
-                13 -> end().also {
-                    submitWorldPulse(TravelForthPulse(player))
+                13 -> {
+                    end()
+                    travel(player, true)
                 }
                 14 -> npcl(FacialExpression.OLD_HAPPY, "Sure, sure! Come back when you need to!").also {
                     stage = END_DIALOGUE
@@ -59,8 +60,9 @@ class DwarvenBoatmanForthDialogue(player: Player? = null) : DialoguePlugin(playe
                         Topic(FacialExpression.FRIENDLY, "Yes, please take me.", 2),
                         Topic(FacialExpression.FRIENDLY, "What, on your ship? No way.", 3),
                 )
-                2 -> end().also {
-                    submitWorldPulse(TravelForthPulse(player))
+                2 -> {
+                    end()
+                    travel(player, true)
                 }
                 3 -> npcl(FacialExpression.OLD_NORMAL, "Hey, it was only a little accident! Calm down!").also {
                     stage = END_DIALOGUE
@@ -79,29 +81,6 @@ class DwarvenBoatmanForthDialogue(player: Player? = null) : DialoguePlugin(playe
     }
 }
 
-class TravelForthPulse(val player: Player): Pulse(1){
-    var counter = 0
-    override fun pulse(): Boolean {
-        when(counter++){
-            0 -> lock(player, 10).also {
-                openInterface(player, Components.FADE_TO_BLACK_120)
-            }
-            3 -> teleport(player, Location.create(2892, 10225, 0))
-            4 -> {
-                closeInterface(player)
-                openInterface(player, Components.FADE_FROM_BLACK_170)
-            }
-            6 -> unlock(player).also {
-                closeInterface(player)
-                setAttribute(player, "/save:keldagrim-visited", true)
-                return true
-            }
-        }
-        return false
-    }
-}
-
-
 @Initializable
 class DwarvenBoatmanBackDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
@@ -111,7 +90,10 @@ class DwarvenBoatmanBackDialogue(player: Player? = null) : DialoguePlugin(player
                     Topic(FacialExpression.FRIENDLY, "Yes, please take me.", 2),
                     Topic(FacialExpression.FRIENDLY, "What, on your ship! No thanks!", 3),
             )
-            2 -> end().also { submitWorldPulse(TravelBackPulse(player)) }
+            2 -> {
+                end()
+                travel(player, false)
+            }
             3 -> npcl(FacialExpression.OLD_NORMAL, "Hey now, it was only a slight accident!").also { stage++ }
             4 -> playerl(FacialExpression.FRIENDLY, "A slight accident?? Have you any idea how much time I spent rebuilding that statue?").also { stage++ }
             5 -> npcl(FacialExpression.OLD_NORMAL, "Calm down, calm down! You got what you paid for the trip, didn't you?").also {
@@ -130,23 +112,30 @@ class DwarvenBoatmanBackDialogue(player: Player? = null) : DialoguePlugin(player
     }
 }
 
-class TravelBackPulse(val player: Player): Pulse(1){
-    var counter = 0
-    override fun pulse(): Boolean {
-        when(counter++){
-            0 -> lock(player, 10).also {
+private fun travel(player: Player, isForth: Boolean) {
+    queueScript(player, 1, QueueStrength.SOFT) { stage ->
+        when (stage) {
+            0 -> {
+                lock(player, 10)
                 openInterface(player, Components.FADE_TO_BLACK_120)
+                return@queueScript delayScript(player, 3)
             }
-            3 -> teleport(player, Location.create(2838, 10127, 0))
-            4 -> {
+            1 -> teleport(player, if (isForth) Location(2892, 10225, 0) else Location(2838, 10127, 0))
+            2 -> {
                 closeInterface(player)
                 openInterface(player, Components.FADE_FROM_BLACK_170)
+                return@queueScript delayScript(player, 2)
             }
-            6 -> unlock(player).also {
+            3 -> {
+                unlock(player)
                 closeInterface(player)
-                return true
+                if (isForth) {
+                    val KELDAGRIM_VISITED = "/save:keldagrim-visited"
+                    setAttribute(player, KELDAGRIM_VISITED, true)
+                }
+                return@queueScript stopExecuting(player)
             }
         }
-        return false
+        return@queueScript keepRunning(player)
     }
 }

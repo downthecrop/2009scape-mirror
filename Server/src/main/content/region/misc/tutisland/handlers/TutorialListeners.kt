@@ -4,6 +4,7 @@ import content.global.skill.smithing.smelting.Bar
 import content.region.misc.tutisland.dialogue.RatPenDialogue
 import core.api.*
 import core.game.event.ResourceProducedEvent
+import core.game.global.action.DoorHelper
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import org.rs09.consts.NPCs
@@ -51,7 +52,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 4)
             TutorialStage.load(player, 4)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
             return@on true
         }
 
@@ -61,7 +62,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 17)
             TutorialStage.load(player, 17)
-            handleAutowalkDoor(player, gate as Scenery)
+            handleDoor(player, gate as Scenery)
             return@on true
         }
 
@@ -71,7 +72,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 18)
             TutorialStage.load(player, 18)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
             return@on true
         }
 
@@ -111,7 +112,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 23)
             TutorialStage.load(player, 23)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
             return@on true
         }
 
@@ -121,7 +122,7 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 27)
             TutorialStage.load(player, 27)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
             return@on true
         }
 
@@ -138,15 +139,11 @@ class TutorialListeners : InteractionListener {
 
         on(QUEST_EXIT_LADDER, IntType.SCENERY, "climb-up") { player, ladder ->
             core.game.global.action.ClimbActionHandler.climbLadder(player, ladder.asScenery(), "climb-up")
-
-            submitWorldPulse(object : Pulse(2) {
-                override fun pulse(): Boolean {
-                    val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return true
-                    sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
-                    return true
-                }
-            })
-
+            val questTutor = Repository.findNPC(NPCs.QUEST_GUIDE_949) ?: return@on true
+            queueScript(questTutor, 2, QueueStrength.NORMAL) {
+                sendChat(questTutor, "What are you doing, ${player.username}? Get back down the ladder.")
+                return@queueScript stopExecuting(questTutor)
+            }
             return@on true
         }
 
@@ -175,7 +172,8 @@ class TutorialListeners : InteractionListener {
                 setAttribute(player, "tutorial:stage", 44)
                 TutorialStage.load(player, 44)
             }
-            handleAutowalkDoor(player, gate as Scenery)
+            handleDoor(player, gate as Scenery)
+            return@on true
         }
 
         on(RAT_GATES, IntType.SCENERY, "open") { player, gate ->
@@ -188,7 +186,7 @@ class TutorialListeners : InteractionListener {
                 setAttribute(player, "tutorial:stage", 51)
                 TutorialStage.load(player, 51)
             }
-            handleAutowalkDoor(player, gate as Scenery)
+            handleDoor(player, gate as Scenery)
             return@on true
         }
 
@@ -210,7 +208,8 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 58)
             TutorialStage.load(player, 58)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
+            return@on true
         }
 
         on(FINANCE_EXIT, IntType.SCENERY, "open") { player, door ->
@@ -219,7 +218,8 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 60)
             TutorialStage.load(player, 60)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
+            return@on true
         }
 
         on(CHURCH_EXIT, IntType.SCENERY, "open") { player, door ->
@@ -228,7 +228,12 @@ class TutorialListeners : InteractionListener {
 
             setAttribute(player, "tutorial:stage", 67)
             TutorialStage.load(player, 67)
-            handleAutowalkDoor(player, door as Scenery)
+            handleDoor(player, door as Scenery)
+            return@on true
+        }
+
+        setDest(IntType.SCENERY, intArrayOf(GUIDE_HOUSE_DOOR, *FIRST_GATE, COOKS_DOOR, COOKS_EXIT, QUEST_ENTER, *COMBAT_GATES, *RAT_GATES, BANK_EXIT, FINANCE_EXIT, CHURCH_EXIT), "open") { entity, node ->
+            DoorHelper.getDestination(entity, node.asScenery())
         }
 
         fun smeltBronzeBar(player: Player): Boolean {

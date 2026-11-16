@@ -41,7 +41,7 @@ class MithrilSeedsListener : InteractionListener {
             if (getAttribute(player, ATTRIBUTE_DELAY, -1) > ticks) {
                 return@on false
             }
-            if (getObject(flowerLoc) != null) {
+            if (!isFreeTile(player.location)) {
                 sendMessage(player, "You can't plant a flower here.")
                 return@on true
             }

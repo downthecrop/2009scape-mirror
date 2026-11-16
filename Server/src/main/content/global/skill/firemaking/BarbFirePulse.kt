@@ -62,8 +62,7 @@ class BarbFirePulse(player: Player, node: Item?, groundItem: GroundItem?, privat
         }
 
         // Check for fire-disallowed location
-        if (RegionManager.getObject(player.location) != null || player.zoneMonitor.isInZone("bank")) {
-            sendMessage(player, "You can't light a fire here.")
+        if (!checkFreeTileForFire(player)) {
             return false
         }
 

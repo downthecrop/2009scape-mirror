@@ -2,8 +2,10 @@ package content.global.skill.agility
 
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
+import core.game.global.action.DoorHelper
 import core.game.interaction.QueueStrength
 import core.game.node.Node
+import core.game.node.entity.Entity
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
@@ -32,7 +34,7 @@ class WildernessCourse
         when (`object`.id) {
             2309 -> handleEntrance(player, `object`)
             2307, 2308 -> {
-                handleAutowalkDoor(player, `object`)
+                handleDoor(player, `object`)
                 handleEntranceObstacle(player, `object`)
             }
             2288 -> handlePipe(player, `object`)
@@ -51,7 +53,7 @@ class WildernessCourse
      */
     private fun handleEntrance(player: Player, `object`: Scenery) {
         if (player.location.y > 3916 || player.skills.getLevel(Skills.AGILITY) >= 52) {
-            handleAutowalkDoor(player, `object`)
+            handleDoor(player, `object`)
             if (player.location.y <= 3916) {
                 handleEntranceObstacle(player, `object`)
             }
@@ -79,14 +81,14 @@ class WildernessCourse
                     }
                     9 -> {
                         if (fail) {
-                            AgilityHandler.fail(player, 0, player.location.transform(if (`object`.id < 2309) -2 else 2, 0, 0), Animation.create(if (`object`.id < 2309) 771 else 771), getHitAmount(player), null)
+                            AgilityHandler.fail(player, player.location.transform(if (`object`.id < 2309) -2 else 2, 0, 0), Animation.create(if (`object`.id < 2309) 771 else 771), getHitAmount(player), null)
                         }
                         return fail
                     }
                     15 -> player.lock(3)
                     16 -> {
                         val doorLoc = if (`object`.id < 2309) Location(2998, 3917, 0) else Location(2998, 3931, 0)
-                        handleAutowalkDoor(player, RegionManager.getObject(doorLoc))
+                        handleDoor(player, RegionManager.getObject(doorLoc)!!)
                         return true
                     }
                 }
@@ -153,7 +155,7 @@ class WildernessCourse
             return
         }
         if (AgilityHandler.hasFailed(player, 1, 0.1)) {
-            AgilityHandler.fail(player, 0, Location.create(3005, 10357, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
+            AgilityHandler.fail(player, Location.create(3005, 10357, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
         ropeDelay = GameWorld.ticks + 2
@@ -181,7 +183,7 @@ class WildernessCourse
                 val dest = Location(3001, 3963, 0)
                 val failanim = Animation(771)
                 val hit = (player.skills.lifepoints * 0.26).toInt()
-                AgilityHandler.fail(player, -1, dest, failanim, hit, "... You lose your footing and fall into the lava.")
+                AgilityHandler.fail(player, dest, failanim, hit, "... You lose your footing and fall into the lava.")
                 return@queueScript stopExecuting(player)
             }
             if (stage == 5) {
@@ -206,7 +208,7 @@ class WildernessCourse
             GameWorld.Pulser.submit(object : Pulse(5, player) {
                 override fun pulse(): Boolean {
                     player.faceLocation(Location.create(2998, 3944, 0))
-                    AgilityHandler.fail(player, 3, Location.create(2998, 10345, 0), Animation.create(770), getHitAmount(player), "You slip and fall onto the spikes below.")
+                    AgilityHandler.fail(player, Location.create(2998, 10345, 0), Animation.create(770), getHitAmount(player), "You slip and fall onto the spikes below.")
                     return true
                 }
             })
@@ -235,6 +237,7 @@ class WildernessCourse
             37704 -> return Location.create(3002, 3960, 0)
             2297 -> return Location.create(3002, 3945, 0)
             2328 -> return n.location.transform(0, 1, 0)
+            2307, 2308 -> return DoorHelper.getDestination(node as Entity, n as Scenery)
         }
         return null
     }

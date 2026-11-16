@@ -33,7 +33,7 @@ class ThirdFightCutscene(player: Player) : Cutscene(player) {
             }
 
             2 -> {
-                handleAutowalkDoor(getNPC(BOUNCER)!!, getObject(46, 26))
+                handleAutowalkDoor(getNPC(BOUNCER)!!, getObject(46, 26)!!)
                 timedUpdate(2)
             }
 

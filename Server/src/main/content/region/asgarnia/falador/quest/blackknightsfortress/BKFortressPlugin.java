@@ -4,8 +4,10 @@ import core.api.ContentAPIKt;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.ClimbActionHandler;
+import core.game.global.action.DoorHelper;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
+import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
@@ -128,12 +130,12 @@ public final class BKFortressPlugin extends OptionHandler {
 			break;
 		case 2341:
 			player.getPacketDispatch().sendMessage("You push against the wall. You find a secret passage.");
-			ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+			ContentAPIKt.handleDoor(player, (Scenery) node);
 			return true;
 		case 2338:
 			if (player.getLocation().getX() > 3019) {
 				// big table room door
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getDialogueInterpreter().open(4605, Repository.findNPC(4605), true, true);
@@ -142,12 +144,12 @@ public final class BKFortressPlugin extends OptionHandler {
 				switch (player.getLocation().getY()) {
 					case 3514: // Outside constant Y location, block the player for checks
 						if(allInEquipment(player, Items.BRONZE_MED_HELM_1139, Items.IRON_CHAINBODY_1101)){
-							ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+							ContentAPIKt.handleDoor(player, (Scenery) node);
 						}
 						else player.getDialogueInterpreter().open(4605, Repository.findNPC(4604), true);
 						break;
 					case 3515: //Inside constant Y location, let the player through
-						ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+						ContentAPIKt.handleDoor(player, (Scenery) node);
 					default:
 						break;
 				}
@@ -155,7 +157,7 @@ public final class BKFortressPlugin extends OptionHandler {
 		case 74:
 		case 73:// large door scenery id 73
 			if (player.getLocation().getX() == 3008) { // only opened from inside
-				ContentAPIKt.handleAutowalkDoor(player, (Scenery) node);
+				ContentAPIKt.handleDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("You can't open this door."); // large door to the fortress
@@ -205,4 +207,15 @@ public final class BKFortressPlugin extends OptionHandler {
 		return !(node instanceof Item);
 	}
 
+	@Override
+	public Location getDestination(Node node, Node n) {
+		switch (n.getId()) {
+			case 73:
+			case 2337:
+			case 2338:
+			case 2341:
+				return DoorHelper.getDestination((Entity) node, (Scenery) n);
+		}
+		return null;
+	}
 }

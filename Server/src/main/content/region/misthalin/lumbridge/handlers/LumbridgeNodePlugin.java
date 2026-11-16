@@ -123,7 +123,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
                 if (!addItem(player, Items.BRONZE_AXE_1351, 1, Container.INVENTORY)) {
                     sendMessage(player, "You don't have enough inventory space to hold that item.");
                 } else {
-                    replaceScenery(node.asScenery(), org.rs09.consts.Scenery.LOGS_36975, 300, null);
+                    replaceScenery(node.asScenery(), org.rs09.consts.Scenery.LOGS_36975, 300, null, true);
                 }
                 return true;
         }

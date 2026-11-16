@@ -13,7 +13,6 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.RegionManager;
 import core.game.world.map.Region;
-import core.game.system.task.Pulse;
 import core.game.world.map.zone.ZoneType;
 
 import static core.api.ContentAPIKt.*;
@@ -139,26 +138,8 @@ public final class HouseZone extends MapZone {
             }
 
             remove_items(p);
-            // The below tears down the house if the owner was the one who left
             if (house == p.getHouseManager()) {
                 house.expelGuests(p);
-                int toRemove = previousRegion;
-                int dungRemove = previousDungeon;
-                submitWorldPulse(new Pulse(1) {
-                    public boolean pulse() {
-                        Region r = RegionManager.forId(toRemove);
-                        Region dr = dungRemove != -1 ? RegionManager.forId(dungRemove) : null;
-                        RegionManager.removeRegion(toRemove);
-                        unregisterRegion(toRemove);
-                        r.flagInactive();
-                        if (dungRemove != -1) {
-                            RegionManager.removeRegion(dungRemove);
-                            unregisterRegion(dungRemove);
-                            dr.flagInactive();
-                        }
-                        return true;
-                    }
-                });
             }
             // Clear logout listener and original-loc (if appropriate)
             clearLogoutListener(p, "houselogout");
