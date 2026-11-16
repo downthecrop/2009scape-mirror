@@ -772,13 +772,7 @@ public class Player extends Entity {
 		}
 		if (entity instanceof Player) {
 			Player p = (Player) entity;
-			if (p.getSkullManager().isWilderness() && skullManager.isWilderness()) {
-				if (!GameWorld.getSettings().getWild_pvp_enabled())
-					return false;
-				if (p.getSkullManager().hasWildernessProtection())
-					return false;
-				if (skullManager.hasWildernessProtection())
-					return false;
+			if (GameWorld.getSettings().isPvp() || (ServerConstants.ENHANCED_DEEP_WILDERNESS && p.getSkullManager().isDeepWilderness() && skullManager.isDeepWilderness())) {
 				return super.isAttackable(entity, style, message);
 			} else {
 				return getZoneMonitor().isPvPable(entity,this, style, message);
@@ -801,13 +795,10 @@ public class Player extends Entity {
 		if (target instanceof Player) {
 			Player p = (Player) target;
 			if (p.getSkullManager().isWilderness() && skullManager.isWilderness()) {
-				if (GameWorld.getSettings() == null || !GameWorld.getSettings().getWild_pvp_enabled()) {
-					return false;
+				if (GameWorld.getSettings().isPvp()) {
+					return true;
 				}
-				if (p.getSkullManager().hasWildernessProtection()) {
-					return false;
-				}
-                return !skullManager.hasWildernessProtection();
+                return ServerConstants.ENHANCED_DEEP_WILDERNESS && p.getSkullManager().isDeepWilderness() && skullManager.isDeepWilderness();
             } else {
 				return getZoneMonitor().isPvPable(target, this, style, message);
 			}

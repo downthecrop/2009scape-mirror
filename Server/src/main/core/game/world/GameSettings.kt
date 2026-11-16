@@ -71,14 +71,11 @@ class GameSettings
         var msAddress: String,
         var enable_default_clan: Boolean,
         var enable_bots: Boolean,
-        var autostock_ge: Boolean,
         var allow_token_purchase: Boolean,
         var skillcape_perks: Boolean,
-        var increased_door_time: Boolean,
         var enabled_botting : Boolean,
         var max_adv_bots: Int,
         var enable_doubling_money_scammers: Boolean,
-        var wild_pvp_enabled: Boolean,
         var jad_practice_enabled: Boolean,
         var ge_announcement_limit: Int,
         var smartpathfinder_bfs: Boolean,
@@ -114,7 +111,7 @@ class GameSettings
          * @return the settings object.
          * @author Ceikry
          */
-        fun parse(data: JSONObject): GameSettings? {
+        fun parse(data: JSONObject): GameSettings {
             val name = ServerConstants.SERVER_NAME
             val debug = data["debug"] as Boolean
             val dev = data["dev"] as Boolean
@@ -122,17 +119,14 @@ class GameSettings
             val worldId = data["worldID"].toString().toInt()
             val countryId = data["countryID"].toString().toInt()
             val activity = data["activity"].toString()
-            val pvpWorld = data["pvpWorld"] as Boolean
+            val pvp = data["pvp"] as Boolean
             val msip = data["msip"].toString()
             val enable_default_clan = data["enable_default_clan"] as Boolean
             val enable_bots = data["enable_bots"] as Boolean
-            val autostock_ge = data["autostock_ge"] as Boolean
             val skillcape_perks = if(data.containsKey("skillcape_perks")) data["skillcape_perks"] as Boolean else false
-            val increased_door_time = if(data.containsKey("increased_door_time")) data["increased_door_time"] as Boolean else false
             val enable_botting = if(data.containsKey("botting_enabled")) data["botting_enabled"] as Boolean else false
             val max_adv_bots = if(data.containsKey("max_adv_bots")) data["max_adv_bots"].toString().toInt() else 100
             val enable_doubling_money_scammers = if(data.containsKey("enable_doubling_money_scammers")) data["enable_doubling_money_scammers"] as Boolean else false
-            val wild_pvp_enabled = if(data.containsKey("wild_pvp_enabled")) data["wild_pvp_enabled"] as Boolean else true
             val jad_practice_enabled = if(data.containsKey("jad_practice_enabled")) data["jad_practice_enabled"] as Boolean else true
             val ge_announcement_limit = data["ge_announcement_limit"].toString().toInt()
             val smartpathfinder_bfs = if(data.containsKey("smartpathfinder_bfs")) data["smartpathfinder_bfs"] as Boolean else false
@@ -149,20 +143,17 @@ class GameSettings
                     countryId,
                     activity,
                     true,
-                    pvpWorld,
+                    pvp,
                     false,
                     false,
                     msip,
                     enable_default_clan,
                     enable_bots,
-                    autostock_ge,
                     allow_token_purchase,
                     skillcape_perks,
-                    increased_door_time,
                     enable_botting,
                     max_adv_bots,
                     enable_doubling_money_scammers,
-                    wild_pvp_enabled,
                     jad_practice_enabled,
                     ge_announcement_limit,
                     smartpathfinder_bfs,
@@ -170,24 +161,6 @@ class GameSettings
                     message_of_the_week_identifier,
                     message_of_the_week_text
             )
-        }
-
-        /**
-         * Gets the properties.
-         * @param path the path.
-         * @return the properties.
-         */
-        private fun getProperties(path: String): Properties {
-            val file: FileInputStream
-            val properties = Properties()
-            try {
-                file = FileInputStream(path)
-                properties.load(file)
-            } catch (e: IOException) {
-                println("Warning: Could not find file in " + System.getProperty("user.dir") + path)
-                e.printStackTrace()
-            }
-            return properties
         }
     }
 }

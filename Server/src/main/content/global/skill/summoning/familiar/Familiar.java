@@ -2,6 +2,7 @@ package content.global.skill.summoning.familiar;
 
 import content.global.skill.summoning.SummoningScroll;
 import content.global.skill.summoning.pet.Pet;
+import core.ServerConstants;
 import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
@@ -317,27 +318,27 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 		if (target instanceof Player) {
 			Player targetPlayer = (Player) target;
-			if (!targetPlayer.getSkullManager().isWilderness()) {
-				if (message) {
-					sendMessage(owner, "You have to be in the wilderness to attack a player's familiar.");
+			if (GameWorld.getSettings().isPvp() || ServerConstants.ENHANCED_DEEP_WILDERNESS) {
+				if (!GameWorld.getSettings().isPvp() && !targetPlayer.getSkullManager().isDeepWilderness()) {
+					if (message) {
+						sendMessage(owner, "You have to be in the deep wilderness to attack a player's familiar.");
+					}
+					return false;
 				}
-				return false;
-			}
-			if (!owner.getSkullManager().isWilderness()) {
-				if (message) {
-					sendMessage(owner, "This familiar's owner is not in the wilderness.");
+				if (!GameWorld.getSettings().isPvp() && !owner.getSkullManager().isWilderness()) {
+					if (message) {
+						sendMessage(owner, "This familiar's owner is not in the deep wilderness.");
+					}
+					return false;
 				}
-				return false;
-			}
-			if (!owner.isAttackable(target, style, false)) {
-				return false;
-			}
-			if (!owner.getProperties().isMultiZone()) {
-				if (message) {
-					sendMessage(owner, "You have to be in a multicombat zone to attack another player with your familiar.");
+				if (!owner.getProperties().isMultiZone()) {
+					if (message) {
+						sendMessage(owner, "You have to be in a multicombat zone to attack another player with your familiar.");
+					}
+					return false;
 				}
-				return false;
 			}
+            return owner.isAttackable(target, style, false);
 		}
 		
 		return true;
@@ -361,36 +362,38 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			return true;
 		}
 		if (attacker instanceof Player) {
-			Player attackingPlayer = (Player) attacker;
-			if (!attackingPlayer.getSkullManager().isWilderness()) {
-				if (message) {
-					sendMessage(attackingPlayer, "You have to be in the wilderness to attack a player's familiar.");
+			if (GameWorld.getSettings().isPvp() || ServerConstants.ENHANCED_DEEP_WILDERNESS) {
+				Player attackingPlayer = (Player) attacker;
+				if (!attackingPlayer.getSkullManager().isDeepWilderness()) {
+					if (message) {
+						sendMessage(attackingPlayer, "You have to be in the deep wilderness to attack a player's familiar.");
+					}
+					return true;
 				}
-				return true;
-			}
-			if (!owner.getSkullManager().isWilderness()) {
-				if (message) {
-					sendMessage(attackingPlayer, "This familiar's owner is not in the wilderness.");
+				if (!GameWorld.getSettings().isPvp() && !owner.getSkullManager().isDeepWilderness()) {
+					if (message) {
+						sendMessage(attackingPlayer, "This familiar's owner is not in the deep wilderness.");
+					}
+					return true;
 				}
-				return true;
-			}
-			if (!owner.isAttackable(attackingPlayer, style, false)) {
-				return true;
-			}
-			if (!attackingPlayer.getProperties().isMultiZone()) {
-				if (message) {
-					sendMessage(attackingPlayer, "You have to be in a multicombat zone to attack a player's familiar.");
+				if (!attackingPlayer.getProperties().isMultiZone()) {
+					if (message) {
+						sendMessage(attackingPlayer, "You have to be in a multicombat zone to attack a player's familiar.");
+					}
+					return true;
 				}
-				return true;
-			}
-			if (!this.getProperties().isMultiZone()) {
-				if (message) {
-					sendMessage(attackingPlayer, "This familiar is not in a multicombat zone.");
+
+				if (!owner.isAttackable(attackingPlayer, style, false)) {
+					return true;
 				}
-				return true;
+				if (!this.getProperties().isMultiZone()) {
+					if (message) {
+						sendMessage(attackingPlayer, "This familiar is not in a multicombat zone.");
+					}
+					return true;
+				}
 			}
 		}
-		
 		return false;
 	}
 

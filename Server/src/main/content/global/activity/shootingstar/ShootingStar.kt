@@ -18,59 +18,13 @@ import core.tools.RandomFunction
  * @author Ceikry
  */
 class ShootingStar(var level: ShootingStarType = ShootingStarType.values().random()) {
-    val crash_locations = mapOf(
-            "East of Dark Wizards' Tower" to Location.create(2925, 3339, 0), // East of Dark Wizards' Tower
-            "Crafting Guild" to Location.create(2940, 3280, 0), // Crafting Guild Mine
-            "Falador East Bank" to Location.create(3030, 3349, 0), // Falador East Bank
-            "Rimmington mining site" to Location.create(2974, 3240, 0), // Rimmington Mine 2974, 3240, 0)
-            "Karamja northwestern mining site" to Location.create(2737, 3223, 0), // Karamja northwestern mining site/Brimhaven gold rocks
-            "Brimhaven mining site" to Location.create(2743, 3143, 0), // Brimhaven mining site
-            "South Crandor mining site" to Location.create(2822, 3239, 0), // South Crandor mining site (requires Dragon Slayer)
-            "Karamja mining site" to Location.create(2854, 3032, 0), // Karamja mining site
-            "Shilo Village mining site" to Location.create(2826, 2997, 0), // Shilo Village mining site/Gem rocks (requires Shilo Village prereqs)
-            "Relleka mining site" to Location.create(2682, 3700, 0), // Rellekka mining site
-            "Jatizso mine" to Location.create(2393, 3815, 0), //Jatiszo mining site (requires Fremennik Isles prereqs)
-            "Lunar Isle mine" to Location.create(2140, 3939, 0), // Lunar Isle mine (requires Lunar Diplomacy prereqs)
-            "Miscellania coal mine" to Location.create(2529, 3887, 0), // Miscellania coal mine (requires The Fremennik Trials)
-            //"Neitiznot runite mine" to Location.create(2376, 3835, 0), // Near the Neitiznot runite mine (requires Fremennik Isles prereqs) currently inaccessible as bridge does not work
-            "Ardougne mining site" to Location.create(2600, 3232, 0), // Ardougne mining site (Monastery)
-            "Ardougne eastern mine" to Location.create(2706, 3334, 0), // Ardougne mining site (Legends Guild)
-            "Kandarin Coal trucks" to Location.create(2589, 3485, 0), // Kandarin Coal trucks
-            "Yanille Bank" to Location.create(2602, 3086, 0), // Yanille Bank (Wizards' Guild)
-            "Port Khazard mine" to Location.create(2626, 3140, 0), // Mining spot north-east of Yanille / Port Khazard mine
-            "Al Kharid bank" to Location.create(3276, 3176, 0), // Al Kharid bank
-            "Al Kharid mining site" to Location.create(3296, 3297, 0), // Al Kharid mine (Scorpion mine)
-            "Duel Arena bank chest" to Location.create(3342, 3267, 0), // Duel Arena bank chest
-            "Kharidian Desert clay mine" to Location.create(3426, 3159, 0), // Desert clay mine / Ruins of Uzer mine
-            "Nardah mining site" to Location.create(3320, 2872, 0), // Kharidian Desert gold mine / Vulture mine
-            "Nardah bank" to Location.create(3434, 2888, 0), // Nardah bank
-            "Granite and sandstone quarry" to Location.create(3170, 2913, 0), // Granite and sandstone quarry / Quarry on map
-            "South-east Varrock mine" to Location.create(3292, 3353, 0), // South-east Varrock mine
-            "South-west Varrock mine" to Location.create(3176, 3362, 0), // South-west Varrock mine / Champion's Guild mine
-            "Varrock east bank" to Location.create(3259, 3407, 0), // Varrock east bank / Rune shop
-            "Lumbridge Swamp south-east mine" to Location.create(3227, 3150, 0), // Lumbridge Swamp south-east mine
-            "Burgh de Rott bank" to Location.create(3500, 3219, 0), // Burgh de Rott bank (requires quest to enter)
-            "Canifis Bank" to Location.create(3504, 3487, 0), // Canifis bank
-            "Mos Le'Harmless bank" to Location.create(3687, 2969, 0), // Mos Le'Harmless bank (requires quest to enter but is currently accessible for Slayer)
-            "Gnome stronghold Bank" to Location.create(2460, 3432, 0), // Gnome stronghold bank
-            "Lletya bank" to Location.create(2329, 3163, 0), // Lletya bank (requires MEP1 prereqs)
-            "Piscatoris mining site" to Location.create(2336, 3636, 0), // Piscatoris mining site
-            "North Edgeville mining site" to Location.create(3101, 3569, 0), // Wilderness Steel mine / Zamorak mage mine
-            "Southern wilderness mine" to Location.create(3025, 3591, 0), // Wilderness skeleton mine
-            "Wilderness Volcano bank" to Location.create(3188, 3695, 0), // Wilderness Volcano bank
-            "Wilderness hobgoblin mine" to Location.create(3020, 3809, 0), // Wilderness hobgoblin mine
-            "Pirates' Hideout mine" to Location.create(3059, 3940, 0), // Pirates' Hideout mine
-            "Lava Maze mining site" to Location.create(3062, 3885, 0), // Wilderness rune mine
-            "Mage Arena bank" to Location.create(3093, 3962, 0) // Mage Arena bank
-    )
     val starSprite = NPC(8091)
     var location = "Canifis Bank"
     var maxDust = level.totalStardust
     var dustLeft = level.totalStardust
-    var starObject = Scenery(level.objectId, crash_locations.get(location))
+    var starObject = Scenery(level.objectId, crash_locations[location])
     var isDiscovered = false
     var ticks = 0
-    var isSpawned = false
     var spriteSpawned = false
     var firstStar = true
     var selfBots = ArrayList<ShootingStarBot>()
@@ -105,6 +59,8 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
     fun clear() {
         SceneryBuilder.remove(starObject)
         clearSprite()
+        selfBots.forEach { it.bot.clear() }
+        selfBots.clear()
     }
 
     /**
@@ -112,15 +68,13 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      */
     fun fire() {
         SceneryBuilder.add(starObject)
-        if(!isSpawned) {
-            (0..2).forEach {
-                selfBots.add(ShootingStarBot.new())
+        if (level.ordinal + 1 > 5) {
+            (0..2).forEach { _ ->
+                val bot = ShootingStarBot.new()
+                selfBots.add(bot)
+                bot.activate(true)
             }
         }
-        if (level.ordinal + 1 > 5) {
-            selfBots.filter { it.isIdle() }.forEach { it.activate(true) }
-        }
-        isSpawned = true
         Repository.sendNews("A shooting star level ${level.ordinal + 1} just crashed near ${location}!")
         ShootingStarPlugin.getStoreFile()["level"] = level.ordinal
         ShootingStarPlugin.getStoreFile()["location"] = location
@@ -153,13 +107,12 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
         }
 
         maxDust = level.totalStardust
-        starObject = Scenery(level.objectId, crash_locations.get(location))
+        starObject = Scenery(level.objectId, crash_locations[location])
     }
 
     fun spawnSprite() {
         selfBots.filter { it.isMining() }.forEach { it.sleep() }
         SceneryBuilder.remove(starObject)
-        isSpawned = false
         starSprite.location = starObject.location
         starSprite.init()
         spriteSpawned = true
@@ -221,6 +174,54 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      */
     val miningLevel: Int
         get() = (level.ordinal + 1) * 10
+
+    companion object {
+        val crash_locations = mapOf(
+            "East of Dark Wizards' Tower" to Location.create(2925, 3339, 0), // East of Dark Wizards' Tower
+            "Crafting Guild" to Location.create(2940, 3280, 0), // Crafting Guild Mine
+            "Falador East Bank" to Location.create(3030, 3349, 0), // Falador East Bank
+            "Rimmington mining site" to Location.create(2974, 3240, 0), // Rimmington Mine 2974, 3240, 0)
+            "Karamja northwestern mining site" to Location.create(2737, 3223, 0), // Karamja northwestern mining site/Brimhaven gold rocks
+            "Brimhaven mining site" to Location.create(2743, 3143, 0), // Brimhaven mining site
+            "South Crandor mining site" to Location.create(2822, 3239, 0), // South Crandor mining site (requires Dragon Slayer)
+            "Karamja mining site" to Location.create(2854, 3032, 0), // Karamja mining site
+            "Shilo Village mining site" to Location.create(2826, 2997, 0), // Shilo Village mining site/Gem rocks (requires Shilo Village prereqs)
+            "Relleka mining site" to Location.create(2682, 3700, 0), // Rellekka mining site
+            "Jatizso mine" to Location.create(2393, 3815, 0), //Jatiszo mining site (requires Fremennik Isles prereqs)
+            "Lunar Isle mine" to Location.create(2140, 3939, 0), // Lunar Isle mine (requires Lunar Diplomacy prereqs)
+            "Miscellania coal mine" to Location.create(2529, 3887, 0), // Miscellania coal mine (requires The Fremennik Trials)
+            //"Neitiznot runite mine" to Location.create(2376, 3835, 0), // Near the Neitiznot runite mine (requires Fremennik Isles prereqs) currently inaccessible as bridge does not work
+            "Ardougne mining site" to Location.create(2600, 3232, 0), // Ardougne mining site (Monastery)
+            "Ardougne eastern mine" to Location.create(2706, 3334, 0), // Ardougne mining site (Legends Guild)
+            "Kandarin Coal trucks" to Location.create(2589, 3485, 0), // Kandarin Coal trucks
+            "Yanille Bank" to Location.create(2603, 3087, 0), // Yanille Bank (Wizards' Guild)
+            "Port Khazard mine" to Location.create(2626, 3140, 0), // Mining spot north-east of Yanille / Port Khazard mine
+            "Al Kharid bank" to Location.create(3276, 3176, 0), // Al Kharid bank
+            "Al Kharid mining site" to Location.create(3296, 3297, 0), // Al Kharid mine (Scorpion mine)
+            "Duel Arena bank chest" to Location.create(3342, 3267, 0), // Duel Arena bank chest
+            "Kharidian Desert clay mine" to Location.create(3426, 3159, 0), // Desert clay mine / Ruins of Uzer mine
+            "Nardah mining site" to Location.create(3320, 2872, 0), // Kharidian Desert gold mine / Vulture mine
+            "Nardah bank" to Location.create(3434, 2888, 0), // Nardah bank
+            "Granite and sandstone quarry" to Location.create(3170, 2913, 0), // Granite and sandstone quarry / Quarry on map
+            "South-east Varrock mine" to Location.create(3292, 3353, 0), // South-east Varrock mine
+            "South-west Varrock mine" to Location.create(3176, 3362, 0), // South-west Varrock mine / Champion's Guild mine
+            "Varrock east bank" to Location.create(3259, 3407, 0), // Varrock east bank / Rune shop
+            "Lumbridge Swamp south-east mine" to Location.create(3227, 3150, 0), // Lumbridge Swamp south-east mine
+            "Burgh de Rott bank" to Location.create(3500, 3219, 0), // Burgh de Rott bank (requires quest to enter)
+            "Canifis Bank" to Location.create(3504, 3487, 0), // Canifis bank
+            "Mos Le'Harmless bank" to Location.create(3687, 2969, 0), // Mos Le'Harmless bank (requires quest to enter but is currently accessible for Slayer)
+            "Gnome stronghold Bank" to Location.create(2460, 3432, 0), // Gnome stronghold bank
+            "Lletya bank" to Location.create(2329, 3163, 0), // Lletya bank (requires MEP1 prereqs)
+            "Piscatoris mining site" to Location.create(2336, 3636, 0), // Piscatoris mining site
+            "North Edgeville mining site" to Location.create(3101, 3569, 0), // Wilderness Steel mine / Zamorak mage mine
+            "Southern wilderness mine" to Location.create(3025, 3591, 0), // Wilderness skeleton mine
+            "Wilderness Volcano bank" to Location.create(3188, 3695, 0), // Wilderness Volcano bank
+            "Wilderness hobgoblin mine" to Location.create(3020, 3809, 0), // Wilderness hobgoblin mine
+            "Pirates' Hideout mine" to Location.create(3059, 3940, 0), // Pirates' Hideout mine
+            "Lava Maze mining site" to Location.create(3062, 3885, 0), // Wilderness rune mine
+            "Mage Arena bank" to Location.create(3093, 3962, 0) // Mage Arena bank
+        )
+    }
 }
 
 /**

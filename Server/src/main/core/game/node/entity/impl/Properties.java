@@ -1,5 +1,6 @@
 package core.game.node.entity.impl;
 
+import core.ServerConstants;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.Entity;
@@ -233,8 +234,7 @@ public final class Properties {
 	public int getCurrentCombatLevel() {
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
-			if ((GameWorld.getSettings().isPvp() || (GameWorld.getSettings().getWild_pvp_enabled() && player.getSkullManager().isWilderness()))
-					&& !player.getFamiliarManager().isUsingSummoning()) {
+			if (player.getSkullManager().isWilderness() && !player.getFamiliarManager().isUsingSummoning()) {
 				//TODO: Split combat levels should also be used for Bounty Hunter
 				return combatLevel;
 			} else {

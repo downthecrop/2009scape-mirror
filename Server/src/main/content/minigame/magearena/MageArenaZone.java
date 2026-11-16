@@ -116,7 +116,7 @@ public final class MageArenaZone extends MapZone implements Plugin<Object> {
 		register(new ZoneBorders(3119, 3942, 3123, 3945));
 		register(new ZoneBorders(3115, 3944, 3119, 3949));
 		register(new ZoneBorders(3119, 3942, 3119, 3952));
-		register(new ZoneBorders(3120, 3940, 2125, 3945));
+		register(new ZoneBorders(3120, 3940, 3125, 3945));
 		register(new ZoneBorders(3114, 3944, 3120, 3949));
 		register(new ZoneBorders(3114, 3942, 3117, 3952));
 		x = 3118;

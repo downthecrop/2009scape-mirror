@@ -10,9 +10,8 @@ import core.game.node.entity.player.Player
 import core.tools.*
 import core.api.*
 import core.game.world.GameWorld
-
-import kotlin.reflect.*
 import kotlin.math.max
+import kotlin.reflect.typeOf
 
 sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530, EFlagType.Player, p, o, f) {
     class Chat : PlayerFlags530 (0x80, 0, EntityFlag.Chat) {
@@ -75,7 +74,7 @@ sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530
             val appearance = context.appearance
             appearance.prepareBodyData(context)
             var settings = appearance.gender.toByte().toInt()
-            val nonPvp = context.skullManager.isWilderness && context.skullManager.isWildernessDisabled //nonPvp is always false
+            val nonPvp = false //pvp-world--non-pvp-world split not implemented yet
             if (context.size() > 1)
                 settings += (context.size() - 1) shl 3
             if (nonPvp)
@@ -110,8 +109,7 @@ sealed class PlayerFlags530 (p: Int, o: Int, f: EntityFlag) : EFlagProvider (530
             } else {
                 //client-side code determines how the combat level will be displayed, based on
                 //the combat level values that are sent
-                if ((GameWorld.settings!!.isPvp || (GameWorld.settings!!.wild_pvp_enabled && context.skullManager.isWilderness))
-                    && !context.familiarManager.isUsingSummoning) {
+                if ((GameWorld.settings!!.isPvp || context.skullManager.isWilderness) && !context.familiarManager.isUsingSummoning) {
                     //client will display separate base and summoning combat levels (e.g. "50+5")
                     //TODO: Split combat levels should also be used for Bounty Hunter
                     buffer.p1 (context.properties.combatLevel) //without summoning

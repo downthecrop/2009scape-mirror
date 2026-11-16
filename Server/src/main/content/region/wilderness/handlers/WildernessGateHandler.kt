@@ -42,9 +42,7 @@ class WildernessGateHandler : InteractionListener {
         override fun handle (interfaceId: Int, buttonId: Int) {
             when (stage) {
                 0 -> sendDialogueLines(player!!, "WARNING!", firstLine, "Anyone will be able to attack you without consequence!", "You WILL NOT be able to leave during combat!").also { stage++ }
-                1 -> sendDialogueLines(player!!, "While you are there, you will be skulled:","you will lose all your items if you die!","The skull will go away when you leave the deep wilderness.").also { stage++ }
-                2 -> sendDialogueLines(player!!, "If you are risking sufficient value, the skull will become red.","This increases your chances of receiving special loot from killing","revenants and the Chaos Elemental!").also { stage++ }
-                3 -> showTopics(
+                1 -> showTopics(
                         Topic(FacialExpression.NEUTRAL, "I wish to proceed.", 10, true),
                         Topic(FacialExpression.NEUTRAL, "I wish to proceed, and don't show this warning again.", 11, true),
                         Topic(FacialExpression.NEUTRAL, "Never mind.", END_DIALOGUE, true)

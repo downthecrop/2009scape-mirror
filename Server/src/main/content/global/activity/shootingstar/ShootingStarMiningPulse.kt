@@ -26,8 +26,6 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
      */
     private var ticks = 0
     override fun start() {
-        if(!star.isSpawned) return
-
         if(!player.isArtificial) {
             star.notifyNewPlayer(player)
         }
@@ -44,7 +42,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
 
     override fun checkRequirements(): Boolean {
         tool = SkillingTool.getPickaxe(player)
-        if (!star.starObject.isActive || !star.isSpawned) {
+        if (!star.starObject.isActive) {
             return false
         }
         //checks if the star has been discovered and if not, awards the bonus xp. Xp can be awarded regardless of mining level as per the wiki.

@@ -1,19 +1,14 @@
 package core.game.node.entity.player.link;
 
-import core.game.container.Container;
-import core.game.container.ContainerEvent;
-import core.game.container.ContainerListener;
+import core.ServerConstants;
+import core.game.interaction.Option;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.item.Item;
-import core.ServerConstants;
+
 import static core.api.ContentAPIKt.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static core.tools.GlobalsKt.colorize;
-import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_PROT_ATTR;
 
 /**
  * Represents a managing class of the active player skulls.
@@ -21,34 +16,34 @@ import static core.game.world.map.zone.impl.WildernessZone.WILDERNESS_PROT_ATTR;
  * @author Emperor
  */
 public final class SkullManager {
-    public enum SkullIcon {
-        NONE(-1),
-        WHITE(0),
-        RED(1),
-        BH_RED5(2),
-        BH_BLUE4(3),
-        BH_GREEN3(4),
-        BH_GREY2(5),
-        BH_BROWN1(6),
-        SCREAM(7);
-        public final int id;
-        SkullIcon(int id) {
-            this.id = id;
-        }
-        public static SkullIcon forId(int id) {
-            switch(id) {
-                case 0: return SkullIcon.WHITE;
-                case 1: return SkullIcon.RED;
-                case 2: return SkullIcon.BH_RED5;
-                case 3: return SkullIcon.BH_BLUE4;
-                case 4: return SkullIcon.BH_GREEN3;
-                case 5: return SkullIcon.BH_GREY2;
-                case 6: return SkullIcon.BH_BROWN1;
-                case 7: return SkullIcon.SCREAM;
-                default: return SkullIcon.NONE;
-            }
-        }
-    }
+	public enum SkullIcon {
+		NONE(-1),
+		WHITE(0),
+		RED(1),
+		BH_RED5(2),
+		BH_BLUE4(3),
+		BH_GREEN3(4),
+		BH_GREY2(5),
+		BH_BROWN1(6),
+		SCREAM(7);
+		public final int id;
+		SkullIcon(int id) {
+			this.id = id;
+		}
+		public static SkullIcon forId(int id) {
+			switch(id) {
+				case 0: return SkullIcon.WHITE;
+				case 1: return SkullIcon.RED;
+				case 2: return SkullIcon.BH_RED5;
+				case 3: return SkullIcon.BH_BLUE4;
+				case 4: return SkullIcon.BH_GREEN3;
+				case 5: return SkullIcon.BH_GREY2;
+				case 6: return SkullIcon.BH_BROWN1;
+				case 7: return SkullIcon.SCREAM;
+				default: return SkullIcon.NONE;
+			}
+		}
+	}
 
 
 	/**
@@ -86,7 +81,10 @@ public final class SkullManager {
 	 */
 	private boolean skullCheckDisabled;
 
-        private boolean deepWilderness;
+	/**
+	 * Whether the player is in the inauthentic deep wilderness.
+	 */
+	private boolean deepWilderness;
 
 	/**
 	 * Constructs a new {@code SkullManager} {@code Object}.
@@ -114,8 +112,8 @@ public final class SkullManager {
 			return;
 		}
 		skullCauses.add(o);
-                removeTimer (player, "skulled");
-                registerTimer (player, spawnTimer("skulled", 2000));
+		removeTimer(player, "skulled");
+		registerTimer(player, spawnTimer("skulled", 2000));
 	}
 
 	/**
@@ -134,7 +132,7 @@ public final class SkullManager {
 		skullCauses.clear();
 		setSkullIcon(-1);
 		setSkulled(false);
-                player.getAppearance().sync();
+		player.getAppearance().sync();
 	}
 
 	/**
@@ -158,16 +156,16 @@ public final class SkullManager {
 	 * @param level the level to set.
 	 */
 	public void setLevel(int level) {
-                if (!deepWilderness && level >= 49)
-                    setDeepWilderness(true);
-                else if (deepWilderness && level < 48)
-                    setDeepWilderness(false);
-
-                if (level > 20)
-                    player.getLocks().lockTeleport (1_000_000);
-                else
-                    player.getLocks().unlockTeleport();
-
+		if (!deepWilderness && level >= 49) {
+			setDeepWilderness(true);
+		} else if (deepWilderness && level < 48) {
+			setDeepWilderness(false);
+		}
+		if (level > 20) {
+			player.getLocks().lockTeleport(1_000_000);
+		} else {
+			player.getLocks().unlockTeleport();
+		}
 		this.level = level;
 	}
 
@@ -188,14 +186,6 @@ public final class SkullManager {
 	}
 
 	/**
-	 * Gets the skullCheckDisabled.
-	 * @return The skullCheckDisabled.
-	 */
-	public boolean isSkullCheckDisabled() {
-		return skullCheckDisabled;
-	}
-
-	/**
 	 * Sets the skullCheckDisabled.
 	 * @param skullCheckDisabled The skullCheckDisabled to set.
 	 */
@@ -211,10 +201,6 @@ public final class SkullManager {
 		return wildernessDisabled;
 	}
 
-        public boolean hasWildernessProtection() {
-                return level < 49;
-        }
-
 	/**
 	 * Sets the wildernessDisabled.
 	 * @param wildernessDisabled The wildernessDisabled to set.
@@ -228,77 +214,24 @@ public final class SkullManager {
 	 * @return The skulled.
 	 */
 	public boolean isSkulled() {
-		return skulled || deepWilderness;
+		return skulled;
 	}
 
-    public boolean isDeepWilderness() {
-            return deepWilderness;
-    }
+	public boolean isDeepWilderness() {
+			return deepWilderness;
+	}
 
-    public void setDeepWilderness (boolean deepWildy) {
-            if(ServerConstants.ENHANCED_DEEP_WILDERNESS && deepWildy) {
-                updateDWSkullIcon();
-            } else {
-                removeDWSkullIcon();
-            }
-            setSkullCheckDisabled(deepWildy);
-            deepWilderness = deepWildy;
-    }
-
-    public static final long DEEP_WILD_DROP_RISK_THRESHOLD = 100000;
-    public void updateDWSkullIcon() {
-        if (player.getAttribute("deepwild-value-listener") == null) {
-            ContainerListener listener = new ContainerListener() {
-                @Override
-                public void update(Container c, ContainerEvent event) {
-                    refresh(c);
-                }
-
-                @Override
-                public void refresh(Container c) {
-                    updateDWSkullIcon();
-                }
-            };
-            player.setAttribute("deepwild-value-listener", listener);
-            player.getInventory().getListeners().add(listener);
-            player.getEquipment().getListeners().add(listener);
-        }
-        long value = 0;
-        long maxValue = 0;
-        for (Item item : player.getInventory().toArray()) {
-            if (item != null) {
-                long alchValue = item.getAlchemyValue();
-                value += alchValue;
-                maxValue = Math.max(maxValue, alchValue);
-            }
-        }
-        for (Item item : player.getEquipment().toArray()) {
-            if (item != null) {
-                long alchValue = item.getAlchemyValue();
-                value += alchValue;
-                maxValue = Math.max(maxValue, alchValue);
-            }
-        }
-        // Act as if protect item is always active when calculating risk
-        value -= maxValue;
-        player.setAttribute("deepwild-value-risk", value);
-        SkullIcon skull = SkullIcon.BH_BROWN1;
-        if (value >= DEEP_WILD_DROP_RISK_THRESHOLD) {
-            skull = SkullIcon.RED;
-        }
-        setSkullIcon(skull.id);
-    }
-
-    public void removeDWSkullIcon() {
-        setSkullIcon(skulled ? 0 : -1);
-        ContainerListener listener = player.getAttribute("deepwild-value-listener");
-        if (listener != null) {
-            player.getInventory().getListeners().remove(listener);
-            player.getEquipment().getListeners().remove(listener);
-        }
-        player.removeAttribute("deepwild-value-listener");
-        player.removeAttribute("deepwild-value-risk");
-    }
+	public void setDeepWilderness (boolean deepWildy) {
+		setSkullCheckDisabled(deepWildy);
+		deepWilderness = deepWildy;
+		if (ServerConstants.ENHANCED_DEEP_WILDERNESS) {
+			if (deepWildy) {
+				player.getInteraction().set(Option._P_ATTACK);
+			} else {
+				player.getInteraction().remove(Option._P_ATTACK);
+			}
+		}
+	}
 
 	/**
 	 * Sets the skulled.

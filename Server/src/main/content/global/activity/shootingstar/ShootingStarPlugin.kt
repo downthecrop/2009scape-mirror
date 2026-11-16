@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
-import org.rs09.consts.Scenery
+import org.rs09.consts.Scenery as Sceneries
 import core.ServerStore
 import core.ServerStore.Companion.getBoolean
 import core.game.dialogue.DialogueFile
@@ -17,12 +17,14 @@ import core.game.world.GameWorld
 import core.tools.Log
 import core.tools.secondsToTicks
 import content.data.Quests
-import core.game.node.scenery.SceneryBuilder
+import content.global.activity.shootingstar.ShootingStar.Companion.crash_locations
+import core.game.node.scenery.Scenery
 
 class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Commands, StartupListener {
     override fun login(player: Player) {
-        if(star.isSpawned && !star.spriteSpawned)
+        if (!star.spriteSpawned) {
             sendMessage(player, "<img=12><col=CC6600>News: A shooting star (Level ${star.level.ordinal + 1}) has just crashed near the ${star.location}!")
+        }
     }
 
     override fun tick() {
@@ -34,7 +36,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
             star.clearSprite()
         }
 
-        if (star.firstStar && !star.isSpawned && !star.spriteSpawned) {
+        if (star.firstStar && !star.spriteSpawned) {
             // Apparently, the server has only just booted
             star.rebuildVars()
             if (star.spriteSpawned) {
@@ -56,7 +58,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
     }
 
     override fun defineListeners() {
-        on(Scenery.SHOOTING_STAR_NOTICEBOARD_38669, IntType.SCENERY, "read") { player, _ ->
+        on(Sceneries.SHOOTING_STAR_NOTICEBOARD_38669, IntType.SCENERY, "read") { player, _ ->
             var index = 0
             scoreboardEntries.forEach { entry ->
                 val timeElapsed = secondsToTicks(GameWorld.ticks - entry.time) / 60
@@ -113,7 +115,7 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
                         }
                         if (!condition.invoke(player)) {
                             sendDialogue(player,"Magical forces prevent your teleportation.")
-                        } else if (teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)) {
+                        } else if (teleport(player, crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)) {
                             getRingStoreFile()[player.username.toLowerCase()] = true
                         }
                     }
@@ -139,9 +141,27 @@ class ShootingStarPlugin : LoginListener, InteractionListener, TickListener, Com
             teleport(player, star.starObject.location.transform(1,1,0))
         }
 
-        define("submit", Privilege.ADMIN, description = "Rebuilds and fires the shooting star event immediately.") { _, _ ->
+        define("submit", Privilege.ADMIN, description = "Rebuilds and fires the shooting star event immediately.") { player, args ->
             star.clear()
             star.rebuildVars()
+            if (args.size > 1) {
+                if (args.size != 3) {
+                    reject(player, "Usage: ::submit [location ordinal] [level]")
+                }
+                val i = args[1].toInt()
+                if (i !in 0 until crash_locations.size) {
+                    reject(player, "Invalid location id $i")
+                }
+                val j = args[2].toInt()
+                if (j !in 1..9) {
+                    reject(player, "Invalid level $j")
+                }
+                val loc = crash_locations.entries.elementAt(i)
+                val level = ShootingStarType.values()[j-1]
+                star.location = loc.key
+                star.level = level
+                star.starObject = Scenery(level.objectId, loc.value)
+            }
             star.fire()
         }
 

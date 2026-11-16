@@ -192,13 +192,26 @@ public abstract class MapZone implements Zone {
 			return true;
 		}
 		Entity attacker = e instanceof Familiar ? ((Familiar) e).getOwner() : e;
-		Entity target = t.getAttribute("combat-attacker", e);
-		if (target instanceof Familiar) {
-			target = ((Familiar) target).getOwner();
+		Entity targetAttacker = t.getAttribute("combat-attacker", e);
+		if (targetAttacker instanceof Familiar) {
+			targetAttacker = ((Familiar) targetAttacker).getOwner();
 		}
-		if (t.getAttribute("combat-time", -1L) > time && target != attacker && target.isActive()) {
-			if (message && e instanceof Player) {
-				((Player) e).getPacketDispatch().sendMessage("Someone else is already fighting this" + (t instanceof Player ? " player." : "."));
+		if (t.getAttribute("combat-time", -1L) > time && targetAttacker != attacker && targetAttacker.isActive()) {
+			if (e instanceof Player) {
+				if (t instanceof Player && !(targetAttacker instanceof Player)) {
+					/* https://runescape.wiki/w/Update:The_Path_of_Glouphrie:
+					 * "A small change has been made to single-way combat in the Wilderness. Player-vs-player combat now
+					 * takes precedence over monster fighting, meaning that anyone in battle with a creature can still
+					 * be attacked by another player. Before, a player could fight another player, run away, enter
+					 * combat with a creature, and stop the other player from attacking them. All other single-way
+					 * combat rules still apply, with only one player able to attack you at a time, and only one
+					 * creature able to attack at any time."
+					 */
+					return true;
+				}
+				if (message) {
+					((Player) e).getPacketDispatch().sendMessage("Someone else is already fighting this" + (t instanceof Player ? " player." : "."));
+				}
 			}
 			return false;
 		}
@@ -211,8 +224,13 @@ public abstract class MapZone implements Zone {
 			if (t.getId() == 1614 || t.getId() == 1613) {
 				return true;
 			}
-			if (message && e instanceof Player) {
-				((Player) e).getPacketDispatch().sendMessage("You're already under attack!");
+			if (e instanceof Player) {
+				if (tResolved instanceof Player) {
+					return true; // allow the victim to fight back in the above "PvPvM" single-combat exception
+				}
+				if (message) {
+					((Player) e).getPacketDispatch().sendMessage("You're already under attack!");
+				}
 			}
 			return false;
 		}

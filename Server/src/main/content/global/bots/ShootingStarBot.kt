@@ -1,5 +1,6 @@
 package content.global.bots
 
+import content.global.activity.shootingstar.ShootingStar
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
@@ -28,7 +29,7 @@ class ShootingStarBot : Script() {
             State.FULL_IDLE -> {}
 
             State.TELEPORT_TO -> {
-                scriptAPI.teleport(star.crash_locations[star.location]!!.transform(0, -1, 0))
+                scriptAPI.teleport(ShootingStar.crash_locations[star.location]!!.transform(0, -1, 0))
                 state = State.MINING
                 timerCountdown = 15
             }

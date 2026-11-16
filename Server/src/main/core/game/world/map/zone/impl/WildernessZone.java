@@ -12,10 +12,8 @@ import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.game.node.entity.player.link.SkullManager;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -40,9 +38,6 @@ public final class WildernessZone extends MapZone {
 	 * The wilderness zone.
 	 */
 	private static final WildernessZone INSTANCE = new WildernessZone(new ZoneBorders(2944, 3525, 3400, 3975), new ZoneBorders(3070, 9924, 3135, 10002), ZoneBorders.forRegion(12192), ZoneBorders.forRegion(12193), ZoneBorders.forRegion(11937));
-
-	public static final String WILDERNESS_PROT_ATTR = "/save:wilderness-protection-active";
-	public static final String WILDERNESS_HIGHER_NEXTFEE = "/save:wilderness-higher-next-fee";
 
 	/**
 	 * The zone borders.
@@ -97,12 +92,8 @@ public final class WildernessZone extends MapZone {
 		if (!(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 || e.asNpc().getName().contains("Revenant"))) return;
 
 		int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
-		boolean higherRate = ((Player) killer).getSkullManager().isDeepWilderness() && ((Player) killer).getAttribute("deepwild-value-risk", 0L) > SkullManager.DEEP_WILD_DROP_RISK_THRESHOLD;
-		if (higherRate) {
-			pvpGearRate /= 2;
-		}
 		int cEleGloveRate = 50;
-		int normalGloveRate = higherRate ? 100 : (int) ((1.0 / (1.0 - Math.pow(1.0 - (1.0 / (double) pvpGearRate), 16.0))) * 5.0 / 6.0);
+		int normalGloveRate = (int) ((1.0 / (1.0 - Math.pow(1.0 - (1.0 / (double) pvpGearRate), 16.0))) * 5.0 / 6.0);
 
 		if (RandomFunction.roll(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? cEleGloveRate : normalGloveRate)) {
 			byte glove = (byte) RandomFunction.random(1, 14);
@@ -149,12 +140,7 @@ public final class WildernessZone extends MapZone {
 	public boolean enter(Entity e) {
 		if (e instanceof Player) {
 			Player p = (Player) e;
-			if(!p.isArtificial()) {
-				show(p);
-			} else {
-				p.getSkullManager().setWilderness(true);
-				p.getSkullManager().setLevel(getWilderness(p));
-			}
+			show(p);
 			if (p.getFamiliarManager().hasFamiliar() && !p.getFamiliarManager().hasPet()) {
 				Familiar familiar = p.getFamiliarManager().getFamiliar();
 				familiar.transform();
@@ -190,12 +176,11 @@ public final class WildernessZone extends MapZone {
 	 * Method used to remove traces of being in the zone.
 	 * @param p the player.
 	 */
-	public final void leave(final Player p) {
+	public void leave(final Player p) {
 		Component overlay = new Component(381);
 		if (overlay.getId() == 381) {
 			p.getInterfaceManager().close(overlay);
 		}
-		p.getInteraction().remove(Option._P_ATTACK);
 		p.getSkullManager().setWilderness(false);
 		p.getSkullManager().setLevel(0);
 	}
@@ -204,17 +189,17 @@ public final class WildernessZone extends MapZone {
 	 * Method used to show being the wilderness.
 	 * @param p the player.
 	 */
-	public static final void show(final Player p) {
+	public static void show(final Player p) {
 		if (p.getSkullManager().isWildernessDisabled()) {
 			return;
 		}
-		p.getInterfaceManager().openOverlay(new Component(381));
-		p.getSkullManager().setLevel(getWilderness(p));
-		p.getPacketDispatch().sendString("Level: " + p.getSkullManager().getLevel(), 381, 1);
-		if(GameWorld.getSettings().getWild_pvp_enabled()) {
-			p.getInteraction().set(Option._P_ATTACK);
-		}
+		int level = getWilderness(p);
+		p.getSkullManager().setLevel(level);
 		p.getSkullManager().setWilderness(true);
+		if (!p.isArtificial()) {
+			p.getInterfaceManager().openOverlay(new Component(381));
+			p.getPacketDispatch().sendString("Level: " + level, 381, 1);
+		}
 	}
 
 	@Override
