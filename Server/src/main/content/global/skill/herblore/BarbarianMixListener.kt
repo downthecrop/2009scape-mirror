@@ -11,9 +11,9 @@ import core.api.sendMessage
 import core.api.removeItem
 import core.api.addItem
 import core.api.getAttribute
-import core.api.setAttribute
 import core.api.rewardXP
 import core.api.sendDialogue
+import core.api.setAttribute
 import org.rs09.consts.Items
 
 /**
@@ -26,12 +26,12 @@ import org.rs09.consts.Items
 class BarbarianMixListener : InteractionListener {
     override fun defineListeners(){
         for (potion in BarbarianPotion.values()) {
-            if (potion.isBoth()) {
-                onUseWith(IntType.ITEM, potion.getItem(), 11324) { player, used, with -> //Roe
+            if (potion.canUseRoe) {
+                onUseWith(IntType.ITEM, potion.item, Items.ROE_11324) { player, used, with -> // Roe
                     handle(player, used, with);
                 }
             }
-            onUseWith(IntType.ITEM, potion.getItem(), 11326) { player, used, with -> //Caviar
+            onUseWith(IntType.ITEM, potion.item, Items.CAVIAR_11326) { player, used, with -> // Caviar
                 handle(player, used, with);
             }
         }
@@ -43,28 +43,25 @@ class BarbarianMixListener : InteractionListener {
         if (herbloreStage == 0) {
             return false
         }
-        val potion: BarbarianPotion? = BarbarianPotion.forId(inputPotion.getId())
-        if(potion == null){
-            return false
-        }
+        val potion: BarbarianPotion = BarbarianPotion.forId(inputPotion.id) ?: return false
 
-        if (!hasLevelStat(player, Skills.HERBLORE, potion.getLevel())) {
-            sendMessage(player, "You need a herblore level of " + potion.getLevel().toString() + " to make this mix.")
+        if (!hasLevelStat(player, Skills.HERBLORE, potion.level)) {
+            sendMessage(player, "You need a Herblore level of ${potion.level} to make this mix.")
             return true
         }
 
-        if(!removeItem(player, potion.getItem())) { //Remove input potion
+        if (!removeItem(player, potion.item)) { // Remove input potion
             return false
         }
-        if(!removeItem(player, egg.getId())) { //Remove egg used
-            addItem(player, potion.getItem()) //Add potion back to inventory if we can't remove the egg
+        if (!removeItem(player, egg.id)) { // Remove egg used
+            addItem(player, potion.item) // Add potion back to inventory if we can't remove the egg
             return false
         }
-        addItem(player, potion.getProduct()) //Add output potion
-        rewardXP(player, Skills.HERBLORE, potion.getExp()) //Add exp
+        addItem(player, potion.product) // Add output potion
+        rewardXP(player, Skills.HERBLORE, potion.xp) // Add exp
         sendMessage(player, "You combine your potion with the fish eggs.")
         // Progress Barbarian training if this is your first attack mix
-        if (herbloreStage == 1 && potion.getProduct() == Items.ATTACK_MIX2_11429) {
+        if (herbloreStage == 1 && potion.product == Items.ATTACK_MIX2_11429) {
             setAttribute(player, BarbarianTraining.attributeHerblore, 2)
             sendDialogue(player, "You feel you have learned more of barbarian ways. Otto might wish to talk to you more.")
         }
