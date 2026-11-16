@@ -567,7 +567,7 @@ class PlayerSaver (val player: Player){
         }
         root.put("skills",skills)
         root.put("totalEXP",player.skills.experienceGained.toString())
-        root.put("exp_multiplier",player.skills.experienceMultiplier.toString())
+        root.put("xp_rate", player.skills.xpRate.ordinal.toString())
         if(player.skills.combatMilestone > 0 || player.skills.skillMilestone > 0){
             val milestone = JSONObject()
             milestone.put("combatMilestone",player.skills.combatMilestone.toString())

@@ -16,6 +16,7 @@ import core.ServerConstants
 import core.api.log
 import core.game.node.entity.combat.graves.GraveController
 import core.game.node.entity.combat.graves.GraveType
+import core.game.node.entity.skill.Skills.XpRate
 import core.tools.Log
 import java.io.File
 import java.io.FileReader
@@ -335,11 +336,23 @@ class PlayerSaveParser(val player: Player) {
         val skillData = saveFile!!["skills"] as JSONArray
         player.skills.parse(skillData)
         player.skills.experienceGained = saveFile!!["totalEXP"].toString().toDouble()
-        player.skills.experienceMultiplier = saveFile!!["exp_multiplier"].toString().toDouble()
-        val divisor: Double
-        if(player.skills.experienceMultiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish
-            divisor = player.skills.experienceMultiplier / 5.0
-            player.skills.correct(divisor)
+        if (player.version < 7 && !saveFile!!.containsKey("xp_rate")) {
+            val legacyMultiplier = saveFile!!["exp_multiplier"].toString().toDouble()
+
+            player.skills.xpRate = when (legacyMultiplier) {
+                1.0 -> XpRate.RATE_1X
+                2.5 -> XpRate.RATE_2_5X
+                5.0 -> XpRate.RATE_5X
+                10.0 -> XpRate.RATE_10X
+                else -> XpRate.RATE_5X
+            }
+
+            if (legacyMultiplier >= 10 && !player.attributes.containsKey("permadeath")) {
+                player.skills.correct(legacyMultiplier / 5.0)
+            }
+        } else {
+            val ordinal = saveFile!!["xp_rate"].toString().toInt()
+            player.skills.xpRate = XpRate.values().getOrElse(ordinal) { XpRate.RATE_1X }
         }
         if (saveFile!!.containsKey("milestone")) {
             val milestone: JSONObject = saveFile!!["milestone"] as JSONObject

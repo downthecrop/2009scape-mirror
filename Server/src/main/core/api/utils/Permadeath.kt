@@ -4,7 +4,6 @@ import content.global.skill.construction.CrestType
 import content.global.skill.construction.HouseLocation
 import content.minigame.blastfurnace.BFPlayerState
 import content.minigame.blastfurnace.BlastFurnace
-import core.ServerConstants
 import core.api.isUsingSecondaryBankAccount
 import core.api.teleport
 import core.api.toggleBankAccount
@@ -17,6 +16,7 @@ import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.Skills.XpRate
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.world.map.Location
@@ -96,7 +96,7 @@ fun permadeath(target: Player) {
     }
 
     // Xp rate
-    target.skills.experienceMultiplier = 1.0
+    target.skills.xpRate = XpRate.RATE_1X
 
     // Ironman data
     target.ironmanManager.mode = IronmanMode.NONE

@@ -12,6 +12,7 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.TeleportManager
+import core.game.node.entity.skill.Skills.XpRate
 import core.game.node.item.Item
 import core.game.world.GameWorld
 import core.game.world.map.Location
@@ -117,7 +118,7 @@ class TutorialMagicTutorDialogueFile : DialogueLabeller() {
 
         label("inauthentic")
             options(
-                DialogueOption("xprate","Change XP rate (current: ${player?.skills?.experienceMultiplier}x)", skipPlayer = true) { _, _ ->
+                DialogueOption("xprate","Change XP rate (current: ${if (player?.skills?.xpRate == XpRate.RATE_SCALED) "Scaled XP mode" else "${player?.skills?.xpRate?.multiplier}x"})", skipPlayer = true) { _, _ ->
                     return@DialogueOption ServerConstants.XP_RATES
                 },
                 DialogueOption("ironman","Set ironman mode (current: ${player?.ironmanManager?.mode?.name?.toLowerCase()})", skipPlayer = true) { _, _ ->
@@ -131,15 +132,25 @@ class TutorialMagicTutorDialogueFile : DialogueLabeller() {
                 DialogueOption("1.0x","1.0x (default)", skipPlayer = true),
                 DialogueOption("2.5x","2.5x", skipPlayer = true),
                 DialogueOption("5.0x","5.0x", skipPlayer = true),
-                title = "Change XP rate (current: ${player?.skills?.experienceMultiplier}x)",
+                DialogueOption("xp_scaling", "Scaled XP mode", skipPlayer = true),
+                title = "Change XP rate (current: ${if (player?.skills?.xpRate == XpRate.RATE_SCALED) "Scaled XP mode" else "${player?.skills?.xpRate?.multiplier}x"})",
                 unclosable = true
             )
-            for (rate in doubleArrayOf(1.0, 2.5, 5.0)) {
-                label("${rate}x")
-                exec { player, _ -> player.skills.experienceMultiplier = rate }
-                manual(unclosable = true) { player, _ -> player.dialogueInterpreter.sendDialogue("You set your XP rate to: ${rate}x.") }
+            for (rate in arrayOf(XpRate.RATE_1X, XpRate.RATE_2_5X, XpRate.RATE_5X)) {
+                label("${rate.multiplier}x")
+                exec { player, _ ->
+                    player.skills.xpRate = rate
+                }
+                manual(unclosable = true) { player, _ -> player.dialogueInterpreter.sendDialogue("You set your XP rate to: ${rate.multiplier}x.") }
                 goto("inauthentic")
             }
+
+        label("xp_scaling")
+            exec { player, _ ->
+                player.skills.xpRate = XpRate.RATE_SCALED
+            }
+            line("You set your XP rate to: Scaled XP mode.", unclosable = true)
+            goto("inauthentic")
 
         label("ironman")
             options(

@@ -37,9 +37,34 @@ import static java.lang.Math.max;
 public final class Skills {
 
 	/**
-	 * Represents the constant modifier of experience.
+	 * The available experience rates.
 	 */
-	public double experienceMultiplier = 1.0;
+	public enum XpRate {
+		RATE_1X(1.0),
+		RATE_2_5X(2.5),
+		RATE_5X(5.0),
+		RATE_10X(10.0),
+		RATE_SCALED(1.0);
+
+		public final double multiplier;
+
+		XpRate(double multiplier) {
+			this.multiplier = multiplier;
+		}
+	}
+
+	/**
+	 * The selected experience rate.
+	 */
+	private XpRate xpRate = XpRate.RATE_1X;
+
+	public XpRate getXpRate() {
+		return xpRate;
+	}
+
+	public void setXpRate(XpRate xpRate) {
+		this.xpRate = xpRate;
+	}
 
 	/**
 	 * Represents an array of skill names.
@@ -191,7 +216,7 @@ public final class Skills {
 	public void addExperience(int slot, double experience, boolean playerMod) {
 		if (lastUpdateXp == null)
 			lastUpdateXp = this.experience.clone();
-		double mod = getExperienceMod(slot, experience, playerMod, true);
+		double mod = getExperienceMod(slot);
 		final Player player = entity instanceof Player ? ((Player) entity) : null;
 		final AssistSession assist = entity.getExtension(AssistSession.class);
 		if (assist != null && assist.translateExperience(player, slot, experience, mod)) {
@@ -220,6 +245,9 @@ public final class Skills {
 				if(count == 2) experienceAdd += (0.05 * experienceAdd);
 				else experienceAdd += (0.02 * experienceAdd);
 			}
+		}
+		if (xpRate == XpRate.RATE_SCALED) {
+			experienceAdd = Math.floor(experienceAdd * 10.0) / 10.0;
 		}
 		this.experience[slot] += experienceAdd;
 		if (this.experience[slot] >= 200000000) {
@@ -275,14 +303,29 @@ public final class Skills {
 	/**
 	 * Gets the current experience mod.
 	 * @param slot The skill slot.
-	 * @param experience The experience gained.
-	 * @param playerMod If player mods should be applied.
 	 * @return The experience mod.
 	 */
-	private double getExperienceMod(int slot, double experience, boolean playerMod, boolean multiplyer) {
-		//Keywords for people ctrl + Fing the project
-		//xprate xp rate xp multiplier skilling rate
-		return experienceMultiplier;
+	private double getExperienceMod(int slot) {
+		if (xpRate == XpRate.RATE_SCALED) {
+			return getScaledExperienceMod(slot);
+		}
+
+		return xpRate.multiplier;
+	}
+
+	/**
+	 * Obtains scaling for a skill "slot" based on a scaled leveling system -> e.g. Attack at 70 scales at ~1.5x, defense at 79 scales at 3x...
+	 * @param slot The skill slot.
+	 * @return The experience mod.
+	 */
+	private double getScaledExperienceMod(int slot) {
+		double scalingFloor = 333804.0; // Level 62
+		double scalingCap = 3258594.0; // Level 85
+
+		double scale = (experience[slot] - scalingFloor) / (scalingCap - scalingFloor);
+		scale = Math.max(0.0, Math.min(scale, 1.0));
+
+		return 1.0 + (4.0 * scale);
 	}
 
 	/**
@@ -359,7 +402,7 @@ public final class Skills {
 				setLifepoints(staticLevels[i]);
 			}
 		}
-		experienceMultiplier = 5.0;
+		xpRate = XpRate.RATE_5X;
 		updateCombatLevel();
 	}
 
