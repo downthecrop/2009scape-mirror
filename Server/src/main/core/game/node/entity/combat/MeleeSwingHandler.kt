@@ -32,28 +32,29 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
  */
     : CombatSwingHandler(CombatStyle.MELEE, *flags) {
 	override fun canSwing(entity : Entity, victim : Entity) : InteractionType? {
-		//Credits wolfenzi, https://www.rune-server.ee/2009scape-development/rs2-server/snippets/608720-arios-hybridding-improve.html
-		var distance = if (usingHalberd(entity)) 2 else 1
+		val halberd = usingHalberd(entity)
+		var distance = if (halberd) 2 else 1
 		var type = InteractionType.STILL_INTERACT
 		var goodRange = canMelee(entity, victim, distance)
-		if (!goodRange && victim.properties.combatPulse.getVictim() !== entity && victim.walkingQueue.isMoving && entity.size() == 1) {
+		if (!goodRange && victim.properties.combatPulse.getVictim() !== entity && victim.walkingQueue.isMoving) {
 			type = InteractionType.MOVE_INTERACT
 			distance += if (entity.walkingQueue.isRunningBoth) 2 else 1
 			goodRange = canMelee(entity, victim, distance)
 		}
-		if (!isProjectileClipped(entity, victim, !usingHalberd(entity))) {
+		// Pass "false" even though this is melee, because halberds and attacks while moving have a greater range than 1.
+		if (!isProjectileClipped(entity, victim, false)) {
 			return InteractionType.NO_INTERACT
 		}
 		val isRunning = entity.walkingQueue.runDir != -1
 		val enemyRunning = victim.walkingQueue.runDir != -1
-		// THX 4 fix tom <333.
-		if (super.canSwing(entity, victim) != InteractionType.NO_INTERACT) {
-			val maxDistance = if (isRunning) if (enemyRunning) 3 else 4 else 2
-			if (entity.walkingQueue.isMoving && entity.location.getDistance(victim.location) <= maxDistance && goodRange) {
+		if (goodRange && super.canSwing(entity, victim) != InteractionType.NO_INTERACT) {
+			// canStepTowards checks if the victim can approach the attacker so that NPCs like Spinolyps, which are on unwalkable tiles but not behind obstacles, can still be attacked.
+			if (!halberd && canStepTowards(victim, entity) == InteractionType.NO_INTERACT) {
+				return InteractionType.NO_INTERACT
+			} else if (type == InteractionType.STILL_INTERACT) {
+				entity.walkingQueue.reset()
 				return type
-			} else if (goodRange) {
-				if (canStepTowards(entity, victim) == InteractionType.NO_INTERACT) return InteractionType.NO_INTERACT
-				if (type == InteractionType.STILL_INTERACT) entity.walkingQueue.reset()
+			} else if (entity.walkingQueue.isMoving) {
 				return type
 			}
 		}
@@ -386,7 +387,7 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 }
                 return victim.getSwingHandler(false).type == CombatStyle.MELEE && e.withinDistance(victim.location, 1) && victim.properties.combatPulse.getVictim() === entity && entity.index < victim.index
             }
-            return entity.centerLocation.withinDistance(victim.centerLocation, distance + (size shr 1) + (victim.size() shr 1))
+            return entity.centerLocation.withinDistance(victim.getClosestOccupiedTile(entity.location), distance)
         }
     }
 }
