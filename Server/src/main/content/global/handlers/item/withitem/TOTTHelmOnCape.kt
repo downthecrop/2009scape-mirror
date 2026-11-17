@@ -5,11 +5,15 @@ import org.rs09.consts.Items
 import core.game.dialogue.DialogueFile
 import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.world.GameWorld
 import core.tools.END_DIALOGUE
 
 class TOTTHelmOnCape : InteractionListener {
     override fun defineListeners() {
-        onUseWith(IntType.ITEM, Items.SLAYER_HELMET_13263, Items.SLAYER_CAPE_9786, Items.SLAYER_CAPET_9787){ player, used, with ->
+        onUseWith(IntType.ITEM, Items.SLAYER_HELMET_13263, Items.SLAYER_CAPE_9786, Items.SLAYER_CAPET_9787) { player, _, _ ->
+            if (GameWorld.settings?.skillcape_perks != true) {
+                return@onUseWith false
+            }
             val alreadyHasHelm = getAttribute(player, "cape_perks:tott:helmet-stored", false)
 
             if(alreadyHasHelm){

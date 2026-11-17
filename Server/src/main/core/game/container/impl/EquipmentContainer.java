@@ -1,7 +1,9 @@
 package core.game.container.impl;
 
+import content.global.handlers.item.withitem.AAAAvasOnCape;
 import content.global.skill.skillcapeperks.SkillcapeEquipmentPlugin;
 import content.global.skill.skillcapeperks.SkillcapePerks;
+import core.api.EquipmentSlot;
 import core.game.container.Container;
 import core.game.container.ContainerEvent;
 import core.game.container.ContainerListener;
@@ -12,7 +14,6 @@ import core.game.node.item.Item;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
-import core.net.packet.out.WeightUpdate;
 import core.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 import core.game.interaction.InteractionListeners;
@@ -332,12 +333,12 @@ public final class EquipmentContainer extends Container {
 			}
 		}
 		Item weapon = player.getEquipment().get(SLOT_WEAPON);
-		if(weapon != null && weapon.getDefinition().getRequirement(Skills.STRENGTH) > 0 && SkillcapePerks.isActive(SkillcapePerks.FINE_ATTUNEMENT,player)){
+		if (weapon != null && weapon.getDefinition().getRequirement(Skills.STRENGTH) > 0 && SkillcapePerks.isActive(SkillcapePerks.FINE_ATTUNEMENT, player)) {
 			int[] bonus = weapon.getDefinition().getConfiguration(ItemConfigParser.BONUS, new int[15]);
 			bonuses[11] += Math.ceil(bonus[11] * 0.20);
 		}
 		Item shield = player.getEquipment().get(SLOT_SHIELD);
-		if(shield != null && SkillcapePerks.isActive(SkillcapePerks.GRAND_BULLWARK,player)){
+		if (shield != null && SkillcapePerks.isActive(SkillcapePerks.GRAND_BULLWARK, player)) {
 			bonuses[5] += Math.ceil(bonuses[5] * 0.20);
 			bonuses[6] += Math.ceil(bonuses[6] * 0.20);
 			bonuses[7] += Math.ceil(bonuses[7] * 0.20);
@@ -351,6 +352,10 @@ public final class EquipmentContainer extends Container {
 			bonuses[7] += increase;
 			bonuses[9] += increase;
 			bonuses[10] += increase;
+		}
+		Item cape = getItemFromEquipment(player, EquipmentSlot.CAPE);
+		if (cape != null && SkillcapePerks.isActive(SkillcapePerks.AN_ARROW_ATTRACTOR, player) && getAttribute(player, AAAAvasOnCape.ATTRIBUTE, false)) {
+			bonuses[4] += 2; // ranged boost +2, commensurate with Ava's attractor
 		}
 		player.getProperties().setBonuses(bonuses);
 		if (player.getInterfaceManager().hasMainComponent(Components.EQUIP_SCREEN2_667)) {

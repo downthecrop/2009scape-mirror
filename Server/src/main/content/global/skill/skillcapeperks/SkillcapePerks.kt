@@ -1,6 +1,7 @@
 package content.global.skill.skillcapeperks
 
 import content.data.Quests
+import content.global.handlers.item.withitem.AAAAvasOnCape
 import content.global.skill.farming.PatchType
 import content.global.skill.farming.Plantable
 import content.global.skill.runecrafting.Altar
@@ -12,9 +13,7 @@ import core.api.closeDialogue
 import core.api.getAttribute
 import core.api.hasRequirement
 import core.api.sendDialogue
-import core.api.sendMessage
 import core.api.teleport
-import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.event.SpellbookChangeEvent
 import core.game.node.entity.combat.equipment.WeaponInterface
@@ -90,6 +89,14 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
     SMOOTH_HANDS("cape_perks:smooth-hands"),
     PET_MASTERY("cape_perks:pet-mastery"),
     BREWMASTER("cape_perks:brewmaster"),
+    AN_ARROW_ATTRACTOR("cape_perks:an-arrow-attractor", { player ->
+        val hasAvasBonus = getAttribute(player, AAAAvasOnCape.ATTRIBUTE, false)
+        if (hasAvasBonus) {
+            sendDialogue(player, "Your very fetching cape looks like an arrow attractor of triple-A quality, just like you.")
+        } else {
+            sendDialogue(player, "Your not-so-fetching cape does not look like it's an arrow attractor of triple-A quality. You wonder if some object could change that.")
+        }
+    }),
     NONE("cape_perks:none")
     ;
 
@@ -112,10 +119,10 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.AGILITY -> MARATHON_RUNNER
                 Skillcape.HERBLORE -> BREWMASTER
                 Skillcape.THIEVING -> SMOOTH_HANDS
-                Skillcape.CRAFTING -> NONE
-                Skillcape.FLETCHING -> NONE
+                Skillcape.CRAFTING -> NONE // TODO
+                Skillcape.FLETCHING -> AN_ARROW_ATTRACTOR
                 Skillcape.SLAYER -> TRICKS_OF_THE_TRADE
-                Skillcape.CONSTRUCTION -> NONE
+                Skillcape.CONSTRUCTION -> NONE // TODO
                 Skillcape.MINING -> PRECISION_MINER
                 Skillcape.SMITHING -> BAREFISTED_SMITHING
                 Skillcape.FISHING -> GREAT_AIM
@@ -123,7 +130,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.FIREMAKING -> CONSTANT_GLOW
                 Skillcape.WOODCUTTING -> NEST_HUNTER
                 Skillcape.FARMING -> SEED_ATTRACTION
-                Skillcape.HUNTING -> NONE
+                Skillcape.HUNTING -> NONE // TODO
                 Skillcape.SUMMONING -> PET_MASTERY
                 else -> NONE
             }

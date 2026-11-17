@@ -1,5 +1,6 @@
 package core.game.node.entity.combat
 
+import content.global.handlers.item.withitem.AAAAvasOnCape
 import content.global.skill.skillcapeperks.SkillcapePerks
 import content.global.skill.summoning.SummoningPouch
 import core.api.*
@@ -406,33 +407,37 @@ open class RangeSwingHandler (vararg flags: SwingHandlerFlag) : CombatSwingHandl
             }
         }
 
-		/**
-		 * Checks if ammunition should be saved.
-		 *
-		 * @param e The entity.
-		 * @return `True` if so.
-		 */
-		private fun getDropRate(e : Entity?) : Double {
-			if (e is Player) {
-				val cape = e.equipment[EquipmentContainer.SLOT_CAPE]
-				val weapon = e.equipment[EquipmentContainer.SLOT_WEAPON]
-				val ammo = e.equipment[EquipmentContainer.SLOT_ARROWS]
-				val ammoExcluded = ammo != null && ammo.id == Items.BOLT_RACK_4740
-				if (cape != null && (cape.id == 10498 || cape.id == 10499) && weapon != null && weapon.id != 10034 && weapon.id != 10033 && !ammoExcluded) {
-					val rate = 80
-					if (RandomFunction.random(100) < rate) {
-						val torso = e.equipment[EquipmentContainer.SLOT_CHEST]
-						val modelId = torso?.definition?.maleWornModelId1 ?: -1
-						if (modelId == 301 || modelId == 306 || modelId == 3379) {
-							e.packetDispatch.sendMessage("Your armour interferes with Ava's device.")
-							return 1.0
-						}
-						return (-1).toDouble()
-					}
-					return 0.33
-				}
-			}
-			return 1.0
-		}
-	}
+        /**
+         * Checks if ammunition should be saved.
+         * @param e The entity.
+         * @return `True` if so.
+         */
+        private fun getDropRate(e : Entity?) : Double {
+            if (e is Player) {
+                val cape = e.equipment[EquipmentContainer.SLOT_CAPE]
+                val weapon = e.equipment[EquipmentContainer.SLOT_WEAPON]
+                val weaponExcluded = weapon != null && (weapon.id == Items.CHINCHOMPA_10033 || weapon.id == Items.RED_CHINCHOMPA_10034)
+                val ammo = e.equipment[EquipmentContainer.SLOT_ARROWS]
+                val ammoExcluded = ammo != null && ammo.id == Items.BOLT_RACK_4740
+                val hasAvas = cape != null && (
+                        cape.id in arrayOf(Items.AVAS_ATTRACTOR_10498, Items.AVAS_ACCUMULATOR_10499) ||
+                        (cape.id in arrayOf(Items.FLETCHING_CAPE_9783, Items.FLETCHING_CAPET_9784) && getAttribute(e, AAAAvasOnCape.ATTRIBUTE, false))
+                    )
+                if (hasAvas && !weaponExcluded && !ammoExcluded) {
+                    val rate = 80
+                    if (RandomFunction.random(100) < rate) {
+                        val torso = e.equipment[EquipmentContainer.SLOT_CHEST]
+                        val modelId = torso?.definition?.maleWornModelId1 ?: -1
+                        if (modelId == 301 || modelId == 306 || modelId == 3379) {
+                            sendMessage(e, "Your armour interferes with Ava's device.")
+                            return 1.0
+                        }
+                        return -1.0
+                    }
+                    return 0.33
+                }
+            }
+            return 1.0
+        }
+    }
 }
