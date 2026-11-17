@@ -38,7 +38,11 @@ class SeedlingListener : InteractionListener {
         val can = with.asItem() ?: return false
 
         val nextCan = can.id.getNext()
-        val wateredSeedling = if (seedling.id > 5400) seedling.id + 8 else seedling.id + 6
+        val wateredSeedling = when {
+            seedling.id == Items.WHITE_TREE_SHOOT_6462 -> seedling.id + 1
+            seedling.id > 5400 -> seedling.id + 8
+            else -> seedling.id + 6
+        }
 
         if (!removeItem(player, can) || !removeItem(player, seedling)) return false
         addItem(player, wateredSeedling)
@@ -46,6 +50,7 @@ class SeedlingListener : InteractionListener {
 
         var seedlings = getOrStartTimer <SeedlingGrowth> (player)
         seedlings.addSeedling(wateredSeedling)
+        sendMessage(player, "You water the plantpot.")
         return true
     }
 
@@ -70,6 +75,7 @@ class SeedlingListener : InteractionListener {
             Items.PAPAYA_TREE_SEED_5288 ->  Items.PAPAYA_SEEDLING_5485
             Items.PALM_TREE_SEED_5289 ->    Items.PALM_SEEDLING_5486
             Items.SPIRIT_SEED_5317 ->       Items.SPIRIT_SEEDLING_5363
+            Items.WHITE_TREE_SHOOT_6461 ->  Items.WHITE_TREE_SHOOT_6462
             Items.CALQUAT_TREE_SEED_5290 -> Items.CALQUAT_SEEDLING_5487
             else -> -1
         }
@@ -89,7 +95,8 @@ class SeedlingListener : InteractionListener {
         Items.PAPAYA_TREE_SEED_5288,
         Items.PALM_TREE_SEED_5289,
         Items.SPIRIT_SEED_5317,
-        Items.CALQUAT_TREE_SEED_5290
+        Items.CALQUAT_TREE_SEED_5290,
+        Items.WHITE_TREE_SHOOT_6461
     )
 
     val TREE_SEEDLINGS = intArrayOf(
@@ -107,6 +114,7 @@ class SeedlingListener : InteractionListener {
         Items.PALM_SEEDLING_5486,
         Items.SPIRIT_SEEDLING_5363,
         Items.CALQUAT_SEEDLING_5487,
+        Items.WHITE_TREE_SHOOT_6462
     )
 
     private val WATERING_CANS = intArrayOf(Items.WATERING_CAN8_5340,Items.WATERING_CAN7_5339,Items.WATERING_CAN6_5338,Items.WATERING_CAN5_5337,Items.WATERING_CAN4_5336,Items.WATERING_CAN3_5335,Items.WATERING_CAN2_5334,Items.WATERING_CAN1_5333)

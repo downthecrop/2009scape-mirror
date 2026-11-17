@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import content.global.skill.farming.*
 import java.util.concurrent.TimeUnit
 import org.json.simple.*
+import org.rs09.consts.Items
 import java.time.*
 
 class SeedlingGrowth : PersistTimer (1, "farming:seedling", isSoft = true) { 
@@ -18,7 +19,11 @@ class SeedlingGrowth : PersistTimer (1, "farming:seedling", isSoft = true) {
             Seedling(
                 seedling, 
                 System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5),
-                seedling + if(seedling > 5400) 8 else 6
+                seedling + when {
+                    seedling == Items.WHITE_TREE_SHOOT_6463 -> 1
+                    seedling > 5400 -> 8
+                    else -> 6
+                }
             )
         )
     }
@@ -60,10 +65,19 @@ class SeedlingGrowth : PersistTimer (1, "farming:seedling", isSoft = true) {
             seedArray.add(seed)
         }
         root.put("seedlings",seedArray)
+        root.put("shoots",seedArray)
     }
 
     override fun parse(root: JSONObject, entity: Entity) {
         (root["seedlings"] as JSONArray).forEach {
+            val s = it as JSONObject
+            val id = s["id"].toString().toInt()
+            val ttl = s["ttl"].toString().toLong()
+            val sapling = s["sapling"].toString().toInt()
+            seedlings.add(Seedling(id,ttl,sapling))
+        }
+
+        (root["shoots"] as JSONArray).forEach {
             val s = it as JSONObject
             val id = s["id"].toString().toInt()
             val ttl = s["ttl"].toString().toLong()

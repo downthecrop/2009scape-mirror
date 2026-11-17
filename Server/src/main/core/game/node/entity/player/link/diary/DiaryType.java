@@ -115,7 +115,7 @@ public enum DiaryType {
                             "Escape from the spider lair in Varrock Sewers with some red<br><br>spiders eggs",
                             "Use the spirit tree north of Varrock",
                             "Perform the 4 emotes from the Stronghold of Security.",
-                            "Select a colour for a new kitten", // TODO need ring of charos(a) and garden of tranquility to start
+                            "Select a colour for a new kitten",
                             "Use the shortcut under the wall, north-west of the Grand<br><br>Exchange",
                             "Enter the A Soul's Bane rift",
                             "Teleport to the Digsite using a Digsite pendant",
@@ -124,7 +124,7 @@ public enum DiaryType {
                             "Use the teleport to Varrock spell",
                             "Get a Slayer task from Vannaka",
                             "Buy twenty mahogany planks from the Sawmill Operator in one<br><br>transaction",
-                            "Pick a fruit from the White Tree", // TODO Garden of Tranquility
+                            "Pick a fruit from the White Tree",
                             "Use the hot air balloon to travel from Varrock to somewhere<br><br>else", // TODO Enlightened Journey
                             "Get a cat training medal from Gertrude", // TODO need rat catchers and cats fixed
                             "Dial to the fairy ring west of Varrock",

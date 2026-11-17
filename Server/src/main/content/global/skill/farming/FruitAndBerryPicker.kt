@@ -6,6 +6,8 @@ import core.game.interaction.OptionHandler
 import core.game.node.Node
 import content.global.skill.summoning.familiar.GiantEntNPC
 import content.global.skill.summoning.familiar.WolpertingerNPC
+import content.region.misthalin.varrock.diary.VarrockAchivementDiary
+import core.game.diary.DiaryLevel
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -95,8 +97,12 @@ class FruitAndBerryPicker : OptionHandler() {
                     sendMessage(player, "You pick $determiner ${reward.name.lowercase()}.")
                 }
 
-                if (plantable == Plantable.POISON_IVY_SEED && patch.patch == FarmingPatch.CHAMPIONS_GUILD_BUSH){
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 0)
+                if (patch.patch.type == PatchType.WHITE_TREE_PATCH) {
+                    finishTask(player, DiaryType.VARROCK, DiaryLevel.MEDIUM, VarrockAchivementDiary.Companion.MediumTasks.PICK_FROM_WHITE_TREE)
+                }
+
+                if (plantable == Plantable.POISON_IVY_SEED && patch.patch == FarmingPatch.CHAMPIONS_GUILD_BUSH) {
+                    finishTask(player, DiaryType.VARROCK, DiaryLevel.HARD, VarrockAchivementDiary.Companion.HardTasks.PICK_POISON_IVY_FARMING_PATCH)
                 }
 
                 return patch.getFruitOrBerryCount() == 0

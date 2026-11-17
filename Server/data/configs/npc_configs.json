@@ -30605,27 +30605,34 @@
   },
   {
     "id": "2581",
-    "name": "Ellamaria"
+    "name": "Ellamaria",
+    "examine": "Queen Ellamaria of Varrock."
   },
   {
     "id": "2582",
-    "name": "Trolley"
+    "name": "Trolley",
+    "examine": "This statue of Saradomin has been 'borrowed' for a while."
   },
   {
     "id": "2583",
-    "name": "Trolley"
+    "name": "Trolley",
+    "examine": "This statue of a king has been 'borrowed' for a while."
   },
   {
     "id": "2584",
     "name": "Trolley"
   },
   {
-    "id": "2585",
-    "name": "Billy, a guard of Falador"
+    "id": "2586",
+    "name": "Billy, a guard of Falador",
+    "examine": "Someone should have warned him when he signed up.",
+    "lifepoints": "22"
   },
   {
     "id": "2587",
-    "name": "Bob, another guard of Falador"
+    "name": "Bob, another guard of Falador",
+    "examine": "A seasoned guard of Falador.",
+    "lifepoints": "22"
   },
   {
     "id": "2588",
@@ -30645,11 +30652,14 @@
   },
   {
     "id": "2589",
-    "name": "PKMaster0036"
+    "name": "PKMaster0036",
+    "examine": "A master of the wilderness."
   },
   {
     "id": "2590",
-    "name": "King Roald"
+    "name": "King Roald",
+    "examine": "Varrock's resident monarch.",
+    "lifepoints": "10"
   },
   {
     "id": "2591",
@@ -62903,7 +62913,8 @@
   },
   {
     "id": "5838",
-    "name": "King Roald"
+    "name": "King Roald",
+    "examine": "Varrock's resident monarch."
   },
   {
     "id": "5839",
@@ -86676,7 +86687,8 @@
   },
   {
     "id": "8175",
-    "name": "Ellamaria"
+    "name": "Ellamaria",
+    "examine": "Queen Ellamaria of Varrock."
   },
   {
     "id": "8176",
@@ -86692,7 +86704,8 @@
   },
   {
     "id": "8179",
-    "name": "Ellamaria"
+    "name": "Ellamaria",
+    "examine": "Queen Ellamaria of Varrock."
   },
   {
     "id": "8180",

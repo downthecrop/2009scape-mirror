@@ -25,6 +25,7 @@ import core.game.component.Component
 import core.game.consumable.*
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.DialogueFile
+import core.game.dialogue.DialoguePlugin
 import core.game.dialogue.SkillDialogueHandler
 import core.game.diary.DiaryLevel
 import core.game.ge.GrandExchangeRecords
@@ -1134,6 +1135,10 @@ fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
     when (dialogue) {
         is Int -> player.dialogueInterpreter.open(dialogue, *args)
         is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
+        is DialoguePlugin -> {
+            player.dialogueInterpreter.dialogue = dialogue
+            dialogue.open(*args)
+        }
         is SkillDialogueHandler -> dialogue.open()
         else -> log(ContentAPI::class.java, Log.ERR, "Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
     }

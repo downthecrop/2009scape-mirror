@@ -24,7 +24,8 @@ public enum GrindingItem {
 	DRAGON_SCALE(new Item[] { new Item(Items.BLUE_DRAGON_SCALE_243) }, new Item(Items.DRAGON_SCALE_DUST_241)),
 	ANCHOVIES(new Item[] { new Item(Items.ANCHOVIES_319) }, new Item(Items.ANCHOVY_PASTE_11266)),
 	CHOCOLATE_BAR(new Item[] {new Item(Items.CHOCOLATE_BAR_1973)}, new Item(Items.CHOCOLATE_DUST_1975)),
-	GUAM_LEAF(new Item[] { new Item(Items.CLEAN_GUAM_249) }, new Item(Items.GROUND_GUAM_6681));
+	GUAM_LEAF(new Item[] { new Item(Items.CLEAN_GUAM_249) }, new Item(Items.GROUND_GUAM_6681)),
+	RUNE_SHARDS(new Item[] { new Item(Items.RUNE_SHARDS_6466) }, new Item(Items.RUNE_DUST_6467));
 
 	/**
 	 * Represents the item to grind.

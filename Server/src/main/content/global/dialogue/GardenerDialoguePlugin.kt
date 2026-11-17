@@ -1,9 +1,6 @@
 package content.global.dialogue
 
-import content.global.skill.farming.FarmerPayOptionDialogue
-import content.global.skill.farming.Farmers
-import content.global.skill.farming.FarmingPatch
-import content.global.skill.farming.PatchType
+import content.global.skill.farming.*
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.dialogue.IfTopic
@@ -16,9 +13,16 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 
 @Initializable
-class GardenerDialoguePlugin(player: Player? = null) : core.game.dialogue.DialoguePlugin(player) {
+class GardenerDialoguePlugin(player: Player? = null, private val startStage: Int = START_DIALOGUE) : core.game.dialogue.DialoguePlugin(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+
+        // go to the specific stage if coming from a quest NPC's dialogue file
+        if (stage == START_DIALOGUE && startStage != START_DIALOGUE) {
+            stage = startStage
+        }
+
         val patches = Farmers.forId(npc.id)!!.patches
+
         when (stage) {
             // TODO: Can fruit trees be chopped down by the gardener too?
             START_DIALOGUE -> {
@@ -227,7 +231,9 @@ class GardenerDialoguePlugin(player: Player? = null) : core.game.dialogue.Dialog
     }
 
     override fun getIds(): IntArray {
-        return Farmers.values().map(Farmers::id).toIntArray()
+        // the quest farmers start dialogue in their own files, and get sent to this file to talk about non-quest options
+        val questFarmers = setOf(Farmers.DANTAERA, Farmers.LYRA, Farmers.KRAGEN, Farmers.ELSTAN, Farmers.ALAIN)
+        return Farmers.values().filter { it !in questFarmers }.map(Farmers::id).toIntArray()
     }
 
 }

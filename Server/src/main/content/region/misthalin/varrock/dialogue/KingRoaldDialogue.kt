@@ -12,6 +12,11 @@ import core.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import content.data.Quests
+import content.region.misthalin.varrock.quest.gardenoftranquility.KingRoaldGardenDialogue
+import core.api.getQuestStage
+import core.api.isQuestComplete
+import core.api.isQuestStarted
+import org.rs09.consts.NPCs
 
 /**
  * Central dialogue plugin for King Roald. Reroutes to the more specific DialogueFiles
@@ -27,32 +32,39 @@ class KingRoaldDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
 
-        if (player.getAttribute("afu-mini:ring", false) || player.getAttribute("afu-mini:gloves", false) || player.getAttribute("afu-mini:adze", false)) {
+        if (player.getAttribute("afu-mini:ring", false)
+            || player.getAttribute("afu-mini:gloves", false)
+            || player.getAttribute("afu-mini:adze", false)
+        ) {
             player("Your Majesty! I did it!")
             loadFile(KingRoaldAFUMiniDialogue())
             return true
         }
 
-        if(player.questRepository.isComplete(Quests.PRIEST_IN_PERIL)) {
-            if (!player.questRepository.hasStarted(Quests.ALL_FIRED_UP) || player.questRepository.getQuest(Quests.ALL_FIRED_UP).getStage(player) == 90) {
-                addOption("All Fired Up", KingRoaldAFUDialogue(player.questRepository.getStage(Quests.ALL_FIRED_UP)))
+        if (isQuestComplete(player, Quests.PRIEST_IN_PERIL)) {
+            if (!isQuestStarted(player, Quests.ALL_FIRED_UP) || getQuestStage(player, Quests.ALL_FIRED_UP) == 90) {
+                addOption("All Fired Up", KingRoaldAFUDialogue(getQuestStage(player, Quests.ALL_FIRED_UP)))
             }
         } else {
-            addOption("Priest in Peril", KingRoaldPIPDialogue(player.questRepository.getStage(Quests.PRIEST_IN_PERIL)))
+            addOption("Priest in Peril", KingRoaldPIPDialogue(getQuestStage(player, Quests.PRIEST_IN_PERIL)))
         }
 
-        if (player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).isStarted(player) && !player.questRepository.getQuest(Quests.SHIELD_OF_ARRAV).isCompleted(player)) {
+        if (isQuestStarted(player, Quests.SHIELD_OF_ARRAV) && !isQuestComplete(player, Quests.SHIELD_OF_ARRAV)) {
             addOption("Shield of Arrav", KingRoaldArravDialogue())
         }
 
-        if(!sendChoices()){
+        if (getQuestStage(player, Quests.GARDEN_OF_TRANQUILITY) == 50) {
+            addOption("Garden of Tranquility", KingRoaldGardenDialogue())
+        }
+
+        if (!sendChoices()) {
             player("Greetings, your Majesty.")
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        //Default (non-specific) dialogue
+        // Default (non-specific) dialogue
         when (stage) {
 
             DIALOGUE_INITIAL_OPTIONS_HANDLE -> {
@@ -64,10 +76,12 @@ class KingRoaldDialogue(player: Player? = null) : DialoguePlugin(player) {
                 interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Do you have anything of importance to say?")
                 stage = 1
             }
+
             1 -> {
                 interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "...Not really.")
                 stage = 2
             }
+
             2 -> {
                 interpreter.sendDialogues(
                     npc,
@@ -84,6 +98,6 @@ class KingRoaldDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(648, 2590, 5838)
+        return intArrayOf(NPCs.KING_ROALD_648, NPCs.KING_ROALD_2590, NPCs.KING_ROALD_5838)
     }
 }

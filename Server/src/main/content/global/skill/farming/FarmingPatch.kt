@@ -5,6 +5,7 @@ import core.cache.def.impl.SceneryDefinition
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import content.global.skill.farming.timers.CropGrowth
+import content.region.misthalin.varrock.quest.gardenoftranquility.GardenOfTranquility
 
 enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     //Allotments
@@ -68,16 +69,39 @@ enum class FarmingPatch(val varbit: Int, val type: PatchType) {
     CANIFIS_MUSHROOM(746, PatchType.MUSHROOM_PATCH),
     ALKHARID_CACTUS(744, PatchType.CACTUS_PATCH),
     EVIL_TURNIP(4291, PatchType.EVIL_TURNIP_PATCH),
-    CALQUAT_TREE(726, PatchType.CALQUAT_TREE_PATCH);
+    CALQUAT_TREE(726, PatchType.CALQUAT_TREE_PATCH),
+
+    //Garden of Tranquility
+    GOT_PINK_ROSE(GardenOfTranquility.VB_PINK_ROSE_PATCH, PatchType.PINK_ROSE_PATCH),
+    GOT_RED_ROSE(GardenOfTranquility.VB_RED_ROSE_PATCH, PatchType.RED_ROSE_PATCH),
+    GOT_WHITE_ROSE(GardenOfTranquility.VB_WHITE_ROSE_PATCH, PatchType.WHITE_ROSE_PATCH),
+    GOT_WHITE_TREE(GardenOfTranquility.VB_WHITE_TREE_PATCH, PatchType.WHITE_TREE_PATCH),
+    GOT_DELPHINIUM(GardenOfTranquility.VB_DELPHINIUM_PATCH, PatchType.DELPHINIUM_PATCH),
+    GOT_VINE(GardenOfTranquility.VB_VINE_PATCH, PatchType.VINE_PATCH),
+    GOT_SNOWDROP(GardenOfTranquility.VB_SNOWDROP_PATCH, PatchType.SNOWDROP_PATCH),
+    GOT_YELLOW_ORCHID(GardenOfTranquility.VB_YELLOW_ORCHID_PATCH, PatchType.YELLOW_ORCHID_PATCH),
+    GOT_PINK_ORCHID(GardenOfTranquility.VB_PINK_ORCHID_PATCH, PatchType.PINK_ORCHID_PATCH);
 
 
     companion object {
         @JvmField
         val patches = FarmingPatch.values().map { it.varbit to it }.toMap()
         val patchNodes = ArrayList<Int>()
+        val tranquilityPatchNodes = ArrayList<Int>()
         val nodeMap = HashMap<Int, SceneryDefinition>()
 
         init {
+            // Garden of Tranquility Patches
+            tranquilityPatchNodes.add(9232) //vine patch
+            tranquilityPatchNodes.add(9165)
+            tranquilityPatchNodes.add(9209)
+            tranquilityPatchNodes.addAll(9174..9176)
+            tranquilityPatchNodes.add(9223)
+            tranquilityPatchNodes.add(9197)
+            tranquilityPatchNodes.add(9198)
+            patchNodes.addAll(tranquilityPatchNodes)
+
+            // Rest of the farming patches
             patchNodes.addAll(8550..8557) //allotment wrappers
             patchNodes.addAll(7847..7853) //flower patch wrappers
             patchNodes.addAll(8150..8156) //herb patch wrappers

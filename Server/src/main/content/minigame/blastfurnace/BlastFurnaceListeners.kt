@@ -43,7 +43,7 @@ class BlastFurnaceListeners : InteractionListener {
         initialized = true
 
         on (BlastConsts.STAIR_ENTRANCE_ID, IntType.SCENERY, "climb-down") { p, _ ->
-            val hasCharos = inEquipment(p, Items.RING_OF_CHAROS_4202) || inEquipment(p, Items.RING_OF_CHAROSA_6465)
+            val hasCharos = inEquipment(p, Items.RING_OF_CHAROSA_6465)
             val fee = BlastFurnace.getEntranceFee(hasCharos, getStatLevel(p, Skills.SMITHING))
             if (fee > 0 && !hasTimerActive<BFTempEntranceTimer>(p)) {
                 openDialogue(p, BlastFurnaceDoorDialogue(fee))

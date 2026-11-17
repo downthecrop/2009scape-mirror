@@ -80,6 +80,12 @@ class UseWithBinHandler : InteractionListener {
             }
             return@onUseWith true
         }
+
+        onUseWith(IntType.ITEM, intArrayOf(Items.COMPOST_POTION4_6470, Items.COMPOST_POTION3_6472, Items.COMPOST_POTION2_6474, Items.COMPOST_POTION1_6476), Items.COMPOST_6032) { player, used, with ->
+            replaceSlot(player, used.asItem().slot, used.id.getNext().asItem())
+            replaceSlot(player, with.asItem().slot, Items.SUPERCOMPOST_6034.asItem())
+            return@onUseWith true
+        }
     }
 
     fun loadNodes() {

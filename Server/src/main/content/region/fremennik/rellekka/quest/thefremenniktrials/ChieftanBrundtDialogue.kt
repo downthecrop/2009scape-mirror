@@ -11,6 +11,8 @@ import kotlin.random.Random
 
 import org.rs09.consts.*
 import content.data.Quests
+import core.game.dialogue.IfTopic
+import core.game.dialogue.Topic
 
 @Initializable
 class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
@@ -185,15 +187,30 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
                 stage = 1000
             }
 
-            600 -> options("I just came to say hello.","Do you have any quests?","Nice hat!","Can I hear the history of your people?", "Can I have a seal of passage?").also { stage++ }
-            601 -> when(buttonId){
-                1 -> playerl(FacialExpression.HAPPY,"I just came by to say hello.").also { stage++ }
-                2 -> playerl(FacialExpression.ASKING,"Do you have any quests?").also { stage = 605 }
-                3 -> playerl(FacialExpression.HAPPY,"Nice hat!").also { stage = 610 }
-                4 -> playerl(FacialExpression.ASKING,"Can I hear the history of your people?").also { stage = 615 }
-                5 -> playerl(FacialExpression.HAPPY, "Can I have a seal of passage?").also { stage = 1200 }
+            600 -> {
+                showTopics(
+                    Topic(FacialExpression.HAPPY, "I just came to say hello.", 602),
+                    Topic(FacialExpression.ASKING, "Do you have any quests?", 605),
+                    Topic(FacialExpression.HAPPY, "Nice hat!", 610),
+                    Topic(FacialExpression.ASKING, "Can I hear the history of your people?", 615),
+
+                    IfTopic(FacialExpression.ASKING, "Can I have a seal of passage?", 1200,
+                        !inEquipment(player, Items.RING_OF_CHAROSA_6465)),
+                    IfTopic("More options", 603,
+                        inEquipment(player, Items.RING_OF_CHAROSA_6465), true)
+                )
             }
+
             602 -> npcl(FacialExpression.HAPPY,"Well met, $gender $fName. it is always good to see your face in glorious Rellekka once more!").also { stage = 1000 }
+
+            603 -> {
+                showTopics(
+                    Topic(FacialExpression.ASKING, "Can I have a seal of passage?", 1200),
+                    Topic("(Charm) Can I have a new name?", 604, true)
+                )
+            }
+
+            604 -> playerl(FacialExpression.ASKING, "Not that I don't like my name or anything, but can I have a new one?").also { stage = 1300 }
 
             605 -> npcl(FacialExpression.HAPPY,"Not at the moment, $fName. Rest assured, should your services to the Fremennik be required, I will call upon you").also { stage = 1000 }
 
@@ -270,6 +287,13 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
                 stage = END_DIALOGUE
             }
 
+            1300 -> npcl(FacialExpression.ASKING, "A new name? That is a strange request. What's wrong with $fName?").also { stage++ }
+            1301 -> playerl(FacialExpression.HAPPY, "Nothing's wrong with $fName, I'd just like a new name, if it's not too much trouble.").also {stage++}
+            1302 -> {
+                player.setAttribute("/save:fremennikname", GenerateFremennikName())
+                npcl(FacialExpression.NEUTRAL,  "Very well. From now on you will be known as ${player.getAttribute("fremennikname","how did u break this")}.")
+                stage = END_DIALOGUE
+            }
             1000 -> end()
         }
         return true

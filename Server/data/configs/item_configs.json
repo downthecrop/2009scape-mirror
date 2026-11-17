@@ -36388,7 +36388,7 @@
   {
     "id": "4202",
     "name": "Ring of charos",
-    "examine": "The Ring of charos",
+    "examine": "The Ring of charos.",
     "archery_ticket_price": "0",
     "destroy": "true",
     "destroy_message": "Another can be received from pickpocketing Dr. Fenkenstrain in the tower.",
@@ -55754,6 +55754,26 @@
     "tradeable": "false"
   },
   {
+    "id": "6458",
+    "name": "Orchid seed",
+    "examine": "A pink orchid seed.",
+    "archery_ticket_price": "0",
+    "destroy": "true",
+    "destroy_message": "You can reclaim this item from the place you found it.",
+    "durability": null,
+    "tradeable": "false"
+  },
+  {
+    "id": "6459",
+    "name": "Orchid seed",
+    "examine": "A yellow orchid seed.",
+    "archery_ticket_price": "0",
+    "destroy": "true",
+    "destroy_message": "You can reclaim this item from the place you found it.",
+    "durability": null,
+    "tradeable": "false"
+  },
+  {
     "id": "6460",
     "name": "Snowdrop seed",
     "examine": "A snowdrop seed.",
@@ -55766,31 +55786,37 @@
   {
     "id": "6461",
     "name": "White tree shoot",
-    "examine": "Shoot: A shoot that has been cut from a dying White Tree.Plant pot: A young White Tree sapling.Plant pot after watering: This shoot from a White Tree has been watered and will soon grow.",
+    "examine": "A shoot that has been cut from a dying White Tree.",
     "archery_ticket_price": "0",
+    "destroy": "true",
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "durability": null
+    "durability": null,
+    "tradeable": "false"
   },
   {
     "id": "6462",
     "name": "White tree shoot",
-    "examine": "Shoot: A shoot that has been cut from a dying White Tree.Plant pot: A young White Tree sapling.Plant pot after watering: This shoot from a White Tree has been watered and will soon grow.",
+    "examine": "A young White Tree sapling.",
     "archery_ticket_price": "0",
+    "destroy": "true",
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "durability": null
+    "durability": null,
+    "tradeable": "false"
   },
   {
     "id": "6463",
     "name": "White tree shoot",
-    "examine": "Shoot: A shoot that has been cut from a dying White Tree.Plant pot: A young White Tree sapling.Plant pot after watering: This shoot from a White Tree has been watered and will soon grow.",
+    "examine": "This shoot from a White Tree has been watered and will soon grow.",
     "archery_ticket_price": "0",
+    "destroy": "true",
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "durability": null
+    "durability": null,
+    "tradeable": "false"
   },
   {
     "id": "6464",
     "name": "White tree sapling",
-    "examine": "A young White Tree sapling",
+    "examine": "A young White Tree sapling.",
     "archery_ticket_price": "0",
     "destroy": "true",
     "destroy_message": "You can reclaim this item from the place you found it.",
@@ -55826,11 +55852,11 @@
   {
     "id": "6468",
     "name": "Plant cure",
-    "examine": "Use this on plants to cure disease.",
+    "examine": "This plant cure emits potency.",
     "archery_ticket_price": "0",
     "durability": null,
     "shop_price": "25",
-    "tradeable": "true"
+    "tradeable": "false"
   },
   {
     "id": "6469",
@@ -55910,7 +55936,7 @@
   {
     "id": "6478",
     "name": "Trolley",
-    "examine": "I can use this to move heavy objects. (or) An empty trolley.",
+    "examine": "I can use this to move heavy objects.",
     "archery_ticket_price": "0",
     "destroy": "true",
     "destroy_message": "You can get another one from Queen Ellamaria",

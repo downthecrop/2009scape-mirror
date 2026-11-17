@@ -14,6 +14,8 @@ import org.rs09.consts.Items;
 
 import java.util.concurrent.TimeUnit;
 
+import static content.region.misthalin.draynor.dialogue.WiseOldManDialogueFile.ATTR_QP_CAPE_RECLAIM;
+import static content.region.misthalin.draynor.dialogue.WiseOldManDialogueFile.ATTR_QP_HOOD_RECLAIM;
 import static core.api.ContentAPIKt.*;
 
 /**
@@ -97,9 +99,9 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 					} else {
 						location = "the Wise Old Man";
 						if (i.getId() == Items.QUEST_POINT_CAPE_9813) {
-							setAttribute(player, "/save:reclaim-qp-cape", true);
+							setAttribute(player, ATTR_QP_CAPE_RECLAIM, true);
 						} else {
-							setAttribute(player, "/save:reclaim-qp-hood", true);
+							setAttribute(player, ATTR_QP_HOOD_RECLAIM, true);
 						}
 					}
 					if (amt == 1) {

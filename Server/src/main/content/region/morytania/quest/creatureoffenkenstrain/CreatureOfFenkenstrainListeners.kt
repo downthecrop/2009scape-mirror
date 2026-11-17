@@ -1,6 +1,7 @@
 package content.region.morytania.quest.creatureoffenkenstrain
 
 import content.data.Quests
+import content.region.misthalin.varrock.quest.gardenoftranquility.GardenOfTranquility
 import core.api.*
 import core.game.dialogue.FacialExpression
 import core.game.global.action.DoorHelper
@@ -386,12 +387,22 @@ class CreatureOfFenkenstrainListeners : InteractionListener {
             if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) == 7) {
                 sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")
                 finishQuest(player, Quests.CREATURE_OF_FENKENSTRAIN)
-            } else if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 7 && hasAnItem(player, Items.RING_OF_CHAROS_4202).container == null) {
+            } else if (getVarbit(player, GardenOfTranquility.VB_RING_WELL) == 1) {
+                // Fenkenstrain cannot be pickpocketed for ring if it is thrown down the well during Garden of Tranquility.
+                sendNPCDialogue(player, NPCs.DR_FENKENSTRAIN_1670, "What do you think you're doing???", FacialExpression.NEUTRAL)
+            } else if (hasAnItem(player, arrayOf(Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465)).exists()) {
+                // Fenkenstrain cannot be pickpocketed for ring if it is already possessed.
+                sendNPCDialogue(player, NPCs.DR_FENKENSTRAIN_1670, "What do you think you're doing???", FacialExpression.NEUTRAL)
+            }else if (getQuestStage(player, Quests.GARDEN_OF_TRANQUILITY) >= 20) {
+                // Allow Fenkenstrain to be pickpocketed beyond the quest if the ring is lost. After Wise Old Man enchants it, it should give the augmented version.
+                addItemOrDrop(player, Items.RING_OF_CHAROSA_6465, 1)
+                sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")
+            } else if (getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) > 7) {
                 // Allow Fenkenstrain to be pickpocketed beyond the quest if the ring is lost.
                 addItemOrDrop(player, Items.RING_OF_CHAROS_4202, 1)
                 sendMessage(player, "You steal the Ring of Charos from Fenkenstrain.")
             } else {
-                player.dialogueInterpreter.sendDialogues(NPCs.DR_FENKENSTRAIN_1670, FacialExpression.NEUTRAL ,"What do you think you're doing???")
+                sendNPCDialogue(player, NPCs.DR_FENKENSTRAIN_1670, "What do you think you're doing???", FacialExpression.NEUTRAL)
             }
             return@on true
         }

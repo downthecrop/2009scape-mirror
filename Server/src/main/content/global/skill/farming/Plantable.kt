@@ -82,8 +82,18 @@ enum class Plantable(val itemID: Int, val displayName: String, val value: Int, v
     CACTUS_SEED(Items.CACTUS_SEED_5280, "cactus seed", 8, 7, 66.5, 25.0, 374.0, 55, PatchType.CACTUS_PATCH, Items.CACTUS_SPINE_6016),
     EVIL_TURNIP_SEED(Items.EVIL_TURNIP_SEED_12148, "evil turnip seed", 4, 1, 41.0, 46.0, 0.0, 42, PatchType.EVIL_TURNIP_PATCH, Items.EVIL_TURNIP_12134),
     CALQUAT_SAPLING(Items.CALQUAT_SAPLING_5503, "calquat tree sapling",  4, 8, 130.5, 48.5, 12096.0, 72, PatchType.CALQUAT_TREE_PATCH, Items.CALQUAT_FRUIT_5980, Item(Items.POISON_IVY_BERRIES_6018, 8)),
-    SPIRIT_SAPLING(Items.SPIRIT_SAPLING_5375, "spirit tree sapling", 8, 12, 199.5, 0.0, 19301.0, 83, PatchType.SPIRIT_TREE_PATCH, 0, Item(Items.MONKEY_NUTS_4012, 5), null, Item(Items.MONKEY_BAR_4014, 1), Item(Items.GROUND_TOOTH_9082, 1) )
-    ;
+    SPIRIT_SAPLING(Items.SPIRIT_SAPLING_5375, "spirit tree sapling", 8, 12, 199.5, 0.0, 19301.0, 83, PatchType.SPIRIT_TREE_PATCH, 0, Item(Items.MONKEY_NUTS_4012, 5), null, Item(Items.MONKEY_BAR_4014, 1), Item(Items.GROUND_TOOTH_9082, 1)),
+
+    // Quests
+    VINE_SEED(Items.VINE_SEED_6456, "vine seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.VINE_PATCH, 0),
+    PINK_ORCHID_SEED(Items.ORCHID_SEED_6458, "pink orchid seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.PINK_ORCHID_PATCH, 0),
+    YELLOW_ORCHID_SEED(Items.ORCHID_SEED_6459, "yellow orchid seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.YELLOW_ORCHID_PATCH, 0),
+    SNOWDROP_SEED(Items.SNOWDROP_SEED_6460, "snowdrop seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.SNOWDROP_PATCH, 0),
+    DELPHINIUM_SEED(Items.DELPHINIUM_SEED_6457, "delphinium seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.DELPHINIUM_PATCH, 0),
+    PINK_ROSE_SEED(Items.PINK_ROSE_SEED_6455, "pink rose seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.PINK_ROSE_PATCH, 0),
+    RED_ROSE_SEED(Items.RED_ROSE_SEED_6454, "red rose seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.RED_ROSE_PATCH, 0),
+    WHITE_ROSE_SEED(Items.WHITE_ROSE_SEED_6453, "white rose seed", 4, 3, 0.0, 0.0, 0.0, 1, PatchType.WHITE_ROSE_PATCH, 0),
+    WHITE_TREE_SAPLING(Items.WHITE_TREE_SAPLING_6464, "white tree sapling", 4, 4, 0.0, 12.0, 0.0, 1, PatchType.WHITE_TREE_PATCH, Items.WHITE_TREE_FRUIT_6469);
 
     constructor(itemID: Int, displayName: String, value: Int, stages: Int, plantingXP: Double, harvestXP: Double, checkHealthXP: Double, requiredLevel: Int, applicablePatch: PatchType, harvestItem: Int, protectionFlower: Plantable)
             : this(itemID,displayName,value,stages,plantingXP,harvestXP,checkHealthXP,requiredLevel,applicablePatch,harvestItem,null,protectionFlower)

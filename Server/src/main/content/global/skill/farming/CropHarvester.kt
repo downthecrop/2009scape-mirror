@@ -1,10 +1,12 @@
 package content.global.skill.farming
 
+import content.data.Quests
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import content.global.skill.summoning.familiar.GiantEntNPC
+import content.region.misthalin.varrock.quest.gardenoftranquility.GardenOfTranquility
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -113,6 +115,17 @@ class CropHarvester : OptionHandler() {
                     if (sendHarvestMessages && (patch.cropLives <= 0 || patch.harvestAmt <= 0)) {
                         sendMessage(player, "The $patchName is now empty.")
                     }
+
+                    // check for harvesting marigolds in Garden of Tranquility
+                    val gardenOfTranquilityStage = getQuestStage(player, Quests.GARDEN_OF_TRANQUILITY)
+                    val gardenOfTranquilityElstan = getVarbit(player, GardenOfTranquility.VB_ELSTAN_STAGE)
+                    if (gardenOfTranquilityStage <= 40
+                        && gardenOfTranquilityElstan == 2
+                        && plantable == Plantable.MARIGOLD_SEED
+                        && fPatch == FarmingPatch.S_FALADOR_FLOWER_C){
+                        setVarbit(player, GardenOfTranquility.VB_ELSTAN_STAGE, 3, true)
+                    }
+
                     return patch.cropLives <= 0 || patch.harvestAmt <= 0
                 }
             }

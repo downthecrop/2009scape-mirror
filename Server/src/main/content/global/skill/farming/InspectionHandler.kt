@@ -1,5 +1,7 @@
 package content.global.skill.farming
 
+import content.region.misthalin.varrock.quest.gardenoftranquility.GardenOfTranquility
+import content.region.misthalin.varrock.quest.gardenoftranquility.GardenOfTranquilityListeners
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
@@ -27,6 +29,11 @@ class InspectionHandler : OptionHandler() {
 
         val p = patch.getPatchFor(player)
         val patchName = p.patch.type.displayName()
+
+        if (GardenOfTranquilityListeners.questPatches.contains(patch.type)) {
+            GardenOfTranquilityListeners.questPatchInspect(player, patch.type)
+            return true
+        }
 
         val statusPatchType = if (patch == FarmingPatch.TROLL_STRONGHOLD_HERB) "This is a very special herb patch."
             else "This is ${prependArticle(patchName)}."

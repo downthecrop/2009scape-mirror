@@ -57,7 +57,11 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
     private fun runOfflineCatchupLogic() {
         for ((_, patch) in patchMap) {
             val type = patch.patch.type
-            val shouldPlayCatchup = !patch.isGrown() || (type == PatchType.BUSH_PATCH && patch.getFruitOrBerryCount() < 4) || (type == PatchType.FRUIT_TREE_PATCH && patch.getFruitOrBerryCount() < 6) || (patch.plantable == Plantable.WILLOW_SAPLING && patch.harvestAmt < 6)
+            val shouldPlayCatchup = !patch.isGrown()
+                    || (type == PatchType.BUSH_PATCH && patch.getFruitOrBerryCount() < 4)
+                    || (type == PatchType.FRUIT_TREE_PATCH && patch.getFruitOrBerryCount() < 6)
+                    || (patch.plantable == Plantable.WILLOW_SAPLING && patch.harvestAmt < 6)
+                    || (type == PatchType.WHITE_TREE_PATCH && patch.getFruitOrBerryCount() < 4)
             if (shouldPlayCatchup && !patch.isDead && !patch.isChoppedFruitTree()) {
                 var stagesToSimulate = if (!patch.isGrown()) {
                     if (patch.isWeedy() || patch.isEmptyAndWeeded()) patch.currentGrowthStage % 4
@@ -65,7 +69,7 @@ class CropGrowth : PersistTimer (500, "farming:crops", isSoft = true) {
                 } else 0
 
                 if (patch.plantable != null) {
-                    if (type == PatchType.BUSH_PATCH)
+                    if (type == PatchType.BUSH_PATCH || type == PatchType.WHITE_TREE_PATCH)
                         stagesToSimulate += Math.min(4, 4 - patch.getFruitOrBerryCount())
                     if (type == PatchType.FRUIT_TREE_PATCH)
                         stagesToSimulate += Math.min(6, 6 - patch.getFruitOrBerryCount())
