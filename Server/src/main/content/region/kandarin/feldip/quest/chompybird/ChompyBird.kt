@@ -27,7 +27,7 @@ import java.util.Random
 import content.data.Quests
 
 @Initializable
-class ChompyBird : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QUEST_CHOMPY, 0, 1, 65), InteractionListener {
+class ChompyBird : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QUEST_CHOMPY_293, 0, 1, 65), InteractionListener {
   companion object {
     val CAVE_ENTRANCE = Location.create(2646, 9378, 0)
     val CAVE_EXIT = Location.create(2630, 2997, 0) 
@@ -192,12 +192,12 @@ class ChompyBird : Quest(Quests.BIG_CHOMPY_BIRD_HUNTING, 35, 34, 2, Vars.VARP_QU
         && amountInInventory(player, fycieIngredient) > 0
       ) {
         lock(player, 5)
-        setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 1)
+        setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST_1770, 1)
         animate(player, Animations.HUMAN_COOKING_RANGE_896)
         sendMessage(player, "You carefully place the chompy bird on the spit-roast.")
         sendMessage(player, "You add the other ingredients and cook the food.")
         runTask(player, 4) {
-          setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST, 0)
+          setVarbit(player, Vars.VARBIT_QUEST_CHOMPY_SPITROAST_1770, 0)
           sendItemDialogue(
             player,
             Items.SEASONED_CHOMPY_2882,

@@ -20,7 +20,7 @@ import org.rs09.consts.Vars
 class SkippyDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        openDialogue(player, SkippyBucketDialogue(0, getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE)))
+        openDialogue(player, SkippyBucketDialogue(0, getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE_1344)))
         return true
     }
 
@@ -83,7 +83,7 @@ class SkippyBucketDialogue(override var stage: Int = 0, val questStage: Int = 0)
                                 animate(player!!, 2283)
                                 removeItem(player!!, Items.BUCKET_OF_WATER_1929)
                                 addItem(player!!, Items.BUCKET_1925)
-                                setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE, TENDER, true)
+                                setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_1344, TENDER, true)
                                 return@queueScript delayScript(player!!, 1)
                             }
                             2 -> {
@@ -154,7 +154,7 @@ class SkippyBucketDialogue(override var stage: Int = 0, val questStage: Int = 0)
                 6 -> sendItemDialogue(player!!, Items.NETTLE_TEA_4239, "Skippy drinks the tea and clutches his forehead in pain.").also {
                     stage++
                     removeItem(player!!, Items.NETTLE_TEA_4239)
-                    setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE, HUNGOVER, true)
+                    setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_1344, HUNGOVER, true)
                 }
                 7 -> npcl(FacialExpression.ANNOYED, "Ohhhhh...").also { stage++ }
                 8 -> playerl(FacialExpression.ASKING, "What? What's wrong?").also { stage++ }
@@ -260,7 +260,7 @@ class SkippyBucketDialogue(override var stage: Int = 0, val questStage: Int = 0)
 class SkippyBootDialogue: DialogueFile(){
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.SKIPPY_2796)
-        val expression = if (getVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE) > SkippyBucketDialogue.DRUNK) FacialExpression.ROLLING_EYES else FacialExpression.DRUNK
+        val expression = if (getVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_1344) > SkippyBucketDialogue.DRUNK) FacialExpression.ROLLING_EYES else FacialExpression.DRUNK
         npcl(expression, "Thanks! Now I have two right boots!").also { stage = END_DIALOGUE }
     }
 

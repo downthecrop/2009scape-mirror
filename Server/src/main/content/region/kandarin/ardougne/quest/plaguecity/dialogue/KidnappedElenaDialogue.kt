@@ -33,8 +33,8 @@ class KidnappedElenaDialogue(player: Player? = null) : DialoguePlugin(player) {
             4 -> {
                 end()
                 setQuestStage(player!!, Quests.PLAGUE_CITY, 99)
-                setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_RESCUE_ELENA, 1)
-                setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS, 0)
+                setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_RESCUE_ELENA_1784, 1)
+                setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS_1783, 0)
                 stage = END_DIALOGUE
             }
         }

@@ -389,8 +389,8 @@ class PlagueCityListeners : InteractionListener {
                     3 -> {
                         teleport(p, Location(2518, 9759))
                         setQuestStage(p, Quests.PLAGUE_CITY, 4)
-                        setVarbit(p, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS, 1)
-                        setVarbit(p, Vars.VARBIT_QUEST_PLAGUE_CITY_MUD_PILE, 1)
+                        setVarbit(p, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS_1783, 1)
+                        setVarbit(p, Vars.VARBIT_QUEST_PLAGUE_CITY_MUD_PILE_1785, 1)
                         sendDialogueLines(
                             p,
                             "You fall through...",

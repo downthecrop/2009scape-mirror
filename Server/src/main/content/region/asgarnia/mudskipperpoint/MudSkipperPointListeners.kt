@@ -43,7 +43,7 @@ class MudSkipperPointListeners : InteractionListener {
 
     private fun handleExplosives(player: Player, explosives: Item, target: Location): Boolean{
         // Check if the player has unlocked the ability to summon Mogres
-        if (getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE) != SkippyBucketDialogue.DONE_QUEST){
+        if (getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE_1344) != SkippyBucketDialogue.DONE_QUEST){
             sendDialogueLines(player, "Sinister as that fishing spot is, why would I want to", "explode it?")
             return false
         }
@@ -88,7 +88,7 @@ class MudSkipperPointListeners : InteractionListener {
     }
 
     private fun soberSkippy(player: Player): Boolean {
-        if (getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE) > SkippyBucketDialogue.DRUNK){
+        if (getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE_1344) > SkippyBucketDialogue.DRUNK){
             sendDialogue(player, "I think he's sober enough. And I don't want to use another bucket of water.")
             return false
         }

@@ -213,13 +213,10 @@ class AbyssPlugin : InteractionListener {
     )
 
     companion object {
-
         /**
          * varp bit offset for the abyss obstacles varbits
          */
         const val ABYSS_OBSTACLES = 18
-        // varp value, until the constant is defined in consntlib
-        const val VARP_SCENERY_ABYSS = 491
 
         /**
          * Represents teleporting to the abyss,

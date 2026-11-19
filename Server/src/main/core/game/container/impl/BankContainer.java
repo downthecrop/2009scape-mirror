@@ -417,7 +417,7 @@ public final class BankContainer extends Container {
 	 * @return If items have to be noted {@code true}.
 	 */
 	public boolean isNoteItems() {
-		return getVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE) == 1;
+		return getVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE_7001) == 1;
 	}
 
 	/**
@@ -425,7 +425,7 @@ public final class BankContainer extends Container {
 	 * @param noteItems If items have to be noted {@code true}.
 	 */
 	public void setNoteItems(boolean noteItems) {
-		setVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE, noteItems ? 1 : 0, true);
+		setVarbit(player, Vars.VARBIT_IFACE_BANK_NOTE_MODE_7001, noteItems ? 1 : 0, true);
 	}
 
 	/**
@@ -459,7 +459,7 @@ public final class BankContainer extends Container {
 	 * @param insertItems The insert items value.
 	 */
 	public void setInsertItems(boolean insertItems) {
-		setVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE, insertItems ? 1 : 0, true);
+		setVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE_7000, insertItems ? 1 : 0, true);
 	}
 	
 	/**
@@ -467,7 +467,7 @@ public final class BankContainer extends Container {
 	 * @return {@code True} if inserting items mode is enabled.
 	 */
 	public boolean isInsertItems() {
-		return getVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE) == 1;
+		return getVarbit(player, Vars.VARBIT_IFACE_BANK_INSERT_MODE_7000) == 1;
 	}
 	
 	/**

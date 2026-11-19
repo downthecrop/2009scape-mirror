@@ -79,8 +79,8 @@ class SaveVersionHooks : LoginListener {
             if (player.version < 3) {
                 // Damage control on Plague city. There are a few varbits that should have been set for spawning
                 when (getQuestStage(player, Quests.PLAGUE_CITY)){
-                    in 6..98 -> setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS, 1) // Edmond is in the tunnel
-                    in 99..100 ->setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_RESCUE_ELENA, 1)  // Elena is free
+                    in 6..98 -> setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_EDMOND_TUNNELS_1783, 1) // Edmond is in the tunnel
+                    in 99..100 ->setVarbit(player, Vars.VARBIT_QUEST_PLAGUE_CITY_RESCUE_ELENA_1784, 1)  // Elena is free
                 }
             }
 
