@@ -13,10 +13,6 @@ import core.game.interaction.IntType
 import org.rs09.consts.Sounds
 
 class JatizsoListeners : InteractionListener {
-    val GATES_CLOSED = intArrayOf(21403,21405)
-    val NORTH_GATE_ZONE = ZoneBorders(2414,3822,2417,3825)
-    val WEST_GATE_ZONE = ZoneBorders(2386,3797,2390,3801)
-    val SOUTH_GAE_ZONE = ZoneBorders(2411,3795,2414,3799)
     val BELL = 21394
     val TOWER_GUARDS = intArrayOf(NPCs.GUARD_5490, NPCs.GUARD_5489)
     val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
@@ -39,42 +35,6 @@ class JatizsoListeners : InteractionListener {
         )
     )
     override fun defineListeners() {
-        on(GATES_CLOSED, IntType.SCENERY, "open"){ player, node ->
-            if(NORTH_GATE_ZONE.insideBorder(player)){
-                if(node.id == GATES_CLOSED.first()){
-                    val other = getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    replaceScenery(other.asScenery(), other.id - 1, -1, Direction.NORTH_EAST)
-                } else {
-                    val other = getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH_EAST)
-                    replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
-                }
-            } else if(WEST_GATE_ZONE.insideBorder(player)){
-                if(node.id == GATES_CLOSED.first()){
-                    val other = getScenery(node.location.transform(0, 1, 0)) ?: return@on true
-                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.WEST)
-                    replaceScenery(other.asScenery(), other.id + 1, -1, Direction.NORTH)
-                } else {
-                    val other = getScenery(node.location.transform(0, -1, 0)) ?: return@on true
-                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
-                    replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
-                }
-            } else if(SOUTH_GAE_ZONE.insideBorder(player)){
-                if(node.id == GATES_CLOSED.first()){
-                    val other = getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
-                    replaceScenery(other.asScenery(), other.id - 1, -1, Direction.EAST)
-                } else {
-                    val other = getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
-                }
-            }
-            playAudio(player, Sounds.NICEDOOR_OPEN_81)
-            return@on true
-        }
-
         on(TOWER_GUARDS, IntType.NPC, "watch-shouting"){ player, _ ->
             val local = findLocalNPC(player, NPCs.GUARD_5489)
             lock(player, 200)

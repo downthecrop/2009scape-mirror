@@ -172,7 +172,7 @@ class DoorHelper {
                 }
             } else {
                 val pairedConfig = DoorConfigLoader.forId(pairedDoor.id)
-                handlePairedDoors(entity, config, door, pairedConfig, pairedDoor, isAutowalkDoor, isOpening)
+                closed = handlePairedDoors(entity, config, door, pairedConfig, pairedDoor, isAutowalkDoor, isOpening)
             }
             if (entity is Player && config?.sound != false) {
                 if (closed) playCloseDoorSound(entity, convertToSoundType(config))
@@ -197,7 +197,7 @@ class DoorHelper {
         }
 
         /** Handles paired doors. */
-        private fun handlePairedDoors(entity: Entity, config: DoorConfigLoader.Door?, door: Scenery, pairedConfig: DoorConfigLoader.Door?, pairedDoor: Scenery, isAutowalkDoor: Boolean, opening: Boolean) {
+        private fun handlePairedDoors(entity: Entity, config: DoorConfigLoader.Door?, door: Scenery, pairedConfig: DoorConfigLoader.Door?, pairedDoor: Scenery, isAutowalkDoor: Boolean, opening: Boolean): Boolean {
             /**
              * Designate the door closest to the south-west corner as the 'primary' door and the other door as the
              * 'secondary' door. This ensures that fences rotate around the correct pivot, and that gates rotate
@@ -226,9 +226,11 @@ class DoorHelper {
                     openGates(primaryConfig, primary, secondaryConfig, secondary, isAutowalkDoor)
                 }
             } else if (!isAutowalkDoor) {
-                closeDoor(entity, primary)
+                val closed = closeDoor(entity, primary)
                 closeDoor(null, secondary)
+                return closed
             }
+            return false
         }
 
         /** Swings open a fixed door. */
@@ -380,15 +382,15 @@ class DoorHelper {
         /** Sound type. */
         enum class SoundType {
             DEFAULT,
-            IS_METAL,
             IS_FENCE,
+            IS_METAL
         }
 
         /** Converts Door to SoundType. */
         private fun convertToSoundType(doorConfig: DoorConfigLoader.Door?): SoundType {
             return when {
-                doorConfig?.isMetal == true -> SoundType.IS_METAL
                 doorConfig?.isFence == true -> SoundType.IS_FENCE
+                doorConfig?.isMetal == true -> SoundType.IS_METAL
                 else -> SoundType.DEFAULT
             }
         }

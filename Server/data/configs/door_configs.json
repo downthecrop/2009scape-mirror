@@ -814,13 +814,6 @@
     "autowalk": "true"
   },
   {
-    "id": "2600",
-    "replaceId": "2600",
-    "fence": "false",
-    "metal": "false",
-    "autowalk": "true"
-  },
-  {
     "id": "2601",
     "replaceId": "2601",
     "fence": "false",
@@ -2839,14 +2832,16 @@
   {
     "id": "21403",
     "replaceId": "21404",
-    "fence": "true",
-    "metal": "true"
+    "fence": "false",
+    "metal": "true",
+    "extraMove": "-1"
   },
   {
     "id": "21405",
     "replaceId": "21406",
-    "fence": "true",
-    "metal": "true"
+    "fence": "false",
+    "metal": "true",
+    "extraMove": "-1"
   },
   {
     "id": "21505",
@@ -3090,19 +3085,22 @@
     "id": "25718",
     "replaceId": "25719",
     "fence": "false",
-    "metal": "false"
+    "metal": "false",
+    "ignoreSecondDoor": "true"
   },
   {
     "id": "25748",
     "replaceId": "25749",
     "fence": "false",
-    "metal": "false"
+    "metal": "false",
+    "autowalk": "true"
   },
   {
     "id": "25750",
     "replaceId": "25751",
     "fence": "false",
-    "metal": "false"
+    "metal": "false",
+    "autowalk": "true"
   },
   {
     "id": "25788",
