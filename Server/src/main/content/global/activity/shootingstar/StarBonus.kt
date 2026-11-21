@@ -19,9 +19,9 @@ class StarBonus : PersistTimer (1, "shootingstar:bonus") {
 
     override fun run (entity: Entity) : Boolean {
         if (entity is Player && ticksLeft == 500) {
-            entity.sendMessage("<col=f0f095>You have 5 minutes of your mining bonus left</col>")
+            sendMessage(entity, "<col=f0f095>You have 5 minutes of your mining bonus left.</col>")
         } else if (entity is Player && ticksLeft == 0) {
-            entity.sendMessage("<col=FF0000>Your mining bonus has run out!</col>")
+            sendMessage(entity, "<col=FF0000>Your mining bonus has run out!</col>")
         }
         return ticksLeft-- > 0
     }

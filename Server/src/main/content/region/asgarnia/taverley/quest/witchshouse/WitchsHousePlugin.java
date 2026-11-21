@@ -172,7 +172,6 @@ public class WitchsHousePlugin extends OptionHandler {
             case 2861:
             case 2862:
             case 2863:
-            case 2864:
             case 2865:
             case 2866:
                 return DoorHelper.getDestination((Entity) node, (Scenery) n);
