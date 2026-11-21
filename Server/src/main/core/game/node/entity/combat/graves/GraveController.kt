@@ -232,6 +232,8 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
                 return false
             if (player.zoneMonitor.isRestricted(ZoneRestriction.GRAVES))
                 return false
+            if (player.location.y < 2000) //instanced areas
+                return false
             return true
         }
 

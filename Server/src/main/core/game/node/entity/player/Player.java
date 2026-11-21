@@ -719,8 +719,9 @@ public class Player extends Entity {
 				if (coins > 0) {
 					GroundItemManager.create(new Item(Items.COINS_995, coins), location, (Player) killer);
 				}
-				if (killer instanceof Player)
+				if (killer instanceof Player) {
 					PlayerMonitor.log((Player) killer, LogType.PK, "Killed " + name + ", who dropped: " + itemsLost);
+				}
 				sendMessage(colorize("%RDue to the circumstances of your death, you do not have a grave."));
 			}
 

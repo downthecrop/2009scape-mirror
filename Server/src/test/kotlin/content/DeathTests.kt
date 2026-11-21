@@ -39,7 +39,7 @@ class DeathTests {
         val player = TestUtils.getMockPlayer("gravetest", IronmanMode.NONE, Rights.REGULAR_PLAYER)
 
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave.initialize(player, Location.create(0,0,0), inventory)
+        grave.initialize(player, Location(3222, 3218, 0), inventory)
 
         for (item in grave.getItems()) {
             Assertions.assertEquals(player, item.dropper)
@@ -58,7 +58,7 @@ class DeathTests {
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
         val p = TestUtils.getMockPlayer("gravetest")
 
-        grave.initialize(p, Location.create(0,0,0), arrayOf())
+        grave.initialize(p, Location(3222, 3218, 0), arrayOf())
         Assertions.assertEquals(false, grave.isActive)
     }
 
@@ -75,7 +75,7 @@ class DeathTests {
         )
         val p = TestUtils.getMockPlayer("gravetest")
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave.initialize(p, Location.create(0,0,0), inventory)
+        grave.initialize(p, Location(3222, 3218, 0), inventory)
 
         Assertions.assertEquals(true, grave.getItems().isEmpty())
         Assertions.assertEquals(false, grave.isActive)
@@ -88,7 +88,7 @@ class DeathTests {
         )
         val p = TestUtils.getMockPlayer("gravetest")
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave.initialize(p, Location.create(0,0,0), inventory)
+        grave.initialize(p, Location(3222, 3218, 0), inventory)
 
         Assertions.assertEquals(2, grave.getItems().size)
         Assertions.assertEquals(true, grave.isActive)
@@ -100,7 +100,7 @@ class DeathTests {
         )
         val p = TestUtils.getMockPlayer("gravetest")
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave.initialize(p, Location.create(0,0,0), inventory)
+        grave.initialize(p, Location(3222, 3218, 0), inventory)
 
         Assertions.assertEquals(0, grave.getItems().size)
         Assertions.assertEquals(false, grave.isActive)
@@ -114,7 +114,7 @@ class DeathTests {
         )
         val p = TestUtils.getMockPlayer("gravetest")
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave.initialize(p, Location.create(0,0,0), inventory)
+        grave.initialize(p, Location(3222, 3218, 0), inventory)
 
         Assertions.assertEquals(0, grave.getItems().size)
         Assertions.assertEquals(false, grave.isActive)
@@ -133,7 +133,7 @@ class DeathTests {
         val startTime = GameWorld.ticks
         val p = TestUtils.getMockPlayer("gravetest")
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave.initialize(p, Location.create(0,0,0), inventory)
+        grave.initialize(p, Location(3222, 3218, 0), inventory)
 
         TestUtils.advanceTicks(30, false)
         val expectedTicksRemaining = secondsToTicks(GraveType.MEM_PLAQUE.durationMinutes * 60) - (GameWorld.ticks - startTime)
@@ -161,7 +161,7 @@ class DeathTests {
             )
             val startTime = GameWorld.ticks
             val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-            grave.initialize(p, Location.create(0,0,0), inventory)
+            grave.initialize(p, Location(3222, 3218, 0), inventory)
             val expectedTicksRemaining = secondsToTicks(GraveType.MEM_PLAQUE.durationMinutes * 60) - (GameWorld.ticks - startTime)
             Assertions.assertEquals(expectedTicksRemaining, grave.ticksRemaining)
 
@@ -194,7 +194,7 @@ class DeathTests {
                 Items.RED_BEAD_1470.asItem()
         )
         val p = TestUtils.getMockPlayer("gravetester", IronmanMode.NONE, Rights.REGULAR_PLAYER)
-        p.location = Location.create(0,0,0)
+        p.location = Location(3222, 3218, 0)
         p.setAttribute("tutorial:complete", true)
 
         for (item in inventory)
@@ -217,7 +217,7 @@ class DeathTests {
                 Items.ABYSSAL_WHIP_4151.asItem()
         )
         val p = TestUtils.getMockPlayer("gravetester", IronmanMode.NONE, Rights.REGULAR_PLAYER)
-        p.location = Location.create(0,0,0)
+        p.location = Location(3222, 3218, 0)
         p.setAttribute("tutorial:complete", true)
 
         for (item in inventory)
@@ -236,7 +236,7 @@ class DeathTests {
         )
         val grave1 = GraveController.produceGrave(GraveType.MEM_PLAQUE)
         val p = TestUtils.getMockPlayer("gravetester")
-        grave1.initialize(p, Location.create(0,0,0), inventory1)
+        grave1.initialize(p, Location(3222, 3218, 0), inventory1)
 
         Assertions.assertEquals(true, grave1.isActive)
         Assertions.assertEquals(Items.RUNE_SCIMITAR_1333, GraveController.activeGraves[p.details.uid]?.getItems()?.getOrNull(0)?.id ?: -1)
@@ -245,7 +245,7 @@ class DeathTests {
                 Items.ABYSSAL_WHIP_4151.asItem()
         )
         val grave2 = GraveController.produceGrave(GraveType.MEM_PLAQUE)
-        grave2.initialize(p, Location.create(0,0,0), inventory2)
+        grave2.initialize(p, Location(3222, 3218, 0), inventory2)
 
         Assertions.assertEquals(false, grave1.isActive)
         Assertions.assertEquals(true, grave2.isActive)
@@ -259,7 +259,7 @@ class DeathTests {
                 Items.RUNE_SCIMITAR_1333.asItem()
         )
         val p = TestUtils.getMockPlayer("gtester", IronmanMode.NONE, Rights.REGULAR_PLAYER)
-        p.location = Location.create(0,0,0)
+        p.location = Location(3222, 3218, 0)
         p.setAttribute("tutorial:complete", true)
 
         for (item in inventory)

@@ -18,6 +18,7 @@ import core.game.node.entity.skill.Skills
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -88,6 +89,17 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
 
     override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
         entity.animate(entity.properties.attackAnimation)
+    }
+
+    private fun shouldGetBlackMaskBoost(player: Player) : Boolean {
+        val victimId = player.properties.combatPulse?.getVictim()?.id ?: return false
+        if (victimId == NPCs.BORK_7133 || victimId == NPCs.BORK_7134) { // Bork always counts as on-task https://runescape.wiki/w/Bork?oldid=900457
+            return true
+        }
+        val isOnTask = getSlayerTask(player)?.let { task ->
+            task.ids.contains(victimId) || (task == Tasks.KALPHITES && (victimId == NPCs.KALPHITE_QUEEN_1158)) // Kalphite Queen phase 1
+        } == true
+        return isOnTask
     }
 
     override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
@@ -166,13 +178,11 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                 val amuletId = getItemFromEquipment(entity, EquipmentSlot.NECK)?.id ?: 0
                 if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
                     effectiveAttackLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
-                } else if (getSlayerTask(entity)?.let { task ->
-                        val victimId = entity.properties.combatPulse?.getVictim()?.id ?: 0
-                        task.ids.contains(victimId) || (task == Tasks.KALPHITES && (victimId == 1158)) // Kalphite Queen phase 1
-                    } == true) {
+                } else if (shouldGetBlackMaskBoost(entity)) {
                     effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
-                    if (getSlayerTask(entity)?.dragon == true && inEquipment(entity, Items.DRAGON_SLAYER_GLOVES_12862))
+                    if (getSlayerTask(entity)?.dragon == true && inEquipment(entity, Items.DRAGON_SLAYER_GLOVES_12862)) {
                         effectiveAttackLevel *= 1.1
+                    }
                 }
 
                 return effectiveAttackLevel.toInt()
@@ -206,16 +216,12 @@ open class MeleeSwingHandler (vararg flags: SwingHandlerFlag)
                     effectiveStrengthLevel *= styleStrengthBonus
                 else effectiveStrengthLevel *= 64
 
-                val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
-
                 // strength bonus for specialized equipments (salve amulets, slayer equips)
+                val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
                 val amuletId = getItemFromEquipment(entity, EquipmentSlot.NECK)?.id ?: 0
                 if ((amuletId == Items.SALVE_AMULET_4081 || amuletId == Items.SALVE_AMULETE_10588) && checkUndead(victimName)) {
                     effectiveStrengthLevel *= if (amuletId == Items.SALVE_AMULET_4081) 1.15 else 1.2
-                } else if (getSlayerTask(entity)?.let { task ->
-                    val victimId = entity.properties.combatPulse?.getVictim()?.id ?: 0
-                    task.ids.contains(victimId) || (task == Tasks.KALPHITES && (victimId == 1158)) // Kalphite Queen phase 1
-                } == true) {
+                } else if (shouldGetBlackMaskBoost(entity)) {
                     effectiveStrengthLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
                 }
 
